@@ -1453,7 +1453,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   background-position:center top;
   opacity:0;
   transition:opacity .6s var(--ease);
-  filter:brightness(.55) saturate(.75);
+  filter:brightness(.7) saturate(.85);
   pointer-events:none;
   z-index:0;
 }
@@ -1463,12 +1463,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .about-v2__era-bg-3{background-image:url('about_salesforce.png')}
 .about-v2__era-bg-4{background-image:url('about_meta_summit.png')}
 
-/* overlay — dark on left where text is, open on right to show photo */
+/* overlay — heavy dark left for text, clear right for photo */
 .about-v2__timeline-wrap::after{
   content:'';position:absolute;inset:0;
-  background:
-    linear-gradient(to right, rgba(13,16,20,.82) 0%, rgba(13,16,20,.55) 50%, rgba(13,16,20,.2) 100%),
-    linear-gradient(to bottom, rgba(13,16,20,.3) 0%, rgba(13,16,20,.5) 100%);
+  background:linear-gradient(to right, rgba(13,16,20,.95) 0%, rgba(13,16,20,.9) 45%, rgba(13,16,20,.15) 75%, rgba(13,16,20,0) 100%);
   z-index:1;pointer-events:none;
 }
 
@@ -1478,6 +1476,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   border-left:2px solid rgba(160,168,180,.15);
   padding:32px 28px 32px 36px;
   position:relative;z-index:2;
+  max-width:58%;
 }
 .about-v2__titem{
   position:relative;padding-bottom:32px;cursor:default;
