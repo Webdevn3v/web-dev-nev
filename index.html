@@ -1394,6 +1394,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   border-radius:3px;
   filter:brightness(.96) contrast(1.02);
   display:block;
+  transition:opacity .5s var(--ease);
 }
 .about-v2__photo-badge{
   position:absolute;bottom:-18px;left:-18px;
@@ -1446,28 +1447,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   border-radius:8px;
   overflow:hidden;
   margin:36px 0;
-}
-.about-v2__era-bg{
-  position:absolute;inset:0;
-  background-size:cover;
-  background-position:center top;
-  opacity:0;
-  transition:opacity .6s var(--ease);
-  filter:brightness(.7) saturate(.85);
-  pointer-events:none;
-  z-index:0;
-}
-.about-v2__era-bg.active{opacity:1}
-.about-v2__era-bg-1{background-image:url('about_main.jpg')}
-.about-v2__era-bg-2{background-image:url('about_grad.png')}
-.about-v2__era-bg-3{background-image:url('about_salesforce.png')}
-.about-v2__era-bg-4{background-image:url('about_meta_summit.png')}
-
-/* overlay — heavy dark left for text, clear right for photo */
-.about-v2__timeline-wrap::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to right, rgba(13,16,20,.95) 0%, rgba(13,16,20,.9) 45%, rgba(13,16,20,.15) 75%, rgba(13,16,20,0) 100%);
-  z-index:1;pointer-events:none;
+  background:var(--card);
 }
 
 /* Timeline */
@@ -1476,7 +1456,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   border-left:2px solid rgba(160,168,180,.15);
   padding:32px 28px 32px 36px;
   position:relative;z-index:2;
-  max-width:58%;
 }
 .about-v2__titem{
   position:relative;padding-bottom:32px;cursor:default;
@@ -1551,11 +1530,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <p class="about-v2__intro">I'm a front-end web developer building modern websites for local businesses. My path here didn't start with code. It started with <strong>people, operations, and a decade of learning how businesses actually work.</strong></p>
 
         <div class="about-v2__timeline-wrap" id="timelineWrap">
-          <!-- Era background layers -->
-          <div class="about-v2__era-bg about-v2__era-bg-1 active" id="eraBg1"></div>
-          <div class="about-v2__era-bg about-v2__era-bg-2" id="eraBg2"></div>
-          <div class="about-v2__era-bg about-v2__era-bg-3" id="eraBg3"></div>
-          <div class="about-v2__era-bg about-v2__era-bg-4" id="eraBg4"></div>
 
           <div class="about-v2__timeline">
             <div class="about-v2__titem era-active" data-era="1">
@@ -1793,15 +1767,37 @@ const ro = new IntersectionObserver(entries=>{
 },{threshold:.09,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal,.rl,.rr').forEach(el=>ro.observe(el));
 
-/* ── ERA BACKGROUND SWAP ─────────────── */
+/* ── ERA PHOTO SWAP ─────────────────── */
+const eraPhotos = {
+  '1': 'about_main.jpg',
+  '2': 'about_grad.png',
+  '3': 'about_salesforce.png',
+  '4': 'about_meta_summit.png'
+};
+const defaultPhoto = 'about_mim.png';
+const portraitImg = document.querySelector('.about-v2__photo-main img');
+
 document.querySelectorAll('.about-v2__titem').forEach(item => {
   item.addEventListener('mouseenter', () => {
-    const era = item.dataset.era;
     document.querySelectorAll('.about-v2__titem').forEach(t => t.classList.remove('era-active'));
-    document.querySelectorAll('.about-v2__era-bg').forEach(bg => bg.classList.remove('active'));
     item.classList.add('era-active');
-    const bg = document.getElementById('eraBg' + era);
-    if(bg) bg.classList.add('active');
+    if(portraitImg){
+      portraitImg.style.opacity = '0';
+      setTimeout(() => {
+        portraitImg.src = eraPhotos[item.dataset.era] || defaultPhoto;
+        portraitImg.style.opacity = '1';
+      }, 250);
+    }
+  });
+  item.addEventListener('mouseleave', () => {
+    item.classList.remove('era-active');
+    if(portraitImg){
+      portraitImg.style.opacity = '0';
+      setTimeout(() => {
+        portraitImg.src = defaultPhoto;
+        portraitImg.style.opacity = '1';
+      }, 250);
+    }
   });
 });
 
