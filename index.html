@@ -1554,7 +1554,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
 /* Supporting photos strip */
 .about-v2__photos{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:3px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:3px;
   margin-top:80px;
   border-radius:4px;overflow:hidden;
 }
@@ -1580,6 +1580,37 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   transition:all .35s var(--ease);
 }
 .about-v2__sphoto:hover .about-v2__sphoto-cap{opacity:1;transform:none}
+
+/* Timeline hover photo reveal */
+.about-v2__titem{
+  cursor:default;
+}
+.about-v2__titem-inner{
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;
+}
+@media(max-width:600px){.about-v2__titem-inner{grid-template-columns:1fr}}
+.about-v2__titem-reveal{
+  width:90px;height:120px;
+  border-radius:3px;overflow:hidden;
+  flex-shrink:0;
+  opacity:0;
+  transform:translateX(10px) scale(.97);
+  transition:opacity .4s var(--ease),transform .4s var(--ease);
+  pointer-events:none;
+}
+@media(max-width:600px){.about-v2__titem-reveal{display:none}}
+.about-v2__titem-reveal img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  filter:brightness(.8) saturate(.85);
+}
+.about-v2__titem:hover .about-v2__titem-reveal{
+  opacity:1;
+  transform:translateX(0) scale(1);
+}
+/* last timeline item (Today) — Method in Motion main photo swap */
+.about-v2__titem:last-child .about-v2__titem-reveal img{
+  object-position:center 20%;
+}
 
 /* Method in Motion callout */
 .about-v2__mim{
@@ -1610,7 +1641,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
       <!-- Main photo -->
       <div class="rl reveal about-v2__photo-main">
-        <img src="about_main.jpg" alt="Nev Gonzalez — Web Dev Nev" />
+        <img src="about_mim.jpg" alt="Nev Gonzalez — Web Dev Nev" />
         <div class="about-v2__photo-badge">
           <div class="about-v2__photo-badge-num">10+</div>
           <div class="about-v2__photo-badge-lbl">Years in Business</div>
@@ -1628,22 +1659,42 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
           <div class="about-v2__titem reveal d1">
             <div class="about-v2__titem-label">The Beginning</div>
-            <div class="about-v2__titem-text">After high school I attended community college, where I helped establish and lead a student business club as <strong>Vice President</strong> — organizing events, inviting guest speakers, and building opportunities for students interested in entrepreneurship.</div>
+            <div class="about-v2__titem-inner">
+              <div class="about-v2__titem-text">After high school I attended community college, where I helped establish and lead a student business club as <strong>Vice President</strong> — organizing events, inviting guest speakers, and building opportunities for students interested in entrepreneurship.</div>
+              <div class="about-v2__titem-reveal">
+                <img src="about_grad.jpg" alt="University of Baltimore graduation" />
+              </div>
+            </div>
           </div>
 
           <div class="about-v2__titem reveal d2">
             <div class="about-v2__titem-label">University of Baltimore</div>
-            <div class="about-v2__titem-text">I transferred to UB and earned a degree in <strong>Forensic Accounting</strong>. While studying, I spent nearly a decade helping operate a family-owned restaurant in downtown Frederick — gaining hands-on experience in business operations, marketing, customer service, and day-to-day management.</div>
+            <div class="about-v2__titem-inner">
+              <div class="about-v2__titem-text">I transferred to UB and earned a degree in <strong>Forensic Accounting</strong>. While studying, I spent nearly a decade helping operate a family-owned restaurant in downtown Frederick — gaining hands-on experience in business operations, marketing, customer service, and day-to-day management.</div>
+              <div class="about-v2__titem-reveal">
+                <img src="about_grad.jpg" alt="University of Baltimore graduation" />
+              </div>
+            </div>
           </div>
 
           <div class="about-v2__titem reveal d3">
             <div class="about-v2__titem-label">The Shift</div>
-            <div class="about-v2__titem-text">Over time my interest shifted toward technology and digital business. I began teaching myself web development, experimenting with e-commerce, and building websites for friends, family, and local businesses. <strong>What started as a personal challenge became a passion.</strong></div>
+            <div class="about-v2__titem-inner">
+              <div class="about-v2__titem-text">Over time my interest shifted toward technology and digital business. I began teaching myself web development, experimenting with e-commerce, and building websites for friends, family, and local businesses. <strong>What started as a personal challenge became a passion.</strong></div>
+              <div class="about-v2__titem-reveal">
+                <img src="about_salesforce.jpg" alt="Salesforce" />
+              </div>
+            </div>
           </div>
 
           <div class="about-v2__titem reveal d4">
             <div class="about-v2__titem-label">Today</div>
-            <div class="about-v2__titem-text">I combine my background in business, problem-solving, and development to create modern websites that help businesses establish a strong online presence and <strong>connect with their customers.</strong></div>
+            <div class="about-v2__titem-inner">
+              <div class="about-v2__titem-text">I combine my background in business, problem-solving, and development to create modern websites that help businesses establish a strong online presence and <strong>connect with their customers.</strong></div>
+              <div class="about-v2__titem-reveal">
+                <img src="about_meta_summit.jpg" alt="Meta Marketing Summit 2025" />
+              </div>
+            </div>
           </div>
 
         </div>
@@ -1674,10 +1725,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <div class="about-v2__sphoto">
         <img src="about_salesforce.jpg" alt="Salesforce" />
         <div class="about-v2__sphoto-cap">Salesforce</div>
-      </div>
-      <div class="about-v2__sphoto">
-        <img src="about_meta_team.jpg" alt="Meta — Tech 4 You" />
-        <div class="about-v2__sphoto-cap">Meta — Tech 4 You</div>
       </div>
       <div class="about-v2__sphoto">
         <img src="about_meta_summit.jpg" alt="Meta Marketing Summit 2025" />
