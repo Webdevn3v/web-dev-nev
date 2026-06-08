@@ -401,7 +401,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .proj-card:hover .proj-card__tech span{border-color:var(--icon-color,var(--lime));color:var(--card-color,var(--lime));}
 .proj-card__link{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--card-color,var(--lime));padding:8px 16px;border:1px solid var(--icon-border,rgba(160,168,180,.25));border-radius:4px;transition:all .25s;white-space:nowrap;}
 .proj-card__link:hover{background:var(--icon-bg-hover,var(--lime-glow));border-color:var(--icon-color,var(--lime));}
-@media(min-width:861px){.proj-card:nth-child(4){grid-column:1/span 1}.proj-card:nth-child(5){grid-column:2/span 2}.proj-card:nth-child(5) .proj-card__num{font-size:7rem}}
+@media(min-width:861px){.proj-card:nth-child(5){grid-column:auto}.proj-card:nth-child(5) .proj-card__num{font-size:5rem}}
 @media(max-width:860px){.work__header{grid-template-columns:1fr}.work__grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.work__grid{grid-template-columns:1fr}}
 
@@ -918,8 +918,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <a href="#contact" class="btn btn--outline">Let's Talk</a>
       </div>
       <div class="hero__stats">
-        <div>
-          <div class="hero__stat-num">10<span class="accent">+</span></div>
+        <div class="hero__stat">
+          <div class="hero__stat-num"><span class="counter-num" data-target="10">10</span><span class="accent">+</span></div>
           <div class="hero__stat-label">Industries Covered</div>
         </div>
         <div>
@@ -946,7 +946,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div class="work__header">
       <div class="reveal rl">
         <div class="tag">Demo Work</div>
-        <h2>Nine Industries.<br>Nine Live Demos.</h2>
+        <h2>Different Industries.<br>Unique Live Demos.</h2>
       </div>
       <div class="reveal rr">
         <p class="lead">Each demo site was purpose-built to show local businesses exactly what a professional website looks like for their industry. Full custom code — no templates.</p>
@@ -986,42 +986,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         </div>
       </div>
 
-      <!-- Roofing -->
-      <div class="proj-card reveal d3" style="--card-color:#e8a44a;--icon-color:#e8a44a;--icon-bg:rgba(232,164,74,.08);--icon-border:rgba(232,164,74,.2);--icon-bg-hover:rgba(232,164,74,.15);--card-accent:linear-gradient(90deg,#e8a44a,transparent)">
-        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=60')"></div>
-        <div class="proj-card__num">03</div>
-        <div class="proj-card__icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9"/><path d="M5 10v9a1 1 0 001 1h4v-4h4v4h4a1 1 0 001-1v-9"/></svg>
-        </div>
-        <div class="proj-card__industry">Trades · Roofing</div>
-        <h3>Apex Ridge Roofing</h3>
-        <p>Industrial-premium roofing contractor site. Amber accent palette, diagonal section cuts, floating stat cards, animated counters, and full estimate form.</p>
-        <div class="proj-card__footer">
-          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-          <a href="https://webdevn3v.github.io/roofing-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
-        </div>
-      </div>
-
-      <!-- HVAC -->
-      <div class="proj-card reveal d2" style="--card-color:#6ab0e8;--icon-color:#6ab0e8;--icon-bg:rgba(106,176,232,.08);--icon-border:rgba(106,176,232,.2);--icon-bg-hover:rgba(106,176,232,.15);--card-accent:linear-gradient(90deg,#6ab0e8,transparent)">
-        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=60')"></div>
-        <div class="proj-card__num">04</div>
-        <div class="proj-card__icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 4-5 11-5 11S7 11 7 7a5 5 0 015-5z"/><circle cx="12" cy="7" r="2"/></svg>
-        </div>
-        <div class="proj-card__industry">Trades · HVAC</div>
-        <h3>Summit Air &amp; Heating</h3>
-        <p>Dark navy HVAC site with electric-blue accents, animated thermostat hero widget, membership plans, service areas map, and 24/7 emergency CTA.</p>
-        <div class="proj-card__footer">
-          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-          <a href="https://webdevn3v.github.io/hvac-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
-        </div>
-      </div>
-
       <!-- Med Spa -->
       <div class="proj-card reveal d3" style="--card-color:#d4a0b0;--icon-color:#d4a0b0;--icon-bg:rgba(212,160,176,.08);--icon-border:rgba(212,160,176,.2);--icon-bg-hover:rgba(212,160,176,.15);--card-accent:linear-gradient(90deg,#d4a0b0,transparent)">
         <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=60')"></div>
-        <div class="proj-card__num">05</div>
+        <div class="proj-card__num">03</div>
         <div class="proj-card__icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
         </div>
@@ -1037,7 +1005,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <!-- Barbershop -->
       <div class="proj-card reveal d1" style="--card-color:#c8a96e;--icon-color:#c8a96e;--icon-bg:rgba(200,169,110,.08);--icon-border:rgba(200,169,110,.2);--icon-bg-hover:rgba(200,169,110,.15);--card-accent:linear-gradient(90deg,#c8a96e,transparent)">
         <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=60')"></div>
-        <div class="proj-card__num">06</div>
+        <div class="proj-card__num">04</div>
         <div class="proj-card__icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M6 3L6 15"/><path d="M18 9L18 21"/><path d="M6 15C6 16.6569 7.34315 18 9 18C10.6569 18 12 16.6569 12 15C12 13.3431 10.6569 12 9 12C7.34315 12 6 13.3431 6 15Z"/><path d="M18 9C18 10.6569 16.6569 12 15 12C13.3431 12 12 10.6569 12 9C12 7.34315 13.3431 6 15 6C16.6569 6 18 7.34315 18 9Z"/></svg>
         </div>
@@ -1050,42 +1018,26 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         </div>
       </div>
 
-      <!-- Auto Detail -->
-      <div class="proj-card reveal d2" style="--card-color:#c45c5c;--icon-color:#c45c5c;--icon-bg:rgba(196,92,92,.08);--icon-border:rgba(196,92,92,.2);--icon-bg-hover:rgba(196,92,92,.15);--card-accent:linear-gradient(90deg,#c45c5c,transparent)">
-        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=60')"></div>
-        <div class="proj-card__num">07</div>
+      <!-- Funeral Home — spans 2 cols -->
+      <div class="proj-card reveal d2" style="--card-color:#9a9a8a;--icon-color:#9a9a8a;--icon-bg:rgba(154,154,138,.08);--icon-border:rgba(154,154,138,.2);--icon-bg-hover:rgba(154,154,138,.15);--card-accent:linear-gradient(90deg,#9a9a8a,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=60')"></div>
+        <div class="proj-card__num">05</div>
         <div class="proj-card__icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v5"/><circle cx="15.5" cy="17.5" r="2.5"/><circle cx="5.5" cy="17.5" r="2.5"/><path d="M3 9h4l2-4h6l2 4h2"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         </div>
-        <div class="proj-card__industry">Automotive · Detailing</div>
-        <h3>Apex Detail Co.</h3>
-        <p>Premium auto detailing — clean white/grey base with deep red accent, floating detail report widget, three-tier package cards, and mobile service booking form.</p>
+        <div class="proj-card__industry">Funeral Services · Memorial</div>
+        <h3>Hallow &amp; Grace</h3>
+        <p>A dignified funeral home built with emotional intelligence — warm charcoal palette, Cormorant serif typography, pre-planning flow, grief resources section, and a 24/7 contact form. An industry that needed better design.</p>
         <div class="proj-card__footer">
           <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-          <a href="https://webdevn3v.github.io/auto-detail-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
-        </div>
-      </div>
-
-      <!-- Tattoo Studio -->
-      <div class="proj-card reveal d3" style="--card-color:#a87cb8;--icon-color:#a87cb8;--icon-bg:rgba(168,124,184,.08);--icon-border:rgba(168,124,184,.2);--icon-bg-hover:rgba(168,124,184,.15);--card-accent:linear-gradient(90deg,#a87cb8,transparent)">
-        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1590246814883-57c511e54f75?w=600&q=60')"></div>
-        <div class="proj-card__num">08</div>
-        <div class="proj-card__icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-        </div>
-        <div class="proj-card__industry">Creative · Tattoo Studio</div>
-        <h3>Inkwell Studio</h3>
-        <p>Fine art tattoo studio — dark editorial base, crimson accents, gallery-style grid, individual artist profiles with waitlists, and appointment-only booking flow.</p>
-        <div class="proj-card__footer">
-          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-          <a href="https://webdevn3v.github.io/tattoo-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
+          <a href="https://webdevn3v.github.io/Funeral-home-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
       <!-- ABLE E-Commerce -->
-      <div class="proj-card reveal d1" style="--card-color:#00e87a;--icon-color:#00e87a;--icon-bg:rgba(0,232,122,.08);--icon-border:rgba(0,232,122,.2);--icon-bg-hover:rgba(0,232,122,.15);--card-accent:linear-gradient(90deg,#00e87a,transparent)">
+      <div class="proj-card reveal d3" style="--card-color:#00e87a;--icon-color:#00e87a;--icon-bg:rgba(0,232,122,.08);--icon-border:rgba(0,232,122,.2);--icon-bg-hover:rgba(0,232,122,.15);--card-accent:linear-gradient(90deg,#00e87a,transparent)">
         <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=60')"></div>
-        <div class="proj-card__num">09</div>
+        <div class="proj-card__num">06</div>
         <div class="proj-card__icon-wrap">
           <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
         </div>
@@ -1099,9 +1051,18 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
 
     </div>
-    <p class="reveal" style="text-align:center;margin-top:36px;font-size:.82rem;color:var(--muted);font-family:var(--display);letter-spacing:.06em">
-      > each demo represents what your industry's site could look like — custom, not templated.
-    </p>
+
+    <!-- Also built for -->
+    <div class="reveal" style="margin-top:48px;padding:28px 36px;background:var(--card);border-radius:var(--r);border:1px solid var(--border-md);display:flex;align-items:center;flex-wrap:wrap;gap:16px;justify-content:space-between;">
+      <div style="font-family:var(--display);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Also built for</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <a href="https://webdevn3v.github.io/roofing-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">Roofing →</a>
+        <a href="https://webdevn3v.github.io/hvac-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">HVAC →</a>
+        <a href="https://webdevn3v.github.io/auto-detail-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">Auto Detail →</a>
+        <a href="https://webdevn3v.github.io/tattoo-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">Tattoo Studio →</a>
+        <a href="https://webdevn3v.github.io/Able-the-World-Demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">E-Commerce →</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1665,7 +1626,27 @@ const ro = new IntersectionObserver(entries=>{
 },{threshold:.09,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal,.rl,.rr').forEach(el=>ro.observe(el));
 
-/* ── ERA PHOTO SWAP ─────────────────── */
+/* ── COUNTER ANIMATION ───────────────── */
+function animateCounter(el, target, duration) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start += step;
+    if (start >= target) { el.textContent = target; clearInterval(timer); return; }
+    el.textContent = Math.floor(start);
+  }, 16);
+}
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target.querySelector('.counter-num');
+      if (el) animateCounter(el, parseInt(el.dataset.target), 1200);
+      counterObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.hero__stat').forEach(el => counterObserver.observe(el));
+
 const eraPhotos = {
   '1': 'about_main.jpg',
   '2': 'about_grad.png',
