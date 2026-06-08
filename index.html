@@ -378,117 +378,31 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
    WORK / PORTFOLIO
 ══════════════════════════════════════════ */
 .work{background:var(--dark);padding:112px 0}
-.work__header{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:48px;align-items:end;margin-bottom:68px;
-}
-.work__grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:3px;
-  border-radius:var(--r-xl);overflow:hidden;
-  background:var(--border);
-}
-/* 3+2 layout: last two are half width */
-.work__grid .proj-card:nth-child(4),
-.work__grid .proj-card:nth-child(7){
-  /* span properly in a 3-col grid they sit naturally */
-}
-.proj-card{
-  background:var(--card);
-  padding:40px 36px;
-  position:relative;overflow:hidden;
-  transition:background .3s var(--ease);
-  display:flex;flex-direction:column;
-}
-.proj-card::before{
-  content:'';
-  position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--lime),rgba(168,255,62,.3));
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .4s var(--ease);
-}
+.work__header{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:68px;}
+.work__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;border-radius:var(--r-xl);overflow:hidden;background:var(--border);}
+.proj-card{background:var(--card);padding:40px 36px;position:relative;overflow:hidden;transition:background .3s var(--ease);display:flex;flex-direction:column;}
+/* subtle bg image on hover */
+.proj-card__bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .5s var(--ease);pointer-events:none;z-index:0;}
+.proj-card:hover .proj-card__bg{opacity:.09}
+.proj-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--card-accent,linear-gradient(90deg,var(--lime),transparent));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);z-index:1;}
 .proj-card:hover{background:var(--card-lt)}
 .proj-card:hover::before{transform:scaleX(1)}
-
-/* big number bg */
-.proj-card__num{
-  position:absolute;top:-8px;right:12px;
-  font-family:var(--display);font-size:5rem;
-  color:rgba(255,255,255,.025);pointer-events:none;
-  transition:color .3s;line-height:1;
-}
-.proj-card:hover .proj-card__num{color:rgba(168,255,62,.05)}
-
-/* industry icon strip */
-.proj-card__icon-wrap{
-  width:52px;height:52px;
-  border-radius:12px;
-  background:var(--lime-glow2);
-  border:1px solid rgba(168,255,62,.15);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;margin-bottom:22px;
-  transition:all .35s var(--ease-back);
-}
-.proj-card:hover .proj-card__icon-wrap{
-  background:var(--lime-glow);
-  border-color:rgba(168,255,62,.35);
-  transform:scale(1.08) rotate(-5deg);
-}
-.proj-card__industry{
-  font-family:var(--display);font-size:.6rem;
-  letter-spacing:.2em;text-transform:uppercase;
-  color:var(--lime);margin-bottom:10px;
-}
-.proj-card h3{margin-bottom:10px;font-size:1.05rem}
-.proj-card p{
-  font-size:.85rem;color:var(--muted);
-  line-height:1.8;flex:1;
-}
-.proj-card__footer{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-top:24px;padding-top:20px;
-  border-top:1px solid var(--border);
-}
-.proj-card__tech{
-  display:flex;gap:6px;flex-wrap:wrap;
-}
-.proj-card__tech span{
-  font-family:var(--display);font-size:.58rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  padding:3px 9px;
-  border:1px solid var(--border-md);border-radius:3px;
-  color:var(--muted);transition:all .2s;
-}
-.proj-card:hover .proj-card__tech span{
-  border-color:rgba(168,255,62,.2);color:rgba(168,255,62,.7);
-}
-.proj-card__link{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:var(--display);font-size:.64rem;
-  letter-spacing:.1em;text-transform:uppercase;
-  color:var(--lime);
-  padding:8px 16px;
-  border:1px solid rgba(168,255,62,.25);
-  border-radius:4px;
-  transition:all .25s;white-space:nowrap;
-}
-.proj-card__link:hover{
-  background:var(--lime-glow);
-  border-color:var(--lime);
-  box-shadow:0 0 16px rgba(168,255,62,.15);
-}
-
-/* last two cards span to fill row */
-@media(min-width:861px){
-  .proj-card:nth-child(4){grid-column:1/span 1}
-  .proj-card:nth-child(5){grid-column:2/span 2}
-  .proj-card:nth-child(5) .proj-card__num{font-size:7rem}
-}
-@media(max-width:860px){
-  .work__header{grid-template-columns:1fr}
-  .work__grid{grid-template-columns:repeat(2,1fr)}
-}
+.proj-card__num{position:absolute;top:-8px;right:12px;font-family:var(--display);font-size:5rem;color:rgba(255,255,255,.025);pointer-events:none;transition:opacity .3s;line-height:1;z-index:1;}
+.proj-card:hover .proj-card__num{opacity:.5}
+.proj-card__icon-wrap{width:52px;height:52px;border-radius:12px;background:var(--icon-bg,var(--lime-glow2));border:1px solid var(--icon-border,rgba(160,168,180,.15));display:flex;align-items:center;justify-content:center;margin-bottom:22px;transition:all .35s var(--ease-back);position:relative;z-index:1;}
+.proj-card__icon-wrap svg{width:22px;height:22px;stroke:var(--icon-color,var(--lime));fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:all .35s;}
+.proj-card:hover .proj-card__icon-wrap{transform:scale(1.08) rotate(-5deg);background:var(--icon-bg-hover,var(--lime-glow));border-color:var(--icon-color,var(--lime));}
+.proj-card__industry{font-family:var(--display);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--card-color,var(--lime));margin-bottom:10px;position:relative;z-index:1;}
+.proj-card h3{margin-bottom:10px;font-size:1.05rem;position:relative;z-index:1;}
+.proj-card p{font-size:.85rem;color:var(--muted);line-height:1.8;flex:1;position:relative;z-index:1;}
+.proj-card__footer{display:flex;align-items:center;justify-content:space-between;margin-top:24px;padding-top:20px;border-top:1px solid var(--border);position:relative;z-index:1;}
+.proj-card__tech{display:flex;gap:6px;flex-wrap:wrap;}
+.proj-card__tech span{font-family:var(--display);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--border-md);border-radius:3px;color:var(--muted);transition:all .2s;}
+.proj-card:hover .proj-card__tech span{border-color:var(--icon-color,var(--lime));color:var(--card-color,var(--lime));}
+.proj-card__link{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--card-color,var(--lime));padding:8px 16px;border:1px solid var(--icon-border,rgba(160,168,180,.25));border-radius:4px;transition:all .25s;white-space:nowrap;}
+.proj-card__link:hover{background:var(--icon-bg-hover,var(--lime-glow));border-color:var(--icon-color,var(--lime));}
+@media(min-width:861px){.proj-card:nth-child(4){grid-column:1/span 1}.proj-card:nth-child(5){grid-column:2/span 2}.proj-card:nth-child(5) .proj-card__num{font-size:7rem}}
+@media(max-width:860px){.work__header{grid-template-columns:1fr}.work__grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.work__grid{grid-template-columns:1fr}}
 
 /* ══════════════════════════════════════════
@@ -996,7 +910,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
       <div class="hero__stats">
         <div>
-          <div class="hero__stat-num">9<span class="accent">+</span></div>
+          <div class="hero__stat-num">10<span class="accent">+</span></div>
           <div class="hero__stat-label">Industries Covered</div>
         </div>
         <div>
@@ -1016,26 +930,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div class="hero__scroll-line"></div>
   </div>
 </section>
-          <div class="bm-block" style="margin-top:14px">
-            <div class="bm-block-icon">🏠</div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-            <div class="bm-block" style="height:52px"><div class="bm-block-icon" style="font-size:1rem">💼</div></div>
-            <div class="bm-block" style="height:52px"><div class="bm-block-icon" style="font-size:1rem">🦷</div></div>
-          </div>
-          <div class="bm-line bm-sm" style="margin-top:10px"></div>
-          <div class="bm-line bm-xs"></div>
-        </div>
-      </div>
-      <div class="browser-mock__badge">Live Demos →</div>
-    </div>
-  </div>
-
-  <div class="hero__scroll">
-    <div class="hero__scroll-line"></div>
-    Scroll
-  </div>
-</section>
 
 <!-- ─── WORK ───────────────────────────────── -->
 <section class="work" id="work">
@@ -1043,7 +937,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div class="work__header">
       <div class="reveal rl">
         <div class="tag">Demo Work</div>
-        <h2>Five Industries.<br>Five Live Demos.</h2>
+        <h2>Nine Industries.<br>Nine Live Demos.</h2>
       </div>
       <div class="reveal rr">
         <p class="lead">Each demo site was purpose-built to show local businesses exactly what a professional website looks like for their industry. Full custom code — no templates.</p>
@@ -1052,151 +946,146 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div class="work__grid">
 
       <!-- Law Firm -->
-      <div class="proj-card reveal d1">
+      <div class="proj-card reveal d1" style="--card-color:#b8a98a;--icon-color:#b8a98a;--icon-bg:rgba(184,169,138,.08);--icon-border:rgba(184,169,138,.2);--icon-bg-hover:rgba(184,169,138,.15);--card-accent:linear-gradient(90deg,#b8a98a,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=60')"></div>
         <div class="proj-card__num">01</div>
-        <div class="proj-card__icon-wrap">⚖️</div>
+        <div class="proj-card__icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M12 2L3 7v4c0 5.25 3.75 10.15 9 11.35C17.25 21.15 21 16.25 21 11V7L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
         <div class="proj-card__industry">Legal · Law Firm</div>
         <h3>Frederick Legacy Law</h3>
         <p>Estate planning and family law firm — built for trust, authority, and conversions. Dark navy palette, serif typography, and a consultation request form.</p>
         <div class="proj-card__footer">
-          <div class="proj-card__tech">
-            <span>HTML</span><span>CSS</span><span>JS</span>
-          </div>
-          <a href="https://webdevn3v.github.io/law-firm-demo/" target="_blank" rel="noopener" class="proj-card__link">
-            View Demo →
-          </a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="https://webdevn3v.github.io/law-firm-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
       <!-- Dental -->
-      <div class="proj-card reveal d2">
+      <div class="proj-card reveal d2" style="--card-color:#7ecfcf;--icon-color:#7ecfcf;--icon-bg:rgba(126,207,207,.08);--icon-border:rgba(126,207,207,.2);--icon-bg-hover:rgba(126,207,207,.15);--card-accent:linear-gradient(90deg,#7ecfcf,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=60')"></div>
         <div class="proj-card__num">02</div>
-        <div class="proj-card__icon-wrap">🦷</div>
+        <div class="proj-card__icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M12 2c-2.5 0-4.5 1.5-5.5 3.5C5.5 7 4 7.5 3 9c-1.5 2.5-.5 5.5 1 7 .8 1 1.5 2.5 2 4.5.3 1.2.8 2 1.5 2s1-.5 1.5-1.5c.5-1 1-2.5 3-2.5s2.5 1.5 3 2.5c.5 1 .8 1.5 1.5 1.5s1.2-.8 1.5-2c.5-2 1.2-3.5 2-4.5 1.5-1.5 2.5-4.5 1-7-1-1.5-2.5-2-3.5-3.5C16.5 3.5 14.5 2 12 2z"/></svg>
+        </div>
         <div class="proj-card__industry">Healthcare · Dental</div>
         <h3>Lumina Dental Studio</h3>
-        <p>Premium dental office with a luxury spa aesthetic. Mint-teal palette, interactive thermostat-style hero, custom cursor, and before/after patient results section.</p>
+        <p>Premium dental office with a luxury spa aesthetic. Mint-teal palette, interactive hero, custom cursor, and before/after patient results section.</p>
         <div class="proj-card__footer">
-          <div class="proj-card__tech">
-            <span>HTML</span><span>CSS</span><span>JS</span>
-          </div>
-          <a href="https://webdevn3v.github.io/dental-office-demo/" target="_blank" rel="noopener" class="proj-card__link">
-            View Demo →
-          </a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="https://webdevn3v.github.io/dental-office-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
       <!-- Roofing -->
-      <div class="proj-card reveal d3">
+      <div class="proj-card reveal d3" style="--card-color:#e8a44a;--icon-color:#e8a44a;--icon-bg:rgba(232,164,74,.08);--icon-border:rgba(232,164,74,.2);--icon-bg-hover:rgba(232,164,74,.15);--card-accent:linear-gradient(90deg,#e8a44a,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=60')"></div>
         <div class="proj-card__num">03</div>
-        <div class="proj-card__icon-wrap">🏠</div>
+        <div class="proj-card__icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9"/><path d="M5 10v9a1 1 0 001 1h4v-4h4v4h4a1 1 0 001-1v-9"/></svg>
+        </div>
         <div class="proj-card__industry">Trades · Roofing</div>
         <h3>Apex Ridge Roofing</h3>
-        <p>Industrial-premium roofing contractor site. Amber accent palette, diagonal section cuts, floating stat cards, animated counters, financing section, and full estimate form.</p>
+        <p>Industrial-premium roofing contractor site. Amber accent palette, diagonal section cuts, floating stat cards, animated counters, and full estimate form.</p>
         <div class="proj-card__footer">
-          <div class="proj-card__tech">
-            <span>HTML</span><span>CSS</span><span>JS</span>
-          </div>
-          <a href="https://webdevn3v.github.io/roofing-demo/" target="_blank" rel="noopener" class="proj-card__link">
-            View Demo →
-          </a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="https://webdevn3v.github.io/roofing-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
       <!-- HVAC -->
-      <div class="proj-card reveal d2">
+      <div class="proj-card reveal d2" style="--card-color:#6ab0e8;--icon-color:#6ab0e8;--icon-bg:rgba(106,176,232,.08);--icon-border:rgba(106,176,232,.2);--icon-bg-hover:rgba(106,176,232,.15);--card-accent:linear-gradient(90deg,#6ab0e8,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=60')"></div>
         <div class="proj-card__num">04</div>
-        <div class="proj-card__icon-wrap">🌡️</div>
+        <div class="proj-card__icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 4-5 11-5 11S7 11 7 7a5 5 0 015-5z"/><circle cx="12" cy="7" r="2"/></svg>
+        </div>
         <div class="proj-card__industry">Trades · HVAC</div>
         <h3>Summit Air &amp; Heating</h3>
-        <p>Dark navy HVAC company site with electric-blue accents, animated thermostat hero widget, membership plans, service areas map, and 24/7 emergency CTA.</p>
+        <p>Dark navy HVAC site with electric-blue accents, animated thermostat hero widget, membership plans, service areas map, and 24/7 emergency CTA.</p>
         <div class="proj-card__footer">
-          <div class="proj-card__tech">
-            <span>HTML</span><span>CSS</span><span>JS</span>
-          </div>
-          <a href="https://webdevn3v.github.io/hvac-demo/" target="_blank" rel="noopener" class="proj-card__link">
-            View Demo →
-          </a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="https://webdevn3v.github.io/hvac-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
       <!-- Med Spa -->
-      <div class="proj-card reveal d3">
+      <div class="proj-card reveal d3" style="--card-color:#d4a0b0;--icon-color:#d4a0b0;--icon-bg:rgba(212,160,176,.08);--icon-border:rgba(212,160,176,.2);--icon-bg-hover:rgba(212,160,176,.15);--card-accent:linear-gradient(90deg,#d4a0b0,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=60')"></div>
         <div class="proj-card__num">05</div>
-        <div class="proj-card__icon-wrap">🌹</div>
+        <div class="proj-card__icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
         <div class="proj-card__industry">Wellness · Med Spa</div>
         <h3>LUXE Aesthetics &amp; Wellness</h3>
-        <p>Luxury med spa portfolio site — champagne gold + rose palette, glassmorphism cards, editorial serif typography, before/after hover results, and VIP membership tiers.</p>
+        <p>Luxury med spa — champagne gold + rose palette, glassmorphism cards, editorial serif typography, before/after hover results, and VIP membership tiers.</p>
         <div class="proj-card__footer">
-          <div class="proj-card__tech">
-            <span>HTML</span><span>CSS</span><span>JS</span>
-          </div>
-          <a href="https://webdevn3v.github.io/med-spa-demo/" target="_blank" rel="noopener" class="proj-card__link">
-            View Demo →
-          </a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="https://webdevn3v.github.io/med-spa-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
-      <div class="proj-card reveal d1">
+      <!-- Barbershop -->
+      <div class="proj-card reveal d1" style="--card-color:#c8a96e;--icon-color:#c8a96e;--icon-bg:rgba(200,169,110,.08);--icon-border:rgba(200,169,110,.2);--icon-bg-hover:rgba(200,169,110,.15);--card-accent:linear-gradient(90deg,#c8a96e,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=60')"></div>
         <div class="proj-card__num">06</div>
-        <div class="proj-card__icon-wrap">✂️</div>
+        <div class="proj-card__icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M6 3L6 15"/><path d="M18 9L18 21"/><path d="M6 15C6 16.6569 7.34315 18 9 18C10.6569 18 12 16.6569 12 15C12 13.3431 10.6569 12 9 12C7.34315 12 6 13.3431 6 15Z"/><path d="M18 9C18 10.6569 16.6569 12 15 12C13.3431 12 12 10.6569 12 9C12 7.34315 13.3431 6 15 6C16.6569 6 18 7.34315 18 9Z"/></svg>
+        </div>
         <div class="proj-card__industry">Personal Care · Barbershop</div>
         <h3>The Monarch Barbershop</h3>
-        <p>Premium gentleman's grooming lounge — deep black + warm gold palette, Palatino serif typography, barber profile cards with individual booking, and a full service menu with pricing.</p>
+        <p>Premium gentleman's grooming lounge — deep black + warm gold palette, barber profile cards with individual booking, and a full service menu with pricing.</p>
         <div class="proj-card__footer">
-          <div class="proj-card__tech">
-            <span>HTML</span><span>CSS</span><span>JS</span>
-          </div>
-          <a href="https://webdevn3v.github.io/barbershop-demo/" target="_blank" rel="noopener" class="proj-card__link">
-            View Demo →
-          </a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="https://webdevn3v.github.io/barbershop-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
-      <div class="proj-card reveal d2">
+      <!-- Auto Detail -->
+      <div class="proj-card reveal d2" style="--card-color:#c45c5c;--icon-color:#c45c5c;--icon-bg:rgba(196,92,92,.08);--icon-border:rgba(196,92,92,.2);--icon-bg-hover:rgba(196,92,92,.15);--card-accent:linear-gradient(90deg,#c45c5c,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=60')"></div>
         <div class="proj-card__num">07</div>
-        <div class="proj-card__icon-wrap">🚗</div>
+        <div class="proj-card__icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v5"/><circle cx="15.5" cy="17.5" r="2.5"/><circle cx="5.5" cy="17.5" r="2.5"/><path d="M3 9h4l2-4h6l2 4h2"/></svg>
+        </div>
         <div class="proj-card__industry">Automotive · Detailing</div>
         <h3>Apex Detail Co.</h3>
-        <p>Premium auto detailing — clean white/grey base with deep red accent, floating detail report card widget, three-tier package cards, 5-step process, and mobile service booking form.</p>
+        <p>Premium auto detailing — clean white/grey base with deep red accent, floating detail report widget, three-tier package cards, and mobile service booking form.</p>
         <div class="proj-card__footer">
-          <div class="proj-card__tech">
-            <span>HTML</span><span>CSS</span><span>JS</span>
-          </div>
-          <a href="https://webdevn3v.github.io/auto-detail-demo/" target="_blank" rel="noopener" class="proj-card__link">
-            View Demo →
-          </a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="https://webdevn3v.github.io/auto-detail-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
-      <div class="proj-card reveal d3">
+      <!-- Tattoo Studio -->
+      <div class="proj-card reveal d3" style="--card-color:#a87cb8;--icon-color:#a87cb8;--icon-bg:rgba(168,124,184,.08);--icon-border:rgba(168,124,184,.2);--icon-bg-hover:rgba(168,124,184,.15);--card-accent:linear-gradient(90deg,#a87cb8,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1590246814883-57c511e54f75?w=600&q=60')"></div>
         <div class="proj-card__num">08</div>
-        <div class="proj-card__icon-wrap">🖋️</div>
+        <div class="proj-card__icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+        </div>
         <div class="proj-card__industry">Creative · Tattoo Studio</div>
         <h3>Inkwell Studio</h3>
-        <p>Fine art tattoo studio — dark editorial base, crimson accents, gallery-style style grid, individual artist profiles with waitlists, founder manifesto panel, and appointment-only booking flow.</p>
+        <p>Fine art tattoo studio — dark editorial base, crimson accents, gallery-style grid, individual artist profiles with waitlists, and appointment-only booking flow.</p>
         <div class="proj-card__footer">
-          <div class="proj-card__tech">
-            <span>HTML</span><span>CSS</span><span>JS</span>
-          </div>
-          <a href="https://webdevn3v.github.io/tattoo-demo/" target="_blank" rel="noopener" class="proj-card__link">
-            View Demo →
-          </a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="https://webdevn3v.github.io/tattoo-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
-      <div class="proj-card reveal d1" style="border-color:rgba(168,255,62,.18)">
-        <div class="proj-card__num" style="color:rgba(168,255,62,.08)">09</div>
-        <div class="proj-card__icon-wrap">🌍</div>
+      <!-- ABLE E-Commerce -->
+      <div class="proj-card reveal d1" style="--card-color:#00e87a;--icon-color:#00e87a;--icon-bg:rgba(0,232,122,.08);--icon-border:rgba(0,232,122,.2);--icon-bg-hover:rgba(0,232,122,.15);--card-accent:linear-gradient(90deg,#00e87a,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=60')"></div>
+        <div class="proj-card__num">09</div>
+        <div class="proj-card__icon-wrap">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+        </div>
         <div class="proj-card__industry">Streetwear · E-Commerce</div>
         <h3>ABLE — The World Is Mine.</h3>
-        <p>Full e-commerce streetwear brand — void black + electric green space aesthetic, animated 3D globe hero, glitch typography, scanline effects, 14 shoppable products with cart, size picker, and checkout flow.</p>
+        <p>Full e-commerce streetwear brand — void black + electric green, animated 3D globe hero, glitch typography, 14 shoppable products with cart, size picker, and checkout flow.</p>
         <div class="proj-card__footer">
-          <div class="proj-card__tech">
-            <span>HTML</span><span>CSS</span><span>JS</span><span>E-Commerce</span>
-          </div>
-          <a href="https://webdevn3v.github.io/Able-the-World-Demo/" target="_blank" rel="noopener" class="proj-card__link" style="border-color:rgba(168,255,62,.4);color:var(--lime)">
-            View Live Site →
-          </a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span><span>E-Commerce</span></div>
+          <a href="https://webdevn3v.github.io/Able-the-World-Demo/" target="_blank" rel="noopener" class="proj-card__link">View Live Site →</a>
         </div>
       </div>
 
