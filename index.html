@@ -422,11 +422,20 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 .svc:hover{background:var(--card-lt)}
 .svc__icon{
-  font-size:1.8rem;margin-bottom:20px;
-  display:block;
-  transition:transform .3s var(--ease-back);
+  width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(160,168,180,.15);
+  border-radius:10px;
+  background:var(--lime-glow2);
+  margin-bottom:20px;
+  transition:all .35s var(--ease-back);
 }
-.svc:hover .svc__icon{transform:scale(1.15) rotate(-5deg)}
+.svc__icon svg{
+  width:22px;height:22px;
+  stroke:var(--lime);fill:none;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+}
+.svc:hover .svc__icon{transform:scale(1.12) rotate(-5deg);background:var(--lime-glow);border-color:var(--lime);}
 .svc h3{font-size:1rem;margin-bottom:10px}
 .svc p{font-size:.84rem;color:var(--muted);line-height:1.78}
 .svc__tag{
@@ -1106,39 +1115,39 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     </div>
     <div class="services__grid">
       <div class="svc reveal d1">
-        <span class="svc__icon">🎨</span>
+        <div class="svc__icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3>Custom Business Websites</h3>
         <p>No templates, no page builders. Every site is written in clean HTML, CSS, and JavaScript — designed around your industry, your brand, and your goals.</p>
         <div class="svc__tag">Custom Code →</div>
       </div>
       <div class="svc reveal d2">
-        <span class="svc__icon">🔄</span>
+        <div class="svc__icon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></div>
         <h3>Website Redesigns</h3>
         <p>Got an outdated site that doesn't reflect where your business is now? I'll redesign it from scratch — modern, fast, and built to convert visitors into leads.</p>
         <div class="svc__tag">Fresh Start →</div>
       </div>
       <div class="svc reveal d3">
-        <span class="svc__icon">📄</span>
+        <div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
         <h3>Landing Pages</h3>
         <p>Single-page sites built around one goal — getting someone to call, book, or reach out. Ideal for promotions, ad campaigns, or a specific service you want to push.</p>
         <div class="svc__tag">High-Converting →</div>
       </div>
       <div class="svc reveal d1">
-        <span class="svc__icon">📱</span>
+        <div class="svc__icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
         <h3>Mobile Optimization</h3>
         <p>Most local business customers are on their phones. Every site I build is designed mobile-first and tested across real devices before it goes live.</p>
         <div class="svc__tag">Mobile-First →</div>
       </div>
       <div class="svc reveal d2">
-        <span class="svc__icon">🚀</span>
+        <div class="svc__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
         <h3>Launch Support</h3>
         <p>I don't hand you a file and disappear. I help get your site live, walk you through the basics, and stay available for questions after launch — no extra charge.</p>
         <div class="svc__tag">Included →</div>
       </div>
       <div class="svc reveal d3">
-        <span class="svc__icon">🤖</span>
-        <h3>AI-Assisted Development</h3>
-        <p>I use modern AI-assisted workflows to build faster without cutting corners on quality — so you get a polished, custom site without the agency timeline or price tag.</p>
+        <div class="svc__icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h3>Efficient Development</h3>
+        <p>I build with precision and speed using modern development practices — delivering agency-quality work without the agency wait time or overhead.</p>
         <div class="svc__tag">Smarter Builds →</div>
       </div>
     </div>
@@ -1173,7 +1182,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
 
       <div class="price-card price-card--featured reveal d2">
-        <div class="price-badge price-badge--featured">⚡ Most Requested</div>
+        <div class="price-badge price-badge--featured">Most Requested</div>
         <div class="price-card__name">Business Website</div>
         <div class="price-card__price">$1,250</div>
         <div class="price-card__price-note">Starting price · Scales with scope</div>
@@ -1224,7 +1233,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div class="process__steps">
       <div class="process__step reveal d1">
         <div class="process__circle">
-          💬
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           <div class="process__step-num">1</div>
         </div>
         <h4>Discovery</h4>
@@ -1232,7 +1241,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
       <div class="process__step reveal d2">
         <div class="process__circle">
-          🎨
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <div class="process__step-num">2</div>
         </div>
         <h4>Demo or Direction</h4>
@@ -1240,7 +1249,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
       <div class="process__step reveal d3">
         <div class="process__circle">
-          ⚙️
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           <div class="process__step-num">3</div>
         </div>
         <h4>Build</h4>
@@ -1248,7 +1257,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
       <div class="process__step reveal d4">
         <div class="process__circle">
-          🚀
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           <div class="process__step-num">4</div>
         </div>
         <h4>Launch</h4>
@@ -1446,7 +1455,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="about-v2__pill">CSS3</div>
           <div class="about-v2__pill">JavaScript</div>
           <div class="about-v2__pill">Responsive</div>
-          <div class="about-v2__pill">AI-Assisted</div>
+          <div class="about-v2__pill">GitHub Pages</div>
           <div class="about-v2__pill">GitHub Pages</div>
           <div class="about-v2__pill">Netlify</div>
           <div class="about-v2__pill">Figma</div>
@@ -1484,21 +1493,21 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <h2>Let's Talk<br>About Your Site.</h2>
         <p class="lead">Interested in a website refresh or redesign? Reach out and I'll send over next steps — usually within a few hours.</p>
         <div class="contact-item">
-          <div class="contact-item__icon">✉️</div>
+          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
           <div>
             <div class="contact-item__label">Email</div>
             <div class="contact-item__val"><a href="mailto:webdevn3v@gmail.com">webdevn3v@gmail.com</a></div>
           </div>
         </div>
         <div class="contact-item">
-          <div class="contact-item__icon">📍</div>
+          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <div>
             <div class="contact-item__label">Location</div>
             <div class="contact-item__val">Columbia, Maryland</div>
           </div>
         </div>
         <div class="contact-item">
-          <div class="contact-item__icon">🌐</div>
+          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
           <div>
             <div class="contact-item__label">Portfolio</div>
             <div class="contact-item__val"><a href="https://webdevn3v.github.io" target="_blank" rel="noopener">webdevn3v.github.io</a></div>
@@ -1557,7 +1566,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           </form>
         </div>
         <div class="form__ok" id="formOk">
-          <div class="form__ok-icon">⚡</div>
+          <div class="form__ok-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
           <h3>Message Received.</h3>
           <p>Thanks for reaching out. I'll review your project and get back to you within a few hours — usually same day.<br><br>
           Or email me directly at <a href="mailto:webdevn3v@gmail.com" style="color:var(--lime)">webdevn3v@gmail.com</a>.</p>
