@@ -1237,8 +1237,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   border-radius:3px;
   filter:brightness(.96) contrast(1.02);
   display:block;
-  transition:opacity .5s var(--ease);
+  opacity:1;
+  transition:opacity .25s var(--ease);
 }
+.about-v2__photo-main img.is-fading{opacity:0}
 .about-v2__photo-badge{
   position:absolute;bottom:-18px;left:-18px;
   background:var(--lime);color:var(--black);
@@ -1637,30 +1639,51 @@ const eraPhotos = {
 };
 const defaultPhoto = 'about_mim.png';
 const portraitImg = document.querySelector('.about-v2__photo-main img');
+const titems = document.querySelectorAll('.about-v2__titem');
 
-document.querySelectorAll('.about-v2__titem').forEach(item => {
-  item.addEventListener('mouseenter', () => {
-    document.querySelectorAll('.about-v2__titem').forEach(t => t.classList.remove('era-active'));
-    item.classList.add('era-active');
-    if(portraitImg){
-      portraitImg.style.opacity = '0';
-      setTimeout(() => {
-        portraitImg.src = eraPhotos[item.dataset.era] || defaultPhoto;
-        portraitImg.style.opacity = '1';
-      }, 250);
-    }
+// Devices with real hover/pointer (mouse, trackpad) get the hover photo-swap.
+// Touch devices skip it entirely — mouseenter/mouseleave on touch is unreliable
+// (a tap can fire mouseenter with no matching mouseleave), which was leaving
+// the portrait stuck mid-fade and invisible. Class-based fade instead of
+// inline styles so a fade can never get "stuck" in a half state.
+const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+function swapPortrait(src){
+  if(!portraitImg) return;
+  portraitImg.classList.add('is-fading');
+  setTimeout(() => {
+    portraitImg.src = src;
+    portraitImg.classList.remove('is-fading');
+  }, 250);
+}
+
+if(supportsHover){
+  titems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      titems.forEach(t => t.classList.remove('era-active'));
+      item.classList.add('era-active');
+      swapPortrait(eraPhotos[item.dataset.era] || defaultPhoto);
+    });
+    item.addEventListener('mouseleave', () => {
+      item.classList.remove('era-active');
+      swapPortrait(defaultPhoto);
+    });
   });
-  item.addEventListener('mouseleave', () => {
-    item.classList.remove('era-active');
-    if(portraitImg){
-      portraitImg.style.opacity = '0';
-      setTimeout(() => {
-        portraitImg.src = defaultPhoto;
-        portraitImg.style.opacity = '1';
-      }, 250);
-    }
+} else {
+  // Touch devices: tap a timeline item to preview its photo, tap again to release it.
+  titems.forEach(item => {
+    item.addEventListener('click', () => {
+      const wasActive = item.classList.contains('era-active');
+      titems.forEach(t => t.classList.remove('era-active'));
+      if(wasActive){
+        swapPortrait(defaultPhoto);
+      } else {
+        item.classList.add('era-active');
+        swapPortrait(eraPhotos[item.dataset.era] || defaultPhoto);
+      }
+    });
   });
-});
+}
 
 function handleForm(e){
   e.preventDefault();
