@@ -1222,12 +1222,17 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   display:grid;grid-template-columns:1fr 1.1fr;
   gap:64px;align-items:start;
 }
-@media(max-width:860px){.about-v2__hero{grid-template-columns:1fr;gap:40px}}
-
-/* Sticky left column */
+/* Sticky left column (desktop only — see mobile override below) */
 .about-v2__left{
   position:sticky;top:100px;
   align-self:start;
+}
+
+@media(max-width:860px){
+  .about-v2__hero{grid-template-columns:1fr;gap:40px}
+  /* Photo scrolls with the timeline instead of pinning in place —
+     must come AFTER the base rule above so it actually wins. */
+  .about-v2__left{position:static;top:auto;align-self:auto}
 }
 
 /* Main portrait */
@@ -1293,6 +1298,11 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   overflow:hidden;
   margin:36px 0;
   background:var(--card);
+}
+@media(max-width:860px){
+  /* Lighter than desktop card bg — improves text contrast now that
+     the photo scrolls away above it instead of sitting behind it. */
+  .about-v2__timeline-wrap{background:var(--card-lt)}
 }
 
 /* Timeline */
@@ -1383,7 +1393,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
             </div>
             <div class="about-v2__titem" data-era="2">
               <div class="about-v2__titem-label">The Hard Choice</div>
-              <div class="about-v2__titem-text">I transferred to UB, working toward a Bachelor of Science in Business Administration concentrating in Accounting and Forensic Accounting, while spending nearly a decade helping operate a family-owned restaurant in downtown Frederick. Along the way, I made the hard choice to <strong>leave UB and take the risk</strong> of building something of my own instead of finishing the traditional path.</div>
+              <div class="about-v2__titem-text">I transferred to UB to pursue a degree in Business Administration, with a concentration in Accounting and Forensic Accounting, while spending nearly a decade helping operate a family-owned restaurant in downtown Frederick. Along the way, I made the hard choice to <strong>leave UB and take the risk</strong> of building something of my own instead of finishing the traditional path.</div>
             </div>
             <div class="about-v2__titem" data-era="3">
               <div class="about-v2__titem-label">The Shift</div>
@@ -1634,6 +1644,7 @@ document.querySelectorAll('.hero__stat').forEach(el => counterObserver.observe(e
 
 const eraPhotos = {
   '1': 'about_main.jpg',
+  '2': 'about_grad.jpg',
   '3': 'about_salesforce.png',
   '4': 'about_meta_summit.png'
 };
