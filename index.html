@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Dev Nev — Modern Websites for Local Businesses</title>
+<title>the digital side — You Run Your Business. We Handle the Digital Side.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════
    TOKENS
@@ -28,6 +31,7 @@
   --display: 'Courier New', 'Courier', monospace;
   --heading: 'Trebuchet MS','Segoe UI',Helvetica,sans-serif;
   --body:    'Gill Sans','Gill Sans MT',Calibri,sans-serif;
+  --serif:   'Fraunces', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
 
   --max: 1100px;
   --r:   6px;
@@ -190,10 +194,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   height:66px;
 }
 .nav__logo{
-  font-family:var(--display);
-  font-size:1.1rem;letter-spacing:.08em;
+  font-family:var(--serif);font-style:italic;font-weight:500;
+  font-size:1.2rem;letter-spacing:.01em;
   color:var(--white);
-  display:flex;align-items:center;gap:6px;
+  display:flex;align-items:center;gap:8px;
 }
 .nav__logo-bracket{color:var(--lime);font-size:1.3rem;line-height:1}
 .nav__logo-dot{
@@ -327,6 +331,12 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 .hero h1 .ghost{
   -webkit-text-stroke:1px rgba(255,255,255,.2);color:transparent;
+}
+.hero__promise{
+  font-family:var(--serif);font-style:italic;font-weight:500;
+  font-size:clamp(1rem,1.6vw,1.2rem);color:var(--lime);
+  margin:20px 0 18px;
+  animation:fadeUp .9s .35s var(--ease) both;
 }
 .hero__sub{
   font-size:clamp(.92rem,1.3vw,1.1rem);
@@ -795,8 +805,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 .footer__brand{display:flex;align-items:center;gap:6px;margin-bottom:10px}
 .footer__brand-name{
-  font-family:var(--display);font-size:1.1rem;
-  letter-spacing:.08em;color:var(--white);
+  font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.15rem;
+  letter-spacing:.01em;color:var(--white);
 }
 .footer__brand-dot{
   width:6px;height:6px;border-radius:50%;
@@ -863,9 +873,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="container">
     <div class="nav__inner">
       <a href="#" class="nav__logo">
-        <span class="nav__logo-bracket">[</span>
-        Web Dev Nev
-        <span class="nav__logo-bracket">]</span>
+        the digital side
         <div class="nav__logo-dot"></div>
       </a>
       <div class="nav__links">
@@ -905,14 +913,15 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="container">
     <div class="hero__content">
       <div class="hero__terminal">
-        nev@webdevnev:~$ portfolio live<span class="hero__cursor"></span>
+        the-digital-side@vee:~$ portfolio live<span class="hero__cursor"></span>
       </div>
       <h1>
         Custom websites.<br>
         <span class="ghost">No templates.</span><br>
         <span class="hl">No fluff.</span>
       </h1>
-      <p class="hero__sub">I build modern, mobile-friendly websites for service businesses that need a stronger online presence. Custom code, clean design, and a process that moves fast.</p>
+      <p class="hero__promise">You handle your side. We handle the digital side.</p>
+      <p class="hero__sub">Modern, mobile-friendly websites for service businesses that need a stronger online presence. Custom code, clean design, and a process that moves fast.</p>
       <div class="hero__actions">
         <a href="#work" class="btn btn--lime">View My Work <span class="btn__arr">→</span></a>
         <a href="#contact" class="btn btn--outline">Let's Talk</a>
@@ -1539,12 +1548,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div class="footer__top">
       <div>
         <div class="footer__brand">
-          <span style="color:var(--lime);font-family:var(--display);font-size:1.2rem">[</span>
-          <div class="footer__brand-name">Web Dev Nev</div>
-          <span style="color:var(--lime);font-family:var(--display);font-size:1.2rem">]</span>
+          <div class="footer__brand-name">the digital side</div>
           <div class="footer__brand-dot"></div>
         </div>
-        <p class="footer__tagline">Modern Websites for Local Businesses.<br>Custom code. Clean design. Real results.<br><span style="color:var(--fog)">Columbia, Maryland</span></p>
+        <p class="footer__tagline">You run your business. We handle the digital side.<br>Custom code. Clean design. Real results.<br><span style="color:var(--fog)">Columbia, Maryland</span></p>
         <div class="footer__social">
           <a href="https://github.com/webdevn3v" target="_blank" rel="noopener" class="footer__soc" title="GitHub">GH</a>
           <a href="mailto:webdevn3v@gmail.com" class="footer__soc" title="Email">✉</a>
@@ -1576,7 +1583,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
     </div>
     <div class="footer__bottom">
-      <div class="footer__copy">&copy; 2024 Web Dev Nev · Nev Gonzalez. All rights reserved.</div>
+      <div class="footer__copy">&copy; 2024 the digital side · Nev Gonzalez. All rights reserved.</div>
       <p class="footer__legal">Built with custom HTML, CSS &amp; JavaScript. No templates used. GitHub Pages hosted.</p>
     </div>
   </div>
