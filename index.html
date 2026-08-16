@@ -385,7 +385,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 ══════════════════════════════════════════ */
 .work{background:var(--dark);padding:112px 0}
 .work__header{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:68px;}
-.work__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;border-radius:var(--r-xl);overflow:hidden;background:var(--border);}
+.work__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;border-radius:var(--r-xl);overflow:hidden;background:var(--border);}
 .proj-card{background:var(--card);padding:40px 36px;position:relative;overflow:hidden;transition:background .3s var(--ease);display:flex;flex-direction:column;}
 /* subtle bg image on hover */
 .proj-card__bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .5s var(--ease);pointer-events:none;z-index:0;}
@@ -407,8 +407,22 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .proj-card:hover .proj-card__tech span{border-color:var(--icon-color,var(--lime));color:var(--card-color,var(--lime));}
 .proj-card__link{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--card-color,var(--lime));padding:8px 16px;border:1px solid var(--icon-border,rgba(160,168,180,.25));border-radius:4px;transition:all .25s;white-space:nowrap;}
 .proj-card__link:hover{background:var(--icon-bg-hover,var(--lime-glow));border-color:var(--icon-color,var(--lime));}
-@media(min-width:861px){.proj-card:nth-child(5){grid-column:auto}.proj-card:nth-child(5) .proj-card__num{font-size:5rem}}
-@media(max-width:860px){.work__header{grid-template-columns:1fr}.work__grid{grid-template-columns:repeat(2,1fr)}}
+
+/* 5th featured card — spans both columns, shorter horizontal banner
+   instead of a tall card stretched wide. */
+.proj-card--wide{grid-column:1/-1;flex-direction:row;align-items:center;gap:28px}
+.proj-card--wide .proj-card__icon-wrap{flex-shrink:0;margin-bottom:0}
+.proj-card--wide .proj-card__body{flex:1;min-width:0}
+.proj-card--wide .proj-card__industry{margin-bottom:4px}
+.proj-card--wide h3{margin-bottom:4px}
+.proj-card--wide p{-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;flex:none}
+.proj-card--wide .proj-card__footer{margin-top:0;padding-top:0;border-top:none;flex-shrink:0}
+.proj-card--wide .proj-card__num{display:none}
+@media(max-width:520px){
+  .proj-card--wide{flex-direction:column;align-items:flex-start;gap:12px}
+  .proj-card--wide .proj-card__footer{width:100%;justify-content:space-between}
+}
+@media(max-width:860px){.work__header{grid-template-columns:1fr}}
 /* Narrow phones: stay 2-up (matches the original site) instead of
    collapsing to a single column — cards get more compact padding/
    type instead of stretching full-width. Additive only; nothing
@@ -1038,19 +1052,21 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         </div>
       </div>
 
-      <!-- ABLE E-Commerce -->
-      <div class="proj-card reveal d3" style="--card-color:#00e87a;--icon-color:#00e87a;--icon-bg:rgba(0,232,122,.08);--icon-border:rgba(0,232,122,.2);--icon-bg-hover:rgba(0,232,122,.15);--card-accent:linear-gradient(90deg,#00e87a,transparent)">
-        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=60')"></div>
+      <!-- Roofing / Contractor — wide banner card, spans both columns -->
+      <div class="proj-card proj-card--wide reveal d3" style="--card-color:#c98a52;--icon-color:#c98a52;--icon-bg:rgba(201,138,82,.08);--icon-border:rgba(201,138,82,.2);--icon-bg-hover:rgba(201,138,82,.15);--card-accent:linear-gradient(90deg,#c98a52,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1632759145351-1d592919f522?w=800&q=60')"></div>
         <div class="proj-card__num">05</div>
         <div class="proj-card__icon-wrap">
-          <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
         </div>
-        <div class="proj-card__industry">Streetwear · E-Commerce</div>
-        <h3>ABLE — The World Is Mine.</h3>
-        <p>Full e-commerce streetwear brand — void black + electric green, animated 3D globe hero, glitch typography, 14 shoppable products with cart, size picker, and checkout flow.</p>
+        <div class="proj-card__body">
+          <div class="proj-card__industry">Home Services · Roofing</div>
+          <h3>Apex Ridge Roofing</h3>
+          <p>Premium residential and commercial roofing — lifetime workmanship warranties, transparent pricing, and a request-an-estimate flow built for how contractor leads actually come in.</p>
+        </div>
         <div class="proj-card__footer">
-          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span><span>E-Commerce</span></div>
-          <a href="https://webdevn3v.github.io/Able-the-World-Demo/" target="_blank" rel="noopener" class="proj-card__link">View Live Site →</a>
+          <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          <a href="https://webdevn3v.github.io/roofing-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
@@ -1060,7 +1076,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div class="reveal" style="margin-top:48px;padding:28px 36px;background:var(--card);border-radius:var(--r);border:1px solid var(--border-md);display:flex;align-items:center;flex-wrap:wrap;gap:16px;justify-content:space-between;">
       <div style="font-family:var(--display);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Also built for</div>
       <div style="display:flex;flex-wrap:wrap;gap:10px">
-        <a href="https://webdevn3v.github.io/roofing-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">Roofing →</a>
         <a href="https://webdevn3v.github.io/hvac-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">HVAC →</a>
         <a href="https://webdevn3v.github.io/auto-detail-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">Auto Detail →</a>
         <a href="https://webdevn3v.github.io/tattoo-shop-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">Tattoo Studio →</a>
@@ -1377,6 +1392,16 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 .about-v2__pill:hover{border-color:var(--lime);color:var(--lime);background:var(--lime-glow2)}
 
+/* Homepage flow: the full About story is not part of the normal
+   mobile scroll — reached instead via the "Meet the person" teaser
+   near the bottom of the page (or the nav's About link), which
+   reveals this section on tap (see the about-reveal script).
+   Desktop is untouched; About stays exactly where it is there. */
+@media(max-width:860px){
+  #about .about-v2{display:none}
+  #about.is-open .about-v2{display:block}
+}
+
 </style>
 
   <div class="container about-v2">
@@ -1444,6 +1469,30 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     </div>
   </div>
 </section>
+
+<!-- ─── ABOUT LINK (mobile only) ───────────── -->
+<div class="about-mobile-link">
+<style>
+.about-mobile-link{display:none}
+@media(max-width:860px){
+  .about-mobile-link{
+    display:block;background:var(--dark);padding:8px 0 56px;text-align:center;
+  }
+  .about-mobile-link a{
+    font-family:var(--display);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--lime);display:inline-flex;align-items:center;gap:6px;
+    padding:14px 22px;border:1px solid rgba(160,168,180,.25);border-radius:4px;
+  }
+  .about-mobile-link p{
+    margin-top:16px;font-size:.76rem;color:var(--muted);font-style:italic;
+  }
+}
+</style>
+  <div class="container">
+    <a href="#about" class="reveal">Meet the person behind The Digital Side →</a>
+    <p class="reveal">Want the full hover + motion experience? Take a look on desktop →</p>
+  </div>
+</div>
 
 <!-- ─── CTA BAND ───────────────────────────── -->
 <div class="cta-band">
@@ -1631,6 +1680,25 @@ document.addEventListener('click',e=>{
   if(m.classList.contains('op')&&!m.contains(e.target)&&!h.contains(e.target)){
     m.classList.remove('op'); h.classList.remove('op');
   }
+});
+
+/* ── MOBILE ABOUT REVEAL ─────────────────
+   On mobile, About isn't in the normal scroll (see CSS). Any link
+   to #about — nav, hamburger menu, or the homepage teaser — reveals
+   it on tap instead of scrolling to an empty spot. Desktop is
+   untouched: the section is already visible there, so this never
+   fires (nothing has .about-v2{display:none} to undo). */
+document.querySelectorAll('a[href="#about"]').forEach(link => {
+  link.addEventListener('click', e => {
+    if (window.matchMedia('(max-width:860px)').matches) {
+      const about = document.getElementById('about');
+      if (about && !about.classList.contains('is-open')) {
+        e.preventDefault();
+        about.classList.add('is-open');
+        requestAnimationFrame(() => about.scrollIntoView({behavior:'smooth', block:'start'}));
+      }
+    }
+  });
 });
 
 /* ── SCROLL REVEAL ───────────────────── */
