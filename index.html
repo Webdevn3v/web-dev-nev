@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>the digital side — You Run Your Business. We Handle the Digital Side.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════
    TOKENS
@@ -31,7 +28,6 @@
   --display: 'Courier New', 'Courier', monospace;
   --heading: 'Trebuchet MS','Segoe UI',Helvetica,sans-serif;
   --body:    'Gill Sans','Gill Sans MT',Calibri,sans-serif;
-  --serif:   'Fraunces', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
 
   --max: 1100px;
   --r:   6px;
@@ -194,8 +190,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   height:66px;
 }
 .nav__logo{
-  font-family:var(--serif);font-style:italic;font-weight:500;
-  font-size:1.2rem;letter-spacing:.01em;
+  font-family:var(--display);
+  font-size:1.1rem;letter-spacing:.08em;
   color:var(--white);
   display:flex;align-items:center;gap:8px;
 }
@@ -333,7 +329,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   -webkit-text-stroke:1px rgba(255,255,255,.2);color:transparent;
 }
 .hero__promise{
-  font-family:var(--serif);font-style:italic;font-weight:500;
+  font-family:var(--heading);font-style:italic;font-weight:600;
   font-size:clamp(1rem,1.6vw,1.2rem);color:var(--lime);
   margin:20px 0 18px;
   animation:fadeUp .9s .35s var(--ease) both;
@@ -413,7 +409,22 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .proj-card__link:hover{background:var(--icon-bg-hover,var(--lime-glow));border-color:var(--icon-color,var(--lime));}
 @media(min-width:861px){.proj-card:nth-child(5){grid-column:auto}.proj-card:nth-child(5) .proj-card__num{font-size:5rem}}
 @media(max-width:860px){.work__header{grid-template-columns:1fr}.work__grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.work__grid{grid-template-columns:1fr}}
+/* Narrow phones: stay 2-up (matches the original site) instead of
+   collapsing to a single column — cards get more compact padding/
+   type instead of stretching full-width. Additive only; nothing
+   here changes the desktop/tablet rules above. */
+@media(max-width:520px){
+  .proj-card{padding:20px 16px}
+  .proj-card__icon-wrap{width:38px;height:38px;border-radius:9px;margin-bottom:14px}
+  .proj-card__icon-wrap svg{width:16px;height:16px}
+  .proj-card__num{font-size:2.6rem;top:-4px;right:8px}
+  .proj-card__industry{font-size:.5rem;letter-spacing:.12em;margin-bottom:6px}
+  .proj-card h3{font-size:.86rem;margin-bottom:6px;line-height:1.25}
+  .proj-card p{font-size:.72rem;line-height:1.55}
+  .proj-card__footer{margin-top:14px;padding-top:12px;flex-wrap:wrap;gap:8px}
+  .proj-card__tech{display:none}
+  .proj-card__link{font-size:.54rem;padding:6px 10px}
+}
 
 /* ══════════════════════════════════════════
    SERVICES
@@ -805,8 +816,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 .footer__brand{display:flex;align-items:center;gap:6px;margin-bottom:10px}
 .footer__brand-name{
-  font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.15rem;
-  letter-spacing:.01em;color:var(--white);
+  font-family:var(--display);font-size:1.1rem;
+  letter-spacing:.08em;color:var(--white);
 }
 .footer__brand-dot{
   width:6px;height:6px;border-radius:50%;
