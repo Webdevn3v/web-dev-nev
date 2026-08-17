@@ -597,9 +597,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 .process__step:hover .process__circle{
   background:var(--lime-glow);
-  border-color:var(--lime);
+  border-color:var(--step-color,var(--lime));
   transform:scale(1.1);
-  box-shadow:var(--sh-lime);
+  box-shadow:0 0 0 1px var(--step-color,var(--lime)),var(--sh-lime);
+  color:var(--step-color,var(--lime));
 }
 .process__step h4{
   font-family:var(--heading);font-size:.92rem;font-weight:700;
@@ -607,10 +608,26 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 .process__step p{font-size:.8rem;color:var(--muted);line-height:1.7}
 @media(max-width:720px){
-  .process__steps{grid-template-columns:repeat(2,1fr);gap:40px}
+  .process__steps{
+    display:flex;grid-template-columns:none;gap:0;
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -24px;padding:0 24px 8px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  }
+  .process__steps::-webkit-scrollbar{display:none}
   .process__steps::before{display:none}
+  .process__step{
+    flex:0 0 78%;scroll-snap-align:center;
+    padding:0 16px;
+  }
 }
-@media(max-width:440px){.process__steps{grid-template-columns:1fr}}
+@media(max-width:440px){.process__step{flex-basis:86%}}
+.process__dots{display:none}
+@media(max-width:720px){
+  .process__dots{display:flex;justify-content:center;gap:8px;margin-top:8px}
+  .process__dot{width:6px;height:6px;border-radius:50%;background:rgba(160,168,180,.3);transition:all .3s}
+  .process__dot.in-view{background:var(--lime);box-shadow:0 0 6px var(--lime);width:16px;border-radius:3px}
+}
 
 /* ══════════════════════════════════════════
    ABOUT
@@ -1020,19 +1037,19 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         </div>
       </div>
 
-      <!-- Tattoo Studio -->
-      <div class="proj-card reveal d3" style="--card-color:#c72536;--icon-color:#c72536;--icon-bg:rgba(199,37,54,.08);--icon-border:rgba(199,37,54,.2);--icon-bg-hover:rgba(199,37,54,.15);--card-accent:linear-gradient(90deg,#c72536,transparent)">
-        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1568515387316-05a72bf3ab27?w=600&q=60')"></div>
+      <!-- Auto Detail -->
+      <div class="proj-card reveal d3" style="--card-color:#5b9bd5;--icon-color:#5b9bd5;--icon-bg:rgba(91,155,213,.08);--icon-border:rgba(91,155,213,.2);--icon-bg-hover:rgba(91,155,213,.15);--card-accent:linear-gradient(90deg,#5b9bd5,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=600&q=60')"></div>
         <div class="proj-card__num">03</div>
         <div class="proj-card__icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2z"/><path d="M6 18l1 3M18 18l-1 3"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M5 17h14M5 17a2 2 0 01-2-2v-3l2-5h10l2 5v3a2 2 0 01-2 2M5 17v2a1 1 0 001 1h1a1 1 0 001-1v-2m10 0v2a1 1 0 001 1h1a1 1 0 001-1v-2"/><circle cx="7.5" cy="14.5" r="1"/><circle cx="16.5" cy="14.5" r="1"/></svg>
         </div>
-        <div class="proj-card__industry">Art · Tattoo Studio</div>
-        <h3>Inkwell Studio</h3>
-        <p>A private, appointment-only tattoo studio where every artist has their own voice. Editorial dark palette, portfolio-first layout, and an application-style booking flow.</p>
+        <div class="proj-card__industry">Automotive · Detailing</div>
+        <h3>Apex Detail Co.</h3>
+        <p>Meticulous hand detailing, paint correction, and ceramic coating for drivers who don't settle for ordinary. Clean chrome palette, before/after gallery, and a booking-first layout.</p>
         <div class="proj-card__footer">
           <div class="proj-card__tech"><span>HTML</span><span>CSS</span><span>JS</span></div>
-          <a href="https://webdevn3v.github.io/tattoo-shop-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
+          <a href="https://webdevn3v.github.io/auto-detail-demo/" target="_blank" rel="noopener" class="proj-card__link">View Demo →</a>
         </div>
       </div>
 
@@ -1077,7 +1094,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <div style="font-family:var(--display);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)">Also built for</div>
       <div style="display:flex;flex-wrap:wrap;gap:10px">
         <a href="https://webdevn3v.github.io/hvac-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">HVAC →</a>
-        <a href="https://webdevn3v.github.io/auto-detail-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">Auto Detail →</a>
+        <a href="https://webdevn3v.github.io/tattoo-shop-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">Tattoo Studio →</a>
         <a href="https://webdevn3v.github.io/med-spa-demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">Med Spa →</a>
         <a href="https://webdevn3v.github.io/Able-the-World-Demo/" target="_blank" rel="noopener" style="font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--light);padding:8px 16px;border:1px solid var(--border-md);border-radius:3px;transition:all .2s" onmouseover="this.style.borderColor='var(--lime)';this.style.color='var(--lime)'" onmouseout="this.style.borderColor='var(--border-md)';this.style.color='var(--light)'">E-Commerce →</a>
       </div>
@@ -1123,27 +1140,26 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <section class="services" id="services">
 <style>
 .hire-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;border-radius:var(--r-xl);overflow:hidden;background:var(--border);margin-top:40px}
-.hire-card{background:var(--card);padding:26px 24px;position:relative;transition:background .3s var(--ease)}
+.hire-card{background:var(--card);position:relative;transition:background .3s var(--ease)}
 .hire-card:hover{background:var(--card-lt)}
-.hire-card__num{font-family:var(--display);font-size:.6rem;letter-spacing:.14em;color:var(--card-color,var(--lime));margin-bottom:10px}
-.hire-card h3{font-size:.98rem;margin-bottom:6px}
-.hire-card__problem{font-size:.86rem;color:rgba(255,255,255,.8);line-height:1.5;margin-bottom:14px}
-.path-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:16px}
+.hire-card > summary{list-style:none;cursor:pointer;padding:28px 24px;display:flex;flex-direction:column}
+.hire-card > summary::-webkit-details-marker{display:none}
+.hire-card__num{font-family:var(--display);font-size:.62rem;letter-spacing:.14em;color:var(--card-color,var(--lime));margin-bottom:12px}
+.hire-card__name{font-family:var(--heading);font-size:1.3rem;font-weight:800;color:var(--white);line-height:1.2;margin-bottom:4px}
+.hire-card__hint{font-family:var(--display);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px;display:flex;align-items:center;gap:6px}
+.hire-card[open] .hire-card__hint{color:var(--card-color,var(--lime))}
+.hire-card__body{padding:0 24px 26px}
+.hire-card__problem{font-size:.86rem;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:16px}
+.path-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .path-label{font-family:var(--display);font-size:.54rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5);white-space:nowrap}
 .path-node{width:5px;height:5px;border-radius:50%;background:rgba(160,168,180,.35);flex-shrink:0}
-.path-node--end{background:var(--card-color,var(--lime));box-shadow:0 0 6px var(--card-color,var(--lime))}
+.path-node--end{background:var(--card-color,var(--lime));box-shadow:0 0 6px var(--card-color,var(--lime));animation:nodeLive 1.8s ease-in-out infinite}
+@keyframes nodeLive{0%,100%{box-shadow:0 0 4px var(--card-color,var(--lime));opacity:1}50%{box-shadow:0 0 12px 3px var(--card-color,var(--lime));opacity:.75}}
 .path-line{width:12px;height:1px;background:rgba(160,168,180,.3);flex-shrink:0}
 .hire-card__chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .hire-card__chips span{font-family:var(--display);font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:3px 8px;border:1px solid var(--border-md);border-radius:3px}
-.hire-card__footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-top:12px;border-top:1px solid var(--border)}
-.hire-card__link{font-family:var(--display);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--card-color,var(--lime));display:inline-flex;align-items:center;gap:6px}
-.hire-card details{font-family:var(--display);font-size:.54rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);cursor:pointer}
-.hire-card details summary{list-style:none;cursor:pointer}
-.hire-card details summary::-webkit-details-marker{display:none}
-.hire-card details[open] summary{color:var(--card-color,var(--lime))}
-.hire-card details p,.hire-card details ul{margin-top:8px;padding-left:0;list-style:none;font-size:.76rem;letter-spacing:normal;text-transform:none;color:rgba(255,255,255,.65);line-height:1.7}
-.hire-card details ul li::before{content:'—  '}
-@media(max-width:520px){.hire-grid{grid-template-columns:1fr}.hire-card{padding:20px 18px}}
+.hire-cta{text-align:center;margin-top:36px}
+@media(max-width:520px){.hire-grid{grid-template-columns:1fr}.hire-card > summary{padding:22px 20px}.hire-card__body{padding:0 20px 22px}}
 </style>
   <div class="container">
     <div style="text-align:center;max-width:520px;margin:0 auto" class="reveal">
@@ -1152,91 +1168,107 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     </div>
 
     <div class="hire-grid">
-      <div class="hire-card reveal d1" style="--card-color:#a0a8b4">
-        <div class="hire-card__num">01 — BUILD</div>
-        <h3>I need the whole thing.</h3>
-        <div class="path-row">
-          <span class="path-label">Idea</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
-          <span class="path-label">Structure</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
-          <span class="path-label">Site</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
-          <span class="path-label">Live</span>
+      <details class="hire-card reveal d1" style="--card-color:#a0a8b4">
+        <summary>
+          <div class="hire-card__num">01 — BUILD</div>
+          <div class="hire-card__name">I need the whole thing.</div>
+          <div class="hire-card__hint">See the path ↓</div>
+        </summary>
+        <div class="hire-card__body">
+          <p class="hire-card__problem">A complete digital presence built around your business and what your customers need to do.</p>
+          <div class="path-row">
+            <span class="path-label">Idea</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
+            <span class="path-label">Structure</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
+            <span class="path-label">Site</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
+            <span class="path-label">Live</span>
+          </div>
         </div>
-        <div class="hire-card__footer">
-          <a href="#contact" class="hire-card__link">Start a Build →</a>
-          <details><summary>More +</summary><p>A complete digital presence built around your business and what your customers need to do.</p></details>
-        </div>
-      </div>
+      </details>
 
-      <div class="hire-card reveal d2" style="--card-color:#7ecfcf">
-        <div class="hire-card__num">02 — REVIVE</div>
-        <h3>What I have isn't working anymore.</h3>
-        <div class="path-row">
-          <span class="path-label">Current</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
-          <span class="path-label">Audit</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
-          <span class="path-label">Fix</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
-          <span class="path-label">Better</span>
+      <details class="hire-card reveal d2" style="--card-color:#7ecfcf">
+        <summary>
+          <div class="hire-card__num">02 — REVIVE</div>
+          <div class="hire-card__name">What I have isn't working anymore.</div>
+          <div class="hire-card__hint">See the path ↓</div>
+        </summary>
+        <div class="hire-card__body">
+          <p class="hire-card__problem">Keep what's working. Fix what isn't. No unnecessary rebuild.</p>
+          <div class="path-row">
+            <span class="path-label">Current</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
+            <span class="path-label">Audit</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
+            <span class="path-label">Fix</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
+            <span class="path-label">Better</span>
+          </div>
         </div>
-        <div class="hire-card__footer">
-          <a href="#contact" class="hire-card__link">See Revive →</a>
-          <details><summary>More +</summary><p>Keep what's working. Fix what isn't. No unnecessary rebuild.</p></details>
-        </div>
-      </div>
+      </details>
 
-      <div class="hire-card reveal d1" style="--card-color:#d4a0b0">
-        <div class="hire-card__num">03 — EVOLVE</div>
-        <h3>My business changed. My digital presence didn't.</h3>
-        <div class="path-row">
-          <span class="path-label">Then</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
-          <span class="path-label">Now</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
-          <span class="path-label">Next</span>
+      <details class="hire-card reveal d1" style="--card-color:#d4a0b0">
+        <summary>
+          <div class="hire-card__num">03 — EVOLVE</div>
+          <div class="hire-card__name">My business changed. My digital presence didn't.</div>
+          <div class="hire-card__hint">See the path ↓</div>
+        </summary>
+        <div class="hire-card__body">
+          <p class="hire-card__problem">What worked when you started may not fit where you're going. We organize the direction first.</p>
+          <div class="path-row">
+            <span class="path-label">Then</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
+            <span class="path-label">Now</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
+            <span class="path-label">Next</span>
+          </div>
         </div>
-        <div class="hire-card__footer">
-          <a href="#contact" class="hire-card__link">Talk Evolve →</a>
-          <details><summary>More +</summary><p>What worked when you started may not fit where you're going. We organize the direction first.</p></details>
-        </div>
-      </div>
+      </details>
 
-      <div class="hire-card reveal d2" style="--card-color:#c98a52">
-        <div class="hire-card__num">04 — MOBILE RESCUE</div>
-        <h3>Looks fine on desktop. Falls apart on your phone.</h3>
-        <div class="hire-card__chips"><span>Nav</span><span>Forms</span><span>Speed</span><span>CTA</span></div>
-        <div class="path-row">
-          <span class="path-label">Visit</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
-          <span class="path-label">Navigate</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
-          <span class="path-label">Act</span>
+      <details class="hire-card reveal d2" style="--card-color:#c98a52">
+        <summary>
+          <div class="hire-card__num">04 — MOBILE RESCUE</div>
+          <div class="hire-card__name">Looks fine on desktop. Falls apart on your phone.</div>
+          <div class="hire-card__hint">See the path ↓</div>
+        </summary>
+        <div class="hire-card__body">
+          <div class="hire-card__chips"><span>Nav</span><span>Forms</span><span>Speed</span><span>CTA</span></div>
+          <div class="path-row">
+            <span class="path-label">Visit</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
+            <span class="path-label">Navigate</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
+            <span class="path-label">Act</span>
+          </div>
         </div>
-        <div class="hire-card__footer">
-          <a href="#contact" class="hire-card__link">See what we'd fix →</a>
-        </div>
-      </div>
+      </details>
 
-      <div class="hire-card reveal d1" style="--card-color:#00e87a">
-        <div class="hire-card__num">05 — DIGITAL DOOR™</div>
-        <h3>One entrance. Built around where your customers need to go.</h3>
-        <div class="path-row">
-          <span class="path-label">Scan</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
-          <span class="path-label">Digital Door</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
-          <span class="path-label">Action</span>
+      <details class="hire-card reveal d1" style="--card-color:#00e87a">
+        <summary>
+          <div class="hire-card__num">05 — DIGITAL DOOR™</div>
+          <div class="hire-card__name">One entrance. Built around where your customers need to go.</div>
+          <div class="hire-card__hint">See the path ↓</div>
+        </summary>
+        <div class="hire-card__body">
+          <p class="hire-card__problem">Not a pile of links. A path. Built for QR, social bios, cards, and signage.</p>
+          <div class="path-row">
+            <span class="path-label">Scan</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
+            <span class="path-label">Digital Door</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
+            <span class="path-label">Action</span>
+          </div>
         </div>
-        <div class="hire-card__footer">
-          <a href="#contact" class="hire-card__link">See a Digital Door →</a>
-          <details><summary>More +</summary><p>Not a pile of links. A path. Built for QR, social bios, cards, and signage.</p></details>
-        </div>
-      </div>
+      </details>
 
-      <div class="hire-card reveal d2" style="--card-color:#b8a98a">
-        <div class="hire-card__num">06 — CONNECT THE DOTS</div>
-        <h3>Not sure what you need? Start anywhere.</h3>
-        <div class="path-row">
-          <span class="path-label">Blurt It Out</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
-          <span class="path-label">Organize</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
-          <span class="path-label">Build It</span>
+      <details class="hire-card reveal d2" style="--card-color:#b8a98a">
+        <summary>
+          <div class="hire-card__num">06 — CONNECT THE DOTS</div>
+          <div class="hire-card__name">Not sure what you need? Start anywhere.</div>
+          <div class="hire-card__hint">See the path ↓</div>
+        </summary>
+        <div class="hire-card__body">
+          <p class="hire-card__problem">Bring the messy version. You don't need a plan before you come to me — that's part of my job.</p>
+          <div class="path-row">
+            <span class="path-label">Blurt It Out</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
+            <span class="path-label">Organize</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
+            <span class="path-label">Build It</span>
+          </div>
         </div>
-        <div class="hire-card__footer">
-          <a href="#contact" class="hire-card__link">Just start talking →</a>
-          <details><summary>More +</summary><p>Bring the messy version. You don't need a plan before you come to me — that's part of my job.</p></details>
-        </div>
-      </div>
+      </details>
+    </div>
+
+    <div class="hire-cta reveal">
+      <a href="#contact" class="btn btn--lime">Tell Me What's Going On →</a>
     </div>
   </div>
 </section>
@@ -1348,9 +1380,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .behind__header{text-align:center;max-width:560px;margin:0 auto 52px}
 .behind__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:820px;margin:0 auto}
 .behind-item{display:flex;gap:16px}
-.behind-item__node{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime);flex-shrink:0;margin-top:6px}
-.behind-item h4{font-size:.92rem;color:var(--white);margin-bottom:4px}
-.behind-item p{font-size:.8rem;color:var(--muted);line-height:1.7}
+.behind-item__icon{width:34px;height:34px;border-radius:8px;border:1px solid var(--border-md);background:var(--card);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--lime)}
+.behind-item__icon svg{width:16px;height:16px}
+.behind-item h4{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:5px;letter-spacing:-.01em}
+.behind-item p{font-size:.8rem;color:var(--muted);line-height:1.6}
 @media(max-width:640px){.behind__grid{grid-template-columns:1fr}}
 </style>
   <div class="container">
@@ -1360,24 +1393,24 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     </div>
     <div class="behind__grid">
       <div class="behind-item reveal d1">
-        <div class="behind-item__node"></div>
-        <div><h4>Customer-Path Design™</h4><p>Designing the intentional route customers take toward an action.</p></div>
+        <div class="behind-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 12h4M12 12l4-4M12 12l4 4"/></svg></div>
+        <div><h4>Customer-Path Design™</h4><p>The intentional route from found to customer.</p></div>
       </div>
       <div class="behind-item reveal d2">
-        <div class="behind-item__node"></div>
-        <div><h4>Customer Journey Cleanup</h4><p>Removing friction — confusing nav, dead ends, bad forms, broken links, unclear CTAs.</p></div>
+        <div class="behind-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h10M14 12l-3-3M14 12l-3 3"/><circle cx="19" cy="12" r="2"/></svg></div>
+        <div><h4>Customer Journey Cleanup</h4><p>Fewer dead ends. Fewer unnecessary steps.</p></div>
       </div>
       <div class="behind-item reveal d1">
-        <div class="behind-item__node"></div>
-        <div><h4>Digital Cleanup</h4><p>Organizing the digital junk drawer — domains, hosting, email, logins, socials, analytics, QR destinations.</p></div>
+        <div class="behind-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="5" r="1.5"/><circle cx="5" cy="19" r="1.5"/><path d="M8 12h8"/><circle cx="19" cy="19" r="1.5"/></svg></div>
+        <div><h4>Digital Cleanup</h4><p>The junk drawer, organized and labeled.</p></div>
       </div>
       <div class="behind-item reveal d2">
-        <div class="behind-item__node"></div>
-        <div><h4>Conversion Design</h4><p>Using your business goals and customer behavior to shape messaging, hierarchy, offers, and flow.</p></div>
+        <div class="behind-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+        <div><h4>Conversion Design</h4><p>Every decision points toward the next step.</p></div>
       </div>
       <div class="behind-item reveal d1" style="grid-column:1/-1;max-width:380px;margin:0 auto">
-        <div class="behind-item__node"></div>
-        <div><h4>Ownership + Handoff</h4><p>You understand and own your finished infrastructure — what each platform does, and what not to cancel.</p></div>
+        <div class="behind-item__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg></div>
+        <div><h4>Ownership + Handoff</h4><p>We build it. You own it — and understand it.</p></div>
       </div>
     </div>
   </div>
@@ -1412,71 +1445,66 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
 <!-- ─── PRICING ───────────────────────────── -->
 <section class="pricing" id="pricing">
+<style>
+.price-rows{display:flex;flex-direction:column;gap:2px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;margin-top:44px}
+.price-row{background:var(--card);padding:20px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.price-row__name{font-family:var(--heading);font-weight:800;font-size:.95rem;color:var(--white);min-width:190px}
+.price-row__name span{display:block;font-family:var(--display);font-size:.58rem;letter-spacing:.1em;color:var(--lime);font-weight:400;margin-bottom:3px}
+.price-row__desc{font-size:.8rem;color:var(--muted);flex:1;min-width:180px}
+.price-row__amt{font-family:var(--display);font-size:.72rem;letter-spacing:.06em;color:rgba(255,255,255,.8);white-space:nowrap}
+.price-row__link{font-family:var(--display);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lime);white-space:nowrap}
+@media(max-width:640px){.price-row{padding:16px 18px}.price-row__name{min-width:100%}}
+</style>
   <div class="container">
     <div style="text-align:center;max-width:560px;margin:0 auto" class="reveal">
       <div class="tag">Pricing</div>
       <h2>Straightforward.<br>No Surprises.</h2>
-      <p class="lead" style="text-align:center;margin:16px auto 0">Starting prices for the most common project types. Every quote includes launch support — and I'll always tell you what you're getting before you commit.</p>
+      <p class="lead" style="text-align:center;margin:16px auto 0">Priced by which door fits — not a generic package tier. Every project includes launch support.</p>
     </div>
-    <div class="pricing__grid">
-
-      <div class="price-card reveal d1">
-        <div class="price-badge price-badge--plain">Starter</div>
-        <div class="price-card__name">Starter Website</div>
-        <div class="price-card__price">$750</div>
-        <div class="price-card__price-note">Starting price · Final quote after discovery</div>
-        <div class="price-card__desc">A clean, professional web presence for businesses just getting started or replacing a DIY site that isn't working.</div>
-        <div class="price-feats">
-          <div class="price-feat"><div class="price-feat-check">✓</div>Up to 4 pages</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Mobile responsive design</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Contact form included</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Launch support</div>
-          <div class="price-feat price-feat--dim"><div class="price-feat-check">—</div>Advanced animations</div>
-          <div class="price-feat price-feat--dim"><div class="price-feat-check">—</div>Custom interactions</div>
-        </div>
-        <a href="#contact" class="btn btn--outline" style="width:100%;justify-content:center;">Get a Quote</a>
+    <div class="price-rows">
+      <div class="price-row reveal d1">
+        <div class="price-row__name"><span>01 — Build</span>Full custom site</div>
+        <div class="price-row__desc">Like the demo work above — built around your business, start to finish.</div>
+        <div class="price-row__amt">Starting at $750</div>
+        <a href="#contact" class="price-row__link">Get a Quote →</a>
       </div>
-
-      <div class="price-card price-card--featured reveal d2">
-        <div class="price-badge price-badge--featured">Most Requested</div>
-        <div class="price-card__name">Business Website</div>
-        <div class="price-card__price">$1,250</div>
-        <div class="price-card__price-note">Starting price · Scales with scope</div>
-        <div class="price-card__desc">A full-featured website designed to look polished, perform on mobile, and turn visitors into customers — like the demo sites above.</div>
-        <div class="price-feats">
-          <div class="price-feat"><div class="price-feat-check">✓</div>5–8 sections, fully custom</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Scroll animations + hover effects</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Mobile-first, fast-loading</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Estimate / contact form</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Industry-specific design</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Launch support included</div>
-        </div>
-        <a href="#contact" class="btn btn--lime" style="width:100%;justify-content:center;">Get a Quote →</a>
+      <div class="price-row reveal d2">
+        <div class="price-row__name"><span>02 — Revive</span>Fix what's there</div>
+        <div class="price-row__desc">Quick audit first, then a scope-based quote.</div>
+        <div class="price-row__amt">Custom Quote</div>
+        <a href="#contact" class="price-row__link">Get a Quote →</a>
       </div>
-
-      <div class="price-card reveal d3">
-        <div class="price-badge price-badge--quote">Custom</div>
-        <div class="price-card__name">Custom Project</div>
-        <div class="price-card__price" style="font-size:2rem;padding-top:4px">Let's Talk</div>
-        <div class="price-card__price-note">Quote-based · No obligation</div>
-        <div class="price-card__desc">Already have a site that needs a complete overhaul? Something more complex in mind? Let's talk through the scope and I'll put together a custom quote.</div>
-        <div class="price-feats">
-          <div class="price-feat"><div class="price-feat-check">✓</div>Full site audit first</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Everything rebuilt from scratch</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Content migration help</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Scope-based pricing</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Timeline discussed upfront</div>
-          <div class="price-feat"><div class="price-feat-check">✓</div>Launch support included</div>
-        </div>
-        <a href="#contact" class="btn btn--ghost" style="width:100%;justify-content:center;border-radius:6px;">Request a Quote</a>
+      <div class="price-row reveal d1">
+        <div class="price-row__name"><span>03 — Evolve</span>Outgrown it</div>
+        <div class="price-row__desc">Direction conversation first, then a scope-based quote.</div>
+        <div class="price-row__amt">Custom Quote</div>
+        <a href="#contact" class="price-row__link">Get a Quote →</a>
       </div>
-
+      <div class="price-row reveal d2">
+        <div class="price-row__name"><span>04 — Mobile Rescue</span>Broken on phone</div>
+        <div class="price-row__desc">Scope stays tight — quick call, fixed quote.</div>
+        <div class="price-row__amt">Ask for a Quote</div>
+        <a href="#contact" class="price-row__link">Get a Quote →</a>
+      </div>
+      <div class="price-row reveal d1">
+        <div class="price-row__name"><span>05 — Digital Door™</span>One entrance</div>
+        <div class="price-row__desc">A single custom mobile destination for your QR/socials.</div>
+        <div class="price-row__amt">Ask for a Quote</div>
+        <a href="#contact" class="price-row__link">Get a Quote →</a>
+      </div>
+      <div class="price-row reveal d2">
+        <div class="price-row__name"><span>06 — Connect the Dots</span>Not sure yet</div>
+        <div class="price-row__desc">Free conversation — we figure out what you actually need first.</div>
+        <div class="price-row__amt">Free to Start</div>
+        <a href="#contact" class="price-row__link">Just Start Talking →</a>
+      </div>
     </div>
-    <div class="price-card__note reveal" style="max-width:640px;margin:20px auto 0;text-align:center">
+    <div class="price-card__note reveal" style="max-width:640px;margin:24px auto 0;text-align:center">
       <strong style="color:var(--white)">On hosting &amp; domains:</strong> Hosting and domain registration are purchased through your own account — I'll walk you through the setup from start to finish. Launch assistance is included with every project.
     </div>
   </div>
 </section>
+
 
 <!-- ─── PROCESS ───────────────────────────── -->
 <section class="process" id="process">
@@ -1486,39 +1514,42 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <h2>From First Message<br>to Live Site</h2>
       <p class="lead" style="text-align:center;margin:16px auto 0">A simple four-step process designed to move fast, stay clear, and get your site live without unnecessary back-and-forth.</p>
     </div>
-    <div class="process__steps">
+    <div class="process__steps" id="processSteps">
       <div class="process__step reveal d1">
-        <div class="process__circle">
+        <div class="process__circle" style="--step-color:#a0a8b4">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           <div class="process__step-num">1</div>
         </div>
-        <h4>Discovery</h4>
-        <p>We talk through your business, goals, and what you need. I ask the right questions — you don't need to have everything figured out.</p>
+        <h4 style="color:#a0a8b4">Discovery</h4>
+        <p>You tell me what's going on. I ask the rest.</p>
       </div>
       <div class="process__step reveal d2">
-        <div class="process__circle">
+        <div class="process__circle" style="--step-color:#7ecfcf">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           <div class="process__step-num">2</div>
         </div>
-        <h4>Demo or Direction</h4>
-        <p>I show you a relevant demo or design direction based on your industry. You see the style before I build anything for you.</p>
+        <h4 style="color:#7ecfcf">Demo or Direction</h4>
+        <p>You see the style before I build anything.</p>
       </div>
       <div class="process__step reveal d3">
-        <div class="process__circle">
+        <div class="process__circle" style="--step-color:#d4a0b0">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           <div class="process__step-num">3</div>
         </div>
-        <h4>Build</h4>
-        <p>I build your site with your content, branding, and specific needs. You review, we refine — I keep it moving without dragging it out.</p>
+        <h4 style="color:#d4a0b0">Build</h4>
+        <p>You review, we refine. It keeps moving.</p>
       </div>
       <div class="process__step reveal d4">
-        <div class="process__circle">
+        <div class="process__circle" style="--step-color:#c98a52">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           <div class="process__step-num">4</div>
         </div>
-        <h4>Launch</h4>
-        <p>We get the site live on your domain. I make sure everything works, walk you through the basics, and stick around for questions.</p>
+        <h4 style="color:#c98a52">Launch</h4>
+        <p>Live on your domain. I stick around after.</p>
       </div>
+    </div>
+    <div class="process__dots" id="processDots">
+      <span class="process__dot in-view"></span><span class="process__dot"></span><span class="process__dot"></span><span class="process__dot"></span>
     </div>
   </div>
 </section>
@@ -1756,10 +1787,11 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .closer__label{font-size:.88rem;color:var(--muted);max-width:380px;margin:14px auto 6px;line-height:1.6}
 .closer__source{font-family:var(--display);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog);margin-bottom:48px}
 .closer__q{font-size:1.15rem;color:var(--white);max-width:420px;margin:0 auto 20px;line-height:1.5}
+.closer__num span.roll{font-variant-numeric:tabular-nums}
 </style>
   <div class="container">
     <div class="reveal">
-      <div class="closer__num">63<span class="accent">%</span></div>
+      <div class="closer__num"><span class="roll" id="closerNum">00</span><span class="accent">%</span></div>
       <p class="closer__label">of consumers prefer finding information about brands and products on mobile devices.</p>
       <div class="closer__source">Source: HubSpot, State of Consumer Trends</div>
       <p class="closer__q">Have you checked what your website looks like on mobile?</p>
@@ -2025,6 +2057,50 @@ const counterObserver = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('.hero__stat').forEach(el => counterObserver.observe(el));
+
+/* ── PROCESS: HORIZONTAL SWIPE DOTS ──── */
+const processSteps = document.getElementById('processSteps');
+const processDots = document.getElementById('processDots');
+if (processSteps && processDots) {
+  const dots = processDots.querySelectorAll('.process__dot');
+  const stepObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = Array.from(processSteps.children).indexOf(e.target);
+        dots.forEach((d,i) => d.classList.toggle('in-view', i === idx));
+      }
+    });
+  }, { root: processSteps, threshold: 0.6 });
+  processSteps.querySelectorAll('.process__step').forEach(s => stepObserver.observe(s));
+}
+
+/* ── 63% CLOSER: SLOT-ROLL EFFECT ─────── */
+function slotRoll(el, target, duration) {
+  const start = performance.now();
+  function tick(now) {
+    const elapsed = now - start;
+    if (elapsed < duration) {
+      el.textContent = String(Math.floor(Math.random() * 99)).padStart(2,'0');
+      requestAnimationFrame(tick);
+    } else {
+      el.textContent = target;
+    }
+  }
+  requestAnimationFrame(tick);
+}
+const closerEl = document.getElementById('closer');
+if (closerEl) {
+  const closerObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = document.getElementById('closerNum');
+        if (el) slotRoll(el, 63, 900);
+        closerObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: .5 });
+  closerObserver.observe(closerEl);
+}
 
 const eraPhotos = {
   '1': 'about_main.jpg',
