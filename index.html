@@ -978,9 +978,13 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="hero__stat-label">Custom Code</div>
         </div>
         <div>
-          <div class="hero__stat-num">∞</div>
-          <div class="hero__stat-label">Launch Support</div>
+          <div class="hero__stat-num"><span class="accent">✓</span></div>
+          <div class="hero__stat-label">Yours at Handoff</div>
         </div>
+      </div>
+      <div class="hero__capabilities" aria-label="Services offered">
+        <span class="hero__cap-label">Also building</span>
+        <span class="hero__cap-rotator" id="heroCapability">Custom Websites</span>
       </div>
     </div>
   </div>
@@ -990,6 +994,15 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div class="hero__scroll-line"></div>
   </div>
 </section>
+
+
+<style>
+.hero__capabilities{margin-top:22px;display:flex;align-items:center;gap:10px;min-height:22px;font-family:var(--display);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog)}
+.hero__cap-label{color:rgba(255,255,255,.35)}
+.hero__cap-rotator{color:var(--lime);transition:opacity .25s ease,transform .25s ease;display:inline-block}
+.hero__cap-rotator.is-changing{opacity:0;transform:translateY(4px)}
+@media(max-width:520px){.hero__capabilities{margin-top:16px;font-size:.56rem;gap:7px;flex-wrap:wrap}}
+</style>
 
 <!-- ─── WORK ───────────────────────────────── -->
 <section class="work" id="work">
@@ -1248,7 +1261,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="hire-card__hint">See the path ↓</div>
         </summary>
         <div class="hire-card__body">
-          <p class="hire-card__problem">Not a pile of links. A path. Built for QR, social bios, cards, and signage.</p>
+          <p class="hire-card__problem">A custom website built around one clear customer path, plus a personalized QR entrance you can keep on your phone, cards, signage, vehicle, or packaging.</p>
           <div class="path-row">
             <span class="path-label">Scan</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
             <span class="path-label">Digital Door</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
@@ -1336,8 +1349,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="container">
     <div class="cpath__header reveal">
       <div class="tag" style="justify-content:center">Customer-Path Design</div>
-      <h2>Scan It. Know Exactly Where To Go.</h2>
-      <p>One QR code, one clear next step — book, browse a gallery, or find your socials. No guessing.</p>
+      <h2>Your Website, With a Door Built for the Real World.</h2>
+      <p>Digital Door™ includes a custom website — not just a QR code. The QR is the personalized entrance that takes customers straight into the path built for your business.</p>
     </div>
 
     <div class="cpath__demo reveal">
@@ -1352,27 +1365,36 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <div class="cpath__phone-btn">Contact Me</div>
       </div>
     </div>
+    <div class="cpath__example-link reveal">
+      <button type="button" class="cpath__example-btn" id="openDoorExample">View a branded QR example →</button>
+      <span>Not a plain QR dropped on a page — it can be designed to look like part of your business.</span>
+    </div>
 
     <div class="cpath__uses">
       <div class="cpath-use reveal d1">
         <div class="cpath-use__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2z"/></svg></div>
         <div class="cpath-use__trade">Tattoo Artist</div>
-        <div class="cpath-use__ex">Scan on the shop door → portfolio, then straight to booking.</div>
+        <div class="cpath-use__ex">Someone asks to see your work → pull up your Door → portfolio, booking, and socials in one scan.</div>
       </div>
       <div class="cpath-use reveal d2">
         <div class="cpath-use__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
         <div class="cpath-use__trade">Beauty Tech / Barber</div>
-        <div class="cpath-use__ex">Scan on the chair or card → book an appointment, no calls needed.</div>
+        <div class="cpath-use__ex">Keep your Door on your phone → clients can scan for services, availability, booking, and socials.</div>
       </div>
       <div class="cpath-use reveal d1">
         <div class="cpath-use__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3a2 2 0 012 2v1H4V5a2 2 0 012-2h12z"/><path d="M4 8h16l-1.5 12a2 2 0 01-2 2h-9a2 2 0 01-2-2z"/><path d="M9 13l2 2 4-4"/></svg></div>
         <div class="cpath-use__trade">Electrician</div>
-        <div class="cpath-use__ex">Scan on the truck → a request-estimate form, done in one stop.</div>
+        <div class="cpath-use__ex">Truck, invoice, or your phone → customers go straight to your estimate request.</div>
       </div>
       <div class="cpath-use reveal d2">
         <div class="cpath-use__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l6-6M3 21l1-4 8-8 3 3-8 8zM14 6l4-4 4 4-4 4z"/></svg></div>
         <div class="cpath-use__trade">Contractor</div>
-        <div class="cpath-use__ex">Scan on a job sign → past work, then a quick estimate request.</div>
+        <div class="cpath-use__ex">Job sign, truck, or your phone → past work, services, and a quote request in one place.</div>
+      </div>
+      <div class="cpath-use reveal d1">
+        <div class="cpath-use__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v20H6z"/><path d="M9 6h6M9 10h6M9 14h4"/></svg></div>
+        <div class="cpath-use__trade">Event / Product Business</div>
+        <div class="cpath-use__ex">No business card handy? Pull up your Door → customers can browse, follow, inquire, or find your next event.</div>
       </div>
     </div>
 
@@ -1382,6 +1404,27 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
+
+
+<style>
+.cpath__example-link{max-width:680px;margin:-30px auto 34px;text-align:center;display:flex;flex-direction:column;gap:7px;align-items:center}
+.cpath__example-btn{border:1px solid var(--border-md);background:var(--card);color:var(--lime);font-family:var(--display);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:11px 15px;border-radius:4px;cursor:pointer}
+.cpath__example-link span{font-size:.72rem;color:var(--fog)}
+.door-modal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.84);display:none;align-items:center;justify-content:center;padding:24px}
+.door-modal.is-open{display:flex}
+.door-modal__panel{position:relative;max-width:430px;width:100%;max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--border-md);border-radius:14px;padding:16px}
+.door-modal__panel img{display:block;width:100%;height:auto;border-radius:9px}
+.door-modal__caption{padding:12px 4px 2px;font-size:.78rem;color:var(--muted);line-height:1.55}
+.door-modal__caption strong{color:var(--white)}
+.door-modal__close{position:absolute;top:24px;right:24px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.7);color:white;font-size:1.2rem;cursor:pointer;z-index:2}
+</style>
+<div class="door-modal" id="doorExampleModal" aria-hidden="true" role="dialog" aria-label="Branded Digital Door QR example">
+  <div class="door-modal__panel">
+    <button class="door-modal__close" id="closeDoorExample" aria-label="Close example">×</button>
+    <img src="digital-door-stone-stardust-example.png" alt="Example of a branded QR code designed as part of a business visual" />
+    <div class="door-modal__caption"><strong>Branded QR example.</strong> Your Digital Door™ can live on your phone and be ready to scan in person, or be added to cards, signs, packaging, vehicles, and other customer touchpoints. The QR opens the website and customer path built for your business.</div>
+  </div>
+</div>
 
 <!-- ─── WHAT'S BEHIND THE RESULTS ──────────── -->
 <section class="behind" id="behind">
@@ -1479,8 +1522,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="container">
     <div style="text-align:center;max-width:560px;margin:0 auto" class="reveal">
       <div class="tag">Pricing</div>
-      <h2>Straightforward.<br>No Surprises.</h2>
-      <p class="lead" style="text-align:center;margin:16px auto 0">Priced by which door fits — not a generic package tier. Tap a door to see the number.</p>
+      <h2>Starting Prices.<br>No Guessing Games.</h2>
+      <p class="lead" style="text-align:center;margin:16px auto 0">You should know whether we're in the same ballpark before you reach out. These are starting points; your final price is based on scope and confirmed before work begins.</p>
     </div>
     <div class="price-rows">
 
@@ -1505,7 +1548,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         </summary>
         <div class="price-row__body">
           <div class="price-row__desc">Quick audit first, then a scope-based quote — keep what's working.</div>
-          <div class="price-row__amt">Custom Quote<small>After a quick audit</small></div>
+          <div class="price-row__amt">Starting at $250<small>Final after quick audit</small></div>
           <a href="#contact" class="price-row__cta">Get an Audit →</a>
         </div>
       </details>
@@ -1518,7 +1561,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         </summary>
         <div class="price-row__body">
           <div class="price-row__desc">Direction conversation first, then a scope-based quote.</div>
-          <div class="price-row__amt">Custom Quote<small>After a direction call</small></div>
+          <div class="price-row__amt">Starting at $350<small>Final after direction call</small></div>
           <a href="#contact" class="price-row__cta">Talk Direction →</a>
         </div>
       </details>
@@ -1531,7 +1574,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         </summary>
         <div class="price-row__body">
           <div class="price-row__desc">Scope stays tight — quick call, fixed number, fast turnaround.</div>
-          <div class="price-row__amt">Starting at $350*<small>Fixed scope</small></div>
+          <div class="price-row__amt">Starting at $175<small>Final price by scope</small></div>
           <a href="#contact" class="price-row__cta">See What We'd Fix →</a>
         </div>
       </details>
@@ -1543,8 +1586,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="price-row__chevron">Tap for pricing ↓</div>
         </summary>
         <div class="price-row__body">
-          <div class="price-row__desc">A single custom mobile destination for your QR code, bio, or cards.</div>
-          <div class="price-row__amt">Starting at $250*<small>One page, done right</small></div>
+          <div class="price-row__desc">A custom website built around one clear customer path, plus your personalized QR entrance.</div>
+          <div class="price-row__amt">Starting at $250<small>Website + QR entrance</small></div>
           <a href="#contact" class="price-row__cta">See a Digital Door →</a>
         </div>
       </details>
@@ -1564,8 +1607,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
     </div>
     <div class="price-card__note reveal" style="max-width:640px;margin:24px auto 0;text-align:center">
-      <strong style="color:var(--white)">On hosting &amp; domains:</strong> Hosting and domain registration are purchased through your own account — I'll walk you through the setup from start to finish. Launch assistance is included with every project.
-      <br><span style="font-size:.72rem">*Mobile Rescue and Digital Door starting prices are proposed — not yet confirmed by Vee.</span>
+      <strong style="color:var(--white)">Starting price = baseline, not a bait-and-switch.</strong> Final cost depends on what your project actually needs and is confirmed before I start. Hosting and domain accounts stay in your name. No required monthly retainer. Every completed project includes an organized handoff so you know what you own, where it lives, and how to access it.
     </div>
   </div>
 </section>
@@ -1576,8 +1618,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="container">
     <div style="text-align:center;max-width:540px;margin:0 auto" class="reveal">
       <div class="tag">How It Works</div>
-      <h2>From First Message<br>to Live Site</h2>
-      <p class="lead" style="text-align:center;margin:16px auto 0">A simple four-step process designed to move fast, stay clear, and get your site live without unnecessary back-and-forth.</p>
+      <h2>From “I Need Help”<br>to Handled.</h2>
+      <p class="lead" style="text-align:center;margin:16px auto 0">A simple four-step process designed to move fast, stay clear, and leave you fully set up when the work is done.</p>
     </div>
     <div class="process__steps" id="processSteps">
       <div class="process__step reveal d1">
@@ -1609,8 +1651,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           <div class="process__step-num">4</div>
         </div>
-        <h4 style="color:#c98a52">Launch</h4>
-        <p>Live on your domain. I stick around after.</p>
+        <h4 style="color:#c98a52">Launch + Handoff</h4>
+        <p>Live, organized, and yours. You leave with the keys.</p>
       </div>
     </div>
     <div class="process__dots" id="processDots">
@@ -1776,6 +1818,24 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   #about.is-open .about-v2{display:block}
 }
 
+
+/* Mobile About: each chapter uses its era image behind the text, as established. */
+@media(max-width:860px){
+  #about.is-open .about-v2{display:block}
+  .about-v2__left{display:none}
+  .about-v2__text{width:100%}
+  .about-v2__timeline{display:flex;flex-direction:column;gap:16px}
+  .about-v2__titem{position:relative;overflow:hidden;border:1px solid var(--border-md);border-radius:10px;padding:28px 22px;min-height:240px;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center}
+  .about-v2__titem::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,10,.18),rgba(8,9,10,.82) 58%,rgba(8,9,10,.96));z-index:0}
+  .about-v2__titem > *{position:relative;z-index:1}
+  .about-v2__titem[data-era="1"]{background-image:url('about_main.jpg')}
+  .about-v2__titem[data-era="2"]{background-image:url('about_grad.jpg')}
+  .about-v2__titem[data-era="3"]{background-image:url('about_salesforce.png')}
+  .about-v2__titem[data-era="4"]{background-image:url('about_meta_summit.png')}
+  .about-v2__titem-label{color:var(--white)}
+  .about-v2__titem-text{color:rgba(255,255,255,.84)}
+}
+
 </style>
 
   <div class="container about-v2">
@@ -1801,7 +1861,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <div class="rr reveal about-v2__text">
         <div class="about-v2__eyebrow">About Me</div>
         <h2 class="about-v2__name">Hi, I'm Nev Gonzalez.</h2>
-        <p class="about-v2__intro">I'm a front-end web developer building modern websites for local businesses. My path here didn't start with code. It started with <strong>people, operations, and a decade of learning how businesses actually work.</strong></p>
+        <p class="about-v2__intro">I build and organize the digital side of local businesses — websites, customer paths, mobile experiences, and the systems behind them. My path here didn't start with code. It started with <strong>people, operations, and a decade of learning how businesses actually work.</strong></p>
 
         <div class="about-v2__timeline-wrap" id="timelineWrap">
 
@@ -1832,7 +1892,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="about-v2__pill">JavaScript</div>
           <div class="about-v2__pill">Responsive</div>
           <div class="about-v2__pill">GitHub Pages</div>
-          <div class="about-v2__pill">GitHub Pages</div>
           <div class="about-v2__pill">Netlify</div>
           <div class="about-v2__pill">Figma</div>
         </div>
@@ -1840,29 +1899,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <a href="#contact" class="btn btn--lime">Work With Me <span class="btn__arr">→</span></a>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ─── 63% MOBILE CLOSER ──────────────────── -->
-<section class="closer" id="closer">
-<style>
-.closer{background:var(--dark);padding:96px 0;text-align:center}
-@media(max-width:860px){.closer{padding:56px 0}.closer__source{margin-bottom:32px}}
-.closer__num{font-family:var(--heading);font-size:clamp(3.4rem,8vw,5rem);font-weight:800;color:var(--white);line-height:1}
-.closer__num .accent{color:var(--lime)}
-.closer__label{font-size:.88rem;color:var(--muted);max-width:380px;margin:14px auto 6px;line-height:1.6}
-.closer__source{font-family:var(--display);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog);margin-bottom:48px}
-.closer__q{font-size:1.15rem;color:var(--white);max-width:420px;margin:0 auto 20px;line-height:1.5}
-.closer__num span.roll{font-variant-numeric:tabular-nums}
-</style>
-  <div class="container">
-    <div class="reveal">
-      <div class="closer__num"><span class="roll" id="closerNum">00</span><span class="accent">%</span></div>
-      <p class="closer__label">of consumers prefer finding information about brands and products on mobile devices.</p>
-      <div class="closer__source">Source: HubSpot, State of Consumer Trends</div>
-      <p class="closer__q">Have you checked what your website looks like on mobile?</p>
-      <a href="#mobileRescueDoor" class="btn btn--lime" id="closerMobileLink">Mobile Rescue →</a>
     </div>
   </div>
 </section>
@@ -2098,22 +2134,6 @@ document.querySelectorAll('a[href="#about"]').forEach(link => {
   });
 });
 
-/* ── CLOSER → MOBILE RESCUE DOOR ─────────
-   Opens the Mobile Rescue card and scrolls straight to it, so the
-   63% moment leads somewhere concrete instead of just the top of
-   the Ways to Hire section. */
-const closerMobileLink = document.getElementById('closerMobileLink');
-if (closerMobileLink) {
-  closerMobileLink.addEventListener('click', e => {
-    e.preventDefault();
-    const door = document.getElementById('mobileRescueDoor');
-    if (door) {
-      door.open = true;
-      door.scrollIntoView({behavior:'smooth', block:'center'});
-    }
-  });
-}
-
 /* ── SCROLL REVEAL ───────────────────── */
 const ro = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target) } });
@@ -2155,34 +2175,6 @@ if (processSteps && processDots) {
     });
   }, { root: processSteps, threshold: 0.6 });
   processSteps.querySelectorAll('.process__step').forEach(s => stepObserver.observe(s));
-}
-
-/* ── 63% CLOSER: SLOT-ROLL EFFECT ─────── */
-function slotRoll(el, target, duration) {
-  const start = performance.now();
-  function tick(now) {
-    const elapsed = now - start;
-    if (elapsed < duration) {
-      el.textContent = String(Math.floor(Math.random() * 99)).padStart(2,'0');
-      requestAnimationFrame(tick);
-    } else {
-      el.textContent = target;
-    }
-  }
-  requestAnimationFrame(tick);
-}
-const closerEl = document.getElementById('closer');
-if (closerEl) {
-  const closerObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const el = document.getElementById('closerNum');
-        if (el) slotRoll(el, 63, 900);
-        closerObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: .5 });
-  closerObserver.observe(closerEl);
 }
 
 const eraPhotos = {
@@ -2238,6 +2230,42 @@ if(supportsHover){
     });
   });
 }
+
+
+const capabilityPhrases = [
+  'Custom Websites',
+  'Website Redesigns',
+  'Landing Pages',
+  'Mobile Optimization',
+  'Launch + Handoff',
+  'Digital Cleanup'
+];
+const heroCapability = document.getElementById('heroCapability');
+if(heroCapability){
+  let capabilityIndex = 0;
+  setInterval(() => {
+    heroCapability.classList.add('is-changing');
+    setTimeout(() => {
+      capabilityIndex = (capabilityIndex + 1) % capabilityPhrases.length;
+      heroCapability.textContent = capabilityPhrases[capabilityIndex];
+      heroCapability.classList.remove('is-changing');
+    }, 250);
+  }, 2200);
+}
+
+const doorExampleModal = document.getElementById('doorExampleModal');
+const openDoorExample = document.getElementById('openDoorExample');
+const closeDoorExample = document.getElementById('closeDoorExample');
+function setDoorModal(open){
+  if(!doorExampleModal) return;
+  doorExampleModal.classList.toggle('is-open', open);
+  doorExampleModal.setAttribute('aria-hidden', open ? 'false' : 'true');
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+if(openDoorExample) openDoorExample.addEventListener('click', () => setDoorModal(true));
+if(closeDoorExample) closeDoorExample.addEventListener('click', () => setDoorModal(false));
+if(doorExampleModal) doorExampleModal.addEventListener('click', e => { if(e.target === doorExampleModal) setDoorModal(false); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') setDoorModal(false); });
 
 function handleForm(e){
   e.preventDefault();
