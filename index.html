@@ -1879,6 +1879,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 
 /* Timeline */
+/* Story images are mobile-only. Without this desktop guard they render at
+   their intrinsic size inside the right column and blow the two-column layout apart. */
+.about-v2__titem-image{display:none}
+
 .about-v2__timeline{
   display:flex;flex-direction:column;gap:0;
   border-left:2px solid rgba(160,168,180,.15);
