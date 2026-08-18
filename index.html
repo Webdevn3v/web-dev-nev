@@ -1788,7 +1788,9 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
 <style>
 /* ── ABOUT V2 — EDITORIAL LAYOUT ── */
-.about-v2{background:var(--dark);padding:112px 0 100px}
+.about-v2{background:var(--dark);padding:112px 28px 100px;width:100%;max-width:1100px;margin:0 auto}
+/* Desktop guardrail: keep the About section in its intended two-column composition. */
+#about > .container.about-v2{width:100%;max-width:1100px;margin:0 auto}
 .about-v2__hero{
   display:grid;grid-template-columns:1fr 1.1fr;
   gap:64px;align-items:start;
@@ -1943,7 +1945,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   .about-teaser{display:block}
   #about{display:none;padding:0;background:var(--dark)}
   #about.about-open{display:block}
-  #about .about-v2{display:block;padding:22px 0 64px}
+  #about .about-v2{display:block;width:100%;max-width:none;margin:0;padding:22px 0 64px}
   .about-v2__hero{display:block}
   .about-v2__left{display:none}
   .about-v2__text{width:100%}
