@@ -1774,6 +1774,16 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 </section>
 
 <!-- ─── ABOUT ──────────────────────────────── -->
+<!-- MOBILE ABOUT TEASER -->
+<section class="about-teaser" id="aboutTeaser" aria-label="About Nev">
+  <div class="container">
+    <button class="about-teaser__button" id="aboutRevealBtn" type="button" aria-expanded="false" aria-controls="about">
+      <span>Meet the person behind the digital side</span>
+      <span class="about-teaser__arrow">→</span>
+    </button>
+  </div>
+</section>
+
 <section class="about" id="about">
 
 <style>
@@ -1918,138 +1928,72 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 .about-v2__pill:hover{border-color:var(--lime);color:var(--lime);background:var(--lime-glow2)}
 
-/* Homepage flow: the full About story is not part of the normal
-   mobile scroll — reached instead via the "Meet the person" teaser
-   near the bottom of the page (or the nav's About link), which
-   reveals this section on tap (see the about-reveal script).
-   Desktop is untouched; About stays exactly where it is there. */
-@media(max-width:860px){
-  #about{padding:0}
-  #about .about-v2{display:block}
+/* Mobile About teaser + expandable full-photo story. */
+.about-teaser{display:none;background:var(--dark);padding:54px 0 58px}
+.about-teaser__button{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:22px 0;border-top:1px solid var(--border-md);border-bottom:1px solid var(--border-md);
+  color:var(--white);font-family:var(--heading);font-size:clamp(1.05rem,5vw,1.35rem);
+  font-weight:700;letter-spacing:-.015em;text-align:left;cursor:pointer;
 }
+.about-teaser__arrow{font-family:var(--display);color:var(--lime);font-size:1.25rem;transition:transform .25s var(--ease)}
+.about-teaser__button:hover .about-teaser__arrow{transform:translateX(5px)}
 
-
-/* Mobile About — full photographic chapters with readable text overlays. */
 @media(max-width:860px){
-  #about{padding:0;background:var(--dark)}
-  #about .about-v2{display:block;padding:72px 0 64px}
+  .about-teaser{display:block}
+  #about{display:none;padding:0;background:var(--dark)}
+  #about.about-open{display:block}
+  #about .about-v2{display:block;padding:22px 0 64px}
   .about-v2__hero{display:block}
   .about-v2__left{display:none}
   .about-v2__text{width:100%}
 
-  /* Keep the intro readable, then let the story images run nearly edge-to-edge. */
-  .about-v2__eyebrow,
-  .about-v2__name,
-  .about-v2__intro,
-  .about-v2__stack-label,
-  .about-v2__pills,
-  .about-v2__text > .btn{margin-left:24px;margin-right:24px}
-  .about-v2__eyebrow,.about-v2__name,.about-v2__intro{margin-left:24px;margin-right:24px}
-  .about-v2__intro{max-width:none;margin-bottom:38px}
+  /* On mobile the story opens directly into the imagery instead of leading with a large About intro. */
+  .about-v2__eyebrow,.about-v2__name,.about-v2__intro{display:none}
+  .about-v2__stack-label,.about-v2__pills,.about-v2__text > .btn{margin-left:24px;margin-right:24px}
 
-  .about-v2__timeline-wrap{
-    margin:0;
-    border:0;
-    border-radius:0;
-    background:transparent;
-    overflow:visible;
-  }
+  .about-v2__timeline-wrap{margin:0;border:0;border-radius:0;background:transparent;overflow:visible}
   .about-v2__timeline{
-    position:relative;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-    border-left:0;
-    padding:0 0 0 26px;
-    margin:0;
+    position:relative;display:flex;flex-direction:column;gap:18px;
+    border-left:0;padding:0 0 0 26px;margin:0;
   }
-
-  /* Progress rail stays visible while the chapters themselves become large images. */
   .about-v2__timeline::before{
-    content:'';
-    position:absolute;
-    left:9px;
-    top:20px;
-    bottom:20px;
-    width:2px;
+    content:'';position:absolute;left:9px;top:20px;bottom:20px;width:2px;
     background:linear-gradient(to bottom,
-      var(--lime) 0,
-      var(--lime) var(--timeline-progress,0%),
-      rgba(160,168,180,.18) var(--timeline-progress,0%),
-      rgba(160,168,180,.18) 100%);
-    box-shadow:0 0 10px rgba(160,168,180,.16);
-    transition:background .45s ease;
-    z-index:5;
+      var(--lime) 0,var(--lime) var(--timeline-progress,0%),
+      rgba(160,168,180,.18) var(--timeline-progress,0%),rgba(160,168,180,.18) 100%);
+    box-shadow:0 0 10px rgba(160,168,180,.16);transition:background .45s ease;z-index:5;
   }
 
   .about-v2__titem{
-    position:relative;
-    overflow:hidden;
-    width:calc(100vw - 26px);
-    min-height:72svh;
-    padding:0;
-    border:0;
-    border-radius:0;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-position:center;
-    box-shadow:none;
-    isolation:isolate;
+    position:relative;overflow:hidden;width:calc(100vw - 26px);
+    min-height:82svh;padding:0;border:0;border-radius:0;
+    display:flex;flex-direction:column;justify-content:flex-end;background:#050608;
+    box-shadow:none;isolation:isolate;
   }
-
-  /* Dark photographic overlay: image remains visible while copy stays readable. */
+  .about-v2__titem-image{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;
+    background:#050608;z-index:0;display:block;
+  }
   .about-v2__titem::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    width:auto;height:auto;
-    border:0;
-    border-radius:0;
-    transform:none;
-    background:linear-gradient(180deg,
-      rgba(5,6,8,.08) 0%,
-      rgba(5,6,8,.16) 35%,
-      rgba(5,6,8,.68) 67%,
-      rgba(5,6,8,.94) 100%);
-    z-index:1;
-    pointer-events:none;
+    content:'';position:absolute;inset:0;width:auto;height:auto;border:0;border-radius:0;transform:none;
+    background:linear-gradient(180deg,rgba(5,6,8,.03) 0%,rgba(5,6,8,.08) 40%,rgba(5,6,8,.58) 70%,rgba(5,6,8,.94) 100%);
+    z-index:1;pointer-events:none;
   }
-  .about-v2__titem:hover::before,
-  .about-v2__titem.era-active::before{transform:none;background:linear-gradient(180deg,rgba(5,6,8,.08) 0%,rgba(5,6,8,.16) 35%,rgba(5,6,8,.68) 67%,rgba(5,6,8,.94) 100%)}
-
-  .about-v2__titem > *{position:relative;z-index:2}
+  .about-v2__titem:hover::before,.about-v2__titem.era-active::before{
+    transform:none;background:linear-gradient(180deg,rgba(5,6,8,.03) 0%,rgba(5,6,8,.08) 40%,rgba(5,6,8,.58) 70%,rgba(5,6,8,.94) 100%);
+  }
+  .about-v2__titem > *:not(.about-v2__titem-image){position:relative;z-index:2}
   .about-v2__titem-label{padding:0 24px;margin-bottom:10px;color:var(--white);text-shadow:0 2px 14px rgba(0,0,0,.9)}
-  .about-v2__titem-text{padding:0 24px 28px;color:rgba(255,255,255,.9);font-size:.94rem;line-height:1.78;text-shadow:0 2px 12px rgba(0,0,0,.92)}
+  .about-v2__titem-text{padding:0 24px 30px;color:rgba(255,255,255,.92);font-size:.94rem;line-height:1.78;text-shadow:0 2px 12px rgba(0,0,0,.92)}
   .about-v2__titem-text strong{color:#fff}
 
-  /* Use the CURRENT repo source images — no stale optimized copies. */
-  .about-v2__titem[data-era="1"]{background-image:url('about_mim.png');background-position:center 28%}
-  .about-v2__titem[data-era="2"]{background-image:url('about-dropout.png');background-position:center 30%}
-  .about-v2__titem[data-era="3"]{background-image:url('about_salesforce.png');background-position:center 25%}
-  .about-v2__titem[data-era="4"]{background-image:url('about_meta_summit.png');background-position:center 25%}
-
-  /* The glowing live orb sits on the rail, independent of the image overlay. */
   .about-v2__titem::after{
-    content:'';
-    position:absolute;
-    left:-21px;
-    top:50%;
-    width:9px;height:9px;
-    border-radius:50%;
-    background:rgba(160,168,180,.32);
-    border:1px solid rgba(255,255,255,.35);
-    z-index:7;
+    content:'';position:absolute;left:-21px;top:50%;width:9px;height:9px;border-radius:50%;
+    background:rgba(160,168,180,.32);border:1px solid rgba(255,255,255,.35);z-index:7;
     transition:transform .35s ease,background .35s ease,box-shadow .35s ease;
   }
-  .about-v2__titem.era-active::after{
-    background:var(--lime);
-    transform:scale(1.5);
-    box-shadow:0 0 8px var(--lime),0 0 20px rgba(160,168,180,.65);
-  }
-
+  .about-v2__titem.era-active::after{background:var(--lime);transform:scale(1.5);box-shadow:0 0 8px var(--lime),0 0 20px rgba(160,168,180,.65)}
   .about-v2__stack-label{margin-top:38px}
   .about-v2__pills{margin-left:24px;margin-right:24px}
 }
@@ -2085,18 +2029,22 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
           <div class="about-v2__timeline">
             <div class="about-v2__titem era-active" data-era="1">
+              <img class="about-v2__titem-image" src="about_mim.png" alt="Method in Motion workspace" />
               <div class="about-v2__titem-label">The Beginning</div>
               <div class="about-v2__titem-text">After high school I attended community college, where I helped establish and lead a student business club as <strong>Vice President</strong> — organizing events, inviting guest speakers, and building real opportunities for students interested in entrepreneurship.</div>
             </div>
             <div class="about-v2__titem" data-era="2">
+              <img class="about-v2__titem-image" src="about-dropout.png" alt="Nev carrying a stack of keyboards" />
               <div class="about-v2__titem-label">The Hard Choice</div>
               <div class="about-v2__titem-text">I transferred to UB to pursue a degree in Business Administration, with a concentration in Accounting and Forensic Accounting, while spending nearly a decade helping operate a family-owned restaurant in downtown Frederick. Along the way, I made the hard choice to <strong>leave UB and take the risk</strong> of building something of my own instead of finishing the traditional path.</div>
             </div>
             <div class="about-v2__titem" data-era="3">
+              <img class="about-v2__titem-image" src="about_salesforce.png" alt="Nev during her Salesforce chapter" />
               <div class="about-v2__titem-label">The Shift</div>
               <div class="about-v2__titem-text">My interest shifted toward technology and digital business. I landed an internship at Salesforce, learned a lot, and realized I wanted to build something of my own. I started teaching myself web development and building websites for friends, family, and local businesses. <strong>What started as a personal challenge became a direction.</strong></div>
             </div>
             <div class="about-v2__titem" data-era="4">
+              <img class="about-v2__titem-image" src="about_meta_summit.png" alt="Nev at a Meta event" />
               <div class="about-v2__titem-label">Today</div>
               <div class="about-v2__titem-text">I combine my background in business, problem-solving, and development to build modern websites that help businesses show up online with intention and <strong>connect with their customers.</strong></div>
             </div>
@@ -2357,5 +2305,39 @@ function handleForm(e){
   document.getElementById('formOk').classList.add('show');
 }
 </script>
+
+<script>
+(function(){
+  const about = document.getElementById('about');
+  const teaser = document.getElementById('aboutTeaser');
+  const btn = document.getElementById('aboutRevealBtn');
+  if(!about || !btn) return;
+
+  function openAbout(scrollToSection=true){
+    about.classList.add('about-open');
+    btn.setAttribute('aria-expanded','true');
+    if(teaser) teaser.style.display='none';
+    if(scrollToSection){
+      requestAnimationFrame(()=>about.scrollIntoView({behavior:'smooth',block:'start'}));
+    }
+  }
+
+  btn.addEventListener('click',()=>openAbout(true));
+
+  document.querySelectorAll('a[href="#about"]').forEach(link=>{
+    link.addEventListener('click',e=>{
+      if(window.matchMedia('(max-width: 860px)').matches){
+        e.preventDefault();
+        openAbout(true);
+        const mob=document.getElementById('mob');
+        const ham=document.getElementById('ham');
+        if(mob) mob.classList.remove('op');
+        if(ham) ham.classList.remove('op');
+      }
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
