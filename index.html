@@ -1159,8 +1159,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .hire-card > summary::-webkit-details-marker{display:none}
 .hire-card__icon{width:42px;height:42px;border-radius:10px;border:1px solid var(--border-md);background:var(--dark);display:flex;align-items:center;justify-content:center;color:var(--card-color,var(--lime));margin-bottom:14px}
 .hire-card__icon svg{width:20px;height:20px}
-.hire-card__num{font-family:var(--display);font-size:.62rem;letter-spacing:.14em;color:var(--card-color,var(--lime));margin-bottom:10px}
-.hire-card__name{font-family:var(--heading);font-size:1.5rem;font-weight:800;color:var(--white);line-height:1.15;margin-bottom:4px}
+.hire-card__num{font-family:var(--heading);font-size:clamp(1.65rem,3vw,2.35rem);font-weight:800;letter-spacing:-.025em;color:var(--card-color,var(--lime));margin-bottom:7px;line-height:1}
+.hire-card__name{font-family:var(--body);font-size:.92rem;font-weight:500;color:rgba(255,255,255,.78);line-height:1.45;margin-bottom:4px}
 .hire-card__hint{font-family:var(--display);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:14px;display:flex;align-items:center;gap:6px}
 .hire-card[open] .hire-card__hint{color:var(--card-color,var(--lime))}
 .hire-card__body{padding:0 24px 26px}
@@ -1421,7 +1421,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <div class="door-modal" id="doorExampleModal" aria-hidden="true" role="dialog" aria-label="Branded Digital Door QR example">
   <div class="door-modal__panel">
     <button class="door-modal__close" id="closeDoorExample" aria-label="Close example">×</button>
-    <img src="digital-door-stone-stardust-example.png" alt="Example of a branded QR code designed as part of a business visual" />
+    <img src="digital-door-stone-stardust-example.webp" alt="Example of a branded QR code designed as part of a business visual" />
     <div class="door-modal__caption"><strong>Branded QR example.</strong> Your Digital Door™ can live on your phone and be ready to scan in person, or be added to cards, signs, packaging, vehicles, and other customer touchpoints. The QR opens the website and customer path built for your business.</div>
   </div>
 </div>
@@ -1661,6 +1661,118 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
+<!-- ─── CTA BAND ───────────────────────────── -->
+<div class="cta-band">
+  <div class="container">
+    <div class="cta-band__inner">
+      <div class="cta-band__text reveal">
+        <h2>Interested in a Website<br>Refresh or Redesign?</h2>
+        <p>Let's talk. Reach out and I'll send over next steps — no pressure, no long intake forms.</p>
+      </div>
+      <div class="cta-band__right reveal d2">
+        <a href="mailto:webdevn3v@gmail.com" class="btn btn--dark">Email Me Directly <span class="btn__arr">→</span></a>
+        <a href="#contact" class="btn btn--outline" style="border-color:rgba(0,0,0,.25);color:rgba(0,0,0,.7)">Use the Form</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CONTACT ───────────────────────────── -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact__layout">
+      <div class="rl reveal">
+        <div class="tag">Get in Touch</div>
+        <h2>Let's Talk<br>About Your Site.</h2>
+        <p class="lead">Interested in a website refresh or redesign? Reach out and I'll send over next steps — usually within a few hours.</p>
+        <div class="contact-item">
+          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div>
+            <div class="contact-item__label">Email</div>
+            <div class="contact-item__val"><a href="mailto:webdevn3v@gmail.com">webdevn3v@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div>
+            <div class="contact-item__label">Location</div>
+            <div class="contact-item__val">Columbia, Maryland</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+          <div>
+            <div class="contact-item__label">Portfolio</div>
+            <div class="contact-item__val"><a href="#work">See the work above ↑</a></div>
+          </div>
+        </div>
+        <div class="contact__note">
+          <strong style="color:var(--white)">What to expect:</strong> I'll respond with a few questions about your business and project — then we figure out the best next step together. No hard sell, just a real conversation.
+        </div>
+      </div>
+      <div class="rr reveal contact__form-wrap">
+        <div id="formBody">
+          <div class="tag" style="margin-bottom:12px">New Project Inquiry</div>
+          <h3 style="font-family:var(--heading);font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:6px;letter-spacing:-.02em">Tell Me About Your Business</h3>
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:28px">I'll get back to you within a few hours.</p>
+          <form onsubmit="handleForm(event)">
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label">Your Name</label>
+                <input class="form__input" type="text" placeholder="Jane Smith" required>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Business Name</label>
+                <input class="form__input" type="text" placeholder="Smith Roofing Co.">
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label">Email</label>
+                <input class="form__input" type="email" placeholder="jane@example.com" required>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Phone (optional)</label>
+                <input class="form__input" type="tel" placeholder="(555) 000-0000">
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="form__label">Industry / Business Type</label>
+              <select class="form__select">
+                <option value="">Select your industry…</option>
+                <option>Law Firm / Legal</option>
+                <option>Dental / Medical</option>
+                <option>Roofing / Contractor</option>
+                <option>HVAC / Home Services</option>
+                <option>Med Spa / Wellness</option>
+                <option>Restaurant / Food</option>
+                <option>Real Estate</option>
+                <option>Other Local Business</option>
+              </select>
+            </div>
+            <div class="form__group">
+              <label class="form__label">Current Website / Social Link <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+              <input class="form__input" type="url" placeholder="https://yourbusiness.com">
+            </div>
+            <div class="form__group">
+              <label class="form__label">What Do You Need?</label>
+              <textarea class="form__textarea" placeholder="New website? Redesign? Landing page? Just tell me a bit about your situation and what you're looking to accomplish…"></textarea>
+            </div>
+            <button type="submit" class="form__submit">Send My Inquiry →</button>
+            <p class="form__note">No sales pitch. Just a real response with clear next steps.</p>
+          </form>
+        </div>
+        <div class="form__ok" id="formOk">
+          <div class="form__ok-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h3>Message Received.</h3>
+          <p>Thanks for reaching out. I'll review your project and get back to you within a few hours — usually same day.<br><br>
+          Or email me directly at <a href="mailto:webdevn3v@gmail.com" style="color:var(--lime)">webdevn3v@gmail.com</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── ABOUT ──────────────────────────────── -->
 <section class="about" id="about">
 
@@ -1813,15 +1925,13 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
    Desktop is untouched; About stays exactly where it is there. */
 @media(max-width:860px){
   #about{padding:0}
-  #about.is-open{padding:112px 0}
-  #about .about-v2{display:none}
-  #about.is-open .about-v2{display:block}
+  #about .about-v2{display:block}
 }
 
 
 /* Mobile About: each chapter uses its era image behind the text, as established. */
 @media(max-width:860px){
-  #about.is-open .about-v2{display:block}
+  #about .about-v2{display:block}
   .about-v2__left{display:none}
   .about-v2__text{width:100%}
   .about-v2__timeline{display:flex;flex-direction:column;gap:16px}
@@ -1829,11 +1939,15 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   .about-v2__titem::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,10,.18),rgba(8,9,10,.82) 58%,rgba(8,9,10,.96));z-index:0}
   .about-v2__titem > *{position:relative;z-index:1}
   .about-v2__titem[data-era="1"]{background-image:url('about_main.jpg')}
-  .about-v2__titem[data-era="2"]{background-image:url('about_grad.jpg')}
-  .about-v2__titem[data-era="3"]{background-image:url('about_salesforce.png')}
-  .about-v2__titem[data-era="4"]{background-image:url('about_meta_summit.png')}
+  .about-v2__titem[data-era="2"]{background-image:url('about-dropout.webp')}
+  .about-v2__titem[data-era="3"]{background-image:url('about_salesforce.jpg')}
+  .about-v2__titem[data-era="4"]{background-image:url('about_meta_summit.jpg')}
   .about-v2__titem-label{color:var(--white)}
   .about-v2__titem-text{color:rgba(255,255,255,.84)}
+  .about-v2__timeline{position:relative;padding-left:34px}
+  .about-v2__timeline::before{content:'';position:absolute;left:11px;top:18px;bottom:18px;width:2px;background:linear-gradient(to bottom,var(--lime) 0,var(--lime) var(--timeline-progress,0%),rgba(160,168,180,.18) var(--timeline-progress,0%),rgba(160,168,180,.18) 100%);box-shadow:0 0 10px rgba(160,168,180,.16);transition:background .45s ease}
+  .about-v2__titem::after{content:'';position:absolute;left:-29px;top:50%;width:9px;height:9px;border-radius:50%;background:rgba(160,168,180,.28);border:1px solid rgba(255,255,255,.28);z-index:4;transition:transform .35s ease,background .35s ease,box-shadow .35s ease}
+  .about-v2__titem.era-active::after{background:var(--lime);transform:scale(1.45);box-shadow:0 0 8px var(--lime),0 0 18px rgba(160,168,180,.55)}
 }
 
 </style>
@@ -1844,7 +1958,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <!-- LEFT: sticky photo + MIM caption -->
       <div class="about-v2__left rl reveal">
         <div class="about-v2__photo-main">
-          <img src="about_mim.png" alt="Nev Gonzalez" />
+          <img src="about_mim.webp" alt="Nev Gonzalez" />
           <div class="about-v2__photo-badge">
             <div class="about-v2__photo-badge-num">10+</div>
             <div class="about-v2__photo-badge-lbl">Years in Business</div>
@@ -1903,137 +2017,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
-<!-- ─── ABOUT LINK (mobile only) ───────────── -->
-<div class="about-mobile-link">
-<style>
-.about-mobile-link{display:none}
-@media(max-width:860px){
-  .about-mobile-link{
-    display:block;background:var(--dark);padding:8px 0 56px;text-align:center;
-  }
-  .about-mobile-link a{
-    font-family:var(--display);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--lime);display:inline-flex;align-items:center;gap:6px;
-    padding:14px 22px;border:1px solid rgba(160,168,180,.25);border-radius:4px;
-  }
-  .about-mobile-link p{
-    margin-top:16px;font-size:.76rem;color:var(--muted);font-style:italic;
-  }
-}
-</style>
-  <div class="container">
-    <a href="#about" class="reveal">Meet the person behind The Digital Side →</a>
-    <p class="reveal">Want the full hover + motion experience? Take a look on desktop →</p>
-  </div>
-</div>
-
-<!-- ─── CTA BAND ───────────────────────────── -->
-<div class="cta-band">
-  <div class="container">
-    <div class="cta-band__inner">
-      <div class="cta-band__text reveal">
-        <h2>Interested in a Website<br>Refresh or Redesign?</h2>
-        <p>Let's talk. Reach out and I'll send over next steps — no pressure, no long intake forms.</p>
-      </div>
-      <div class="cta-band__right reveal d2">
-        <a href="mailto:webdevn3v@gmail.com" class="btn btn--dark">Email Me Directly <span class="btn__arr">→</span></a>
-        <a href="#contact" class="btn btn--outline" style="border-color:rgba(0,0,0,.25);color:rgba(0,0,0,.7)">Use the Form</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ─── CONTACT ───────────────────────────── -->
-<section class="contact" id="contact">
-  <div class="container">
-    <div class="contact__layout">
-      <div class="rl reveal">
-        <div class="tag">Get in Touch</div>
-        <h2>Let's Talk<br>About Your Site.</h2>
-        <p class="lead">Interested in a website refresh or redesign? Reach out and I'll send over next steps — usually within a few hours.</p>
-        <div class="contact-item">
-          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div>
-            <div class="contact-item__label">Email</div>
-            <div class="contact-item__val"><a href="mailto:webdevn3v@gmail.com">webdevn3v@gmail.com</a></div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div>
-            <div class="contact-item__label">Location</div>
-            <div class="contact-item__val">Columbia, Maryland</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-          <div>
-            <div class="contact-item__label">Portfolio</div>
-            <div class="contact-item__val"><a href="#work">See the work above ↑</a></div>
-          </div>
-        </div>
-        <div class="contact__note">
-          <strong style="color:var(--white)">What to expect:</strong> I'll respond with a few questions about your business and project — then we figure out the best next step together. No hard sell, just a real conversation.
-        </div>
-      </div>
-      <div class="rr reveal contact__form-wrap">
-        <div id="formBody">
-          <div class="tag" style="margin-bottom:12px">New Project Inquiry</div>
-          <h3 style="font-family:var(--heading);font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:6px;letter-spacing:-.02em">Tell Me About Your Business</h3>
-          <p style="font-size:.8rem;color:var(--muted);margin-bottom:28px">I'll get back to you within a few hours.</p>
-          <form onsubmit="handleForm(event)">
-            <div class="form__row">
-              <div class="form__group">
-                <label class="form__label">Your Name</label>
-                <input class="form__input" type="text" placeholder="Jane Smith" required>
-              </div>
-              <div class="form__group">
-                <label class="form__label">Business Name</label>
-                <input class="form__input" type="text" placeholder="Smith Roofing Co.">
-              </div>
-            </div>
-            <div class="form__row">
-              <div class="form__group">
-                <label class="form__label">Email</label>
-                <input class="form__input" type="email" placeholder="jane@example.com" required>
-              </div>
-              <div class="form__group">
-                <label class="form__label">Phone (optional)</label>
-                <input class="form__input" type="tel" placeholder="(555) 000-0000">
-              </div>
-            </div>
-            <div class="form__group">
-              <label class="form__label">Industry / Business Type</label>
-              <select class="form__select">
-                <option value="">Select your industry…</option>
-                <option>Law Firm / Legal</option>
-                <option>Dental / Medical</option>
-                <option>Roofing / Contractor</option>
-                <option>HVAC / Home Services</option>
-                <option>Med Spa / Wellness</option>
-                <option>Restaurant / Food</option>
-                <option>Real Estate</option>
-                <option>Other Local Business</option>
-              </select>
-            </div>
-            <div class="form__group">
-              <label class="form__label">What Do You Need?</label>
-              <textarea class="form__textarea" placeholder="New website? Redesign? Landing page? Just tell me a bit about your situation and what you're looking to accomplish…"></textarea>
-            </div>
-            <button type="submit" class="form__submit">Send My Inquiry →</button>
-            <p class="form__note">No sales pitch. Just a real response with clear next steps.</p>
-          </form>
-        </div>
-        <div class="form__ok" id="formOk">
-          <div class="form__ok-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-          <h3>Message Received.</h3>
-          <p>Thanks for reaching out. I'll review your project and get back to you within a few hours — usually same day.<br><br>
-          Or email me directly at <a href="mailto:webdevn3v@gmail.com" style="color:var(--lime)">webdevn3v@gmail.com</a>.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ─── FOOTER ────────────────────────────── -->
 <footer class="footer">
@@ -2115,25 +2098,6 @@ document.addEventListener('click',e=>{
   }
 });
 
-/* ── MOBILE ABOUT REVEAL ─────────────────
-   On mobile, About isn't in the normal scroll (see CSS). Any link
-   to #about — nav, hamburger menu, or the homepage teaser — reveals
-   it on tap instead of scrolling to an empty spot. Desktop is
-   untouched: the section is already visible there, so this never
-   fires (nothing has .about-v2{display:none} to undo). */
-document.querySelectorAll('a[href="#about"]').forEach(link => {
-  link.addEventListener('click', e => {
-    if (window.matchMedia('(max-width:860px)').matches) {
-      const about = document.getElementById('about');
-      if (about && !about.classList.contains('is-open')) {
-        e.preventDefault();
-        about.classList.add('is-open');
-        requestAnimationFrame(() => about.scrollIntoView({behavior:'smooth', block:'start'}));
-      }
-    }
-  });
-});
-
 /* ── SCROLL REVEAL ───────────────────── */
 const ro = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target) } });
@@ -2177,13 +2141,29 @@ if (processSteps && processDots) {
   processSteps.querySelectorAll('.process__step').forEach(s => stepObserver.observe(s));
 }
 
+// Mobile About timeline: advance the live rail/orb as each chapter enters view.
+const aboutTimeline = document.querySelector('.about-v2__timeline');
+const aboutItems = Array.from(document.querySelectorAll('.about-v2__titem'));
+if (aboutTimeline && aboutItems.length) {
+  const aboutObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const idx = aboutItems.indexOf(entry.target);
+      aboutItems.forEach((item, i) => item.classList.toggle('era-active', i === idx));
+      const progress = aboutItems.length > 1 ? (idx / (aboutItems.length - 1)) * 100 : 100;
+      aboutTimeline.style.setProperty('--timeline-progress', `${progress}%`);
+    });
+  }, {threshold:.55, rootMargin:'-12% 0px -28% 0px'});
+  aboutItems.forEach(item => aboutObserver.observe(item));
+}
+
 const eraPhotos = {
   '1': 'about_main.jpg',
-  '2': 'about_grad.jpg',
-  '3': 'about_salesforce.png',
-  '4': 'about_meta_summit.png'
+  '2': 'about-dropout.webp',
+  '3': 'about_salesforce.jpg',
+  '4': 'about_meta_summit.jpg'
 };
-const defaultPhoto = 'about_mim.png';
+const defaultPhoto = 'about_mim.webp';
 const portraitImg = document.querySelector('.about-v2__photo-main img');
 const titems = document.querySelectorAll('.about-v2__titem');
 
@@ -2237,8 +2217,8 @@ const capabilityPhrases = [
   'Website Redesigns',
   'Landing Pages',
   'Mobile Optimization',
-  'Launch + Handoff',
-  'Digital Cleanup'
+  'Launch Support',
+  'Efficient Development'
 ];
 const heroCapability = document.getElementById('heroCapability');
 if(heroCapability){
