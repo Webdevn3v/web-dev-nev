@@ -1848,6 +1848,9 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 
 /* Right column — timeline with era background */
+/* Desktop: timeline images are data sources for the sticky portrait, not inline content.
+   They only become full-card backgrounds inside the mobile breakpoint below. */
+.about-v2__titem-image{display:none}
 .about-v2__text{position:relative}
 .about-v2__eyebrow{
   font-family:var(--display);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
@@ -1879,10 +1882,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 }
 
 /* Timeline */
-/* Story images are mobile-only. Without this desktop guard they render at
-   their intrinsic size inside the right column and blow the two-column layout apart. */
-.about-v2__titem-image{display:none}
-
 .about-v2__timeline{
   display:flex;flex-direction:column;gap:0;
   border-left:2px solid rgba(160,168,180,.15);
