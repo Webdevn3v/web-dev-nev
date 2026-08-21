@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>the digital side — You Run Your Business. We Handle the Digital Side.</title>
+<!-- Fonts for the mobile Digital Door only (scoped via .mobile-digital-door) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════
    TOKENS
@@ -902,6 +906,107 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 ::-webkit-scrollbar-track{background:var(--black)}
 ::-webkit-scrollbar-thumb{background:var(--lime-dk);border-radius:2px}
 ::-webkit-scrollbar-thumb:hover{background:var(--lime)}
+
+/* ══════════════════════════════════════════
+   MOBILE DIGITAL DOOR
+   Scoped entirely to .mobile-digital-door — does not
+   touch any existing token, class, or desktop rule.
+   Hidden by default; only shown at the mobile breakpoint,
+   where it replaces the existing hero content.
+══════════════════════════════════════════ */
+.mobile-digital-door{
+  display:none;
+  --mdd-black:#080A0C;
+  --mdd-charcoal:#141316;
+  --mdd-graphite:#26282B;
+  --mdd-gray:#B8B9BA;
+  --mdd-off:#EEEDEF;
+  --mdd-lime:#A6FF00;
+  --mdd-mono:'Space Mono',var(--display);
+  --mdd-sans:'Inter',var(--body);
+  position:relative;
+  z-index:2;
+  width:100%;
+  min-height:100svh;
+  flex-direction:column;
+  padding:calc(66px + env(safe-area-inset-top,0px) + 26px) max(20px,env(safe-area-inset-left,0px)) calc(env(safe-area-inset-bottom,0px) + 28px);
+  background:var(--mdd-black);
+  overflow:hidden;
+}
+
+/* faint circuit linework, corner only, never competes with content */
+.mdd-circuit{position:absolute;top:0;right:0;width:150px;height:220px;pointer-events:none;opacity:.55;z-index:0}
+.mdd-circuit svg{width:100%;height:100%}
+.mdd-circuit line,.mdd-circuit path{stroke:var(--mdd-graphite);stroke-width:1;fill:none}
+.mdd-circuit circle{fill:var(--mdd-black);stroke:var(--mdd-graphite);stroke-width:1}
+.mdd-circuit circle.lit{fill:var(--mdd-lime);stroke:none;opacity:.9}
+
+.mdd-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;margin-bottom:38px}
+.mdd-status{display:flex;align-items:center;gap:9px;font-family:var(--mdd-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mdd-gray)}
+.mdd-status-dot{width:8px;height:8px;background:var(--mdd-lime);box-shadow:0 0 8px rgba(166,255,0,.7);flex-shrink:0}
+.mdd-menu-hint{width:5px;height:5px;border-radius:50%;background:var(--mdd-lime);box-shadow:0 0 6px rgba(166,255,0,.7);animation:mddPulse 2.4s ease-in-out infinite}
+@keyframes mddPulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+.mdd-brand{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:26px}
+.mdd-mark{width:76px;height:auto;margin-bottom:22px}
+.mdd-mark path{fill:var(--mdd-off)}
+.mdd-word{font-family:var(--mdd-mono);font-weight:700;font-size:1.7rem;line-height:1.18;letter-spacing:-.01em;color:var(--mdd-off);text-transform:lowercase}
+.mdd-word .mdd-dot{color:var(--mdd-lime)}
+.mdd-divider{width:34px;height:1px;background:var(--mdd-lime);margin-top:16px;opacity:.8}
+
+.mdd-headline{position:relative;z-index:1;font-family:var(--mdd-mono);font-weight:700;font-size:clamp(1.3rem,6.5vw,1.65rem);letter-spacing:.01em;color:var(--mdd-off);text-align:center;margin-bottom:14px}
+.mdd-headline .mdd-lime{color:var(--mdd-lime)}
+.mdd-sub{position:relative;z-index:1;font-family:var(--mdd-sans);font-size:.9rem;line-height:1.6;color:var(--mdd-gray);text-align:center;max-width:340px;margin:0 auto 34px}
+
+.mdd-nav-wrap{position:relative;z-index:1;display:flex;gap:14px;margin-bottom:30px}
+.mdd-rail{flex-shrink:0;width:14px;display:flex;flex-direction:column;align-items:center;padding:14px 0}
+.mdd-rail-line{width:1px;flex:1;background:linear-gradient(to bottom,var(--mdd-lime),var(--mdd-graphite) 30%,var(--mdd-graphite));min-height:220px}
+.mdd-rail-dots{position:absolute;left:6px;top:14px;bottom:14px;display:flex;flex-direction:column;justify-content:space-between}
+.mdd-rail-dot{width:9px;height:9px;border-radius:50%;background:var(--mdd-black);border:1px solid var(--mdd-graphite)}
+.mdd-rail-dot:first-child{width:11px;height:11px;background:var(--mdd-lime);border:none;box-shadow:0 0 10px rgba(166,255,0,.8);animation:mddPulse 2.4s ease-in-out infinite}
+
+.mdd-nav{flex:1;display:flex;flex-direction:column;gap:12px}
+.mdd-btn{
+  -webkit-tap-highlight-color:transparent;
+  display:flex;align-items:center;gap:14px;
+  min-height:62px;padding:14px 18px;
+  background:rgba(20,19,22,.55);
+  border:1px solid var(--mdd-graphite);
+  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+  transition:border-color .2s var(--ease),background .2s var(--ease);
+}
+.mdd-btn:active{border-color:var(--mdd-lime);background:rgba(166,255,0,.05)}
+.mdd-num{font-family:var(--mdd-mono);font-weight:700;font-size:1.15rem;color:var(--mdd-lime);flex-shrink:0;width:26px}
+.mdd-sep{width:1px;align-self:stretch;background:var(--mdd-graphite);flex-shrink:0}
+.mdd-label{font-family:var(--mdd-mono);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mdd-off);flex:1}
+.mdd-arrow{font-family:var(--mdd-mono);color:var(--mdd-lime);flex-shrink:0;transition:transform .2s var(--ease)}
+.mdd-btn:active .mdd-arrow{transform:translateX(4px)}
+.mdd-btn--disabled{opacity:.45}
+.mdd-btn--disabled .mdd-num,.mdd-btn--disabled .mdd-arrow{color:var(--mdd-gray)}
+.mdd-btn--disabled:active{border-color:var(--mdd-graphite);background:rgba(20,19,22,.55)}
+
+.mdd-status-panel{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--mdd-graphite);margin-bottom:20px;font-family:var(--mdd-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mdd-gray)}
+.mdd-status-panel .mdd-lime{color:var(--mdd-lime)}
+.mdd-signal{display:flex;align-items:flex-end;gap:3px;height:14px}
+.mdd-signal span{width:2px;background:var(--mdd-graphite)}
+.mdd-signal span:nth-child(1){height:30%}
+.mdd-signal span:nth-child(2){height:50%}
+.mdd-signal span:nth-child(3){height:70%}
+.mdd-signal span:nth-child(4){height:90%}
+.mdd-signal span:nth-child(5){height:100%;background:var(--mdd-lime);box-shadow:0 0 6px rgba(166,255,0,.7)}
+
+.mdd-tagline{position:relative;z-index:1;text-align:center;font-family:var(--mdd-mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mdd-off)}
+.mdd-tagline .mdd-lime{color:var(--mdd-lime)}
+
+@media(max-width:740px){
+  .hero{overflow:visible;min-height:auto;display:block}
+  .hero__grid,.hero__glow,.hero__glow2,.hero__content,.hero__scroll{display:none}
+  .mobile-digital-door{display:flex}
+}
+@media(max-width:360px){
+  .mdd-mark{width:64px}
+  .mdd-word{font-size:1.5rem}
+}
 </style>
 </head>
 <body>
@@ -951,6 +1056,81 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="hero__grid"></div>
   <div class="hero__glow"></div>
   <div class="hero__glow2"></div>
+
+  <!-- MOBILE DIGITAL DOOR — mobile-only entrance, hidden ≥741px.
+       Replaces the hero above only on phone widths; desktop hero is untouched. -->
+  <div class="mobile-digital-door" id="mobileDoor">
+    <div class="mdd-circuit" aria-hidden="true">
+      <svg viewBox="0 0 150 220" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150 40 L110 40 L110 90 L130 90 L130 160 L100 160 L100 220" />
+        <line x1="150" y1="70" x2="126" y2="70" />
+        <line x1="150" y1="105" x2="140" y2="105" />
+        <line x1="140" y1="105" x2="140" y2="130" />
+        <circle cx="110" cy="40" r="3.5" />
+        <circle cx="130" cy="90" r="3.5" class="lit" />
+        <circle cx="100" cy="160" r="3.5" />
+      </svg>
+    </div>
+
+    <div class="mdd-top">
+      <div class="mdd-status"><span class="mdd-status-dot"></span>Online</div>
+      <span class="mdd-menu-hint" aria-hidden="true"></span>
+    </div>
+
+    <div class="mdd-brand">
+      <svg class="mdd-mark" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M78 0 L28 42 L78 42 L22 92 L22 130 L72 88 L22 88 L78 38 Z"/>
+      </svg>
+      <div class="mdd-word">the<br>digital<br>side<span class="mdd-dot">.</span></div>
+      <div class="mdd-divider"></div>
+    </div>
+
+    <h2 class="mdd-headline">The digital side<span class="mdd-lime">,</span> handled<span class="mdd-lime">.</span></h2>
+    <p class="mdd-sub">Custom websites, digital systems, and mobile experiences that move businesses forward.</p>
+
+    <div class="mdd-nav-wrap">
+      <div class="mdd-rail">
+        <div class="mdd-rail-line"></div>
+        <div class="mdd-rail-dots">
+          <span class="mdd-rail-dot"></span>
+          <span class="mdd-rail-dot"></span>
+          <span class="mdd-rail-dot"></span>
+          <span class="mdd-rail-dot"></span>
+          <span class="mdd-rail-dot"></span>
+        </div>
+      </div>
+      <nav class="mdd-nav" aria-label="Digital Door quick paths">
+        <a href="#contact" class="mdd-btn">
+          <span class="mdd-num">01</span><span class="mdd-sep"></span>
+          <span class="mdd-label">Start a Project</span><span class="mdd-arrow">→</span>
+        </a>
+        <a href="#services" class="mdd-btn">
+          <span class="mdd-num">02</span><span class="mdd-sep"></span>
+          <span class="mdd-label">Explore Services</span><span class="mdd-arrow">→</span>
+        </a>
+        <a href="#work" class="mdd-btn">
+          <span class="mdd-num">03</span><span class="mdd-sep"></span>
+          <span class="mdd-label">View Work</span><span class="mdd-arrow">→</span>
+        </a>
+        <!-- TEXT: no sms:/phone number exists anywhere in the current code,
+             so this is left visually built but intentionally unwired — see note to Vee. -->
+        <span class="mdd-btn mdd-btn--disabled" role="button" aria-disabled="true">
+          <span class="mdd-num">04</span><span class="mdd-sep"></span>
+          <span class="mdd-label">Text</span><span class="mdd-arrow">→</span>
+        </span>
+        <a href="mailto:webdevn3v@gmail.com" class="mdd-btn">
+          <span class="mdd-num">05</span><span class="mdd-sep"></span>
+          <span class="mdd-label">Email</span><span class="mdd-arrow">→</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="mdd-status-panel">
+      <span>Status: <span class="mdd-lime">Ready</span></span>
+      <span class="mdd-signal"><span></span><span></span><span></span><span></span><span></span></span>
+    </div>
+    <div class="mdd-tagline">Strategy<span class="mdd-lime">.</span> Execution<span class="mdd-lime">.</span> Results<span class="mdd-lime">.</span></div>
+  </div>
 
   <div class="container">
     <div class="hero__content">
