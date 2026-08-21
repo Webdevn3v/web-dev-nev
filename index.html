@@ -4,10 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>the digital side — You Run Your Business. We Handle the Digital Side.</title>
-<!-- Fonts for the mobile Digital Door only (scoped via .mobile-digital-door) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════
    TOKENS
@@ -906,107 +902,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 ::-webkit-scrollbar-track{background:var(--black)}
 ::-webkit-scrollbar-thumb{background:var(--lime-dk);border-radius:2px}
 ::-webkit-scrollbar-thumb:hover{background:var(--lime)}
-
-/* ══════════════════════════════════════════
-   MOBILE DIGITAL DOOR
-   Scoped entirely to .mobile-digital-door — does not
-   touch any existing token, class, or desktop rule.
-   Hidden by default; only shown at the mobile breakpoint,
-   where it replaces the existing hero content.
-══════════════════════════════════════════ */
-.mobile-digital-door{
-  display:none;
-  --mdd-black:#080A0C;
-  --mdd-charcoal:#141316;
-  --mdd-graphite:#26282B;
-  --mdd-gray:#B8B9BA;
-  --mdd-off:#EEEDEF;
-  --mdd-lime:#A6FF00;
-  --mdd-mono:'Space Mono',var(--display);
-  --mdd-sans:'Inter',var(--body);
-  position:relative;
-  z-index:2;
-  width:100%;
-  min-height:100svh;
-  flex-direction:column;
-  padding:calc(66px + env(safe-area-inset-top,0px) + 26px) max(20px,env(safe-area-inset-left,0px)) calc(env(safe-area-inset-bottom,0px) + 28px);
-  background:var(--mdd-black);
-  overflow:hidden;
-}
-
-/* faint circuit linework, corner only, never competes with content */
-.mdd-circuit{position:absolute;top:0;right:0;width:150px;height:220px;pointer-events:none;opacity:.55;z-index:0}
-.mdd-circuit svg{width:100%;height:100%}
-.mdd-circuit line,.mdd-circuit path{stroke:var(--mdd-graphite);stroke-width:1;fill:none}
-.mdd-circuit circle{fill:var(--mdd-black);stroke:var(--mdd-graphite);stroke-width:1}
-.mdd-circuit circle.lit{fill:var(--mdd-lime);stroke:none;opacity:.9}
-
-.mdd-top{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;margin-bottom:38px}
-.mdd-status{display:flex;align-items:center;gap:9px;font-family:var(--mdd-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mdd-gray)}
-.mdd-status-dot{width:8px;height:8px;background:var(--mdd-lime);box-shadow:0 0 8px rgba(166,255,0,.7);flex-shrink:0}
-.mdd-menu-hint{width:5px;height:5px;border-radius:50%;background:var(--mdd-lime);box-shadow:0 0 6px rgba(166,255,0,.7);animation:mddPulse 2.4s ease-in-out infinite}
-@keyframes mddPulse{0%,100%{opacity:.4}50%{opacity:1}}
-
-.mdd-brand{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:26px}
-.mdd-mark{width:76px;height:auto;margin-bottom:22px}
-.mdd-mark path{fill:var(--mdd-off)}
-.mdd-word{font-family:var(--mdd-mono);font-weight:700;font-size:1.7rem;line-height:1.18;letter-spacing:-.01em;color:var(--mdd-off);text-transform:lowercase}
-.mdd-word .mdd-dot{color:var(--mdd-lime)}
-.mdd-divider{width:34px;height:1px;background:var(--mdd-lime);margin-top:16px;opacity:.8}
-
-.mdd-headline{position:relative;z-index:1;font-family:var(--mdd-mono);font-weight:700;font-size:clamp(1.3rem,6.5vw,1.65rem);letter-spacing:.01em;color:var(--mdd-off);text-align:center;margin-bottom:14px}
-.mdd-headline .mdd-lime{color:var(--mdd-lime)}
-.mdd-sub{position:relative;z-index:1;font-family:var(--mdd-sans);font-size:.9rem;line-height:1.6;color:var(--mdd-gray);text-align:center;max-width:340px;margin:0 auto 34px}
-
-.mdd-nav-wrap{position:relative;z-index:1;display:flex;gap:14px;margin-bottom:30px}
-.mdd-rail{flex-shrink:0;width:14px;display:flex;flex-direction:column;align-items:center;padding:14px 0}
-.mdd-rail-line{width:1px;flex:1;background:linear-gradient(to bottom,var(--mdd-lime),var(--mdd-graphite) 30%,var(--mdd-graphite));min-height:220px}
-.mdd-rail-dots{position:absolute;left:6px;top:14px;bottom:14px;display:flex;flex-direction:column;justify-content:space-between}
-.mdd-rail-dot{width:9px;height:9px;border-radius:50%;background:var(--mdd-black);border:1px solid var(--mdd-graphite)}
-.mdd-rail-dot:first-child{width:11px;height:11px;background:var(--mdd-lime);border:none;box-shadow:0 0 10px rgba(166,255,0,.8);animation:mddPulse 2.4s ease-in-out infinite}
-
-.mdd-nav{flex:1;display:flex;flex-direction:column;gap:12px}
-.mdd-btn{
-  -webkit-tap-highlight-color:transparent;
-  display:flex;align-items:center;gap:14px;
-  min-height:62px;padding:14px 18px;
-  background:rgba(20,19,22,.55);
-  border:1px solid var(--mdd-graphite);
-  clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
-  transition:border-color .2s var(--ease),background .2s var(--ease);
-}
-.mdd-btn:active{border-color:var(--mdd-lime);background:rgba(166,255,0,.05)}
-.mdd-num{font-family:var(--mdd-mono);font-weight:700;font-size:1.15rem;color:var(--mdd-lime);flex-shrink:0;width:26px}
-.mdd-sep{width:1px;align-self:stretch;background:var(--mdd-graphite);flex-shrink:0}
-.mdd-label{font-family:var(--mdd-mono);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mdd-off);flex:1}
-.mdd-arrow{font-family:var(--mdd-mono);color:var(--mdd-lime);flex-shrink:0;transition:transform .2s var(--ease)}
-.mdd-btn:active .mdd-arrow{transform:translateX(4px)}
-.mdd-btn--disabled{opacity:.45}
-.mdd-btn--disabled .mdd-num,.mdd-btn--disabled .mdd-arrow{color:var(--mdd-gray)}
-.mdd-btn--disabled:active{border-color:var(--mdd-graphite);background:rgba(20,19,22,.55)}
-
-.mdd-status-panel{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border:1px solid var(--mdd-graphite);margin-bottom:20px;font-family:var(--mdd-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mdd-gray)}
-.mdd-status-panel .mdd-lime{color:var(--mdd-lime)}
-.mdd-signal{display:flex;align-items:flex-end;gap:3px;height:14px}
-.mdd-signal span{width:2px;background:var(--mdd-graphite)}
-.mdd-signal span:nth-child(1){height:30%}
-.mdd-signal span:nth-child(2){height:50%}
-.mdd-signal span:nth-child(3){height:70%}
-.mdd-signal span:nth-child(4){height:90%}
-.mdd-signal span:nth-child(5){height:100%;background:var(--mdd-lime);box-shadow:0 0 6px rgba(166,255,0,.7)}
-
-.mdd-tagline{position:relative;z-index:1;text-align:center;font-family:var(--mdd-mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mdd-off)}
-.mdd-tagline .mdd-lime{color:var(--mdd-lime)}
-
-@media(max-width:740px){
-  .hero{overflow:visible;min-height:auto;display:block}
-  .hero__grid,.hero__glow,.hero__glow2,.hero__content,.hero__scroll{display:none}
-  .mobile-digital-door{display:flex}
-}
-@media(max-width:360px){
-  .mdd-mark{width:64px}
-  .mdd-word{font-size:1.5rem}
-}
 </style>
 </head>
 <body>
@@ -1026,7 +921,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <div class="nav__links">
         <a href="#work">Work</a>
         <a href="#services">Services</a>
-        <a href="#pricing">Pricing</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
@@ -1044,7 +938,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <div class="mob" id="mob">
   <a href="#work" onclick="toggleNav()">Work</a>
   <a href="#services" onclick="toggleNav()">Services</a>
-  <a href="#pricing" onclick="toggleNav()">Pricing</a>
   <a href="#process" onclick="toggleNav()">Process</a>
   <a href="#about" onclick="toggleNav()">About</a>
   <a href="#contact" onclick="toggleNav()">Contact</a>
@@ -1056,81 +949,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="hero__grid"></div>
   <div class="hero__glow"></div>
   <div class="hero__glow2"></div>
-
-  <!-- MOBILE DIGITAL DOOR — mobile-only entrance, hidden ≥741px.
-       Replaces the hero above only on phone widths; desktop hero is untouched. -->
-  <div class="mobile-digital-door" id="mobileDoor">
-    <div class="mdd-circuit" aria-hidden="true">
-      <svg viewBox="0 0 150 220" xmlns="http://www.w3.org/2000/svg">
-        <path d="M150 40 L110 40 L110 90 L130 90 L130 160 L100 160 L100 220" />
-        <line x1="150" y1="70" x2="126" y2="70" />
-        <line x1="150" y1="105" x2="140" y2="105" />
-        <line x1="140" y1="105" x2="140" y2="130" />
-        <circle cx="110" cy="40" r="3.5" />
-        <circle cx="130" cy="90" r="3.5" class="lit" />
-        <circle cx="100" cy="160" r="3.5" />
-      </svg>
-    </div>
-
-    <div class="mdd-top">
-      <div class="mdd-status"><span class="mdd-status-dot"></span>Online</div>
-      <span class="mdd-menu-hint" aria-hidden="true"></span>
-    </div>
-
-    <div class="mdd-brand">
-      <svg class="mdd-mark" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M78 0 L28 42 L78 42 L22 92 L22 130 L72 88 L22 88 L78 38 Z"/>
-      </svg>
-      <div class="mdd-word">the<br>digital<br>side<span class="mdd-dot">.</span></div>
-      <div class="mdd-divider"></div>
-    </div>
-
-    <h2 class="mdd-headline">The digital side<span class="mdd-lime">,</span> handled<span class="mdd-lime">.</span></h2>
-    <p class="mdd-sub">Custom websites, digital systems, and mobile experiences that move businesses forward.</p>
-
-    <div class="mdd-nav-wrap">
-      <div class="mdd-rail">
-        <div class="mdd-rail-line"></div>
-        <div class="mdd-rail-dots">
-          <span class="mdd-rail-dot"></span>
-          <span class="mdd-rail-dot"></span>
-          <span class="mdd-rail-dot"></span>
-          <span class="mdd-rail-dot"></span>
-          <span class="mdd-rail-dot"></span>
-        </div>
-      </div>
-      <nav class="mdd-nav" aria-label="Digital Door quick paths">
-        <a href="#contact" class="mdd-btn">
-          <span class="mdd-num">01</span><span class="mdd-sep"></span>
-          <span class="mdd-label">Start a Project</span><span class="mdd-arrow">→</span>
-        </a>
-        <a href="#services" class="mdd-btn">
-          <span class="mdd-num">02</span><span class="mdd-sep"></span>
-          <span class="mdd-label">Explore Services</span><span class="mdd-arrow">→</span>
-        </a>
-        <a href="#work" class="mdd-btn">
-          <span class="mdd-num">03</span><span class="mdd-sep"></span>
-          <span class="mdd-label">View Work</span><span class="mdd-arrow">→</span>
-        </a>
-        <!-- TEXT: no sms:/phone number exists anywhere in the current code,
-             so this is left visually built but intentionally unwired — see note to Vee. -->
-        <span class="mdd-btn mdd-btn--disabled" role="button" aria-disabled="true">
-          <span class="mdd-num">04</span><span class="mdd-sep"></span>
-          <span class="mdd-label">Text</span><span class="mdd-arrow">→</span>
-        </span>
-        <a href="mailto:webdevn3v@gmail.com" class="mdd-btn">
-          <span class="mdd-num">05</span><span class="mdd-sep"></span>
-          <span class="mdd-label">Email</span><span class="mdd-arrow">→</span>
-        </a>
-      </nav>
-    </div>
-
-    <div class="mdd-status-panel">
-      <span>Status: <span class="mdd-lime">Ready</span></span>
-      <span class="mdd-signal"><span></span><span></span><span></span><span></span><span></span></span>
-    </div>
-    <div class="mdd-tagline">Strategy<span class="mdd-lime">.</span> Execution<span class="mdd-lime">.</span> Results<span class="mdd-lime">.</span></div>
-  </div>
 
   <div class="container">
     <div class="hero__content">
@@ -1353,13 +1171,20 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .path-line{width:12px;height:1px;background:rgba(160,168,180,.3);flex-shrink:0}
 .hire-card__chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .hire-card__chips span{font-family:var(--display);font-size:.52rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:3px 8px;border:1px solid var(--border-md);border-radius:3px}
+.hire-card__price{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.hire-card__price-amt{font-family:var(--display);font-size:.78rem;letter-spacing:.04em;color:rgba(255,255,255,.9)}
+.hire-card__price-amt small{display:block;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.hire-card__price-cta{font-family:var(--display);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--card-color,var(--lime));white-space:nowrap}
 .hire-cta{text-align:center;margin-top:36px}
-@media(max-width:520px){.hire-grid{grid-template-columns:1fr}.hire-card > summary{padding:22px 20px}.hire-card__body{padding:0 20px 22px}}
+.hire-note{max-width:640px;margin:28px auto 0;text-align:center;font-size:.84rem;color:var(--muted);line-height:1.75}
+.hire-note strong{color:var(--white)}
+@media(max-width:520px){.hire-grid{grid-template-columns:1fr}.hire-card > summary{padding:22px 20px}.hire-card__body{padding:0 20px 22px}.hire-card__price{flex-direction:column;align-items:flex-start}}
 </style>
   <div class="container">
     <div style="text-align:center;max-width:520px;margin:0 auto" class="reveal">
       <div class="tag">Ways to Hire The Digital Side</div>
       <h2>Six Doors In. Pick Yours.</h2>
+      <p class="lead" style="text-align:center;margin:16px auto 0">Tap a door to see the path — and the starting price. These are baselines; final cost is confirmed before work begins.</p>
     </div>
 
     <div class="hire-grid">
@@ -1368,7 +1193,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="hire-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V6a2 2 0 012-2h8l6 6v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M14 4v6h6"/></svg></div>
           <div class="hire-card__num">01 — BUILD</div>
           <div class="hire-card__name">I need the whole thing.</div>
-          <div class="hire-card__hint">See the path ↓</div>
+          <div class="hire-card__hint">See the path + pricing ↓</div>
         </summary>
         <div class="hire-card__body">
           <p class="hire-card__problem">A complete digital presence built around your business and what your customers need to do.</p>
@@ -1378,6 +1203,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
             <span class="path-label">Site</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
             <span class="path-label">Live</span>
           </div>
+          <div class="hire-card__price">
+            <div class="hire-card__price-amt">Starting at $750<small>Scales with scope</small></div>
+            <a href="#contact" class="hire-card__price-cta">Start a Build →</a>
+          </div>
         </div>
       </details>
 
@@ -1386,7 +1215,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="hire-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg></div>
           <div class="hire-card__num">02 — REVIVE</div>
           <div class="hire-card__name">What I have isn't working anymore.</div>
-          <div class="hire-card__hint">See the path ↓</div>
+          <div class="hire-card__hint">See the path + pricing ↓</div>
         </summary>
         <div class="hire-card__body">
           <p class="hire-card__problem">Keep what's working. Fix what isn't. No unnecessary rebuild.</p>
@@ -1396,6 +1225,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
             <span class="path-label">Fix</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
             <span class="path-label">Better</span>
           </div>
+          <div class="hire-card__price">
+            <div class="hire-card__price-amt">Starting at $250<small>Final after quick audit</small></div>
+            <a href="#contact" class="hire-card__price-cta">Get an Audit →</a>
+          </div>
         </div>
       </details>
 
@@ -1404,7 +1237,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="hire-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 11-14h-7z"/></svg></div>
           <div class="hire-card__num">03 — EVOLVE</div>
           <div class="hire-card__name">My business changed. My digital presence didn't.</div>
-          <div class="hire-card__hint">See the path ↓</div>
+          <div class="hire-card__hint">See the path + pricing ↓</div>
         </summary>
         <div class="hire-card__body">
           <p class="hire-card__problem">What worked when you started may not fit where you're going. We organize the direction first.</p>
@@ -1412,6 +1245,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
             <span class="path-label">Then</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
             <span class="path-label">Now</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
             <span class="path-label">Next</span>
+          </div>
+          <div class="hire-card__price">
+            <div class="hire-card__price-amt">Starting at $350<small>Final after direction call</small></div>
+            <a href="#contact" class="hire-card__price-cta">Talk Direction →</a>
           </div>
         </div>
       </details>
@@ -1421,7 +1258,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="hire-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M9 17l2-3-1.5-1L12 9"/></svg></div>
           <div class="hire-card__num">04 — MOBILE RESCUE</div>
           <div class="hire-card__name">Looks fine on desktop. Falls apart on your phone.</div>
-          <div class="hire-card__hint">See the path ↓</div>
+          <div class="hire-card__hint">See the path + pricing ↓</div>
         </summary>
         <div class="hire-card__body">
           <div class="hire-card__chips"><span>Nav</span><span>Forms</span><span>Speed</span><span>CTA</span></div>
@@ -1429,6 +1266,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
             <span class="path-label">Visit</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
             <span class="path-label">Navigate</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
             <span class="path-label">Act</span>
+          </div>
+          <div class="hire-card__price">
+            <div class="hire-card__price-amt">Starting at $175<small>Final price by scope</small></div>
+            <a href="#contact" class="hire-card__price-cta">See What We'd Fix →</a>
           </div>
         </div>
       </details>
@@ -1438,7 +1279,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="hire-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="1.5"/><circle cx="15" cy="12" r="1"/></svg></div>
           <div class="hire-card__num">05 — DIGITAL DOOR™</div>
           <div class="hire-card__name">One entrance. Built around where your customers need to go.</div>
-          <div class="hire-card__hint">See the path ↓</div>
+          <div class="hire-card__hint">See the path + pricing ↓</div>
         </summary>
         <div class="hire-card__body">
           <p class="hire-card__problem">A custom website built around one clear customer path, plus a personalized QR entrance you can keep on your phone, cards, signage, vehicle, or packaging.</p>
@@ -1446,6 +1287,10 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
             <span class="path-label">Scan</span><span class="path-line"></span><span class="path-node"></span><span class="path-line"></span>
             <span class="path-label">Digital Door</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
             <span class="path-label">Action</span>
+          </div>
+          <div class="hire-card__price">
+            <div class="hire-card__price-amt">Starting at $250<small>Website + QR entrance</small></div>
+            <a href="#contact" class="hire-card__price-cta">See a Digital Door →</a>
           </div>
         </div>
       </details>
@@ -1455,7 +1300,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
           <div class="hire-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="5" r="1.3"/><circle cx="8" cy="9" r="1.3"/><circle cx="4" cy="13" r="1.3"/><circle cx="9" cy="17" r="1.3"/><path d="M12 12h9M12 12l3-3M12 12l3 3"/></svg></div>
           <div class="hire-card__num">06 — CONNECT THE DOTS</div>
           <div class="hire-card__name">Not sure what you need? Start anywhere.</div>
-          <div class="hire-card__hint">See the path ↓</div>
+          <div class="hire-card__hint">See the path + pricing ↓</div>
         </summary>
         <div class="hire-card__body">
           <p class="hire-card__problem">Bring the messy version. You don't need a plan before you come to me — that's part of my job.</p>
@@ -1464,8 +1309,16 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
             <span class="path-label">Organize</span><span class="path-line"></span><span class="path-node path-node--end"></span><span class="path-line"></span>
             <span class="path-label">Build It</span>
           </div>
+          <div class="hire-card__price">
+            <div class="hire-card__price-amt">Free to Start<small>No obligation</small></div>
+            <a href="#contact" class="hire-card__price-cta">Just Start Talking →</a>
+          </div>
         </div>
       </details>
+    </div>
+
+    <div class="hire-note reveal">
+      <strong>Starting price = baseline, not a bait-and-switch.</strong> Final cost depends on what your project actually needs and is confirmed before I start. Hosting and domain accounts stay in your name. No required monthly retainer. Every completed project includes an organized handoff so you know what you own, where it lives, and how to access it.
     </div>
 
     <div class="hire-cta reveal">
@@ -1673,121 +1526,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
       <p class="refresh__note">No mandatory monthly plan. <strong>Quick, Seasonal, or Full Refresh</strong> — come back only when your business does.</p>
       <a href="#contact" class="btn btn--lime">Request a Refresh →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── PRICING ───────────────────────────── -->
-<section class="pricing" id="pricing">
-<style>
-.price-rows{display:flex;flex-direction:column;gap:2px;background:var(--border);border-radius:var(--r-xl);overflow:hidden;margin-top:44px}
-.price-row{background:var(--card);transition:background .3s var(--ease)}
-.price-row:hover{background:var(--card-lt)}
-.price-row > summary{list-style:none;cursor:pointer;padding:22px 26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.price-row > summary::-webkit-details-marker{display:none}
-.price-row__icon{width:40px;height:40px;border-radius:9px;border:1px solid var(--border-md);background:var(--dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--row-color,var(--lime))}
-.price-row__icon svg{width:19px;height:19px}
-.price-row__head{flex:1;min-width:180px}
-.price-row__name{font-family:var(--heading);font-weight:800;font-size:1.15rem;color:var(--white);line-height:1.15}
-.price-row__sub{font-family:var(--display);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--row-color,var(--lime));margin-top:4px}
-.price-row__chevron{font-family:var(--display);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-.price-row[open] .price-row__chevron{color:var(--row-color,var(--lime))}
-.price-row__body{padding:0 26px 24px 84px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.price-row__desc{font-size:.84rem;color:var(--muted);max-width:380px}
-.price-row__amt{font-family:var(--display);font-size:.78rem;letter-spacing:.04em;color:rgba(255,255,255,.9);white-space:nowrap}
-.price-row__amt small{display:block;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
-.price-row__cta{font-family:var(--display);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--row-color,var(--lime));white-space:nowrap}
-@media(max-width:640px){.price-row > summary{padding:18px 18px}.price-row__body{padding:0 18px 20px 18px;flex-direction:column;align-items:flex-start}}
-</style>
-  <div class="container">
-    <div style="text-align:center;max-width:560px;margin:0 auto" class="reveal">
-      <div class="tag">Pricing</div>
-      <h2>Starting Prices.<br>No Guessing Games.</h2>
-      <p class="lead" style="text-align:center;margin:16px auto 0">You should know whether we're in the same ballpark before you reach out. These are starting points; your final price is based on scope and confirmed before work begins.</p>
-    </div>
-    <div class="price-rows">
-
-      <details class="price-row reveal d1" style="--row-color:#a0a8b4">
-        <summary>
-          <div class="price-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V6a2 2 0 012-2h8l6 6v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M14 4v6h6"/></svg></div>
-          <div class="price-row__head"><div class="price-row__name">Build</div><div class="price-row__sub">Full Custom Site</div></div>
-          <div class="price-row__chevron">Tap for pricing ↓</div>
-        </summary>
-        <div class="price-row__body">
-          <div class="price-row__desc">Like the demo work above — built around your business, start to finish.</div>
-          <div class="price-row__amt">Starting at $750<small>Scales with scope</small></div>
-          <a href="#contact" class="price-row__cta">Start a Build →</a>
-        </div>
-      </details>
-
-      <details class="price-row reveal d2" style="--row-color:#7ecfcf">
-        <summary>
-          <div class="price-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg></div>
-          <div class="price-row__head"><div class="price-row__name">Revive</div><div class="price-row__sub">Fix What's There</div></div>
-          <div class="price-row__chevron">Tap for pricing ↓</div>
-        </summary>
-        <div class="price-row__body">
-          <div class="price-row__desc">Quick audit first, then a scope-based quote — keep what's working.</div>
-          <div class="price-row__amt">Starting at $250<small>Final after quick audit</small></div>
-          <a href="#contact" class="price-row__cta">Get an Audit →</a>
-        </div>
-      </details>
-
-      <details class="price-row reveal d1" style="--row-color:#d4a0b0">
-        <summary>
-          <div class="price-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 11-14h-7z"/></svg></div>
-          <div class="price-row__head"><div class="price-row__name">Evolve</div><div class="price-row__sub">Outgrown It</div></div>
-          <div class="price-row__chevron">Tap for pricing ↓</div>
-        </summary>
-        <div class="price-row__body">
-          <div class="price-row__desc">Direction conversation first, then a scope-based quote.</div>
-          <div class="price-row__amt">Starting at $350<small>Final after direction call</small></div>
-          <a href="#contact" class="price-row__cta">Talk Direction →</a>
-        </div>
-      </details>
-
-      <details class="price-row reveal d2" style="--row-color:#c98a52">
-        <summary>
-          <div class="price-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M9 17l2-3-1.5-1L12 9"/></svg></div>
-          <div class="price-row__head"><div class="price-row__name">Mobile Rescue</div><div class="price-row__sub">Broken on Phone</div></div>
-          <div class="price-row__chevron">Tap for pricing ↓</div>
-        </summary>
-        <div class="price-row__body">
-          <div class="price-row__desc">Scope stays tight — quick call, fixed number, fast turnaround.</div>
-          <div class="price-row__amt">Starting at $175<small>Final price by scope</small></div>
-          <a href="#contact" class="price-row__cta">See What We'd Fix →</a>
-        </div>
-      </details>
-
-      <details class="price-row reveal d1" style="--row-color:#00e87a">
-        <summary>
-          <div class="price-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="1.5"/><circle cx="15" cy="12" r="1"/></svg></div>
-          <div class="price-row__head"><div class="price-row__name">Digital Door™</div><div class="price-row__sub">One Entrance</div></div>
-          <div class="price-row__chevron">Tap for pricing ↓</div>
-        </summary>
-        <div class="price-row__body">
-          <div class="price-row__desc">A custom website built around one clear customer path, plus your personalized QR entrance.</div>
-          <div class="price-row__amt">Starting at $250<small>Website + QR entrance</small></div>
-          <a href="#contact" class="price-row__cta">See a Digital Door →</a>
-        </div>
-      </details>
-
-      <details class="price-row reveal d2" style="--row-color:#b8a98a">
-        <summary>
-          <div class="price-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="5" r="1.3"/><circle cx="8" cy="9" r="1.3"/><circle cx="4" cy="13" r="1.3"/><circle cx="9" cy="17" r="1.3"/><path d="M12 12h9M12 12l3-3M12 12l3 3"/></svg></div>
-          <div class="price-row__head"><div class="price-row__name">Connect the Dots</div><div class="price-row__sub">Not Sure Yet</div></div>
-          <div class="price-row__chevron">Tap for pricing ↓</div>
-        </summary>
-        <div class="price-row__body">
-          <div class="price-row__desc">Free conversation — we figure out what you actually need first.</div>
-          <div class="price-row__amt">Free to Start<small>No obligation</small></div>
-          <a href="#contact" class="price-row__cta">Just Start Talking →</a>
-        </div>
-      </details>
-
-    </div>
-    <div class="price-card__note reveal" style="max-width:640px;margin:24px auto 0;text-align:center">
-      <strong style="color:var(--white)">Starting price = baseline, not a bait-and-switch.</strong> Final cost depends on what your project actually needs and is confirmed before I start. Hosting and domain accounts stay in your name. No required monthly retainer. Every completed project includes an organized handoff so you know what you own, where it lives, and how to access it.
     </div>
   </div>
 </section>
@@ -2288,7 +2026,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <ul>
           <li><a href="#work">Portfolio Work</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#pricing">Pricing</a></li>
           <li><a href="#process">My Process</a></li>
           <li><a href="#about">About Nev Gonzalez</a></li>
           <li><a href="#contact">Contact</a></li>
