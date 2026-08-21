@@ -121,6 +121,9 @@ nav.paths{display:flex;flex-direction:column;gap:11px}
 .path-label{font-weight:700;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--off);flex:1}
 .path-arrow{color:var(--lime);flex-shrink:0;transition:transform .2s var(--ease)}
 .path-btn:active .path-arrow{transform:translateX(4px)}
+.path-btn--secondary{background:transparent;border-style:dashed}
+.path-btn--secondary .path-num,.path-btn--secondary .path-arrow{color:var(--gray)}
+.path-btn--secondary:active{border-color:var(--gray);background:rgba(90,95,99,.08)}
 
 footer{text-align:center;margin-top:28px;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--graphite)}
 
@@ -180,6 +183,10 @@ footer{text-align:center;margin-top:28px;font-size:.58rem;letter-spacing:.16em;t
     <a href="mailto:webdevn3v@gmail.com" class="path-btn">
       <span class="path-num">04</span><span class="path-sep"></span>
       <span class="path-label">Email Directly</span><span class="path-arrow">→</span>
+    </a>
+    <a href="index.html" class="path-btn path-btn--secondary">
+      <span class="path-num">05</span><span class="path-sep"></span>
+      <span class="path-label">View Full Site</span><span class="path-arrow">→</span>
     </a>
   </nav>
 
