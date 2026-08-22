@@ -34,7 +34,7 @@ body{
 }
 a{color:inherit;text-decoration:none}
 button{font-family:inherit}
-html.gate-lock body{overflow:hidden}
+html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 
 /* ══════════════════════════════
    GATE — restored: large identity, tap/click to enter.
@@ -92,7 +92,7 @@ html.gate-lock body{overflow:hidden}
 .transition-key-dot{width:6px;height:6px;background:var(--lime);border-radius:50%;opacity:0;box-shadow:0 0 8px rgba(166,255,0,.7);transition:opacity .2s var(--ease)}
 .transition.phase-key .transition-key-dot{opacity:1}
 
-.entry-panel{position:fixed;top:0;bottom:0;width:50%;background:var(--black);z-index:101;transition:transform .5s var(--ease)}
+.entry-panel{position:fixed;top:0;bottom:0;width:50%;background:var(--black);z-index:101;pointer-events:none;transition:transform .5s var(--ease)}
 .entry-panel--l{left:0}
 .entry-panel--r{right:0}
 .entry-panel--l.open{transform:translateX(-100%)}
