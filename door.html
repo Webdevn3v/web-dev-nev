@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
-<script>document.documentElement.className='js';</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>The Digital Side — Digital Door</title>
-<meta name="description" content="The Digital Side — quick entrance. Start a project, view the work, see what I do, or email directly.">
+<title>The Digital Door — The Digital Side</title>
+<meta name="description" content="Your customers are trying to get somewhere. One scan, one door, clear paths to what they came for.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --black:#0F1113;
@@ -18,363 +17,532 @@
   --off:#F3F1EC;
   --lime:#A6FF00;
   --mono:'Space Mono',monospace;
+  --sans:'Inter',sans-serif;
   --ease:cubic-bezier(.25,.46,.45,.94);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{height:100%;scroll-behavior:smooth}
+html{height:100%}
 body{
   min-height:100%;
   background:var(--black);
   color:var(--off);
-  font-family:var(--mono);
+  font-family:var(--sans);
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
-}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-
-/* faint dot-grid, whole page, never competitive with content */
-body{
-  background-image:radial-gradient(rgba(90,95,99,.18) 1px,transparent 1px);
+  background-image:radial-gradient(rgba(90,95,99,.16) 1px,transparent 1px);
   background-size:26px 26px;
 }
-html.js:not(.entered) body{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+html.entry-lock body{overflow:hidden}
 
 /* ══════════════════════════════
-   ENTRANCE GATE
+   ENTRY SEQUENCE
+   Runs once per browser session. Skips entirely under
+   prefers-reduced-motion, and never blocks the page if JS fails
+   (see the no-js fallback rule at the bottom of this block).
 ══════════════════════════════ */
-.gate{
-  display:none;
-  position:fixed;inset:0;z-index:50;
+.entry{
+  position:fixed;inset:0;z-index:100;
   background:var(--black);
-  flex-direction:column;align-items:center;justify-content:center;gap:22px;
-  cursor:pointer;
-  transition:opacity .5s var(--ease);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
 }
-html.js .gate{display:flex}
-.gate.gate-hide{opacity:0;pointer-events:none}
-.gate-ring{position:relative;width:104px;height:104px;display:flex;align-items:center;justify-content:center}
-.gate-ring::before{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  border:1px solid var(--lime);opacity:.45;
-  animation:ringPulse 2.2s ease-in-out infinite;
+.entry-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(90,95,99,.18) 1px,transparent 1px);background-size:26px 26px;opacity:0;transition:opacity .3s var(--ease)}
+.entry.phase-key .entry-grid{opacity:1}
+.entry-text{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);opacity:0;transition:opacity .25s var(--ease),color .25s var(--ease)}
+.entry.phase-key .entry-text{opacity:1}
+.entry.phase-route .entry-text{color:var(--lime)}
+.entry.phase-access .entry-text{color:var(--off)}
+@media (prefers-reduced-motion: no-preference){
+  .entry.phase-access .entry-text{animation:entryGlitch .15s steps(3) 1}
 }
-.gate-mark{width:64px;height:64px;object-fit:cover;object-position:top center;opacity:.9}
-@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.14);opacity:.85}}
-.gate-label{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gray);animation:labelBreathe 2.2s ease-in-out infinite}
-@keyframes labelBreathe{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes entryGlitch{0%{transform:translateX(0)}25%{transform:translateX(-2px)}50%{transform:translateX(2px)}75%{transform:translateX(-1px)}100%{transform:translateX(0)}}
+.entry-line{width:1px;height:0;background:var(--lime);box-shadow:0 0 8px rgba(166,255,0,.6);transition:height .3s var(--ease)}
+.entry.phase-route .entry-line,.entry.phase-access .entry-line{height:110px}
+.entry.phase-open{opacity:0;transition:opacity .3s var(--ease)}
+.entry-key-dot{width:6px;height:6px;background:var(--lime);border-radius:50%;opacity:0;box-shadow:0 0 8px rgba(166,255,0,.7);transition:opacity .2s var(--ease)}
+.entry.phase-key .entry-key-dot{opacity:1}
 
-@keyframes fadeInSimple{from{opacity:0}to{opacity:1}}
-@keyframes circuitIn{from{opacity:0}to{opacity:.5}}
+.entry-panel{position:fixed;top:0;bottom:0;width:50%;background:var(--black);z-index:101;transition:transform .5s var(--ease)}
+.entry-panel--l{left:0}
+.entry-panel--r{right:0}
+.entry-panel--l.open{transform:translateX(-100%)}
+.entry-panel--r.open{transform:translateX(100%)}
 
 /* ══════════════════════════════
-   STAGE 1 — LOGO
+   ROUTE RAIL — the road-map spine
 ══════════════════════════════ */
-.stage-logo{
-  position:relative;
-  min-height:100svh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:calc(env(safe-area-inset-top,0px) + 20px) 24px calc(env(safe-area-inset-bottom,0px) + 20px);
-  overflow:hidden;
+.route-rail{
+  position:fixed;top:0;left:9px;width:2px;height:100vh;
+  background:var(--graphite);z-index:5;pointer-events:none;
 }
-
-.circuit{position:absolute;top:0;right:0;width:150px;height:210px;pointer-events:none;opacity:.5;z-index:0}
-html.js .circuit{opacity:0}
-html.entered .circuit{animation:circuitIn 1s var(--ease) .2s both}
-.circuit svg{width:100%;height:100%}
-.circuit line,.circuit path{stroke:var(--graphite);stroke-width:1;fill:none}
-.circuit circle{fill:var(--black);stroke:var(--graphite);stroke-width:1}
-.circuit circle.lit{fill:var(--lime);stroke:none;opacity:.9;animation:litPulse 2.4s ease-in-out infinite}
-@keyframes litPulse{0%,100%{opacity:.5}50%{opacity:1}}
-
-.online{
-  position:absolute;top:calc(env(safe-area-inset-top,0px) + 20px);left:22px;
-  z-index:2;display:flex;align-items:center;gap:9px;
-  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);
+.route-fill{position:absolute;top:0;left:0;width:100%;height:0;background:var(--lime);box-shadow:0 0 6px rgba(166,255,0,.5)}
+.route-orb{position:absolute;left:50%;top:0;width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px rgba(166,255,0,.8);transform:translate(-50%,-50%)}
+@media (prefers-reduced-motion: reduce){
+  .route-fill,.route-orb{transition:none}
 }
-html.js .online{opacity:0}
-html.entered .online{animation:fadeInSimple .5s var(--ease) .05s both}
-.online-dot{width:8px;height:8px;background:var(--lime);box-shadow:0 0 8px rgba(166,255,0,.7);flex-shrink:0}
-
-.logo-glow{
-  position:absolute;
-  width:70vw;height:70vw;max-width:420px;max-height:420px;
-  background:radial-gradient(circle,rgba(166,255,0,.09) 0%,transparent 68%);
-  pointer-events:none;z-index:0;
-  animation:glowBreathe 5s ease-in-out infinite;
+.route-node{
+  position:absolute;left:50%;width:9px;height:9px;border-radius:50%;
+  background:var(--black);border:1px solid var(--graphite);
+  transform:translate(-50%,-50%);transition:background .3s var(--ease),border-color .3s var(--ease);
 }
-@keyframes glowBreathe{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
-
-.logo-wrap{
-  position:relative;z-index:1;
-  width:min(62vw,320px);
+.route-node.is-reached{background:var(--lime);border-color:var(--lime)}
+@media (prefers-reduced-motion: no-preference){
+  .route-node.pulse{animation:nodePulse .7s var(--ease)}
 }
-html.js .logo-wrap{opacity:0}
-html.entered .logo-wrap{animation:logoIn 1s var(--ease) .35s both}
-@keyframes logoIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
-.logo-wrap img{width:100%;height:auto}
+@keyframes nodePulse{0%{box-shadow:0 0 0 0 rgba(166,255,0,.6)}100%{box-shadow:0 0 0 14px rgba(166,255,0,0)}}
 
-.scroll-cue{
-  position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 26px);left:50%;
-  transform:translateX(-50%);z-index:1;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);
+.status-label{
+  position:sticky;top:calc(env(safe-area-inset-top,0px) + 14px);z-index:6;
+  display:inline-block;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gray);margin-bottom:20px;
 }
-html.js .scroll-cue{opacity:0}
-html.entered .scroll-cue{animation:fadeInSimple .6s var(--ease) 1s both}
-.scroll-cue-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--lime),transparent);animation:cueMove 2s ease-in-out infinite}
-@keyframes cueMove{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{opacity:1}60%{transform:scaleY(1);transform-origin:top}60.01%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom;opacity:0}}
 
 /* ══════════════════════════════
-   STAGE 2 — PATHS
+   PAGE LAYOUT
 ══════════════════════════════ */
-.stage-paths{
-  position:relative;z-index:1;
-  max-width:460px;margin:0 auto;
-  padding:8px 24px calc(env(safe-area-inset-bottom,0px) + 36px);
-}
+.door{max-width:480px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 20px) 24px calc(env(safe-area-inset-bottom,0px) + 40px) 40px}
 
-.headline{font-weight:700;font-size:clamp(1.2rem,5.5vw,1.45rem);color:var(--off);text-align:center;margin-bottom:8px}
-.headline .lime{color:var(--lime)}
-.sub{font-size:.82rem;line-height:1.6;color:var(--gray);text-align:center;max-width:320px;margin:0 auto 30px}
+.dsec{padding:38px 0;border-top:1px solid var(--graphite)}
+.dsec:first-of-type{border-top:none;padding-top:6px}
+.dsec-num{font-family:var(--mono);font-weight:700;font-size:1.9rem;color:var(--lime);line-height:1;margin-bottom:8px}
+.dsec-h2{font-family:var(--mono);font-weight:700;font-size:1.15rem;letter-spacing:.01em;color:var(--off);margin-bottom:10px}
+.dsec-sub{font-size:.86rem;color:var(--gray);line-height:1.6;margin-bottom:8px}
 
-nav.paths{display:flex;flex-direction:column;gap:11px}
-.door-row{
-  -webkit-tap-highlight-color:transparent;
-  display:flex;align-items:center;gap:14px;
-  min-height:64px;padding:14px 17px;
-  background:rgba(36,38,40,.4);
-  border:1px solid var(--graphite);
-  clip-path:polygon(11px 0,100% 0,100% calc(100% - 11px),calc(100% - 11px) 100%,0 100%,0 11px);
+/* ── Section 1: Opening ── */
+.dsec--opening{padding-top:10px}
+.opening-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin-bottom:18px}
+.logo-mini{width:46px;margin-bottom:18px}
+.logo-mini img{width:100%;height:auto}
+.opening-h1{font-family:var(--mono);font-weight:700;font-size:clamp(1.3rem,6.5vw,1.55rem);line-height:1.35;color:var(--off);margin-bottom:14px}
+.opening-h1 .lime{color:var(--lime)}
+.opening-sub{font-size:.88rem;color:var(--gray);line-height:1.6;margin-bottom:26px}
+.route-diagram{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--graphite)}
+.route-diagram-row{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
+.route-diagram-row .rd-arrow{color:var(--graphite);font-size:.65rem}
+.route-diagram-row.lime{color:var(--lime)}
+
+/* ── Section 2: Demos ── */
+.demo-list{display:flex;flex-direction:column;gap:9px;margin-top:20px;margin-bottom:16px}
+.demo-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px;border:1px solid var(--graphite);
+  clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);
   transition:border-color .2s var(--ease),background .2s var(--ease);
-  cursor:pointer;list-style:none;
 }
-.door-row::-webkit-details-marker{display:none}
-.door-row:active{border-color:var(--lime);background:rgba(166,255,0,.06)}
-.door-row--primary{border-color:rgba(166,255,0,.4)}
-.door-num{font-weight:700;font-size:1.05rem;color:var(--lime);flex-shrink:0;width:24px}
-.door-sep{width:1px;align-self:stretch;background:var(--graphite);flex-shrink:0}
-.door-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.door-title{font-weight:700;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--off)}
-.door-hint{font-size:.68rem;color:var(--gray);font-weight:400}
-.door-arrow{color:var(--lime);flex-shrink:0;transition:transform .2s var(--ease)}
-.door-row:active .door-arrow{transform:translateX(4px)}
-details.door-item[open] > .door-row .door-arrow{transform:rotate(90deg)}
-details.door-item[open] > .door-row:active .door-arrow{transform:rotate(90deg)}
+.demo-row:active{border-color:var(--lime);background:rgba(166,255,0,.05)}
+.demo-row span:first-child{font-size:.82rem;font-weight:600;color:var(--off)}
+.demo-row .demo-arrow{color:var(--lime)}
+.dsec-more{display:inline-block;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);text-decoration:underline;text-underline-offset:3px}
+.dsec-more:active{color:var(--lime)}
 
-.door-panel{padding:2px 17px 18px}
-.door-sub-list{display:flex;flex-direction:column}
-.door-sub-item{padding:11px 0;border-top:1px solid var(--graphite);display:flex}
-.door-sub-item:first-child{border-top:none;padding-top:8px}
-.door-sub-item--stack{flex-direction:column;gap:2px}
-.door-sub-item--row{flex-direction:row;align-items:center;justify-content:space-between;gap:12px}
-.door-sub-name{font-size:.74rem;font-weight:700;color:var(--off)}
-.door-sub-desc{font-size:.66rem;color:var(--gray)}
-.door-sub-price{font-size:.72rem;font-weight:700;color:var(--lime);white-space:nowrap}
-.door-note{font-size:.62rem;color:var(--gray);line-height:1.65;margin-top:14px;padding-top:12px;border-top:1px solid var(--graphite)}
-.door-panel-cta{display:inline-block;margin-top:16px;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+/* ── Section 3: Services + Pricing ── */
+.svc-block{padding:16px 0;border-top:1px solid var(--graphite)}
+.svc-block:first-of-type{border-top:none;padding-top:20px}
+.svc-block--priority{background:rgba(166,255,0,.04);border-left:2px solid var(--lime);padding-left:14px;margin-left:-14px}
+.svc-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px}
+.svc-name{font-family:var(--mono);font-weight:700;font-size:.86rem;color:var(--off)}
+.svc-price{font-family:var(--mono);font-weight:700;font-size:.8rem;white-space:nowrap}
+.svc-price.lime{color:var(--lime)}
+.svc-hint{font-size:.78rem;color:var(--gray);line-height:1.5}
+.svc-note{font-size:.68rem;color:var(--gray);margin-top:18px;padding-top:14px;border-top:1px solid var(--graphite)}
+.svc-callout{margin-top:24px;padding:18px;border:1px dashed var(--graphite);text-align:center}
+.svc-callout-label{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--off);margin-bottom:8px}
+.svc-callout p{font-size:.82rem;color:var(--gray);margin-bottom:14px}
+.svc-callout-link{font-family:var(--mono);font-weight:700;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--lime)}
 
-.email-secondary{
-  display:block;text-align:center;
-  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--gray);text-decoration:underline;text-underline-offset:3px;
+/* ── Branch visual ── */
+.branch{padding:36px 0 30px;text-align:center}
+.branch-node{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px rgba(166,255,0,.7);margin:0 auto 16px}
+.branch-labels{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gray)}
+.branch-labels span{flex:1;padding-top:10px;border-top:1px solid var(--graphite)}
+
+/* ── Forms (Quick Inquiry) ── */
+.field{margin-bottom:20px}
+.field-label{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--off);margin-bottom:8px}
+.field-label .opt{color:var(--gray);font-weight:400;text-transform:none;letter-spacing:normal;margin-left:6px}
+input[type=text],input[type=email],input[type=tel],input[type=url],textarea{
+  width:100%;padding:12px 14px;background:rgba(36,38,40,.4);border:1px solid var(--graphite);color:var(--off);
+  font-family:var(--sans);font-size:.86rem;border-radius:2px;transition:border-color .2s var(--ease);
 }
-.email-secondary:active{color:var(--lime)}
+input::placeholder,textarea::placeholder{color:var(--graphite)}
+input:focus,textarea:focus{outline:none;border-color:var(--lime)}
+textarea{min-height:84px;resize:vertical;line-height:1.5}
 
-.already{margin-top:26px;padding-top:20px;border-top:1px solid var(--graphite);text-align:center}
-.already-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--graphite);margin-bottom:12px}
-.already-link{display:block;font-weight:700;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
-.already-link:active{opacity:.7}
-
-footer{text-align:center;margin-top:28px;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--graphite)}
-
-@media(min-height:800px){
-  .headline{margin-top:8px}
+.btn-route{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:15px 20px;margin-top:6px;
+  font-family:var(--mono);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--lime);color:var(--black);border:1px solid var(--lime);
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  cursor:pointer;transition:background .2s var(--ease);
 }
+.btn-route:active{background:#93e600}
+.btn-route--secondary{background:transparent;color:var(--lime)}
+.btn-route--secondary:active{background:rgba(166,255,0,.08)}
+.btn-route:disabled{opacity:.5;pointer-events:none}
+
+.submit-fallback{display:none;margin-top:16px;padding:16px;border:1px solid var(--graphite);background:rgba(36,38,40,.4)}
+.submit-fallback.show{display:block}
+.submit-fallback p{font-size:.78rem;color:var(--gray);line-height:1.6;margin-bottom:12px}
+.fb-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-fb{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;border:1px solid var(--lime);color:var(--lime);background:transparent;cursor:pointer}
+.btn-fb:active{background:rgba(166,255,0,.08)}
+.fb-copied{color:var(--lime);font-size:.68rem;margin-left:2px;display:none}
+.fb-copied.show{display:inline}
+
+/* ── Footer ── */
+.door-footer{padding-top:40px;border-top:1px solid var(--graphite);text-align:center}
+.footer-route{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin-bottom:6px}
+.footer-arrive{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:26px}
+.footer-brand{font-family:var(--mono);font-size:.78rem;color:var(--off);line-height:1.7}
+.footer-brand strong{display:block;color:var(--lime);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
 </style>
 </head>
 <body>
 
-<!-- ENTRANCE GATE — tap to enter, plays a chime, unlocks the reveal -->
-<div class="gate" id="gate" role="button" tabindex="0" aria-label="Tap to enter The Digital Side">
-  <div class="gate-ring">
-    <img class="gate-mark" src="tds-logo.webp" alt="" width="1024" height="1536">
-  </div>
-  <div class="gate-label">Tap to Enter</div>
+<!-- ENTRY SEQUENCE -->
+<div class="entry" id="entry">
+  <div class="entry-grid" aria-hidden="true"></div>
+  <div class="entry-key-dot" aria-hidden="true"></div>
+  <div class="entry-text" id="entryText">Digital Key Detected</div>
+  <div class="entry-line" aria-hidden="true"></div>
+</div>
+<div class="entry-panel entry-panel--l" id="panelL" aria-hidden="true"></div>
+<div class="entry-panel entry-panel--r" id="panelR" aria-hidden="true"></div>
+
+<!-- ROUTE RAIL -->
+<div class="route-rail" id="routeRail" aria-hidden="true">
+  <div class="route-fill" id="routeFill"></div>
+  <div class="route-orb" id="routeOrb"></div>
 </div>
 
-<!-- STAGE 1: the logo IS the door -->
-<div class="stage-logo">
-  <div class="circuit" aria-hidden="true">
-    <svg viewBox="0 0 150 210" xmlns="http://www.w3.org/2000/svg">
-      <path d="M150 30 L112 30 L112 76 L132 76 L132 148 L102 148 L102 210" />
-      <line x1="150" y1="54" x2="128" y2="54" />
-      <circle cx="112" cy="30" r="3" />
-      <circle cx="132" cy="76" r="3" class="lit" />
-      <circle cx="102" cy="148" r="3" />
-    </svg>
+<main class="door">
+  <div class="status-label" id="statusLabel">Route: Section 01</div>
+
+  <!-- SECTION 1 — OPENING -->
+  <section class="dsec dsec--opening" id="sec-opening" data-node="01" data-label="Opening">
+    <div class="opening-kicker">Welcome to the Digital Side.</div>
+    <div class="logo-mini"><img src="tds-logo.webp" alt="The Digital Side" width="1024" height="1536"></div>
+    <h1 class="opening-h1">Your customers are trying to get somewhere.<br><span class="lime">Make it easy.</span></h1>
+    <p class="opening-sub">One scan. One door. Clear paths to what your customers came for.</p>
+    <div class="route-diagram" aria-hidden="true">
+      <div class="route-diagram-row"><span>Digital Key</span></div>
+      <div class="route-diagram-row"><span class="rd-arrow">↓</span></div>
+      <div class="route-diagram-row"><span>Digital Door</span></div>
+      <div class="route-diagram-row"><span class="rd-arrow">↓</span></div>
+      <div class="route-diagram-row"><span>Customer Path</span></div>
+      <div class="route-diagram-row"><span class="rd-arrow">↓</span></div>
+      <div class="route-diagram-row lime"><span>Destination</span></div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — DEMOS -->
+  <section class="dsec" id="sec-demos" data-node="02" data-label="Demos">
+    <div class="dsec-num">02</div>
+    <h2 class="dsec-h2">See What This Looks Like.</h2>
+    <p class="dsec-sub">A few real customer-path builds — proof before we start naming everything.</p>
+    <div class="demo-list">
+      <a href="https://webdevn3v.github.io/tattoo-shop-demo/" target="_blank" rel="noopener" class="demo-row"><span>Tattoo Studio</span><span class="demo-arrow">→</span></a>
+      <a href="https://webdevn3v.github.io/roofing-demo/" target="_blank" rel="noopener" class="demo-row"><span>Roofing Company</span><span class="demo-arrow">→</span></a>
+      <a href="https://webdevn3v.github.io/med-spa-demo/" target="_blank" rel="noopener" class="demo-row"><span>Med Spa</span><span class="demo-arrow">→</span></a>
+      <a href="https://webdevn3v.github.io/Able-the-World-Demo/" target="_blank" rel="noopener" class="demo-row"><span>ABLE Streetwear</span><span class="demo-arrow">→</span></a>
+    </div>
+    <a href="index.html#work" class="dsec-more">See all work →</a>
+  </section>
+
+  <!-- SECTION 3 — SERVICES + PRICING -->
+  <section class="dsec" id="sec-services" data-node="03" data-label="Services">
+    <div class="dsec-num">03</div>
+    <h2 class="dsec-h2">What This Costs.</h2>
+    <p class="dsec-sub">Starting prices. No hunting around for numbers.</p>
+
+    <div class="svc-block">
+      <div class="svc-row"><span class="svc-name">Connect the Dots</span><span class="svc-price lime">Free</span></div>
+      <div class="svc-hint">Not sure what you need? Start here.</div>
+    </div>
+    <div class="svc-block">
+      <div class="svc-row"><span class="svc-name">Mobile Rescue</span><span class="svc-price lime">Starting at $175</span></div>
+      <div class="svc-hint">Looks fine on desktop. Falls apart on your phone.</div>
+    </div>
+    <div class="svc-block svc-block--priority">
+      <div class="svc-row"><span class="svc-name">Digital Door™</span><span class="svc-price lime">Starting at $250</span></div>
+      <div class="svc-hint">One entrance built around where your customers need to go.</div>
+    </div>
+    <div class="svc-block">
+      <div class="svc-row"><span class="svc-name">Revive</span><span class="svc-price lime">Starting at $250</span></div>
+      <div class="svc-hint">What I have isn't working anymore.</div>
+    </div>
+    <div class="svc-block">
+      <div class="svc-row"><span class="svc-name">Evolve</span><span class="svc-price lime">Starting at $350</span></div>
+      <div class="svc-hint">My business changed. My digital presence didn't.</div>
+    </div>
+    <div class="svc-block">
+      <div class="svc-row"><span class="svc-name">Build</span><span class="svc-price lime">Starting at $750</span></div>
+      <div class="svc-hint">I need the whole thing.</div>
+    </div>
+
+    <div class="svc-note">Final pricing depends on project scope.</div>
+
+    <div class="svc-callout">
+      <div class="svc-callout-label">Not sure which fits?</div>
+      <p>That's what Connect the Dots is for.</p>
+      <a href="#sec-inquiry" id="ctdLink" class="svc-callout-link">Help Me Figure It Out →</a>
+    </div>
+  </section>
+
+  <!-- BRANCH -->
+  <div class="branch" aria-hidden="true">
+    <div class="branch-node"></div>
+    <div class="branch-labels">
+      <span>I'm Interested</span>
+      <span>I'm Ready</span>
+      <span>I'd Rather Email</span>
+    </div>
   </div>
 
-  <div class="online">
-    <span class="online-dot"></span>Online
-  </div>
+  <!-- SECTION 4 — QUICK PROJECT INQUIRY -->
+  <section class="dsec" id="sec-inquiry" data-node="04" data-label="Quick Inquiry">
+    <div class="dsec-num">04</div>
+    <h2 class="dsec-h2">Start a Project</h2>
+    <p class="dsec-sub">Interested? Start here. A few quick details are enough to get the conversation moving.</p>
 
-  <div class="logo-glow" aria-hidden="true"></div>
-
-  <div class="logo-wrap">
-    <img src="tds-logo.webp" alt="The Digital Side" width="1024" height="1536">
-  </div>
-
-  <div class="scroll-cue">
-    <span>Scroll</span>
-    <div class="scroll-cue-line"></div>
-  </div>
-</div>
-
-<!-- STAGE 2: the customer paths -->
-<div class="stage-paths">
-  <h1 class="headline">The digital side<span class="lime">,</span> handled<span class="lime">.</span></h1>
-  <p class="sub">Custom websites, digital systems, and mobile experiences that move businesses forward.</p>
-
-  <nav class="paths" aria-label="Digital Door guided menu">
-    <details class="door-item">
-      <summary class="door-row">
-        <span class="door-num">01</span><span class="door-sep"></span>
-        <span class="door-text">
-          <span class="door-title">Services</span>
-          <span class="door-hint">Find the right door.</span>
-        </span>
-        <span class="door-arrow">→</span>
-      </summary>
-      <div class="door-panel">
-        <div class="door-sub-list">
-          <div class="door-sub-item door-sub-item--stack">
-            <span class="door-sub-name">Build</span><span class="door-sub-desc">I need the whole thing.</span>
-          </div>
-          <div class="door-sub-item door-sub-item--stack">
-            <span class="door-sub-name">Revive</span><span class="door-sub-desc">What I have isn't working anymore.</span>
-          </div>
-          <div class="door-sub-item door-sub-item--stack">
-            <span class="door-sub-name">Evolve</span><span class="door-sub-desc">My business changed. My digital presence didn't.</span>
-          </div>
-          <div class="door-sub-item door-sub-item--stack">
-            <span class="door-sub-name">Mobile Rescue</span><span class="door-sub-desc">Looks fine on desktop. Falls apart on your phone.</span>
-          </div>
-          <div class="door-sub-item door-sub-item--stack">
-            <span class="door-sub-name">Digital Door™</span><span class="door-sub-desc">One entrance. Built around where your customers need to go.</span>
-          </div>
-          <div class="door-sub-item door-sub-item--stack">
-            <span class="door-sub-name">Connect the Dots</span><span class="door-sub-desc">Not sure what you need? Start anywhere.</span>
-          </div>
-        </div>
-        <a href="index.html#contact" class="door-panel-cta">Start a Project →</a>
+    <form id="inquiryForm" novalidate>
+      <div class="field">
+        <label class="field-label" for="inq_name">Name</label>
+        <input type="text" id="inq_name" name="name" required>
       </div>
-    </details>
-
-    <a href="index.html#work" class="door-row">
-      <span class="door-num">02</span><span class="door-sep"></span>
-      <span class="door-text">
-        <span class="door-title">Work</span>
-        <span class="door-hint">See what's been built.</span>
-      </span>
-      <span class="door-arrow">→</span>
-    </a>
-
-    <details class="door-item">
-      <summary class="door-row">
-        <span class="door-num">03</span><span class="door-sep"></span>
-        <span class="door-text">
-          <span class="door-title">Pricing</span>
-          <span class="door-hint">Know where it starts.</span>
-        </span>
-        <span class="door-arrow">→</span>
-      </summary>
-      <div class="door-panel">
-        <div class="door-sub-list">
-          <div class="door-sub-item door-sub-item--row">
-            <span class="door-sub-name">Build</span><span class="door-sub-price">Starting at $750</span>
-          </div>
-          <div class="door-sub-item door-sub-item--row">
-            <span class="door-sub-name">Revive</span><span class="door-sub-price">Starting at $250</span>
-          </div>
-          <div class="door-sub-item door-sub-item--row">
-            <span class="door-sub-name">Evolve</span><span class="door-sub-price">Starting at $350</span>
-          </div>
-          <div class="door-sub-item door-sub-item--row">
-            <span class="door-sub-name">Mobile Rescue</span><span class="door-sub-price">Starting at $175</span>
-          </div>
-          <div class="door-sub-item door-sub-item--row">
-            <span class="door-sub-name">Digital Door™</span><span class="door-sub-price">Starting at $250</span>
-          </div>
-          <div class="door-sub-item door-sub-item--row">
-            <span class="door-sub-name">Connect the Dots</span><span class="door-sub-price">Free</span>
-          </div>
-        </div>
-        <div class="door-note">Final pricing may change after a consultation, based on project scope.</div>
-        <a href="index.html#contact" class="door-panel-cta">Start a Project →</a>
+      <div class="field">
+        <label class="field-label" for="inq_business">Business Name</label>
+        <input type="text" id="inq_business" name="business_name" required>
       </div>
-    </details>
+      <div class="field">
+        <label class="field-label" for="inq_email">Email</label>
+        <input type="email" id="inq_email" name="email" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="inq_need">What Do You Need?</label>
+        <textarea id="inq_need" name="what_do_you_need" required></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label" for="inq_link">Current Website / Social<span class="opt">— if applicable</span></label>
+        <input type="text" id="inq_link" name="current_link">
+      </div>
+      <div class="field">
+        <label class="field-label" for="inq_message">Short Message<span class="opt">— optional</span></label>
+        <textarea id="inq_message" name="message"></textarea>
+      </div>
+      <button type="submit" class="btn-route" id="inquirySubmit">Send Inquiry →</button>
 
-    <a href="index.html#contact" class="door-row door-row--primary">
-      <span class="door-num">04</span><span class="door-sep"></span>
-      <span class="door-text">
-        <span class="door-title">Start a Project</span>
-        <span class="door-hint">Tell me what needs handling.</span>
-      </span>
-      <span class="door-arrow">→</span>
-    </a>
-  </nav>
+      <div class="submit-fallback" id="inquiryFallback">
+        <p>Something didn't send. Copy your answers below and email them to <strong>webdevn3v@gmail.com</strong> so nothing gets lost.</p>
+        <div class="fb-actions">
+          <button type="button" class="btn-fb" id="inquiryCopyBtn">Copy Answers</button>
+          <a href="mailto:webdevn3v@gmail.com?subject=Project%20Inquiry" class="btn-fb" id="inquiryMailFallback">Open Email →</a>
+        </div>
+        <span class="fb-copied" id="inquiryCopied">Copied ✓ — now paste into your email</span>
+      </div>
+    </form>
+  </section>
 
-  <div class="already">
-    <div class="already-label">Already started?</div>
-    <a href="client-intake.html" class="already-link">Client Intake →</a>
-    <a href="mailto:webdevn3v@gmail.com" class="email-secondary">Email Directly →</a>
-  </div>
+  <!-- SECTION 5 — FULL PROJECT INTAKE -->
+  <section class="dsec" id="sec-intake" data-node="05" data-label="Full Intake">
+    <div class="dsec-num">05</div>
+    <h2 class="dsec-h2">Already Know You're Ready?</h2>
+    <p class="dsec-sub">Give me the full picture upfront. The more you share here, the faster I can review your digital side and come back with next steps, recommended scope, and an estimate.</p>
+    <p class="dsec-sub">Not sure about an answer? Skip it. The details can be worked through together.</p>
+    <a href="client-intake.html" class="btn-route">Start Full Intake →</a>
+  </section>
 
-  <footer>thedigitalside.com</footer>
-</div>
+  <!-- SECTION 6 — EMAIL -->
+  <section class="dsec" id="sec-email" data-node="06" data-label="Email">
+    <div class="dsec-num">06</div>
+    <h2 class="dsec-h2">Prefer Email?</h2>
+    <p class="dsec-sub">Keep it simple. Rather skip the forms? Send a message directly.</p>
+    <a href="mailto:webdevn3v@gmail.com" class="btn-route btn-route--secondary">Email The Digital Side →</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="door-footer">
+    <div class="footer-route">Route Complete</div>
+    <div class="footer-arrive">Arrive at your destination.</div>
+    <div class="footer-brand">the digital side.<strong>The Digital Side, Handled.</strong></div>
+  </footer>
+</main>
 
 <script>
 (function(){
-  var gate = document.getElementById('gate');
-  if(!gate) return;
-  var entered = false;
+  /* ── ENTRY SEQUENCE ── */
+  var entry = document.getElementById('entry');
+  var entryText = document.getElementById('entryText');
+  var panelL = document.getElementById('panelL');
+  var panelR = document.getElementById('panelR');
 
-  function playChime(){
-    try{
-      var Ctx = window.AudioContext || window.webkitAudioContext;
-      var ctx = new Ctx();
-      var now = ctx.currentTime;
-      [[392,0,.09],[587,.07,.14],[784,.16,.22]].forEach(function(t){
-        var osc = ctx.createOscillator();
-        var gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.value = t[0];
-        gain.gain.setValueAtTime(0, now + t[1]);
-        gain.gain.linearRampToValueAtTime(.12, now + t[1] + .015);
-        gain.gain.exponentialRampToValueAtTime(.0001, now + t[1] + t[2]);
-        osc.connect(gain).connect(ctx.destination);
-        osc.start(now + t[1]);
-        osc.stop(now + t[1] + t[2] + .02);
-      });
-    }catch(e){}
-  }
-
-  function enter(){
-    if(entered) return;
-    entered = true;
-    playChime();
+  function skipEntry(){
     document.documentElement.classList.add('entered');
-    gate.classList.add('gate-hide');
-    setTimeout(function(){ gate.style.display = 'none'; }, 550);
+    if(entry) entry.style.display = 'none';
+    if(panelL) panelL.style.display = 'none';
+    if(panelR) panelR.style.display = 'none';
   }
 
-  gate.addEventListener('click', enter);
-  gate.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); enter(); }
+  function runEntry(){
+    document.documentElement.classList.add('entry-lock');
+    setTimeout(function(){ entry.classList.add('phase-key'); }, 30);
+    setTimeout(function(){ entryText.textContent = 'Route Established'; entry.classList.add('phase-route'); }, 380);
+    setTimeout(function(){ entryText.textContent = 'Access // Granted'; entry.classList.add('phase-access'); }, 700);
+    setTimeout(function(){
+      entry.classList.add('phase-open');
+      panelL.classList.add('open');
+      panelR.classList.add('open');
+    }, 900);
+    setTimeout(function(){
+      document.documentElement.classList.remove('entry-lock');
+      skipEntry();
+    }, 1400);
+  }
+
+  try{
+    var seen = sessionStorage.getItem('tds_door_entered');
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(seen || reduced){
+      skipEntry();
+    }else{
+      runEntry();
+    }
+    sessionStorage.setItem('tds_door_entered', '1');
+  }catch(e){
+    skipEntry();
+  }
+
+  /* ── ROUTE RAIL: nodes, fill, orb, status label ── */
+  var rail = document.getElementById('routeRail');
+  var fill = document.getElementById('routeFill');
+  var orb = document.getElementById('routeOrb');
+  var statusLabel = document.getElementById('statusLabel');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.dsec'));
+  var nodeEls = sections.map(function(sec){
+    var n = document.createElement('div');
+    n.className = 'route-node';
+    rail.appendChild(n);
+    return n;
+  });
+
+  function layoutRail(){
+    var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    if(scrollable <= 0) return;
+    sections.forEach(function(sec, i){
+      var pct = Math.min(100, Math.max(0, (sec.offsetTop / scrollable) * 100));
+      nodeEls[i].style.top = pct + '%';
+    });
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = scrollable > 0 ? Math.min(100, Math.max(0, (window.scrollY / scrollable) * 100)) : 0;
+      fill.style.height = pct + '%';
+      orb.style.top = pct + '%';
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('resize', layoutRail);
+  window.addEventListener('load', layoutRail);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  layoutRail();
+  onScroll();
+
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var idx = sections.indexOf(entry.target);
+        if(idx === -1) return;
+        var node = nodeEls[idx];
+        if(entry.isIntersecting){
+          if(!node.classList.contains('is-reached')){
+            node.classList.add('is-reached', 'pulse');
+            setTimeout(function(){ node.classList.remove('pulse'); }, 700);
+          }
+          var num = entry.target.getAttribute('data-node');
+          var label = entry.target.getAttribute('data-label');
+          if(num) statusLabel.textContent = 'Route: Section ' + num + (label ? ' — ' + label : '');
+        }
+      });
+    }, {threshold: 0.35});
+    sections.forEach(function(s){ obs.observe(s); });
+  }
+
+  /* ── Connect the Dots → prefill Quick Inquiry ── */
+  var ctdLink = document.getElementById('ctdLink');
+  if(ctdLink){
+    ctdLink.addEventListener('click', function(e){
+      e.preventDefault();
+      var need = document.getElementById('inq_need');
+      if(need && !need.value){
+        need.value = 'Not sure what I need yet — help me figure it out.';
+      }
+      document.getElementById('sec-inquiry').scrollIntoView({behavior:'smooth'});
+    });
+  }
+
+  /* ── QUICK INQUIRY submission ──
+     Same pattern as client-intake.html: posts to a Formspree
+     placeholder, falls back to copy/email if it fails or isn't
+     configured yet. Needs its own Formspree form ID — see chat note. */
+  var INQUIRY_ENDPOINT = 'https://formspree.io/f/YOUR_INQUIRY_FORM_ID';
+  var inquiryForm = document.getElementById('inquiryForm');
+  var inquirySubmit = document.getElementById('inquirySubmit');
+  var inquiryFallback = document.getElementById('inquiryFallback');
+  var inquiryCopyBtn = document.getElementById('inquiryCopyBtn');
+  var inquiryCopied = document.getElementById('inquiryCopied');
+  var inquiryMailFallback = document.getElementById('inquiryMailFallback');
+
+  function buildInquirySummary(){
+    var fd = new FormData(inquiryForm);
+    var lines = [];
+    for(var pair of fd.entries()){
+      if(pair[1]) lines.push(pair[0] + ': ' + pair[1]);
+    }
+    return lines.join('\n');
+  }
+
+  inquiryCopyBtn.addEventListener('click', function(){
+    var text = buildInquirySummary();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        inquiryCopied.classList.add('show');
+      }).catch(function(){
+        window.prompt('Copy this text:', text);
+      });
+    }else{
+      window.prompt('Copy this text:', text);
+    }
+    inquiryMailFallback.href = 'mailto:webdevn3v@gmail.com?subject=Project%20Inquiry&body=' + encodeURIComponent(text).slice(0, 1800);
+  });
+
+  inquiryForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var invalid = inquiryForm.querySelector(':invalid');
+    if(invalid){ invalid.reportValidity(); return; }
+    inquirySubmit.disabled = true;
+    inquirySubmit.textContent = 'Sending…';
+    inquiryFallback.classList.remove('show');
+
+    fetch(INQUIRY_ENDPOINT, {
+      method: 'POST',
+      body: new FormData(inquiryForm),
+      headers: {'Accept': 'application/json'}
+    }).then(function(res){
+      if(!res.ok) throw new Error('submit failed');
+      inquirySubmit.textContent = 'Sent ✓';
+    }).catch(function(){
+      inquirySubmit.disabled = false;
+      inquirySubmit.textContent = 'Send Inquiry →';
+      inquiryFallback.classList.add('show');
+    });
   });
 })();
 </script>
