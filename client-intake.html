@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Client Intake — The Digital Side</title>
+<meta name="description" content="Client intake for The Digital Side — tell me about your business so I can build around it.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0F1113;
+  --graphite:#242628;
+  --gray:#5A5F63;
+  --off:#F3F1EC;
+  --lime:#A6FF00;
+  --mono:'Space Mono',monospace;
+  --sans:'Inter',sans-serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%}
+body{
+  min-height:100%;
+  background:var(--black);
+  color:var(--off);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  background-image:radial-gradient(rgba(90,95,99,.16) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+
+.wrap{max-width:480px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 24px) 22px calc(env(safe-area-inset-bottom,0px) + 48px)}
+
+.back-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:26px}
+.back-link:active{color:var(--lime)}
+
+/* ══════════════════════════════
+   PROGRESS
+══════════════════════════════ */
+.progress{display:none;align-items:center;gap:7px;margin-bottom:30px}
+.progress.show{display:flex}
+.progress-dot{flex:1;height:2px;background:var(--graphite);transition:background .3s var(--ease)}
+.progress-dot.is-done,.progress-dot.is-active{background:var(--lime)}
+.progress-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:10px;display:none}
+.progress-label.show{display:block}
+
+/* ══════════════════════════════
+   STEP LAYOUT
+══════════════════════════════ */
+.step{display:none}
+.step.active{display:block;animation:stepIn .4s var(--ease) both}
+@keyframes stepIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.step-num{font-family:var(--mono);font-weight:700;font-size:2.2rem;color:var(--lime);line-height:1;margin-bottom:6px}
+.step-title{font-family:var(--mono);font-weight:700;font-size:1.05rem;letter-spacing:.02em;text-transform:uppercase;color:var(--off);margin-bottom:6px}
+.step-kicker{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+.step-intro{font-size:.86rem;color:var(--gray);line-height:1.65;margin-bottom:30px}
+
+/* ══════════════════════════════
+   FIELDS
+══════════════════════════════ */
+.field{margin-bottom:24px}
+.field-label{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--off);margin-bottom:9px}
+.field-label .opt{color:var(--gray);font-weight:400;text-transform:none;letter-spacing:normal;margin-left:6px}
+.field-help{font-size:.78rem;color:var(--gray);line-height:1.5;margin-bottom:10px}
+
+input[type=text],input[type=email],input[type=tel],input[type=url],textarea{
+  width:100%;padding:13px 14px;
+  background:rgba(36,38,40,.4);
+  border:1px solid var(--graphite);
+  color:var(--off);
+  font-family:var(--sans);font-size:.88rem;
+  border-radius:2px;
+  transition:border-color .2s var(--ease);
+}
+input[type=text]::placeholder,input[type=email]::placeholder,input[type=tel]::placeholder,input[type=url]::placeholder,textarea::placeholder{color:var(--graphite)}
+input:focus,textarea:focus{outline:none;border-color:var(--lime)}
+textarea{min-height:96px;resize:vertical;line-height:1.5}
+
+.choice-group{display:flex;flex-direction:column;gap:8px}
+.choice{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;
+  border:1px solid var(--graphite);
+  cursor:pointer;
+  transition:border-color .2s var(--ease),background .2s var(--ease);
+}
+.choice.is-checked{border-color:var(--lime);background:rgba(166,255,0,.05)}
+.choice input{accent-color:var(--lime);width:17px;height:17px;flex-shrink:0}
+.choice span{font-size:.84rem;color:var(--off)}
+
+.note{
+  font-size:.74rem;color:var(--gray);line-height:1.6;
+  padding:12px 14px;border:1px dashed var(--graphite);margin-top:4px;margin-bottom:22px;
+}
+
+.conditional{
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height .35s var(--ease),opacity .3s var(--ease);
+}
+.conditional.show{max-height:600px;opacity:1;margin-top:6px}
+
+/* ══════════════════════════════
+   STEP NAVIGATION
+══════════════════════════════ */
+.step-nav{display:flex;justify-content:space-between;gap:12px;margin-top:34px}
+.btn-nav{
+  -webkit-tap-highlight-color:transparent;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:14px 20px;
+  border:1px solid var(--graphite);
+  background:transparent;color:var(--gray);
+  cursor:pointer;
+  clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);
+  transition:border-color .2s var(--ease),background .2s var(--ease),color .2s var(--ease);
+}
+.btn-nav:active{border-color:var(--gray);background:rgba(90,95,99,.08)}
+.btn-continue,.btn-submit{
+  color:var(--black);background:var(--lime);border-color:var(--lime);
+  font-weight:700;flex:1;
+}
+.btn-continue:active,.btn-submit:active{background:#93e600}
+.btn-submit:disabled{opacity:.5;pointer-events:none}
+.step:first-child .step-nav{justify-content:flex-end}
+
+/* ══════════════════════════════
+   THANK YOU
+══════════════════════════════ */
+.thankyou{text-align:center;padding-top:20px}
+.thankyou-mark{width:56px;height:56px;border-radius:50%;border:1px solid var(--lime);display:flex;align-items:center;justify-content:center;margin:0 auto 26px;color:var(--lime);font-size:1.4rem}
+.thankyou h1{font-family:var(--mono);font-weight:700;font-size:1.4rem;letter-spacing:.02em;color:var(--off);margin-bottom:10px}
+.thankyou p{font-size:.9rem;color:var(--gray);line-height:1.65;margin-bottom:26px}
+.security-note{
+  font-size:.72rem;color:var(--gray);line-height:1.65;
+  padding:14px 16px;border:1px solid var(--graphite);text-align:left;margin-bottom:26px;
+}
+.security-note strong{color:var(--off)}
+
+/* ══════════════════════════════
+   SUBMIT FALLBACK (until Formspree is wired)
+══════════════════════════════ */
+.submit-fallback{display:none;margin-top:18px;padding:16px;border:1px solid var(--graphite);background:rgba(36,38,40,.4)}
+.submit-fallback.show{display:block}
+.submit-fallback p{font-size:.8rem;color:var(--gray);line-height:1.6;margin-bottom:14px}
+.submit-fallback .fb-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-fb{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:11px 16px;border:1px solid var(--lime);color:var(--lime);background:transparent;cursor:pointer;
+}
+.btn-fb:active{background:rgba(166,255,0,.08)}
+.fb-copied{color:var(--lime);font-size:.7rem;margin-left:2px;display:none}
+.fb-copied.show{display:inline}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a href="door.html" class="back-link">← Back to Digital Door</a>
+
+  <div class="progress-label" id="progressLabel"></div>
+  <div class="progress" id="progress">
+    <span class="progress-dot" data-step="1"></span>
+    <span class="progress-dot" data-step="2"></span>
+    <span class="progress-dot" data-step="3"></span>
+    <span class="progress-dot" data-step="4"></span>
+    <span class="progress-dot" data-step="5"></span>
+  </div>
+
+  <form id="intakeForm" novalidate>
+
+    <!-- STEP 0 — INTRO -->
+    <div class="step active" data-step="0">
+      <div class="step-kicker">Client Intake / 01</div>
+      <h1 class="step-title" style="font-size:1.5rem">Let's Get Your Side.</h1>
+      <p class="step-intro" style="margin-top:18px">“I already know what we're building. Now I just need the pieces that help me build it around your business.”</p>
+      <p class="step-intro">“Don't know an answer? Skip it. I'll handle the technical questions with you.”</p>
+      <div class="step-nav">
+        <button type="button" class="btn-nav btn-continue" data-goto="1">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 1 — YOUR BUSINESS -->
+    <div class="step" data-step="1">
+      <div class="step-num">01</div>
+      <div class="step-title">Your Business</div>
+      <p class="step-intro">Just the basics.</p>
+
+      <div class="field">
+        <label class="field-label" for="f_business_name">Business Name</label>
+        <input type="text" id="f_business_name" name="business_name" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="f_your_name">Your Name</label>
+        <input type="text" id="f_your_name" name="your_name" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="f_email">Best Email</label>
+        <input type="email" id="f_email" name="email" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="f_phone">Phone Number</label>
+        <input type="tel" id="f_phone" name="phone">
+      </div>
+      <div class="field">
+        <label class="field-label" for="f_location">Location or Service Area<span class="opt">— optional</span></label>
+        <input type="text" id="f_location" name="location">
+      </div>
+      <div class="field">
+        <label class="field-label" for="f_current_site">Current Website<span class="opt">— optional</span></label>
+        <input type="url" id="f_current_site" name="current_website" placeholder="https://">
+      </div>
+      <div class="field">
+        <label class="field-label" for="f_social">Social Media<span class="opt">— optional</span></label>
+        <input type="text" id="f_social" name="social_media">
+      </div>
+      <div class="field">
+        <label class="field-label" for="f_what_business">In a sentence or two, what does your business do?</label>
+        <textarea id="f_what_business" name="what_business_does" required></textarea>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-nav" data-goto="0">← Previous</button>
+        <button type="button" class="btn-nav btn-continue" data-goto="2">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 — WHAT SHOULD PEOPLE DO -->
+    <div class="step" data-step="2">
+      <div class="step-num">02</div>
+      <div class="step-title">What Should People Do?</div>
+      <p class="step-intro">When someone finds you online, where should we get them?</p>
+
+      <div class="field">
+        <label class="field-label">What's the main thing you want a customer to do?</label>
+        <div class="choice-group" data-radio-group="main_action">
+          <label class="choice"><input type="radio" name="main_action" value="Call" required><span>Call</span></label>
+          <label class="choice"><input type="radio" name="main_action" value="Book"><span>Book</span></label>
+          <label class="choice"><input type="radio" name="main_action" value="Request a quote"><span>Request a quote</span></label>
+          <label class="choice"><input type="radio" name="main_action" value="Buy"><span>Buy</span></label>
+          <label class="choice"><input type="radio" name="main_action" value="Visit"><span>Visit</span></label>
+          <label class="choice"><input type="radio" name="main_action" value="Send an inquiry"><span>Send an inquiry</span></label>
+          <label class="choice"><input type="radio" name="main_action" value="Something else"><span>Something else</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="f_main_service">What service or product matters most right now?</label>
+        <textarea id="f_main_service" name="main_service" required></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="f_faq">Anything customers constantly ask about or have trouble finding?<span class="opt">— optional</span></label>
+        <textarea id="f_faq" name="customer_questions"></textarea>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-nav" data-goto="1">← Previous</button>
+        <button type="button" class="btn-nav btn-continue" data-goto="3">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 — WHAT ARE WE WORKING WITH -->
+    <div class="step" data-step="3">
+      <div class="step-num">03</div>
+      <div class="step-title">What Are We Working With?</div>
+      <p class="step-intro">No technical knowledge required. “I don't know” is a perfectly good answer.</p>
+
+      <div class="field">
+        <label class="field-label">Do you currently have a website?</label>
+        <div class="choice-group" data-radio-group="has_website">
+          <label class="choice"><input type="radio" name="has_website" value="Yes" required><span>Yes</span></label>
+          <label class="choice"><input type="radio" name="has_website" value="No"><span>No</span></label>
+          <label class="choice"><input type="radio" name="has_website" value="Kind of"><span>Kind of</span></label>
+          <label class="choice"><input type="radio" name="has_website" value="I'm not sure"><span>I'm not sure</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Do you already own a domain or URL?</label>
+        <div class="choice-group" data-radio-group="own_domain">
+          <label class="choice"><input type="radio" name="own_domain" value="Yes" required><span>Yes</span></label>
+          <label class="choice"><input type="radio" name="own_domain" value="No"><span>No</span></label>
+          <label class="choice"><input type="radio" name="own_domain" value="I'm not sure"><span>I'm not sure</span></label>
+        </div>
+
+        <div class="conditional" id="domainDetails">
+          <div class="field" style="margin-top:18px">
+            <label class="field-label" for="f_domain_what">What is it?</label>
+            <input type="text" id="f_domain_what" name="domain_url">
+          </div>
+          <div class="field">
+            <label class="field-label">Know where you purchased it?<span class="opt">— optional</span></label>
+            <div class="choice-group" data-radio-group="domain_purchased_where">
+              <label class="choice"><input type="radio" name="domain_purchased_where" value="Yes"><span>Yes</span></label>
+              <label class="choice"><input type="radio" name="domain_purchased_where" value="No"><span>No</span></label>
+              <label class="choice"><input type="radio" name="domain_purchased_where" value="I'm not sure"><span>I'm not sure</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">What do you already use?</label>
+        <div class="choice-group">
+          <label class="choice"><input type="checkbox" name="already_use" value="Website"><span>Website</span></label>
+          <label class="choice"><input type="checkbox" name="already_use" value="Business email"><span>Business email</span></label>
+          <label class="choice"><input type="checkbox" name="already_use" value="Google Business Profile"><span>Google Business Profile</span></label>
+          <label class="choice"><input type="checkbox" name="already_use" value="Online booking"><span>Online booking</span></label>
+          <label class="choice"><input type="checkbox" name="already_use" value="Online payments"><span>Online payments</span></label>
+          <label class="choice"><input type="checkbox" name="already_use" value="Contact/inquiry form"><span>Contact/inquiry form</span></label>
+          <label class="choice"><input type="checkbox" name="already_use" value="QR code"><span>QR code</span></label>
+          <label class="choice"><input type="checkbox" name="already_use" value="Social media"><span>Social media</span></label>
+          <label class="choice"><input type="checkbox" name="already_use" value="Analytics"><span>Analytics</span></label>
+          <label class="choice"><input type="checkbox" name="already_use" value="None / I'm not sure"><span>None / I'm not sure</span></label>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-nav" data-goto="2">← Previous</button>
+        <button type="button" class="btn-nav btn-continue" data-goto="4">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 — SHOW ME WHAT YOU'VE GOT -->
+    <div class="step" data-step="4">
+      <div class="step-num">04</div>
+      <div class="step-title">Show Me What You've Got.</div>
+      <p class="step-intro">Already have it? Great. Starting fresh? That's fine too.</p>
+
+      <div class="field">
+        <div class="choice-group">
+          <label class="choice"><input type="checkbox" name="have_assets" value="Logo"><span>Logo</span></label>
+          <label class="choice"><input type="checkbox" name="have_assets" value="Brand colors"><span>Brand colors</span></label>
+          <label class="choice"><input type="checkbox" name="have_assets" value="Business photos"><span>Business photos</span></label>
+          <label class="choice"><input type="checkbox" name="have_assets" value="Product/service photos"><span>Product/service photos</span></label>
+          <label class="choice"><input type="checkbox" name="have_assets" value="Service or product descriptions"><span>Service or product descriptions</span></label>
+          <label class="choice"><input type="checkbox" name="have_assets" value="About/business story"><span>About/business story</span></label>
+          <label class="choice"><input type="checkbox" name="have_assets" value="Testimonials or reviews"><span>Testimonials or reviews</span></label>
+          <label class="choice"><input type="checkbox" name="have_assets" value="Existing marketing materials"><span>Existing marketing materials</span></label>
+        </div>
+      </div>
+
+      <div class="note">We'll handle file sharing separately — no need to cram everything into this form.</div>
+
+      <div class="field">
+        <label class="field-label" for="f_keep">Anything you definitely want to keep?<span class="opt">— optional</span></label>
+        <textarea id="f_keep" name="want_to_keep"></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label" for="f_change">Anything you absolutely want changed?<span class="opt">— optional</span></label>
+        <textarea id="f_change" name="want_to_change"></textarea>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-nav" data-goto="3">← Previous</button>
+        <button type="button" class="btn-nav btn-continue" data-goto="5">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 5 — WHAT DOES DONE LOOK LIKE -->
+    <div class="step" data-step="5">
+      <div class="step-num">05</div>
+      <div class="step-title">What Does Done Look Like?</div>
+      <p class="step-intro">One last thing.</p>
+
+      <div class="field">
+        <label class="field-label" for="f_done">When this project is finished, what would make you say, “Yep. That's exactly what I needed”?</label>
+        <textarea id="f_done" name="definition_of_done" required></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label" for="f_else">Anything else I should know?<span class="opt">— optional</span></label>
+        <textarea id="f_else" name="anything_else"></textarea>
+      </div>
+
+      <div class="step-nav">
+        <button type="button" class="btn-nav" data-goto="4">← Previous</button>
+        <button type="submit" class="btn-nav btn-submit" id="submitBtn">Submit Intake →</button>
+      </div>
+
+      <div class="submit-fallback" id="submitFallback">
+        <p>Something didn't send. Copy your answers below and email them to <strong>webdevn3v@gmail.com</strong> so nothing gets lost.</p>
+        <div class="fb-actions">
+          <button type="button" class="btn-fb" id="copyAnswersBtn">Copy Answers</button>
+          <a href="mailto:webdevn3v@gmail.com?subject=Client%20Intake" class="btn-fb" id="mailFallback">Open Email →</a>
+        </div>
+        <span class="fb-copied" id="fbCopied">Copied ✓ — now paste into your email</span>
+      </div>
+    </div>
+
+    <!-- STEP 6 — THANK YOU -->
+    <div class="step" data-step="6">
+      <div class="thankyou">
+        <div class="thankyou-mark">✓</div>
+        <h1>That's It.</h1>
+        <p>“I've got your side. I'll take it from here.”</p>
+        <div class="security-note">
+          <strong>Security note:</strong> Never send passwords through this form or by email. If I need access to an account, I'll tell you exactly what I need and how to share it safely.
+        </div>
+        <a href="door.html" class="back-link" style="justify-content:center">← Back to Digital Door</a>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<script>
+(function(){
+  var form = document.getElementById('intakeForm');
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+  var progress = document.getElementById('progress');
+  var progressLabel = document.getElementById('progressLabel');
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.progress-dot'));
+  var current = 0;
+
+  var stepNames = ['', 'Your Business', 'What Should People Do?', 'What Are We Working With?', 'Show Me What You\'ve Got', 'What Does Done Look Like?', ''];
+
+  function showStep(i){
+    steps.forEach(function(s){
+      s.classList.toggle('active', parseInt(s.getAttribute('data-step'), 10) === i);
+    });
+    current = i;
+    if(i >= 1 && i <= 5){
+      progress.classList.add('show');
+      progressLabel.classList.add('show');
+      progressLabel.textContent = 'Section 0' + i + ' / 05 — ' + stepNames[i];
+      dots.forEach(function(d){
+        var ds = parseInt(d.getAttribute('data-step'), 10);
+        d.classList.toggle('is-done', ds < i);
+        d.classList.toggle('is-active', ds === i);
+      });
+    }else{
+      progress.classList.remove('show');
+      progressLabel.classList.remove('show');
+    }
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function currentStepEl(){
+    return steps.filter(function(s){ return parseInt(s.getAttribute('data-step'),10) === current; })[0];
+  }
+
+  function validateCurrentStep(){
+    var el = currentStepEl();
+    var invalid = el.querySelector(':invalid');
+    if(invalid){
+      invalid.reportValidity();
+      return false;
+    }
+    return true;
+  }
+
+  document.querySelectorAll('[data-goto]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var goto = parseInt(btn.getAttribute('data-goto'), 10);
+      if(goto > current){
+        if(!validateCurrentStep()) return;
+      }
+      showStep(goto);
+    });
+  });
+
+  /* visual checked-state for custom choice rows (works alongside :has() where supported) */
+  document.querySelectorAll('.choice input').forEach(function(input){
+    input.addEventListener('change', function(){
+      if(input.type === 'radio'){
+        document.querySelectorAll('input[name="' + input.name + '"]').forEach(function(sib){
+          sib.closest('.choice').classList.toggle('is-checked', sib.checked);
+        });
+      }else{
+        input.closest('.choice').classList.toggle('is-checked', input.checked);
+      }
+    });
+  });
+
+  /* conditional reveal: domain details */
+  var domainDetails = document.getElementById('domainDetails');
+  document.querySelectorAll('input[name="own_domain"]').forEach(function(r){
+    r.addEventListener('change', function(){
+      var checked = document.querySelector('input[name="own_domain"]:checked');
+      domainDetails.classList.toggle('show', !!checked && checked.value === 'Yes');
+    });
+  });
+
+  /* ── SUBMISSION ──
+     No real backend exists on the site yet. This posts to a Formspree
+     endpoint placeholder — swap FORM_ENDPOINT for the real one once
+     a Formspree form is created. Until then (or if the request fails
+     for any reason), nothing is lost: the fallback panel below lets
+     the client copy their answers or email them directly. */
+  var FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+  function buildSummary(){
+    var fd = new FormData(form);
+    var lines = [];
+    for(var pair of fd.entries()){
+      if(pair[1]) lines.push(pair[0] + ': ' + pair[1]);
+    }
+    return lines.join('\n');
+  }
+
+  var submitBtn = document.getElementById('submitBtn');
+  var fallback = document.getElementById('submitFallback');
+  var copyBtn = document.getElementById('copyAnswersBtn');
+  var copiedLabel = document.getElementById('fbCopied');
+  var mailFallback = document.getElementById('mailFallback');
+
+  copyBtn.addEventListener('click', function(){
+    var text = buildSummary();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        copiedLabel.classList.add('show');
+      }).catch(function(){
+        window.prompt('Copy this text:', text);
+      });
+    }else{
+      window.prompt('Copy this text:', text);
+    }
+    mailFallback.href = 'mailto:webdevn3v@gmail.com?subject=Client%20Intake&body=' + encodeURIComponent(text).slice(0, 1800);
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!validateCurrentStep()) return;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    fallback.classList.remove('show');
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: {'Accept': 'application/json'}
+    }).then(function(res){
+      if(!res.ok) throw new Error('submit failed');
+      showStep(6);
+    }).catch(function(){
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Intake →';
+      fallback.classList.add('show');
+    });
+  });
+
+  showStep(0);
+})();
+</script>
+
+</body>
+</html>
