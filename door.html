@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
+<script>document.documentElement.className='js';</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>The Digital Side — Digital Door</title>
@@ -37,6 +38,34 @@ body{
   background-image:radial-gradient(rgba(90,95,99,.18) 1px,transparent 1px);
   background-size:26px 26px;
 }
+html.js:not(.entered) body{overflow:hidden}
+
+/* ══════════════════════════════
+   ENTRANCE GATE
+══════════════════════════════ */
+.gate{
+  display:none;
+  position:fixed;inset:0;z-index:50;
+  background:var(--black);
+  flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  cursor:pointer;
+  transition:opacity .5s var(--ease);
+}
+html.js .gate{display:flex}
+.gate.gate-hide{opacity:0;pointer-events:none}
+.gate-ring{position:relative;width:104px;height:104px;display:flex;align-items:center;justify-content:center}
+.gate-ring::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  border:1px solid var(--lime);opacity:.45;
+  animation:ringPulse 2.2s ease-in-out infinite;
+}
+.gate-mark{width:64px;height:64px;object-fit:cover;object-position:top center;opacity:.9}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.14);opacity:.85}}
+.gate-label{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gray);animation:labelBreathe 2.2s ease-in-out infinite}
+@keyframes labelBreathe{0%,100%{opacity:.45}50%{opacity:1}}
+
+@keyframes fadeInSimple{from{opacity:0}to{opacity:1}}
+@keyframes circuitIn{from{opacity:0}to{opacity:.5}}
 
 /* ══════════════════════════════
    STAGE 1 — LOGO
@@ -53,6 +82,8 @@ body{
 }
 
 .circuit{position:absolute;top:0;right:0;width:150px;height:210px;pointer-events:none;opacity:.5;z-index:0}
+html.js .circuit{opacity:0}
+html.entered .circuit{animation:circuitIn 1s var(--ease) .2s both}
 .circuit svg{width:100%;height:100%}
 .circuit line,.circuit path{stroke:var(--graphite);stroke-width:1;fill:none}
 .circuit circle{fill:var(--black);stroke:var(--graphite);stroke-width:1}
@@ -64,6 +95,8 @@ body{
   z-index:2;display:flex;align-items:center;gap:9px;
   font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);
 }
+html.js .online{opacity:0}
+html.entered .online{animation:fadeInSimple .5s var(--ease) .05s both}
 .online-dot{width:8px;height:8px;background:var(--lime);box-shadow:0 0 8px rgba(166,255,0,.7);flex-shrink:0}
 
 .logo-glow{
@@ -78,8 +111,9 @@ body{
 .logo-wrap{
   position:relative;z-index:1;
   width:min(62vw,320px);
-  animation:logoIn 1.1s var(--ease) both;
 }
+html.js .logo-wrap{opacity:0}
+html.entered .logo-wrap{animation:logoIn 1s var(--ease) .35s both}
 @keyframes logoIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
 .logo-wrap img{width:100%;height:auto}
 
@@ -89,6 +123,8 @@ body{
   display:flex;flex-direction:column;align-items:center;gap:8px;
   font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);
 }
+html.js .scroll-cue{opacity:0}
+html.entered .scroll-cue{animation:fadeInSimple .6s var(--ease) 1s both}
 .scroll-cue-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--lime),transparent);animation:cueMove 2s ease-in-out infinite}
 @keyframes cueMove{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{opacity:1}60%{transform:scaleY(1);transform-origin:top}60.01%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom;opacity:0}}
 
@@ -133,6 +169,14 @@ footer{text-align:center;margin-top:28px;font-size:.58rem;letter-spacing:.16em;t
 </style>
 </head>
 <body>
+
+<!-- ENTRANCE GATE — tap to enter, plays a chime, unlocks the reveal -->
+<div class="gate" id="gate" role="button" tabindex="0" aria-label="Tap to enter The Digital Side">
+  <div class="gate-ring">
+    <img class="gate-mark" src="tds-logo.webp" alt="" width="1024" height="1536">
+  </div>
+  <div class="gate-label">Tap to Enter</div>
+</div>
 
 <!-- STAGE 1: the logo IS the door -->
 <div class="stage-logo">
@@ -192,6 +236,48 @@ footer{text-align:center;margin-top:28px;font-size:.58rem;letter-spacing:.16em;t
 
   <footer>thedigitalside.com</footer>
 </div>
+
+<script>
+(function(){
+  var gate = document.getElementById('gate');
+  if(!gate) return;
+  var entered = false;
+
+  function playChime(){
+    try{
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      var ctx = new Ctx();
+      var now = ctx.currentTime;
+      [[392,0,.09],[587,.07,.14],[784,.16,.22]].forEach(function(t){
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = t[0];
+        gain.gain.setValueAtTime(0, now + t[1]);
+        gain.gain.linearRampToValueAtTime(.12, now + t[1] + .015);
+        gain.gain.exponentialRampToValueAtTime(.0001, now + t[1] + t[2]);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(now + t[1]);
+        osc.stop(now + t[1] + t[2] + .02);
+      });
+    }catch(e){}
+  }
+
+  function enter(){
+    if(entered) return;
+    entered = true;
+    playChime();
+    document.documentElement.classList.add('entered');
+    gate.classList.add('gate-hide');
+    setTimeout(function(){ gate.style.display = 'none'; }, 550);
+  }
+
+  gate.addEventListener('click', enter);
+  gate.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); enter(); }
+  });
+})();
+</script>
 
 </body>
 </html>
