@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Demo 01 — Frederick Legacy Law — Architecture Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0a0a0a;
+    --wood:#14110d;
+    --wood-dk:#0a0806;
+    --brass:#b9975b;
+    --brass-lt:#d9bd85;
+    --brass-dim:#6e5c3c;
+    --lime:#A6FF00;
+    --lime-glow:rgba(166,255,0,.4);
+    --off:#EDE8DE;
+    --gray:#6b665c;
+    --mono:'Space Mono',monospace;
+    --sans:'Inter',sans-serif;
+    --serif:'Playfair Display',Georgia,serif;
+    --ease-heavy:cubic-bezier(.65,0,.35,1);
+    --ease:cubic-bezier(.25,.46,.45,.94);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--black);
+    color:var(--off);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  a{color:inherit}
+
+  /* ══════════════════════════════════════════
+     DEMO NOTES — DS-controlled, not part of the
+     fictional business. Short. No methodology.
+  ══════════════════════════════════════════ */
+  .notes{
+    height:100%;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:20px;
+    padding:32px 24px;
+    text-align:center;
+    transition:opacity .4s var(--ease);
+  }
+  .notes.is-hidden{ opacity:0; pointer-events:none; position:fixed; inset:0; }
+  .notes__eyebrow{
+    font-family:var(--mono); font-size:.62rem; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--lime);
+  }
+  .notes__name{ font-family:var(--mono); font-size:1.3rem; letter-spacing:.02em; }
+  .notes__desc{
+    color:var(--gray); font-size:.9rem; line-height:1.65; max-width:42ch;
+  }
+  .notes__actions{
+    margin-top:10px;
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+  }
+  .notes__primary{
+    padding:16px 32px;
+    background:transparent;
+    border:1px solid var(--brass);
+    color:var(--off);
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    border-radius:4px;
+    cursor:pointer;
+    transition:background .25s var(--ease), color .25s var(--ease);
+  }
+  .notes__primary:hover{ background:var(--brass); color:var(--black); }
+  .notes__secondary{
+    background:none; border:none;
+    font-family:var(--mono); font-size:.62rem; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--gray);
+    cursor:pointer;
+    transition:color .2s var(--ease);
+  }
+  .notes__secondary:hover{ color:var(--lime); }
+
+  /* ══════════════════════════════════════════
+     OWNER KEY overlay — placeholder only. Real
+     asset/visual system is being designed
+     separately (Sprint 2). This just proves the
+     display slot exists and doesn't collide with
+     the customer-facing Door.
+  ══════════════════════════════════════════ */
+  .owner-overlay{
+    position:fixed; inset:0; z-index:60;
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    background:rgba(0,0,0,0);
+    backdrop-filter:blur(0px);
+    opacity:0; pointer-events:none;
+    transition:opacity .3s var(--ease), background .3s var(--ease), backdrop-filter .3s var(--ease);
+  }
+  .owner-overlay.is-open{
+    opacity:1; pointer-events:auto;
+    background:rgba(0,0,0,.82);
+    backdrop-filter:blur(6px);
+  }
+  .owner-card{
+    width:100%; max-width:300px;
+    padding:40px 26px;
+    border:1px dashed rgba(185,151,91,.35);
+    border-radius:10px;
+    text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .owner-card__label{
+    font-family:var(--mono); font-size:.6rem; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--brass-dim);
+  }
+  .owner-card__title{ font-family:var(--serif); font-size:1.15rem; color:var(--off); }
+  .owner-card__note{ font-family:var(--sans); font-size:.78rem; color:var(--gray); line-height:1.6; margin-top:6px; }
+  .owner-close{
+    margin-top:18px;
+    background:none; border:none; color:var(--gray);
+    font-family:var(--mono); font-size:.6rem; letter-spacing:.12em;
+    text-transform:uppercase; cursor:pointer;
+  }
+  .owner-close:hover{ color:var(--off); }
+
+  /* ══════════════════════════════════════════
+     STAGE — the door itself, UNCHANGED from the
+     approved Frederick animation. Timing, easing
+     and structure are identical to the prior file.
+  ══════════════════════════════════════════ */
+  .stage{
+    position:fixed; inset:0; z-index:50;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--black);
+    opacity:0; pointer-events:none;
+    transition:opacity .4s var(--ease);
+  }
+  .stage.is-open{ opacity:1; pointer-events:auto; }
+  html.stage-lock body{ overflow:hidden; touch-action:none; }
+
+  .tds-mark{
+    position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+    font-family:var(--mono); font-size:.55rem; letter-spacing:.14em;
+    color:var(--gray); opacity:.55; text-transform:uppercase;
+    z-index:2;
+  }
+
+  .door-scene{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition:opacity .3s var(--ease);
+  }
+  .door-scene.is-active{ opacity:1; pointer-events:auto; }
+
+  .door{ position:absolute; inset:0; display:flex; }
+  .door__panel{
+    width:50%; height:100%;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 2px, transparent 2px 64px),
+      linear-gradient(160deg, var(--wood), var(--wood-dk) 70%);
+    position:relative;
+    transition:transform 1.5s var(--ease-heavy);
+  }
+  .door__panel--l{ box-shadow: inset -30px 0 60px rgba(0,0,0,.55); }
+  .door__panel--r{ box-shadow: inset 30px 0 60px rgba(0,0,0,.55); }
+  .door-scene.is-opening .door__panel--l{ transform:translateX(-101%); }
+  .door-scene.is-opening .door__panel--r{ transform:translateX(101%); }
+  .door__panel::before{ content:''; position:absolute; inset:26px; border:1px solid rgba(185,151,91,.16); }
+  .door__panel--l::before{ right:14px; }
+  .door__panel--r::before{ left:14px; }
+
+  .door__lockgroup{ position:absolute; inset:0; z-index:4; opacity:1; transition:opacity .6s var(--ease); }
+  .door-scene.is-resolving .door__lockgroup{ opacity:0; }
+
+  .door__seam{ position:absolute; top:0; bottom:0; left:50%; width:2px; background:rgba(0,0,0,.6); transform:translateX(-1px); }
+  .door__signal{
+    position:absolute; left:50%; top:0; width:2px; height:0%;
+    background:linear-gradient(180deg, transparent, var(--lime));
+    transform:translateX(-1px);
+    box-shadow:0 0 10px var(--lime-glow);
+    transition:height .6s var(--ease), opacity .5s var(--ease);
+  }
+  .door-scene.is-signaling .door__signal{ height:42%; opacity:1; }
+  .door-scene.is-responding .door__signal{ opacity:0; }
+
+  .door__lock{ position:absolute; left:50%; top:50%; width:34px; height:52px; transform:translate(-50%,-50%); display:flex; align-items:center; justify-content:center; }
+  .door__lock-plate{
+    width:100%; height:100%;
+    background:linear-gradient(160deg, var(--brass-lt), var(--brass) 55%, var(--brass-dim));
+    border-radius:3px;
+    box-shadow:0 4px 14px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.35);
+    opacity:.55;
+    transition:opacity .5s var(--ease), box-shadow .5s var(--ease);
+  }
+  .door-scene.is-responding .door__lock-plate{
+    opacity:1;
+    box-shadow:0 0 26px rgba(217,189,133,.65), 0 4px 14px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.5);
+  }
+
+  .door__seam-glow{
+    position:absolute; left:50%; top:20%; bottom:20%; width:0; transform:translateX(-50%);
+    background:radial-gradient(ellipse at center, rgba(217,189,133,.55), transparent 70%);
+    filter:blur(6px); opacity:0;
+    transition:opacity .8s var(--ease), width .8s var(--ease);
+  }
+  .door-scene.is-glowing .door__seam-glow{ opacity:1; width:60px; }
+
+  .door__reveal{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:22px;
+    background:radial-gradient(ellipse at center, #1a1611, var(--black) 75%);
+    z-index:0; text-align:center; padding:24px;
+  }
+  .door__reveal-num{
+    font-family:var(--mono); font-size:.62rem; letter-spacing:.2em; color:var(--brass-dim); text-transform:uppercase;
+    opacity:0; filter:blur(6px);
+    transition:opacity 1.1s var(--ease) .2s, filter 1.1s var(--ease) .2s;
+  }
+  .door__reveal-name{
+    font-family:var(--serif); font-weight:600; font-size:clamp(1.6rem, 7vw, 2.4rem); letter-spacing:.02em; color:var(--off);
+    opacity:0; filter:blur(10px);
+    transition:opacity 1.3s var(--ease) .4s, filter 1.3s var(--ease) .4s;
+  }
+  .door__reveal-sub{
+    font-family:var(--sans); font-size:.8rem; color:var(--brass-lt); letter-spacing:.04em;
+    opacity:0; filter:blur(6px);
+    transition:opacity 1.1s var(--ease) .7s, filter 1.1s var(--ease) .7s;
+  }
+  .door-scene.is-revealed .door__reveal-num,
+  .door-scene.is-revealed .door__reveal-name,
+  .door-scene.is-revealed .door__reveal-sub{ opacity:1; filter:blur(0); }
+
+  /* ── scroll cue — replaces the old Enter Demo button.
+     The door opening IS entry; scrolling (or a tap, for
+     accessibility/desktop-trackpad cases) continues straight
+     into the business's customer path. No extra click gate. ── */
+  .scroll-cue{
+    margin-top:6px;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    opacity:0;
+    transition:opacity .9s var(--ease) 1.3s;
+    cursor:pointer;
+  }
+  .door-scene.is-revealed .scroll-cue{ opacity:.8; }
+  .scroll-cue__label{
+    font-family:var(--mono); font-size:.58rem; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--brass-lt);
+  }
+  .scroll-cue__chevron{
+    width:14px; height:14px;
+    border-right:1px solid var(--brass-lt);
+    border-bottom:1px solid var(--brass-lt);
+    transform:rotate(45deg);
+    animation:cueBob 1.8s ease-in-out infinite;
+  }
+  @keyframes cueBob{
+    0%,100%{ transform:rotate(45deg) translate(0,0); opacity:.7; }
+    50%{ transform:rotate(45deg) translate(3px,3px); opacity:1; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .door__panel, .door__signal, .door__lock-plate, .door__seam-glow, .door__lockgroup,
+    .door__reveal-num, .door__reveal-name, .door__reveal-sub, .scroll-cue, .scroll-cue__chevron{
+      transition-duration:.15s !important;
+      animation:none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- DEMO NOTES — shown first, DS-controlled, not the fictional business -->
+<div class="notes" id="notes">
+  <div class="notes__eyebrow">Demo // 01</div>
+  <div class="notes__name">Frederick Legacy Law</div>
+  <div class="notes__desc">A refined Digital Door designed for a professional service business where trust and a clear route to consultation matter more than unnecessary interaction.</div>
+  <div class="notes__actions">
+    <button class="notes__primary" id="viewExperienceBtn">View Experience →</button>
+    <button class="notes__secondary" id="viewOwnerKeyBtn">View Owner Key ↗</button>
+  </div>
+</div>
+
+<!-- OWNER KEY overlay — placeholder slot only -->
+<div class="owner-overlay" id="ownerOverlay">
+  <div class="owner-card">
+    <div class="owner-card__label">DS Owner Key</div>
+    <div class="owner-card__title">Frederick Legacy Law</div>
+    <div class="owner-card__note">Asset pending — final Owner Key visual system is being designed separately. This slot will display it once supplied.</div>
+    <button class="owner-close" id="ownerClose">Close</button>
+  </div>
+</div>
+
+<!-- THE DOOR — unchanged from the approved Frederick animation -->
+<div class="stage" id="stage">
+  <div class="door-scene" id="doorScene">
+    <div class="door__reveal">
+      <div class="door__reveal-num">01 — Private Access Granted</div>
+      <div class="door__reveal-name">Frederick Legacy Law</div>
+      <div class="door__reveal-sub">Estate Planning · Family Law · Trust</div>
+      <div class="scroll-cue" id="scrollCue">
+        <span class="scroll-cue__label">Scroll</span>
+        <span class="scroll-cue__chevron"></span>
+      </div>
+    </div>
+    <div class="door">
+      <div class="door__panel door__panel--l"></div>
+      <div class="door__panel door__panel--r"></div>
+    </div>
+    <div class="door__lockgroup">
+      <div class="door__seam"></div>
+      <div class="door__signal"></div>
+      <div class="door__seam-glow"></div>
+      <div class="door__lock"><div class="door__lock-plate"></div></div>
+    </div>
+  </div>
+  <div class="tds-mark">The Digital Side — System 01</div>
+</div>
+
+<script>
+/* PLACEHOLDER — Sprint 1 architecture check only. Once the actual
+   customer path is embedded per-demo (Sprint 3/4), "continuing past
+   the reveal" should scroll into that content directly rather than
+   navigating to a separate URL. For now it still hands off to the
+   existing live demo, same-tab, so the journey feels continuous. */
+const DEMO_URL = "https://webdevn3v.github.io/law-firm-demo/";
+
+const notes             = document.getElementById('notes');
+const viewExperienceBtn = document.getElementById('viewExperienceBtn');
+const viewOwnerKeyBtn   = document.getElementById('viewOwnerKeyBtn');
+const ownerOverlay      = document.getElementById('ownerOverlay');
+const ownerClose        = document.getElementById('ownerClose');
+const stage             = document.getElementById('stage');
+const doorScene         = document.getElementById('doorScene');
+const scrollCue         = document.getElementById('scrollCue');
+
+let revealed = false;
+let proceeded = false;
+
+function openOwnerKey(){ ownerOverlay.classList.add('is-open'); }
+function closeOwnerKey(){ ownerOverlay.classList.remove('is-open'); }
+
+function startExperience(){
+  notes.classList.add('is-hidden');
+  document.documentElement.classList.add('stage-lock');
+  stage.classList.add('is-open');
+  doorScene.classList.add('is-active');
+  playDoorSequence();
+}
+
+function playDoorSequence(){
+  // — identical timing to the approved Frederick animation —
+  window.setTimeout(() => doorScene.classList.add('is-signaling'), 150);
+  window.setTimeout(() => doorScene.classList.add('is-responding'), 750);
+  window.setTimeout(() => doorScene.classList.add('is-glowing'), 1050);
+  window.setTimeout(() => {
+    doorScene.classList.add('is-opening');
+    doorScene.classList.add('is-resolving');
+  }, 1650);
+  window.setTimeout(() => {
+    doorScene.classList.add('is-revealed');
+    revealed = true;
+  }, 2850);
+}
+
+function proceedIntoDemo(){
+  if (!revealed || proceeded) return;
+  proceeded = true;
+  window.open(DEMO_URL, "_blank");
+}
+
+viewExperienceBtn.addEventListener('click', startExperience);
+viewOwnerKeyBtn.addEventListener('click', openOwnerKey);
+ownerClose.addEventListener('click', closeOwnerKey);
+ownerOverlay.addEventListener('click', (e) => { if (e.target === ownerOverlay) closeOwnerKey(); });
+
+// scroll/wheel/touch continues past the reveal — no button click
+stage.addEventListener('wheel', proceedIntoDemo, { passive:true });
+stage.addEventListener('touchmove', proceedIntoDemo, { passive:true });
+scrollCue.addEventListener('click', proceedIntoDemo); // accessibility fallback
+</script>
+
+</body>
+</html>
