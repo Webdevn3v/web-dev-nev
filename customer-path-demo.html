@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Customer Path Demo — Blackline Tattoo | The Digital Side</title>
+<meta name="description" content="Digital Key → Digital Door → Customer Path → Destination — a customer-path demonstration for The Digital Side.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="customer-path-demo.css">
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <div class="grid-bg" id="gridBg" aria-hidden="true"></div>
+
+  <!-- PHONE — Scenes 01–02 -->
+  <div class="phone" id="phone" aria-hidden="true">
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="screen-key">
+          <div class="key-eyebrow">Digital Key</div>
+          <div class="key-business">Blackline Tattoo</div>
+          <div class="qr-mock" id="qrMock">
+            <div class="qr-grid" id="qrGrid"></div>
+            <div class="qr-pulse" id="qrPulse"></div>
+          </div>
+          <div class="key-status">Access <span class="lime">// Active</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRANSITION MICROCOPY — Scene 02 -->
+  <div class="transition-copy" id="transitionCopy" aria-hidden="true"></div>
+
+  <!-- DOOR / PATH / DESTINATION — Scenes 03–05 -->
+  <div class="door-screen" id="doorScreen" aria-hidden="true">
+
+    <div class="door-panel" id="doorPanel">
+      <div class="door-headline">Welcome to <span class="lime">Blackline</span></div>
+      <div class="door-sub">What are you here for?</div>
+
+      <div class="route-map" id="routeMap">
+        <div class="route-hub"><span class="route-hub-dot"></span></div>
+        <div class="route-spine" id="routeSpine"></div>
+        <div class="route-signal" id="routeSignal"></div>
+
+        <div class="route-node" id="node-book" data-node="book">
+          <span class="route-node-dot"></span>
+          <span class="route-node-label">Book a Tattoo</span>
+        </div>
+        <div class="route-node" data-node="artists">
+          <span class="route-node-dot"></span>
+          <span class="route-node-label">View Artists</span>
+        </div>
+        <div class="route-node" data-node="aftercare">
+          <span class="route-node-dot"></span>
+          <span class="route-node-label">Aftercare</span>
+        </div>
+        <div class="route-node" data-node="flash">
+          <span class="route-node-dot"></span>
+          <span class="route-node-label">Shop Flash</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="destination-panel" id="destinationPanel">
+      <div class="dest-eyebrow">Blackline Tattoo</div>
+      <div class="dest-headline">Request a Tattoo</div>
+      <div class="dest-field"></div>
+      <div class="dest-field"></div>
+      <div class="dest-field dest-field--wide"></div>
+      <div class="dest-node"><span class="lime">●</span> Destination Reached</div>
+    </div>
+
+    <div class="route-complete" id="routeComplete">
+      <div class="rc-line1">Route Complete</div>
+      <div class="rc-line2">Arrive at your destination.</div>
+    </div>
+  </div>
+
+  <!-- FINAL FRAME -->
+  <div class="final-frame" id="finalFrame" aria-hidden="true">
+    <div class="final-route">
+      Digital Key <span class="lime">→</span> Digital Door <span class="lime">→</span> Customer Path <span class="lime">→</span> Destination
+    </div>
+    <div class="final-brand">
+      the digital side.
+      <strong>The Digital Side, Handled.</strong>
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls" id="controls">
+    <button type="button" class="ctrl-btn" id="replayBtn">↻ Replay</button>
+    <button type="button" class="ctrl-btn ctrl-btn--ghost" id="closeBtn">✕ Close</button>
+  </div>
+
+  <!-- REDUCED-MOTION STATIC FALLBACK -->
+  <div class="static-summary" id="staticSummary">
+    <div class="static-eyebrow">Customer Path Demo</div>
+    <div class="static-title">Blackline Tattoo</div>
+    <ol class="static-list">
+      <li><strong>Digital Key</strong> — a branded QR credential for the business</li>
+      <li><strong>Digital Door</strong> — the mobile entrance customers land on</li>
+      <li><strong>Customer Path</strong> — "Book a Tattoo" selected automatically</li>
+      <li><strong>Destination</strong> — the request form, reached directly</li>
+    </ol>
+    <div class="static-route">Digital Key → Digital Door → Customer Path → Destination</div>
+    <button type="button" class="ctrl-btn" id="playBtn">▶ Play Animation</button>
+  </div>
+</div>
+
+<script src="customer-path-demo.js"></script>
+</body>
+</html>
