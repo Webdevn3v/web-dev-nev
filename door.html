@@ -92,12 +92,6 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 .transition-key-dot{width:6px;height:6px;background:var(--lime);border-radius:50%;opacity:0;box-shadow:0 0 8px rgba(166,255,0,.7);transition:opacity .2s var(--ease)}
 .transition.phase-key .transition-key-dot{opacity:1}
 
-.entry-panel{position:fixed;top:0;bottom:0;width:50%;background:var(--black);z-index:101;pointer-events:none;transition:transform .5s var(--ease)}
-.entry-panel--l{left:0}
-.entry-panel--r{right:0}
-.entry-panel--l.open{transform:translateX(-100%)}
-.entry-panel--r.open{transform:translateX(100%)}
-
 /* ══════════════════════════════
    IMMERSIVE HERO — revealed after the transition.
    Large opening area + scroll invitation, before the numbered menu.
@@ -278,8 +272,6 @@ textarea{min-height:84px;resize:vertical;line-height:1.5}
   <div class="transition-text" id="transitionText">Digital Key Detected</div>
   <div class="transition-line" aria-hidden="true"></div>
 </div>
-<div class="entry-panel entry-panel--l" id="panelL" aria-hidden="true"></div>
-<div class="entry-panel entry-panel--r" id="panelR" aria-hidden="true"></div>
 
 <!-- IMMERSIVE HERO — revealed after the transition, before the numbered menu -->
 <div class="hero-stage" id="heroStage">
@@ -460,8 +452,6 @@ textarea{min-height:84px;resize:vertical;line-height:1.5}
   var gate = document.getElementById('gate');
   var transition = document.getElementById('transition');
   var transitionText = document.getElementById('transitionText');
-  var panelL = document.getElementById('panelL');
-  var panelR = document.getElementById('panelR');
   var heroStage = document.getElementById('heroStage');
   var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -470,8 +460,6 @@ textarea{min-height:84px;resize:vertical;line-height:1.5}
     document.documentElement.classList.add('entered');
     if(gate) gate.style.display = 'none';
     if(transition){ transition.classList.remove('show'); transition.style.display = 'none'; }
-    if(panelL) panelL.style.display = 'none';
-    if(panelR) panelR.style.display = 'none';
     if(heroStage) heroStage.classList.add('show');
   }
 
@@ -480,11 +468,7 @@ textarea{min-height:84px;resize:vertical;line-height:1.5}
     setTimeout(function(){ transition.classList.add('phase-key'); }, 30);
     setTimeout(function(){ transitionText.textContent = 'Route Established'; transition.classList.add('phase-route'); }, 380);
     setTimeout(function(){ transitionText.textContent = 'Access // Granted'; transition.classList.add('phase-access'); }, 700);
-    setTimeout(function(){
-      transition.classList.add('phase-open');
-      panelL.classList.add('open');
-      panelR.classList.add('open');
-    }, 900);
+    setTimeout(function(){ transition.classList.add('phase-open'); }, 900);
     setTimeout(revealHero, 1400);
   }
 
