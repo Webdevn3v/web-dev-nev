@@ -142,24 +142,52 @@ html.entered .scroll-cue{animation:fadeInSimple .6s var(--ease) 1s both}
 .sub{font-size:.82rem;line-height:1.6;color:var(--gray);text-align:center;max-width:320px;margin:0 auto 30px}
 
 nav.paths{display:flex;flex-direction:column;gap:11px}
-.path-btn{
+.door-row{
   -webkit-tap-highlight-color:transparent;
   display:flex;align-items:center;gap:14px;
-  min-height:58px;padding:13px 17px;
+  min-height:64px;padding:14px 17px;
   background:rgba(36,38,40,.4);
   border:1px solid var(--graphite);
   clip-path:polygon(11px 0,100% 0,100% calc(100% - 11px),calc(100% - 11px) 100%,0 100%,0 11px);
   transition:border-color .2s var(--ease),background .2s var(--ease);
+  cursor:pointer;list-style:none;
 }
-.path-btn:active{border-color:var(--lime);background:rgba(166,255,0,.06)}
-.path-num{font-weight:700;font-size:1.05rem;color:var(--lime);flex-shrink:0;width:24px}
-.path-sep{width:1px;align-self:stretch;background:var(--graphite);flex-shrink:0}
-.path-label{font-weight:700;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--off);flex:1}
-.path-arrow{color:var(--lime);flex-shrink:0;transition:transform .2s var(--ease)}
-.path-btn:active .path-arrow{transform:translateX(4px)}
-.path-btn--secondary{background:transparent;border-style:dashed}
-.path-btn--secondary .path-num,.path-btn--secondary .path-arrow{color:var(--gray)}
-.path-btn--secondary:active{border-color:var(--gray);background:rgba(90,95,99,.08)}
+.door-row::-webkit-details-marker{display:none}
+.door-row:active{border-color:var(--lime);background:rgba(166,255,0,.06)}
+.door-row--primary{border-color:rgba(166,255,0,.4)}
+.door-num{font-weight:700;font-size:1.05rem;color:var(--lime);flex-shrink:0;width:24px}
+.door-sep{width:1px;align-self:stretch;background:var(--graphite);flex-shrink:0}
+.door-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.door-title{font-weight:700;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--off)}
+.door-hint{font-size:.68rem;color:var(--gray);font-weight:400}
+.door-arrow{color:var(--lime);flex-shrink:0;transition:transform .2s var(--ease)}
+.door-row:active .door-arrow{transform:translateX(4px)}
+details.door-item[open] > .door-row .door-arrow{transform:rotate(90deg)}
+details.door-item[open] > .door-row:active .door-arrow{transform:rotate(90deg)}
+
+.door-panel{padding:2px 17px 18px}
+.door-sub-list{display:flex;flex-direction:column}
+.door-sub-item{padding:11px 0;border-top:1px solid var(--graphite);display:flex}
+.door-sub-item:first-child{border-top:none;padding-top:8px}
+.door-sub-item--stack{flex-direction:column;gap:2px}
+.door-sub-item--row{flex-direction:row;align-items:center;justify-content:space-between;gap:12px}
+.door-sub-name{font-size:.74rem;font-weight:700;color:var(--off)}
+.door-sub-desc{font-size:.66rem;color:var(--gray)}
+.door-sub-price{font-size:.72rem;font-weight:700;color:var(--lime);white-space:nowrap}
+.door-note{font-size:.62rem;color:var(--gray);line-height:1.65;margin-top:14px;padding-top:12px;border-top:1px solid var(--graphite)}
+.door-panel-cta{display:inline-block;margin-top:16px;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+
+.email-secondary{
+  display:block;text-align:center;
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gray);text-decoration:underline;text-underline-offset:3px;
+}
+.email-secondary:active{color:var(--lime)}
+
+.already{margin-top:26px;padding-top:20px;border-top:1px solid var(--graphite);text-align:center}
+.already-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--graphite);margin-bottom:12px}
+.already-link{display:block;font-weight:700;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+.already-link:active{opacity:.7}
 
 footer{text-align:center;margin-top:28px;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--graphite)}
 
@@ -211,28 +239,100 @@ footer{text-align:center;margin-top:28px;font-size:.58rem;letter-spacing:.16em;t
   <h1 class="headline">The digital side<span class="lime">,</span> handled<span class="lime">.</span></h1>
   <p class="sub">Custom websites, digital systems, and mobile experiences that move businesses forward.</p>
 
-  <nav class="paths" aria-label="Digital Door quick paths">
-    <a href="index.html#contact" class="path-btn">
-      <span class="path-num">01</span><span class="path-sep"></span>
-      <span class="path-label">Start a Project</span><span class="path-arrow">→</span>
+  <nav class="paths" aria-label="Digital Door guided menu">
+    <details class="door-item">
+      <summary class="door-row">
+        <span class="door-num">01</span><span class="door-sep"></span>
+        <span class="door-text">
+          <span class="door-title">Services</span>
+          <span class="door-hint">Find the right door.</span>
+        </span>
+        <span class="door-arrow">→</span>
+      </summary>
+      <div class="door-panel">
+        <div class="door-sub-list">
+          <div class="door-sub-item door-sub-item--stack">
+            <span class="door-sub-name">Build</span><span class="door-sub-desc">I need the whole thing.</span>
+          </div>
+          <div class="door-sub-item door-sub-item--stack">
+            <span class="door-sub-name">Revive</span><span class="door-sub-desc">What I have isn't working anymore.</span>
+          </div>
+          <div class="door-sub-item door-sub-item--stack">
+            <span class="door-sub-name">Evolve</span><span class="door-sub-desc">My business changed. My digital presence didn't.</span>
+          </div>
+          <div class="door-sub-item door-sub-item--stack">
+            <span class="door-sub-name">Mobile Rescue</span><span class="door-sub-desc">Looks fine on desktop. Falls apart on your phone.</span>
+          </div>
+          <div class="door-sub-item door-sub-item--stack">
+            <span class="door-sub-name">Digital Door™</span><span class="door-sub-desc">One entrance. Built around where your customers need to go.</span>
+          </div>
+          <div class="door-sub-item door-sub-item--stack">
+            <span class="door-sub-name">Connect the Dots</span><span class="door-sub-desc">Not sure what you need? Start anywhere.</span>
+          </div>
+        </div>
+        <a href="index.html#contact" class="door-panel-cta">Start a Project →</a>
+      </div>
+    </details>
+
+    <a href="index.html#work" class="door-row">
+      <span class="door-num">02</span><span class="door-sep"></span>
+      <span class="door-text">
+        <span class="door-title">Work</span>
+        <span class="door-hint">See what's been built.</span>
+      </span>
+      <span class="door-arrow">→</span>
     </a>
-    <a href="index.html#work" class="path-btn">
-      <span class="path-num">02</span><span class="path-sep"></span>
-      <span class="path-label">View the Work</span><span class="path-arrow">→</span>
-    </a>
-    <a href="index.html#services" class="path-btn">
-      <span class="path-num">03</span><span class="path-sep"></span>
-      <span class="path-label">What I Do</span><span class="path-arrow">→</span>
-    </a>
-    <a href="mailto:webdevn3v@gmail.com" class="path-btn">
-      <span class="path-num">04</span><span class="path-sep"></span>
-      <span class="path-label">Email Directly</span><span class="path-arrow">→</span>
-    </a>
-    <a href="index.html" class="path-btn path-btn--secondary">
-      <span class="path-num">05</span><span class="path-sep"></span>
-      <span class="path-label">View Full Site</span><span class="path-arrow">→</span>
+
+    <details class="door-item">
+      <summary class="door-row">
+        <span class="door-num">03</span><span class="door-sep"></span>
+        <span class="door-text">
+          <span class="door-title">Pricing</span>
+          <span class="door-hint">Know where it starts.</span>
+        </span>
+        <span class="door-arrow">→</span>
+      </summary>
+      <div class="door-panel">
+        <div class="door-sub-list">
+          <div class="door-sub-item door-sub-item--row">
+            <span class="door-sub-name">Build</span><span class="door-sub-price">Starting at $750</span>
+          </div>
+          <div class="door-sub-item door-sub-item--row">
+            <span class="door-sub-name">Revive</span><span class="door-sub-price">Starting at $250</span>
+          </div>
+          <div class="door-sub-item door-sub-item--row">
+            <span class="door-sub-name">Evolve</span><span class="door-sub-price">Starting at $350</span>
+          </div>
+          <div class="door-sub-item door-sub-item--row">
+            <span class="door-sub-name">Mobile Rescue</span><span class="door-sub-price">Starting at $175</span>
+          </div>
+          <div class="door-sub-item door-sub-item--row">
+            <span class="door-sub-name">Digital Door™</span><span class="door-sub-price">Starting at $250</span>
+          </div>
+          <div class="door-sub-item door-sub-item--row">
+            <span class="door-sub-name">Connect the Dots</span><span class="door-sub-price">Free</span>
+          </div>
+        </div>
+        <div class="door-note">Final pricing may change after a consultation, based on project scope.</div>
+        <a href="index.html#contact" class="door-panel-cta">Start a Project →</a>
+      </div>
+    </details>
+
+    <a href="index.html#contact" class="door-row door-row--primary">
+      <span class="door-num">04</span><span class="door-sep"></span>
+      <span class="door-text">
+        <span class="door-title">Start a Project</span>
+        <span class="door-hint">Tell me what needs handling.</span>
+      </span>
+      <span class="door-arrow">→</span>
     </a>
   </nav>
+
+  <div class="already">
+    <div class="already-label">Already started?</div>
+    <a href="client-intake.html" class="already-link">Client Intake →</a>
+    <a href="mailto:webdevn3v@gmail.com" class="email-secondary">Email Directly →</a>
+  </div>
 
   <footer>thedigitalside.com</footer>
 </div>
