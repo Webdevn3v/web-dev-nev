@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Digital Door — The Digital Side</title>
+<meta name="description" content="Your customers are trying to get somewhere. One scan, one door, clear paths to what they came for.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0F1113;
+  --graphite:#242628;
+  --gray:#5A5F63;
+  --off:#F3F1EC;
+  --lime:#A6FF00;
+  --mono:'Space Mono',monospace;
+  --sans:'Inter',sans-serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%}
+body{
+  min-height:100%;
+  background:var(--black);
+  color:var(--off);
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  background-image:radial-gradient(rgba(90,95,99,.16) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
+
+/* ══════════════════════════════
+   GATE — restored: large identity, tap/click to enter.
+   Required on every visit (this was the original approved
+   behavior — no session-skip on the gate itself).
+══════════════════════════════ */
+.gate{
+  position:fixed;inset:0;z-index:100;
+  background:var(--black);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  padding:24px;cursor:pointer;
+  transition:opacity .4s var(--ease);
+}
+.gate.gate-hide{opacity:0;pointer-events:none}
+.gate-mark-wrap{position:relative;width:88px;height:88px;display:flex;align-items:center;justify-content:center}
+.gate-mark-glow{position:absolute;inset:-40%;background:radial-gradient(circle,rgba(166,255,0,.18) 0%,transparent 70%);border-radius:50%}
+@media (prefers-reduced-motion: no-preference){
+  .gate-mark-glow{animation:markGlow 2.6s ease-in-out infinite}
+}
+@keyframes markGlow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.18)}}
+.gate-mark{position:relative;width:70px;height:70px;object-fit:cover;object-position:top center;opacity:.95}
+.gate-prompt{font-family:var(--mono);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gray)}
+@media (prefers-reduced-motion: no-preference){
+  .gate-prompt{animation:gatePromptPulse 2.2s ease-in-out infinite}
+}
+@keyframes gatePromptPulse{0%,100%{opacity:.45}50%{opacity:1}}
+
+/* ══════════════════════════════
+   TRANSITION — Digital Key reveal sequence.
+   Enhancement layered onto the restored gate. Plays in full the
+   first time this session; later taps skip straight to reveal.
+══════════════════════════════ */
+.transition{
+  position:fixed;inset:0;z-index:100;
+  background:var(--black);
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:18px;
+}
+.transition.show{display:flex}
+.transition-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(90,95,99,.18) 1px,transparent 1px);background-size:26px 26px;opacity:0;transition:opacity .3s var(--ease)}
+.transition.phase-key .transition-grid{opacity:1}
+.transition-text{font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);opacity:0;transition:opacity .25s var(--ease),color .25s var(--ease)}
+.transition.phase-key .transition-text{opacity:1}
+.transition.phase-route .transition-text{color:var(--lime)}
+.transition.phase-access .transition-text{color:var(--off)}
+.transition-line{width:1px;height:0;background:var(--lime);box-shadow:0 0 8px rgba(166,255,0,.6);transition:height .3s var(--ease)}
+.transition.phase-route .transition-line,.transition.phase-access .transition-line{height:110px}
+.transition-glow{
+  position:absolute;left:50%;top:50%;width:6px;height:6px;
+  background:radial-gradient(circle,rgba(166,255,0,.9),transparent 70%);
+  transform:translate(-50%,-50%) scale(1);
+  opacity:0;pointer-events:none;
+}
+.transition.phase-open .transition-glow{
+  opacity:1;transform:translate(-50%,-50%) scale(60);
+  transition:opacity .7s var(--ease),transform .7s var(--ease);
+}
+.transition.phase-open{opacity:0;transition:opacity .6s var(--ease) .15s}
+.transition-key-dot{width:6px;height:6px;background:var(--lime);border-radius:50%;opacity:0;box-shadow:0 0 8px rgba(166,255,0,.7);transition:opacity .2s var(--ease)}
+.transition.phase-key .transition-key-dot{opacity:1}
+
+/* ══════════════════════════════
+   IMMERSIVE HERO — revealed after the transition.
+   Large opening area + scroll invitation, before the numbered menu.
+══════════════════════════════ */
+.hero-stage{
+  display:none;
+  min-height:100svh;
+  flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:24px;
+  position:relative;z-index:2;
+}
+.hero-stage.show{display:flex}
+.hero-logo{width:min(48vw,210px);margin-bottom:30px}
+.hero-logo img{width:100%;height:auto}
+.hero-headline{font-family:var(--mono);font-weight:700;font-size:clamp(1.4rem,7vw,1.8rem);color:var(--off);margin-bottom:14px}
+.hero-headline .lime{color:var(--lime)}
+.hero-sub{font-size:.9rem;color:var(--gray);line-height:1.6;max-width:340px;margin-bottom:44px}
+.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gray)}
+.hero-scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--lime),transparent)}
+@media (prefers-reduced-motion: no-preference){
+  .hero-scroll-line{animation:cueMove 2s ease-in-out infinite}
+}
+@keyframes cueMove{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{opacity:1}60%{transform:scaleY(1);transform-origin:top}60.01%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom;opacity:0}}
+
+/* ══════════════════════════════
+   ROUTE RAIL — the road-map spine
+══════════════════════════════ */
+.route-rail{
+  position:fixed;top:0;left:9px;width:2px;height:100vh;
+  background:var(--graphite);z-index:5;pointer-events:none;
+}
+.route-fill{position:absolute;top:0;left:0;width:100%;height:0;background:var(--lime);box-shadow:0 0 6px rgba(166,255,0,.5)}
+.route-orb{position:absolute;left:50%;top:0;width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px rgba(166,255,0,.8);transform:translate(-50%,-50%)}
+@media (prefers-reduced-motion: reduce){
+  .route-fill,.route-orb{transition:none}
+}
+.route-node{
+  position:absolute;left:50%;width:9px;height:9px;border-radius:50%;
+  background:var(--black);border:1px solid var(--graphite);
+  transform:translate(-50%,-50%);transition:background .3s var(--ease),border-color .3s var(--ease);
+}
+.route-node.is-reached{background:var(--lime);border-color:var(--lime)}
+@media (prefers-reduced-motion: no-preference){
+  .route-node.pulse{animation:nodePulse .7s var(--ease)}
+}
+@keyframes nodePulse{0%{box-shadow:0 0 0 0 rgba(166,255,0,.6)}100%{box-shadow:0 0 0 14px rgba(166,255,0,0)}}
+
+.status-label{
+  position:fixed;top:0;left:0;right:0;z-index:20;
+  height:calc(env(safe-area-inset-top,0px) + 42px);
+  display:flex;align-items:center;
+  padding:0 24px;padding-top:env(safe-area-inset-top,0px);
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gray);
+  background:var(--black);
+  border-bottom:1px solid var(--graphite);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* ══════════════════════════════
+   PAGE LAYOUT
+══════════════════════════════ */
+.door{max-width:480px;margin:0 auto;padding:calc(env(safe-area-inset-top,0px) + 20px) 24px calc(env(safe-area-inset-bottom,0px) + 40px) 40px}
+
+.dsec{padding:38px 0;border-top:1px solid var(--graphite)}
+.dsec:first-of-type{border-top:none;padding-top:60px}
+.dsec-num{font-family:var(--mono);font-weight:700;font-size:1.9rem;color:var(--lime);line-height:1;margin-bottom:8px}
+.dsec-h2{font-family:var(--mono);font-weight:700;font-size:1.15rem;letter-spacing:.01em;color:var(--off);margin-bottom:10px}
+.dsec-sub{font-size:.86rem;color:var(--gray);line-height:1.6;margin-bottom:8px}
+
+/* ── Section 1: Opening ── */
+.dsec--opening{padding-top:10px}
+.opening-kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin-bottom:18px}
+.opening-h1{font-family:var(--mono);font-weight:700;font-size:clamp(1.3rem,6.5vw,1.55rem);line-height:1.35;color:var(--off);margin-bottom:14px}
+.opening-h1 .lime{color:var(--lime)}
+.opening-sub{font-size:.88rem;color:var(--gray);line-height:1.6;margin-bottom:26px}
+.route-diagram{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px solid var(--graphite)}
+.route-diagram-row{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gray)}
+.route-diagram-row .rd-arrow{color:var(--graphite);font-size:.65rem}
+.route-diagram-row.lime{color:var(--lime)}
+
+/* ── Section 2: Demos ── */
+.demo-list{display:flex;flex-direction:column;gap:9px;margin-top:20px;margin-bottom:16px}
+.demo-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px;border:1px solid var(--graphite);
+  clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);
+  transition:border-color .2s var(--ease),background .2s var(--ease);
+}
+.demo-row:active{border-color:var(--lime);background:rgba(166,255,0,.05)}
+.demo-row span:first-child{font-size:.82rem;font-weight:600;color:var(--off)}
+.demo-row .demo-arrow{color:var(--lime)}
+.dsec-more{display:inline-block;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);text-decoration:underline;text-underline-offset:3px}
+.dsec-more:active{color:var(--lime)}
+
+/* ── Section 3: Services + Pricing ── */
+.svc-block{padding:16px 0;border-top:1px solid var(--graphite)}
+.svc-block:first-of-type{border-top:none;padding-top:20px}
+.svc-block--priority{background:rgba(166,255,0,.04);border-left:2px solid var(--lime);padding-left:14px;margin-left:-14px}
+.svc-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px}
+.svc-name{font-family:var(--mono);font-weight:700;font-size:.86rem;color:var(--off)}
+.svc-price{font-family:var(--mono);font-weight:700;font-size:.8rem;white-space:nowrap}
+.svc-price.lime{color:var(--lime)}
+.svc-hint{font-size:.78rem;color:var(--gray);line-height:1.5}
+.svc-note{font-size:.68rem;color:var(--gray);margin-top:18px;padding-top:14px;border-top:1px solid var(--graphite)}
+.svc-callout{margin-top:24px;padding:18px;border:1px dashed var(--graphite);text-align:center}
+.svc-callout-label{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--off);margin-bottom:8px}
+.svc-callout p{font-size:.82rem;color:var(--gray);margin-bottom:14px}
+.svc-callout-link{font-family:var(--mono);font-weight:700;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--lime)}
+
+.reveal{margin-top:4px}
+.reveal-toggle{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 18px;
+  border:1px solid var(--graphite);
+  font-family:var(--mono);font-weight:700;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--off);cursor:pointer;list-style:none;
+  clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);
+  transition:border-color .2s var(--ease),background .2s var(--ease);
+}
+.reveal-toggle::-webkit-details-marker{display:none}
+.reveal-toggle:active{border-color:var(--lime);background:rgba(166,255,0,.05)}
+.reveal-arrow{color:var(--lime);flex-shrink:0;transition:transform .25s var(--ease)}
+details.reveal[open] > .reveal-toggle .reveal-arrow{transform:rotate(90deg)}
+.reveal-body{padding-top:20px}
+.about-photo{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;margin-bottom:16px;border:1px solid var(--graphite)}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15)}
+.about-photo-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,17,19,.15) 0%,rgba(15,17,19,.75) 100%)}
+
+/* ── Branch visual ── */
+.branch{padding:36px 0 30px;text-align:center}
+.branch-node{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px rgba(166,255,0,.7);margin:0 auto 16px}
+.branch-labels{display:flex;justify-content:space-between;gap:8px;font-family:var(--mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gray)}
+.branch-labels a{flex:1;padding-top:10px;border-top:1px solid var(--graphite);color:var(--gray);transition:color .2s var(--ease),border-color .2s var(--ease)}
+.branch-labels a:active{color:var(--lime);border-color:var(--lime)}
+
+/* ── Forms (Quick Inquiry) ── */
+.field{margin-bottom:20px}
+.field-label{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--off);margin-bottom:8px}
+.field-label .opt{color:var(--gray);font-weight:400;text-transform:none;letter-spacing:normal;margin-left:6px}
+input[type=text],input[type=email],input[type=tel],input[type=url],textarea{
+  width:100%;padding:12px 14px;background:rgba(36,38,40,.4);border:1px solid var(--graphite);color:var(--off);
+  font-family:var(--sans);font-size:.86rem;border-radius:2px;transition:border-color .2s var(--ease);
+}
+input::placeholder,textarea::placeholder{color:var(--graphite)}
+input:focus,textarea:focus{outline:none;border-color:var(--lime)}
+textarea{min-height:84px;resize:vertical;line-height:1.5}
+
+.btn-route{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:15px 20px;margin-top:6px;
+  font-family:var(--mono);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+  background:var(--lime);color:var(--black);border:1px solid var(--lime);
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  cursor:pointer;transition:background .2s var(--ease);
+}
+.btn-route:active{background:#93e600}
+.btn-route--secondary{background:transparent;color:var(--lime)}
+.btn-route--secondary:active{background:rgba(166,255,0,.08)}
+.btn-route:disabled{opacity:.5;pointer-events:none}
+
+.submit-fallback{display:none;margin-top:16px;padding:16px;border:1px solid var(--graphite);background:rgba(36,38,40,.4)}
+.submit-fallback.show{display:block}
+.submit-fallback p{font-size:.78rem;color:var(--gray);line-height:1.6;margin-bottom:12px}
+.fb-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-fb{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;border:1px solid var(--lime);color:var(--lime);background:transparent;cursor:pointer}
+.btn-fb:active{background:rgba(166,255,0,.08)}
+.fb-copied{color:var(--lime);font-size:.68rem;margin-left:2px;display:none}
+.fb-copied.show{display:inline}
+
+/* ── Footer ── */
+.door-footer{padding-top:40px;border-top:1px solid var(--graphite);text-align:center}
+.footer-route{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin-bottom:6px}
+.footer-arrive{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);margin-bottom:26px}
+.footer-brand{font-family:var(--mono);font-size:.78rem;color:var(--off);line-height:1.7}
+.footer-brand strong{display:block;color:var(--lime);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+</style>
+</head>
+<body>
+
+<!-- GATE — minimal, mark only, tap to enter -->
+<div class="gate" id="gate" role="button" tabindex="0" aria-label="Tap to enter The Digital Side">
+  <div class="gate-mark-wrap">
+    <div class="gate-mark-glow" aria-hidden="true"></div>
+    <img class="gate-mark" src="tds-logo.webp" alt="The Digital Side" width="1024" height="1536">
+  </div>
+  <div class="gate-prompt">Tap to Enter</div>
+</div>
+
+<!-- TRANSITION — Digital Key reveal sequence -->
+<div class="transition" id="transition">
+  <div class="transition-grid" aria-hidden="true"></div>
+  <div class="transition-key-dot" aria-hidden="true"></div>
+  <div class="transition-text" id="transitionText">Digital Key Detected</div>
+  <div class="transition-line" aria-hidden="true"></div>
+  <div class="transition-glow" aria-hidden="true"></div>
+</div>
+
+<!-- IMMERSIVE HERO — revealed after the transition, before the numbered menu -->
+<div class="hero-stage" id="heroStage">
+  <div class="hero-logo"><img src="tds-logo.webp" alt="The Digital Side" width="1024" height="1536"></div>
+  <h1 class="hero-headline">The digital side<span class="lime">,</span> handled<span class="lime">.</span></h1>
+  <p class="hero-sub">One scan. One door. Clear paths to what your customers came for.</p>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</div>
+
+<!-- ROUTE RAIL -->
+<div class="route-rail" id="routeRail" aria-hidden="true">
+  <div class="route-fill" id="routeFill"></div>
+  <div class="route-orb" id="routeOrb"></div>
+</div>
+
+<main class="door">
+  <div class="status-label" id="statusLabel">Route: Section 01</div>
+
+  <!-- SECTION 1 — OPENING -->
+  <section class="dsec dsec--opening" id="sec-opening" data-node="01" data-label="Opening">
+    <div class="opening-kicker">Welcome to the Digital Side.</div>
+    <h1 class="opening-h1">Your customers are trying to get somewhere.<br><span class="lime">Make it easy.</span></h1>
+    <p class="opening-sub">One scan. One door. Clear paths to what your customers came for.</p>
+    <div class="route-diagram" aria-hidden="true">
+      <div class="route-diagram-row"><span>Digital Key</span></div>
+      <div class="route-diagram-row"><span class="rd-arrow">↓</span></div>
+      <div class="route-diagram-row"><span>Digital Door</span></div>
+      <div class="route-diagram-row"><span class="rd-arrow">↓</span></div>
+      <div class="route-diagram-row"><span>Customer Path</span></div>
+      <div class="route-diagram-row"><span class="rd-arrow">↓</span></div>
+      <div class="route-diagram-row lime"><span>Destination</span></div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — DEMOS -->
+  <section class="dsec" id="sec-demos" data-node="02" data-label="Demos">
+    <div class="dsec-num">02</div>
+    <h2 class="dsec-h2">See What This Looks Like.</h2>
+    <p class="dsec-sub">A few real customer-path builds — proof before we start naming everything.</p>
+    <div class="demo-list">
+      <a href="https://webdevn3v.github.io/tattoo-shop-demo/" target="_blank" rel="noopener" class="demo-row"><span>Tattoo Studio</span><span class="demo-arrow">→</span></a>
+      <a href="https://webdevn3v.github.io/roofing-demo/" target="_blank" rel="noopener" class="demo-row"><span>Roofing Company</span><span class="demo-arrow">→</span></a>
+      <a href="https://webdevn3v.github.io/med-spa-demo/" target="_blank" rel="noopener" class="demo-row"><span>Med Spa</span><span class="demo-arrow">→</span></a>
+      <a href="https://webdevn3v.github.io/Able-the-World-Demo/" target="_blank" rel="noopener" class="demo-row"><span>ABLE Streetwear</span><span class="demo-arrow">→</span></a>
+    </div>
+    <a href="index.html#work" class="dsec-more">See all work →</a>
+  </section>
+
+  <!-- SECTION 3 — SERVICES + PRICING -->
+  <section class="dsec" id="sec-services" data-node="03" data-label="Services">
+    <div class="dsec-num">03</div>
+    <h2 class="dsec-h2">What This Costs.</h2>
+    <p class="dsec-sub">Starting prices. No hunting around for numbers.</p>
+
+    <details class="reveal">
+      <summary class="reveal-toggle">See Services + Starting Prices <span class="reveal-arrow">→</span></summary>
+      <div class="reveal-body">
+        <div class="svc-block">
+          <div class="svc-row"><span class="svc-name">Connect the Dots</span><span class="svc-price lime">Free</span></div>
+          <div class="svc-hint">Not sure what you need? Start here.</div>
+        </div>
+        <div class="svc-block">
+          <div class="svc-row"><span class="svc-name">Mobile Rescue</span><span class="svc-price lime">Starting at $175</span></div>
+          <div class="svc-hint">Looks fine on desktop. Falls apart on your phone.</div>
+        </div>
+        <div class="svc-block svc-block--priority">
+          <div class="svc-row"><span class="svc-name">Digital Door™</span><span class="svc-price lime">Starting at $250</span></div>
+          <div class="svc-hint">One entrance built around where your customers need to go.</div>
+        </div>
+        <div class="svc-block">
+          <div class="svc-row"><span class="svc-name">Revive</span><span class="svc-price lime">Starting at $250</span></div>
+          <div class="svc-hint">What I have isn't working anymore.</div>
+        </div>
+        <div class="svc-block">
+          <div class="svc-row"><span class="svc-name">Evolve</span><span class="svc-price lime">Starting at $350</span></div>
+          <div class="svc-hint">My business changed. My digital presence didn't.</div>
+        </div>
+        <div class="svc-block">
+          <div class="svc-row"><span class="svc-name">Build</span><span class="svc-price lime">Starting at $750</span></div>
+          <div class="svc-hint">I need the whole thing.</div>
+        </div>
+        <div class="svc-note">Final pricing depends on project scope.</div>
+      </div>
+    </details>
+
+    <div class="svc-callout">
+      <div class="svc-callout-label">Not sure which fits?</div>
+      <p>That's what Connect the Dots is for.</p>
+      <a href="#sec-inquiry" id="ctdLink" class="svc-callout-link">Help Me Figure It Out →</a>
+    </div>
+  </section>
+
+  <!-- BRANCH -->
+  <div class="branch" aria-hidden="true">
+    <div class="branch-node"></div>
+    <div class="branch-labels">
+      <a href="#sec-inquiry" class="branch-link" data-open-inquiry="1">I'm Interested</a>
+      <a href="#sec-intake">I'm Ready</a>
+      <a href="#sec-email">I'd Rather Email</a>
+    </div>
+  </div>
+
+  <!-- SECTION 4 — QUICK PROJECT INQUIRY -->
+  <section class="dsec" id="sec-inquiry" data-node="04" data-label="Quick Inquiry">
+    <div class="dsec-num">04</div>
+    <h2 class="dsec-h2">Start a Project</h2>
+    <p class="dsec-sub">Interested? Start here. A few quick details are enough to get the conversation moving.</p>
+
+    <details class="reveal" id="inquiryReveal">
+      <summary class="reveal-toggle">Start a Project <span class="reveal-arrow">→</span></summary>
+      <div class="reveal-body">
+        <form id="inquiryForm" novalidate>
+      <div class="field">
+        <label class="field-label" for="inq_name">Name</label>
+        <input type="text" id="inq_name" name="name" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="inq_business">Business Name</label>
+        <input type="text" id="inq_business" name="business_name" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="inq_email">Email</label>
+        <input type="email" id="inq_email" name="email" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="inq_need">What Do You Need?</label>
+        <textarea id="inq_need" name="what_do_you_need" required></textarea>
+      </div>
+      <div class="field">
+        <label class="field-label" for="inq_link">Current Website / Social<span class="opt">— if applicable</span></label>
+        <input type="text" id="inq_link" name="current_link">
+      </div>
+      <div class="field">
+        <label class="field-label" for="inq_message">Short Message<span class="opt">— optional</span></label>
+        <textarea id="inq_message" name="message"></textarea>
+      </div>
+      <button type="submit" class="btn-route" id="inquirySubmit">Send Inquiry →</button>
+
+      <div class="submit-fallback" id="inquiryFallback">
+        <p>Something didn't send. Copy your answers below and email them to <strong>webdevn3v@gmail.com</strong> so nothing gets lost.</p>
+        <div class="fb-actions">
+          <button type="button" class="btn-fb" id="inquiryCopyBtn">Copy Answers</button>
+          <a href="mailto:webdevn3v@gmail.com?subject=Project%20Inquiry" class="btn-fb" id="inquiryMailFallback">Open Email →</a>
+        </div>
+        <span class="fb-copied" id="inquiryCopied">Copied ✓ — now paste into your email</span>
+      </div>
+        </form>
+      </div>
+    </details>
+  </section>
+
+  <!-- SECTION 5 — FULL PROJECT INTAKE -->
+  <section class="dsec" id="sec-intake" data-node="05" data-label="Full Intake">
+    <div class="dsec-num">05</div>
+    <h2 class="dsec-h2">I Already Know What I'm Building.</h2>
+    <p class="dsec-sub">Give me the full picture upfront. The more you share here, the faster I can review your digital side and come back with next steps, recommended scope, and an estimate.</p>
+    <p class="dsec-sub">Not sure about an answer? Skip it. The details can be worked through together.</p>
+    <a href="client-intake.html" class="btn-route">Start Full Intake →</a>
+  </section>
+
+  <!-- SECTION 6 — EMAIL -->
+  <section class="dsec" id="sec-email" data-node="06" data-label="Email">
+    <div class="dsec-num">06</div>
+    <h2 class="dsec-h2">Prefer Email?</h2>
+    <p class="dsec-sub">Keep it simple. Rather skip the forms? Send a message directly.</p>
+    <a href="mailto:webdevn3v@gmail.com" class="btn-route btn-route--secondary">Email The Digital Side →</a>
+  </section>
+
+  <!-- SECTION 7 — MEET THE PERSON -->
+  <section class="dsec" id="sec-about" data-node="07" data-label="About">
+    <div class="dsec-num">07</div>
+    <details class="reveal">
+      <summary class="reveal-toggle">Meet the Person Behind The Digital Side <span class="reveal-arrow">→</span></summary>
+      <div class="reveal-body">
+        <div class="about-photo">
+          <img src="about_main.jpg" alt="The person behind The Digital Side" loading="lazy">
+          <div class="about-photo-overlay"></div>
+        </div>
+        <p class="dsec-sub">One person building every Digital Door by hand — no agency, no outsourcing, no guesswork.</p>
+        <a href="index.html#about" class="dsec-more">Read the full story →</a>
+      </div>
+    </details>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="door-footer">
+    <div class="footer-route">Route Complete</div>
+    <div class="footer-arrive">Arrive at your destination.</div>
+    <div class="footer-brand">the digital side.<strong>The Digital Side, Handled.</strong></div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  /* ── GATE + TRANSITION + HERO ──
+     Gate (tap to enter) shows on every visit — this is the restored,
+     always-on behavior. The Digital Key transition sequence plays in
+     full only the first time this session; later visits within the
+     same session skip straight from tap to the hero reveal. */
+  var gate = document.getElementById('gate');
+  var transition = document.getElementById('transition');
+  var transitionText = document.getElementById('transitionText');
+  var heroStage = document.getElementById('heroStage');
+  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function revealHero(){
+    document.documentElement.classList.remove('gate-lock');
+    document.documentElement.classList.add('entered');
+    if(gate) gate.style.display = 'none';
+    if(transition){ transition.classList.remove('show'); transition.style.display = 'none'; }
+    if(heroStage) heroStage.classList.add('show');
+  }
+
+  function playTransition(){
+    transition.classList.add('show');
+    setTimeout(function(){ transition.classList.add('phase-key'); }, 30);
+    setTimeout(function(){ transitionText.textContent = 'Route Established'; transition.classList.add('phase-route'); }, 380);
+    setTimeout(function(){ transitionText.textContent = 'Access // Granted'; transition.classList.add('phase-access'); }, 700);
+    setTimeout(function(){ transition.classList.add('phase-open'); }, 900);
+    setTimeout(revealHero, 1750);
+  }
+
+  function enterDoor(){
+    if(gate) gate.classList.add('gate-hide');
+    var seenTransition = false;
+    try{ seenTransition = !!sessionStorage.getItem('tds_door_transition_seen'); }catch(e){}
+
+    if(reducedMotion || seenTransition){
+      setTimeout(revealHero, 250);
+    }else{
+      setTimeout(playTransition, 300);
+    }
+    try{ sessionStorage.setItem('tds_door_transition_seen', '1'); }catch(e){}
+  }
+
+  if(gate){
+    document.documentElement.classList.add('gate-lock');
+    gate.addEventListener('click', enterDoor);
+    gate.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); enterDoor(); }
+    });
+  }else{
+    revealHero();
+  }
+
+  /* ── ROUTE RAIL: nodes, fill, orb, status label ── */
+  var rail = document.getElementById('routeRail');
+  var fill = document.getElementById('routeFill');
+  var orb = document.getElementById('routeOrb');
+  var statusLabel = document.getElementById('statusLabel');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.dsec'));
+  var nodeEls = sections.map(function(sec){
+    var n = document.createElement('div');
+    n.className = 'route-node';
+    rail.appendChild(n);
+    return n;
+  });
+
+  function layoutRail(){
+    var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    if(scrollable <= 0) return;
+    sections.forEach(function(sec, i){
+      var pct = Math.min(100, Math.max(0, (sec.offsetTop / scrollable) * 100));
+      nodeEls[i].style.top = pct + '%';
+    });
+  }
+
+  var ticking = false;
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = scrollable > 0 ? Math.min(100, Math.max(0, (window.scrollY / scrollable) * 100)) : 0;
+      fill.style.height = pct + '%';
+      orb.style.top = pct + '%';
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('resize', layoutRail);
+  window.addEventListener('load', layoutRail);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  layoutRail();
+  onScroll();
+
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var idx = sections.indexOf(entry.target);
+        if(idx === -1) return;
+        var node = nodeEls[idx];
+        if(entry.isIntersecting){
+          if(!node.classList.contains('is-reached')){
+            node.classList.add('is-reached', 'pulse');
+            setTimeout(function(){ node.classList.remove('pulse'); }, 700);
+          }
+          var num = entry.target.getAttribute('data-node');
+          var label = entry.target.getAttribute('data-label');
+          if(num) statusLabel.textContent = 'Route: Section ' + num + (label ? ' — ' + label : '');
+        }
+      });
+    }, {threshold: 0.35});
+    sections.forEach(function(s){ obs.observe(s); });
+  }
+
+  /* ── Links that jump to Quick Inquiry: auto-open the accordion ── */
+  function openInquiry(prefill){
+    var reveal = document.getElementById('inquiryReveal');
+    if(reveal) reveal.open = true;
+    if(prefill){
+      var need = document.getElementById('inq_need');
+      if(need && !need.value) need.value = prefill;
+    }
+    document.getElementById('sec-inquiry').scrollIntoView({behavior:'smooth'});
+  }
+  var ctdLink = document.getElementById('ctdLink');
+  if(ctdLink){
+    ctdLink.addEventListener('click', function(e){
+      e.preventDefault();
+      openInquiry('Not sure what I need yet — help me figure it out.');
+    });
+  }
+  document.querySelectorAll('[data-open-inquiry]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      openInquiry(null);
+    });
+  });
+
+  /* ── QUICK INQUIRY submission ──
+     Same pattern as client-intake.html: posts to a Formspree
+     placeholder, falls back to copy/email if it fails or isn't
+     configured yet. Needs its own Formspree form ID — see chat note. */
+  var INQUIRY_ENDPOINT = 'https://formspree.io/f/YOUR_INQUIRY_FORM_ID';
+  var inquiryForm = document.getElementById('inquiryForm');
+  var inquirySubmit = document.getElementById('inquirySubmit');
+  var inquiryFallback = document.getElementById('inquiryFallback');
+  var inquiryCopyBtn = document.getElementById('inquiryCopyBtn');
+  var inquiryCopied = document.getElementById('inquiryCopied');
+  var inquiryMailFallback = document.getElementById('inquiryMailFallback');
+
+  function buildInquirySummary(){
+    var fd = new FormData(inquiryForm);
+    var lines = [];
+    for(var pair of fd.entries()){
+      if(pair[1]) lines.push(pair[0] + ': ' + pair[1]);
+    }
+    return lines.join('\n');
+  }
+
+  inquiryCopyBtn.addEventListener('click', function(){
+    var text = buildInquirySummary();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        inquiryCopied.classList.add('show');
+      }).catch(function(){
+        window.prompt('Copy this text:', text);
+      });
+    }else{
+      window.prompt('Copy this text:', text);
+    }
+    inquiryMailFallback.href = 'mailto:webdevn3v@gmail.com?subject=Project%20Inquiry&body=' + encodeURIComponent(text).slice(0, 1800);
+  });
+
+  inquiryForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var invalid = inquiryForm.querySelector(':invalid');
+    if(invalid){ invalid.reportValidity(); return; }
+    inquirySubmit.disabled = true;
+    inquirySubmit.textContent = 'Sending…';
+    inquiryFallback.classList.remove('show');
+
+    fetch(INQUIRY_ENDPOINT, {
+      method: 'POST',
+      body: new FormData(inquiryForm),
+      headers: {'Accept': 'application/json'}
+    }).then(function(res){
+      if(!res.ok) throw new Error('submit failed');
+      inquirySubmit.textContent = 'Sent ✓';
+    }).catch(function(){
+      inquirySubmit.disabled = false;
+      inquirySubmit.textContent = 'Send Inquiry →';
+      inquiryFallback.classList.add('show');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
