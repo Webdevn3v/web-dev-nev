@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lumina Dental Studio — Mobile Full Site</title>
+<meta name="theme-color" content="#1c2330">
+<style>
+:root{
+ --white:#fff;--off:#f8f9fb;--fog:#f0f3f7;--mint:#d6ede8;--mint2:#a8d5cc;--teal:#1a8a78;--tealD:#136659;--tealL:#2ab09a;--ink:#1c2330;--slate:#4a5568;--muted:#8a9ab0;--line:rgba(28,35,48,.11);
+ --serif:Georgia,"Times New Roman",serif;--sans:"Gill Sans","Gill Sans MT",Calibri,system-ui,sans-serif;--mono:"Courier New",monospace
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--off);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit}
+.page{max-width:620px;margin:auto;background:white;min-height:100dvh;overflow:hidden}
+nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(28,35,48,.06)}
+.logo{display:flex;gap:10px;align-items:center;font:400 1rem var(--serif)}.mark{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--teal);color:white}.doorlink{font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;font-weight:700;color:var(--teal)}
+.hero{background:var(--ink);color:white;padding:62px 22px 34px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;inset:auto -90px -150px auto;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(42,176,154,.2),transparent 66%)}
+.kicker{font:.65rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--tealL)}h1{font:400 clamp(3.1rem,14vw,5rem)/.95 var(--serif);letter-spacing:-.05em;margin:18px 0}.hero em{color:var(--tealL);font-weight:400}.hero p{color:rgba(255,255,255,.62);line-height:1.7;max-width:480px}.hero-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;padding:14px 18px;border-radius:999px;background:var(--teal);color:white;font-weight:700;font-size:.84rem}.btn.ghost{border:1px solid rgba(255,255,255,.22);background:transparent}
+.snapshot{display:grid;grid-template-columns:repeat(3,1fr);background:var(--teal);color:white}.snap{padding:20px 14px;border-right:1px solid rgba(255,255,255,.15)}.snap:last-child{border:0}.snap b{display:block;font:400 1.45rem var(--serif)}.snap span{font-size:.65rem;line-height:1.2;color:rgba(255,255,255,.7)}
+.section{padding:34px 20px}.section.fog{background:var(--off)}.section.dark{background:var(--ink);color:white}.label{font:.64rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}.dark .label{color:var(--tealL)}h2{font:400 2rem/1.03 var(--serif);letter-spacing:-.03em;margin:0 0 12px}.lead{color:var(--slate);line-height:1.65;margin:0 0 20px;font-size:.92rem}.dark .lead{color:rgba(255,255,255,.62)}
+.hscroll{display:flex;gap:12px;overflow:auto;scroll-snap-type:x mandatory;padding:2px 0 10px;scrollbar-width:none}.card{flex:0 0 78%;scroll-snap-align:start;border:1px solid var(--line);border-radius:20px;padding:20px;background:white}.card .num{font:.62rem var(--mono);color:var(--teal)}.card h3{margin:18px 0 8px;font-size:1.06rem}.card p{margin:0;color:var(--slate);font-size:.84rem;line-height:1.55}
+details{border-top:1px solid var(--line)}details:last-child{border-bottom:1px solid var(--line)}summary{list-style:none;padding:17px 2px;display:flex;justify-content:space-between;gap:20px;font-weight:700;cursor:pointer}summary::-webkit-details-marker{display:none}summary:after{content:"+";color:var(--teal)}details[open] summary:after{content:"−"}details p{margin:-5px 0 18px;color:var(--slate);font-size:.88rem;line-height:1.6}
+.first{background:var(--mint);border-radius:24px;padding:22px}.first ol{margin:18px 0 0;padding:0;list-style:none;counter-reset:s}.first li{counter-increment:s;padding:15px 0 15px 40px;position:relative;border-top:1px solid rgba(19,102,89,.14)}.first li:before{content:counter(s);position:absolute;left:0;top:14px;width:25px;height:25px;border-radius:50%;background:var(--teal);color:white;display:grid;place-items:center;font-size:.72rem}.first b{display:block}.first span{display:block;color:var(--slate);font-size:.82rem;margin-top:3px}
+.quote{border-left:2px solid var(--teal);padding-left:18px;margin:18px 0;color:var(--slate);font:italic 1.04rem/1.6 var(--serif)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.contact{padding:16px;border-radius:16px;background:var(--fog)}.contact small{display:block;color:var(--muted);margin-bottom:5px}.contact b{font-size:.86rem}
+.loop{padding:38px 20px 48px;background:var(--teal);color:white}.loop h2{font-size:2.25rem}.loop p{color:rgba(255,255,255,.72);line-height:1.55}.loop a{display:flex;justify-content:space-between;align-items:center;padding:17px 0;border-top:1px solid rgba(255,255,255,.22);font-weight:700}
+.note{font-size:.7rem;color:var(--muted);line-height:1.5;margin-top:14px}
+@media(min-width:700px){body{background:#e9eef0}.page{box-shadow:0 18px 70px rgba(28,35,48,.12)}}
+</style>
+</head>
+<body>
+<main class="page">
+<nav><div class="logo"><span class="mark">✦</span>Lumina Dental Studio</div><a class="doorlink" href="./lumina-door.html">Faster way →</a></nav>
+
+<section class="hero">
+ <div class="kicker">Now welcoming new patients</div>
+ <h1>Your smile.<br><em>Elevated.</em><br>Finally.</h1>
+ <p>Advanced dental technology, a calm modern space, and a care team that genuinely listens — so every visit feels different.</p>
+ <div class="hero-actions"><a class="btn" href="#book">Book a visit →</a><a class="btn ghost" href="tel:+15555550177">Call Lumina</a></div>
+</section>
+
+<div class="snapshot">
+ <div class="snap"><b>4.9★</b><span>620+ patient ratings</span></div>
+ <div class="snap"><b>$0</b><span>new patient exam</span></div>
+ <div class="snap"><b>15m</b><span>digital onboarding</span></div>
+</div>
+
+<section class="section" id="services">
+ <div class="label">What we offer</div><h2>Care for every stage of life.</h2><p class="lead">Comprehensive, gentle dental care under one roof — condensed for mobile without losing the details.</p>
+ <div class="hscroll">
+  <article class="card"><span class="num">01</span><h3>General Dentistry</h3><p>Cleanings, digital X-rays, fillings, and comprehensive exams.</p></article>
+  <article class="card"><span class="num">02</span><h3>Teeth Whitening</h3><p>In-office whitening and custom take-home trays tailored to sensitivity.</p></article>
+  <article class="card"><span class="num">03</span><h3>Veneers + Cosmetics</h3><p>Porcelain veneers, composite bonding, and precision smile makeovers.</p></article>
+  <article class="card"><span class="num">04</span><h3>Clear Aligners</h3><p>Invisalign and comparable systems for discreet orthodontic treatment.</p></article>
+  <article class="card"><span class="num">05</span><h3>Dental Implants</h3><p>Single-tooth and full-arch options with guided surgery technology.</p></article>
+  <article class="card"><span class="num">06</span><h3>Sedation Dentistry</h3><p>Nitrous oxide and oral conscious sedation options for anxious patients.</p></article>
+ </div>
+</section>
+
+<section class="section fog">
+ <div class="label">The practice</div><h2>Science meets genuine care.</h2>
+ <p class="lead">Dr. Elena Vasquez founded Lumina around one idea: excellent dentistry should feel human, not clinical.</p>
+ <details><summary>Advanced technology, human touch</summary><p>Same-day CEREC crowns, 3D cone beam CT imaging, and laser dentistry — paired with a team that does not rush patients.</p></details>
+ <details><summary>Transparent pricing</summary><p>Full treatment estimates are provided before work begins. Lumina works with most major insurance plans and offers financing options.</p></details>
+ <details><summary>Built for busy lives</summary><p>Early morning, evening, and Saturday appointments are available.</p></details>
+</section>
+
+<section class="section">
+ <div class="first" id="book"><div class="label">First visit</div><h2>We made the first step easy.</h2>
+  <ol>
+   <li><b>Book online</b><span>Choose a time that works. Confirmation takes under two minutes.</span></li>
+   <li><b>Complete intake</b><span>Fill out your health history digitally before you arrive.</span></li>
+   <li><b>Your exam</b><span>Digital X-rays, comprehensive exam, and an unrushed conversation about your goals.</span></li>
+   <li><b>Your custom plan</b><span>Clear options, timeline, and pricing before you commit to treatment.</span></li>
+  </ol>
+ </div>
+</section>
+
+<section class="section dark">
+ <div class="label">Comfort matters</div><h2>Nervous once, too.</h2>
+ <p class="lead">A meaningful portion of Lumina’s message is built around patients who have delayed care because of anxiety.</p>
+ <div class="quote">“Lumina was the first office that actually made me feel like a person, not a problem to solve.”</div>
+ <a class="btn" href="./lumina-door.html">Take the anxiety-friendly path →</a>
+</section>
+
+<section class="section" id="faq">
+ <div class="label">Good to know</div><h2>Common questions, compressed.</h2>
+ <details><summary>Do you accept insurance?</summary><p>Yes. Most major PPO plans are accepted, including Delta Dental, Cigna, MetLife, Guardian, and Aetna. Benefits are verified before the appointment.</p></details>
+ <details><summary>What if I haven’t been in years?</summary><p>You will not be judged. The team will meet you where you are and create a realistic plan.</p></details>
+ <details><summary>How long is a new patient visit?</summary><p>Plan for about 60–75 minutes, including digital X-rays, an exam, possible cleaning, and time to discuss goals.</p></details>
+ <details><summary>Do you see children?</summary><p>Yes. Patients are welcomed from their first tooth, around age one or within six months of the first tooth appearing.</p></details>
+ <details><summary>What payment options are available?</summary><p>Major cards, cash, checks, CareCredit, and LendingClub patient financing are listed on the demo site.</p></details>
+ <details><summary>How do I handle a dental emergency?</summary><p>Call the office directly. Daily emergency slots are reserved for current patients; after-hours voicemail includes guidance and an emergency line for severe situations.</p></details>
+</section>
+
+<section class="section fog" id="visit">
+ <div class="label">Visit Lumina</div><h2>Everything you need before you go.</h2>
+ <div class="contact-grid">
+  <div class="contact"><small>Address</small><b>280 Wellness Blvd.<br>Suite 140</b></div>
+  <div class="contact"><small>Phone</small><b>(555) 555-0177</b></div>
+  <div class="contact"><small>Hours</small><b>Mon–Thu 7:30–6<br>Fri 7:30–4</b></div>
+  <div class="contact"><small>Saturday</small><b>8:00–2:00</b></div>
+ </div>
+ <p class="note">Address, phone, and routing are fictional demo information. Parking/building instructions in the Digital Door are placeholders until verified.</p>
+</section>
+
+<section class="loop">
+ <div class="label" style="color:#d6ede8">The faster loop</div>
+ <h2>Know what you came for?</h2><p>Skip back to the Customer Paths and take the shortest useful route.</p>
+ <a href="./lumina-door.html"><span>Open Lumina’s Digital Door</span><span>→</span></a>
+ <a href="./lumina-door.html#paths"><span>Choose a Customer Path</span><span>→</span></a>
+</section>
+</main>
+</body>
+</html>
