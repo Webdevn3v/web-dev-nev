@@ -41,7 +41,7 @@ a{color:inherit;text-decoration:none}
 .notes{
   position:relative;
   min-height:100svh;
-  display:flex;
+  display:none;
   flex-direction:column;
   align-items:center;
   justify-content:center;
@@ -814,7 +814,14 @@ html.stage-lock body{
         <a class="path-action" href="tel:+10000000000">Call</a>
         <a class="path-action" href="sms:+10000000000">Text</a>
         <a class="path-action" href="mailto:hello@example.com">Email</a>
-        <a class="path-action path-action--quiet" href="https://webdevn3v.github.io/law-firm-demo/" target="_blank" rel="noopener">Full Website ↗</a>
+      </div>
+    </div>
+
+    <div class="path-contact">
+      <div class="path-contact__label">Want more before you reach out?</div>
+      <div class="path-utility">
+        <button class="path-action" id="viewOwnerKeyBtn2" type="button">Owner Key</button>
+        <a class="path-action path-action--quiet" href="https://webdevn3v.github.io/law-firm-demo/" target="_blank" rel="noopener">View In-Depth Site ↗</a>
       </div>
     </div>
   </div>
@@ -860,6 +867,10 @@ function startExperience(){
   stage.setAttribute('aria-hidden','false');
 }
 
+/* Gate removed per Vee's direction: skip straight into the door experience on load
+   instead of waiting on the notes screen + "Open the Door" button. */
+window.addEventListener('DOMContentLoaded', startExperience);
+
 function useDigitalKey(){
   if(keyUsed) return;
   keyUsed = true;
@@ -903,6 +914,9 @@ function goToCustomerPath(){
 
 viewExperienceBtn.addEventListener('click', startExperience);
 viewOwnerKeyBtn.addEventListener('click', openOwnerKey);
+
+const viewOwnerKeyBtn2 = document.getElementById('viewOwnerKeyBtn2');
+if(viewOwnerKeyBtn2) viewOwnerKeyBtn2.addEventListener('click', openOwnerKey);
 
 ownerClose.addEventListener('click', closeOwnerKey);
 ownerOverlay.addEventListener('click', (event) => {
