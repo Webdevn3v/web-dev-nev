@@ -1061,6 +1061,110 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
+<!-- ─── DIGITAL DOOR / CUSTOMER PATH ───────── -->
+<section class="cpath" id="cpath">
+<style>
+.cpath{background:var(--black);padding:112px 0}
+.cpath__header{text-align:center;max-width:650px;margin:0 auto 56px}
+.cpath__header p{font-size:.94rem;color:var(--muted);margin-top:14px;line-height:1.8}
+.owner-showcase{max-width:900px;margin:0 auto 58px;display:grid;grid-template-columns:minmax(230px,.72fr) 1.28fr;gap:44px;align-items:center;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-xl);padding:30px}
+.owner-showcase__visual{display:flex;align-items:center;justify-content:center;background:#090907;border-radius:12px;overflow:hidden;min-height:420px}
+.owner-showcase__visual img{display:block;width:100%;height:auto;max-height:620px;object-fit:contain}
+.owner-showcase__copy .tag{margin-bottom:12px}
+.owner-showcase__copy h3{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:14px}
+.owner-showcase__copy p{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:16px}
+.owner-showcase__points{display:flex;flex-direction:column;gap:11px;margin:22px 0}
+.owner-showcase__point{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--light)}
+.owner-showcase__point::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 8px var(--signal-glow);margin-top:9px;flex-shrink:0}
+.owner-showcase__wallet{font-family:var(--display);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--border)}
+.door-placements{max-width:900px;margin:0 auto 60px}
+.door-placements__label{text-align:center;font-family:var(--display);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.door-placements__chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
+.door-placements__chips span{font-family:var(--display);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--light);padding:7px 12px;border:1px solid var(--border-md);border-radius:999px;background:var(--card)}
+.path-library{max-width:900px;margin:0 auto}
+.path-library__head{text-align:center;max-width:600px;margin:0 auto 28px}
+.path-library__head h3{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:10px}
+.path-library__head p{font-size:.86rem;color:var(--muted);line-height:1.7}
+.path-examples{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.path-example{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 22px}
+.path-example summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.path-example summary::-webkit-details-marker{display:none}
+.path-example__name{font-family:var(--heading);font-size:.95rem;font-weight:700;color:var(--white)}
+.path-example__hint{font-family:var(--display);font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.path-example[open] .path-example__hint{color:var(--lime)}
+.path-example__flow{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
+.path-example__flow span{font-size:.72rem;color:var(--light);padding:6px 9px;border:1px solid var(--border-md);border-radius:4px;background:var(--dark)}
+.path-example__note{font-size:.76rem;color:var(--muted);line-height:1.6;margin-top:12px}
+.path-finish{max-width:900px;margin:36px auto 0;padding:22px;background:var(--card);border:1px solid var(--border);border-radius:10px;text-align:center}
+.path-finish__actions{font-family:var(--display);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:8px}
+.path-finish p{font-size:.78rem;color:var(--muted)}
+@media(max-width:760px){.cpath{padding:70px 0}.owner-showcase{grid-template-columns:1fr;padding:18px}.owner-showcase__visual{min-height:auto}.path-examples{grid-template-columns:1fr}}
+
+.owner-showcase__visual iframe{width:100%;height:560px;border:0;border-radius:18px;background:#080a0c;display:block}
+.path-library-collapsed{margin-top:34px;border-top:1px solid var(--border-md);border-bottom:1px solid var(--border-md);padding:0}
+.path-library-toggle{list-style:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:18px 4px;font-family:var(--heading);font-weight:700;color:var(--white)}
+.path-library-toggle::-webkit-details-marker{display:none}.path-library-toggle span:last-child{color:var(--lime);font-family:var(--display);font-size:1.1rem;transition:transform .25s}.path-library-collapsed[open] .path-library-toggle span:last-child{transform:rotate(45deg)}
+.path-library__inside{padding:10px 0 24px}.path-library-collapsed .path-library__head{margin-bottom:18px}.path-library-collapsed .path-library__head h3{font-size:1.35rem}.path-library-collapsed .path-library__head p{font-size:.78rem}.path-library-collapsed .path-example{padding:14px 16px}.path-library-collapsed .path-example__name{font-size:.84rem}
+@media(max-width:760px){.owner-showcase__visual iframe{height:72svh}}
+</style>
+  <div class="container">
+    <div class="cpath__header reveal">
+      <div class="tag" style="justify-content:center">Explore the clearest example</div>
+      <h2>Built Around What They Came to Do.</h2>
+      <p>The Door is the focused mobile experience. It can stand in front of an existing website, connect to the tools a business already uses, and keep deeper information available without making every customer dig for it first.</p>
+    </div>
+
+    <div class="owner-showcase reveal" id="ownerKeyShowcase">
+      <div class="owner-showcase__visual">
+        <iframe src="key-frederick.html" title="Avery Bennett Digital Key" loading="lazy"></iframe>
+      </div>
+      <div class="owner-showcase__copy">
+        <div class="tag">Frederick Legacy Law · Digital Key</div>
+        <h3>The Door is for customers. The Owner Key is for the people representing the business.</h3>
+        <p>Pull it up while networking, let someone scan the QR, and send them straight into the Digital Door — without searching for the business, spelling out a URL, or digging through a social profile.</p>
+        <div class="owner-showcase__points">
+          <div class="owner-showcase__point">The Door also has its own direct link for social media bios and other digital touchpoints.</div>
+          <div class="owner-showcase__point">QR access can be placed on cards, signs, packaging, vehicles, menus, event material, or wherever the business actually meets customers.</div>
+          <div class="owner-showcase__point">The Owner Key can be customized for the business owner, manager, salesperson, or another person who regularly networks for the business.</div>
+        </div>
+        <div class="owner-showcase__wallet">Apple Wallet access is optional and quoted by project scope.</div>
+        <a href="door-frederick-legacy-law.html" class="btn btn--outline" style="margin-top:22px">Experience the Frederick Door <span class="btn__arr">→</span></a>
+      </div>
+    </div>
+
+    <div class="door-placements reveal">
+      <div class="door-placements__label">The direct Door link can be used in</div>
+      <div class="door-placements__chips">
+        <span>Social Bio</span><span>Business Card</span><span>Signage</span><span>Vehicle</span><span>Email Signature</span><span>Packaging</span><span>Event Material</span>
+      </div>
+    </div>
+
+    <details class="path-library path-library-collapsed"><summary class="path-library-toggle"><span>More path examples</span><span>+</span></summary><div class="path-library__inside">
+      <div class="path-library__head reveal">
+        <div class="tag" style="justify-content:center">Different Business. Different Path.</div>
+        <h3>The Door should answer the business they actually run.</h3>
+        <p>These are examples of the kinds of paths a customer might need — not one template repeated across industries.</p>
+      </div>
+
+      <div class="path-examples">
+        <details class="path-example reveal"><summary><span class="path-example__name">Restaurant + Catering</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Menu</span><span>Order / Reserve</span><span>Hours + Directions</span><span>Catering</span><span>Private Events</span><span>Event Inquiry</span></div><p class="path-example__note">Someone planning dinner should not have to take the same route as someone planning a 75-person event.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Independent Stylist / Barber</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Services + Pricing</span><span>Portfolio</span><span>New Client Info</span><span>Book</span><span>Text</span><span>Location</span></div><p class="path-example__note">Especially useful for booth renters who need a polished personal entry point without building an entire salon website.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Maker / Custom Orders</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Collections</span><span>Inspo</span><span>Custom Request</span><span>Upload Reference</span><span>Upcoming Events</span><span>Where to Shop</span></div><p class="path-example__note">Custom requests can collect the useful details up front so the maker starts the conversation with something to work from.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Roofing / Contractor</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Leak / Damage</span><span>Replacement</span><span>Service Area</span><span>Send Photo</span><span>Estimate</span><span>Call / Text</span></div><p class="path-example__note">A broader intake can give the contractor context before they ever return the lead.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Tattoo Artist / Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Portfolio</span><span>Styles / Artists</span><span>Custom Inquiry</span><span>Upload Inspo</span><span>Book</span><span>Policies</span></div><p class="path-example__note">For visual businesses, the work itself can appear much earlier because seeing the portfolio helps the customer decide.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Auto Body Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Collision / Dent / Paint</span><span>Vehicle Info</span><span>Send Damage Photos</span><span>Estimate</span><span>Call / Text</span><span>Directions</span></div><p class="path-example__note">Photos and basic vehicle details can reduce back-and-forth before the shop responds.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Dental Office</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Routine Care</span><span>Something Hurts</span><span>Cosmetic</span><span>New Patient</span><span>Book</span><span>Directions</span></div><p class="path-example__note">The Door routes intent without collecting unnecessary medical information.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Funeral Home</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Need Help Now</span><span>Planning Ahead</span><span>Services</span><span>Obituaries</span><span>Resources</span><span>Call</span></div><p class="path-example__note">Tone and urgency matter. Someone who needs immediate help should reach a person quickly and calmly.</p></details>
+      </div>
+
+      <div class="path-finish reveal">
+        <div class="path-finish__actions">Call · Text · Email · Full Website ↗</div>
+        <p>Every path can end with a quiet utility layer so someone who needs more can keep going. The full website stays available — it just does not have to be the first obstacle.</p>
+      </div>
+    </div></details>
+  </div>
+</section>
+
 <!-- ─── WORK ───────────────────────────────── -->
 <section class="work" id="work">
   <div class="container">
@@ -1131,108 +1235,11 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <section class="services" id="services">
   <div class="container">
     <div class="reveal"><div class="tag">The Breakdown</div><h2>Start where the problem is.</h2><p class="lead" style="margin-top:14px">The Digital Door is the core entry product. Deeper site work gets scoped only when the business behind it actually needs more.</p></div>
-    <div class="services__grid">
+    <div class="services__grid" style="grid-template-columns:repeat(2,1fr)">
       <div class="svc reveal d1"><div class="svc__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>Signal Check</h3><p>A short consult to identify what is actually getting in the way before paying for a build.</p><div class="svc__tag">FREE</div></div>
       <div class="svc reveal d2"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M9 12h6"/></svg></div><h3>Digital Door</h3><p>Digital Key + Digital Door + Customer Paths + Apple Wallet access + the usable QR asset.</p><div class="svc__tag">$350</div></div>
-      <div class="svc reveal d3"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg></div><h3>Connect the Dots</h3><p>Full custom build: Digital Door, responsive mobile experience, and a brand-new in-depth desktop site.</p><div class="svc__tag">$750+</div></div>
-    </div>
-    <div class="reveal" style="margin-top:24px;padding:22px 26px;border:1px solid var(--border-md);border-radius:var(--r);background:var(--card);color:var(--muted);font-size:.86rem;line-height:1.7"><strong style="color:var(--white)">Need the existing site to catch up?</strong> Mobile-Optimized Desktop, Revive, and Evolve are follow-up add-ons, not separate front-door tiers. Scope comes after the core problem is clear.</div>
-  </div>
-</section>
-
-<!-- ─── DIGITAL DOOR / CUSTOMER PATH ───────── -->
-<section class="cpath" id="cpath">
-<style>
-.cpath{background:var(--black);padding:112px 0}
-.cpath__header{text-align:center;max-width:650px;margin:0 auto 56px}
-.cpath__header p{font-size:.94rem;color:var(--muted);margin-top:14px;line-height:1.8}
-.owner-showcase{max-width:900px;margin:0 auto 58px;display:grid;grid-template-columns:minmax(230px,.72fr) 1.28fr;gap:44px;align-items:center;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-xl);padding:30px}
-.owner-showcase__visual{display:flex;align-items:center;justify-content:center;background:#090907;border-radius:12px;overflow:hidden;min-height:420px}
-.owner-showcase__visual img{display:block;width:100%;height:auto;max-height:620px;object-fit:contain}
-.owner-showcase__copy .tag{margin-bottom:12px}
-.owner-showcase__copy h3{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:14px}
-.owner-showcase__copy p{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:16px}
-.owner-showcase__points{display:flex;flex-direction:column;gap:11px;margin:22px 0}
-.owner-showcase__point{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--light)}
-.owner-showcase__point::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 8px var(--signal-glow);margin-top:9px;flex-shrink:0}
-.owner-showcase__wallet{font-family:var(--display);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--border)}
-.door-placements{max-width:900px;margin:0 auto 60px}
-.door-placements__label{text-align:center;font-family:var(--display);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.door-placements__chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
-.door-placements__chips span{font-family:var(--display);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--light);padding:7px 12px;border:1px solid var(--border-md);border-radius:999px;background:var(--card)}
-.path-library{max-width:900px;margin:0 auto}
-.path-library__head{text-align:center;max-width:600px;margin:0 auto 28px}
-.path-library__head h3{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:10px}
-.path-library__head p{font-size:.86rem;color:var(--muted);line-height:1.7}
-.path-examples{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.path-example{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 22px}
-.path-example summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.path-example summary::-webkit-details-marker{display:none}
-.path-example__name{font-family:var(--heading);font-size:.95rem;font-weight:700;color:var(--white)}
-.path-example__hint{font-family:var(--display);font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.path-example[open] .path-example__hint{color:var(--lime)}
-.path-example__flow{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}
-.path-example__flow span{font-size:.72rem;color:var(--light);padding:6px 9px;border:1px solid var(--border-md);border-radius:4px;background:var(--dark)}
-.path-example__note{font-size:.76rem;color:var(--muted);line-height:1.6;margin-top:12px}
-.path-finish{max-width:900px;margin:36px auto 0;padding:22px;background:var(--card);border:1px solid var(--border);border-radius:10px;text-align:center}
-.path-finish__actions{font-family:var(--display);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--light);margin-bottom:8px}
-.path-finish p{font-size:.78rem;color:var(--muted)}
-@media(max-width:760px){.cpath{padding:70px 0}.owner-showcase{grid-template-columns:1fr;padding:18px}.owner-showcase__visual{min-height:auto}.path-examples{grid-template-columns:1fr}}
-</style>
-  <div class="container">
-    <div class="cpath__header reveal">
-      <div class="tag" style="justify-content:center">Digital Door™</div>
-      <h2>Built Around What They Came to Do.</h2>
-      <p>The Door is the focused mobile experience. It can stand in front of an existing website, connect to the tools a business already uses, and keep deeper information available without making every customer dig for it first.</p>
-    </div>
-
-    <div class="owner-showcase reveal" id="ownerKeyShowcase">
-      <div class="owner-showcase__visual">
-        <img src="owner-key-frederick-law.png" alt="Frederick Legacy Law Owner Key example">
-      </div>
-      <div class="owner-showcase__copy">
-        <div class="tag">Owner Key Example</div>
-        <h3>The Door is for customers. The Owner Key is for the people representing the business.</h3>
-        <p>Pull it up while networking, let someone scan the QR, and send them straight into the Digital Door — without searching for the business, spelling out a URL, or digging through a social profile.</p>
-        <div class="owner-showcase__points">
-          <div class="owner-showcase__point">The Door also has its own direct link for social media bios and other digital touchpoints.</div>
-          <div class="owner-showcase__point">QR access can be placed on cards, signs, packaging, vehicles, menus, event material, or wherever the business actually meets customers.</div>
-          <div class="owner-showcase__point">The Owner Key can be customized for the business owner, manager, salesperson, or another person who regularly networks for the business.</div>
-        </div>
-        <div class="owner-showcase__wallet">Apple Wallet access is optional and quoted by project scope.</div>
-        <a href="door-frederick-legacy-law.html" class="btn btn--outline" style="margin-top:22px">Experience the Frederick Door <span class="btn__arr">→</span></a>
-      </div>
-    </div>
-
-    <div class="door-placements reveal">
-      <div class="door-placements__label">The direct Door link can be used in</div>
-      <div class="door-placements__chips">
-        <span>Social Bio</span><span>Business Card</span><span>Signage</span><span>Vehicle</span><span>Email Signature</span><span>Packaging</span><span>Event Material</span>
-      </div>
-    </div>
-
-    <div class="path-library">
-      <div class="path-library__head reveal">
-        <div class="tag" style="justify-content:center">Different Business. Different Path.</div>
-        <h3>The Door should answer the business they actually run.</h3>
-        <p>These are examples of the kinds of paths a customer might need — not one template repeated across industries.</p>
-      </div>
-
-      <div class="path-examples">
-        <details class="path-example reveal"><summary><span class="path-example__name">Restaurant + Catering</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Menu</span><span>Order / Reserve</span><span>Hours + Directions</span><span>Catering</span><span>Private Events</span><span>Event Inquiry</span></div><p class="path-example__note">Someone planning dinner should not have to take the same route as someone planning a 75-person event.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Independent Stylist / Barber</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Services + Pricing</span><span>Portfolio</span><span>New Client Info</span><span>Book</span><span>Text</span><span>Location</span></div><p class="path-example__note">Especially useful for booth renters who need a polished personal entry point without building an entire salon website.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Maker / Custom Orders</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Collections</span><span>Inspo</span><span>Custom Request</span><span>Upload Reference</span><span>Upcoming Events</span><span>Where to Shop</span></div><p class="path-example__note">Custom requests can collect the useful details up front so the maker starts the conversation with something to work from.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Roofing / Contractor</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Leak / Damage</span><span>Replacement</span><span>Service Area</span><span>Send Photo</span><span>Estimate</span><span>Call / Text</span></div><p class="path-example__note">A broader intake can give the contractor context before they ever return the lead.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Tattoo Artist / Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Portfolio</span><span>Styles / Artists</span><span>Custom Inquiry</span><span>Upload Inspo</span><span>Book</span><span>Policies</span></div><p class="path-example__note">For visual businesses, the work itself can appear much earlier because seeing the portfolio helps the customer decide.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Auto Body Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Collision / Dent / Paint</span><span>Vehicle Info</span><span>Send Damage Photos</span><span>Estimate</span><span>Call / Text</span><span>Directions</span></div><p class="path-example__note">Photos and basic vehicle details can reduce back-and-forth before the shop responds.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Dental Office</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Routine Care</span><span>Something Hurts</span><span>Cosmetic</span><span>New Patient</span><span>Book</span><span>Directions</span></div><p class="path-example__note">The Door routes intent without collecting unnecessary medical information.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Funeral Home</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Need Help Now</span><span>Planning Ahead</span><span>Services</span><span>Obituaries</span><span>Resources</span><span>Call</span></div><p class="path-example__note">Tone and urgency matter. Someone who needs immediate help should reach a person quickly and calmly.</p></details>
-      </div>
-
-      <div class="path-finish reveal">
-        <div class="path-finish__actions">Call · Text · Email · Full Website ↗</div>
-        <p>Every path can end with a quiet utility layer so someone who needs more can keep going. The full website stays available — it just does not have to be the first obstacle.</p>
-      </div>
+      <div class="reveal" style="grid-column:1/-1;padding:20px 24px;border:1px solid var(--border-md);background:rgba(169,177,162,.035);color:var(--muted);font-size:.84rem;line-height:1.65"><strong style="color:var(--white)">Need the existing site behind the Door to catch up?</strong> Mobile-Optimized Desktop, Revive, and Evolve are follow-up add-ons. They are scoped when the existing site needs cleanup, a visual refresh, or a larger evolution — without forcing a second standalone product.</div>
+      <div class="svc reveal d3" style="grid-column:1/-1;opacity:.78"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg></div><h3>Connect the Dots</h3><p>Full custom build: Digital Door, responsive mobile experience, and a brand-new in-depth desktop site.</p><div class="svc__tag">$750+</div></div>
     </div>
   </div>
 </section>
@@ -1375,8 +1382,16 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
 <!-- ─── CONTACT ───────────────────────────── -->
 <section class="contact" id="contact">
+<style>
+.contact-collapse{border-top:1px solid var(--border-md);border-bottom:1px solid var(--border-md)}
+.contact-collapse>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:26px 0}
+.contact-collapse>summary::-webkit-details-marker{display:none}.contact-collapse__label{display:flex;flex-direction:column;gap:6px}.contact-collapse__label small{font-family:var(--display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}.contact-collapse__label strong{font-family:var(--heading);font-size:clamp(1.35rem,3vw,1.9rem);color:var(--white)}.contact-collapse__plus{color:var(--lime);font-size:1.4rem;transition:transform .25s}.contact-collapse[open] .contact-collapse__plus{transform:rotate(45deg)}.contact-collapse__body{padding:10px 0 34px}
+</style>
   <div class="container">
-    <div class="contact__layout">
+    <details class="contact-collapse">
+      <summary><span class="contact-collapse__label"><small>Start a conversation</small><strong>Talk to me about your business</strong></span><span class="contact-collapse__plus">+</span></summary>
+      <div class="contact-collapse__body">
+        <div class="contact__layout">
       <div class="rl reveal">
         <div class="tag">Get in Touch</div>
         <h2>Let's Talk<br>About Your Door.</h2>
@@ -1469,6 +1484,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         </div>
       </div>
     </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -1483,292 +1500,28 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
-<section class="about" id="about">
-
+<section class="about about-simple" id="about">
 <style>
-/* ── ABOUT V2 — EDITORIAL LAYOUT ── */
-.about-v2{background:var(--dark);padding:112px 28px 100px;width:100%;max-width:1100px;margin:0 auto}
-/* Desktop guardrail: keep the About section in its intended two-column composition. */
-#about > .container.about-v2{width:100%;max-width:1100px;margin:0 auto}
-.about-v2__hero{
-  display:grid;grid-template-columns:1fr 1.1fr;
-  gap:64px;align-items:start;
-}
-/* Sticky left column (desktop only — see mobile override below) */
-.about-v2__left{
-  position:sticky;top:100px;
-  align-self:start;
-}
-
-@media(max-width:860px){
-  .about-v2__hero{grid-template-columns:1fr;gap:40px}
-  /* Photo scrolls with the timeline instead of pinning in place —
-     must come AFTER the base rule above so it actually wins. */
-  .about-v2__left{position:static;top:auto;align-self:auto}
-}
-
-/* Main portrait */
-.about-v2__photo-main{position:relative;margin-bottom:24px}
-.about-v2__photo-main img{
-  width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;
-  border-radius:3px;
-  filter:brightness(.96) contrast(1.02);
-  display:block;
-  opacity:1;
-  transition:opacity .25s var(--ease);
-}
-.about-v2__photo-main img.is-fading{opacity:0}
-.about-v2__photo-badge{
-  position:absolute;bottom:-18px;left:-18px;
-  background:var(--lime);color:var(--black);
-  padding:16px 22px;border-radius:3px;
-  box-shadow:0 8px 32px rgba(169,177,162,.2);
-}
-.about-v2__photo-badge-num{font-family:var(--display);font-size:1.8rem;font-weight:700;letter-spacing:-.02em;line-height:1}
-.about-v2__photo-badge-lbl{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-top:3px;color:rgba(0,0,0,.6)}
-
-/* MIM caption under photo */
-.about-v2__caption{
-  margin-top:32px;
-  padding:20px 22px;
-  background:var(--card);
-  border-radius:3px;
-  border-left:2px solid var(--lime);
-}
-.about-v2__caption-label{
-  font-family:var(--display);font-size:.56rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--lime);margin-bottom:6px;
-}
-.about-v2__caption h4{
-  font-size:.95rem;font-weight:700;color:var(--white);margin-bottom:6px;letter-spacing:-.01em;
-}
-.about-v2__caption p{
-  font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.75;
-}
-
-/* Right column — timeline with era background */
-/* Desktop: timeline images are data sources for the sticky portrait, not inline content.
-   They only become full-card backgrounds inside the mobile breakpoint below. */
-.about-v2__titem-image{display:none}
-.about-v2__text{position:relative}
-.about-v2__eyebrow{
-  font-family:var(--display);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--lime);margin-bottom:18px;display:flex;align-items:center;gap:10px;
-}
-.about-v2__eyebrow::before{content:'';width:20px;height:2px;background:var(--lime)}
-.about-v2__name{
-  font-size:clamp(2.2rem,4vw,3.4rem);font-weight:800;letter-spacing:-.03em;
-  color:var(--white);line-height:1.05;margin-bottom:24px;
-}
-.about-v2__intro{
-  font-size:clamp(.95rem,1.3vw,1.05rem);color:rgba(255,255,255,.6);
-  line-height:1.9;margin-bottom:22px;
-}
-.about-v2__intro strong{color:var(--white);font-weight:600}
-
-/* Era background system */
-.about-v2__timeline-wrap{
-  position:relative;
-  border-radius:8px;
-  overflow:hidden;
-  margin:36px 0;
-  background:var(--card);
-}
-@media(max-width:860px){
-  /* Lighter than desktop card bg — improves text contrast now that
-     the photo scrolls away above it instead of sitting behind it. */
-  .about-v2__timeline-wrap{background:var(--card-lt)}
-}
-
-/* Timeline */
-.about-v2__timeline{
-  display:flex;flex-direction:column;gap:0;
-  border-left:2px solid rgba(169,177,162,.15);
-  padding:32px 28px 32px 36px;
-  position:relative;z-index:2;
-}
-.about-v2__titem{
-  position:relative;padding-bottom:32px;cursor:default;
-}
-.about-v2__titem:last-child{padding-bottom:0}
-.about-v2__titem::before{
-  content:'';position:absolute;left:-43px;top:5px;
-  width:10px;height:10px;border-radius:50%;
-  background:var(--dark);border:2px solid rgba(169,177,162,.3);
-  transition:border-color .3s,background .3s,transform .3s;
-  z-index:3;
-}
-.about-v2__titem:hover::before,
-.about-v2__titem.era-active::before{
-  border-color:var(--lime);background:var(--lime);transform:scale(1.3);
-}
-.about-v2__titem-label{
-  font-family:var(--display);font-size:.58rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--lime);margin-bottom:8px;
-  transition:opacity .3s;
-  text-shadow:0 1px 8px rgba(0,0,0,.8);
-}
-.about-v2__titem-text{
-  font-size:.92rem;color:rgba(255,255,255,.6);line-height:1.85;
-  transition:color .3s;
-  text-shadow:0 1px 6px rgba(0,0,0,.7);
-}
-.about-v2__titem:hover .about-v2__titem-text,
-.about-v2__titem.era-active .about-v2__titem-text{
-  color:rgba(255,255,255,.92);
-}
-.about-v2__titem-text strong{color:rgba(255,255,255,.9);font-weight:600}
-
-/* Stack pills */
-.about-v2__stack-label{
-  font-family:var(--display);font-size:.58rem;letter-spacing:.18em;
-  text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:12px;
-}
-.about-v2__pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
-.about-v2__pill{
-  padding:6px 14px;border:1px solid rgba(169,177,162,.2);border-radius:3px;
-  font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:rgba(169,177,162,.7);transition:all .22s;
-}
-.about-v2__pill:hover{border-color:var(--lime);color:var(--lime);background:var(--lime-glow2)}
-
-/* Mobile About teaser + expandable full-photo story. */
-.about-teaser{display:none;background:var(--dark);padding:54px 0 58px}
-.about-teaser__button{
-  width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;
-  padding:22px 0;border-top:1px solid var(--border-md);border-bottom:1px solid var(--border-md);
-  color:var(--white);font-family:var(--heading);font-size:clamp(1.05rem,5vw,1.35rem);
-  font-weight:700;letter-spacing:-.015em;text-align:left;cursor:pointer;
-}
-.about-teaser__arrow{font-family:var(--display);color:var(--lime);font-size:1.25rem;transition:transform .25s var(--ease)}
-.about-teaser__button:hover .about-teaser__arrow{transform:translateX(5px)}
-
-@media(max-width:860px){
-  .about-teaser{display:block}
-  #about{display:none;padding:0;background:var(--dark)}
-  #about.about-open{display:block}
-  #about .about-v2{display:block;width:100%;max-width:none;margin:0;padding:22px 0 64px}
-  .about-v2__hero{display:block}
-  .about-v2__left{display:none}
-  .about-v2__text{width:100%}
-
-  /* On mobile the story opens directly into the imagery instead of leading with a large About intro. */
-  .about-v2__eyebrow,.about-v2__name,.about-v2__intro{display:none}
-  .about-v2__stack-label,.about-v2__pills,.about-v2__text > .btn{margin-left:24px;margin-right:24px}
-
-  .about-v2__timeline-wrap{margin:0;border:0;border-radius:0;background:transparent;overflow:visible}
-  .about-v2__timeline{
-    position:relative;display:flex;flex-direction:column;gap:18px;
-    border-left:0;padding:0 0 0 26px;margin:0;
-  }
-  .about-v2__timeline::before{
-    content:'';position:absolute;left:9px;top:20px;bottom:20px;width:2px;
-    background:linear-gradient(to bottom,
-      var(--lime) 0,var(--lime) var(--timeline-progress,0%),
-      rgba(169,177,162,.18) var(--timeline-progress,0%),rgba(169,177,162,.18) 100%);
-    box-shadow:0 0 10px rgba(169,177,162,.16);transition:background .45s ease;z-index:5;
-  }
-
-  .about-v2__titem{
-    position:relative;overflow:hidden;width:calc(100vw - 26px);
-    min-height:82svh;padding:0;border:0;border-radius:0;
-    display:flex;flex-direction:column;justify-content:flex-end;background:#050608;
-    box-shadow:none;isolation:isolate;
-  }
-  .about-v2__titem-image{
-    position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;
-    background:#050608;z-index:0;display:block;
-  }
-  .about-v2__titem::before{
-    content:'';position:absolute;inset:0;width:auto;height:auto;border:0;border-radius:0;transform:none;
-    background:linear-gradient(180deg,rgba(5,6,8,.03) 0%,rgba(5,6,8,.08) 40%,rgba(5,6,8,.58) 70%,rgba(5,6,8,.94) 100%);
-    z-index:1;pointer-events:none;
-  }
-  .about-v2__titem:hover::before,.about-v2__titem.era-active::before{
-    transform:none;background:linear-gradient(180deg,rgba(5,6,8,.03) 0%,rgba(5,6,8,.08) 40%,rgba(5,6,8,.58) 70%,rgba(5,6,8,.94) 100%);
-  }
-  .about-v2__titem > *:not(.about-v2__titem-image){position:relative;z-index:2}
-  .about-v2__titem-label{padding:0 24px;margin-bottom:10px;color:var(--white);text-shadow:0 2px 14px rgba(0,0,0,.9)}
-  .about-v2__titem-text{padding:0 24px 30px;color:rgba(255,255,255,.92);font-size:.94rem;line-height:1.78;text-shadow:0 2px 12px rgba(0,0,0,.92)}
-  .about-v2__titem-text strong{color:#fff}
-
-  .about-v2__titem::after{
-    content:'';position:absolute;left:-21px;top:50%;width:9px;height:9px;border-radius:50%;
-    background:rgba(169,177,162,.32);border:1px solid rgba(255,255,255,.35);z-index:7;
-    transition:transform .35s ease,background .35s ease,box-shadow .35s ease;
-  }
-  .about-v2__titem.era-active::after{background:var(--lime);transform:scale(1.5);box-shadow:0 0 8px var(--lime),0 0 20px rgba(169,177,162,.65)}
-  .about-v2__stack-label{margin-top:38px}
-  .about-v2__pills{margin-left:24px;margin-right:24px}
-}
-
+.about-simple{background:var(--dark);padding:92px 0}.about-simple__grid{display:grid;grid-template-columns:minmax(280px,.9fr) 1.1fr;gap:58px;align-items:start}.about-simple__photo img{width:100%;display:block;border-radius:4px}.about-simple__photo-note{margin-top:14px;padding:16px 18px;border-left:2px solid var(--lime);background:var(--card)}.about-simple__photo-note small{font-family:var(--display);font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:var(--lime)}.about-simple__photo-note p{font-size:.8rem;color:var(--muted);line-height:1.65;margin-top:7px}.about-simple__copy h2{font-family:var(--heading);font-size:clamp(2rem,4.5vw,3.4rem);line-height:1;letter-spacing:-.04em;color:var(--white);margin:8px 0 20px}.about-simple__copy>p{font-size:.96rem;color:var(--light);line-height:1.8;margin-bottom:22px}.about-simple__story{display:grid;gap:12px;margin:28px 0}.about-simple__story div{padding:16px 0;border-top:1px solid var(--border)}.about-simple__story strong{display:block;color:var(--white);font-size:.84rem;margin-bottom:5px}.about-simple__story span{font-size:.8rem;color:var(--muted);line-height:1.6}
+@media(max-width:860px){#about.about-simple{display:none;padding:54px 0}#about.about-simple.about-open{display:block}.about-simple__grid{grid-template-columns:1fr;gap:28px}.about-simple__photo{max-width:520px;margin:auto}}
 </style>
-
-  <div class="container about-v2">
-    <div class="about-v2__hero">
-
-      <!-- LEFT: sticky photo + MIM caption -->
-      <div class="about-v2__left rl reveal">
-        <div class="about-v2__photo-main">
-          <img src="about_mim.png" alt="Nev Gonzalez" />
-          <div class="about-v2__photo-badge">
-            <div class="about-v2__photo-badge-num">10+</div>
-            <div class="about-v2__photo-badge-lbl">Years in Business</div>
-          </div>
-        </div>
-        <div class="about-v2__caption">
-          <div class="about-v2__caption-label">Side Project</div>
-          <h4>Method in Motion</h4>
-          <p>When I'm not building websites, I'm growing Method in Motion — introducing kids to coding through creative, approachable learning experiences.</p>
-        </div>
+  <div class="container">
+    <div class="about-simple__grid">
+      <div class="about-simple__photo reveal rl">
+        <img src="about_mim.png" alt="Nev Gonzalez with Method in Motion">
+        <div class="about-simple__photo-note"><small>Method in Motion</small><p>A side project focused on introducing kids to coding through creative, approachable learning experiences.</p></div>
       </div>
-
-      <!-- RIGHT: timeline with era background -->
-      <div class="rr reveal about-v2__text">
-        <div class="about-v2__eyebrow">About Me</div>
-        <h2 class="about-v2__name">Hi, I'm Nev Gonzalez.</h2>
-        <p class="about-v2__intro">I build the digital side around how a business actually works — what customers need, what they keep asking, and what needs to happen next. My path here didn't start with code. It started with <strong>business, people, operations, and learning to solve the problem in front of me.</strong></p>
-
-        <div class="about-v2__timeline-wrap" id="timelineWrap">
-
-          <div class="about-v2__timeline">
-            <div class="about-v2__titem era-active" data-era="1">
-              <img class="about-v2__titem-image" src="about_mim.png" alt="Method in Motion workspace" />
-              <div class="about-v2__titem-label">The Beginning</div>
-              <div class="about-v2__titem-text">After high school I attended community college, where I helped establish and lead a student business club as <strong>Vice President</strong> — organizing events, inviting guest speakers, and building real opportunities for students interested in entrepreneurship.</div>
-            </div>
-            <div class="about-v2__titem" data-era="2">
-              <img class="about-v2__titem-image" src="about-dropout.png" alt="Nev carrying a stack of keyboards" />
-              <div class="about-v2__titem-label">The Hard Choice</div>
-              <div class="about-v2__titem-text">I transferred to the <strong>University of Baltimore, Maryland</strong> to pursue Business Administration with a concentration in Accounting and Forensic Accounting, while spending years working inside a family-owned restaurant in <strong>Downtown Frederick, Maryland</strong>. I learned the customer-facing side first, then got a closer look at the back-of-house decisions and day-to-day problem solving that happen when the owner is actually there running the business. I eventually made the hard choice to leave school and take the risk of building something of my own.</div>
-            </div>
-            <div class="about-v2__titem" data-era="3">
-              <img class="about-v2__titem-image" src="about_salesforce.png" alt="Nev during her Salesforce chapter" />
-              <div class="about-v2__titem-label">The Shift</div>
-              <div class="about-v2__titem-text">My interest shifted toward technology and digital business. I landed an internship at Salesforce, learned a lot, and realized I wanted to build something of my own. I started teaching myself web development and building websites for friends, family, and local businesses. <strong>What started as a personal challenge became a direction.</strong></div>
-            </div>
-            <div class="about-v2__titem" data-era="4">
-              <img class="about-v2__titem-image" src="about_meta_summit.png" alt="Nev at a Meta event" />
-              <div class="about-v2__titem-label">Today</div>
-              <div class="about-v2__titem-text">I combine business thinking, problem-solving, design, and development to build Digital Doors and supporting websites that make it easier for customers to understand a business and <strong>take the next step.</strong></div>
-            </div>
-          </div>
+      <div class="about-simple__copy reveal rr">
+        <div class="tag">About Me</div>
+        <h2>Hi, I'm Nev Gonzalez.</h2>
+        <p>The Digital Side is built around how a business actually works — what customers need, what they keep asking, and what needs to happen next. The path here started with business, people, operations, and learning to solve the problem in front of me.</p>
+        <div class="about-simple__story">
+          <div><strong>Business first.</strong><span>Early experience centered on entrepreneurship, customer-facing work, and the day-to-day reality behind small-business decisions.</span></div>
+          <div><strong>Then technology.</strong><span>That eventually shifted into digital business, a Salesforce internship, self-taught web development, and building for local businesses.</span></div>
+          <div><strong>Now the two live together.</strong><span>Business thinking, design, and development shape Digital Doors and full sites around the customer experience instead of forcing every business into the same template.</span></div>
         </div>
-
-        <div class="about-v2__stack-label">Stack &amp; Tools</div>
-        <div class="about-v2__pills">
-          <div class="about-v2__pill">HTML5</div>
-          <div class="about-v2__pill">CSS3</div>
-          <div class="about-v2__pill">JavaScript</div>
-          <div class="about-v2__pill">Responsive</div>
-          <div class="about-v2__pill">GitHub Pages</div>
-          <div class="about-v2__pill">Netlify</div>
-          <div class="about-v2__pill">Figma</div>
-        </div>
-
         <a href="#contact" class="btn btn--lime">Work With Me <span class="btn__arr">→</span></a>
       </div>
-
     </div>
   </div>
 </section>
