@@ -29,6 +29,6 @@ jobs:
           fi
           git config user.name "digital-side-build"
           git config user.email "actions@users.noreply.github.com"
-          git add index.html door-frederick-legacy-law.html lumina-door.html lumina-mobile-site.html northline-door.html northline-mobile-site.html northline-full-site.html atelier-door.html atelier-house-mobile-site.html atelier-house-full-site.html
-          git commit -m "Finish demo routing analytics and homepage polish"
+          git add index.html door-frederick-legacy-law.html frederick-full-site.html lumina-door.html lumina-mobile-site.html northline-door.html northline-mobile-site.html northline-full-site.html atelier-door.html atelier-house-mobile-site.html atelier-house-full-site.html
+          git commit -m "Finish flagship paths and Frederick warm full site"
           git push
