@@ -395,12 +395,12 @@ const data={
   eye:'Portfolio path',title:'See what a space can become.',
   intro:'Browse the work by the kind of transformation you want to imagine in your own home.',
   menu:['Living spaces','Kitchens + dining','Bedrooms + retreats','Before + after transformations','Featured full-home projects'],
-  actions:[['Browse the full portfolio','#full-site']]
+  actions:[['Browse the full portfolio','atelier-house-full-site.html']]
  },
  style:{
   eye:'Interactive style path',title:'Let\u2019s find your design language.',
   intro:'Don\u2019t worry about knowing the right design words. Choose the rooms you\u2019re naturally pulled toward.',
-  quiz:true,actions:[['Bring my direction to a consultation','#consult']]
+  quiz:true,actions:[['Bring my direction to a consultation','atelier-house-full-site.html']]
  },
  project:{
   eye:'Project path',title:'You have the idea. Let\u2019s shape it.',
@@ -411,19 +411,19 @@ const data={
    ['What matters most?','Function, feeling, timeline, existing pieces you love, and what currently is not working.'],
    ['Start the conversation','Share the project basics now; the deeper details can come during consultation.']
   ],
-  actions:[['Start my project inquiry','#inquiry'],['See services first','#full-site']]
+  actions:[['Start my project inquiry','atelier-house-full-site.html'],['See services first','atelier-house-full-site.html']]
  },
  client:{
   eye:'Current client path',title:'Back to your project.',
   intro:'The useful project links in one place \u2014 without making you search through the public site.',
   menu:['Project updates','Selections + approvals','Project documents','Next meeting','Contact your designer'],
-  actions:[['Open client workspace','#client-portal'],['Contact the studio','mailto:hello@atelierhouse.example']]
+  actions:[['See client process','atelier-house-full-site.html'],['Contact the studio','atelier-house-full-site.html']]
  },
  help:{
   eye:'Design help path',title:'The room just isn\u2019t working.',
   intro:'You do not need a full renovation to need a designer. Start with the thing that keeps bothering you.',
   menu:['The layout feels wrong','I need help with color','It needs finishing touches','Help me pull the room together','I\u2019m not sure what it needs'],
-  actions:[['Find the right level of help','#consult'],['See design services','#full-site']]
+  actions:[['Find the right level of help','atelier-house-full-site.html'],['See design services','atelier-house-full-site.html']]
  }
 };
 
@@ -453,7 +453,7 @@ function openPath(key){
  count.textContent=key==='style'?'STYLE FINDER':'CUSTOMER PATH';
  if(d.quiz) body.innerHTML=quizHTML();
  else if(d.steps) body.innerHTML=`<div class="steps">${d.steps.map(x=>`<div class="step"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div>`;
- else body.innerHTML=`<div class="route-menu">${d.menu.map(x=>`<a href="#">${x}<span style="float:right;color:var(--clay)">\u2197</span></a>`).join('')}</div>`;
+ else body.innerHTML=`<div class="route-menu">${d.menu.map(x=>`<a href="atelier-house-full-site.html">${x}<span style="float:right;color:var(--clay)">\u2197</span></a>`).join('')}</div>`;
  actions.innerHTML=(d.actions||[]).map((x,i)=>`<a class="cta ${i?'secondary':''}" href="${x[1]}"><span>${x[0]}</span><span>\u2197</span></a>`).join('');
  panel.classList.add('open');panel.setAttribute('aria-hidden','false');panel.scrollTop=0;document.body.style.overflow='hidden';
  if(d.quiz)document.querySelectorAll('.swatch').forEach(btn=>btn.onclick=()=>{
