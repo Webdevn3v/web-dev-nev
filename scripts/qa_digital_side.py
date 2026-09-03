@@ -21,6 +21,10 @@ for name in FILES:
     if 'G-GGMNTLZZ06' not in s:
         fail(f'GA4 missing: {name}')
     for href in re.findall(r'href=["\']([^"\']+)',s):
+        # Dynamic JS template values are validated by their source data below,
+        # not as literal filesystem paths.
+        if '${' in href or '`' in href:
+            continue
         if href.startswith(('#','http://','https://','mailto:','tel:','sms:','javascript:')):
             continue
         target=href.split('#',1)[0].split('?',1)[0]
