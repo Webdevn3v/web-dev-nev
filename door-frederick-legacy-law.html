@@ -16,8 +16,8 @@
   --brass-dim:#6e5c3c;
   --lime:#A6FF00;
   --lime-glow:rgba(166,255,0,.4);
-  --off:#EDE8DE;
-  --gray:#777168;
+  --off:#F3EEE5;
+  --gray:#9B948A;
   --mono:'Space Mono',monospace;
   --sans:'Inter',sans-serif;
   --serif:'Playfair Display',Georgia,serif;
@@ -222,7 +222,7 @@ html.stage-lock body{
   white-space:nowrap;
 }
 
-/* Customer-facing Digital Key */
+/* Customer-facing Door entrance */
 .access-screen{
   position:absolute;
   inset:0;
@@ -589,8 +589,8 @@ html.stage-lock body{
   min-height:100svh;
   display:none;
   background:
-    radial-gradient(circle at 50% 0%,rgba(185,151,91,.06),transparent 28%),
-    #0b0a08;
+    radial-gradient(circle at 50% 0%,rgba(185,151,91,.10),transparent 32%),
+    #15120e;
   padding:92px 22px 64px;
 }
 .customer-path.is-ready{display:block}
@@ -689,7 +689,7 @@ html.stage-lock body{
 }
 .path-action--quiet{
   color:var(--gray);
-  border-color:rgba(255,255,255,.09);
+  border-color:rgba(217,189,133,.16);
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
@@ -700,6 +700,8 @@ html.stage-lock body{
   }
 }
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GGMNTLZZ06"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-GGMNTLZZ06');</script>
 </head>
 <body>
 
@@ -734,25 +736,25 @@ html.stage-lock body{
 
   <div class="access-screen" id="accessScreen">
     <div class="access-inner">
-      <div class="access-eyebrow">Private Access // Frederick Legacy Law</div>
+      <div class="access-eyebrow">Frederick Legacy Law</div>
 
-      <button class="digital-key" id="digitalKey" aria-label="Unlock Frederick Legacy Law Digital Door">
+      <button class="digital-key" id="digitalKey" aria-label="Enter Frederick Legacy Law">
         <div class="key-monogram">FL</div>
         <div class="key-rule"></div>
-        <div class="key-label">Digital Key</div>
+        <div class="key-label">Client Entrance</div>
         <div class="key-name">Frederick<br>Legacy Law</div>
         <div class="key-service">Estate Planning · Family Law · Trust</div>
         <div class="key-signal"></div>
       </button>
 
-      <div class="key-instruction">Tap Key to Enter</div>
-      <div class="key-sub">Private access</div>
+      <div class="key-instruction">Tap to Enter</div>
+      <div class="key-sub">Choose what brings you here</div>
     </div>
   </div>
 
   <div class="door-scene" id="doorScene">
     <div class="door__reveal">
-      <div class="door__reveal-num">Private Access Granted</div>
+      <div class="door__reveal-num">Frederick Legacy Law</div>
       <div class="door__reveal-mark">FL</div>
       <div class="door__reveal-name">Frederick Legacy Law</div>
       <div class="door__reveal-sub">Estate Planning · Family Law · Trust</div>
@@ -787,33 +789,30 @@ html.stage-lock body{
     <p class="path-intro">Choose the closest fit. The next step should feel clear from here.</p>
 
     <div class="path-grid">
-      <a class="path-card" href="#">
+      <a class="path-card" href="frederick-full-site.html" target="_blank" rel="noopener">
         <span class="path-card__label">Planning Ahead</span>
         <span class="path-card__arrow">→</span>
       </a>
 
-      <a class="path-card" href="#">
+      <a class="path-card" href="frederick-full-site.html" target="_blank" rel="noopener">
         <span class="path-card__label">Handling an Estate</span>
         <span class="path-card__arrow">→</span>
       </a>
 
-      <a class="path-card" href="#">
+      <a class="path-card" href="frederick-full-site.html" target="_blank" rel="noopener">
         <span class="path-card__label">Family Matter</span>
         <span class="path-card__arrow">→</span>
       </a>
 
-      <a class="path-card" href="#">
+      <a class="path-card" href="frederick-full-site.html" target="_blank" rel="noopener">
         <span class="path-card__label">Not Sure Where to Begin</span>
         <span class="path-card__arrow">→</span>
       </a>
     </div>
-
     <div class="path-contact">
-      <div class="path-contact__label">Prefer to reach out directly?</div>
+      <div class="path-contact__label">Ready to contact the firm?</div>
       <div class="path-utility">
-        <a class="path-action" href="tel:+10000000000">Call</a>
-        <a class="path-action" href="sms:+10000000000">Text</a>
-        <a class="path-action" href="mailto:hello@example.com">Email</a>
+        <a class="path-action" href="frederick-full-site.html" target="_blank" rel="noopener">Contact on Full Site ↗</a>
       </div>
     </div>
 
@@ -821,7 +820,7 @@ html.stage-lock body{
       <div class="path-contact__label">Want more before you reach out?</div>
       <div class="path-utility">
         <button class="path-action" id="viewOwnerKeyBtn2" type="button">Owner Key</button>
-        <a class="path-action path-action--quiet" href="https://webdevn3v.github.io/law-firm-demo/" target="_blank" rel="noopener">View In-Depth Site ↗</a>
+        <a class="path-action path-action--quiet" href="frederick-full-site.html" target="_blank" rel="noopener">View In-Depth Site ↗</a>
       </div>
     </div>
   </div>
@@ -930,9 +929,6 @@ document.addEventListener('keydown', (event) => {
 digitalKey.addEventListener('click', useDigitalKey);
 scrollCue.addEventListener('click', goToCustomerPath);
 
-document.querySelectorAll('.path-card[href="#"]').forEach(card => {
-  card.addEventListener('click', event => event.preventDefault());
-});
 </script>
 
 </body>

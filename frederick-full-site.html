@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frederick Legacy Law | Estate Planning & Family Law</title>
+<style>
+  /* ─── TOKENS ─────────────────────────────────────────── */
+  :root {
+    --navy:      #1a2540;
+    --navy-deep: #111827;
+    --gold:      #b8973a;
+    --gold-lt:   #d4b86a;
+    --cream:     #f5f0e8;
+    --cream-dk:  #ede7d9;
+    --charcoal:  #2e3340;
+    --slate:     #5a6175;
+    --mist:      #f9f7f4;
+    --white:     #ffffff;
+    --border:    rgba(26,37,64,.10);
+
+    --serif:  'Georgia', 'Times New Roman', serif;
+    --sans:   'Palatino Linotype', 'Palatino', 'Book Antiqua', Georgia, serif;
+    --body:   'Georgia', serif;
+
+    --max: 1120px;
+    --r:   6px;
+    --r-lg: 12px;
+    --shadow-sm: 0 2px 12px rgba(26,37,64,.08);
+    --shadow-md: 0 8px 32px rgba(26,37,64,.12);
+    --shadow-lg: 0 20px 60px rgba(26,37,64,.16);
+
+    --ease: cubic-bezier(.25,.46,.45,.94);
+  }
+
+  /* ─── RESET ──────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: var(--body);
+    background: var(--mist);
+    color: var(--charcoal);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  button, input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    border: none;
+    outline: none;
+    background: none;
+  }
+
+  /* ─── UTILITY ─────────────────────────────────────────── */
+  .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  .section { padding: 96px 0; }
+  .section--alt { background: var(--cream); }
+  .section--dark { background: var(--navy-deep); color: var(--cream); }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: .75rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .eyebrow--light { color: var(--gold-lt); }
+
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: normal;
+    line-height: 1.2;
+    color: var(--navy);
+  }
+  .section--dark h2,
+  .section--dark h3,
+  .section--dark h4 { color: var(--cream); }
+
+  h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
+
+  .lead {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: var(--slate);
+    max-width: 560px;
+    line-height: 1.8;
+  }
+  .section--dark .lead { color: rgba(245,240,232,.7); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 32px;
+    border-radius: var(--r);
+    font-family: var(--sans);
+    font-size: .875rem;
+    letter-spacing: .06em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .25s var(--ease);
+  }
+  .btn--primary {
+    background: var(--gold);
+    color: var(--white);
+  }
+  .btn--primary:hover {
+    background: var(--gold-lt);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(184,151,58,.35);
+  }
+  .btn--outline {
+    border: 1.5px solid var(--cream);
+    color: var(--cream);
+  }
+  .btn--outline:hover {
+    background: var(--cream);
+    color: var(--navy);
+    transform: translateY(-2px);
+  }
+  .btn--navy {
+    background: var(--navy);
+    color: var(--cream);
+  }
+  .btn--navy:hover {
+    background: var(--charcoal);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ─── NAV ─────────────────────────────────────────────── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 0;
+    transition: all .3s var(--ease);
+  }
+  .nav.scrolled {
+    background: rgba(26,37,64,.97);
+    backdrop-filter: blur(12px);
+    padding: 14px 0;
+    box-shadow: var(--shadow-md);
+  }
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav__logo {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .nav__logo-name {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--white);
+    letter-spacing: .01em;
+  }
+  .nav__logo-sub {
+    font-size: .65rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+  }
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .nav__links a {
+    font-family: var(--sans);
+    font-size: .8rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.75);
+    transition: color .2s;
+  }
+  .nav__links a:hover { color: var(--gold-lt); }
+  .nav__cta { display: none; }
+
+  @media (min-width: 768px) {
+    .nav__cta {
+      display: flex;
+      padding: 10px 22px;
+      font-size: .78rem;
+    }
+  }
+  @media (max-width: 767px) {
+    .nav__links { display: none; }
+  }
+
+  /* ─── HERO ────────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--navy-deep);
+    overflow: hidden;
+  }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 110% 40%, rgba(184,151,58,.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at -10% 60%, rgba(26,37,64,.8) 0%, transparent 70%),
+      linear-gradient(155deg, #111827 0%, #1a2540 50%, #0f1a30 100%);
+  }
+  .hero__rule {
+    position: absolute;
+    top: 0; bottom: 0; right: 38%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(184,151,58,.3) 30%, rgba(184,151,58,.3) 70%, transparent);
+    display: none;
+  }
+  @media (min-width: 900px) { .hero__rule { display: block; } }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    padding: 140px 0 80px;
+    max-width: 680px;
+  }
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    border: 1px solid rgba(184,151,58,.4);
+    border-radius: 40px;
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 32px;
+  }
+  .hero__badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(.8); }
+  }
+  .hero h1 {
+    color: var(--white);
+    margin-bottom: 24px;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    line-height: 1.13;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold-lt);
+  }
+  .hero__sub {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: rgba(245,240,232,.65);
+    line-height: 1.8;
+    margin-bottom: 40px;
+    max-width: 520px;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+  .hero__phone {
+    font-family: var(--sans);
+    font-size: .85rem;
+    color: rgba(255,255,255,.55);
+    letter-spacing: .04em;
+    transition: color .2s;
+  }
+  .hero__phone:hover { color: var(--gold-lt); }
+  .hero__phone span {
+    color: rgba(255,255,255,.85);
+    margin-left: 6px;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 36px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: .65rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.3);
+  }
+  .hero__scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, rgba(184,151,58,.5), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    50.01% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ─── TRUST BAR ───────────────────────────────────────── */
+  .trust {
+    background: var(--navy);
+    padding: 0;
+  }
+  .trust__inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(184,151,58,.2);
+    border-bottom: 1px solid rgba(184,151,58,.2);
+  }
+  .trust__item {
+    padding: 36px 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    border-right: 1px solid rgba(184,151,58,.15);
+  }
+  .trust__item:last-child { border-right: none; }
+  .trust__icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(184,151,58,.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+  }
+  .trust__num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--gold-lt);
+    line-height: 1;
+  }
+  .trust__label {
+    font-size: .75rem;
+    letter-spacing: .06em;
+    color: rgba(245,240,232,.6);
+    margin-top: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .trust__inner { grid-template-columns: 1fr; }
+    .trust__item { border-right: none; border-bottom: 1px solid rgba(184,151,58,.15); }
+    .trust__item:last-child { border-bottom: none; }
+  }
+
+  /* ─── PRACTICE AREAS ──────────────────────────────────── */
+  .areas__header { margin-bottom: 56px; }
+  .areas__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .area-card {
+    background: var(--white);
+    padding: 40px 36px;
+    transition: background .25s var(--ease);
+    position: relative;
+    overflow: hidden;
+  }
+  .area-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s var(--ease);
+  }
+  .area-card:hover { background: var(--cream); }
+  .area-card:hover::before { transform: scaleX(1); }
+  .area-card__icon {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  .area-card h3 { margin-bottom: 12px; }
+  .area-card p {
+    font-size: .9rem;
+    color: var(--slate);
+    line-height: 1.75;
+  }
+  .area-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    font-size: .8rem;
+    letter-spacing: .06em;
+    color: var(--gold);
+    font-family: var(--sans);
+    transition: gap .2s;
+  }
+  .area-card:hover .area-card__link { gap: 10px; }
+
+  /* ─── WHY US ──────────────────────────────────────────── */
+  .why__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .why__visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: var(--cream-dk);
+  }
+  .why__visual-inner {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, var(--cream-dk) 0%, var(--cream) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .why__visual-seal {
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    opacity: .35;
+  }
+  .why__visual-seal-text {
+    font-family: var(--serif);
+    font-size: .65rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .why__visual-seal-year {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    color: var(--navy);
+  }
+  .why__card-badge {
+    position: absolute;
+    top: 28px; right: -12px;
+    background: var(--navy);
+    color: var(--cream);
+    padding: 18px 24px;
+    border-radius: var(--r);
+    box-shadow: var(--shadow-lg);
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .why__card-badge span {
+    display: block;
+    font-family: var(--sans);
+    font-size: .65rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-top: 2px;
+  }
+
+  .why__points {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 40px;
+  }
+  .why__point {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .why__point-num {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-lt));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: .9rem;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .why__point h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+  .why__point p {
+    font-size: .88rem;
+    color: var(--slate);
+    line-height: 1.75;
+  }
+
+  @media (max-width: 860px) {
+    .why__layout { grid-template-columns: 1fr; gap: 48px; }
+    .why__visual { display: none; }
+  }
+
+  /* ─── ATTORNEY BIO ────────────────────────────────────── */
+  .bio__inner {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .bio__photo {
+    position: relative;
+  }
+  .bio__photo-frame {
+    aspect-ratio: 3/4;
+    border-radius: var(--r-lg);
+    background: linear-gradient(160deg, var(--navy) 0%, var(--charcoal) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .bio__photo-placeholder {
+    width: 80%;
+    aspect-ratio: 1;
+    border-radius: 50% 50% 0 0;
+    background: rgba(255,255,255,.08);
+    margin-bottom: -10%;
+  }
+  .bio__photo-tag {
+    position: absolute;
+    bottom: -18px; right: -18px;
+    background: var(--gold);
+    color: var(--white);
+    padding: 14px 20px;
+    border-radius: var(--r);
+    box-shadow: var(--shadow-md);
+    font-family: var(--sans);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .bio__content { padding-top: 8px; }
+  .bio__name {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .bio__title {
+    font-family: var(--sans);
+    font-size: .8rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+  .bio__text {
+    color: var(--slate);
+    font-size: .95rem;
+    line-height: 1.9;
+    margin-bottom: 36px;
+  }
+  .bio__credentials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .bio__cred {
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    font-size: .75rem;
+    letter-spacing: .04em;
+    color: var(--slate);
+    background: var(--white);
+  }
+
+  @media (max-width: 800px) {
+    .bio__inner { grid-template-columns: 1fr; gap: 40px; }
+    .bio__photo { max-width: 280px; }
+  }
+
+  /* ─── PROCESS ─────────────────────────────────────────── */
+  .process__steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    position: relative;
+    margin-top: 56px;
+  }
+  .process__step {
+    padding: 48px 40px;
+    background: rgba(245,240,232,.06);
+    position: relative;
+    border-radius: 0;
+    transition: background .25s;
+  }
+  .process__step:first-child { border-radius: var(--r-lg) 0 0 var(--r-lg); }
+  .process__step:last-child { border-radius: 0 var(--r-lg) var(--r-lg) 0; }
+  .process__step:hover { background: rgba(245,240,232,.1); }
+  .process__num {
+    font-family: var(--serif);
+    font-size: 4rem;
+    color: rgba(184,151,58,.2);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .process__step h3 {
+    color: var(--cream);
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+  }
+  .process__step p {
+    font-size: .88rem;
+    color: rgba(245,240,232,.55);
+    line-height: 1.8;
+  }
+  .process__arrow {
+    position: absolute;
+    right: -14px; top: 50%;
+    transform: translateY(-50%);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    font-size: .7rem;
+    color: var(--white);
+  }
+  .process__step:last-child .process__arrow { display: none; }
+
+  @media (max-width: 720px) {
+    .process__steps { grid-template-columns: 1fr; }
+    .process__step:first-child { border-radius: var(--r-lg) var(--r-lg) 0 0; }
+    .process__step:last-child { border-radius: 0 0 var(--r-lg) var(--r-lg); }
+    .process__arrow { display: none; }
+  }
+
+  /* ─── TESTIMONIALS ────────────────────────────────────── */
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .testimonial-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 36px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .25s, transform .25s;
+  }
+  .testimonial-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+  }
+  .testimonial-card__stars {
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .testimonial-card__quote {
+    font-size: .92rem;
+    color: var(--slate);
+    line-height: 1.85;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+  .testimonial-card__author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .testimonial-card__avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy), var(--charcoal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    color: var(--gold-lt);
+    font-size: .9rem;
+    flex-shrink: 0;
+  }
+  .testimonial-card__name {
+    font-family: var(--sans);
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--navy);
+  }
+  .testimonial-card__loc {
+    font-size: .75rem;
+    color: var(--slate);
+    margin-top: 2px;
+  }
+
+  /* ─── FAQ ─────────────────────────────────────────────── */
+  .faq__list {
+    max-width: 760px;
+    margin: 56px auto 0;
+  }
+  .faq__item {
+    border-bottom: 1px solid var(--border);
+  }
+  .faq__item:first-child { border-top: 1px solid var(--border); }
+  .faq__q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 26px 0;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--navy);
+    background: none;
+    transition: color .2s;
+  }
+  .faq__q:hover { color: var(--gold); }
+  .faq__icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    color: var(--gold);
+    transition: transform .3s var(--ease), background .2s;
+  }
+  .faq__item.open .faq__icon {
+    transform: rotate(45deg);
+    background: var(--gold);
+    color: var(--white);
+    border-color: var(--gold);
+  }
+  .faq__a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s var(--ease);
+  }
+  .faq__item.open .faq__a { max-height: 300px; }
+  .faq__a-inner {
+    padding-bottom: 24px;
+    font-size: .9rem;
+    color: var(--slate);
+    line-height: 1.85;
+  }
+
+  /* ─── CONTACT ─────────────────────────────────────────── */
+  .contact__layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .contact__info { padding-top: 8px; }
+  .contact__detail {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+  .contact__detail-icon {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--cream-dk);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+  .contact__detail-label {
+    font-family: var(--sans);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .contact__detail-val {
+    font-size: .92rem;
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
+  .contact__hours {
+    margin-top: 36px;
+    padding: 24px 28px;
+    background: var(--cream-dk);
+    border-radius: var(--r);
+    border-left: 3px solid var(--gold);
+  }
+  .contact__hours h4 {
+    font-size: .8rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .contact__hours p {
+    font-size: .85rem;
+    color: var(--slate);
+    line-height: 1.8;
+  }
+
+  .contact__form-wrap {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 48px 44px;
+    box-shadow: var(--shadow-md);
+  }
+  .form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .form__group--full { grid-column: 1 / -1; }
+  .form__label {
+    font-family: var(--sans);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+  .form__input, .form__select, .form__textarea {
+    width: 100%;
+    padding: 13px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--r);
+    font-size: .9rem;
+    color: var(--charcoal);
+    background: var(--mist);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .form__input:focus, .form__select:focus, .form__textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,151,58,.1);
+    background: var(--white);
+  }
+  .form__textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.7;
+  }
+  .form__select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235a6175' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+  .form__submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--navy);
+    color: var(--cream);
+    border-radius: var(--r);
+    font-family: var(--sans);
+    font-size: .85rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .25s var(--ease);
+    margin-top: 8px;
+  }
+  .form__submit:hover {
+    background: var(--charcoal);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .form__note {
+    font-size: .72rem;
+    color: var(--slate);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 860px) {
+    .contact__layout { grid-template-columns: 1fr; gap: 48px; }
+    .form__row { grid-template-columns: 1fr; }
+    .contact__form-wrap { padding: 32px 28px; }
+  }
+
+  /* ─── FOOTER ──────────────────────────────────────────── */
+  .footer {
+    background: #0d1220;
+    color: rgba(245,240,232,.6);
+    padding: 64px 0 36px;
+  }
+  .footer__top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .footer__brand-name {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .footer__brand-sub {
+    font-size: .7rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 18px;
+  }
+  .footer__brand-tagline {
+    font-size: .85rem;
+    line-height: 1.75;
+    max-width: 260px;
+  }
+  .footer__col-title {
+    font-family: var(--sans);
+    font-size: .7rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold-lt);
+    margin-bottom: 18px;
+  }
+  .footer__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer__col ul a {
+    font-size: .83rem;
+    transition: color .2s;
+  }
+  .footer__col ul a:hover { color: var(--white); }
+  .footer__col address {
+    font-style: normal;
+    font-size: .83rem;
+    line-height: 1.8;
+  }
+  .footer__col address a { transition: color .2s; }
+  .footer__col address a:hover { color: var(--white); }
+  .footer__bottom {
+    padding-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .footer__copy { font-size: .75rem; }
+  .footer__disclaimer {
+    font-size: .7rem;
+    max-width: 560px;
+    line-height: 1.65;
+    opacity: .55;
+  }
+
+  @media (max-width: 860px) {
+    .footer__top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 500px) {
+    .footer__top { grid-template-columns: 1fr; }
+  }
+
+  /* ─── SCROLL ANIMATIONS ───────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .65s var(--ease), transform .65s var(--ease);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+  .reveal-delay-4 { transition-delay: .4s; }
+  .reveal-delay-5 { transition-delay: .5s; }
+
+  /* ─── MISC ────────────────────────────────────────────── */
+  .divider {
+    width: 48px; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 20px 0 0;
+  }
+  .text-center { text-align: center; }
+  .text-center .lead { margin: 0 auto; }
+  .text-center .divider { margin: 20px auto 0; }
+
+  /* TDS warm Frederick alignment */
+  :root{--navy:#4a4037;--navy-deep:#2f2924;--gold:#9b7a49;--gold-lt:#b9975b;--cream:#f2ece3;--cream-dk:#e8dfd3;--charcoal:#403933;--slate:#756d65;--mist:#fbf8f3;--white:#fffdf9;--border:rgba(64,57,51,.12)}
+  body{background:var(--mist);color:var(--charcoal)}
+  .hero{background:var(--cream)}
+  .hero__bg{background:radial-gradient(ellipse 75% 65% at 110% 32%,rgba(155,122,73,.13),transparent 60%),radial-gradient(ellipse 55% 70% at -5% 60%,rgba(217,189,133,.12),transparent 68%),linear-gradient(155deg,#fbf8f3 0%,#f2ece3 56%,#e8dfd3 100%)}
+  .hero h1{color:var(--charcoal)}.hero h1 em{color:var(--gold)}.hero__sub{color:#70675f}.hero__phone{color:#82786f}.hero__phone span{color:var(--charcoal)}
+  .nav__logo-name{color:var(--charcoal)}.nav__logo-sub{color:var(--gold)}.nav__links a{color:rgba(64,57,51,.72)}.nav.scrolled{background:rgba(251,248,243,.96);border-bottom:1px solid rgba(64,57,51,.08)}
+  .trust{background:#e8dfd3;color:var(--charcoal)}.trust__label{color:#756d65}.section--dark{background:#e5dccf;color:var(--charcoal)}.section--dark h2,.section--dark h3,.section--dark h4{color:var(--charcoal)}.section--dark .lead{color:#756d65}
+  .btn--primary{background:var(--gold);color:#fffdf9}.btn--outline{border-color:rgba(64,57,51,.28);color:var(--charcoal)}.btn--outline:hover{background:#e8dfd3;color:var(--charcoal);border-color:var(--gold)}.btn--navy{background:#4a4037;color:#fffdf9}
+  .area-card{background:#fffdf9}.area-card:hover{background:#f2ece3}.area-card::before{background:linear-gradient(90deg,var(--gold),#c2a474)}
+
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GGMNTLZZ06"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-GGMNTLZZ06');</script>
+</head>
+<body>
+
+<!-- ─── NAV ───────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <span class="nav__logo-name">Frederick Legacy Law</span>
+        <span class="nav__logo-sub">Estate Planning &amp; Family Law</span>
+      </a>
+      <div class="nav__links">
+        <a href="#practice">Practice Areas</a>
+        <a href="#about">About</a>
+        <a href="#process">Process</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="btn btn--primary nav__cta">Schedule Consultation</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ───────────────────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__rule"></div>
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__badge">
+        <div class="hero__badge-dot"></div>
+        Serving Frederick County Since 1998
+      </div>
+      <h1>Protecting What<br><em>You've Built</em> for<br>Generations to Come</h1>
+      <p class="hero__sub">At Frederick Legacy Law, we help families create clear, lasting plans for their future — with compassionate counsel, meticulous drafting, and deep roots in the Frederick community.</p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary">Schedule a Consultation &rarr;</a>
+        <a href="#contact" class="hero__phone">Call us: <span>(301) 555-0199</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="hero__scroll">
+    <div class="hero__scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ─── TRUST BAR ──────────────────────────────────────── -->
+<section class="trust">
+  <div class="container">
+    <div class="trust__inner">
+      <div class="trust__item">
+        <div class="trust__icon">⚖️</div>
+        <div>
+          <div class="trust__num">26+</div>
+          <div class="trust__label">Years of Local Practice</div>
+        </div>
+      </div>
+      <div class="trust__item">
+        <div class="trust__icon">🏠</div>
+        <div>
+          <div class="trust__num">3,400+</div>
+          <div class="trust__label">Families Guided</div>
+        </div>
+      </div>
+      <div class="trust__item">
+        <div class="trust__icon">📞</div>
+        <div>
+          <div class="trust__num">Free</div>
+          <div class="trust__label">Initial Consultation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRACTICE AREAS ─────────────────────────────────── -->
+<section class="section" id="practice">
+  <div class="container">
+    <div class="areas__header reveal">
+      <span class="eyebrow">How We Help</span>
+      <h2>Our Practice Areas</h2>
+      <div class="divider"></div>
+      <p class="lead" style="margin-top:20px;">From simple wills to complex estate plans, we cover every aspect of protecting your family and your legacy.</p>
+    </div>
+    <div class="areas__grid">
+      <div class="area-card reveal reveal-delay-1">
+        <div class="area-card__icon">📜</div>
+        <h3>Estate Planning</h3>
+        <p>Comprehensive plans tailored to your goals — including revocable trusts, asset protection strategies, and tax-efficient transfer structures.</p>
+        <div class="area-card__link">Learn more <span>→</span></div>
+      </div>
+      <div class="area-card reveal reveal-delay-2">
+        <div class="area-card__icon">✍️</div>
+        <h3>Wills &amp; Trusts</h3>
+        <p>Clearly drafted last wills and testaments, living trusts, and pour-over wills that reflect your exact wishes and hold up in court.</p>
+        <div class="area-card__link">Learn more <span>→</span></div>
+      </div>
+      <div class="area-card reveal reveal-delay-3">
+        <div class="area-card__icon">🏛️</div>
+        <h3>Probate &amp; Estate Administration</h3>
+        <p>Guiding executors and beneficiaries through the probate process with clarity and efficiency, minimizing delays and disputes.</p>
+        <div class="area-card__link">Learn more <span>→</span></div>
+      </div>
+      <div class="area-card reveal reveal-delay-1">
+        <div class="area-card__icon">👨‍👩‍👧</div>
+        <h3>Family Law</h3>
+        <p>Compassionate representation in divorce, custody, separation agreements, and adoption matters with a focus on resolution.</p>
+        <div class="area-card__link">Learn more <span>→</span></div>
+      </div>
+      <div class="area-card reveal reveal-delay-2">
+        <div class="area-card__icon">🛡️</div>
+        <h3>Guardianship</h3>
+        <p>Establishing legal guardianship for minors and adults, protecting vulnerable family members when they need it most.</p>
+        <div class="area-card__link">Learn more <span>→</span></div>
+      </div>
+      <div class="area-card reveal reveal-delay-3">
+        <div class="area-card__icon">📋</div>
+        <h3>Power of Attorney</h3>
+        <p>Durable and healthcare powers of attorney that ensure your designated agents can act decisively on your behalf.</p>
+        <div class="area-card__link">Learn more <span>→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY US ─────────────────────────────────────────── -->
+<section class="section section--alt" id="why">
+  <div class="container">
+    <div class="why__layout">
+      <div class="why__visual reveal">
+        <div class="why__visual-inner">
+          <div class="why__visual-seal">
+            <div class="why__visual-seal-text">Est.</div>
+            <div class="why__visual-seal-year">1998</div>
+            <div class="why__visual-seal-text">Frederick, MD</div>
+          </div>
+        </div>
+        <div class="why__card-badge">
+          A+ Rating
+          <span>Better Business Bureau</span>
+        </div>
+      </div>
+      <div class="why__text reveal reveal-delay-2">
+        <span class="eyebrow">Why Clients Choose Us</span>
+        <h2>A Firm Built on Trust, Not Transactions</h2>
+        <div class="divider"></div>
+        <p class="lead" style="margin-top:20px;">We believe estate planning and family law are some of the most personal decisions you'll ever make. Our approach is straightforward: we listen first, advise honestly, and draft with precision.</p>
+        <div class="why__points">
+          <div class="why__point">
+            <div class="why__point-num">1</div>
+            <div>
+              <h4>Genuinely Local</h4>
+              <p>We've practiced in Frederick County for over two decades. We know the courts, the clerks, and the community — because this is our home too.</p>
+            </div>
+          </div>
+          <div class="why__point">
+            <div class="why__point-num">2</div>
+            <div>
+              <h4>Clear, Flat-Fee Pricing</h4>
+              <p>Most estate planning services are offered at transparent, fixed rates. No billing surprises, no unclear hours — just straightforward value.</p>
+            </div>
+          </div>
+          <div class="why__point">
+            <div class="why__point-num">3</div>
+            <div>
+              <h4>Personal Attention</h4>
+              <p>You'll work directly with an attorney — not a paralegal or intake coordinator — from your first consultation through document execution.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ATTORNEY BIO ────────────────────────────────────── -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="bio__inner">
+      <div class="bio__photo reveal">
+        <div class="bio__photo-frame">
+          <div class="bio__photo-placeholder"></div>
+        </div>
+        <div class="bio__photo-tag">
+          Licensed in<br>Maryland &amp; D.C.
+        </div>
+      </div>
+      <div class="bio__content reveal reveal-delay-2">
+        <span class="eyebrow">Meet Your Attorney</span>
+        <div class="bio__name">Margaret A. Frederick, Esq.</div>
+        <div class="bio__title">Founder &amp; Lead Attorney</div>
+        <div class="bio__text">
+          <p>Margaret Frederick has devoted her career to helping Maryland families navigate the most consequential legal decisions of their lives. After graduating with honors from the University of Maryland Francis King Carey School of Law, she clerked for the Circuit Court for Frederick County before founding this firm in 1998.</p>
+          <br>
+          <p>She is a member of the Maryland State Bar Association, the National Academy of Elder Law Attorneys (NAELA), and has been recognized as a Maryland Super Lawyer in Estate Planning &amp; Probate for seven consecutive years. But what matters most to her clients is simpler: she returns calls, explains things plainly, and cares about the outcome.</p>
+        </div>
+        <div class="bio__credentials">
+          <span class="bio__cred">University of Maryland School of Law, J.D.</span>
+          <span class="bio__cred">Maryland Bar, 1997</span>
+          <span class="bio__cred">D.C. Bar, 2001</span>
+          <span class="bio__cred">NAELA Member</span>
+          <span class="bio__cred">Maryland Super Lawyer, 2018–2024</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ────────────────────────────────────────── -->
+<section class="section section--dark" id="process">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="eyebrow eyebrow--light">How It Works</span>
+      <h2>Simple by Design</h2>
+      <div class="divider"></div>
+      <p class="lead" style="margin-top:20px;">We've refined our process over 26 years to be clear, efficient, and respectful of your time.</p>
+    </div>
+    <div class="process__steps">
+      <div class="process__step reveal reveal-delay-1">
+        <div class="process__num">01</div>
+        <h3>Consult</h3>
+        <p>Your free 30-minute consultation helps us understand your situation, your goals, and which services make sense for you — no commitment required.</p>
+        <div class="process__arrow">→</div>
+      </div>
+      <div class="process__step reveal reveal-delay-2">
+        <div class="process__num">02</div>
+        <h3>Plan</h3>
+        <p>We draft your documents with care, reviewing every detail together. You'll understand everything in your plan before you sign a single page.</p>
+        <div class="process__arrow">→</div>
+      </div>
+      <div class="process__step reveal reveal-delay-3">
+        <div class="process__num">03</div>
+        <h3>Resolve</h3>
+        <p>Documents are executed, filed, and stored. We remain available for future questions, updates, and the inevitable changes life brings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ───────────────────────────────────── -->
+<section class="section" id="testimonials">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="eyebrow">Client Stories</span>
+      <h2>Trusted by Frederick Families</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="testimonials__grid">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <p class="testimonial-card__quote">"Margaret walked us through every step with such patience. We finally feel at peace knowing our children are protected. She made something we'd been putting off for years feel completely manageable."</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">DK</div>
+          <div>
+            <div class="testimonial-card__name">David &amp; Karen L.</div>
+            <div class="testimonial-card__loc">Frederick, MD — Estate Planning</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <p class="testimonial-card__quote">"When my father passed unexpectedly, I had no idea what to do. This firm guided our family through probate with compassion and professionalism. I could not have done it without them."</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">SR</div>
+          <div>
+            <div class="testimonial-card__name">Sandra R.</div>
+            <div class="testimonial-card__loc">Thurmont, MD — Probate &amp; Estate Admin</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-3">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <p class="testimonial-card__quote">"Flat-fee pricing is real and they stick to it. My will, power of attorney, and healthcare directive were done in two weeks. Professional, affordable, and genuinely kind people."</p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">TM</div>
+          <div>
+            <div class="testimonial-card__name">Thomas M.</div>
+            <div class="testimonial-card__loc">Middletown, MD — Wills &amp; Trusts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ────────────────────────────────────────────── -->
+<section class="section section--alt" id="faq">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="eyebrow">Questions &amp; Answers</span>
+      <h2>Frequently Asked Questions</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="faq__list">
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          Do I really need an estate plan if I'm not wealthy?
+          <span class="faq__icon">+</span>
+        </button>
+        <div class="faq__a">
+          <p class="faq__a-inner">Absolutely. Estate planning isn't about wealth — it's about clarity and care. Without a will, Maryland law decides who inherits your property and who raises your children. Even a basic plan ensures your wishes are followed, your family is protected, and the people you love aren't left with legal burdens during an already difficult time.</p>
+        </div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          How long does it take to create a will or trust?
+          <span class="faq__icon">+</span>
+        </button>
+        <div class="faq__a">
+          <p class="faq__a-inner">For straightforward wills and basic estate documents, the process typically takes two to three weeks from your initial consultation to execution. More complex trust structures or blended family situations may take four to six weeks. We'll give you a realistic timeline at your first meeting.</p>
+        </div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          What's the difference between a will and a living trust?
+          <span class="faq__icon">+</span>
+        </button>
+        <div class="faq__a">
+          <p class="faq__a-inner">A will takes effect only after your death and must go through probate. A revocable living trust takes effect immediately, avoids probate, allows for private transfer of assets, and can include provisions for incapacity. Many clients benefit from both. We'll help you understand which approach, or combination, makes sense for your specific circumstances.</p>
+        </div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          Is the initial consultation really free?
+          <span class="faq__icon">+</span>
+        </button>
+        <div class="faq__a">
+          <p class="faq__a-inner">Yes, completely. Your 30-minute initial consultation is free and carries no obligation. It gives us a chance to understand your situation and give you a clear sense of what services you may need and what they would cost. We believe you should have enough information to make a confident decision before committing to anything.</p>
+        </div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          How often should I update my estate plan?
+          <span class="faq__icon">+</span>
+        </button>
+        <div class="faq__a">
+          <p class="faq__a-inner">We recommend reviewing your estate plan every three to five years, or after any major life event — marriage, divorce, the birth of a child, a significant change in assets, the death of a named beneficiary or executor, or a move to a different state. We offer plan review appointments for existing clients at a reduced fee.</p>
+        </div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" onclick="toggleFaq(this)">
+          Do you handle contested estates or family disputes?
+          <span class="faq__icon">+</span>
+        </button>
+        <div class="faq__a">
+          <p class="faq__a-inner">Yes. While our preference is always to help families reach thoughtful, collaborative resolutions, we do represent clients in contested probate matters and estate disputes in the Circuit Court for Frederick County and throughout Maryland. Please contact us to discuss your specific situation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ────────────────────────────────────────── -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact__layout">
+      <div class="contact__info reveal">
+        <span class="eyebrow">Get in Touch</span>
+        <h2>Let's Start the Conversation</h2>
+        <div class="divider"></div>
+        <p class="lead" style="margin-top:20px;">Whether you're ready to begin or just have questions, we're here. Your first call is always free.</p>
+
+        <div style="margin-top:40px;">
+          <div class="contact__detail">
+            <div class="contact__detail-icon">📍</div>
+            <div>
+              <div class="contact__detail-label">Office Address</div>
+              <div class="contact__detail-val">112 West Patrick Street, Suite 300<br>Frederick, MD 21701</div>
+            </div>
+          </div>
+          <div class="contact__detail">
+            <div class="contact__detail-icon">📞</div>
+            <div>
+              <div class="contact__detail-label">Phone</div>
+              <div class="contact__detail-val"><a href="#contact">(301) 555-0199</a></div>
+            </div>
+          </div>
+          <div class="contact__detail">
+            <div class="contact__detail-icon">✉️</div>
+            <div>
+              <div class="contact__detail-label">Email</div>
+              <div class="contact__detail-val"><a href="#contact">hello@fredericklegacylaw.com</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact__hours">
+          <h4>Office Hours</h4>
+          <p>Monday – Thursday: 8:30 am – 5:30 pm<br>Friday: 8:30 am – 4:00 pm<br>Saturday: By appointment only<br>Evening appointments available on request</p>
+        </div>
+      </div>
+
+      <div class="contact__form-wrap reveal reveal-delay-2">
+        <span class="eyebrow">Free Consultation Request</span>
+        <h3 style="margin-bottom:28px;">Tell Us About Your Situation</h3>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form__row">
+            <div class="form__group">
+              <label class="form__label">First Name</label>
+              <input class="form__input" type="text" placeholder="Jane" required>
+            </div>
+            <div class="form__group">
+              <label class="form__label">Last Name</label>
+              <input class="form__input" type="text" placeholder="Smith" required>
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="form__group">
+              <label class="form__label">Phone</label>
+              <input class="form__input" type="tel" placeholder="(301) 555-0000">
+            </div>
+            <div class="form__group">
+              <label class="form__label">Email</label>
+              <input class="form__input" type="email" placeholder="you@email.com" required>
+            </div>
+          </div>
+          <div class="form__group form__group--full">
+            <label class="form__label">Area of Interest</label>
+            <select class="form__select">
+              <option value="">Select a practice area…</option>
+              <option>Estate Planning</option>
+              <option>Wills &amp; Trusts</option>
+              <option>Probate &amp; Estate Administration</option>
+              <option>Family Law</option>
+              <option>Guardianship</option>
+              <option>Power of Attorney</option>
+              <option>Other / Not Sure</option>
+            </select>
+          </div>
+          <div class="form__group form__group--full">
+            <label class="form__label">Brief Message (optional)</label>
+            <textarea class="form__textarea" placeholder="A few words about your situation…"></textarea>
+          </div>
+          <button type="submit" class="form__submit">Request Free Consultation →</button>
+          <p class="form__note">All communications are confidential. Submitting this form does not create an attorney-client relationship.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__col">
+        <div class="footer__brand-name">Frederick Legacy Law</div>
+        <div class="footer__brand-sub">Estate Planning &amp; Family Law</div>
+        <p class="footer__brand-tagline">Serving Frederick County and the surrounding communities with thoughtful, experienced legal counsel since 1998.</p>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Practice Areas</div>
+        <ul>
+          <li><a href="#practice">Estate Planning</a></li>
+          <li><a href="#practice">Wills &amp; Trusts</a></li>
+          <li><a href="#practice">Probate</a></li>
+          <li><a href="#practice">Family Law</a></li>
+          <li><a href="#practice">Guardianship</a></li>
+          <li><a href="#practice">Power of Attorney</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Firm</div>
+        <ul>
+          <li><a href="#about">About Margaret Frederick</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#testimonials">Client Testimonials</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Schedule Consultation</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">Contact</div>
+        <address>
+          112 West Patrick Street<br>Suite 300<br>Frederick, MD 21701<br><br>
+          <a href="#contact">(301) 555-0199</a><br>
+          <a href="#contact">hello@fredericklegacylaw.com</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__copy">&copy; 2024 Frederick Legacy Law, LLC. All rights reserved.</div>
+      <p class="footer__disclaimer">The information on this website is for general informational purposes only and does not constitute legal advice. Use of this website or submission of the contact form does not create an attorney-client relationship. Past results do not guarantee similar outcomes. Frederick Legacy Law, LLC is licensed to practice in the State of Maryland and the District of Columbia.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ─── NAV SCROLL ──────────────────────────────────────
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ─── SCROLL REVEAL ───────────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // ─── FAQ TOGGLE ──────────────────────────────────────
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq__item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq__item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ─── FORM SUBMIT ─────────────────────────────────────
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form__submit');
+    btn.textContent = '✓ Request Received — We\'ll be in touch shortly';
+    btn.style.background = '#2e7d52';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
