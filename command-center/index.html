@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Digital Side — Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <div class="boot" id="boot">
+    <div class="boot__mark">S</div>
+    <div class="boot__line">THE DIGITAL SIDE</div>
+    <div class="boot__status">COMMAND CENTER INITIALIZING</div>
+  </div>
+
+  <div class="shell" id="shell" hidden>
+    <aside class="rail">
+      <div class="brand">
+        <span class="brand__dot"></span>
+        <div><strong>the digital side.</strong><small>COMMAND CENTER</small></div>
+      </div>
+      <nav id="nav"></nav>
+      <div class="rail__footer">
+        <span id="offlineState" class="sysdot"></span>
+        <span id="clock"></span>
+      </div>
+    </aside>
+
+    <main class="stage">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow" id="sectionEyebrow">SYSTEM</span>
+          <h1 id="sectionTitle">Command Center</h1>
+        </div>
+        <div class="system-strip" id="systemStrip"></div>
+      </header>
+      <section id="view"></section>
+    </main>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
