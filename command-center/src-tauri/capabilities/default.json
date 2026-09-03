@@ -1,0 +1,11 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-capability",
+  "description": "Minimum Phase 1 permissions for local Command Center persistence.",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "sql:default",
+    "stronghold:default"
+  ]
+}
