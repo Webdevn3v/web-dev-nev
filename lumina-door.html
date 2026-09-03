@@ -190,12 +190,13 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
   </section>
 
   <section class="paths" id="paths">
-    <div class="paths-head"><h2>Start where you are.</h2><span class="small">5 paths</span></div>
+    <div class="paths-head"><h2>Start where you are.</h2><span class="small">6 paths</span></div>
     <button class="path" data-path="new"><span class="num">01</span><strong>I’m New Here</strong><span class="arrow">→</span></button>
     <button class="path" data-path="need"><span class="num">02</span><strong>I Know What I Need</strong><span class="arrow">→</span></button>
     <button class="path" data-path="nervous"><span class="num">03</span><strong>I’m Nervous About the Dentist</strong><span class="arrow">→</span></button>
     <button class="path" data-path="problem"><span class="num">04</span><strong>I Have a Dental Problem</strong><span class="arrow">→</span></button>
     <button class="path" data-path="patient"><span class="num">05</span><strong>I’m Already a Patient</strong><span class="arrow">→</span></button>
+    <button class="path" data-path="insurance"><span class="num">06</span><strong>Do You Take My Insurance?</strong><span class="arrow">→</span></button>
   </section>
 
   <section class="arrival">
@@ -203,7 +204,7 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
     <button data-path="arrival" aria-label="Open arrival guide">→</button>
   </section>
 
-  <div class="foot"><a href="./lumina-mobile-site.html">Explore everything Lumina offers →</a></div>
+  <div class="foot"><button class="toplink" id="ownerKeyPlaceholder" type="button">Owner Key preview</button><a href="./lumina-mobile-site.html">Explore Everything →</a><a href="mailto:handled@thedigitalside.org?subject=Lumina%20Dental%20demo">Email me directly →</a><span class="small" id="ownerKeyStatus" role="status"></span></div>
 </main>
 
 <section class="panel" id="panel" aria-hidden="true">
@@ -215,7 +216,7 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
     <div class="steps" id="panelSteps"></div>
     <div class="route-menu" id="routeMenu"></div>
     <div class="actions" id="panelActions"></div>
-    <a class="deep" href="./lumina-mobile-site.html"><span>Want the deeper details?</span><span>Explore Lumina →</span></a>
+    <a class="deep" href="./lumina-mobile-site.html"><span>Want the deeper details?</span><span>Explore Everything →</span></a>
     </div>
   </div>
 </section>
@@ -244,6 +245,12 @@ const phone='tel:+15555550177';
 const email='mailto:hello@luminadental.com';
 
 const data={
+ insurance:{
+   eye:'Insurance FAQ path',title:'Start with your plan, not a guess.',
+   intro:'Coverage depends on the plan, not only the insurer name. Share the member details before your visit and Lumina can verify benefits and explain the estimate.',
+   steps:[['What to send','Member ID, group number, subscriber name, and date of birth.'],['What verification means','It is an estimate of benefits, not a guarantee of payment.'],['No insurance?','Ask about self-pay options and financing before treatment begins.']],
+   actions:[['See insurance details',fullSite+'#faq'],['Email me directly','mailto:handled@thedigitalside.org?subject=Lumina%20insurance%20demo']]
+ },
  new:{
    eye:'New patient path', title:'First visit. No guesswork.',
    intro:'We made the first step easy — from choosing a time to knowing exactly what happens when you arrive.',
@@ -253,7 +260,7 @@ const data={
      ['3 · Your exam','Plan for about 60–75 minutes for digital X-rays, a comprehensive exam, and a conversation about your goals.'],
      ['4 · Your plan','Leave with clear options, timeline, and pricing — no pressure.']
    ],
-   actions:[['Book my free first visit','#book'],['Insurance + financing',fullSite+'#faq']]
+   actions:[['Book my free first visit',fullSite+'#book'],['Insurance + financing',fullSite+'#faq']]
  },
  need:{
    eye:'Treatment path', title:'You already know the direction.',
@@ -266,7 +273,7 @@ const data={
      ['Dental Implants',fullSite+'#services'],
      ['Sedation Dentistry',fullSite+'#services']
    ],
-   actions:[['Book an appointment','#book'],['Ask a treatment question',email]]
+   actions:[['Book an appointment',fullSite+'#book'],['Ask a treatment question',email]]
  },
  nervous:{
    eye:'Comfort path', title:'Being nervous is allowed here.',
@@ -277,7 +284,7 @@ const data={
      ['No-rush appointments','The practice does not double-book or rush patients. Questions come before treatment.'],
      ['Start with a conversation','You can book a first visit without committing to treatment that day.']
    ],
-   actions:[['Book a low-pressure first visit','#book'],['Learn about sedation',fullSite+'#services']]
+   actions:[['Book a low-pressure first visit',fullSite+'#book'],['Learn about sedation',fullSite+'#services']]
  },
  problem:{
    eye:'Problem path', title:'Something hurts. Start here.',
@@ -288,7 +295,7 @@ const data={
      ['Sensitivity or something feels off','Request an appointment and describe what you are noticing.'],
      ['After hours','Lumina’s voicemail includes guidance and an emergency line for severe situations.']
    ],
-   actions:[['Call Lumina now',phone],['Request an appointment','#book']]
+   actions:[['Call Lumina now',phone],['Request an appointment',fullSite+'#book']]
  },
  patient:{
    eye:'Returning patient path', title:'Welcome back.',
@@ -362,5 +369,6 @@ panel.addEventListener('pointerdown',e=>{
 document.addEventListener('keydown',e=>{
  if(e.key==='Escape' && panel.classList.contains('open')) closePanel();
 });
+document.getElementById('ownerKeyPlaceholder').addEventListener('click',()=>{document.getElementById('ownerKeyStatus').textContent='Quiet placeholder — no QR has been issued for this fictional business.'});
 </script>
 </body></html>
