@@ -44,6 +44,20 @@ def index(s):
     return s
 
 
+def tds_door(s):
+    s = ensure_ga(s)
+    replacements = {
+        '<span class="missing-key">Owner Key visual not available</span><a class="btn primary" href="lumina-door.html">': '<button class="btn quiet" type="button" data-owner-key="lumina">Owner Key</button><a class="btn primary" href="lumina-door.html">',
+        '<span class="missing-key">Owner Key visual not available</span><a class="btn primary" href="northline-door.html">': '<button class="btn quiet" type="button" data-owner-key="northline">Owner Key</button><a class="btn primary" href="northline-door.html">',
+        '<span class="missing-key">Owner Key visual not available</span><a class="btn primary" href="atelier-door.html">': '<button class="btn quiet" type="button" data-owner-key="atelier">Owner Key</button><a class="btn primary" href="atelier-door.html">',
+    }
+    for a,b in replacements.items(): s=s.replace(a,b)
+    if 'id="luminaKeyModal"' not in s:
+        modals='''\n<div class="key-modal" id="luminaKeyModal" aria-hidden="true"><figure><button class="key-close" type="button" aria-label="Close Owner Key">×</button><img src="lumina-owner-key-final.png" alt="Lumina Dental Studio Owner Key"></figure></div>\n<div class="key-modal" id="northlineKeyModal" aria-hidden="true"><figure><button class="key-close" type="button" aria-label="Close Owner Key">×</button><img src="northline-owner-key-final.png" alt="Northline Roofing Co. Owner Key"></figure></div>\n<div class="key-modal" id="atelierKeyModal" aria-hidden="true"><figure><button class="key-close" type="button" aria-label="Close Owner Key">×</button><img src="atelier-owner-key-final.png" alt="Atelier House Owner Key"></figure></div>\n<script>\n(()=>{\n const map={lumina:'luminaKeyModal',northline:'northlineKeyModal',atelier:'atelierKeyModal'};\n function closeAll(){document.querySelectorAll('.key-modal.open').forEach(m=>{m.classList.remove('open');m.setAttribute('aria-hidden','true')})}\n document.querySelectorAll('[data-owner-key]').forEach(btn=>btn.addEventListener('click',()=>{closeAll();const m=document.getElementById(map[btn.dataset.ownerKey]);if(m){m.classList.add('open');m.setAttribute('aria-hidden','false')}}));\n document.querySelectorAll('#luminaKeyModal,#northlineKeyModal,#atelierKeyModal').forEach(m=>{m.addEventListener('click',e=>{if(e.target===m||e.target.classList.contains('key-close'))closeAll()})});\n document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});\n})();\n</script>\n'''
+        s=s.replace('</body>',modals+'</body>',1)
+    return s
+
+
 def frederick(s):
     s = ensure_ga(s)
     s=s.replace('/* Customer-facing Digital Key */','/* Customer-facing Door entrance */')
@@ -124,6 +138,7 @@ def build_frederick_full_site():
     print('built frederick-full-site.html')
 
 patch('index.html', index)
+patch('door.html', tds_door)
 patch('door-frederick-legacy-law.html', frederick)
 patch('atelier-door.html', atelier)
 patch('northline-door.html', northline_door)
