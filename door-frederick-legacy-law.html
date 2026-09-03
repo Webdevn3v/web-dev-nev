@@ -736,16 +736,16 @@ html.stage-lock body{
     <div class="access-inner">
       <div class="access-eyebrow">Private Access // Frederick Legacy Law</div>
 
-      <button class="digital-key" id="digitalKey" aria-label="Open Frederick Legacy Law Digital Door">
+      <button class="digital-key" id="digitalKey" aria-label="Unlock Frederick Legacy Law Digital Door">
         <div class="key-monogram">FL</div>
         <div class="key-rule"></div>
-        <div class="key-label">Digital Door</div>
+        <div class="key-label">Digital Key</div>
         <div class="key-name">Frederick<br>Legacy Law</div>
         <div class="key-service">Estate Planning · Family Law · Trust</div>
         <div class="key-signal"></div>
       </button>
 
-      <div class="key-instruction">Opening the Door</div>
+      <div class="key-instruction">Tap Key to Enter</div>
       <div class="key-sub">Private access</div>
     </div>
   </div>
@@ -787,35 +787,25 @@ html.stage-lock body{
     <p class="path-intro">Choose the closest fit. The next step should feel clear from here.</p>
 
     <div class="path-grid">
-      <a class="path-card" href="https://webdevn3v.github.io/law-firm-demo/#estate-planning">
+      <a class="path-card" href="#">
         <span class="path-card__label">Planning Ahead</span>
         <span class="path-card__arrow">→</span>
       </a>
 
-      <a class="path-card" href="https://webdevn3v.github.io/law-firm-demo/#probate">
+      <a class="path-card" href="#">
         <span class="path-card__label">Handling an Estate</span>
         <span class="path-card__arrow">→</span>
       </a>
 
-      <a class="path-card" href="https://webdevn3v.github.io/law-firm-demo/#family-law">
+      <a class="path-card" href="#">
         <span class="path-card__label">Family Matter</span>
         <span class="path-card__arrow">→</span>
       </a>
 
-      <a class="path-card" href="mailto:handled@thedigitalside.org?subject=Frederick%20Legacy%20Law%20demo%20inquiry">
+      <a class="path-card" href="#">
         <span class="path-card__label">Not Sure Where to Begin</span>
         <span class="path-card__arrow">→</span>
       </a>
-
-      <a class="path-card" href="#phone-faq">
-        <span class="path-card__label">Parking or an Urgent Matter?</span>
-        <span class="path-card__arrow">↓</span>
-      </a>
-    </div>
-
-    <div class="path-contact" id="phone-faq">
-      <div class="path-contact__label">The question that should not need a phone call</div>
-      <p>For parking, use the signed client spaces nearest the main entrance. For a deadline, hearing, safety concern, or other time-sensitive matter, call rather than using email. Demo directions and contact details must be replaced before launch.</p>
     </div>
 
     <div class="path-contact">
@@ -823,15 +813,15 @@ html.stage-lock body{
       <div class="path-utility">
         <a class="path-action" href="tel:+10000000000">Call</a>
         <a class="path-action" href="sms:+10000000000">Text</a>
-        <a class="path-action" href="mailto:handled@thedigitalside.org?subject=Frederick%20Legacy%20Law%20demo">Email me directly</a>
+        <a class="path-action" href="mailto:hello@example.com">Email</a>
       </div>
     </div>
 
     <div class="path-contact">
       <div class="path-contact__label">Want more before you reach out?</div>
       <div class="path-utility">
-        <button class="path-action path-action--quiet" id="viewOwnerKeyBtn2" type="button">Owner Key preview</button>
-        <a class="path-action path-action--quiet" href="https://webdevn3v.github.io/law-firm-demo/" target="_blank" rel="noopener">Explore Everything ↗</a>
+        <button class="path-action" id="viewOwnerKeyBtn2" type="button">Owner Key</button>
+        <a class="path-action path-action--quiet" href="https://webdevn3v.github.io/law-firm-demo/" target="_blank" rel="noopener">View In-Depth Site ↗</a>
       </div>
     </div>
   </div>
@@ -879,10 +869,7 @@ function startExperience(){
 
 /* Gate removed per Vee's direction: skip straight into the door experience on load
    instead of waiting on the notes screen + "Open the Door" button. */
-window.addEventListener('DOMContentLoaded', () => {
-  startExperience();
-  window.setTimeout(useDigitalKey, 120);
-});
+window.addEventListener('DOMContentLoaded', startExperience);
 
 function useDigitalKey(){
   if(keyUsed) return;
@@ -943,6 +930,9 @@ document.addEventListener('keydown', (event) => {
 digitalKey.addEventListener('click', useDigitalKey);
 scrollCue.addEventListener('click', goToCustomerPath);
 
+document.querySelectorAll('.path-card[href="#"]').forEach(card => {
+  card.addEventListener('click', event => event.preventDefault());
+});
 </script>
 
 </body>

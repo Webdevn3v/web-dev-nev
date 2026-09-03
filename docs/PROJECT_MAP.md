@@ -29,24 +29,22 @@ This is a build-free static site: root HTML files, inline or adjacent CSS/JavaSc
 
 | Business | Digital Door | Mobile-optimized destination | Desktop/full destination | Key/path notes |
 | --- | --- | --- | --- | --- |
-| Frederick Legacy Law | `door-frederick-legacy-law.html` | None local | External `law-firm-demo` GitHub Pages site | Gate-free auto-launch is preserved. Real Owner Key preview uses `owner-key-frederick-law.png`; paths now resolve to useful destinations and include a parking/urgent-matter FAQ. Desktop remains the allowed Explore Everything fallback until a mobile version exists. |
-| Lumina Dental Studio | `lumina-door.html` | `lumina-mobile-site.html` | External `dental-office-demo` GitHub Pages site | Entrance animation is preserved; a quiet Owner Key placeholder and insurance FAQ were added. Explore Everything uses the local mobile site. The fictional real-looking `hello@luminadental.com` address still merits review. |
-| Northline Roofing Co. | `northline-door.html` | `northline-mobile-site.html` | `northline-full-site.html` | Entrance is preserved with corrected Door language; quiet Owner Key placeholder and insurance FAQ added. Explore Everything uses mobile. Source remains heavily minified. |
-| Atelier House | `atelier-door.html` | `atelier-house-mobile-site.html` | `atelier-house-full-site.html` | Branded entrance preserved with corrected Door language; quiet Owner Key placeholder and pricing FAQ added. Explore Everything uses mobile, placeholder path targets were removed, and the mobile page received portfolio/scope/FAQ/visit content. |
+| Frederick Legacy Law | `door-frederick-legacy-law.html` | None local | External `law-firm-demo` GitHub Pages site | Gate-free auto-launch is preserved. Its finished Owner Key visual is `owner-key-frederick-law.png`. Desktop remains the allowed Explore Everything fallback until a mobile version exists. |
+| Lumina Dental Studio | `lumina-door.html` | `lumina-mobile-site.html` | External `dental-office-demo` GitHub Pages site | Entrance animation and established custom paths are preserved. No Owner Key visual asset or implementation exists in this repository. |
+| Northline Roofing Co. | `northline-door.html` | `northline-mobile-site.html` | `northline-full-site.html` | Entrance animation and established custom paths are preserved. No Owner Key visual asset or implementation exists in this repository. Source remains heavily minified. |
+| Atelier House | `atelier-door.html` | `atelier-house-mobile-site.html` | `atelier-house-full-site.html` | Branded entrance and established custom paths are preserved. No Owner Key visual asset or implementation exists in this repository. |
 
-Every demo ultimately needs this ordered path ending:
+The `door.html` Walk a Path card order is:
 
-1. Working Door entrance.
-2. Quiet/muted Owner Key preview.
+1. Quiet/muted Owner Key visual preview, when an actual visual exists; otherwise an honest missing state.
+2. Working Door entrance.
 3. **Explore Everything** to mobile-optimized content, with desktop fallback only when mobile does not exist.
-
-Each business also needs one custom FAQ-style Customer Path aimed at its most common phone question (for example, Frederick parking/urgent matters or Lumina insurance).
 
 ## Customer Paths and purposeful loops
 
 Most Customer Paths are embedded in their Door rather than stored as separate pages:
 
-- `door.html`: Walk a Path, Build My Digital Side, Fix What I Have, and I Just Need Help.
+- `door.html`: the locked explainer, four-business Walk a Path, Breakdown, and separate quick/full intake choices.
 - Frederick: four visual path cards plus contact/Owner Key/full-site actions; the cards are not real destinations yet.
 - Lumina: JavaScript-driven route panels that lead into its mobile site.
 - Northline: inspection, storm, replacement, and current-customer modal routes.
@@ -88,13 +86,13 @@ The customer demos contain placeholder `.example` addresses and/or `555`/dummy p
 
 | Asset | Dimensions | Use |
 | --- | ---: | --- |
-| `owner-key-frederick-law.png` | 1080×1920 | Frederick Owner Key overlay and homepage showcase. |
+| `owner-key-frederick-law.png` | 1080×1920 | The only finished Owner Key visual found: Frederick overlay, homepage showcase, and `door.html` Walk a Path preview. |
 | `about_mim.png` | 1086×1448 | Main About portrait and first mobile timeline image. |
 | `about-dropout.png` | 1086×1448 | About timeline. |
 | `about_salesforce.png` | 1086×1448 | About timeline. |
 | `about_meta_summit.png` | 1086×1448 | About timeline. |
 
-The four live About PNGs are roughly 2.0–2.6 MB each and are the clearest homepage optimization opportunity. `door.html` is roughly 804 KB because it embeds multiple base64 images, which cannot be cached independently.
+The four live About PNGs are roughly 2.0–2.6 MB each and are the clearest homepage optimization opportunity. The rebuilt `door.html` no longer carries the earlier embedded base64 image payload.
 
 ### Unreferenced candidates — verify before removal
 
@@ -105,6 +103,8 @@ The four live About PNGs are roughly 2.0–2.6 MB each and are the clearest home
 - `tds-logo.webp`
 
 No current assets are byte-identical. The PNG/WebP pairs are encoding variants, not exact duplicates. Do not delete them until direct URLs, QR usage, design intent, and the actual published branch have been checked.
+
+No Vee/TDS, Lumina, Northline, or Atelier Owner Key visual asset or designed implementation was found. `customer-path-demo.html` belongs to the fictional Blackline Tattoo demonstration and must not be labeled as Vee's Digital Key. The prior TDS wallet card was explanatory interface copy, not an Owner Key or finished QR-based Key preview.
 
 ## Locked product and content decisions
 
@@ -158,8 +158,8 @@ Apple Wallet access is included in the advertised Key + Door + Path price. The $
 1. **Verify deployment and preserve baselines:** confirm remote/default branch/Pages source, DNS and HTTPS state, external demo availability, shared direct URLs, and screenshots of all live pages.
 2. **Lock the route architecture:** decide how `index.html`, `door.html`, intake, standalone path demo, and local versus external full sites connect before moving anything.
 3. **Rebuild `door.html` to the approved brief:** preserve useful behavior while implementing the locked sequence, copy, mobile carousel, Walk a Path, Breakdown, intake choices, privacy tab, and discreet footer links.
-4. **Complete the four demo endings:** working entrance → quiet Owner Key → mobile-first Explore Everything; preserve Frederick's gate-free launch and verify Lumina/Northline animations.
-5. **Complete paths and loops:** add each custom FAQ and replace placeholder/hash/missing destinations with useful, contextual routes.
+4. **Complete the four demo endings:** actual quiet Owner Key visual, when supplied → working Door → mobile-first Explore Everything; preserve Frederick's gate-free launch and verify Lumina/Northline animations.
+5. **Complete paths and loops:** replace placeholder/hash/missing destinations only from approved business content; do not invent FAQ answers, policies, services, hours, or other client facts.
 6. **Restore real conversion behavior after IDs arrive:** configure separate Formspree forms, honest confirmed-success states, failure fallbacks, and all `handled@thedigitalside.org` mail links.
 7. **Bring Atelier mobile to content parity:** compare every meaningful desktop section, then condense/reorder without silently dropping content.
 8. **Optimize assets and source:** convert/replace heavy live images after visual comparison, extract base64 assets, and reformat minified Northline sources without changing behavior.

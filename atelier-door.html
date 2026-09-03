@@ -309,7 +309,7 @@ body.entered .door-ready{
 <body>
 
 <div class="entry" id="entry">
-  <button class="mark-trigger" id="markTrigger" aria-label="Open the Atelier House Digital Door">
+  <button class="mark-trigger" id="markTrigger" aria-label="Enter Atelier House">
     <div class="mark-stage">
       <div class="mark-half mark-left" aria-hidden="true">
         <strong><span class="word-piece">Atelier&nbsp;</span><span class="word-piece">House</span></strong>
@@ -321,7 +321,7 @@ body.entered .door-ready{
       </div>
     </div>
   </button>
-  <div class="tap-cue">tap to open the door</div>
+  <div class="tap-cue">tap to enter</div>
 </div>
 
 <main class="shell door-ready">
@@ -346,7 +346,7 @@ body.entered .door-ready{
   </div>
 
   <section class="contents" id="paths">
-    <div class="contents-head"><h2>Where do you want<br>to begin?</h2><span>05 paths</span></div>
+    <div class="contents-head"><h2>Where do you want<br>to begin?</h2><span>04 paths</span></div>
 
     <button class="path-card portfolio" data-path="portfolio">
       <span class="index">01 · THE WORK</span><div class="shape"></div>
@@ -367,10 +367,6 @@ body.entered .door-ready{
       <span class="index">04 · CURRENT CLIENT</span><div class="shape"></div>
       <h3>I'm Already a Client</h3><p>Updates, selections, documents, and your next step.</p><span class="go">↗</span>
     </button>
-    <button class="path-card" data-path="faq">
-      <span class="index">05 · QUICK ANSWER</span><div class="shape"></div>
-      <h3>What Does This Cost?</h3><p>See what shapes design fees before the first conversation.</p><span class="go">↗</span>
-    </button>
   </section>
 
   <section class="help-block">
@@ -378,7 +374,7 @@ body.entered .door-ready{
     <div class="help-copy"><span class="micro">Small problem. Big difference.</span><h3>I just need a little help.</h3><p>Layout, color, styling, or the room that simply isn't working.</p><button data-path="help">Find the right help →</button></div>
   </section>
 
-  <div class="fullsite"><button type="button" id="ownerKeyPlaceholder" style="border:0;background:none;color:#81776e;text-decoration:underline;cursor:pointer">Owner Key preview</button><span id="ownerKeyStatus" role="status"></span><a href="atelier-house-mobile-site.html">Explore Everything →</a><a href="mailto:handled@thedigitalside.org?subject=Atelier%20House%20demo">Email me directly →</a></div>
+  <div class="fullsite"><a href="atelier-house-full-site.html">See the full Atelier House story →</a></div>
 </main>
 
 <section class="panel" id="panel" aria-hidden="true">
@@ -387,28 +383,22 @@ body.entered .door-ready{
   <div class="panel-hero"><span class="small" id="panelEye"></span><h2 id="panelTitle"></h2><p id="panelIntro"></p></div>
   <div id="panelBody"></div>
   <div class="actions" id="panelActions"></div>
-  <a class="deep" href="atelier-house-mobile-site.html"><span>Want to see more?</span><span>Explore Everything →</span></a>
+  <a class="deep" href="atelier-house-full-site.html"><span>Want to see more?</span><span>Explore Atelier House →</span></a>
  </div>
 </section>
 
 <script>
 const data={
- faq:{
-  eye:'Pricing FAQ path',title:'Scope sets the fee.',
-  intro:'One-room guidance and a whole-home installation are different projects. The first conversation identifies rooms, decisions, sourcing, timeline, and the level of support before a proposal is written.',
-  steps:[['Rooms + reach','How many spaces are involved and whether they need advice, selections, procurement, or installation.'],['Existing pieces','What stays, what changes, and what needs to be sourced.'],['A clear proposal','Scope, design fee, purchasing terms, and timeline are set before work begins.']],
-  actions:[['Start with your space','mailto:handled@thedigitalside.org?subject=Atelier%20House%20pricing%20demo'],['Explore Everything','atelier-house-mobile-site.html']]
- },
  portfolio:{
   eye:'Portfolio path',title:'See what a space can become.',
   intro:'Browse the work by the kind of transformation you want to imagine in your own home.',
   menu:['Living spaces','Kitchens + dining','Bedrooms + retreats','Before + after transformations','Featured full-home projects'],
-  actions:[['Browse the portfolio','atelier-house-mobile-site.html#portfolio']]
+  actions:[['Browse the full portfolio','#full-site']]
  },
  style:{
   eye:'Interactive style path',title:'Let\u2019s find your design language.',
   intro:'Don\u2019t worry about knowing the right design words. Choose the rooms you\u2019re naturally pulled toward.',
-  quiz:true,actions:[['Bring my direction to a consultation','atelier-house-mobile-site.html#contact']]
+  quiz:true,actions:[['Bring my direction to a consultation','#consult']]
  },
  project:{
   eye:'Project path',title:'You have the idea. Let\u2019s shape it.',
@@ -419,19 +409,19 @@ const data={
    ['What matters most?','Function, feeling, timeline, existing pieces you love, and what currently is not working.'],
    ['Start the conversation','Share the project basics now; the deeper details can come during consultation.']
   ],
-  actions:[['Start my project inquiry','atelier-house-mobile-site.html#contact'],['See services first','atelier-house-mobile-site.html#services']]
+  actions:[['Start my project inquiry','#inquiry'],['See services first','#full-site']]
  },
  client:{
   eye:'Current client path',title:'Back to your project.',
   intro:'The useful project links in one place \u2014 without making you search through the public site.',
   menu:['Project updates','Selections + approvals','Project documents','Next meeting','Contact your designer'],
-  actions:[['Project support','atelier-house-mobile-site.html#contact'],['Contact the studio','mailto:hello@atelierhouse.example']]
+  actions:[['Open client workspace','#client-portal'],['Contact the studio','mailto:hello@atelierhouse.example']]
  },
  help:{
   eye:'Design help path',title:'The room just isn\u2019t working.',
   intro:'You do not need a full renovation to need a designer. Start with the thing that keeps bothering you.',
   menu:['The layout feels wrong','I need help with color','It needs finishing touches','Help me pull the room together','I\u2019m not sure what it needs'],
-  actions:[['Find the right level of help','atelier-house-mobile-site.html#contact'],['See design services','atelier-house-mobile-site.html#services']]
+  actions:[['Find the right level of help','#consult'],['See design services','#full-site']]
  }
 };
 
@@ -461,8 +451,7 @@ function openPath(key){
  count.textContent=key==='style'?'STYLE FINDER':'CUSTOMER PATH';
  if(d.quiz) body.innerHTML=quizHTML();
  else if(d.steps) body.innerHTML=`<div class="steps">${d.steps.map(x=>`<div class="step"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div>`;
- else if(d.menu) body.innerHTML=`<div class="route-menu">${d.menu.map(x=>`<a href="atelier-house-mobile-site.html">${x}<span style="float:right;color:var(--clay)">\u2197</span></a>`).join('')}</div>`;
- else body.innerHTML=`<div class="steps">${d.steps.map(x=>`<div class="step"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div>`;
+ else body.innerHTML=`<div class="route-menu">${d.menu.map(x=>`<a href="#">${x}<span style="float:right;color:var(--clay)">\u2197</span></a>`).join('')}</div>`;
  actions.innerHTML=(d.actions||[]).map((x,i)=>`<a class="cta ${i?'secondary':''}" href="${x[1]}"><span>${x[0]}</span><span>\u2197</span></a>`).join('');
  panel.classList.add('open');panel.setAttribute('aria-hidden','false');panel.scrollTop=0;document.body.style.overflow='hidden';
  if(d.quiz)document.querySelectorAll('.swatch').forEach(btn=>btn.onclick=()=>{
@@ -474,7 +463,6 @@ function openPath(key){
 function closePanel(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');document.body.style.overflow=''}
 document.querySelectorAll('[data-path]').forEach(b=>b.addEventListener('click',()=>openPath(b.dataset.path)));
 document.getElementById('back').onclick=closePanel;
-document.getElementById('ownerKeyPlaceholder').addEventListener('click',()=>{document.getElementById('ownerKeyStatus').textContent=' Quiet placeholder — no QR has been issued for this fictional business.'});
 panel.addEventListener('pointerdown',e=>{if(e.target===panel)closePanel()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panel.classList.contains('open'))closePanel()});
 

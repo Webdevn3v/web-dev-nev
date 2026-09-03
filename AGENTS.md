@@ -2,6 +2,8 @@
 
 These instructions apply to the entire repository.
 
+The current locked correction brief is the source of truth. If these instructions, the project map, or an older implementation conflict with it, follow the brief and amend the documentation rather than expanding scope.
+
 ## Protect the working site
 
 - Preserve every working feature, route, animation, responsive behavior, form fallback, and accessibility affordance unless the task explicitly replaces it.
@@ -14,7 +16,7 @@ These instructions apply to the entire repository.
 - Use this sequence and capitalization: **Digital Key → Digital Door → Customer Path → Destination**.
 - The business owner holds the **Digital Key**; the visitor enters through the **Digital Door**. A visitor-facing tap-to-enter screen must say **door**, never **key**.
 - **Explore Everything** means the mobile-optimized version of that business's site. Use a desktop/full-site destination only when no mobile version exists.
-- **Owner Key** previews must be quiet/muted, never a bright primary button. A clearly identified placeholder is acceptable; do not create a real QR code without its confirmed destination.
+- **Owner Key** previews must be actual designed Key visuals and use quiet/muted triggers, never bright primary buttons. A non-scannable QR placeholder may appear inside a designed Key visual, but text or status messages are not previews. Do not invent a QR destination. If no visual exists, report it as missing.
 - **Connect the Dots** is the assembled Door + Mobile + Desktop (Revived/Evolved) combination, not a separate priced product.
 - Digital Cleanup or “junk drawer” organizing belongs only to Connect the Dots, not the base Key + Door + Path tier.
 
@@ -32,11 +34,9 @@ These instructions apply to the entire repository.
 ## Door and path requirements
 
 - Maintain the four customer demos: Frederick Legacy Law, Lumina Dental Studio, Northline Roofing Co., and Atelier House.
-- Each demo path must end, in order, with: a working Door entrance; a quiet Owner Key preview; and **Explore Everything** linked to the mobile-optimized site (desktop fallback only when mobile does not exist).
-- Add or preserve one business-specific FAQ path that resolves the question most likely to clog that business's phone line.
+- In `door.html`, each Walk a Path card must order its available actions as: quiet Owner Key example → View Door → **Explore Everything**. If the Owner Key visual is missing, show an honest non-interactive missing state in that first position rather than a fake preview button.
 - Build purposeful loops: deeper/mobile pages must offer a useful route back to the Door or Customer Paths, and the Door must lead forward to the correct destination. Loops must help visitors choose another intent, not trap them or bounce them without context.
 - Preserve Frederick's gate-free auto-launch behavior. Verify the Lumina and Northline Door entrance animations after related changes.
-- Atelier's mobile site must retain the useful content of its desktop site; do not call that migration complete until a content-parity review passes.
 
 ## The Digital Side Door
 
