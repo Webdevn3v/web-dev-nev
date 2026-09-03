@@ -2,6 +2,7 @@ from pathlib import Path
 import re
 from urllib.request import urlopen
 
+# Final flagship build: safe to rerun; transformations are idempotent.
 GA = '''<script async src="https://www.googletagmanager.com/gtag/js?id=G-GGMNTLZZ06"></script>\n<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-GGMNTLZZ06');</script>'''
 
 
@@ -66,7 +67,6 @@ def frederick(s):
 
 def atelier(s):
     s=ensure_ga(s)
-    # Never render route-menu links or CTA targets as dead hashes in the demo.
     s=s.replace('d.menu.map(x=>`<a href="#">${x}', 'd.menu.map(x=>`<a href="atelier-house-full-site.html">${x}')
     s=s.replace("['Browse the full portfolio','#full-site']", "['Browse the full portfolio','atelier-house-full-site.html']")
     s=s.replace("['Bring my direction to a consultation','#consult']", "['Bring my direction to a consultation','atelier-house-full-site.html']")
@@ -117,7 +117,6 @@ def build_frederick_full_site():
     s=ensure_ga(s)
     warm='''\n  /* TDS warm Frederick alignment */\n  :root{--navy:#4a4037;--navy-deep:#2f2924;--gold:#9b7a49;--gold-lt:#b9975b;--cream:#f2ece3;--cream-dk:#e8dfd3;--charcoal:#403933;--slate:#756d65;--mist:#fbf8f3;--white:#fffdf9;--border:rgba(64,57,51,.12)}\n  body{background:var(--mist);color:var(--charcoal)}\n  .hero{background:var(--cream)}\n  .hero__bg{background:radial-gradient(ellipse 75% 65% at 110% 32%,rgba(155,122,73,.13),transparent 60%),radial-gradient(ellipse 55% 70% at -5% 60%,rgba(217,189,133,.12),transparent 68%),linear-gradient(155deg,#fbf8f3 0%,#f2ece3 56%,#e8dfd3 100%)}\n  .hero h1{color:var(--charcoal)}.hero h1 em{color:var(--gold)}.hero__sub{color:#70675f}.hero__phone{color:#82786f}.hero__phone span{color:var(--charcoal)}\n  .nav__logo-name{color:var(--charcoal)}.nav__logo-sub{color:var(--gold)}.nav__links a{color:rgba(64,57,51,.72)}.nav.scrolled{background:rgba(251,248,243,.96);border-bottom:1px solid rgba(64,57,51,.08)}\n  .trust{background:#e8dfd3;color:var(--charcoal)}.trust__label{color:#756d65}.section--dark{background:#e5dccf;color:var(--charcoal)}.section--dark h2,.section--dark h3,.section--dark h4{color:var(--charcoal)}.section--dark .lead{color:#756d65}\n  .btn--primary{background:var(--gold);color:#fffdf9}.btn--outline{border-color:rgba(64,57,51,.28);color:var(--charcoal)}.btn--outline:hover{background:#e8dfd3;color:var(--charcoal);border-color:var(--gold)}.btn--navy{background:#4a4037;color:#fffdf9}\n  .area-card{background:#fffdf9}.area-card:hover{background:#f2ece3}.area-card::before{background:linear-gradient(90deg,var(--gold),#c2a474)}\n'''
     s=s.replace('</style>',warm+'\n</style>',1)
-    # Do not invite users to dial or email fictional placeholder contact details.
     s=re.sub(r'href="tel:[^"]+"','href="#contact"',s)
     s=re.sub(r'href="mailto:[^"]+"','href="#contact"',s)
     s=s.replace('action="mailto:hello@example.com"','action="#contact"')
