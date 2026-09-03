@@ -23,7 +23,7 @@ jobs:
         run: python scripts/finalize_digital_side.py
       - name: Commit generated edits
         run: |
-          if git diff --quiet; then
+          if [ -z "$(git status --porcelain)" ]; then
             echo "No generated edits needed."
             exit 0
           fi
