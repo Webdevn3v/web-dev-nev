@@ -177,9 +177,9 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     <!-- STEP 0 — INTRO -->
     <div class="step active" data-step="0">
       <div class="step-kicker">Client Intake / 01</div>
-      <h1 class="step-title" style="font-size:1.5rem">Let's Get Your Side.</h1>
-      <p class="step-intro" style="margin-top:18px">The goal here is simple: collect the pieces that make the build fit the business.</p>
-      <p class="step-intro">Skip anything that is unclear. Technical details can be figured out later.</p>
+      <h1 class="step-title" style="font-size:1.5rem">Tell The Digital Side What You're Working With.</h1>
+      <p class="step-intro" style="margin-top:18px">Share the pieces that help the build fit the business.</p>
+      <p class="step-intro">Skip anything that is unclear. Technical details can be sorted out later.</p>
       <div class="step-nav">
         <button type="button" class="btn-nav btn-continue" data-goto="1">Continue →</button>
       </div>
@@ -384,10 +384,10 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
       </div>
 
       <div class="submit-fallback" id="submitFallback">
-        <p>Something didn't send. Copy your answers below and email them to <strong>webdevn3v@gmail.com</strong> so nothing gets lost.</p>
+        <p>Something didn't send. Copy your answers below and email them to <strong>handled@thedigitalside.org</strong> so nothing gets lost.</p>
         <div class="fb-actions">
           <button type="button" class="btn-fb" id="copyAnswersBtn">Copy Answers</button>
-          <a href="mailto:webdevn3v@gmail.com?subject=Client%20Intake" class="btn-fb" id="mailFallback">Open Email →</a>
+          <a href="mailto:handled@thedigitalside.org?subject=Client%20Intake" class="btn-fb" id="mailFallback">Open Email →</a>
         </div>
         <span class="fb-copied" id="fbCopied">Copied ✓ — now paste into your email</span>
       </div>
@@ -521,7 +521,7 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     }else{
       window.prompt('Copy this text:', text);
     }
-    mailFallback.href = 'mailto:webdevn3v@gmail.com?subject=Client%20Intake&body=' + encodeURIComponent(text).slice(0, 1800);
+    mailFallback.href = 'mailto:handled@thedigitalside.org?subject=Client%20Intake&body=' + encodeURIComponent(text).slice(0, 1800);
   });
 
   form.addEventListener('submit', function(e){
