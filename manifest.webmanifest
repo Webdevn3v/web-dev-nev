@@ -1,0 +1,14 @@
+{
+  "name": "The Digital Side — Command Center",
+  "short_name": "TDS Command Center",
+  "description": "The Digital Side control plane: projects, tasks, Digital Door pipeline, audit queue, and clients.",
+  "start_url": "./tds-command-center.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080A0C",
+  "theme_color": "#080A0C",
+  "orientation": "any",
+  "icons": [
+    { "src": "tds-logo.webp", "sizes": "1024x1536", "type": "image/webp", "purpose": "any" }
+  ]
+}
