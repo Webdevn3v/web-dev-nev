@@ -1389,7 +1389,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <div class="contact-simple">
 <p class="contact-simple__intro">Start with the short version or use the full project intake when the details are ready. No phone call or video meeting is required to get started.</p>
 <div class="inquiry-grid">
-<div class="inquiry-card"><div class="tag">Quick version</div><h3>Send the part you know.</h3><p>A business name, link, problem, repeated customer question, or unfinished thought is enough to start.</p><form id="indexQuick" class="quick-fields"><input id="iqName" placeholder="Your name" required><input id="iqEmail" type="email" placeholder="Email" required><input id="iqBusiness" placeholder="Business name or link"><textarea id="iqMessage" placeholder="Tell me about your business or what needs help." required></textarea><button class="btn btn--lime" type="submit">Send Inquiry →</button><p class="quick-note">This short form will submit through the site once the form connection is active.</p></form></div>
+<div class="inquiry-card"><div class="tag">Quick version</div><h3>Send the part you know.</h3><p>A business name, link, problem, repeated customer question, or unfinished thought is enough to start.</p><form id="indexQuick" class="quick-fields"><input id="iqName" placeholder="Your name" required><input id="iqEmail" type="email" placeholder="Email" required><input id="iqBusiness" placeholder="Business name or link"><textarea id="iqMessage" placeholder="Tell me about your business or what needs help." required></textarea><button class="btn btn--lime" type="submit">Send Inquiry →</button><p class="quick-note" id="indexQuickStatus">Short-form submission is not live until the Formspree connection is added.</p></form></div>
 <div class="inquiry-card"><div class="tag">Full project intake</div><h3>Share the full picture.</h3><p>Use the longer questionnaire for goals, current setup, assets, customer needs, and the bigger picture.</p><div class="inquiry-actions"><a class="btn btn--lime" href="client-intake.html">Open Full Intake →</a><a class="btn btn--outline" href="mailto:handled@thedigitalside.org">Email Directly</a></div></div>
 </div></div></details>
 </div></section>
@@ -1617,7 +1617,28 @@ if(doorExampleModal) doorExampleModal.addEventListener('click', e => { if(e.targ
 document.addEventListener('keydown', e => { if(e.key === 'Escape') setDoorModal(false); });
 
 const indexQuick=document.getElementById('indexQuick');
-if(indexQuick){indexQuick.addEventListener('submit',e=>{e.preventDefault();if(!indexQuick.reportValidity())return;const n=encodeURIComponent(document.getElementById('iqName').value),em=encodeURIComponent(document.getElementById('iqEmail').value),b=encodeURIComponent(document.getElementById('iqBusiness').value),m=encodeURIComponent(document.getElementById('iqMessage').value);location.href=`mailto:handled@thedigitalside.org?subject=Quick%20TDS%20Inquiry%20from%20${n}&body=Name:%20${n}%0AEmail:%20${em}%0ABusiness:%20${b}%0A%0AWhat%20needs%20help:%0A${m}`})}
+const INDEX_FORM_ENDPOINT='https://formspree.io/f/YOUR_FORM_ID';
+if(indexQuick){indexQuick.addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(!indexQuick.reportValidity()) return;
+  const status=document.getElementById('indexQuickStatus');
+  if(INDEX_FORM_ENDPOINT.includes('YOUR_FORM_ID')){
+    if(status) status.textContent='This form still needs the live Formspree ID before it can submit.';
+    return;
+  }
+  const btn=indexQuick.querySelector('button[type="submit"]');
+  if(btn){btn.disabled=true;btn.textContent='Sending…'}
+  try{
+    const res=await fetch(INDEX_FORM_ENDPOINT,{method:'POST',body:new FormData(indexQuick),headers:{Accept:'application/json'}});
+    if(!res.ok) throw new Error('submit failed');
+    indexQuick.reset();
+    if(status) status.textContent='Sent. The Digital Side has your short version.';
+  }catch(err){
+    if(status) status.textContent='Something did not send. Please use the full intake or email handled@thedigitalside.org.';
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='Send Inquiry →'}
+  }
+})}
 
 function handleForm(e){
   e.preventDefault();
