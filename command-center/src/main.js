@@ -16,6 +16,10 @@ const seed = {
   systems:[
     ['LOCAL DB','ready'],['GITHUB','planned'],['CLAUDE','planned'],['CHATGPT','planned'],['WATCHTOWER','planned']
   ],
+  clients:[
+    {id:'tds',name:'The Digital Side',role:'STUDIO / CLIENT 0',status:'active',priority:'CORE',deadline:'Ongoing',repo:'Webdevn3v/web-dev-nev',note:'Run the studio through the same client system Jarvie will use for every project.'},
+    {id:'stone-stardust',name:'Stone & Stardust',role:'CLIENT 1',status:'urgent',priority:'TONIGHT',deadline:'Event tomorrow',repo:'',note:'First real-world Jarvie client test: update Nina’s page for tomorrow’s event.'}
+  ],
   doorDraft:{
     client:'',business:'',primaryGoal:'',customer:'',urgentNeed:'',customerIntent:'',tone:'',paths:'',destinations:'',handoff:'',deliverables:'Digital Key\nDigital Door\nCustomer Paths',notes:'',step:0
   }
@@ -127,7 +131,11 @@ function renderRunway(){
 }
 function renderWatch(){setHeader('MONITORING','Watchtower');view.innerHTML=`<div class="card"><div class="big">WATCH REGISTRY READY</div><p class="muted">Phase 1 keeps monitoring offline. Later monitors plug into this system without pretending to be connected.</p>${['Website health','Deployments','Domains / SSL / DNS','Forms','Client inactivity','Payments','Deadlines','Backups'].map(x=>`<div class="status-row"><span>${x}</span><span class="status">PLANNED</span></div>`).join('')}</div>`;}
 function renderMoney(){setHeader('TDS LAUNCH FUND','Money');view.innerHTML=`<div class="grid two"><div class="card glow"><div class="kicker">NEXT INFRASTRUCTURE GOAL</div><div class="big">BUSINESS FORMATION + BANKING</div><p class="muted">Budget engine migration comes after the desktop foundation is stable.</p></div><div class="card"><div class="kicker">RULE</div><div class="big">MONEY GETS A JOB FIRST.</div><p class="muted">Every future expense will carry priority, dependency, target, saved, remaining and funding source.</p></div></div>`;}
-function renderClients(){setHeader('PROJECT SYSTEM','Clients');view.innerHTML=`<div class="card"><div class="big">CLIENT MODEL PORT</div><p class="muted">The original full lifecycle model is preserved as a Phase 1 migration target. The Door Workflow becomes the guided planning layer attached to each project.</p></div>`;}
+function renderClients(){
+  setHeader('CLIENT WORKSPACES','Clients');
+  view.innerHTML=`<div class="grid two">${state.clients.map(c=>`<div class="card ${c.status==='urgent'?'glow':''}"><div class="kicker">${esc(c.role)} · ${esc(c.priority)}</div><div class="big">${esc(c.name)}</div><p class="muted">${esc(c.note)}</p><div class="status-row"><span>DEADLINE</span><span class="status ${c.status==='urgent'?'ready':''}">${esc(c.deadline)}</span></div><div class="status-row"><span>REPO</span><span class="status">${esc(c.repo||'LINK WHEN READY')}</span></div><div class="actions"><button class="btn primary" data-client-door="${esc(c.id)}">START WORK</button></div></div>`).join('')}</div>`;
+  view.querySelectorAll('[data-client-door]').forEach(b=>b.onclick=async()=>{const client=state.clients.find(c=>c.id===b.dataset.clientDoor);state.doorDraft={...structuredClone(seed.doorDraft),client:client?.name||'',step:0,notes:client?.id==='stone-stardust'?'EVENT DEADLINE: tomorrow. Prioritize the page update needed tonight.':''};await persist('doorDraft');active='door';render();});
+}
 function renderAI(){setHeader('ROUTER FOUNDATION','AI Desk');view.innerHTML=`<div class="card glow"><div class="big">ONE DESK. MULTIPLE BRAINS.</div><p class="muted">No external AI credentials are stored or called in this phase. The next layer will route approved jobs to Claude, OpenAI/ChatGPT, GitHub and local tools through the native backend.</p>${state.systems.map(([n,s])=>`<div class="status-row"><span>${n}</span><span class="status ${s==='ready'?'ready':''}">${s.toUpperCase()}</span></div>`).join('')}</div>`;}
 
 function render(){renderNav();renderSystems();({today:renderToday,door:renderDoor,clients:renderClients,runway:renderRunway,watch:renderWatch,money:renderMoney,ai:renderAI}[active]||renderToday)();}
