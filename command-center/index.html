@@ -41,6 +41,24 @@
     </main>
   </div>
 
+  <div id="toast" class="toast" hidden></div>
+
+  <div class="modal-backdrop" id="confirmBackdrop" hidden>
+    <div class="modal">
+      <div class="kicker" id="confirmTier"></div>
+      <div class="big" id="confirmTitle"></div>
+      <p class="muted" id="confirmDetail"></p>
+      <div class="field" id="confirmTypeWrap" hidden>
+        <label>Type APPROVE to continue</label>
+        <input id="confirmTypeInput" placeholder="APPROVE" autocomplete="off">
+      </div>
+      <div class="actions">
+        <button class="btn" id="confirmCancel">CANCEL</button>
+        <button class="btn primary" id="confirmOk">CONFIRM</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>
