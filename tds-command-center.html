@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Digital Side — Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#080A0C;--charcoal:#141316;--graphite:#26282B;--soft:#B8B9BA;--off:#EEEDEF;
+  --lime:#A6FF00;--amber:#F1B84B;--red:#FF5E57;--line:rgba(255,255,255,.09);
+  --mono:'Space Mono',monospace;--sans:'Inter',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--black);color:var(--off);font-family:var(--sans)}
+body{background:radial-gradient(circle at 72% 8%,rgba(166,255,0,.06),transparent 30%),linear-gradient(180deg,#0b0d0f 0%,#080A0C 100%)}
+button,input,textarea,select{font:inherit;color:inherit}
+a{color:var(--lime)}
+.shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.rail{border-right:1px solid var(--line);background:rgba(12,13,15,.9);padding:20px 12px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{display:flex;gap:10px;align-items:center;padding:0 8px 18px;border-bottom:1px solid var(--line)}
+.brand__dot{width:8px;height:8px;background:var(--lime);box-shadow:0 0 16px var(--lime);border-radius:50%;flex:none}
+.brand strong{display:block;font-size:.86rem}
+.brand small{display:block;font:.5rem var(--mono);letter-spacing:.14em;color:#656b70;margin-top:3px}
+nav{padding-top:14px;display:grid;gap:3px}
+.navbtn{background:transparent;border:1px solid transparent;color:#8d9298;border-radius:7px;text-align:left;padding:8px 10px;cursor:pointer;font-size:.74rem;display:flex;justify-content:space-between;width:100%}
+.navbtn:hover{background:#15181b;color:var(--off)}
+.navbtn.active{border-color:rgba(166,255,0,.2);background:rgba(166,255,0,.07);color:var(--lime)}
+.rail__footer{margin-top:auto;padding:12px 8px 0;border-top:1px solid var(--line);font:.54rem var(--mono);color:#656b70;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.sysdot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px rgba(166,255,0,.55);flex:none}
+.sysdot.off{background:var(--amber);box-shadow:none}
+.stage{overflow-x:hidden;padding:26px 32px 80px;min-width:0}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.eyebrow{font:.55rem var(--mono);letter-spacing:.18em;color:#656b70}
+.topbar h1{font-size:1.5rem;margin:5px 0 0}
+.topbar__right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.capture{display:flex;gap:6px;align-items:center;background:#101214;border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-width:220px}
+.capture input{background:transparent;border:0;outline:0;color:var(--off);font-size:.76rem;width:190px}
+.capture input::placeholder{color:#656b70}
+.iconbtn{border:1px solid var(--line);background:#181b1e;color:var(--soft);border-radius:7px;padding:7px 10px;cursor:pointer;font-size:.7rem;white-space:nowrap}
+.iconbtn:hover{border-color:rgba(166,255,0,.4);color:var(--off)}
+.grid{display:grid;gap:12px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:linear-gradient(180deg,rgba(24,26,29,.92),rgba(17,19,21,.92));border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 14px 40px rgba(0,0,0,.2);min-width:0}
+.card.glow{border-color:rgba(166,255,0,.18);box-shadow:inset 0 0 40px rgba(166,255,0,.025),0 14px 40px rgba(0,0,0,.24)}
+.card.attn{border-color:rgba(241,184,75,.3)}
+.kicker{font:.54rem var(--mono);letter-spacing:.12em;color:#656b70;text-transform:uppercase}
+.big{font-size:1.15rem;font-weight:700;margin-top:5px}
+.muted{color:#8d9298;font-size:.78rem;line-height:1.5}
+.metric{font:700 1.7rem var(--mono);color:var(--lime)}
+.btn{border:1px solid var(--line);background:#181b1e;color:var(--off);border-radius:7px;padding:7px 11px;cursor:pointer;font-size:.72rem}
+.btn:hover{border-color:rgba(166,255,0,.45)}
+.btn.primary{background:var(--lime);border-color:var(--lime);color:#090b0c;font-weight:700}
+.btn.danger{border-color:rgba(255,94,87,.4);color:#ff8b86}
+.btn.small{padding:5px 8px;font-size:.66rem}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.pill{font:.55rem var(--mono);letter-spacing:.05em;border:1px solid var(--line);padding:4px 8px;border-radius:20px;color:#9aa0a6;white-space:nowrap;display:inline-block}
+.pill.warn{border-color:rgba(241,184,75,.35);color:var(--amber)}
+.pill.good{border-color:rgba(166,255,0,.3);color:var(--lime)}
+.pill.bad{border-color:rgba(255,94,87,.35);color:#ff8b86}
+.pill.neutral{color:#7d838a}
+.progress{height:5px;background:#25292d;border-radius:4px;overflow:hidden;margin-top:10px}
+.progress span{display:block;height:100%;background:var(--lime)}
+.field{margin-top:11px}
+.field label{display:block;font:.54rem var(--mono);letter-spacing:.08em;color:#72787e;margin-bottom:5px;text-transform:uppercase}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:#0f1113;color:var(--off);padding:8px 9px;border-radius:7px}
+.field textarea{min-height:70px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:rgba(166,255,0,.5)}
+table{width:100%;border-collapse:collapse;font-size:.76rem}
+th{text-align:left;font:.52rem var(--mono);letter-spacing:.08em;color:#656b70;text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.tablewrap{overflow-x:auto}
+.row-flex{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0;font-size:.78rem;gap:10px}
+.row-flex:last-child{border-bottom:0}
+.checkline{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.76rem}
+.checkline input{accent-color:var(--lime)}
+.bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.bar select,.bar input{border:1px solid var(--line);background:#101214;color:var(--off);border-radius:7px;padding:6px 8px;font-size:.72rem}
+.overlay{position:fixed;inset:0;background:rgba(4,5,6,.72);display:none;align-items:flex-start;justify-content:center;padding:6vh 16px;z-index:50;overflow-y:auto}
+.overlay.open{display:flex}
+.modal{background:#101214;border:1px solid var(--line);border-radius:12px;padding:20px;width:min(640px,100%);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.modal__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.modal__top h3{margin:0;font-size:1rem}
+.palette{width:min(560px,100%)}
+.palette input{width:100%;background:#0b0d0e;border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:var(--off);font-size:.86rem;outline:none}
+.palette input:focus{border-color:rgba(166,255,0,.5)}
+.palette__list{margin-top:10px;max-height:50vh;overflow-y:auto}
+.palette__item{padding:9px 10px;border-radius:7px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;font-size:.78rem}
+.palette__item:hover{background:#181b1e}
+.palette__item span:last-child{color:#656b70;font:.6rem var(--mono)}
+.empty{padding:22px 10px;text-align:center;color:#656b70;font-size:.8rem}
+.tabbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabbar button{border:1px solid var(--line);background:#111315;color:#82888e;padding:7px 12px;border-radius:20px;font-size:.7rem;cursor:pointer}
+.tabbar button.active{border-color:rgba(166,255,0,.35);color:var(--lime);background:rgba(166,255,0,.06)}
+.linklist a{display:block;font-size:.76rem;margin-top:4px;word-break:break-all}
+.close{background:transparent;border:0;color:#8d9298;font-size:1.1rem;cursor:pointer;line-height:1}
+.close:hover{color:var(--off)}
+.doorgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px}
+@media(max-width:1000px){.grid.three,.grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}.doorgrid{grid-template-columns:1fr}}
+@media(max-width:820px){
+  .shell{grid-template-columns:64px 1fr}
+  .brand strong,.brand small,.navbtn span:first-child{display:none}
+  .rail{padding:14px 6px}
+  .navbtn{justify-content:center}
+  .stage{padding:20px 14px 70px}
+  .grid.two,.grid.three,.grid.four{grid-template-columns:1fr}
+  .capture{min-width:0}
+  .capture input{width:110px}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><span class="brand__dot"></span><div><strong>the digital side.</strong><small>COMMAND CENTER</small></div></div>
+    <nav id="nav"></nav>
+    <div class="rail__footer"><span id="sysdot" class="sysdot"></span><span id="clock"></span></div>
+  </aside>
+
+  <main class="stage">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow" id="eyebrow">SYSTEM</span>
+        <h1 id="pageTitle">Command Center</h1>
+      </div>
+      <div class="topbar__right">
+        <div class="capture">
+          <input id="captureInput" placeholder="Dump it here… (Enter to save)" />
+        </div>
+        <button class="iconbtn" id="paletteBtn">⌘K SEARCH</button>
+      </div>
+    </header>
+    <section id="view"></section>
+  </main>
+</div>
+
+<div class="overlay" id="modalOverlay"><div class="modal" id="modalBody"></div></div>
+<div class="overlay" id="paletteOverlay"><div class="modal palette">
+  <input id="paletteInput" placeholder="Search projects, tasks, clients, files, sections…" />
+  <div class="palette__list" id="paletteList"></div>
+</div></div>
+
+<script>
+const nav_el = document.getElementById('nav');
+const view_el = document.getElementById('view');
+const eyebrow_el = document.getElementById('eyebrow');
+const title_el = document.getElementById('pageTitle');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalBody = document.getElementById('modalBody');
+const paletteOverlay = document.getElementById('paletteOverlay');
+const paletteInput = document.getElementById('paletteInput');
+const paletteList = document.getElementById('paletteList');
+const paletteBtn = document.getElementById('paletteBtn');
+const captureInput = document.getElementById('captureInput');
+const sysdot = document.getElementById('sysdot');
+const clockEl = document.getElementById('clock');
+
+const NAV = [
+  ['home','Home'],['projects','Projects'],['tasks','Tasks'],['door','Digital Door Pipeline'],
+  ['audit','Audit Queue'],['clients','Clients'],['ai','AI Desk'],['business','Business'],
+  ['integrations','Integrations'],['inbox','Inbox'],['reference','Reference'],['settings','Settings']
+];
+
+const WORKERS = ['Unassigned','Nev','ChatGPT','Claude','Claude Code','Claude Co-work','Manual / External'];
+const PROJECT_STATUSES = ['Backlog','Ready','Building','Needs Audit','Needs Revision','Waiting on Nev','Approved','Ready to Deploy','Live','Done'];
+const TASK_PRIORITIES = ['Low','Medium','High','Urgent'];
+const CRM_STATUSES = ['Prospect','Lead','Consultation','Proposal','Active Client','Completed','Follow-up'];
+const AUDIT_RESULTS = ['Pending','Pass','Pass with notes','Revise','Blocked'];
+const INTEGRATION_STATES = ['Connected','Ready to Connect','Manual Handoff','Future Integration'];
+const DOOR_STAGES = ['Intake','Brand understanding','Assets','Digital Door','Customer Paths','Mobile optimization','Full-Site Handoff','Owner Digital Key','QA/Audit','Client approval','Launch','Support/cleanup'];
+const BUSINESS_STATUSES = ['Not Started','In Progress','Done','Unknown'];
+
+function doorState(done){ const o={}; DOOR_STAGES.forEach(s=>o[s]=done.includes(s)); return o; }
+function doorPct(door){ if(!door) return 0; const vals=DOOR_STAGES.map(s=>door[s]?1:0); return Math.round(vals.reduce((a,b)=>a+b,0)/DOOR_STAGES.length*100); }
+function uid(prefix){ return prefix+'_'+Math.random().toString(36).slice(2,9); }
+function esc(v=''){ return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function nl2br(v=''){ return esc(v).replace(/\n/g,'<br>'); }
+function fmtDate(d){ if(!d) return '—'; try{return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch{return d;} }
+
+function seedData(){
+  return {
+    version: 1,
+    projects: [
+      {id:'tds', name:'The Digital Side', clientName:'', category:'Internal', isClient:false, stage:'Live', health:'On Track',
+        worker:'Unassigned', nextAction:'', links:{repo:'webdevn3v/web-dev-nev', file:'index.html', live:'https://thedigitalside.org'},
+        lastUpdate:'2026-09-04', notes:'The main TDS marketing site. Deployed via GitHub Pages with a custom domain (CNAME file → thedigitalside.org).',
+        door: null},
+      {id:'frederick', name:'Frederick Legacy Law', clientName:'', category:'Client', isClient:true, stage:'Building', health:'On Track',
+        worker:'Unassigned', nextAction:'Build Full-Site Handoff',
+        links:{repo:'webdevn3v/web-dev-nev', file:'door-frederick-legacy-law.html', live:''},
+        lastUpdate:'2026-09-04',
+        notes:'Digital Door (door-frederick-legacy-law.html), mobile site (frederick-legacy-law-mobile.html), and Owner Digital Key for Avery Bennett, Esq. (Founding Attorney) exist in the repo. No Full-Site Handoff file found yet.',
+        door: doorState(['Digital Door','Mobile optimization','Owner Digital Key'])},
+      {id:'lumina', name:'Lumina Dental', clientName:'', category:'Client', isClient:true, stage:'Building', health:'On Track',
+        worker:'Unassigned', nextAction:'Build Full-Site Handoff',
+        links:{repo:'webdevn3v/web-dev-nev', file:'lumina-door.html', live:''},
+        lastUpdate:'2026-09-04',
+        notes:'Digital Door (lumina-door.html), mobile site (lumina-mobile-site.html), and Owner Digital Key exist in the repo. No Full-Site Handoff file found yet. Contact name not on file.',
+        door: doorState(['Digital Door','Mobile optimization','Owner Digital Key'])},
+      {id:'northline', name:'Roofing / Contractor', clientName:'Northline Roofing Co.', category:'Client', isClient:true, stage:'Needs Audit', health:'On Track',
+        worker:'Unassigned', nextAction:'Run QA/Audit',
+        links:{repo:'webdevn3v/web-dev-nev', file:'northline-door.html', live:''},
+        lastUpdate:'2026-09-04',
+        notes:'Client is Northline Roofing Co. Digital Door, mobile site, full-site, and Owner Digital Key all exist in the repo — the most complete client build found. Contact name not on file.',
+        door: doorState(['Digital Door','Mobile optimization','Full-Site Handoff','Owner Digital Key'])},
+      {id:'atelier', name:'Interior Design', clientName:'Atelier House', category:'Client', isClient:true, stage:'Needs Audit', health:'On Track',
+        worker:'Unassigned', nextAction:'Run QA/Audit',
+        links:{repo:'webdevn3v/web-dev-nev', file:'atelier-door.html', live:''},
+        lastUpdate:'2026-09-04',
+        notes:'Client is Atelier House. Digital Door, mobile site, full-site, and Owner Digital Key all exist in the repo. Contact name not on file.',
+        door: doorState(['Digital Door','Mobile optimization','Full-Site Handoff','Owner Digital Key'])},
+      {id:'medspa', name:'MedSpa', clientName:'', category:'Client', isClient:true, stage:'Backlog', health:'Not Started',
+        worker:'Unassigned', nextAction:'Run Intake',
+        links:{repo:'', file:'', live:''},
+        lastUpdate:'',
+        notes:'No files, client name, or records found for this project yet.',
+        door: doorState([])}
+    ],
+    tasks: [
+      {id:'t1', title:'Build Full-Site Handoff for Frederick Legacy Law', project:'frederick', description:'Digital Door, mobile site, and Owner Digital Key exist. Full-Site Handoff page does not exist in the repo yet.', priority:'High', status:'Backlog', worker:'Unassigned', created:'2026-09-04', due:'', deps:'', links:'', auditNotes:'', completionNotes:''},
+      {id:'t2', title:'Build Full-Site Handoff for Lumina Dental', project:'lumina', description:'Digital Door, mobile site, and Owner Digital Key exist. Full-Site Handoff page does not exist in the repo yet.', priority:'High', status:'Backlog', worker:'Unassigned', created:'2026-09-04', due:'', deps:'', links:'', auditNotes:'', completionNotes:''},
+      {id:'t3', title:'Run QA/Audit on Roofing / Contractor (Northline) Digital Door build', project:'northline', description:'All four verifiable pieces exist (Digital Door, mobile, full-site, Owner Digital Key). Needs a real audit pass before moving toward client approval.', priority:'Medium', status:'Ready', worker:'Unassigned', created:'2026-09-04', due:'', deps:'', links:'', auditNotes:'', completionNotes:''},
+      {id:'t4', title:'Run QA/Audit on Interior Design (Atelier House) Digital Door build', project:'atelier', description:'All four verifiable pieces exist (Digital Door, mobile, full-site, Owner Digital Key). Needs a real audit pass before moving toward client approval.', priority:'Medium', status:'Ready', worker:'Unassigned', created:'2026-09-04', due:'', deps:'', links:'', auditNotes:'', completionNotes:''},
+      {id:'t5', title:'Run Intake for MedSpa', project:'medspa', description:'No files or client details exist yet for this project.', priority:'Medium', status:'Backlog', worker:'Unassigned', created:'2026-09-04', due:'', deps:'', links:'', auditNotes:'', completionNotes:''},
+      {id:'t6', title:'Confirm CRM status for existing client builds', project:'', description:'Frederick Legacy Law, Lumina Dental, Roofing/Contractor, and Interior Design were seeded as "Active Client" in the CRM based on the volume of build assets already produced for them, since no explicit CRM record existed. Confirm this is accurate per client, or correct it.', priority:'High', status:'Waiting on Nev', worker:'Nev', created:'2026-09-04', due:'', deps:'', links:'', auditNotes:'', completionNotes:''}
+    ],
+    clients: [
+      {id:'c1', name:'Avery Bennett, Esq.', business:'Frederick Legacy Law', contact:'', service:'Digital Door', project:'frederick', notes:'Founding Attorney. Contact info (email/phone) not on file.', nextAction:'Confirm Full-Site Handoff scope', status:'Active Client'},
+      {id:'c2', name:'', business:'Lumina Dental', contact:'', service:'Digital Door', project:'lumina', notes:'Contact name not on file.', nextAction:'Confirm Full-Site Handoff scope', status:'Active Client'},
+      {id:'c3', name:'', business:'Northline Roofing Co.', contact:'', service:'Digital Door', project:'northline', notes:'Contact name not on file.', nextAction:'Schedule QA/Audit', status:'Active Client'},
+      {id:'c4', name:'', business:'Atelier House', contact:'', service:'Digital Door', project:'atelier', notes:'Contact name not on file.', nextAction:'Schedule QA/Audit', status:'Active Client'}
+    ],
+    inbox: [],
+    audits: [
+      {id:'a1', projectId:'', projectLabel:'Command Center Phase 1 (Tauri desktop scaffold, branch command-center-phase1)', task:'Full code audit against 12 review criteria (Tauri correctness, SQLite/Stronghold setup, CSP/capabilities, offline behavior, data-loss risk, visual quality, etc.)',
+        whatChanged:'Fixed a field-key collision bug in the Digital Door wizard that silently overwrote a user\'s answer between step 0 and step 1. Filled in fields the mission-summary brief was silently dropping. Added a .gitignore and committed package-lock.json.',
+        filesChanged:'command-center/src/main.js, command-center/.gitignore, command-center/package-lock.json, command-center/docs/CLAUDE-AUDIT-RESULTS.md',
+        builderNotes:'Full findings against every item in command-center/docs/CLAUDE-AUDIT.md are written up in command-center/docs/CLAUDE-AUDIT-RESULTS.md on branch command-center-phase1.',
+        screenshotsLink:'', acceptanceCriteria:'PASS / FIX REQUIRED verdict per criterion, blocking issues first, exact files/lines, patches, and Phase 2 recommendations.',
+        result:'Pass with notes', createdAt:'2026-09-04'}
+    ],
+    business: [
+      {id:'b1', label:'LLC / legal setup', status:'Unknown', note:'No record found in the repo — confirm actual status.'},
+      {id:'b2', label:'Banking', status:'Unknown', note:'No record found — confirm actual status.'},
+      {id:'b3', label:'Business email / domain', status:'In Progress', note:'Domain thedigitalside.org is registered and live via GitHub Pages (CNAME file present). Business email not confirmed.'},
+      {id:'b4', label:'Stripe / payments', status:'Not Started', note:'No integration found anywhere in the repo.'},
+      {id:'b5', label:'Google Business Profile', status:'Unknown', note:'No record found — confirm actual status.'},
+      {id:'b6', label:'Analytics', status:'Not Started', note:'No tracking script found on the live site (index.html).'},
+      {id:'b7', label:'Apple Developer', status:'Not Started', note:'No integration found. The Digital Key pages use "Wallet-ready" as design copy only — not a real Apple Wallet pass yet.'},
+      {id:'b8', label:'Forms / intake', status:'In Progress', note:'client-intake.html is a live form wired to Formspree. Submissions are not yet pulled into this Command Center.'},
+      {id:'b9', label:'Contracts', status:'Unknown', note:'No record found — confirm actual status.'},
+      {id:'b10', label:'Client documents', status:'Unknown', note:'No record found — confirm actual status.'},
+      {id:'b11', label:'Pricing', status:'Done', note:'See the Reference section — Connect the Dots, Digital Door, Mobile Rescue, Revive, and Evolve are defined with real prices.'},
+      {id:'b12', label:'Business expenses', status:'Unknown', note:'No record found — confirm actual status.'},
+      {id:'b13', label:'Upcoming operational tasks', status:'Not Started', note:'Nothing captured yet — use Quick Capture / Inbox and convert items to a Business/admin task.'}
+    ],
+    integrations: [
+      {name:'GitHub', state:'Connected', note:'Repo webdevn3v/web-dev-nev. Project links in this Command Center point at real files in it.'},
+      {name:'Claude Code', state:'Connected', note:'Primary repo/code builder. Built this Command Center.'},
+      {name:'ChatGPT / OpenAI', state:'Manual Handoff', note:'Used for architecture, strategy, and audit via copy-paste briefs (see Handoff Generator in AI Desk). No API wired in.'},
+      {name:'Claude (API)', state:'Future Integration', note:'Would need a backend to hold credentials safely — this is a static, no-backend app, so it is not wired in.'},
+      {name:'Claude Co-work', state:'Manual Handoff', note:'Invoked as its own session today; not triggered from inside this dashboard yet.'},
+      {name:'Email', state:'Future Integration', note:'No email service connected.'},
+      {name:'Calendar', state:'Future Integration', note:'No calendar service connected.'},
+      {name:'Forms', state:'Connected', note:'client-intake.html is a live Formspree-backed intake form. Submissions are not yet pulled into this Command Center.'},
+      {name:'Stripe', state:'Future Integration', note:'No account or integration found.'},
+      {name:'Analytics', state:'Future Integration', note:'No tracking script found on the live site.'},
+      {name:'Apple Wallet / Developer', state:'Future Integration', note:'Digital Key pages use wallet-style visuals as design copy only — not a real Apple Wallet pass.'}
+    ],
+    reference: [
+      {name:'Connect the Dots', price:'FREE'},
+      {name:'Digital Door', price:'$350+ / Enhanced $500+'},
+      {name:'Mobile Rescue', price:'$175+'},
+      {name:'Revive', price:'$250+'},
+      {name:'Evolve', price:'$350+'}
+    ],
+    referenceInternal: [
+      {name:'Full Build', price:'Internal reference only — not on the public pricing list unless intentionally present.'}
+    ]
+  };
+}
+
+const STORE_KEY = 'tds_command_center_v1';
+let state = load();
+let active = (location.hash.replace('#/','').split('/')[0]) || 'home';
+
+function load(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw){ const parsed = JSON.parse(raw); if(parsed && parsed.projects) return parsed; }
+  }catch(e){ console.error('Command Center: failed to load saved state, using seed data.', e); }
+  const seed = seedData();
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(seed)); }catch(e){}
+  return seed;
+}
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+  catch(e){ console.error('Command Center: failed to save state.', e); }
+}
+function project(id){ return state.projects.find(p=>p.id===id); }
+function task(id){ return state.tasks.find(t=>t.id===id); }
+function client(id){ return state.clients.find(c=>c.id===id); }
+
+function statusPill(s){
+  const good=['Approved','Ready to Deploy','Live','Done','Pass','Connected'];
+  const warn=['Needs Audit','Needs Revision','Waiting on Nev','Revise','Pass with notes','Ready to Connect'];
+  const bad=['Blocked'];
+  let cls='neutral';
+  if(good.includes(s)) cls='good'; else if(warn.includes(s)) cls='warn'; else if(bad.includes(s)) cls='bad';
+  return `<span class="pill ${cls}">${esc(s)}</span>`;
+}
+
+function setHeader(eyebrow,title){ eyebrow_el.textContent=eyebrow; title_el.textContent=title; }
+
+function renderNav(){
+  nav_el.innerHTML = NAV.map(([id,label])=>`<button class="navbtn ${active===id?'active':''}" data-nav="${id}"><span>${label}</span><span>›</span></button>`).join('');
+  nav_el.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{ location.hash = '#/'+b.dataset.nav; });
+}
+
+function go(view){ location.hash = '#/'+view; }
+
+window.addEventListener('hashchange', ()=>{
+  const parts = location.hash.replace('#/','').split('/');
+  active = parts[0] || 'home';
+  renderNav();
+  render(parts);
+});
+
+/* ---------- HOME ---------- */
+function renderHome(){
+  setHeader('DAILY BRIEFING','Home');
+  const clientProjects = state.projects.filter(p=>p.isClient);
+  const attention = [];
+  state.projects.forEach(p=>{
+    if(p.stage==='Backlog' && p.category==='Client' && !p.links.file) attention.push(`${p.name}: no files or records found yet.`);
+  });
+  state.tasks.forEach(t=>{
+    if(t.status==='Waiting on Nev') attention.push(`Task "${t.title}" is waiting on Nev.`);
+  });
+  const waitingOnNev = state.tasks.filter(t=>t.status==='Waiting on Nev');
+  const waitingOnAI = state.tasks.filter(t=>['Ready','Building'].includes(t.status) && t.worker!=='Unassigned' && t.worker!=='Nev');
+  const recentlyDone = state.tasks.filter(t=>t.status==='Done');
+  const nextActions = state.tasks.filter(t=>['Backlog','Ready'].includes(t.status)).slice(0,6);
+
+  view_el.innerHTML = `
+    <div class="grid three">
+      <div class="card glow"><div class="kicker">ACTIVE PROJECTS</div><div class="metric">${clientProjects.length}</div><div class="muted">Client builds tracked in this Command Center.</div></div>
+      <div class="card"><div class="kicker">WAITING ON NEV</div><div class="metric">${waitingOnNev.length}</div><div class="muted">Tasks blocked on a decision or approval from you.</div></div>
+      <div class="card"><div class="kicker">RECENTLY COMPLETED</div><div class="metric">${recentlyDone.length}</div><div class="muted">Tasks marked Done.</div></div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="kicker">TODAY — NEXT ACTIONS</div>
+      ${nextActions.length? nextActions.map(t=>`<div class="row-flex"><div><strong>${esc(t.title)}</strong><div class="muted">${t.project? esc(project(t.project)?.name||t.project):'—'} · ${esc(t.worker)}</div></div>${statusPill(t.status)}</div>`).join('') : '<div class="empty">Nothing in Backlog or Ready right now.</div>'}
+      <div class="actions"><button class="btn primary" data-go="tasks">OPEN TASK SYSTEM</button><button class="btn" data-go="door">DIGITAL DOOR PIPELINE</button></div>
+    </div>
+
+    <div class="card ${attention.length?'attn':''}" style="margin-top:12px">
+      <div class="kicker">ATTENTION</div>
+      ${attention.length? attention.map(a=>`<div class="row-flex"><span class="muted">${esc(a)}</span></div>`).join('') : '<div class="empty">Nothing flagged right now.</div>'}
+    </div>
+
+    <div class="kicker" style="margin:18px 0 8px">ACTIVE BUILDS</div>
+    <div class="grid three">
+      ${state.projects.map(p=>projectCard(p)).join('')}
+    </div>
+
+    ${waitingOnAI.length? `<div class="card" style="margin-top:12px"><div class="kicker">WAITING ON AI</div>${waitingOnAI.map(t=>`<div class="row-flex"><span>${esc(t.title)}</span><span class="pill neutral">${esc(t.worker)}</span></div>`).join('')}</div>` : ''}
+  `;
+  view_el.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  view_el.querySelectorAll('[data-open-project]').forEach(b=>b.onclick=()=>go('projects/'+b.dataset.openProject));
+}
+
+function projectCard(p){
+  const pct = p.door? doorPct(p.door) : null;
+  return `<div class="card">
+    <div class="kicker">${esc(p.category.toUpperCase())}${p.clientName?' · '+esc(p.clientName):''}</div>
+    <div class="big">${esc(p.name)}</div>
+    <div style="margin-top:6px">${statusPill(p.stage)} <span class="pill neutral">${esc(p.health)}</span></div>
+    <div class="muted" style="margin-top:8px">Worker: ${esc(p.worker)}</div>
+    <div class="muted">Next: ${p.nextAction?esc(p.nextAction):'Not set'}</div>
+    <div class="muted">Updated: ${fmtDate(p.lastUpdate)}</div>
+    ${pct!==null?`<div class="progress"><span style="width:${pct}%"></span></div><div class="muted" style="margin-top:4px">${pct}% of Digital Door pipeline checked</div>`:''}
+    ${p.links.file?`<div class="linklist"><a href="${esc(p.links.file)}" target="_blank" rel="noopener">${esc(p.links.file)}</a>${p.links.live?`<a href="${esc(p.links.live)}" target="_blank" rel="noopener">${esc(p.links.live)}</a>`:''}</div>`:''}
+    <div class="actions"><button class="btn small" data-open-project="${p.id}">OPEN</button></div>
+  </div>`;
+}
+
+/* ---------- PROJECTS ---------- */
+function renderProjects(sub){
+  if(sub) return renderProjectWorkspace(sub);
+  setHeader('PROJECT SYSTEM','Projects');
+  view_el.innerHTML = `
+    <div class="actions" style="margin-bottom:14px"><button class="btn primary" data-new-project>+ NEW PROJECT</button></div>
+    <div class="grid three">${state.projects.map(p=>projectCard(p)).join('')}</div>
+  `;
+  view_el.querySelectorAll('[data-open-project]').forEach(b=>b.onclick=()=>go('projects/'+b.dataset.openProject));
+  view_el.querySelector('[data-new-project]').onclick=()=>openProjectEditor(null);
+}
+
+function renderProjectWorkspace(id){
+  const p = project(id);
+  if(!p){ view_el.innerHTML = `<div class="empty">Project not found.</div>`; return; }
+  setHeader('PROJECT WORKSPACE', p.name);
+  const projTasks = state.tasks.filter(t=>t.project===id);
+  const projAudits = state.audits.filter(a=>a.projectId===id);
+  const projClient = state.clients.find(c=>c.project===id);
+  view_el.innerHTML = `
+    <div class="actions"><button class="btn" data-back>← ALL PROJECTS</button><button class="btn" data-edit-project>EDIT</button></div>
+    <div class="grid two" style="margin-top:12px">
+      <div class="card glow">
+        <div class="kicker">OVERVIEW</div>
+        <div class="big">${esc(p.name)}${p.clientName?` <span class="muted">(${esc(p.clientName)})</span>`:''}</div>
+        <p class="muted">${p.notes? nl2br(p.notes):'No notes yet.'}</p>
+        <div style="margin-top:8px">${statusPill(p.stage)} <span class="pill neutral">${esc(p.health)}</span></div>
+      </div>
+      <div class="card">
+        <div class="kicker">STATUS &amp; ASSIGNMENT</div>
+        <div class="field"><label>Stage</label><select data-field="stage">${PROJECT_STATUSES.map(s=>`<option ${s===p.stage?'selected':''}>${s}</option>`).join('')}</select></div>
+        <div class="field"><label>Worker</label><select data-field="worker">${WORKERS.map(w=>`<option ${w===p.worker?'selected':''}>${w}</option>`).join('')}</select></div>
+        <div class="field"><label>Next Action</label><input data-field="nextAction" value="${esc(p.nextAction)}" placeholder="Not set"></div>
+      </div>
+    </div>
+
+    <div class="grid two" style="margin-top:12px">
+      <div class="card">
+        <div class="kicker">LINKS &amp; FILES</div>
+        <div class="field"><label>Repo</label><input data-field="repo" value="${esc(p.links.repo)}" placeholder="owner/repo"></div>
+        <div class="field"><label>Key file</label><input data-field="file" value="${esc(p.links.file)}" placeholder="path/to/file.html"></div>
+        <div class="field"><label>Live URL</label><input data-field="live" value="${esc(p.links.live)}" placeholder="https://…"></div>
+      </div>
+      <div class="card">
+        <div class="kicker">DIGITAL DOOR PIPELINE</div>
+        ${p.door? `<div class="progress"><span style="width:${doorPct(p.door)}%"></span></div><div class="muted" style="margin:8px 0">${doorPct(p.door)}% complete</div><div class="doorgrid">${DOOR_STAGES.map(s=>`<label class="checkline"><input type="checkbox" data-door="${s}" ${p.door[s]?'checked':''}> ${s}</label>`).join('')}</div>` : `<div class="empty">This project doesn't use the client production pipeline.</div>`}
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="kicker">TASKS FOR THIS PROJECT</div>
+      ${projTasks.length? projTasks.map(t=>`<div class="row-flex"><span>${esc(t.title)}</span>${statusPill(t.status)}</div>`).join('') : '<div class="empty">No tasks yet.</div>'}
+      <div class="actions"><button class="btn small" data-new-task>+ NEW TASK FOR THIS PROJECT</button></div>
+    </div>
+
+    <div class="grid two" style="margin-top:12px">
+      <div class="card">
+        <div class="kicker">AUDIT HISTORY</div>
+        ${projAudits.length? projAudits.map(a=>`<div class="row-flex"><span>${esc(a.task)}</span>${statusPill(a.result)}</div>`).join('') : '<div class="empty">No audits recorded yet.</div>'}
+      </div>
+      <div class="card">
+        <div class="kicker">CRM RECORD</div>
+        ${projClient? `<div class="big">${esc(projClient.name||projClient.business)}</div><p class="muted">${esc(projClient.business)} — ${statusPill(projClient.status)}</p><p class="muted">${esc(projClient.notes)}</p>` : '<div class="empty">No CRM record linked.</div>'}
+      </div>
+    </div>
+  `;
+  view_el.querySelector('[data-back]').onclick=()=>go('projects');
+  view_el.querySelector('[data-edit-project]').onclick=()=>openProjectEditor(id);
+  view_el.querySelector('[data-new-task]').onclick=()=>openTaskEditor(null,id);
+  view_el.querySelectorAll('[data-field]').forEach(el=>el.onchange=()=>{
+    const f=el.dataset.field;
+    if(['repo','file','live'].includes(f)) p.links[f]=el.value.trim(); else p[f]=el.value.trim();
+    p.lastUpdate = new Date().toISOString().slice(0,10);
+    save(); renderProjectWorkspace(id);
+  });
+  view_el.querySelectorAll('[data-door]').forEach(el=>el.onchange=()=>{
+    p.door[el.dataset.door]=el.checked; p.lastUpdate=new Date().toISOString().slice(0,10); save(); renderProjectWorkspace(id);
+  });
+}
+
+function openProjectEditor(id){
+  const p = id? project(id) : {id:uid('proj'), name:'', clientName:'', category:'Client', isClient:true, stage:'Backlog', health:'Unknown', worker:'Unassigned', nextAction:'', links:{repo:'',file:'',live:''}, lastUpdate:new Date().toISOString().slice(0,10), notes:'', door: doorState([])};
+  modalBody.innerHTML = `
+    <div class="modal__top"><h3>${id?'Edit Project':'New Project'}</h3><button class="close" data-close>×</button></div>
+    <div class="field"><label>Name</label><input id="mProjName" value="${esc(p.name)}"></div>
+    <div class="field"><label>Client name (if different)</label><input id="mProjClient" value="${esc(p.clientName)}"></div>
+    <div class="field"><label>Category</label><select id="mProjCategory"><option ${p.category==='Client'?'selected':''}>Client</option><option ${p.category==='Internal'?'selected':''}>Internal</option></select></div>
+    <div class="field"><label>Notes</label><textarea id="mProjNotes">${esc(p.notes)}</textarea></div>
+    <div class="actions"><button class="btn primary" id="mProjSave">SAVE</button>${id?'<button class="btn danger" id="mProjDelete">DELETE</button>':''}</div>
+  `;
+  openModal();
+  modalBody.querySelector('[data-close]').onclick=closeModal;
+  modalBody.querySelector('#mProjSave').onclick=()=>{
+    p.name = modalBody.querySelector('#mProjName').value.trim() || 'Untitled project';
+    p.clientName = modalBody.querySelector('#mProjClient').value.trim();
+    p.category = modalBody.querySelector('#mProjCategory').value;
+    p.isClient = p.category==='Client';
+    p.notes = modalBody.querySelector('#mProjNotes').value.trim();
+    if(!id) state.projects.push(p);
+    save(); closeModal(); go('projects/'+p.id);
+  };
+  if(id){
+    modalBody.querySelector('#mProjDelete').onclick=()=>{
+      if(!confirm('Delete this project? This cannot be undone.')) return;
+      state.projects = state.projects.filter(x=>x.id!==id);
+      state.tasks.forEach(t=>{ if(t.project===id) t.project=''; });
+      save(); closeModal(); go('projects');
+    };
+  }
+}
+
+/* ---------- TASKS ---------- */
+let taskFilters = {project:'', worker:'', status:'', priority:''};
+function renderTasks(){
+  setHeader('TASK SYSTEM','Tasks');
+  const list = state.tasks.filter(t=>
+    (!taskFilters.project || t.project===taskFilters.project) &&
+    (!taskFilters.worker || t.worker===taskFilters.worker) &&
+    (!taskFilters.status || t.status===taskFilters.status) &&
+    (!taskFilters.priority || t.priority===taskFilters.priority)
+  );
+  view_el.innerHTML = `
+    <div class="bar">
+      <select id="fProject"><option value="">All projects</option>${state.projects.map(p=>`<option value="${p.id}" ${taskFilters.project===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select>
+      <select id="fWorker"><option value="">All workers</option>${WORKERS.map(w=>`<option ${taskFilters.worker===w?'selected':''}>${w}</option>`).join('')}</select>
+      <select id="fStatus"><option value="">All statuses</option>${PROJECT_STATUSES.map(s=>`<option ${taskFilters.status===s?'selected':''}>${s}</option>`).join('')}</select>
+      <select id="fPriority"><option value="">All priorities</option>${TASK_PRIORITIES.map(p=>`<option ${taskFilters.priority===p?'selected':''}>${p}</option>`).join('')}</select>
+      <button class="btn primary" id="newTaskBtn">+ NEW TASK</button>
+    </div>
+    <div class="card">
+      <div class="tablewrap"><table>
+        <thead><tr><th>Title</th><th>Project</th><th>Worker</th><th>Priority</th><th>Status</th><th>Due</th><th></th></tr></thead>
+        <tbody>${list.length? list.map(t=>`<tr>
+          <td><strong>${esc(t.title)}</strong>${t.description?`<div class="muted">${esc(t.description).slice(0,90)}${t.description.length>90?'…':''}</div>`:''}</td>
+          <td>${t.project? esc(project(t.project)?.name||t.project):'—'}</td>
+          <td>${esc(t.worker)}</td>
+          <td>${esc(t.priority)}</td>
+          <td>${statusPill(t.status)}</td>
+          <td>${fmtDate(t.due)}</td>
+          <td><button class="btn small" data-edit-task="${t.id}">OPEN</button></td>
+        </tr>`).join('') : `<tr><td colspan="7"><div class="empty">No tasks match these filters.</div></td></tr>`}</tbody>
+      </table></div>
+    </div>
+  `;
+  view_el.querySelector('#fProject').onchange=e=>{taskFilters.project=e.target.value; renderTasks();};
+  view_el.querySelector('#fWorker').onchange=e=>{taskFilters.worker=e.target.value; renderTasks();};
+  view_el.querySelector('#fStatus').onchange=e=>{taskFilters.status=e.target.value; renderTasks();};
+  view_el.querySelector('#fPriority').onchange=e=>{taskFilters.priority=e.target.value; renderTasks();};
+  view_el.querySelector('#newTaskBtn').onclick=()=>openTaskEditor(null,taskFilters.project);
+  view_el.querySelectorAll('[data-edit-task]').forEach(b=>b.onclick=()=>openTaskEditor(b.dataset.editTask));
+}
+
+function openTaskEditor(id,defaultProject){
+  const t = id? task(id) : {id:uid('task'), title:'', project:defaultProject||'', description:'', priority:'Medium', status:'Backlog', worker:'Unassigned', created:new Date().toISOString().slice(0,10), due:'', deps:'', links:'', auditNotes:'', completionNotes:''};
+  modalBody.innerHTML = `
+    <div class="modal__top"><h3>${id?'Edit Task':'New Task'}</h3><button class="close" data-close>×</button></div>
+    <div class="field"><label>Title</label><input id="mTitle" value="${esc(t.title)}"></div>
+    <div class="grid two">
+      <div class="field"><label>Project</label><select id="mProject"><option value="">— none —</option>${state.projects.map(p=>`<option value="${p.id}" ${t.project===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select></div>
+      <div class="field"><label>Worker</label><select id="mWorker">${WORKERS.map(w=>`<option ${t.worker===w?'selected':''}>${w}</option>`).join('')}</select></div>
+      <div class="field"><label>Priority</label><select id="mPriority">${TASK_PRIORITIES.map(p=>`<option ${t.priority===p?'selected':''}>${p}</option>`).join('')}</select></div>
+      <div class="field"><label>Status</label><select id="mStatus">${PROJECT_STATUSES.map(s=>`<option ${t.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+      <div class="field"><label>Due date</label><input id="mDue" type="date" value="${esc(t.due)}"></div>
+      <div class="field"><label>Dependencies / blockers</label><input id="mDeps" value="${esc(t.deps)}"></div>
+    </div>
+    <div class="field"><label>Description</label><textarea id="mDesc">${esc(t.description)}</textarea></div>
+    <div class="field"><label>Links / files</label><input id="mLinks" value="${esc(t.links)}"></div>
+    <div class="field"><label>Audit notes</label><textarea id="mAuditNotes">${esc(t.auditNotes)}</textarea></div>
+    <div class="field"><label>Completion notes</label><textarea id="mCompletionNotes">${esc(t.completionNotes)}</textarea></div>
+    <div class="actions"><button class="btn primary" id="mSave">SAVE</button>${id?'<button class="btn danger" id="mDelete">DELETE</button>':''}</div>
+  `;
+  openModal();
+  modalBody.querySelector('[data-close]').onclick=closeModal;
+  modalBody.querySelector('#mSave').onclick=()=>{
+    t.title = modalBody.querySelector('#mTitle').value.trim() || 'Untitled task';
+    t.project = modalBody.querySelector('#mProject').value;
+    t.worker = modalBody.querySelector('#mWorker').value;
+    t.priority = modalBody.querySelector('#mPriority').value;
+    t.status = modalBody.querySelector('#mStatus').value;
+    t.due = modalBody.querySelector('#mDue').value;
+    t.deps = modalBody.querySelector('#mDeps').value.trim();
+    t.description = modalBody.querySelector('#mDesc').value.trim();
+    t.links = modalBody.querySelector('#mLinks').value.trim();
+    t.auditNotes = modalBody.querySelector('#mAuditNotes').value.trim();
+    t.completionNotes = modalBody.querySelector('#mCompletionNotes').value.trim();
+    if(!id) state.tasks.push(t);
+    save(); closeModal(); render([active]);
+  };
+  if(id){
+    modalBody.querySelector('#mDelete').onclick=()=>{
+      if(!confirm('Delete this task?')) return;
+      state.tasks = state.tasks.filter(x=>x.id!==id);
+      save(); closeModal(); render([active]);
+    };
+  }
+}
+
+/* ---------- DIGITAL DOOR PIPELINE ---------- */
+function renderDoor(){
+  setHeader('GUIDED PRODUCTION WORKFLOW','Digital Door Pipeline');
+  const doorProjects = state.projects.filter(p=>p.door);
+  view_el.innerHTML = `
+    <div class="card" style="margin-bottom:12px">
+      <div class="kicker">LOCKED PRINCIPLES</div>
+      <ul class="muted" style="margin:8px 0 0;padding-left:18px;line-height:1.7">
+        <li>The wording belongs to their brand, not ours.</li>
+        <li>Brand Voice and Full-Site Handoff are separate concepts.</li>
+        <li>Every Customer Path should create a purposeful loop with no dead ends.</li>
+        <li>Owner Digital Key is a vertical pass containing only business name/logo, branded background, and QR placeholder.</li>
+        <li>Do not add generic TDS copy into client-facing brand experiences.</li>
+      </ul>
+    </div>
+    ${doorProjects.map(p=>`
+      <div class="card" style="margin-bottom:12px">
+        <div class="row-flex" style="border-bottom:0;padding-bottom:0">
+          <div><div class="kicker">${esc(p.clientName||p.name)}</div><div class="big">${esc(p.name)}</div></div>
+          ${statusPill(p.stage)}
+        </div>
+        <div class="progress"><span style="width:${doorPct(p.door)}%"></span></div>
+        <div class="muted" style="margin:8px 0">${doorPct(p.door)}% complete</div>
+        <div class="doorgrid">${DOOR_STAGES.map(s=>`<label class="checkline"><input type="checkbox" data-project="${p.id}" data-door="${s}" ${p.door[s]?'checked':''}> ${s}</label>`).join('')}</div>
+        <div class="actions"><button class="btn small" data-open="${p.id}">OPEN PROJECT WORKSPACE</button></div>
+      </div>
+    `).join('')}
+  `;
+  view_el.querySelectorAll('[data-door]').forEach(el=>el.onchange=()=>{
+    const p = project(el.dataset.project);
+    p.door[el.dataset.door]=el.checked; p.lastUpdate=new Date().toISOString().slice(0,10); save(); renderDoor();
+  });
+  view_el.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>go('projects/'+b.dataset.open));
+}
+
+/* ---------- AUDIT QUEUE ---------- */
+function renderAudit(){
+  setHeader('REVIEW QUEUE','Audit Queue');
+  view_el.innerHTML = `
+    <div class="actions" style="margin-bottom:12px"><button class="btn primary" id="newAudit">+ NEW AUDIT ITEM</button></div>
+    ${state.audits.length? state.audits.map(a=>`
+      <div class="card" style="margin-bottom:10px">
+        <div class="row-flex" style="border-bottom:0;padding-bottom:0">
+          <div><div class="kicker">${esc(a.projectId? project(a.projectId)?.name : a.projectLabel)}</div><div class="big">${esc(a.task)}</div></div>
+          ${statusPill(a.result)}
+        </div>
+        <p class="muted"><strong>What changed:</strong> ${nl2br(a.whatChanged)}</p>
+        ${a.filesChanged?`<p class="muted"><strong>Files changed:</strong> ${esc(a.filesChanged)}</p>`:''}
+        ${a.builderNotes?`<p class="muted"><strong>Builder notes:</strong> ${nl2br(a.builderNotes)}</p>`:''}
+        ${a.acceptanceCriteria?`<p class="muted"><strong>Acceptance criteria:</strong> ${nl2br(a.acceptanceCriteria)}</p>`:''}
+        <div class="actions"><button class="btn small" data-edit-audit="${a.id}">EDIT</button></div>
+      </div>
+    `).join('') : '<div class="empty">Nothing waiting for review.</div>'}
+  `;
+  view_el.querySelector('#newAudit').onclick=()=>openAuditEditor(null);
+  view_el.querySelectorAll('[data-edit-audit]').forEach(b=>b.onclick=()=>openAuditEditor(b.dataset.editAudit));
+}
+function openAuditEditor(id){
+  const a = id? state.audits.find(x=>x.id===id) : {id:uid('audit'), projectId:'', projectLabel:'', task:'', whatChanged:'', filesChanged:'', builderNotes:'', screenshotsLink:'', acceptanceCriteria:'', result:'Pending', createdAt:new Date().toISOString().slice(0,10)};
+  modalBody.innerHTML = `
+    <div class="modal__top"><h3>${id?'Edit Audit Item':'New Audit Item'}</h3><button class="close" data-close>×</button></div>
+    <div class="field"><label>Project</label><select id="aProject"><option value="">— not one of the tracked projects —</option>${state.projects.map(p=>`<option value="${p.id}" ${a.projectId===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select></div>
+    <div class="field"><label>Project label (if not in list above)</label><input id="aProjectLabel" value="${esc(a.projectLabel)}"></div>
+    <div class="field"><label>Task / build</label><input id="aTask" value="${esc(a.task)}"></div>
+    <div class="field"><label>What changed</label><textarea id="aWhatChanged">${esc(a.whatChanged)}</textarea></div>
+    <div class="field"><label>Files changed</label><input id="aFilesChanged" value="${esc(a.filesChanged)}"></div>
+    <div class="field"><label>Builder notes</label><textarea id="aBuilderNotes">${esc(a.builderNotes)}</textarea></div>
+    <div class="field"><label>Screenshots / link</label><input id="aScreenshotsLink" value="${esc(a.screenshotsLink)}"></div>
+    <div class="field"><label>Acceptance criteria</label><textarea id="aAcceptanceCriteria">${esc(a.acceptanceCriteria)}</textarea></div>
+    <div class="field"><label>Audit result</label><select id="aResult">${AUDIT_RESULTS.map(r=>`<option ${a.result===r?'selected':''}>${r}</option>`).join('')}</select></div>
+    <div class="actions"><button class="btn primary" id="aSave">SAVE</button>${id?'<button class="btn danger" id="aDelete">DELETE</button>':''}</div>
+  `;
+  openModal();
+  modalBody.querySelector('[data-close]').onclick=closeModal;
+  modalBody.querySelector('#aSave').onclick=()=>{
+    a.projectId = modalBody.querySelector('#aProject').value;
+    a.projectLabel = modalBody.querySelector('#aProjectLabel').value.trim();
+    a.task = modalBody.querySelector('#aTask').value.trim() || 'Untitled audit item';
+    a.whatChanged = modalBody.querySelector('#aWhatChanged').value.trim();
+    a.filesChanged = modalBody.querySelector('#aFilesChanged').value.trim();
+    a.builderNotes = modalBody.querySelector('#aBuilderNotes').value.trim();
+    a.screenshotsLink = modalBody.querySelector('#aScreenshotsLink').value.trim();
+    a.acceptanceCriteria = modalBody.querySelector('#aAcceptanceCriteria').value.trim();
+    a.result = modalBody.querySelector('#aResult').value;
+    if(!id) state.audits.push(a);
+    save(); closeModal(); renderAudit();
+  };
+  if(id){
+    modalBody.querySelector('#aDelete').onclick=()=>{
+      if(!confirm('Delete this audit item?')) return;
+      state.audits = state.audits.filter(x=>x.id!==id);
+      save(); closeModal(); renderAudit();
+    };
+  }
+}
+
+/* ---------- CLIENTS ---------- */
+function renderClients(){
+  setHeader('CLIENT / BUSINESS','Clients');
+  view_el.innerHTML = `
+    <div class="actions" style="margin-bottom:12px"><button class="btn primary" id="newClient">+ NEW CLIENT / PROSPECT</button></div>
+    <div class="card"><div class="tablewrap"><table>
+      <thead><tr><th>Name</th><th>Business</th><th>Service</th><th>Project</th><th>Status</th><th>Next action</th><th></th></tr></thead>
+      <tbody>${state.clients.length? state.clients.map(c=>`<tr>
+        <td>${esc(c.name)||'<span class="muted">—</span>'}</td>
+        <td>${esc(c.business)}</td>
+        <td>${esc(c.service)}</td>
+        <td>${c.project? esc(project(c.project)?.name||c.project):'—'}</td>
+        <td>${statusPill(c.status)}</td>
+        <td>${esc(c.nextAction)||'—'}</td>
+        <td><button class="btn small" data-edit-client="${c.id}">OPEN</button></td>
+      </tr>`).join('') : `<tr><td colspan="7"><div class="empty">No clients yet.</div></td></tr>`}</tbody>
+    </table></div></div>
+  `;
+  view_el.querySelector('#newClient').onclick=()=>openClientEditor(null);
+  view_el.querySelectorAll('[data-edit-client]').forEach(b=>b.onclick=()=>openClientEditor(b.dataset.editClient));
+}
+function openClientEditor(id){
+  const c = id? client(id) : {id:uid('client'), name:'', business:'', contact:'', service:'', project:'', notes:'', nextAction:'', status:'Prospect'};
+  modalBody.innerHTML = `
+    <div class="modal__top"><h3>${id?'Edit Client':'New Client / Prospect'}</h3><button class="close" data-close>×</button></div>
+    <div class="grid two">
+      <div class="field"><label>Name</label><input id="cName" value="${esc(c.name)}"></div>
+      <div class="field"><label>Business</label><input id="cBusiness" value="${esc(c.business)}"></div>
+      <div class="field"><label>Contact info</label><input id="cContact" value="${esc(c.contact)}"></div>
+      <div class="field"><label>Service</label><input id="cService" value="${esc(c.service)}"></div>
+      <div class="field"><label>Linked project</label><select id="cProject"><option value="">— none —</option>${state.projects.map(p=>`<option value="${p.id}" ${c.project===p.id?'selected':''}>${esc(p.name)}</option>`).join('')}</select></div>
+      <div class="field"><label>Status</label><select id="cStatus">${CRM_STATUSES.map(s=>`<option ${c.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+    </div>
+    <div class="field"><label>Next action</label><input id="cNextAction" value="${esc(c.nextAction)}"></div>
+    <div class="field"><label>Notes</label><textarea id="cNotes">${esc(c.notes)}</textarea></div>
+    <div class="actions"><button class="btn primary" id="cSave">SAVE</button>${id?'<button class="btn danger" id="cDelete">DELETE</button>':''}</div>
+  `;
+  openModal();
+  modalBody.querySelector('[data-close]').onclick=closeModal;
+  modalBody.querySelector('#cSave').onclick=()=>{
+    c.name=modalBody.querySelector('#cName').value.trim();
+    c.business=modalBody.querySelector('#cBusiness').value.trim();
+    c.contact=modalBody.querySelector('#cContact').value.trim();
+    c.service=modalBody.querySelector('#cService').value.trim();
+    c.project=modalBody.querySelector('#cProject').value;
+    c.status=modalBody.querySelector('#cStatus').value;
+    c.nextAction=modalBody.querySelector('#cNextAction').value.trim();
+    c.notes=modalBody.querySelector('#cNotes').value.trim();
+    if(!id) state.clients.push(c);
+    save(); closeModal(); renderClients();
+  };
+  if(id){
+    modalBody.querySelector('#cDelete').onclick=()=>{
+      if(!confirm('Delete this client record?')) return;
+      state.clients = state.clients.filter(x=>x.id!==id);
+      save(); closeModal(); renderClients();
+    };
+  }
+}
+
+/* ---------- AI DESK ---------- */
+function renderAI(){
+  setHeader('ONE DESK. MULTIPLE BRAINS.','AI Desk');
+  view_el.innerHTML = `
+    <div class="grid two">
+      <div class="card glow">
+        <div class="kicker">WORKER ROLES</div>
+        <div class="row-flex"><strong>Claude Code</strong><span class="muted">Primary repo/code builder</span></div>
+        <div class="row-flex"><strong>ChatGPT</strong><span class="muted">Architecture, strategy, QA, audit, workflow design, briefs, decision support</span></div>
+        <div class="row-flex"><strong>Claude</strong><span class="muted">Long-form reasoning / review / general AI work</span></div>
+        <div class="row-flex"><strong>Claude Co-work</strong><span class="muted">Autonomous workspace / project execution</span></div>
+        <div class="row-flex"><strong>Nev</strong><span class="muted">Approval, decisions, business judgment</span></div>
+      </div>
+      <div class="card">
+        <div class="kicker">CONNECTION STATE</div>
+        ${state.integrations.filter(i=>['Claude Code','ChatGPT / OpenAI','Claude (API)','Claude Co-work'].includes(i.name)).map(i=>`<div class="row-flex"><span>${esc(i.name)}</span>${statusPill(i.state)}</div>`).join('')}
+        <div class="actions"><button class="btn small" data-go="integrations">FULL INTEGRATIONS PAGE</button></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="kicker">HANDOFF GENERATOR</div>
+      <div class="grid two">
+        <div class="field"><label>Project</label><select id="hProject"><option value="">— none —</option>${state.projects.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></div>
+        <div class="field"><label>Task</label><select id="hTask"><option value="">— none —</option></select></div>
+        <div class="field"><label>Destination worker</label><select id="hWorker">${WORKERS.filter(w=>w!=='Unassigned').map(w=>`<option>${w}</option>`).join('')}</select></div>
+      </div>
+      <div class="actions"><button class="btn primary" id="hGenerate">GENERATE HANDOFF BRIEF</button></div>
+      <div class="field" id="hOutputWrap" style="display:none">
+        <label>Copyable brief</label>
+        <textarea id="hOutput" style="min-height:260px;font-family:var(--mono);font-size:.72rem" readonly></textarea>
+        <div class="actions"><button class="btn" id="hCopy">COPY TO CLIPBOARD</button></div>
+      </div>
+    </div>
+  `;
+  view_el.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  const hProject = view_el.querySelector('#hProject');
+  const hTask = view_el.querySelector('#hTask');
+  function refreshTaskOptions(){
+    const pid = hProject.value;
+    const opts = state.tasks.filter(t=>!pid || t.project===pid);
+    hTask.innerHTML = '<option value="">— none —</option>'+opts.map(t=>`<option value="${t.id}">${esc(t.title)}</option>`).join('');
+  }
+  refreshTaskOptions();
+  hProject.onchange = refreshTaskOptions;
+  view_el.querySelector('#hGenerate').onclick=()=>{
+    const p = project(hProject.value);
+    const t = task(hTask.value);
+    const worker = view_el.querySelector('#hWorker').value;
+    const lines = [
+      'HANDOFF BRIEF',
+      `Project: ${p?p.name:'Not specified'}${p&&p.clientName?` (${p.clientName})`:''}`,
+      `Task: ${t?t.title:'Not specified'}`,
+      `Destination: ${worker}`,
+      '',
+      'CONTEXT:',
+      p?(p.notes||'No notes on file.'):'No project selected.',
+      '',
+      'OBJECTIVE:',
+      t?(t.description||t.title):'No task selected.',
+      '',
+      'RELEVANT FILES:',
+      p? [p.links.repo&&`Repo: ${p.links.repo}`, p.links.file&&`File: ${p.links.file}`, p.links.live&&`Live: ${p.links.live}`].filter(Boolean).join('\n')||'None on file.' : 'None on file.',
+      '',
+      'LOCKED REQUIREMENTS:',
+      '- The wording belongs to the client\'s brand, not The Digital Side.',
+      '- Brand Voice and Full-Site Handoff are separate concepts.',
+      '- Every Customer Path must create a purposeful loop with no dead ends.',
+      '- Owner Digital Key is a vertical pass containing only business name/logo, branded background, and QR placeholder.',
+      '- No generic TDS copy in client-facing brand experiences.',
+      '',
+      'CURRENT STATUS:',
+      p? p.stage : 'Not specified',
+      '',
+      'EXACT REQUESTED OUTPUT:',
+      t? t.title : 'Not specified',
+      '',
+      'WHAT NOT TO CHANGE:',
+      'Do not modify unrelated demo files unless required for this task. Do not remove working features. Do not fake integrations or functionality.',
+      '',
+      'ACCEPTANCE CRITERIA:',
+      t&&t.completionNotes? t.completionNotes : 'Not yet defined — confirm before starting.'
+    ];
+    view_el.querySelector('#hOutput').value = lines.join('\n');
+    view_el.querySelector('#hOutputWrap').style.display='block';
+  };
+  view_el.querySelector('#hCopy').onclick=()=>{
+    const ta = view_el.querySelector('#hOutput');
+    ta.select();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(ta.value).catch(()=>{});
+    }
+  };
+}
+
+/* ---------- BUSINESS ---------- */
+function renderBusiness(){
+  setHeader('TDS OPERATIONS','Business');
+  view_el.innerHTML = `
+    <div class="card">
+      ${state.business.map(b=>`
+        <div class="row-flex">
+          <div><strong>${esc(b.label)}</strong><div class="muted">${esc(b.note)}</div></div>
+          <select data-biz="${b.id}">${BUSINESS_STATUSES.map(s=>`<option ${b.status===s?'selected':''}>${s}</option>`).join('')}</select>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  view_el.querySelectorAll('[data-biz]').forEach(el=>el.onchange=()=>{
+    const b = state.business.find(x=>x.id===el.dataset.biz);
+    b.status = el.value; save();
+  });
+}
+
+/* ---------- INTEGRATIONS ---------- */
+function renderIntegrations(){
+  setHeader('CONNECTION STATE','Integrations');
+  view_el.innerHTML = `
+    <div class="card">
+      ${state.integrations.map(i=>`
+        <div class="row-flex">
+          <div><strong>${esc(i.name)}</strong><div class="muted">${esc(i.note)}</div></div>
+          ${statusPill(i.state)}
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ---------- INBOX ---------- */
+function renderInbox(){
+  setHeader('QUICK CAPTURE','Inbox');
+  const open = state.inbox.filter(i=>!i.converted);
+  const done = state.inbox.filter(i=>i.converted);
+  view_el.innerHTML = `
+    <div class="card">
+      <div class="kicker">UNPROCESSED</div>
+      ${open.length? open.map(i=>`
+        <div class="row-flex">
+          <span>${esc(i.text)}</span>
+          <div class="actions" style="margin-top:0">
+            <button class="btn small" data-convert="${i.id}" data-type="Task">TASK</button>
+            <button class="btn small" data-convert="${i.id}" data-type="Bug">BUG</button>
+            <button class="btn small" data-convert="${i.id}" data-type="Idea">IDEA</button>
+            <button class="btn small" data-convert="${i.id}" data-type="Client follow-up">CLIENT FOLLOW-UP</button>
+            <button class="btn small" data-convert="${i.id}" data-type="Business/admin task">BUSINESS/ADMIN</button>
+            <button class="btn small" data-convert="${i.id}" data-type="Project note">PROJECT NOTE</button>
+          </div>
+        </div>
+      `).join('') : '<div class="empty">Inbox is empty. Use "Dump it here" at the top of any screen.</div>'}
+    </div>
+    ${done.length? `<div class="card" style="margin-top:12px"><div class="kicker">CONVERTED</div>${done.map(i=>`<div class="row-flex"><span class="muted">${esc(i.text)}</span><span class="pill neutral">→ ${esc(i.converted)}</span></div>`).join('')}</div>` : ''}
+  `;
+  view_el.querySelectorAll('[data-convert]').forEach(b=>b.onclick=()=>convertInboxItem(b.dataset.convert,b.dataset.type));
+}
+function convertInboxItem(id,type){
+  const item = state.inbox.find(i=>i.id===id);
+  if(!item) return;
+  if(type==='Project note'){
+    const pid = prompt('Which project id should this note attach to? Options: '+state.projects.map(p=>p.id).join(', '));
+    const p = project(pid);
+    if(!p){ alert('Project not found — nothing converted.'); return; }
+    p.notes = (p.notes?p.notes+'\n':'') + item.text;
+  } else {
+    const prefix = {Bug:'Bug: ', Idea:'Idea: ', 'Client follow-up':'Follow-up: ', 'Business/admin task':'', Task:''}[type] || '';
+    const t = {id:uid('task'), title:prefix+item.text, project:'', description: type==='Business/admin task'?'(Business/Admin) '+item.text:'', priority: type==='Bug'?'High':'Medium', status:'Backlog', worker:'Unassigned', created:new Date().toISOString().slice(0,10), due:'', deps:'', links:'', auditNotes:'', completionNotes:''};
+    state.tasks.push(t);
+  }
+  item.converted = type;
+  save(); renderInbox();
+}
+
+/* ---------- REFERENCE ---------- */
+function renderReference(){
+  setHeader('INTERNAL REFERENCE','Digital Side Service Reference');
+  view_el.innerHTML = `
+    <div class="card">
+      <div class="kicker">PUBLIC SERVICE ORDER</div>
+      <div class="tablewrap"><table><thead><tr><th>#</th><th>Service</th><th>Price</th></tr></thead>
+        <tbody>${state.reference.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.name)}</td><td>${esc(r.price)}</td></tr>`).join('')}</tbody>
+      </table></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div class="kicker">INTERNAL REFERENCE ONLY</div>
+      ${state.referenceInternal.map(r=>`<div class="row-flex"><strong>${esc(r.name)}</strong><span class="muted">${esc(r.price)}</span></div>`).join('')}
+    </div>
+  `;
+}
+
+/* ---------- SETTINGS ---------- */
+function renderSettings(){
+  setHeader('DATA & PREFERENCES','Settings');
+  view_el.innerHTML = `
+    <div class="card">
+      <div class="kicker">BACKUP</div>
+      <p class="muted">All Command Center data lives in this browser's local storage. Export a backup regularly, especially before clearing browser data.</p>
+      <div class="actions">
+        <button class="btn primary" id="exportBtn">EXPORT BACKUP (.json)</button>
+        <button class="btn" id="importBtn">IMPORT BACKUP</button>
+        <input type="file" id="importFile" accept="application/json" style="display:none">
+      </div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div class="kicker">RESET</div>
+      <p class="muted">Reload the original seed data. This replaces everything currently saved in this browser.</p>
+      <div class="actions"><button class="btn danger" id="resetBtn">RESET TO SEED DATA</button></div>
+    </div>
+  `;
+  view_el.querySelector('#exportBtn').onclick=()=>{
+    const blob = new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'tds-command-center-backup-'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  };
+  const fileInput = view_el.querySelector('#importFile');
+  view_el.querySelector('#importBtn').onclick=()=>fileInput.click();
+  fileInput.onchange=()=>{
+    const file = fileInput.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload=()=>{
+      try{
+        const parsed = JSON.parse(reader.result);
+        if(!parsed || !Array.isArray(parsed.projects)) throw new Error('Not a valid Command Center backup.');
+        state = parsed; save(); render([active]);
+        alert('Backup imported.');
+      }catch(e){ alert('Import failed: '+e.message); }
+    };
+    reader.readAsText(file);
+  };
+  view_el.querySelector('#resetBtn').onclick=()=>{
+    if(!confirm('This replaces all current data with the original seed data. Continue?')) return;
+    state = seedData(); save(); render([active]);
+  };
+}
+
+/* ---------- MODAL / PALETTE ---------- */
+function openModal(){ modalOverlay.classList.add('open'); }
+function closeModal(){ modalOverlay.classList.remove('open'); modalBody.innerHTML=''; }
+modalOverlay.addEventListener('click',e=>{ if(e.target===modalOverlay) closeModal(); });
+
+function paletteIndex(){
+  const items = [];
+  NAV.forEach(([id,label])=>items.push({label:label, sub:'Section', action:()=>go(id)}));
+  state.projects.forEach(p=>items.push({label:p.name, sub:'Project · '+p.stage, action:()=>go('projects/'+p.id)}));
+  state.tasks.forEach(t=>items.push({label:t.title, sub:'Task · '+t.status, action:()=>{go('tasks');}}));
+  state.clients.forEach(c=>items.push({label:c.name||c.business, sub:'Client · '+c.status, action:()=>go('clients')}));
+  state.projects.forEach(p=>{ if(p.links.file) items.push({label:p.links.file, sub:'File · '+p.name, action:()=>go('projects/'+p.id)}); });
+  return items;
+}
+function openPalette(){
+  paletteOverlay.classList.add('open');
+  paletteInput.value='';
+  renderPaletteList('');
+  paletteInput.focus();
+}
+function closePalette(){ paletteOverlay.classList.remove('open'); }
+function renderPaletteList(q){
+  const idx = paletteIndex();
+  const filtered = q? idx.filter(i=>i.label.toLowerCase().includes(q.toLowerCase())) : idx.slice(0,12);
+  paletteList.innerHTML = filtered.length? filtered.slice(0,30).map((i,n)=>`<div class="palette__item" data-idx="${n}"><span>${esc(i.label)}</span><span>${esc(i.sub)}</span></div>`).join('') : '<div class="empty">No matches.</div>';
+  paletteList.querySelectorAll('[data-idx]').forEach(el=>el.onclick=()=>{ filtered[Number(el.dataset.idx)].action(); closePalette(); });
+}
+paletteInput?.addEventListener('input',()=>renderPaletteList(paletteInput.value));
+paletteOverlay.addEventListener('click',e=>{ if(e.target===paletteOverlay) closePalette(); });
+paletteBtn.onclick = openPalette;
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey) && e.key.toLowerCase()==='k'){ e.preventDefault(); openPalette(); }
+  if(e.key==='Escape'){ closePalette(); closeModal(); }
+});
+
+/* ---------- QUICK CAPTURE ---------- */
+captureInput.addEventListener('keydown',e=>{
+  if(e.key==='Enter' && captureInput.value.trim()){
+    state.inbox.unshift({id:uid('inbox'), text:captureInput.value.trim(), createdAt:new Date().toISOString(), converted:null});
+    save();
+    captureInput.value='';
+    if(active==='inbox') renderInbox();
+  }
+});
+
+/* ---------- ROUTER ---------- */
+const RENDERERS = {
+  home:renderHome, projects:renderProjects, tasks:renderTasks, door:renderDoor,
+  audit:renderAudit, clients:renderClients, ai:renderAI, business:renderBusiness,
+  integrations:renderIntegrations, inbox:renderInbox, reference:renderReference, settings:renderSettings
+};
+function render(parts){
+  const view = parts[0] || 'home';
+  const sub = parts[1];
+  (RENDERERS[view]||renderHome)(sub);
+}
+
+/* ---------- BOOT ---------- */
+function tick(){
+  clockEl.textContent = new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+  sysdot.classList.toggle('off', !navigator.onLine);
+}
+
+if(!location.hash) location.hash = '#/home';
+renderNav();
+render([active]);
+tick();
+setInterval(tick,30000);
+</script>
+</body>
+</html>
