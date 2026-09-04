@@ -11,6 +11,8 @@
     "dialog:allow-open",
     "fs:allow-read-file",
     "fs:allow-write-file",
+    "fs:allow-exists",
+    "fs:allow-remove",
     "fs:scope-appconfig",
     "fs:scope-applocaldata",
     "fs:scope-desktop-recursive",

@@ -27,7 +27,7 @@ export async function renderToday(goTo) {
     <div class="grid two" style="margin-top:14px">
       <div class="card">
         <div class="kicker">DOOR BRIEFS MID-STAGE</div>
-        ${midStageBriefs.length ? midStageBriefs.map((b) => `<div class="status-row"><span>${esc(b.business || b.id)}</span><span class="status">${esc(b.stage.toUpperCase())}</span></div>`).join('') : '<p class="muted">No briefs in progress.</p>'}
+        ${midStageBriefs.length ? midStageBriefs.map((b) => `<div class="status-row"><span>${esc(b.business || b.id)}</span><span class="status">${esc(b.planning_step.toUpperCase())}</span></div>`).join('') : '<p class="muted">No briefs in progress.</p>'}
         <div class="actions"><button class="btn" data-go="door">GO TO DOOR WORKFLOW</button></div>
       </div>
       <div class="card">

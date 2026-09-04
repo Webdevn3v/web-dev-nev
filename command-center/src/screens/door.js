@@ -47,10 +47,10 @@ async function renderList() {
     </div>
     <div class="grid two" style="margin-top:14px">
       ${briefs.length ? briefs.map((b) => `
-        <div class="card ${b.stage !== 'complete' ? 'glow' : ''}" data-open="${esc(b.id)}" style="cursor:pointer">
+        <div class="card ${b.planning_step !== 'complete' ? 'glow' : ''}" data-open="${esc(b.id)}" style="cursor:pointer">
           <div class="kicker">${esc((clientName(b.client_id) || 'NO CLIENT').toUpperCase())}</div>
           <div class="big">${esc(b.business || 'Untitled mission')}</div>
-          <div class="muted">Stage: ${esc(b.stage.toUpperCase())}</div>
+          <div class="muted">Planning step: ${esc(b.planning_step.toUpperCase())}</div>
         </div>`).join('') : '<p class="muted">No Door missions yet — start one above.</p>'}
     </div>`;
 
@@ -65,7 +65,7 @@ async function renderList() {
   view().querySelectorAll('[data-open]').forEach((el) => el.onclick = () => {
     const b = briefs.find((x) => x.id === el.dataset.open);
     activeBriefId = el.dataset.open;
-    activeStep = Math.max(0, STAGES.indexOf(b?.stage));
+    activeStep = Math.max(0, STAGES.indexOf(b?.planning_step));
     if (activeStep < 0) activeStep = 0;
     showSummary = false;
     renderDoor();
@@ -109,18 +109,18 @@ async function renderWizard() {
   const brief = briefs.find((b) => b.id === activeBriefId);
   if (!brief) { activeBriefId = null; return renderDoor(); }
   const s = Math.max(0, Math.min(5, activeStep));
-  const persistedStep = brief.stage === 'complete' ? 6 : Math.max(0, STAGES.indexOf(brief.stage));
+  const persistedStep = brief.planning_step === 'complete' ? 6 : Math.max(0, STAGES.indexOf(brief.planning_step));
 
   view().innerHTML = `<div class="workflow">
     <div class="steps">${DOOR_STEPS.map((x, i) => `<button class="step ${i === s ? 'active' : ''} ${i < persistedStep ? 'done' : ''}" data-step="${i}">${x[0]}</button>`).join('')}</div>
     <div class="card glow">
-      <div class="kicker">STEP ${s + 1} OF 6 · BRIEF STAGE: ${esc(brief.stage.toUpperCase())}</div>
+      <div class="kicker">STEP ${s + 1} OF 6 · PLANNING STEP: ${esc(brief.planning_step.toUpperCase())}</div>
       <div class="big">${DOOR_STEPS[s][0].replace(/^\d\. /, '')}</div>
       <div class="muted">${DOOR_STEPS[s][1]}</div>
       ${stepBody(brief, s)}
       <div class="actions">
         <button class="btn" data-prev ${s === 0 ? 'disabled' : ''}>BACK</button>
-        <button class="btn primary" data-next>${s === 5 ? (brief.stage === 'complete' ? 'ALREADY LAUNCHED' : 'LAUNCH MISSION') : 'SAVE + NEXT'}</button>
+        <button class="btn primary" data-next>${s === 5 ? (brief.planning_step === 'complete' ? 'ALREADY LAUNCHED' : 'LAUNCH MISSION') : 'SAVE + NEXT'}</button>
         <button class="btn" data-summary>MISSION SUMMARY</button>
         <button class="btn" data-back-list>← ALL MISSIONS</button>
       </div>
@@ -139,7 +139,7 @@ async function renderWizard() {
   });
   view().querySelector('[data-next]').onclick = () => withErrorToast(async () => {
     await captureFields(brief);
-    if (brief.stage === 'complete') return;
+    if (brief.planning_step === 'complete') return;
     const nextStageName = s === 5 ? 'complete' : STAGES[s + 1];
     await AdvanceDoorStage({ id: brief.id, toStage: nextStageName });
     activeStep = Math.min(5, s + 1);
@@ -164,7 +164,7 @@ async function renderSummary() {
   const nl = (v) => esc(v || 'Not defined').replace(/\n/g, '<br>');
 
   view().innerHTML = `<div class="card glow">
-    <div class="kicker">${esc(d.business || 'UNTITLED PROJECT')} · ${esc(d.stage.toUpperCase())}</div>
+    <div class="kicker">${esc(d.business || 'UNTITLED PROJECT')} · ${esc(d.planning_step.toUpperCase())}</div>
     <div class="big">DOOR MISSION BRIEF</div>
     <div class="grid two" style="margin-top:16px">
       <div>

@@ -2,7 +2,7 @@
 
 import { esc, setHeader, withErrorToast } from '../lib/ui.js';
 import { listClients, listProjects } from '../lib/queries.js';
-import { CreateClient, UpdateClient, CreateProject, UpdateProjectStatus } from '../lib/actions.js';
+import { CreateClient, UpdateClient, CreateProject, UpdateProjectStatus, AdvanceProductionStage, PRODUCTION_STAGES } from '../lib/actions.js';
 
 let selectedClientId = null;
 
@@ -82,15 +82,27 @@ async function renderDetail() {
 
     <div class="card" style="margin-top:14px">
       <div class="kicker">PROJECTS</div>
-      ${projects.length ? projects.map((p) => `
-        <div class="status-row">
-          <span>${esc(p.title)} <span class="muted">· ${esc(p.type || 'general')}</span></span>
-          <select data-project-status="${esc(p.id)}">
-            <option value="active" ${p.status === 'active' ? 'selected' : ''}>Active</option>
-            <option value="paused" ${p.status === 'paused' ? 'selected' : ''}>Paused</option>
-            <option value="complete" ${p.status === 'complete' ? 'selected' : ''}>Complete</option>
-          </select>
-        </div>`).join('') : '<p class="muted">No projects yet for this client.</p>'}
+      ${projects.length ? projects.map((p) => {
+        const stageIndex = PRODUCTION_STAGES.indexOf(p.production_stage);
+        const nextStage = stageIndex >= 0 ? PRODUCTION_STAGES[stageIndex + 1] : null;
+        return `
+        <div class="inventory-row">
+          <div>
+            <div>${esc(p.title)} <span class="muted">· ${esc(p.type || 'general')}</span></div>
+            <div class="muted">PRODUCTION: ${esc((p.production_stage || 'intake').toUpperCase())}</div>
+          </div>
+          <div class="actions">
+            <select data-project-status="${esc(p.id)}">
+              <option value="active" ${p.status === 'active' ? 'selected' : ''}>Active</option>
+              <option value="paused" ${p.status === 'paused' ? 'selected' : ''}>Paused</option>
+              <option value="complete" ${p.status === 'complete' ? 'selected' : ''}>Complete</option>
+            </select>
+            ${nextStage
+              ? `<button class="btn ${nextStage === 'launch' ? 'primary' : ''}" data-advance-production="${esc(p.id)}" data-next-stage="${esc(nextStage)}">ADVANCE → ${esc(nextStage.toUpperCase())}</button>`
+              : '<span class="status ready">PRODUCTION COMPLETE</span>'}
+          </div>
+        </div>`;
+      }).join('') : '<p class="muted">No projects yet for this client.</p>'}
     </div>`;
 
   document.getElementById('backToClients').onclick = () => { selectedClientId = null; renderClients(); };
@@ -106,6 +118,10 @@ async function renderDetail() {
   });
   view().querySelectorAll('[data-project-status]').forEach((sel) => sel.onchange = () => withErrorToast(async () => {
     await UpdateProjectStatus({ id: sel.dataset.projectStatus, status: sel.value });
+    renderClients();
+  }));
+  view().querySelectorAll('[data-advance-production]').forEach((b) => b.onclick = () => withErrorToast(async () => {
+    await AdvanceProductionStage({ id: b.dataset.advanceProduction, toStage: b.dataset.nextStage });
     renderClients();
   }));
 }

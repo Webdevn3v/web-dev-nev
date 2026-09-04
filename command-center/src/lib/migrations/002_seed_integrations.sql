@@ -3,8 +3,12 @@
 -- Nothing here is marked 'connected' unless it is genuinely automated right now (§10 acceptance
 -- criterion). Everything external stays 'planned'/'manual' until real wiring exists — see
 -- docs/DECISIONS.md "Deferred from Phase 1".
+--
+-- OR IGNORE: makes this statement idempotent so a retry (if a later statement in the same
+-- migration run ever failed and this migration re-ran from the top) doesn't error on the
+-- already-seeded rows' primary keys. See docs/DECISIONS.md, "Migration robustness."
 
-INSERT INTO integration_record (id, service_name, connection_type, status, notes)
+INSERT OR IGNORE INTO integration_record (id, service_name, connection_type, status, notes)
 VALUES
   ('int-local-db', 'Local SQLite', 'automated', 'connected',
    'Primary Command Center storage via tauri-plugin-sql. Fully local, no network.'),

@@ -17,9 +17,10 @@ export const TIER_LABEL = {
   [TIER.HIGH_IMPACT]: 'High-impact',
 };
 
-// Static tier per action name. AdvanceDoorStage is resolved dynamically (see resolveTier below)
-// because only the final "launch" transition into 'complete' is high-impact — every other stage
-// advance is external/write, matching PHASE1-SPEC.md §5's plain listing of AdvanceDoorStage.
+// Static tier per action name. AdvanceDoorStage and AdvanceProductionStage are resolved
+// dynamically (see resolveTier below) because only their final "launch" transition is
+// high-impact — every other stage advance is external/write, matching PHASE1-SPEC.md §5's plain
+// listing of AdvanceDoorStage.
 export const ACTION_TIERS = {
   CreateClient: TIER.REVERSIBLE_LOCAL,
   UpdateClient: TIER.REVERSIBLE_LOCAL,
@@ -30,6 +31,7 @@ export const ACTION_TIERS = {
   CompleteTask: TIER.REVERSIBLE_LOCAL,
   AdvanceDoorStage: TIER.EXTERNAL_WRITE,
   UpdateDoorBriefField: TIER.REVERSIBLE_LOCAL,
+  AdvanceProductionStage: TIER.EXTERNAL_WRITE,
   CreateArtifact: TIER.EXTERNAL_WRITE,
   CreateHandoff: TIER.EXTERNAL_WRITE,
   UpdateHandoffStatus: TIER.EXTERNAL_WRITE,
@@ -43,8 +45,14 @@ export const ACTION_TIERS = {
   SaveLegacyState: TIER.REVERSIBLE_LOCAL,
 };
 
+// Corrective patch (docs/PHASE1-CORRECTIVE-PATCH.md item 4): AdvanceProductionStage defaults to
+// external/write; only the transition to 'launch' — a live-client-asset change — is high-impact
+// and requires the typed APPROVE confirmation.
 export function resolveTier(actionName, args) {
   if (actionName === 'AdvanceDoorStage' && args?.toStage === 'complete') {
+    return TIER.HIGH_IMPACT;
+  }
+  if (actionName === 'AdvanceProductionStage' && args?.toStage === 'launch') {
     return TIER.HIGH_IMPACT;
   }
   const tier = ACTION_TIERS[actionName];

@@ -4,9 +4,21 @@
 // functions directly today; later, Jarvis calls the exact same functions after interpreting
 // natural language — no separate mutation path is ever built for it (§1, §2).
 //
-// Every action: (1) validates input, (2) performs the mutation via getDb(), (3) emits an
-// ActivityEvent. Risk-tiered actions (external/write, high-impact) gate on confirmGate() first —
-// see src/lib/risk.js for the tier table and src/lib/confirm.js for the UI gate.
+// Every action: (1) validates input, (2) performs the mutation via getDb(), (3) has an
+// ActivityEvent recorded. Step 3 is no longer a second JS-driven `emitEvent()` call after the
+// mutation — the ChatGPT-audit fix for "atomic mutation + event" moved that into SQL triggers
+// (src/lib/migrations/006_activity_event_triggers.sql), so the event is written by the SAME
+// statement execution as the mutation itself and can't go missing independently. See
+// docs/DECISIONS.md for why (tauri-plugin-sql's execute()/select() acquire a pooled connection
+// per call, which ruled out a JS-driven BEGIN/mutate/insert-event/COMMIT sequence). Every mutating
+// statement below is exactly one `db.execute()` call for this reason — an action that issued
+// several separate UPDATEs would let its trigger fire multiple times for one logical action.
+//
+// The one event still emitted directly from JS is 'approval_granted' for high-impact actions: it
+// records the approval step itself, which has no corresponding row mutation to hang a trigger on.
+//
+// Risk-tiered actions (external/write, high-impact) gate on confirmGate() first — see
+// src/lib/risk.js for the tier table and src/lib/confirm.js for the UI gate.
 
 import { getDb } from './db.js';
 import { newId, nowIso } from './ids.js';
@@ -46,30 +58,27 @@ async function assertExists(table, id, label) {
   if (!rows.length) throw new ValidationError(`${label} "${id}" does not exist`);
 }
 
-async function emitEvent({ eventType, entityType, entityId, actor = 'nev', payload }) {
-  const db = getDb();
-  await db.execute(
+async function emitApprovalGranted(actionName, entityType, entityId) {
+  await getDb().execute(
     `INSERT INTO activity_event (id, event_type, related_entity_type, related_entity_id, actor, payload, created_at)
      VALUES ($1,$2,$3,$4,$5,$6,$7)`,
-    [newId('evt'), eventType, entityType ?? null, entityId ?? null, actor, payload ? JSON.stringify(payload) : null, nowIso()]
+    [newId('evt'), 'approval_granted', entityType ?? null, entityId ?? null, 'nev', `action=${actionName}`, nowIso()]
   );
 }
 
-// Runs one named action end-to-end: risk gate -> mutation -> ActivityEvent.
-// `tierArgs` is passed to resolveTier() so dynamically-tiered actions (AdvanceDoorStage) can
-// look at the call's arguments to decide safe/external/high-impact.
-async function runAction(actionName, { title, detail, entityType, entityId, eventType, payload, tierArgs, mutate }) {
+// Runs one named action end-to-end: risk gate -> single mutating statement. The mutating
+// statement's own trigger records the ActivityEvent atomically (see file header) — this wrapper
+// no longer writes one itself.
+async function runAction(actionName, { title, detail, entityType, entityId, tierArgs, mutate }) {
   const tier = resolveTier(actionName, tierArgs);
   if (requiresConfirmation(tier)) {
     const approved = await confirmGate({ tier, title, detail });
     if (!approved) throw new ActionDeclinedError(actionName);
     if (tier === TIER.HIGH_IMPACT) {
-      await emitEvent({ eventType: 'approval_granted', entityType, entityId, payload: { action: actionName } });
+      await emitApprovalGranted(actionName, entityType, entityId);
     }
   }
-  const result = await mutate();
-  await emitEvent({ eventType, entityType, entityId, payload });
-  return result;
+  return mutate();
 }
 
 // ---------------------------------------------------------------- Client
@@ -79,7 +88,6 @@ export async function CreateClient({ name, contactInfo = '', status = 'prospect'
   oneOf(status, ['prospect', 'active', 'archived'], 'status');
   const id = newId('client');
   return runAction('CreateClient', {
-    entityType: 'client', entityId: id, eventType: 'client_created', payload: { name, status },
     mutate: async () => {
       await getDb().execute(
         'INSERT INTO client (id, name, contact_info, status, created_at) VALUES ($1,$2,$3,$4,$5)',
@@ -95,12 +103,17 @@ export async function UpdateClient({ id, name, contactInfo, status }) {
   await assertExists('client', id, 'Client');
   if (status) oneOf(status, ['prospect', 'active', 'archived'], 'status');
   return runAction('UpdateClient', {
-    entityType: 'client', entityId: id, eventType: 'client_updated', payload: { name, contactInfo, status },
     mutate: async () => {
-      const db = getDb();
-      if (name !== undefined) await db.execute('UPDATE client SET name = $1 WHERE id = $2', [name, id]);
-      if (contactInfo !== undefined) await db.execute('UPDATE client SET contact_info = $1 WHERE id = $2', [contactInfo, id]);
-      if (status !== undefined) await db.execute('UPDATE client SET status = $1 WHERE id = $2', [status, id]);
+      // One statement, not one per changed field: a partial-update loop here would let the
+      // client_updated trigger fire more than once for a single logical UpdateClient call.
+      await getDb().execute(
+        `UPDATE client SET
+           name = COALESCE($1, name),
+           contact_info = COALESCE($2, contact_info),
+           status = COALESCE($3, status)
+         WHERE id = $4`,
+        [name ?? null, contactInfo ?? null, status ?? null, id]
+      );
       return id;
     },
   });
@@ -114,7 +127,6 @@ export async function CreateProject({ clientId, title, type = '', status = 'acti
   await assertExists('client', clientId, 'Client');
   const id = newId('project');
   return runAction('CreateProject', {
-    entityType: 'project', entityId: id, eventType: 'project_created', payload: { clientId, title },
     mutate: async () => {
       await getDb().execute(
         'INSERT INTO project (id, client_id, title, type, status, created_at) VALUES ($1,$2,$3,$4,$5,$6)',
@@ -130,9 +142,36 @@ export async function UpdateProjectStatus({ id, status }) {
   required(status, 'status');
   await assertExists('project', id, 'Project');
   return runAction('UpdateProjectStatus', {
-    entityType: 'project', entityId: id, eventType: 'project_status_updated', payload: { status },
     mutate: async () => {
       await getDb().execute('UPDATE project SET status = $1 WHERE id = $2', [status, id]);
+      return id;
+    },
+  });
+}
+
+// ---------------------------------------------------------------- Production pipeline (Project)
+// Corrective patch (docs/PHASE1-CORRECTIVE-PATCH.md): independent of the Digital Door planning
+// flow below. 12-stage client-delivery pipeline lives on Project.production_stage.
+
+const PRODUCTION_STAGES = [
+  'intake', 'brand_understanding', 'assets', 'digital_door', 'customer_paths',
+  'mobile_optimization', 'full_site_handoff', 'owner_digital_key', 'qa_audit',
+  'client_approval', 'launch', 'support_cleanup',
+];
+
+export async function AdvanceProductionStage({ id, toStage }) {
+  required(id, 'id');
+  oneOf(toStage, PRODUCTION_STAGES, 'toStage');
+  await assertExists('project', id, 'Project');
+  return runAction('AdvanceProductionStage', {
+    entityType: 'project', entityId: id,
+    tierArgs: { toStage },
+    title: toStage === 'launch' ? 'Launch this project' : `Advance production stage to "${toStage}"`,
+    detail: toStage === 'launch'
+      ? 'This marks the project launched — a high-impact, live-client-asset transition. Logged as its own approval event.'
+      : 'This is an external/write action and will be logged.',
+    mutate: async () => {
+      await getDb().execute('UPDATE project SET production_stage = $1 WHERE id = $2', [toStage, id]);
       return id;
     },
   });
@@ -146,7 +185,6 @@ export async function CreateTask({ projectId = null, title, priority = 'normal',
   if (projectId) await assertExists('project', projectId, 'Project');
   const id = newId('task');
   return runAction('CreateTask', {
-    entityType: 'task', entityId: id, eventType: 'task_created', payload: { title, projectId, priority },
     mutate: async () => {
       await getDb().execute(
         'INSERT INTO task (id, project_id, title, status, priority, due_date, created_at) VALUES ($1,$2,$3,$4,$5,$6,$7)',
@@ -163,13 +201,16 @@ export async function UpdateTask({ id, title, status, priority, dueDate }) {
   if (status) oneOf(status, ['open', 'doing', 'done'], 'status');
   if (priority) oneOf(priority, ['low', 'normal', 'high', 'urgent'], 'priority');
   return runAction('UpdateTask', {
-    entityType: 'task', entityId: id, eventType: 'task_updated', payload: { title, status, priority, dueDate },
     mutate: async () => {
-      const db = getDb();
-      if (title !== undefined) await db.execute('UPDATE task SET title = $1 WHERE id = $2', [title, id]);
-      if (status !== undefined) await db.execute('UPDATE task SET status = $1 WHERE id = $2', [status, id]);
-      if (priority !== undefined) await db.execute('UPDATE task SET priority = $1 WHERE id = $2', [priority, id]);
-      if (dueDate !== undefined) await db.execute('UPDATE task SET due_date = $1 WHERE id = $2', [dueDate, id]);
+      await getDb().execute(
+        `UPDATE task SET
+           title = COALESCE($1, title),
+           status = COALESCE($2, status),
+           priority = COALESCE($3, priority),
+           due_date = COALESCE($4, due_date)
+         WHERE id = $5`,
+        [title ?? null, status ?? null, priority ?? null, dueDate ?? null, id]
+      );
       return id;
     },
   });
@@ -179,7 +220,6 @@ export async function CompleteTask({ id }) {
   required(id, 'id');
   await assertExists('task', id, 'Task');
   return runAction('CompleteTask', {
-    entityType: 'task', entityId: id, eventType: 'task_completed', payload: {},
     mutate: async () => {
       await getDb().execute("UPDATE task SET status = 'done' WHERE id = $1", [id]);
       return id;
@@ -187,7 +227,10 @@ export async function CompleteTask({ id }) {
   });
 }
 
-// ---------------------------------------------------------------- Digital Door Brief
+// ---------------------------------------------------------------- Digital Door planning flow
+// Corrective patch: this is the planning dimension only (independent of production_stage above).
+// Column is digital_door_brief.planning_step (renamed from `stage` by migration 003 — see
+// docs/DECISIONS.md). Action names/behavior are unchanged, only the underlying column moved.
 
 const DOOR_STAGES = ['outcome', 'customer', 'paths', 'destinations', 'build', 'handoff', 'complete'];
 const DOOR_FIELDS = [
@@ -203,10 +246,9 @@ export async function CreateDoorBrief({ clientId = null, business = '' }) {
   const id = newId('door');
   const ts = nowIso();
   return runAction('UpdateDoorBriefField', {
-    entityType: 'digital_door_brief', entityId: id, eventType: 'door_brief_created', payload: { clientId },
     mutate: async () => {
       await getDb().execute(
-        'INSERT INTO digital_door_brief (id, client_id, stage, business, created_at, updated_at) VALUES ($1,$2,$3,$4,$5,$6)',
+        'INSERT INTO digital_door_brief (id, client_id, planning_step, business, created_at, updated_at) VALUES ($1,$2,$3,$4,$5,$6)',
         [id, clientId, 'outcome', business, ts, ts]
       );
       return id;
@@ -221,7 +263,6 @@ export async function UpdateDoorBriefField({ id, field, value }) {
   await assertExists('digital_door_brief', id, 'Digital Door brief');
   const column = DOOR_FIELD_COLUMN[field] || field;
   return runAction('UpdateDoorBriefField', {
-    entityType: 'digital_door_brief', entityId: id, eventType: 'door_field_updated', payload: { field },
     mutate: async () => {
       await getDb().execute(
         `UPDATE digital_door_brief SET ${column} = $1, updated_at = $2 WHERE id = $3`,
@@ -237,7 +278,7 @@ export async function AdvanceDoorStage({ id, toStage }) {
   oneOf(toStage, DOOR_STAGES, 'toStage');
   await assertExists('digital_door_brief', id, 'Digital Door brief');
   return runAction('AdvanceDoorStage', {
-    entityType: 'digital_door_brief', entityId: id, eventType: 'door_stage_advanced', payload: { toStage },
+    entityType: 'digital_door_brief', entityId: id,
     tierArgs: { toStage },
     title: toStage === 'complete' ? 'Launch this Digital Door brief' : `Advance Door brief to "${toStage}"`,
     detail: toStage === 'complete'
@@ -245,7 +286,7 @@ export async function AdvanceDoorStage({ id, toStage }) {
       : 'This is an external/write action and will be logged.',
     mutate: async () => {
       await getDb().execute(
-        'UPDATE digital_door_brief SET stage = $1, updated_at = $2 WHERE id = $3',
+        'UPDATE digital_door_brief SET planning_step = $1, updated_at = $2 WHERE id = $3',
         [toStage, nowIso(), id]
       );
       return id;
@@ -264,7 +305,6 @@ export async function CreateArtifact({ type, reference, relatedTaskId = null, re
   if (relatedProjectId) await assertExists('project', relatedProjectId, 'Project');
   const id = newId('artifact');
   return runAction('CreateArtifact', {
-    entityType: 'artifact', entityId: id, eventType: 'artifact_created', payload: { type, reference },
     title: `Create ${type} artifact`,
     detail: reference,
     mutate: async () => {
@@ -289,7 +329,6 @@ export async function CreateHandoff({ fromWorker, toWorker, objective, context =
   const id = newId('handoff');
   const ts = nowIso();
   return runAction('CreateHandoff', {
-    entityType: 'handoff', entityId: id, eventType: 'handoff_created', payload: { fromWorker, toWorker, objective },
     title: `Hand off "${objective}" to ${toWorker}`,
     detail: `From ${fromWorker} to ${toWorker}.`,
     mutate: async () => {
@@ -308,7 +347,6 @@ export async function UpdateHandoffStatus({ id, status }) {
   oneOf(status, ['pending', 'in_progress', 'returned'], 'status'); // terminal states go through ApproveChange/RejectChange
   await assertExists('handoff', id, 'Handoff');
   return runAction('UpdateHandoffStatus', {
-    entityType: 'handoff', entityId: id, eventType: 'handoff_status_updated', payload: { status },
     title: `Move handoff to "${status}"`,
     mutate: async () => {
       await getDb().execute('UPDATE handoff SET status = $1, updated_at = $2 WHERE id = $3', [status, nowIso(), id]);
@@ -323,7 +361,6 @@ export async function SubmitForAudit({ handoffId, note = '' }) {
   required(handoffId, 'handoffId');
   await assertExists('handoff', handoffId, 'Handoff');
   return runAction('SubmitForAudit', {
-    entityType: 'handoff', entityId: handoffId, eventType: 'submitted_for_audit', payload: { note },
     title: 'Submit this handoff for audit',
     detail: note,
     mutate: async () => {
@@ -339,13 +376,12 @@ export async function RecordAuditResult({ handoffId, verdict, notes = '' }) {
   await assertExists('handoff', handoffId, 'Handoff');
   const artifactId = newId('artifact');
   return runAction('RecordAuditResult', {
-    entityType: 'handoff', entityId: handoffId, eventType: 'audit_result_recorded', payload: { verdict, notes },
     title: `Record audit result: ${verdict.toUpperCase()}`,
     detail: notes,
     mutate: async () => {
       await getDb().execute(
-        'INSERT INTO artifact (id, type, reference, related_task_id, related_project_id, created_at) VALUES ($1,$2,$3,$4,$5,$6)',
-        [artifactId, 'audit_report', `${verdict.toUpperCase()}: ${notes}`, null, null, nowIso()]
+        'INSERT INTO artifact (id, type, reference, related_task_id, related_project_id, related_handoff_id, created_at) VALUES ($1,$2,$3,$4,$5,$6,$7)',
+        [artifactId, 'audit_report', `${verdict.toUpperCase()}: ${notes}`, null, null, handoffId, nowIso()]
       );
       return { handoffId, artifactId };
     },
@@ -358,7 +394,7 @@ export async function ApproveChange({ handoffId, note = '' }) {
   required(handoffId, 'handoffId');
   await assertExists('handoff', handoffId, 'Handoff');
   return runAction('ApproveChange', {
-    entityType: 'handoff', entityId: handoffId, eventType: 'handoff_accepted', payload: { note },
+    entityType: 'handoff', entityId: handoffId,
     title: 'Approve this change',
     detail: note || 'This accepts the handoff and closes the review loop.',
     mutate: async () => {
@@ -372,7 +408,7 @@ export async function RejectChange({ handoffId, note = '' }) {
   required(handoffId, 'handoffId');
   await assertExists('handoff', handoffId, 'Handoff');
   return runAction('RejectChange', {
-    entityType: 'handoff', entityId: handoffId, eventType: 'handoff_rejected', payload: { note },
+    entityType: 'handoff', entityId: handoffId,
     title: 'Reject this change',
     detail: note || 'This rejects the handoff and sends it back.',
     mutate: async () => {
@@ -388,7 +424,6 @@ export async function CaptureInboxItem({ rawText }) {
   required(rawText, 'rawText');
   const id = newId('inbox');
   return runAction('CaptureInboxItem', {
-    entityType: 'inbox_item', entityId: id, eventType: 'inbox_item_captured', payload: {},
     mutate: async () => {
       await getDb().execute(
         'INSERT INTO inbox_item (id, raw_text, status, created_at) VALUES ($1,$2,$3,$4)',
@@ -408,8 +443,10 @@ export async function ConvertInboxItem({ id, toEntityType, clientId = null, proj
   const item = rows[0];
 
   return runAction('ConvertInboxItem', {
-    entityType: 'inbox_item', entityId: id, eventType: 'inbox_item_converted', payload: { toEntityType },
     mutate: async () => {
+      // Each nested Create* call is its own single-statement action with its own trigger-backed
+      // event; the inbox_item UPDATE below is a separate one. Two real state changes happen here
+      // (a new entity created, this inbox item marked converted), so two events is correct.
       let newEntityId;
       if (toEntityType === 'task') {
         newEntityId = await CreateTask({ projectId, title: title || item.raw_text });
@@ -431,7 +468,6 @@ export async function DismissInboxItem({ id }) {
   required(id, 'id');
   await assertExists('inbox_item', id, 'Inbox item');
   return runAction('DismissInboxItem', {
-    entityType: 'inbox_item', entityId: id, eventType: 'inbox_item_dismissed', payload: {},
     mutate: async () => {
       await getDb().execute("UPDATE inbox_item SET status = 'dismissed' WHERE id = $1", [id]);
       return id;
@@ -447,7 +483,6 @@ export async function DismissInboxItem({ id }) {
 export async function SaveLegacyState({ key, value }) {
   required(key, 'key');
   return runAction('SaveLegacyState', {
-    entityType: 'legacy_state', entityId: key, eventType: 'legacy_state_saved', payload: { key },
     mutate: async () => {
       await getDb().execute(
         `INSERT INTO legacy_state (key, value, updated_at) VALUES ($1,$2,$3)
@@ -459,4 +494,4 @@ export async function SaveLegacyState({ key, value }) {
   });
 }
 
-export { DOOR_STAGES, DOOR_FIELDS, ARTIFACT_TYPES, WORKERS, HANDOFF_STATUSES };
+export { DOOR_STAGES, DOOR_FIELDS, ARTIFACT_TYPES, WORKERS, HANDOFF_STATUSES, PRODUCTION_STAGES };

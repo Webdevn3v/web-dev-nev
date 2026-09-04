@@ -25,7 +25,7 @@ export async function renderHealth() {
     </div>
     <div class="card" style="margin-top:14px">
       <div class="kicker">STALLED DOOR BRIEFS</div>
-      ${stalledBriefs.length ? stalledBriefs.map((b) => `<div class="status-row"><span>${esc(b.business || b.id)}</span><span class="status">${esc(b.stage.toUpperCase())} · idle since ${esc(new Date(b.updated_at).toLocaleDateString())}</span></div>`).join('') : '<p class="muted">Nothing stalled.</p>'}
+      ${stalledBriefs.length ? stalledBriefs.map((b) => `<div class="status-row"><span>${esc(b.business || b.id)}</span><span class="status">${esc(b.planning_step.toUpperCase())} · idle since ${esc(new Date(b.updated_at).toLocaleDateString())}</span></div>`).join('') : '<p class="muted">Nothing stalled.</p>'}
     </div>
     <div class="card" style="margin-top:14px">
       <div class="kicker">STALE HANDOFFS</div>

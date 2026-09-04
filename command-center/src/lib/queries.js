@@ -82,7 +82,7 @@ export async function getTodayView() {
     "SELECT * FROM task WHERE status != 'done' AND priority IN ('high','urgent') ORDER BY due_date IS NULL, due_date ASC"
   );
   const midStageBriefs = await db.select(
-    "SELECT * FROM digital_door_brief WHERE stage NOT IN ('outcome','complete') ORDER BY updated_at DESC"
+    "SELECT * FROM digital_door_brief WHERE planning_step NOT IN ('outcome','complete') ORDER BY updated_at DESC"
   );
   const awaitingApproval = await db.select("SELECT * FROM handoff WHERE status = 'returned' ORDER BY updated_at DESC");
   return { highPriorityTasks, midStageBriefs, awaitingApproval };
@@ -97,7 +97,7 @@ export async function getBusinessHealth() {
     "SELECT * FROM task WHERE status != 'done' AND due_date IS NOT NULL AND due_date < $1", [today]
   );
   const stalledBriefs = await db.select(
-    "SELECT * FROM digital_door_brief WHERE stage NOT IN ('complete') AND updated_at < $1",
+    "SELECT * FROM digital_door_brief WHERE planning_step NOT IN ('complete') AND updated_at < $1",
     [new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()]
   );
   const untriagedInbox = await db.select("SELECT * FROM inbox_item WHERE status = 'untriaged'");

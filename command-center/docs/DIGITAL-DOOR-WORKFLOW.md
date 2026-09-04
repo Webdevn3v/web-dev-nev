@@ -1,5 +1,15 @@
 # Digital Door Workflow — Guided Mission Model
 
+**Scope note (corrective patch, 2026-09-04):** this document describes the **planning flow**
+only — the 6-step thinking sequence below (`digital_door_brief.planning_step` in the schema). It
+is a separate, independent dimension from the **12-stage production pipeline**
+(`project.production_stage`: intake → brand_understanding → assets → digital_door →
+customer_paths → mobile_optimization → full_site_handoff → owner_digital_key → qa_audit →
+client_approval → launch → support_cleanup), which tracks actual client-delivery progress on a
+Project. See `docs/PHASE1-CORRECTIVE-PATCH.md` for the production pipeline's authoritative
+definition and `docs/DECISIONS.md` ("Corrective patch: planning step vs. production stage") for
+why these were originally conflated and how they were separated.
+
 The workflow exists to remove the need for Nev to mentally design every project from scratch.
 
 ## Principle
