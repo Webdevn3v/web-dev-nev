@@ -352,7 +352,7 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 <div class="tds-tier quiet"><h3>Connect the Dots</h3><b>$750+</b><p>Full custom build for a business that needs the entire system rebuilt: Digital Door + a brand-new responsive in-depth site.</p></div>
 </div></details>
 <details class="tds-module"><summary><div><small>Start</small><strong>Tell The Digital Side what needs handling</strong></div><span class="tds-plus">+</span></summary><div class="tds-body"><div class="tds-intakes">
-<div class="tds-choice"><div class="tds-kicker">Quick version</div><h3>Start with the messy part.</h3><p>Name, email, and whatever feels off. A populated email draft opens; nothing sends until you choose to send it.</p><form id="quick"><input id="qname" placeholder="Name" required><input id="qemail" type="email" placeholder="Email" required><textarea id="qmsg" placeholder="What needs help?" required></textarea><button class="tds-send" type="submit">Send the short version →</button></form></div>
+<div class="tds-choice"><div class="tds-kicker">Quick version</div><h3>Start with the messy part.</h3><p>Name, email, and whatever feels off. A populated email draft opens; nothing sends until you choose to send it.</p><form id="quick"><input id="qname" placeholder="Name" required><input id="qemail" type="email" placeholder="Email" required><textarea id="qmsg" placeholder="What needs help?" required></textarea><button class="tds-send" type="submit">Send the short version →</button><div class="notice" id="doorQuickStatus">Short-form submission is not live until the Formspree connection is added.</div></form></div>
 <div class="tds-choice"><div class="tds-kicker">Full intake</div><h3>Share more details.</h3><p>Use the longer intake when the goals, current setup, and project details are ready to put in one place.</p><a class="tds-btn primary" href="client-intake.html">Open full intake →</a></div>
 </div></div></details>
 <details class="tds-module"><summary><div><small>Good to know</small><strong>Ownership, access + what happens next</strong></div><span class="tds-plus">+</span></summary><div class="tds-body">
@@ -368,7 +368,29 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 <div class="tds-modal" id="aboutModal"><div class="tds-modal-card"><button class="tds-modal-close" data-close>×</button><div style="font:700 clamp(1.6rem,5vw,2.3rem)/1 var(--sans);letter-spacing:-.05em;color:#f2f4f5;margin-bottom:16px">Meet the Developer</div><img src="about_mim.png" alt="Nev Gonzalez with Method in Motion"><div style="margin-top:15px;font:700 1.08rem var(--sans);color:#f2f4f5">Nev Gonzalez</div><p style="color:#a0a7ac;line-height:1.7;margin-top:10px">The Digital Side grew from the overlap between small-business operations, customer experience, design, and development. The work focuses on the friction customers actually feel: buried next steps, scattered systems, repeated questions, and digital experiences that make a business harder to use than it needs to be. Those pieces become something clearer, more useful, and easier to own.</p></div></div>
 <script>
 (()=>{const gate=document.getElementById('gate'),tap=document.getElementById('tdsTap');let entering=false;function enter(){if(entering)return;entering=true;if(tap)tap.style.opacity='0';gate.classList.add('opening-in-place');setTimeout(()=>{document.documentElement.classList.remove('gate-lock');document.documentElement.classList.add('entered');gate.classList.add('hide');if(tap)tap.remove()},2350)}gate.addEventListener('click',enter);gate.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enter()}})
-document.getElementById('quick').addEventListener('submit',e=>{e.preventDefault();const n=encodeURIComponent(document.getElementById('qname').value),em=encodeURIComponent(document.getElementById('qemail').value),m=encodeURIComponent(document.getElementById('qmsg').value);location.href=`mailto:handled@thedigitalside.org?subject=Quick%20intake%20from%20${n}&body=Name:%20${n}%0AEmail:%20${em}%0A%0AWhat%20needs%20help:%0A${m}`});
+const doorQuick=document.getElementById('quick');
+const DOOR_FORM_ENDPOINT='https://formspree.io/f/YOUR_FORM_ID';
+doorQuick.addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(!doorQuick.reportValidity()) return;
+  const status=document.getElementById('doorQuickStatus');
+  if(DOOR_FORM_ENDPOINT.includes('YOUR_FORM_ID')){
+    if(status) status.textContent='This form still needs the live Formspree ID before it can submit.';
+    return;
+  }
+  const btn=doorQuick.querySelector('button[type="submit"]');
+  if(btn){btn.disabled=true;btn.textContent='Sending…'}
+  try{
+    const res=await fetch(DOOR_FORM_ENDPOINT,{method:'POST',body:new FormData(doorQuick),headers:{Accept:'application/json'}});
+    if(!res.ok) throw new Error('submit failed');
+    doorQuick.reset();
+    if(status) status.textContent='Sent. The Digital Side has your short version.';
+  }catch(err){
+    if(status) status.textContent='Something did not send. Please use the full intake or email handled@thedigitalside.org.';
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='Send the short version →'}
+  }
+});
 const km=document.getElementById('keyModal'),am=document.getElementById('aboutModal');document.getElementById('keyBtn').onclick=()=>km.classList.add('open');document.getElementById('aboutBtn').onclick=()=>am.classList.add('open');document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.tds-modal').classList.remove('open'));document.querySelectorAll('.tds-modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.tds-modal.open').forEach(m=>m.classList.remove('open'))})
 })();
 </script></body></html>
