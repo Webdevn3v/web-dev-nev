@@ -17,7 +17,7 @@ const seed = {
     ['LOCAL DB','ready'],['GITHUB','planned'],['CLAUDE','planned'],['CHATGPT','planned'],['WATCHTOWER','planned']
   ],
   doorDraft:{
-    client:'',business:'',primaryGoal:'',customer:'',urgentNeed:'',tone:'',paths:'',destinations:'',handoff:'',deliverables:'Digital Key\nDigital Door\nCustomer Paths',notes:'',step:0
+    client:'',business:'',primaryGoal:'',customer:'',urgentNeed:'',customerIntent:'',tone:'',paths:'',destinations:'',handoff:'',deliverables:'Digital Key\nDigital Door\nCustomer Paths',notes:'',step:0
   }
 };
 
@@ -93,7 +93,7 @@ function doorField(label,key,placeholder,kind='textarea'){
 function stepBody(step){
   const d=state.doorDraft;
   if(step===0)return `${doorField('CLIENT / PROJECT','client','Frederick Legacy Law','input')}${doorField('PRIMARY BUSINESS GOAL','primaryGoal','Example: make it effortless for a mobile visitor to choose the right next action.')}${doorField('WHAT WOULD MAKE THIS PROJECT A WIN?','urgentNeed','What must be better after this is built?')}`;
-  if(step===1)return `${doorField('WHO IS ARRIVING?','customer','Describe the actual people, not a marketing persona.')}${doorField('WHAT ARE THEY TRYING TO DO?','urgentNeed','Book, call, understand services, get directions, submit info, etc.')}${doorField('BRAND VOICE / FEEL','tone','How should the client sound and feel?')}`;
+  if(step===1)return `${doorField('WHO IS ARRIVING?','customer','Describe the actual people, not a marketing persona.')}${doorField('WHAT ARE THEY TRYING TO DO?','customerIntent','Book, call, understand services, get directions, submit info, etc.')}${doorField('BRAND VOICE / FEEL','tone','How should the client sound and feel?')}`;
   if(step===2)return `${doorField('CUSTOMER PATHS','paths','One per line. Example:\nI know what I need\nI need help choosing\nI’m already a client')}`;
   if(step===3)return `${doorField('PATH DESTINATIONS','destinations','Map each path to a useful destination/action. Every route must resolve somewhere useful.')}`;
   if(step===4)return `${doorField('BUILD PIECES','deliverables','Digital Key\nDigital Door\nCustomer Paths\nMobile Rescue\nFull-site handoff')}${doorField('BUILD NOTES','notes','Special interactions, assets, constraints, deadlines.')}`;
@@ -117,7 +117,7 @@ async function captureDoor(){
 
 function renderDoorSummary(){
   setHeader('MISSION OUTPUT','Digital Door Brief'); const d=state.doorDraft;
-  view.innerHTML=`<div class="card glow"><div class="kicker">${esc(d.client||'UNTITLED PROJECT')}</div><div class="big">DOOR MISSION BRIEF</div><div class="grid two" style="margin-top:16px"><div><div class="kicker">OUTCOME</div><p class="muted">${esc(d.primaryGoal||'Not defined')}</p><div class="kicker">CUSTOMER</div><p class="muted">${esc(d.customer||'Not defined')}</p><div class="kicker">VOICE</div><p class="muted">${esc(d.tone||'Not defined')}</p></div><div><div class="kicker">PATHS</div><p class="muted">${esc(d.paths||'Not defined').replace(/\n/g,'<br>')}</p><div class="kicker">DESTINATIONS</div><p class="muted">${esc(d.destinations||'Not defined').replace(/\n/g,'<br>')}</p><div class="kicker">HANDOFF</div><p class="muted">${esc(d.handoff||'Not defined')}</p></div></div><div class="actions"><button class="btn primary" data-edit>EDIT WORKFLOW</button></div></div>`;
+  view.innerHTML=`<div class="card glow"><div class="kicker">${esc(d.client||'UNTITLED PROJECT')}</div><div class="big">DOOR MISSION BRIEF</div><div class="grid two" style="margin-top:16px"><div><div class="kicker">OUTCOME</div><p class="muted">${esc(d.primaryGoal||'Not defined')}</p><div class="kicker">CUSTOMER</div><p class="muted">${esc(d.customer||'Not defined')}</p><div class="kicker">CUSTOMER INTENT</div><p class="muted">${esc(d.customerIntent||'Not defined')}</p><div class="kicker">URGENT / HIGH-VALUE NEED</div><p class="muted">${esc(d.urgentNeed||'Not defined')}</p><div class="kicker">VOICE</div><p class="muted">${esc(d.tone||'Not defined')}</p></div><div><div class="kicker">PATHS</div><p class="muted">${esc(d.paths||'Not defined').replace(/\n/g,'<br>')}</p><div class="kicker">DESTINATIONS</div><p class="muted">${esc(d.destinations||'Not defined').replace(/\n/g,'<br>')}</p><div class="kicker">BUILD PIECES</div><p class="muted">${esc(d.deliverables||'Not defined').replace(/\n/g,'<br>')}</p><div class="kicker">HANDOFF</div><p class="muted">${esc(d.handoff||'Not defined')}</p><div class="kicker">NOTES</div><p class="muted">${esc(d.notes||'Not defined').replace(/\n/g,'<br>')}</p></div></div><div class="actions"><button class="btn primary" data-edit>EDIT WORKFLOW</button></div></div>`;
   view.querySelector('[data-edit]').onclick=()=>{renderDoor();};
 }
 
