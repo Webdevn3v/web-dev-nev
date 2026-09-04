@@ -1,7 +1,7 @@
 import Database from '@tauri-apps/plugin-sql';
 
 const NAV = [
-  ['today','TODAY'],['door','DOOR WORKFLOW'],['clients','CLIENTS'],['runway','RUNWAY'],['watch','WATCHTOWER'],['money','MONEY'],['ai','AI DESK']
+  ['today','TODAY'],['door','DOOR WORKFLOW'],['clients','CLIENTS'],['inventory','INVENTORY'],['runway','RUNWAY'],['watch','WATCHTOWER'],['money','MONEY'],['ai','AI DESK']
 ];
 
 const seed = {
@@ -20,6 +20,9 @@ const seed = {
     {id:'tds',name:'The Digital Side',role:'STUDIO / CLIENT 0',status:'active',priority:'CORE',deadline:'Ongoing',repo:'Webdevn3v/web-dev-nev',note:'Run the studio through the same client system Jarvie will use for every project.'},
     {id:'stone-stardust',name:'Stone & Stardust',role:'CLIENT 1',status:'urgent',priority:'TONIGHT',deadline:'Event tomorrow',repo:'',note:'First real-world Jarvie client test: update Nina’s page for tomorrow’s event.'}
   ],
+  inventory:[],
+  events:[{id:'event-2026-09-05',name:'September 5 Event',date:'2026-09-05',clientId:'stone-stardust',status:'prep'}],
+  customOrders:[],
   doorDraft:{
     client:'',business:'',primaryGoal:'',customer:'',urgentNeed:'',customerIntent:'',tone:'',paths:'',destinations:'',handoff:'',deliverables:'Digital Key\nDigital Door\nCustomer Paths',notes:'',step:0
   }
@@ -125,6 +128,18 @@ function renderDoorSummary(){
   view.querySelector('[data-edit]').onclick=()=>{renderDoor();};
 }
 
+function renderInventory(){
+  setHeader('STONE & STARDUST','Inventory + Event Prep');
+  const items=state.inventory.filter(i=>i.clientId==='stone-stardust');
+  const event=state.events.find(e=>e.clientId==='stone-stardust'&&e.status==='prep');
+  const going=items.filter(i=>i.eventId===event?.id);
+  const projected=going.reduce((sum,i)=>sum+(Number(i.price)||0)*(Number(i.qty)||1),0);
+  view.innerHTML=`<div class="grid three"><div class="card glow"><div class="kicker">EVENT</div><div class="big">${esc(event?.name||'NO EVENT')}</div><div class="muted">${esc(event?.date||'')}</div></div><div class="card"><div class="kicker">ITEMS GOING</div><div class="metric">${going.reduce((a,i)=>a+(Number(i.qty)||1),0)}</div></div><div class="card"><div class="kicker">PROJECTED VALUE</div><div class="metric">${projected.toFixed(0)}</div></div></div>
+  <div class="card" style="margin-top:14px"><div class="kicker">QUICK ADD · CONFIRM AFTER PHOTO REVIEW</div><div class="grid two"><div class="field"><label>COLLECTION</label><input id="invCollection" placeholder="Water Colors"></div><div class="field"><label>TYPE</label><input id="invType" placeholder="Window Strand"></div><div class="field"><label>SIZE / LENGTH</label><input id="invSize" placeholder='48"'></div><div class="field"><label>PRICE</label><input id="invPrice" type="number" min="0" step="1" placeholder="40"></div><div class="field"><label>QUANTITY</label><input id="invQty" type="number" min="1" value="1"></div></div><div class="actions"><button class="btn primary" id="addInventory">ADD TO TOMORROW'S EVENT</button></div></div>
+  <div class="card" style="margin-top:14px"><div class="kicker">EVENT INVENTORY</div>${going.length?going.map(i=>`<div class="status-row"><span>${esc(i.id)} · ${esc(i.collection)} · ${esc(i.type)} · ${esc(i.size||'')}</span><span class="status ready">${Number(i.price||0).toFixed(0)} · QTY ${i.qty}</span></div>`).join(''):'<p class="muted">No pieces logged yet. Photograph a collection, confirm Jarvie’s proposed items, then add them here.</p>'}</div>`;
+  view.querySelector('#addInventory').onclick=async()=>{const collection=invCollection.value.trim(),type=invType.value.trim();if(!collection||!type)return;const id=`S&S-${String(items.length+1).padStart(3,'0')}`;state.inventory.push({id,clientId:'stone-stardust',collection,type,size:invSize.value.trim(),price:Number(invPrice.value)||0,qty:Number(invQty.value)||1,status:'available',eventId:event?.id||''});await persist('inventory');renderInventory();};
+}
+
 function renderRunway(){
   setHeader('BUSINESS LEVEL MAP','Goal Runway');
   view.innerHTML=`<div class="grid two">${state.runway.map(([name,pct],i)=>`<div class="card ${i===0?'glow':''}"><div class="kicker">LEVEL ${String(i+1).padStart(2,'0')}</div><div class="big">${name}</div><div class="progress"><span style="width:${pct}%"></span></div><div class="muted" style="margin-top:8px">${pct}% complete</div></div>`).join('')}</div>`;
@@ -138,7 +153,7 @@ function renderClients(){
 }
 function renderAI(){setHeader('ROUTER FOUNDATION','AI Desk');view.innerHTML=`<div class="card glow"><div class="big">ONE DESK. MULTIPLE BRAINS.</div><p class="muted">No external AI credentials are stored or called in this phase. The next layer will route approved jobs to Claude, OpenAI/ChatGPT, GitHub and local tools through the native backend.</p>${state.systems.map(([n,s])=>`<div class="status-row"><span>${n}</span><span class="status ${s==='ready'?'ready':''}">${s.toUpperCase()}</span></div>`).join('')}</div>`;}
 
-function render(){renderNav();renderSystems();({today:renderToday,door:renderDoor,clients:renderClients,runway:renderRunway,watch:renderWatch,money:renderMoney,ai:renderAI}[active]||renderToday)();}
+function render(){renderNav();renderSystems();({today:renderToday,door:renderDoor,clients:renderClients,inventory:renderInventory,runway:renderRunway,watch:renderWatch,money:renderMoney,ai:renderAI}[active]||renderToday)();}
 
 function tick(){clock.textContent=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});offlineState.classList.toggle('off',!navigator.onLine);}
 
