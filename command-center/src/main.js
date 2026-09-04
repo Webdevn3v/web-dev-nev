@@ -1,7 +1,7 @@
 import Database from '@tauri-apps/plugin-sql';
 
 const NAV = [
-  ['today','TODAY'],['door','DOOR WORKFLOW'],['clients','CLIENTS'],['inventory','INVENTORY'],['runway','RUNWAY'],['watch','WATCHTOWER'],['money','MONEY'],['ai','AI DESK']
+  ['today','TODAY'],['door','DOOR WORKFLOW'],['clients','CLIENTS'],['inventory','INVENTORY'],['jobs','CLIENT JOBS'],['runway','RUNWAY'],['watch','WATCHTOWER'],['money','MONEY'],['ai','AI DESK']
 ];
 
 const seed = {
@@ -25,6 +25,12 @@ const seed = {
   customOrders:[],
   photoIntake:[],
   reconciliation:[],
+  clientJobs:[
+    {id:'SS-JOB-001',clientId:'stone-stardust',title:'Build Inspo page',area:'WEBSITE',status:'next',priority:'TONIGHT',note:'Show the many ways strands can be displayed using the new lifestyle photos.'},
+    {id:'SS-JOB-002',clientId:'stone-stardust',title:'Replace Moonstone & Muse references',area:'BRAND',status:'next',priority:'TONIGHT',note:'Audit the site and update stale business-name copy to Stone & Stardust.'},
+    {id:'SS-JOB-003',clientId:'stone-stardust',title:'Add custom-order path',area:'SALES',status:'next',priority:'TONIGHT',note:'Make it easy for an event visitor to request a custom piece later.'},
+    {id:'SS-JOB-004',clientId:'stone-stardust',title:'Event follow-up path',area:'SALES',status:'queued',priority:'EVENT',note:'Give tomorrow’s visitors a clear way to find available work after the event.'}
+  ],
   doorDraft:{
     client:'',business:'',primaryGoal:'',customer:'',urgentNeed:'',customerIntent:'',tone:'',paths:'',destinations:'',handoff:'',deliverables:'Digital Key\nDigital Door\nCustomer Paths',notes:'',step:0
   }
@@ -161,6 +167,16 @@ function renderInventory(){
   view.querySelectorAll('[data-returned]').forEach(b=>b.onclick=async()=>{const i=state.inventory.find(x=>x.id===b.dataset.returned);if(!i)return;i.status='returned';i.returnedAt=new Date().toISOString();await persist('inventory');renderInventory();});
   view.querySelector('#addCustom').onclick=async()=>{const customer=customCustomer.value.trim(),request=customRequest.value.trim();if(!request)return;state.customOrders.push({id:`CO-${String(state.customOrders.length+1).padStart(3,'0')}`,clientId:'stone-stardust',customer:customer||'Walk-up customer',request,status:'requested',createdAt:new Date().toISOString()});await persist('customOrders');renderInventory();};
 }
+function renderJobs(){
+  setHeader('STONE & STARDUST','Client Job Board');
+  const jobs=state.clientJobs.filter(j=>j.clientId==='stone-stardust');
+  const order={doing:0,next:1,queued:2,done:3};
+  jobs.sort((a,b)=>(order[a.status]??9)-(order[b.status]??9));
+  view.innerHTML=`<div class="grid three"><div class="card glow"><div class="kicker">TONIGHT</div><div class="metric">${jobs.filter(j=>j.priority==='TONIGHT'&&j.status!=='done').length}</div><div class="muted">launch-critical jobs</div></div><div class="card"><div class="kicker">IN PROGRESS</div><div class="metric">${jobs.filter(j=>j.status==='doing').length}</div></div><div class="card"><div class="kicker">DONE</div><div class="metric">${jobs.filter(j=>j.status==='done').length}</div></div></div><div class="card" style="margin-top:14px"><div class="kicker">CLIENT #1 · WEBSITE + SALES</div>${jobs.map(j=>`<div class="inventory-row"><div><div class="kicker">${esc(j.area)} · ${esc(j.priority)}</div><strong>${esc(j.title)}</strong><div class="muted">${esc(j.note)}</div></div><div class="actions"><button class="btn ${j.status==='doing'?'primary':''}" data-job="${j.id}">${j.status==='done'?'DONE ✓':j.status==='doing'?'MARK DONE':'START'}</button></div></div>`).join('')}</div><div class="card" style="margin-top:14px"><div class="kicker">ADD CLIENT JOB</div><div class="grid two"><div class="field"><label>JOB</label><input id="jobTitle" placeholder="Update event banner"></div><div class="field"><label>AREA</label><input id="jobArea" placeholder="WEBSITE"></div></div><div class="actions"><button class="btn primary" id="addJob">ADD JOB</button></div></div>`;
+  view.querySelectorAll('[data-job]').forEach(b=>b.onclick=async()=>{const j=state.clientJobs.find(x=>x.id===b.dataset.job);if(!j)return;j.status=j.status==='doing'?'done':'doing';j.updatedAt=new Date().toISOString();await persist('clientJobs');renderJobs();});
+  view.querySelector('#addJob').onclick=async()=>{const title=jobTitle.value.trim();if(!title)return;state.clientJobs.push({id:`SS-JOB-${String(state.clientJobs.filter(j=>j.clientId==='stone-stardust').length+1).padStart(3,'0')}`,clientId:'stone-stardust',title,area:jobArea.value.trim().toUpperCase()||'GENERAL',status:'queued',priority:'NORMAL',note:'',createdAt:new Date().toISOString()});await persist('clientJobs');renderJobs();};
+}
+
 function renderRunway(){
   setHeader('BUSINESS LEVEL MAP','Goal Runway');
   view.innerHTML=`<div class="grid two">${state.runway.map(([name,pct],i)=>`<div class="card ${i===0?'glow':''}"><div class="kicker">LEVEL ${String(i+1).padStart(2,'0')}</div><div class="big">${name}</div><div class="progress"><span style="width:${pct}%"></span></div><div class="muted" style="margin-top:8px">${pct}% complete</div></div>`).join('')}</div>`;
@@ -174,7 +190,7 @@ function renderClients(){
 }
 function renderAI(){setHeader('ROUTER FOUNDATION','AI Desk');view.innerHTML=`<div class="card glow"><div class="big">ONE DESK. MULTIPLE BRAINS.</div><p class="muted">No external AI credentials are stored or called in this phase. The next layer will route approved jobs to Claude, OpenAI/ChatGPT, GitHub and local tools through the native backend.</p>${state.systems.map(([n,s])=>`<div class="status-row"><span>${n}</span><span class="status ${s==='ready'?'ready':''}">${s.toUpperCase()}</span></div>`).join('')}</div>`;}
 
-function render(){renderNav();renderSystems();({today:renderToday,door:renderDoor,clients:renderClients,inventory:renderInventory,runway:renderRunway,watch:renderWatch,money:renderMoney,ai:renderAI}[active]||renderToday)();}
+function render(){renderNav();renderSystems();({today:renderToday,door:renderDoor,clients:renderClients,inventory:renderInventory,jobs:renderJobs,runway:renderRunway,watch:renderWatch,money:renderMoney,ai:renderAI}[active]||renderToday)();}
 
 function tick(){clock.textContent=new Date().toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});offlineState.classList.toggle('off',!navigator.onLine);}
 
