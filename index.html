@@ -938,7 +938,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <a href="#contact">Contact</a>
       </div>
       <div class="nav__right">
-        <a href="#contact" class="btn btn--lime nav__cta">Let's Talk <span class="btn__arr">→</span></a>
+        <a href="door.html" class="btn btn--lime nav__cta">Enter the Door <span class="btn__arr">→</span></a>
         <div class="nav__ham" id="ham" onclick="toggleNav()">
           <span></span><span></span><span></span>
         </div>
@@ -954,7 +954,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <a href="#process" onclick="toggleNav()">Process</a>
   <a href="#about" onclick="toggleNav()">About</a>
   <a href="#contact" onclick="toggleNav()">Contact</a>
-  <a href="#contact" onclick="toggleNav()" class="btn btn--lime" style="margin-top:auto">Let's Talk →</a>
+  <a href="door.html" onclick="toggleNav()" class="btn btn--lime" style="margin-top:auto">Enter the Door →</a>
 </div>
 
 <!-- ─── HERO ──────────────────────────────── -->
@@ -966,7 +966,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="container">
     <div class="hero__content">
       <div class="hero__terminal">
-        the-digital-side@columbia:~$ digital door live<span class="hero__cursor"></span>
+        the-digital-side@studio:~$ digital door live<span class="hero__cursor"></span>
       </div>
       <h1>
         A cleaner way<br>
@@ -977,7 +977,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <p class="hero__sub">Digital Doors built around what customers actually came to do — book, call, order, ask, visit, or get a quote — without forcing them through a desktop-sized experience on their phone.</p>
       <div class="hero__actions">
         <a href="#work" class="btn btn--lime">Experience the Demos <span class="btn__arr">→</span></a>
-        <a href="#contact" class="btn btn--outline">Talk About Your Door</a>
+        <a href="door.html" class="btn btn--outline">Enter the Digital Door</a>
       </div>
       <div class="hero__stats">
         <div class="hero__stat">
@@ -1167,6 +1167,12 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
 <!-- ─── WORK ───────────────────────────────── -->
 <section class="work" id="work">
+<style>
+.proj-desc{margin:14px 0 4px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.proj-desc summary{list-style:none;cursor:pointer;padding:12px 0;font-family:var(--display);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:10px}
+.proj-desc summary::-webkit-details-marker{display:none}.proj-desc summary::after{content:'+';color:var(--card-color,var(--lime))}.proj-desc[open] summary::after{content:'−'}
+.proj-desc p{padding:0 0 14px!important;margin:0!important}
+</style>
   <div class="container">
     <div class="work__header">
       <div class="reveal rl"><div class="tag">Digital Door Demos</div><h2>Different Businesses.<br>Different Ways In.</h2></div>
@@ -1175,23 +1181,27 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div class="work__grid">
       <div class="proj-card reveal d1" style="--card-color:#b8a98a;--icon-color:#b8a98a;--icon-bg:rgba(184,169,138,.08);--icon-border:rgba(184,169,138,.2);--icon-bg-hover:rgba(184,169,138,.15);--card-accent:linear-gradient(90deg,#b8a98a,transparent)">
         <div class="proj-card__num">01</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v4c0 5.25 3.75 10.15 9 11.35C17.25 21.15 21 16.25 21 11V7L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="proj-card__industry">Legal · Law Firm</div><h3>Frederick Legacy Law</h3><p>A restrained professional Door built around planning, estate handling, family legacy questions, and urgent matters.</p>
-        <div class="proj-card__footer"><div class="proj-card__tech"><span>Door</span><span>Paths</span><span>Full Site</span></div><div class="proj-card__actions"><a href="door-frederick-legacy-law.html" class="proj-card__link">View Door →</a><a href="https://webdevn3v.github.io/law-firm-demo/" target="_blank" rel="noopener" class="proj-card__link proj-card__link--ghost">Full Site ↗</a></div></div>
+        <div class="proj-card__industry">Legal · Law Firm</div><h3>Frederick Legacy Law</h3>
+        <details class="proj-desc"><summary>About this build</summary><p>A restrained professional Door built around planning, estate handling, family legacy questions, and urgent matters.</p></details>
+        <div class="proj-card__footer"><div class="proj-card__actions"><a href="key-frederick.html" class="proj-card__link proj-card__link--ghost">Avery Bennett</a><a href="door-frederick-legacy-law.html" class="proj-card__link">View Door →</a><a href="frederick-legacy-law-mobile.html" class="proj-card__link proj-card__link--ghost">Full Site ↗</a></div></div>
       </div>
       <div class="proj-card reveal d2" style="--card-color:#7ecfcf;--icon-color:#7ecfcf;--icon-bg:rgba(126,207,207,.08);--icon-border:rgba(126,207,207,.2);--icon-bg-hover:rgba(126,207,207,.15);--card-accent:linear-gradient(90deg,#7ecfcf,transparent)">
         <div class="proj-card__num">02</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2c-2.5 0-4.5 1.5-5.5 3.5C5.5 7 4 7.5 3 9c-1.5 2.5-.5 5.5 1 7 .8 1 1.5 2.5 2 4.5.3 1.2.8 2 1.5 2s1-.5 1.5-1.5c.5-1 1-2.5 3-2.5s2.5 1.5 3 2.5c.5 1 .8 1.5 1.5 1.5s1.2-.8 1.5-2c.5-2 1.2-3.5 2-4.5 1.5-1.5 2.5-4.5 1-7-1-1.5-2.5-2-3.5-3.5C16.5 3.5 14.5 2 12 2z"/></svg></div>
-        <div class="proj-card__industry">Healthcare · Dental</div><h3>Lumina Dental Studio</h3><p>A calm patient-first Door for appointments, treatment discovery, returning patients, insurance questions, and forms.</p>
-        <div class="proj-card__footer"><div class="proj-card__tech"><span>Door</span><span>Paths</span><span>Full Site</span></div><div class="proj-card__actions"><a href="lumina-door.html" class="proj-card__link">View Door →</a><a href="https://webdevn3v.github.io/dental-office-demo/" target="_blank" rel="noopener" class="proj-card__link proj-card__link--ghost">Full Site ↗</a></div></div>
+        <div class="proj-card__industry">Healthcare · Dental</div><h3>Lumina Dental Studio</h3>
+        <details class="proj-desc"><summary>About this build</summary><p>A calm patient-first Door for appointments, treatment discovery, returning patients, insurance questions, and forms.</p></details>
+        <div class="proj-card__footer"><div class="proj-card__actions"><a href="key-lumina.html" class="proj-card__link proj-card__link--ghost">Dr. Maya Chen</a><a href="lumina-door.html" class="proj-card__link">View Door →</a><a href="https://webdevn3v.github.io/dental-office-demo/" target="_blank" rel="noopener" class="proj-card__link proj-card__link--ghost">Full Site ↗</a></div></div>
       </div>
       <div class="proj-card reveal d3" style="--card-color:#c98a52;--icon-color:#c98a52;--icon-bg:rgba(201,138,82,.08);--icon-border:rgba(201,138,82,.2);--icon-bg-hover:rgba(201,138,82,.15);--card-accent:linear-gradient(90deg,#c98a52,transparent)">
         <div class="proj-card__num">03</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
-        <div class="proj-card__industry">Home Services · Roofing</div><h3>Northline Roofing Co.</h3><p>Inspection, storm response, replacement, and current-customer support organized around urgency and fast decisions.</p>
-        <div class="proj-card__footer"><div class="proj-card__tech"><span>Door</span><span>Paths</span><span>Full Site</span></div><div class="proj-card__actions"><a href="northline-door.html" class="proj-card__link">View Door →</a><a href="northline-full-site.html" class="proj-card__link proj-card__link--ghost">Full Site ↗</a></div></div>
+        <div class="proj-card__industry">Home Services · Roofing</div><h3>Northline Roofing Co.</h3>
+        <details class="proj-desc"><summary>About this build</summary><p>Inspection, storm response, replacement, and current-customer support organized around urgency and fast decisions.</p></details>
+        <div class="proj-card__footer"><div class="proj-card__actions"><a href="key-northline.html" class="proj-card__link proj-card__link--ghost">Jordan Cole</a><a href="northline-door.html" class="proj-card__link">View Door →</a><a href="northline-full-site.html" class="proj-card__link proj-card__link--ghost">Full Site ↗</a></div></div>
       </div>
-      <div class="proj-card reveal d2" style="--card-color:#a56f55;--icon-color:#a56f55;--icon-bg:rgba(165,111,85,.08);--icon-border:rgba(165,111,85,.2);--icon-bg-hover:rgba(165,111,85,.15);--card-accent:linear-gradient(90deg,#a56f55,transparent)">
+      <div class="proj-card reveal d2" style="--card-color:#b89478;--icon-color:#b89478;--icon-bg:rgba(184,148,120,.08);--icon-border:rgba(184,148,120,.2);--icon-bg-hover:rgba(184,148,120,.15);--card-accent:linear-gradient(90deg,#b89478,transparent)">
         <div class="proj-card__num">04</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V8l6-4 6 4v12"/><path d="M9 13h6"/></svg></div>
-        <div class="proj-card__industry">Interiors · Design</div><h3>Atelier House</h3><p>An editorial Door built around portfolio discovery, style direction, project fit, and current-client access.</p>
-        <div class="proj-card__footer"><div class="proj-card__tech"><span>Door</span><span>Paths</span><span>Full Site</span></div><div class="proj-card__actions"><a href="atelier-door.html" class="proj-card__link">View Door →</a><a href="atelier-house-full-site.html" class="proj-card__link proj-card__link--ghost">Full Site ↗</a></div></div>
+        <div class="proj-card__industry">Interiors · Design</div><h3>Atelier House</h3>
+        <details class="proj-desc"><summary>About this build</summary><p>An editorial Door built around portfolio discovery, style direction, project fit, and current-client access.</p></details>
+        <div class="proj-card__footer"><div class="proj-card__actions"><a href="key-atelier.html" class="proj-card__link proj-card__link--ghost">Lillian Hart</a><a href="atelier-door.html" class="proj-card__link">View Door →</a><a href="atelier-house-full-site.html" class="proj-card__link proj-card__link--ghost">Full Site ↗</a></div></div>
       </div>
     </div>
   </div>
@@ -1364,208 +1374,57 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
-<!-- ─── CTA BAND ───────────────────────────── -->
-<div class="cta-band">
-  <div class="container">
-    <div class="cta-band__inner">
-      <div class="cta-band__text reveal">
-        <h2>Want a Cleaner Way<br>Into Your Business?</h2>
-        <p>Start with the problem, the repeated question, or the action you want customers to take. We can figure out the Door from there.</p>
-      </div>
-      <div class="cta-band__right reveal d2">
-        <a href="mailto:handled@thedigitalside.org" class="btn btn--dark">Email Me Directly <span class="btn__arr">→</span></a>
-        <a href="#contact" class="btn btn--outline" style="border-color:rgba(0,0,0,.25);color:rgba(0,0,0,.7)">Use the Form</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ─── CONTACT ───────────────────────────── -->
 <section class="contact" id="contact">
 <style>
 .contact-collapse{border-top:1px solid var(--border-md);border-bottom:1px solid var(--border-md)}
-.contact-collapse>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:26px 0}
-.contact-collapse>summary::-webkit-details-marker{display:none}.contact-collapse__label{display:flex;flex-direction:column;gap:6px}.contact-collapse__label small{font-family:var(--display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}.contact-collapse__label strong{font-family:var(--heading);font-size:clamp(1.35rem,3vw,1.9rem);color:var(--white)}.contact-collapse__plus{color:var(--lime);font-size:1.4rem;transition:transform .25s}.contact-collapse[open] .contact-collapse__plus{transform:rotate(45deg)}.contact-collapse__body{padding:10px 0 34px}
+.contact-collapse>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:28px 0}
+.contact-collapse>summary::-webkit-details-marker{display:none}.contact-collapse__label{display:flex;flex-direction:column;gap:6px}.contact-collapse__label small{font-family:var(--display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}.contact-collapse__label strong{font-family:var(--heading);font-size:clamp(1.35rem,3vw,1.9rem);color:var(--white)}.contact-collapse__plus{color:var(--lime);font-size:1.4rem}.contact-collapse[open] .contact-collapse__plus{transform:rotate(45deg)}
+.contact-simple{padding:8px 0 38px}.contact-simple__intro{max-width:690px;color:var(--muted);line-height:1.7;margin-bottom:24px}.inquiry-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.inquiry-card{background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:28px}.inquiry-card h3{font-size:1.25rem;margin:8px 0}.inquiry-card p{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:20px}.quick-fields{display:grid;gap:10px}.quick-fields input,.quick-fields textarea{width:100%;padding:13px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border-md);border-radius:var(--r);color:var(--white)}.quick-fields textarea{min-height:110px;resize:vertical}.quick-note{font-size:.68rem!important;margin:10px 0 0!important}.inquiry-actions{display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:760px){.inquiry-grid{grid-template-columns:1fr}}
 </style>
-  <div class="container">
-    <details class="contact-collapse">
-      <summary><span class="contact-collapse__label"><small>Start a conversation</small><strong>Talk to me about your business</strong></span><span class="contact-collapse__plus">+</span></summary>
-      <div class="contact-collapse__body">
-        <div class="contact__layout">
-      <div class="rl reveal">
-        <div class="tag">Get in Touch</div>
-        <h2>Let's Talk<br>About Your Door.</h2>
-        <p class="lead">Tell me what customers keep asking, what they need to find faster, or what you want them to do next. I can start there.</p>
-        <div class="contact-item">
-          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div>
-            <div class="contact-item__label">Email</div>
-            <div class="contact-item__val"><a href="mailto:handled@thedigitalside.org">handled@thedigitalside.org</a></div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div>
-            <div class="contact-item__label">Location</div>
-            <div class="contact-item__val">Columbia, Maryland</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-          <div>
-            <div class="contact-item__label">Portfolio</div>
-            <div class="contact-item__val"><a href="#work">See the work above ↑</a></div>
-          </div>
-        </div>
-        <div class="contact__note">
-          <strong style="color:var(--white)">Talk however works best:</strong> phone, FaceTime/video, or — for local businesses around Columbia — I can meet at your place of business and see the customer experience in person. The first conversation is about what is actually happening, not forcing you into a package.
-        </div>
-      </div>
-      <div class="rr reveal contact__form-wrap">
-        <div id="formBody">
-          <div class="tag" style="margin-bottom:12px">New Project Inquiry</div>
-          <h3 style="font-family:var(--heading);font-size:1.4rem;font-weight:800;color:var(--white);margin-bottom:6px;letter-spacing:-.02em">Tell Me About Your Business</h3>
-          <p style="font-size:.8rem;color:var(--muted);margin-bottom:28px">I'll get back to you within a few hours. Your Door can have its own direct link for social bios, QR access, and other customer touchpoints.</p>
-          <form onsubmit="handleForm(event)">
-            <div class="form__row">
-              <div class="form__group">
-                <label class="form__label">Your Name</label>
-                <input class="form__input" type="text" placeholder="Jane Smith" required>
-              </div>
-              <div class="form__group">
-                <label class="form__label">Business Name</label>
-                <input class="form__input" type="text" placeholder="Smith Roofing Co.">
-              </div>
-            </div>
-            <div class="form__row">
-              <div class="form__group">
-                <label class="form__label">Email</label>
-                <input class="form__input" type="email" placeholder="jane@example.com" required>
-              </div>
-              <div class="form__group">
-                <label class="form__label">Phone (optional)</label>
-                <input class="form__input" type="tel" placeholder="(555) 000-0000">
-              </div>
-            </div>
-            <div class="form__group">
-              <label class="form__label">Industry / Business Type</label>
-              <select class="form__select">
-                <option value="">Select your industry…</option>
-                <option>Hairstylist / Barber / Salon</option>
-                <option>Lash / Nail / Beauty Professional</option>
-                <option>Restaurant / Catering / Events</option>
-                <option>Maker / Custom Product Business</option>
-                <option>Roofing / Contractor / Home Services</option>
-                <option>Auto Body Shop</option>
-                <option>Tattoo Artist / Shop</option>
-                <option>Dental / Medical Office</option>
-                <option>Funeral / Memorial Services</option>
-                <option>Law Firm / Professional Services</option>
-                <option>Other Local Business</option>
-              </select>
-            </div>
-            <div class="form__group">
-              <label class="form__label">Current Website / Social Link <span style="color:var(--muted);font-weight:400">(optional)</span></label>
-              <input class="form__input" type="url" placeholder="https://yourbusiness.com">
-            </div>
-            <div class="form__group">
-              <label class="form__label">What Do You Need?</label>
-              <textarea class="form__textarea" placeholder="Digital Door? Existing site cleanup? Booking or quote path? Just tell me what feels harder than it should — or what customers keep asking you for…"></textarea>
-            </div>
-            <button type="submit" class="form__submit">Send My Inquiry →</button>
-            <p class="form__note">No sales pitch. Just a real response with clear next steps.</p>
-          </form>
-        </div>
-        <div class="form__ok" id="formOk">
-          <div class="form__ok-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-          <h3>Message Received.</h3>
-          <p>Thanks for reaching out. I'll review your project and get back to you within a few hours — usually same day.<br><br>
-          Or email me directly at <a href="mailto:handled@thedigitalside.org" style="color:var(--lime)">handled@thedigitalside.org</a>.</p>
-        </div>
-      </div>
-    </div>
-      </div>
-    </details>
-  </div>
-</section>
+<div class="container">
+<details class="contact-collapse">
+<summary><span class="contact-collapse__label"><small>New Project Inquiry</small><strong>Tell Me About Your Business</strong></span><span class="contact-collapse__plus">+</span></summary>
+<div class="contact-simple">
+<p class="contact-simple__intro">Start with the short version or use the full project intake when the details are ready. No phone call or video meeting is required to get started.</p>
+<div class="inquiry-grid">
+<div class="inquiry-card"><div class="tag">Quick version</div><h3>Send the part you know.</h3><p>A business name, link, problem, repeated customer question, or unfinished thought is enough to start.</p><form id="indexQuick" class="quick-fields"><input id="iqName" placeholder="Your name" required><input id="iqEmail" type="email" placeholder="Email" required><input id="iqBusiness" placeholder="Business name or link"><textarea id="iqMessage" placeholder="Tell me about your business or what needs help." required></textarea><button class="btn btn--lime" type="submit">Open Email Draft →</button><p class="quick-note">Nothing is submitted automatically. The completed message opens in your email app for review first.</p></form></div>
+<div class="inquiry-card"><div class="tag">Full project intake</div><h3>Already know this is a project?</h3><p>Use the longer questionnaire for goals, current setup, assets, customer needs, and the bigger picture.</p><div class="inquiry-actions"><a class="btn btn--lime" href="client-intake.html">Open Full Intake →</a><a class="btn btn--outline" href="mailto:handled@thedigitalside.org">Email Directly</a></div></div>
+</div></div></details>
+</div></section>
 
 <!-- ─── ABOUT ──────────────────────────────── -->
-<!-- MOBILE ABOUT TEASER -->
 <section class="about-teaser" id="aboutTeaser" aria-label="About Nev">
   <div class="container">
     <button class="about-teaser__button" id="aboutRevealBtn" type="button" aria-expanded="false" aria-controls="about">
-      <span>Meet the person behind the digital side</span>
-      <span class="about-teaser__arrow">→</span>
+      <span>Meet the Developer</span><span class="about-teaser__arrow">→</span>
     </button>
   </div>
 </section>
-
 <section class="about about-simple" id="about">
 <style>
-.about-simple{background:var(--dark);padding:92px 0}.about-simple__grid{display:grid;grid-template-columns:minmax(280px,.9fr) 1.1fr;gap:58px;align-items:start}.about-simple__photo img{width:100%;display:block;border-radius:4px}.about-simple__photo-note{margin-top:14px;padding:16px 18px;border-left:2px solid var(--lime);background:var(--card)}.about-simple__photo-note small{font-family:var(--display);font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:var(--lime)}.about-simple__photo-note p{font-size:.8rem;color:var(--muted);line-height:1.65;margin-top:7px}.about-simple__copy h2{font-family:var(--heading);font-size:clamp(2rem,4.5vw,3.4rem);line-height:1;letter-spacing:-.04em;color:var(--white);margin:8px 0 20px}.about-simple__copy>p{font-size:.96rem;color:var(--light);line-height:1.8;margin-bottom:22px}.about-simple__story{display:grid;gap:12px;margin:28px 0}.about-simple__story div{padding:16px 0;border-top:1px solid var(--border)}.about-simple__story strong{display:block;color:var(--white);font-size:.84rem;margin-bottom:5px}.about-simple__story span{font-size:.8rem;color:var(--muted);line-height:1.6}
-@media(max-width:860px){#about.about-simple{display:none;padding:54px 0}#about.about-simple.about-open{display:block}.about-simple__grid{grid-template-columns:1fr;gap:28px}.about-simple__photo{max-width:520px;margin:auto}}
+.about-simple{background:var(--dark);padding:92px 0}.about-simple__grid{display:grid;grid-template-columns:minmax(280px,.9fr) 1.1fr;gap:58px;align-items:start}.about-simple__photo-title{font-family:var(--heading);font-weight:900;line-height:.86;letter-spacing:-.055em;color:var(--white);margin:0 0 18px}.about-simple__photo-title span{display:block;font-size:clamp(1.3rem,3vw,2.1rem);color:var(--muted);font-weight:700}.about-simple__photo-title strong{display:block;font-size:clamp(2.5rem,5.5vw,4.5rem)}.about-simple__photo img{width:100%;display:block;border-radius:4px}.about-simple__copy h2{font-family:var(--heading);font-size:clamp(2rem,4.5vw,3.4rem);line-height:1;letter-spacing:-.04em;color:var(--white);margin:8px 0 20px}.about-simple__copy>p{font-size:.96rem;color:var(--light);line-height:1.8;margin-bottom:22px}.about-simple__story{display:grid;gap:12px;margin:28px 0}.about-simple__story div{padding:16px 0;border-top:1px solid var(--border)}.about-simple__story strong{display:block;color:var(--white);font-size:.84rem;margin-bottom:5px}.about-simple__story span{font-size:.8rem;color:var(--muted);line-height:1.6}.about-simple__ending{margin-top:44px;padding:22px 0 0;border-top:1px solid var(--border);display:flex;gap:18px;align-items:flex-start}.about-simple__ending small{font-family:var(--display);font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:var(--lime);white-space:nowrap;padding-top:3px}.about-simple__ending p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.65}
+@media(max-width:860px){#about.about-simple{display:none;padding:54px 0}#about.about-simple.about-open{display:block}.about-simple__grid{grid-template-columns:1fr;gap:28px}.about-simple__photo{max-width:520px;margin:auto}.about-simple__ending{display:block}.about-simple__ending small{display:block;margin-bottom:8px}}
 </style>
-  <div class="container">
-    <div class="about-simple__grid">
-      <div class="about-simple__photo reveal rl">
-        <img src="about_mim.png" alt="Nev Gonzalez with Method in Motion">
-        <div class="about-simple__photo-note"><small>Method in Motion</small><p>A side project focused on introducing kids to coding through creative, approachable learning experiences.</p></div>
-      </div>
-      <div class="about-simple__copy reveal rr">
-        <div class="tag">About Me</div>
-        <h2>Hi, I'm Nev Gonzalez.</h2>
-        <p>The Digital Side is built around how a business actually works — what customers need, what they keep asking, and what needs to happen next. The path here started with business, people, operations, and learning to solve the problem in front of me.</p>
-        <div class="about-simple__story">
-          <div><strong>Business first.</strong><span>Early experience centered on entrepreneurship, customer-facing work, and the day-to-day reality behind small-business decisions.</span></div>
-          <div><strong>Then technology.</strong><span>That eventually shifted into digital business, a Salesforce internship, self-taught web development, and building for local businesses.</span></div>
-          <div><strong>Now the two live together.</strong><span>Business thinking, design, and development shape Digital Doors and full sites around the customer experience instead of forcing every business into the same template.</span></div>
-        </div>
-        <a href="#contact" class="btn btn--lime">Work With Me <span class="btn__arr">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
+<div class="container">
+<div class="about-simple__grid">
+<div class="about-simple__photo reveal rl"><div class="about-simple__photo-title"><span>Meet the</span><strong>Developer.</strong></div><img src="about_mim.png" alt="Nev Gonzalez with Method in Motion"></div>
+<div class="about-simple__copy reveal rr"><div class="tag">About Me</div><h2>Hi, I'm Nev Gonzalez.</h2><p>The Digital Side is built around how a business actually works — what customers need, what they keep asking, and what needs to happen next. The path here started with business, people, operations, and learning to solve the problem in front of me.</p>
+<div class="about-simple__story"><div><strong>Business first.</strong><span>Early experience centered on entrepreneurship, customer-facing work, and the day-to-day reality behind small-business decisions.</span></div><div><strong>Then technology.</strong><span>That eventually shifted into digital business, a Salesforce internship, self-taught web development, and building for local businesses.</span></div><div><strong>Now the two live together.</strong><span>Business thinking, design, and development shape Digital Doors and full sites around the customer experience instead of forcing every business into the same template.</span></div></div>
+<a href="mailto:handled@thedigitalside.org?subject=The%20Digital%20Side%20Inquiry" class="btn btn--lime">Email Nev Directly <span class="btn__arr">→</span></a>
+</div></div>
+<div class="about-simple__ending reveal"><small>Method in Motion</small><p>A side project focused on introducing kids to coding through creative, approachable learning experiences.</p></div>
+</div></section>
 
 <!-- ─── FOOTER ────────────────────────────── -->
-<footer class="footer">
+<footer class="footer" style="padding:42px 0 28px">
   <div class="container">
-    <div class="footer__top">
-      <div>
-        <div class="footer__brand">
-          <div class="footer__brand-name">the digital side</div>
-          <div class="footer__brand-dot"></div>
-        </div>
-        <p class="footer__tagline">The Digital Side, handled.<br>Digital Doors. Clearer customer paths. Yours at handoff.<br><span style="color:var(--fog)">Columbia, Maryland</span></p>
-        <div class="footer__social">
-          <a href="https://github.com/webdevn3v" target="_blank" rel="noopener" class="footer__soc" title="GitHub">GH</a>
-          <a href="mailto:handled@thedigitalside.org" class="footer__soc" title="Email">✉</a>
-        </div>
-      </div>
-      <div class="footer__col">
-        <div class="footer__col-title">Current Demos</div>
-        <ul>
-          <li><a href="door-frederick-legacy-law.html">Frederick Legacy Law →</a></li>
-          <li><a href="lumina-door.html">Lumina Dental Studio →</a></li>
-          <li><a href="northline-door.html">Northline Roofing Co. →</a></li>
-          <li><a href="atelier-door.html">Atelier House →</a></li>
-        </ul>
-      </div>
-            <div class="footer__col">
-        <div class="footer__col-title">Navigation</div>
-        <ul>
-          <li><a href="#work">Portfolio Work</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#process">My Process</a></li>
-          <li><a href="#about">About Nev Gonzalez</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
+    <div style="display:flex;justify-content:space-between;gap:28px;align-items:flex-start;flex-wrap:wrap;padding-bottom:28px;border-bottom:1px solid var(--border)">
+      <div><div class="footer__brand"><div class="footer__brand-name">the digital side</div><div class="footer__brand-dot"></div></div><p class="footer__tagline" style="margin:0">The Digital Side, handled.<br>Based in Maryland.</p></div>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:.78rem"><a href="door.html" style="color:var(--lime)">Enter the Digital Door →</a><a href="#work">Demos</a><a href="#services">Services</a><a href="#about">Meet the Developer</a><a href="mailto:handled@thedigitalside.org">Email</a></div>
     </div>
-    <div class="footer__bottom">
-      <div class="footer__copy">&copy; 2026 the digital side · Nev Gonzalez. All rights reserved.</div>
-      <p class="footer__legal">Built with custom HTML, CSS &amp; JavaScript. No templates used. GitHub Pages hosted.</p>
-    </div>
+    <div class="footer__bottom"><div class="footer__copy">&copy; 2026 the digital side · Nev Gonzalez. All rights reserved.</div><p class="footer__legal">Custom HTML, CSS &amp; JavaScript.</p></div>
   </div>
 </footer>
 
@@ -1750,6 +1609,9 @@ if(openDoorExample) openDoorExample.addEventListener('click', () => setDoorModal
 if(closeDoorExample) closeDoorExample.addEventListener('click', () => setDoorModal(false));
 if(doorExampleModal) doorExampleModal.addEventListener('click', e => { if(e.target === doorExampleModal) setDoorModal(false); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') setDoorModal(false); });
+
+const indexQuick=document.getElementById('indexQuick');
+if(indexQuick){indexQuick.addEventListener('submit',e=>{e.preventDefault();if(!indexQuick.reportValidity())return;const n=encodeURIComponent(document.getElementById('iqName').value),em=encodeURIComponent(document.getElementById('iqEmail').value),b=encodeURIComponent(document.getElementById('iqBusiness').value),m=encodeURIComponent(document.getElementById('iqMessage').value);location.href=`mailto:handled@thedigitalside.org?subject=Quick%20TDS%20Inquiry%20from%20${n}&body=Name:%20${n}%0AEmail:%20${em}%0ABusiness:%20${b}%0A%0AWhat%20needs%20help:%0A${m}`})}
 
 function handleForm(e){
   e.preventDefault();
