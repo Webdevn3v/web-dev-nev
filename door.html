@@ -290,6 +290,8 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 .key-built{width:min(350px,84vw);aspect-ratio:.56;margin:auto;border:1px solid #343a3f;border-radius:28px;background:radial-gradient(circle at 50% 22%,rgba(166,255,0,.07),transparent 28%),#0b0e10;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}.key-built img.logo-key{width:74%;margin-top:8px}.key-built img.qr-key{width:126px;height:126px;background:#fff;padding:6px}.key-built .key-person small{display:block;font:700 .5rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#7d858a;margin-bottom:7px}.key-built .key-person strong{display:block;font-size:1.05rem;color:#f2f4f5}.key-built .key-person span{display:block;margin-top:5px;font-size:.72rem;color:#9da4a9}.key-built>small{font:700 .52rem var(--mono);letter-spacing:.14em;color:#858d92}
 @media(max-width:720px){.tds-system{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tds-step summary{padding:14px 12px;grid-template-columns:auto 1fr auto;gap:7px}.tds-step h3{font-size:.86rem;line-height:1.15}.tds-step small{font-size:.43rem}.tds-step p{padding:0 12px 14px;font-size:.74rem}.tds-demos,.tds-intakes{grid-template-columns:1fr}.brand-reveal{width:68vw!important}.tds-what{padding-top:78px}}
 
+.tds-explainer{margin:32px 0 18px;border:1px solid #cfd3d6;background:#fff}.tds-explainer>summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px}.tds-explainer>summary::-webkit-details-marker{display:none}.tds-explainer>summary small{display:block;font:700 .5rem/1 var(--mono);letter-spacing:.16em;color:#7d858a;margin-bottom:7px}.tds-explainer>summary strong{font:650 1rem/1.2 var(--sans);color:#17191b}.tds-explainer-action{display:flex;align-items:center;gap:8px;color:#596167}.tds-explainer-action b{font:700 .5rem var(--mono);letter-spacing:.14em}.tds-explainer-action i{font-style:normal;font-size:1.35rem;line-height:1;transition:transform .2s}.tds-explainer[open] .tds-explainer-action i{transform:rotate(180deg)}.tds-explainer[open] .tds-explainer-action b{font-size:0}.tds-explainer[open] .tds-explainer-action b:after{content:"CLOSE";font-size:.5rem}.tds-explainer-body{padding:0 20px 20px}.tds-explainer .tds-system{margin:4px 0 14px}.tds-explainer .tds-callout{margin-bottom:4px}@media(max-width:720px){.tds-explainer{margin-top:26px}.tds-explainer>summary{padding:16px 14px}.tds-explainer>summary strong{font-size:.92rem}.tds-explainer-body{padding:0 12px 14px}.tds-explainer .tds-qrnote{margin-top:10px}.tds-explainer .tds-callout{margin-top:20px}}
+
 </style>
 </head>
 <body>
@@ -330,14 +332,19 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
   <h1>The Door is the experience behind the threshold.</h1>
   <div class="tds-kicker tds-kicker--boxed">What is this, exactly?</div>
   <p class="tds-lede">The opening animation is the entrance. The Digital Door is what happens next: a branded, purpose-built starting point that recognizes the few reasons customers usually arrive and gives each one a clear route to the right action.</p>
-  <div class="tds-system">
-    <details class="tds-step"><summary><small>01</small><h3>Digital Key</h3><span class="step-plus">+</span></summary><p>A branded Apple Wallet pass that keeps the business's Door access close at hand.</p></details>
-    <details class="tds-step"><summary><small>02</small><h3>Digital Door</h3><span class="step-plus">+</span></summary><p>The customer-facing entry experience — branded to the business and built around immediate intent.</p></details>
-    <details class="tds-step"><summary><small>03</small><h3>Customer Paths</h3><span class="step-plus">+</span></summary><p>The most common reasons people show up, turned into clear choices instead of a navigation hunt.</p></details>
-    <details class="tds-step"><summary><small>04</small><h3>Destination</h3><span class="step-plus">+</span></summary><p>Book, call, fill something out, get an answer, find directions, or continue into the full site.</p></details>
-  </div>
-  <div class="tds-qrnote"><img src="digitalside-door-qr.png" alt="The Digital Side QR code"><div><strong>One Door can live in a lot of places.</strong><span>The usable QR file is handed over with the build, so the same Door can be reached from a business card, storefront, truck, sign, printed piece, or anywhere else customers need a direct way in.</span></div></div>
-  <div class="tds-callout">Nothing replaces the full website. The Door handles the moment of intent; the in-depth site is still there when a customer wants the whole picture.</div>
+  <details class="tds-explainer">
+    <summary><span><small>HOW IT WORKS</small><strong>See what makes up a Digital Door</strong></span><span class="tds-explainer-action"><b>OPEN</b><i>⌄</i></span></summary>
+    <div class="tds-explainer-body">
+      <div class="tds-system">
+        <details class="tds-step"><summary><small>01</small><h3>Digital Key</h3><span class="step-plus">+</span></summary><p>A branded Apple Wallet pass that keeps the business's Door access close at hand.</p></details>
+        <details class="tds-step"><summary><small>02</small><h3>Digital Door</h3><span class="step-plus">+</span></summary><p>The customer-facing entry experience — branded to the business and built around immediate intent.</p></details>
+        <details class="tds-step"><summary><small>03</small><h3>Customer Paths</h3><span class="step-plus">+</span></summary><p>The most common reasons people show up, turned into clear choices instead of a navigation hunt.</p></details>
+        <details class="tds-step"><summary><small>04</small><h3>Destination</h3><span class="step-plus">+</span></summary><p>Book, call, fill something out, get an answer, find directions, or continue into the full site.</p></details>
+      </div>
+      <div class="tds-qrnote"><img src="digitalside-door-qr.png" alt="The Digital Side QR code"><div><strong>One Door can live in a lot of places.</strong><span>The usable QR file is handed over with the build, so the same Door can be reached from a business card, storefront, truck, sign, printed piece, or anywhere else customers need a direct way in.</span></div></div>
+      <div class="tds-callout">Nothing replaces the full website. The Door handles the moment of intent; the in-depth site is still there when a customer wants the whole picture.</div>
+    </div>
+  </details>
 </div></section>
 <section class="tds-modules"><div class="tds-wrap">
 <details class="tds-module"><summary><div><small>Real examples</small><strong>Walk a Path</strong></div><span class="tds-plus">+</span></summary><div class="tds-body"><div class="tds-demos">
