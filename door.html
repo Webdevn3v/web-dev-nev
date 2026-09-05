@@ -293,6 +293,201 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 .tds-explainer{margin:32px 0 18px;border:1px solid #cfd3d6;background:#fff}.tds-explainer>summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px}.tds-explainer>summary::-webkit-details-marker{display:none}.tds-explainer>summary small{display:block;font:700 .5rem/1 var(--mono);letter-spacing:.16em;color:#7d858a;margin-bottom:7px}.tds-explainer>summary strong{font:650 1rem/1.2 var(--sans);color:#17191b}.tds-explainer-action{display:flex;align-items:center;gap:8px;color:#596167}.tds-explainer-action b{font:700 .5rem var(--mono);letter-spacing:.14em}.tds-explainer-action i{font-style:normal;font-size:1.35rem;line-height:1;transition:transform .2s}.tds-explainer[open] .tds-explainer-action i{transform:rotate(180deg)}.tds-explainer[open] .tds-explainer-action b{font-size:0}.tds-explainer[open] .tds-explainer-action b:after{content:"CLOSE";font-size:.5rem}.tds-explainer-body{padding:0 20px 20px}.tds-explainer .tds-system{margin:4px 0 14px}.tds-explainer .tds-callout{margin-bottom:4px}@media(max-width:720px){.tds-explainer{margin-top:26px}.tds-explainer>summary{padding:16px 14px}.tds-explainer>summary strong{font-size:.92rem}.tds-explainer-body{padding:0 12px 14px}.tds-explainer .tds-qrnote{margin-top:10px}.tds-explainer .tds-callout{margin-top:20px}}
 
 .tds-entryline{margin-top:14px;padding:14px 2px 2px;border-top:1px solid #d7dadd;display:flex;justify-content:space-between;gap:12px;align-items:center}.tds-entryline strong{font-size:.82rem}.tds-entryline span{font:700 .5rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#777f84}@media(max-width:560px){.tds-entryline{align-items:flex-start;flex-direction:column;gap:6px}}
+
+
+/* === LIGHTER BEHIND-THE-DOOR OVERRIDE === */
+/* Keep the threshold dramatic; once through it, the experience turns calm, bright and editorial. */
+.door-world{
+  background:#f7f6f2;
+  color:#17191b;
+  padding-bottom:78px;
+}
+.door-world::before{display:none}
+
+.moment{
+  color:#17191b;
+  background:
+    radial-gradient(circle at 88% 4%,rgba(166,255,0,.07),transparent 26%),
+    linear-gradient(180deg,#fbfaf7 0%,#f7f6f2 100%);
+  border-bottom:1px solid rgba(20,24,28,.10);
+  padding-top:50px;
+}
+.moment::before{
+  background:
+    radial-gradient(rgba(20,24,28,.055) .7px,transparent .8px);
+  background-size:22px 22px;
+  opacity:.34;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 74%);
+}
+.moment h1{color:#151719}
+.moment p{color:#687077}
+.moment .eyebrow{color:#6e767c}
+.system-line{color:#7c848a}
+.system-line i{background:#c4c9cc}
+.system-line i.active{background:var(--signal);box-shadow:none}
+
+.wallet-card{
+  border:1px solid rgba(20,24,28,.11);
+  background:rgba(255,255,255,.82);
+  box-shadow:0 16px 44px rgba(27,30,34,.07);
+  backdrop-filter:blur(14px);
+}
+.wallet-kicker{color:#727a80}
+.wallet-card h2{color:#17191b}
+.wallet-card p{color:#697177}
+.wallet-flow{color:#70787e}
+.wallet-flow span{
+  border:1px solid rgba(20,24,28,.08);
+  background:#f6f5f1;
+  border-radius:8px;
+}
+.wallet-dot{box-shadow:none}
+
+.paths{padding-top:58px}
+.paths-head{
+  border-top:1px solid rgba(20,24,28,.11);
+  border-bottom:1px solid rgba(20,24,28,.11);
+}
+.paths-head::before{color:#979da1}
+.paths-head::after{
+  background:linear-gradient(to bottom,rgba(166,255,0,.9),rgba(20,24,28,.08));
+}
+.paths-head .eyebrow{color:#71797f}
+.paths-head h2{color:#17191b}
+
+.thresholds{border-top:1px solid rgba(20,24,28,.13)}
+.threshold{
+  border-bottom:1px solid rgba(20,24,28,.13);
+  background:transparent;
+}
+.threshold-name{color:#1a1c1e}
+.threshold::before{color:#9aa0a4}
+.threshold::after{background:rgba(20,24,28,.08)}
+.threshold-arrow{color:#6f7968}
+@media(min-width:680px){
+  .threshold:hover,.route-option:hover{
+    background:rgba(255,255,255,.68);
+  }
+}
+
+.route-panel{
+  color:#17191b;
+  border-top:1px solid rgba(20,24,28,.13);
+}
+.route-head{border-bottom:1px solid rgba(20,24,28,.13)}
+.route-back{color:#727a80}
+.route-head h3{color:#17191b}
+.route-head p{color:#697177}
+.route-option{
+  border-bottom:1px solid rgba(20,24,28,.12);
+}
+.route-option:last-child{border-bottom:1px solid rgba(20,24,28,.12)}
+.route-option strong{color:#1a1c1e}
+.route-option span{color:#777f85}
+.route-option em{color:#6d765f}
+.demo-note{border-top-color:rgba(166,255,0,.75)}
+.demo-note h4{color:#17191b}
+.demo-note p{color:#70787e}
+
+.field label{color:#71797f}
+.field input,.field textarea{
+  border:1px solid rgba(20,24,28,.12);
+  background:#fff;
+  color:#17191b;
+}
+.form-submit{
+  background:#17191b;
+  color:#f7f6f2;
+}
+.form-fallback{color:#737b80}
+
+/* The explanatory/product sections stay useful, but lose the "control panel" feeling. */
+.tds-main{background:#f7f6f2;color:#17191b}
+.tds-what{background:#f7f6f2}
+.tds-kicker{color:#687077}
+.tds-kicker--boxed{
+  border-color:#d8dbdc;
+  background:#fff;
+  color:#4d5459;
+}
+.tds-step,
+.tds-qrnote,
+.tds-explainer{
+  border-color:#d9dcdd;
+  background:#fff;
+  box-shadow:0 8px 26px rgba(27,30,34,.035);
+}
+.tds-callout{background:#efeee9!important;border-color:#d9dcdd!important}
+
+/* Former dark accordion block → warm editorial white. */
+.tds-modules{
+  background:#f1f0ec;
+  color:#17191b;
+  padding-top:28px;
+}
+.tds-module{border-top-color:rgba(20,24,28,.13)}
+.tds-module:last-child{border-bottom-color:rgba(20,24,28,.13)}
+.tds-module summary small{color:#7c8489}
+.tds-module summary strong{color:#17191b}
+.tds-plus{color:#65705d}
+.tds-body{color:#4f565b}
+
+.tds-demo{
+  border:1px solid rgba(20,24,28,.10);
+  background:#fff;
+  box-shadow:0 10px 30px rgba(27,30,34,.04);
+}
+.tds-demo h3{color:#17191b}
+.tds-demo p{color:#747c81}
+.tds-btn{
+  border-color:rgba(20,24,28,.14);
+  color:#343a3e;
+  background:#faf9f6;
+}
+.tds-btn.primary{
+  background:#17191b;
+  border-color:#17191b;
+  color:#fff;
+}
+.tds-choice{
+  border:1px solid rgba(20,24,28,.10);
+  background:#fff;
+}
+.tds-choice h3{color:#17191b}
+.tds-choice p{color:#70787e}
+.tds-choice input,.tds-choice textarea{
+  border:1px solid rgba(20,24,28,.12);
+  background:#f8f7f4;
+  color:#17191b;
+}
+.tds-send{background:#17191b;color:#fff}
+
+/* Keep the Digital Key itself dark so it still reads as a premium object. */
+.key-built{box-shadow:0 18px 50px rgba(27,30,34,.12)}
+
+/* Gentle closing section instead of dropping back into a tech-black wall. */
+.tds-handoff{
+  background:#fbfaf7;
+  color:#17191b;
+  border-top:1px solid rgba(20,24,28,.10);
+}
+.tds-handoff h2{color:#17191b}
+.tds-handoff p{color:#6c7479}
+.tds-footer{
+  background:#fbfaf7;
+  border-top:1px solid rgba(20,24,28,.08);
+}
+.tds-footer a,.tds-footer button{
+  color:#686f74;
+  border-bottom-color:rgba(20,24,28,.16);
+}
+.tds-footer a:hover,.tds-footer button:hover{
+  color:#17191b;
+  border-bottom-color:rgba(20,24,28,.42);
+}
+
+/* The modal remains dark because it is an overlay, not part of the walkthrough canvas. */
+
 </style>
 </head>
 <body>
