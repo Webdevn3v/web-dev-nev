@@ -488,6 +488,20 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 
 /* The modal remains dark because it is an overlay, not part of the walkthrough canvas. */
 
+
+
+/* === DIRECT ENTRY CTA === */
+.tds-direct{min-height:calc(100svh - 40px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:56px 0 34px}
+.tds-direct h1{margin-bottom:18px}
+.tds-direct .tds-lede{max-width:610px;margin-bottom:18px}
+.tds-direct-price{font:600 clamp(2rem,6vw,3rem)/1 var(--sans);letter-spacing:-.055em;color:#17191b;margin:2px 0 22px}
+.tds-direct-btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;background:#17191b;color:#fff;border-radius:10px;font:700 .66rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;transition:transform .2s var(--ease),background .2s var(--ease)}
+.tds-direct-btn:hover{background:#272b2e;transform:translateY(-2px)}
+.tds-lookaround{margin-top:auto;padding-top:54px;color:#737b80;font:600 .72rem/1.4 var(--sans)}
+.tds-lookaround span{display:inline-block;margin-left:6px;font-size:1rem}
+#lookAround{scroll-margin-top:24px}
+#start{scroll-margin-top:24px}
+
 </style>
 </head>
 <body>
@@ -525,9 +539,17 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 
 <main class="tds-main" id="doorStart">
 <section class="tds-what"><div class="tds-wrap">
-  <h1>The Door is the experience behind the threshold.</h1>
-  <div class="tds-kicker tds-kicker--boxed">What is this, exactly?</div>
-  <p class="tds-lede">The opening animation is the entrance. The Digital Door is what happens next: a branded, purpose-built starting point that recognizes the few reasons customers usually arrive and gives each one a clear route to the right action.</p>
+  <div class="tds-direct">
+    <div>
+      <div class="tds-kicker">Straight to the point</div>
+      <h1>Need a Digital Door?</h1>
+      <p class="tds-lede">One mobile page that gives customers the fastest path to what they need.</p>
+      <div class="tds-direct-price">$100</div>
+      <a class="tds-direct-btn" href="#start">Get Started →</a>
+    </div>
+    <a class="tds-lookaround" href="#lookAround">Want to look around? Keep scrolling. <span>↓</span></a>
+  </div>
+  <div id="lookAround" class="tds-kicker tds-kicker--boxed">What is this, exactly?</div>
   <details class="tds-explainer">
     <summary><span><small>HOW IT WORKS</small><strong>See what makes up a Digital Door</strong></span><span class="tds-explainer-action"><b>OPEN</b><i>⌄</i></span></summary>
     <div class="tds-explainer-body">
@@ -564,7 +586,7 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 <div class="tds-tier featured"><h3>Digital Door</h3><b>$350</b><p>Digital Key + Digital Door + Customer Paths + Apple Wallet access + the usable QR asset.</p><details class="tds-addon-details"><summary>The Door can be the first move without being the last. <span>+</span></summary><div>If the existing website behind it needs attention, Mobile-Optimized Desktop, Revive, or Evolve can be scoped as follow-up work so the deeper site matches the experience at the front.</div></details></div>
 <div class="tds-tier quiet"><h3>Connect the Dots</h3><b>$750+</b><p>Full custom build for a business that needs the entire system rebuilt: Digital Door + a brand-new responsive in-depth site.</p></div>
 </div></details>
-<details class="tds-module"><summary><div><small>Start</small><strong>Tell The Digital Side what needs handling</strong></div><span class="tds-plus">+</span></summary><div class="tds-body"><div class="tds-intakes">
+<details class="tds-module" id="start"><summary><div><small>Start</small><strong>Tell The Digital Side what needs handling</strong></div><span class="tds-plus">+</span></summary><div class="tds-body"><div class="tds-intakes">
 <div class="tds-choice"><div class="tds-kicker">Quick version</div><h3>Start with the messy part.</h3><p>Name, email, and whatever feels off. A populated email draft opens; nothing sends until you choose to send it.</p><form id="quick"><input id="qname" placeholder="Name" required><input id="qemail" type="email" placeholder="Email" required><textarea id="qmsg" placeholder="What needs help?" required></textarea><button class="tds-send" type="submit">Send the short version →</button><div class="notice" id="doorQuickStatus">Short-form submission is not live until the Formspree connection is added.</div></form></div>
 <div class="tds-choice"><div class="tds-kicker">Full intake</div><h3>Share more details.</h3><p>Use the longer intake when the goals, current setup, and project details are ready to put in one place.</p><a class="tds-btn primary" href="client-intake.html">Open full intake →</a></div>
 </div></div></details>
