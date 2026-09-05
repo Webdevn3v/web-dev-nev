@@ -491,17 +491,80 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 
 
 /* === DIRECT ENTRY CTA === */
-.tds-direct{min-height:calc(100svh - 40px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:56px 0 34px}
-.tds-direct h1{margin-bottom:18px}
-.tds-direct .tds-lede{max-width:610px;margin-bottom:18px}
-.tds-direct-price{font:600 clamp(2rem,6vw,3rem)/1 var(--sans);letter-spacing:-.055em;color:#17191b;margin:2px 0 22px}
-.tds-direct-btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;background:#17191b;color:#fff;border-radius:10px;font:700 .66rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;transition:transform .2s var(--ease),background .2s var(--ease)}
+.tds-direct{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:18px 16px;
+  align-items:end;
+  padding:34px 0 28px;
+  margin-bottom:34px;
+  border-bottom:1px solid rgba(20,24,28,.11);
+}
+.tds-direct-copy{min-width:0}
+.tds-direct .tds-kicker{margin-bottom:10px}
+.tds-direct-line{
+  display:flex;
+  align-items:baseline;
+  justify-content:flex-start;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.tds-direct-line strong{
+  font:600 clamp(1.7rem,6vw,2.35rem)/1.02 var(--sans);
+  letter-spacing:-.055em;
+  color:#17191b;
+}
+.tds-direct-line span{
+  font:600 1.15rem/1 var(--sans);
+  letter-spacing:-.03em;
+  color:#17191b;
+}
+.tds-direct p{
+  margin:0;
+  max-width:560px;
+  color:#6d757a;
+  font-size:.98rem;
+  line-height:1.55;
+}
+.tds-direct-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:0 17px;
+  background:#17191b;
+  color:#fff;
+  border-radius:9px;
+  font:700 .6rem/1 var(--mono);
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  transition:transform .2s var(--ease),background .2s var(--ease);
+}
 .tds-direct-btn:hover{background:#272b2e;transform:translateY(-2px)}
-.tds-lookaround{margin-top:auto;padding-top:54px;color:#737b80;font:600 .72rem/1.4 var(--sans)}
-.tds-lookaround span{display:inline-block;margin-left:6px;font-size:1rem}
-#lookAround{scroll-margin-top:24px}
-#start{scroll-margin-top:24px}
-
+.tds-lookaround{
+  grid-column:1/-1;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  width:max-content;
+  color:#7a8287;
+  font:600 .72rem/1.35 var(--sans);
+}
+.tds-lookaround span{font-size:.95rem}
+#lookAround,#start{scroll-margin-top:24px}
+@media(max-width:640px){
+  .tds-what{padding-top:56px}
+  .tds-direct{
+    grid-template-columns:1fr;
+    gap:16px;
+    padding:22px 0 24px;
+    margin-bottom:28px;
+  }
+  .tds-direct-btn{width:max-content}
+  .tds-lookaround{margin-top:2px}
+}
 </style>
 </head>
 <body>
@@ -540,13 +603,12 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 <main class="tds-main" id="doorStart">
 <section class="tds-what"><div class="tds-wrap">
   <div class="tds-direct">
-    <div>
+    <div class="tds-direct-copy">
       <div class="tds-kicker">Straight to the point</div>
-      <h1>Need a Digital Door?</h1>
-      <p class="tds-lede">One mobile page that gives customers the fastest path to what they need.</p>
-      <div class="tds-direct-price">$100</div>
-      <a class="tds-direct-btn" href="#start">Get Started →</a>
+      <div class="tds-direct-line"><strong>Need a Digital Door?</strong><span>$100</span></div>
+      <p>One mobile page that gets customers where they need to go.</p>
     </div>
+    <a class="tds-direct-btn" href="#start">Get the details →</a>
     <a class="tds-lookaround" href="#lookAround">Want to look around? Keep scrolling. <span>↓</span></a>
   </div>
   <div id="lookAround" class="tds-kicker tds-kicker--boxed">What is this, exactly?</div>
