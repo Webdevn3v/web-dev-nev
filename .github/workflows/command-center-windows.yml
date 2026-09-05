@@ -1,0 +1,50 @@
+name: Command Center Windows Acceptance
+
+on:
+  push:
+    branches:
+      - command-center-phase1-audit
+    paths:
+      - "command-center/**"
+      - ".github/workflows/command-center-windows.yml"
+  workflow_dispatch:
+
+jobs:
+  windows-build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: command-center
+
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: command-center/package-lock.json
+
+      - name: Set up Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Build Tauri Windows installer
+        run: npm run tauri build
+
+      - name: Upload Windows bundles
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: command-center-windows-bundles
+          path: |
+            command-center/src-tauri/target/release/bundle/msi/**
+            command-center/src-tauri/target/release/bundle/nsis/**
+          if-no-files-found: warn
