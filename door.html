@@ -491,80 +491,65 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 
 
 /* === DIRECT ENTRY CTA === */
-.tds-direct{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:18px 16px;
-  align-items:end;
-  padding:34px 0 28px;
-  margin-bottom:34px;
-  border-bottom:1px solid rgba(20,24,28,.11);
+.tds-what{padding-top:58px}
+.tds-intro{max-width:720px;margin-bottom:30px}
+.tds-intro .tds-kicker{margin-bottom:12px}
+.tds-intro h1{
+  font:600 clamp(2.45rem,7vw,4.8rem)/.96 var(--sans);
+  letter-spacing:-.065em;
+  margin:0 0 15px;
+  color:#17191b;
 }
-.tds-direct-copy{min-width:0}
-.tds-direct .tds-kicker{margin-bottom:10px}
-.tds-direct-line{
+.tds-intro .tds-lede{margin:0;max-width:600px}
+.tds-system--front{margin:30px 0 12px}
+.tds-entryline--front{margin:0 0 26px}
+.tds-next-choice{
   display:flex;
-  align-items:baseline;
-  justify-content:flex-start;
-  gap:14px;
-  flex-wrap:wrap;
-  margin-bottom:8px;
-}
-.tds-direct-line strong{
-  font:600 clamp(1.7rem,6vw,2.35rem)/1.02 var(--sans);
-  letter-spacing:-.055em;
-  color:#17191b;
-}
-.tds-direct-line span{
-  font:600 1.15rem/1 var(--sans);
-  letter-spacing:-.03em;
-  color:#17191b;
-}
-.tds-direct p{
-  margin:0;
-  max-width:560px;
-  color:#6d757a;
-  font-size:.98rem;
-  line-height:1.55;
+  align-items:center;
+  gap:20px;
+  padding:24px 0 4px;
+  border-top:1px solid rgba(20,24,28,.11);
 }
 .tds-direct-btn{
   display:inline-flex;
-  align-items:center;
+  flex-direction:column;
+  align-items:flex-start;
   justify-content:center;
-  min-height:44px;
-  padding:0 17px;
+  gap:4px;
+  min-height:58px;
+  padding:10px 18px;
   background:#17191b;
   color:#fff;
   border-radius:9px;
-  font:700 .6rem/1 var(--mono);
+}
+.tds-direct-btn span{
+  font:500 .68rem/1.2 var(--sans);
+  letter-spacing:0;
+  text-transform:none;
+  opacity:.68;
+}
+.tds-direct-btn strong{
+  font:700 .6rem/1.2 var(--mono);
   letter-spacing:.07em;
   text-transform:uppercase;
-  white-space:nowrap;
-  transition:transform .2s var(--ease),background .2s var(--ease);
 }
-.tds-direct-btn:hover{background:#272b2e;transform:translateY(-2px)}
 .tds-lookaround{
-  grid-column:1/-1;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  width:max-content;
-  color:#7a8287;
-  font:600 .72rem/1.35 var(--sans);
+  color:#727a80;
+  font:500 .78rem/1.4 var(--sans);
 }
-.tds-lookaround span{font-size:.95rem}
+.tds-lookaround strong{color:#4e565b;font-weight:650}
 #lookAround,#start{scroll-margin-top:24px}
 @media(max-width:640px){
-  .tds-what{padding-top:56px}
-  .tds-direct{
-    grid-template-columns:1fr;
-    gap:16px;
-    padding:22px 0 24px;
-    margin-bottom:28px;
-  }
-  .tds-direct-btn{width:max-content}
-  .tds-lookaround{margin-top:2px}
+  .tds-what{padding-top:44px;padding-bottom:52px}
+  .tds-intro{margin-bottom:24px}
+  .tds-intro h1{font-size:clamp(2.35rem,11vw,3.25rem)}
+  .tds-system--front{grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}
+  .tds-entryline--front{margin-bottom:20px}
+  .tds-next-choice{align-items:flex-start;flex-direction:column;gap:14px;padding-top:20px}
+  .tds-direct-btn{width:100%;min-height:62px}
+  .tds-lookaround{padding:2px 2px 0}
 }
+
 </style>
 </head>
 <body>
@@ -602,28 +587,26 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 
 <main class="tds-main" id="doorStart">
 <section class="tds-what"><div class="tds-wrap">
-  <div class="tds-direct">
-    <div class="tds-direct-copy">
-      <div class="tds-kicker">Straight to the point</div>
-      <div class="tds-direct-line"><strong>Need a Digital Door?</strong><span>$100</span></div>
-      <p>One mobile page that gets customers where they need to go.</p>
-    </div>
-    <a class="tds-direct-btn" href="#start">Get the details →</a>
-    <a class="tds-lookaround" href="#lookAround">Want to look around? Keep scrolling. <span>↓</span></a>
+  <div class="tds-intro">
+    <div class="tds-kicker">The Digital Door</div>
+    <h1>Get people where they need to go.</h1>
+    <p class="tds-lede">A simpler way into the digital side of a business.</p>
   </div>
-  <div id="lookAround" class="tds-kicker tds-kicker--boxed">What is this, exactly?</div>
-  <details class="tds-explainer">
-    <summary><span><small>HOW IT WORKS</small><strong>See what makes up a Digital Door</strong></span><span class="tds-explainer-action"><b>OPEN</b><i>⌄</i></span></summary>
-    <div class="tds-explainer-body">
-      <div class="tds-system">
-        <details class="tds-step"><summary><small>01</small><h3>Digital Key</h3><span class="step-plus">+</span></summary><p>Scan or tap to enter.</p></details>
-        <details class="tds-step"><summary><small>02</small><h3>Digital Door</h3><span class="step-plus">+</span></summary><p>A branded starting point.</p></details>
-        <details class="tds-step"><summary><small>03</small><h3>Customer Paths</h3><span class="step-plus">+</span></summary><p>Choose why you're here.</p></details>
-        <details class="tds-step"><summary><small>04</small><h3>Destination</h3><span class="step-plus">+</span></summary><p>Get where you need to go.</p></details>
-      </div>
-      <div class="tds-entryline"><strong>One Door. Any entry point.</strong><span>QR · card · storefront · social · print</span></div>
-    </div>
-  </details>
+
+  <div class="tds-system tds-system--front">
+    <details class="tds-step"><summary><small>01</small><h3>Digital Key</h3><span class="step-plus">+</span></summary><p>Scan or tap to enter.</p></details>
+    <details class="tds-step"><summary><small>02</small><h3>Digital Door</h3><span class="step-plus">+</span></summary><p>A branded starting point.</p></details>
+    <details class="tds-step"><summary><small>03</small><h3>Customer Paths</h3><span class="step-plus">+</span></summary><p>Choose why you're here.</p></details>
+    <details class="tds-step"><summary><small>04</small><h3>Destination</h3><span class="step-plus">+</span></summary><p>Get where you need to go.</p></details>
+  </div>
+
+  <div class="tds-entryline tds-entryline--front"><strong>One Door. Any entry point.</strong><span>QR · card · storefront · social · print</span></div>
+
+  <div class="tds-next-choice">
+    <a class="tds-direct-btn" href="#start"><span>Need the details?</span><strong>Straight to the point →</strong></a>
+    <a class="tds-lookaround" href="#lookAround">Want to look around? <strong>Keep scrolling ↓</strong></a>
+  </div>
+  <div id="lookAround"></div>
 </div></section>
 <section class="tds-modules"><div class="tds-wrap">
 <details class="tds-module"><summary><div><small>Real examples</small><strong>Walk a Path</strong></div><span class="tds-plus">+</span></summary><div class="tds-body"><div class="tds-demos">
