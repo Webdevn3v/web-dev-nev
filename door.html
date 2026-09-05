@@ -504,50 +504,50 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 .tds-system--front{margin:30px 0 12px}
 .tds-entryline--front{margin:0 0 26px}
 .tds-next-choice{
-  display:flex;
-  align-items:center;
-  gap:20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
   padding:24px 0 4px;
   border-top:1px solid rgba(20,24,28,.11);
 }
-.tds-direct-btn{
-  display:inline-flex;
+.tds-choice-btn{
+  min-height:82px;
+  padding:16px 18px;
+  border-radius:10px;
+  display:flex;
   flex-direction:column;
-  align-items:flex-start;
   justify-content:center;
-  gap:4px;
-  min-height:58px;
-  padding:10px 18px;
-  background:#17191b;
-  color:#fff;
-  border-radius:9px;
+  align-items:flex-start;
+  gap:7px;
 }
-.tds-direct-btn span{
-  font:500 .68rem/1.2 var(--sans);
-  letter-spacing:0;
-  text-transform:none;
-  opacity:.68;
+.tds-choice-btn small{
+  font:500 .74rem/1.2 var(--sans);
 }
-.tds-direct-btn strong{
-  font:700 .6rem/1.2 var(--mono);
-  letter-spacing:.07em;
+.tds-choice-btn strong{
+  font:700 .62rem/1.25 var(--mono);
+  letter-spacing:.06em;
   text-transform:uppercase;
 }
-.tds-lookaround{
-  color:#727a80;
-  font:500 .78rem/1.4 var(--sans);
+.tds-choice-btn--primary{
+  background:#17191b;
+  color:#fff;
 }
-.tds-lookaround strong{color:#4e565b;font-weight:650}
-#lookAround,#start{scroll-margin-top:24px}
+.tds-choice-btn--primary small{color:#aeb4b7}
+.tds-choice-btn--quiet{
+  background:#fff;
+  color:#343a3e;
+  border:1px solid rgba(20,24,28,.12);
+}
+.tds-choice-btn--quiet small{color:#747c81}
+#lookAround,#start,#simple{scroll-margin-top:24px}
 @media(max-width:640px){
   .tds-what{padding-top:44px;padding-bottom:52px}
   .tds-intro{margin-bottom:24px}
   .tds-intro h1{font-size:clamp(2.35rem,11vw,3.25rem)}
   .tds-system--front{grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}
   .tds-entryline--front{margin-bottom:20px}
-  .tds-next-choice{align-items:flex-start;flex-direction:column;gap:14px;padding-top:20px}
-  .tds-direct-btn{width:100%;min-height:62px}
-  .tds-lookaround{padding:2px 2px 0}
+  .tds-next-choice{grid-template-columns:1fr;gap:9px;padding-top:20px}
+  .tds-choice-btn{min-height:74px}
 }
 
 </style>
@@ -603,8 +603,8 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
   <div class="tds-entryline tds-entryline--front"><strong>One Door. Any entry point.</strong><span>QR · card · storefront · social · print</span></div>
 
   <div class="tds-next-choice">
-    <a class="tds-direct-btn" href="#start"><span>Need the details?</span><strong>Straight to the point →</strong></a>
-    <a class="tds-lookaround" href="#lookAround">Want to look around? <strong>Keep scrolling ↓</strong></a>
+    <a class="tds-choice-btn tds-choice-btn--primary" href="#simple"><small>Need something simple?</small><strong>Vendor + Event Page →</strong></a>
+    <a class="tds-choice-btn tds-choice-btn--quiet" href="#lookAround"><small>Want to look around?</small><strong>Explore The Digital Side ↓</strong></a>
   </div>
   <div id="lookAround"></div>
 </div></section>
@@ -615,7 +615,7 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 <article class="tds-demo"><div class="tds-kicker">Roofing</div><h3>Northline Roofing Co.</h3><p>Inspection, storm response, replacement, and current-customer support organized around urgency.</p><div class="tds-actions"><a class="tds-btn" href="key-northline.html">Owner Key</a><a class="tds-btn primary" href="northline-door.html">View Door</a><a class="tds-btn" href="northline-full-site.html">Index Site</a></div></article>
 <article class="tds-demo"><div class="tds-kicker">Interiors</div><h3>Atelier House</h3><p>Portfolio discovery, style direction, project fit, and current-client access without flattening the brand into a generic menu.</p><div class="tds-actions"><a class="tds-btn" href="key-atelier.html">Owner Key</a><a class="tds-btn primary" href="atelier-door.html">View Door</a><a class="tds-btn" href="atelier-house-full-site.html">Index Site</a></div></article>
 </div></div></details>
-<details class="tds-module"><summary><div><small>Smaller build</small><strong>Don't need all that?</strong></div><span class="tds-plus">+</span></summary><div class="tds-body">
+<details class="tds-module" id="simple"><summary><div><small>Smaller build</small><strong>Don't need all that?</strong></div><span class="tds-plus">+</span></summary><div class="tds-body">
   <div class="tds-tier featured">
     <h3>Need a place for people to find you?</h3><b>$100</b>
     <p>An Event Page gives a business one polished, mobile-friendly place to send people for upcoming events, pop-ups, markets, appearances, or seasonal updates — without building the full Digital Door system.</p>
@@ -673,4 +673,12 @@ doorQuick.addEventListener('submit',async e=>{
 });
 const km=document.getElementById('keyModal'),am=document.getElementById('aboutModal');document.getElementById('keyBtn').onclick=()=>km.classList.add('open');document.getElementById('aboutBtn').onclick=()=>am.classList.add('open');document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.tds-modal').classList.remove('open'));document.querySelectorAll('.tds-modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.tds-modal.open').forEach(m=>m.classList.remove('open'))})
 })();
-</script></body></html>
+</script><script>
+document.addEventListener('click',function(e){
+  const link=e.target.closest('a[href="#simple"]');
+  if(!link)return;
+  const target=document.getElementById('simple');
+  if(target)target.open=true;
+});
+</script>
+</body></html>
