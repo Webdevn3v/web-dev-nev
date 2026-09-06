@@ -279,6 +279,66 @@ export async function parseCommand(rawText, entityId = null) {
   return null;
 }
 
+// The Phase B command vocabulary, as data — Phase C hands this to the LLM as the closed set of
+// verbs + argument shapes + valid enum values it may map an unrecognised request onto
+// (docs/JARVIE-PHASE-C.md §4.2). The LLM's output is still re-parsed by parseCommand().
+export function grammarManifest() {
+  return {
+    verbs: [
+      { verb: 'advance', args: 'target (a Door mission or project), optional "to" step/stage', example: 'advance <target> to <step>' },
+      { verb: 'mark_in_progress', args: 'target (a handoff)', example: 'mark <target> in progress' },
+      { verb: 'submit_for_audit', args: 'target (a handoff)', example: 'submit <target> for audit' },
+      { verb: 'approve', args: 'target (a handoff)', example: 'approve <target>' },
+      { verb: 'reject', args: 'target (a handoff)', example: 'reject <target>' },
+      { verb: 'create_task', args: 'title (required), optional target project, priority, due (YYYY-MM-DD)', example: 'create task "<title>" for <project>' },
+      { verb: 'complete_task', args: 'target (a task)', example: 'complete task <target>' },
+      { verb: 'capture', args: 'text (free text to drop in the inbox)', example: 'capture <text>' },
+      { verb: 'add_client', args: 'title (the client name), optional status', example: 'add client "<name>"' },
+      { verb: 'set_status', args: 'target (a client or project), status', example: 'set <target> status <value>' },
+      { verb: 'pause', args: 'target (a project)', example: 'pause <target>' },
+      { verb: 'resume', args: 'target (a project)', example: 'resume <target>' },
+    ],
+    enums: {
+      doorSteps: DOOR_STAGES,
+      productionStages: PRODUCTION_STAGES,
+      clientStatus: CLIENT_STATUS,
+      projectStatus: PROJECT_STATUS,
+      priorities: ['low', 'normal', 'high', 'urgent'],
+    },
+  };
+}
+
+// Turn a validated LLM command object back into a command STRING that parseCommand() re-parses
+// from scratch — so the model's arguments get the same entity resolution + validation + proposal
+// path as a typed command, and nothing the model produced is trusted directly.
+export function commandObjectToString(cmd) {
+  if (!cmd || typeof cmd !== 'object') return null;
+  const t = (cmd.target || '').trim();
+  const q = (s) => `"${String(s).replace(/"/g, '')}"`;
+  switch (cmd.verb) {
+    case 'advance': return t ? (cmd.to ? `advance ${t} to ${cmd.to}` : `advance ${t}`) : null;
+    case 'mark_in_progress': return t ? `mark ${t} in progress` : null;
+    case 'submit_for_audit': return t ? `submit ${t} for audit` : null;
+    case 'approve': return t ? `approve ${t}` : null;
+    case 'reject': return t ? `reject ${t}` : null;
+    case 'complete_task': return t ? `complete task ${t}` : null;
+    case 'pause': return t ? `pause ${t}` : null;
+    case 'resume': return t ? `resume ${t}` : null;
+    case 'set_status': return t && cmd.status ? `set ${t} status ${cmd.status}` : null;
+    case 'capture': return cmd.text ? `capture ${cmd.text}` : null;
+    case 'add_client': return cmd.title ? `add client ${q(cmd.title)}${cmd.status ? ` status ${cmd.status}` : ''}` : null;
+    case 'create_task': {
+      if (!cmd.title) return null;
+      let s = `create task ${q(cmd.title)}`;
+      if (t) s += ` for ${t}`;
+      if (cmd.priority) s += ` priority ${cmd.priority}`;
+      if (cmd.due) s += ` due ${cmd.due}`;
+      return s;
+    }
+    default: return null;
+  }
+}
+
 export function capabilityText() {
   return [
     'I can do these (I’ll show you the exact change and wait for your OK):',

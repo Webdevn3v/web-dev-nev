@@ -482,7 +482,12 @@ export async function answerQuestion(question, opts = {}) {
   const text = String(question || '').trim();
   const entityId = opts.entityId || null;
   if (!text && !entityId) return buildCapabilities();
-  const intent = entityId ? classifyForReask(text) : classify(text);
+  // opts.forceIntent — Phase C: the LLM classified a question the deterministic matcher didn't
+  // recognise. The answer is still built by the deterministic builder; only the routing decision
+  // came from the model, and it's constrained to these five names (validated by the caller).
+  const intent = opts.forceIntent && INTENT_RULES.some((r) => r.intent === opts.forceIntent)
+    ? opts.forceIntent
+    : (entityId ? classifyForReask(text) : classify(text));
   noteIntent(intent);
   switch (intent) {
     case 'what_changed': return buildWhatChanged(text, opts);
@@ -500,5 +505,20 @@ function classifyForReask(text) {
   const c = classify(text);
   return c === 'why_blocked' || c === 'where_stands' ? c : 'where_stands';
 }
+
+// The five deterministic intents, as data — Phase C hands this to the LLM as the closed set it
+// may classify an unrecognised question into (docs/JARVIE-PHASE-C.md §4.2). Names must match
+// INTENT_RULES.
+export function capabilityManifest() {
+  return [
+    { name: 'what_changed', when: 'the user asks what changed / happened / is new (optionally today, this week, this month, or since they last looked)' },
+    { name: 'needs_me', when: 'the user asks what needs them / is waiting on them / is on their plate / needs a decision' },
+    { name: 'why_blocked', when: 'the user asks why a specific named thing is blocked/stuck or what it is waiting on' },
+    { name: 'where_stands', when: 'the user asks the status of / where a specific named thing stands / to be caught up on it' },
+    { name: 'whats_stalled', when: 'the user asks what is stalled / at risk / slipping / overdue / needs chasing (no specific name)' },
+  ];
+}
+
+export const FORCEABLE_INTENTS = ['what_changed', 'needs_me', 'why_blocked', 'where_stands', 'whats_stalled'];
 
 export const __INTERNAL__ = { classify, extractEntityPhrase, matchByName, waitingOn, windowFromQuestion, context };

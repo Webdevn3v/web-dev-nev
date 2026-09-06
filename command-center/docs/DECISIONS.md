@@ -346,6 +346,44 @@ hook, since screens have no unmount callback.
 it's the secrets-boundary phase (Stronghold read/write + Rust command for the API key) and
 deserves its own pass.
 
+## 2026-09-06 — Jarvie Phase C: optional Claude API layer (prose + fuzzy intent)
+
+**Decision:** Jarvie gains an **optional** Claude API layer (`docs/JARVIE-PHASE-C.md`) that
+does exactly two things — rewrites a deterministic answer's summary into prose, and routes a
+question the Phase A/B matchers didn't recognise onto an existing intent or Phase B command.
+Retrieval, entity resolution, the command grammar, and both risk gates stay deterministic. The
+LLM never queries the DB, never sees more than the already-retrieved `records`, and never
+executes anything — a routed command is re-parsed by `parseCommand()` like a typed one.
+
+**Why it's an enhancement layer, never a dependency:** no key, offline, an API error, a
+timeout, malformed output, a failed validation, or the toggle off → Jarvie returns the exact
+Phase A/B answer, with a small "answered locally" note. The offline-first guarantee
+(`PHASE1-SPEC.md`) is intact.
+
+**Why the API call is Rust-side (`src-tauri/src/jarvie_llm.rs`):** the key must never live in
+the renderer or the bundle (`docs/DECISIONS.md`, "Secrets stay outside renderer code"). It's
+typed once into a form, handed to a Rust command, stored in a **mode-0600 file** in
+`app_local_data_dir()`, and read only when Rust makes the `POST /v1/messages` call. Because the
+renderer makes no outbound request, its CSP is unchanged.
+
+**Why not Stronghold for the key:** the Stronghold vault has no always-on password —
+`Stronghold.load(path, passphrase)` needs the recovery passphrase, entered only at
+backup/restore. Requiring it per Jarvie call is unacceptable. The 0600 file meets the real
+threat model (never in renderer / bundle / git / DB / cloud-synced backup). **Intended
+hardening, deferred:** the OS credential manager via the `keyring` crate — its Linux backend
+complicated this build; the Rust seam isolates the storage impl to one function.
+
+**Model:** configurable (Haiku 4.5 / Sonnet 5 / Opus 5), default **Haiku 4.5** — the workload
+is rephrasing + 6-way classification. (The `claude-api` skill's blanket default is Opus 5;
+overridden here per the approved decision.)
+
+**Deviations from the draft:** (1) the key-entry UI is a collapsible card on the **Ask Jarvie**
+screen, not Integrations — Integrations stays a pure read-only view and just reflects the
+status. (2) The fuzzy-intent call asks for a JSON object in the prompt and parses defensively,
+rather than using the structured-outputs `format` param — more robust to API shape drift; the
+Rust command supports `format` passthrough for later. (3) `reqwest` feature is `rustls` (this
+tree's reqwest 0.13.4 doesn't expose `rustls-tls-webpki-roots`).
+
 ## Environment limits on this build (verify manually — see docs/PHASE1-ACCEPTANCE.md)
 
 This build was done in a sandboxed Linux container with **no Rust/Cargo toolchain, no
