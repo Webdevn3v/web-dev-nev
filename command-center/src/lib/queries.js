@@ -68,6 +68,23 @@ export async function listActivityEvents({ entityType, limit = 200 } = {}) {
   return getDb().select('SELECT * FROM activity_event ORDER BY created_at DESC LIMIT $1', [limit]);
 }
 
+// Read-only helpers added for Jarvie Phase A (docs/JARVIE-PHASE-A.md §4/§8). Plain SELECTs —
+// no schema change, no writes. created_at is stored as an ISO-8601 string, so a lexicographic
+// >= comparison is a correct chronological filter.
+export async function listActivityEventsSince({ since, limit = 200 } = {}) {
+  return getDb().select(
+    'SELECT * FROM activity_event WHERE created_at >= $1 ORDER BY created_at DESC LIMIT $2',
+    [since, limit]
+  );
+}
+
+export async function listActivityEventsForEntity({ relatedEntityId, limit = 20 } = {}) {
+  return getDb().select(
+    'SELECT * FROM activity_event WHERE related_entity_id = $1 ORDER BY created_at DESC LIMIT $2',
+    [relatedEntityId, limit]
+  );
+}
+
 export async function getLegacyState(key, fallback) {
   const rows = await getDb().select('SELECT value FROM legacy_state WHERE key = $1', [key]);
   if (!rows.length) return fallback;

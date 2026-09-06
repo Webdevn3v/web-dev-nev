@@ -10,6 +10,7 @@ import { renderTasks } from './screens/tasks.js';
 import { renderInbox } from './screens/inbox.js';
 import { renderHandoffs } from './screens/handoffs.js';
 import { renderActivity } from './screens/activity.js';
+import { renderJarvie } from './screens/jarvie.js';
 import { renderHealth } from './screens/health.js';
 import { renderIntegrations } from './screens/integrations.js';
 import { renderBackup } from './screens/backupScreen.js';
@@ -27,6 +28,7 @@ const NAV = [
   ['inbox', 'INBOX'],
   ['ai', 'AI DESK'],
   ['activity', 'ACTIVITY LOG'],
+  ['jarvie', 'ASK JARVIE'],
   ['health', 'BUSINESS HEALTH'],
   ['integrations', 'INTEGRATIONS'],
   ['backup', 'BACKUP'],
@@ -47,6 +49,7 @@ const SCREENS = {
   inbox: renderInbox,
   ai: renderHandoffs,
   activity: renderActivity,
+  jarvie: () => renderJarvie(goTo),
   health: renderHealth,
   integrations: renderIntegrations,
   backup: renderBackup,

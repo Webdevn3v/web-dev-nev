@@ -286,6 +286,66 @@ this environment and this plugin's API actually allow — a stricter guarantee w
 dedicated Rust-side command opening its own single-connection pool, which is a real Phase 2 option
 if it's ever needed, not something to fake here.
 
+## 2026-09-06 — Jarvie Phase A: read-only Q&A over the system of record
+
+**Decision:** The first slice of Jarvie is a read-only question answerer (`docs/JARVIE-PHASE-A.md`).
+It answers five fixed intents — what changed, what needs me, why is X blocked, where does X
+stand, what's stalled — from live query results only. New code: `src/lib/jarvie.js` (imports
+only `queries.js`), `src/screens/jarvie.js`, two read-only helpers in `queries.js`, one nav entry.
+No migration, no dependency, no Rust, no capability change.
+
+**Why read-only:** asking is a Safe read (`PHASE1-SPEC.md` §5). Jarvie never calls the action
+layer and never writes, so it cannot violate the Single-Writer Boundary (§2). Consistent with §8:
+this is the first concrete cut of "what the event log later powers," with deterministic rules and
+no inference.
+
+**Why questions are not logged:** the ActivityEvent log records state *mutations* (§8). A read
+produces no state change; logging every question would pollute the log and, taken to its
+conclusion, would be a write on the read path. If "since I last looked" is ever wanted, that
+needs a stored last-seen timestamp — deferred to a later phase for exactly this reason.
+
+**Why deterministic before any LLM:** retrieval stays deterministic and local. The answer shape
+carries a raw `records` field so a future phase could hand it to a Claude API call that only
+*re-phrases* already-retrieved facts — it never retrieves state itself. No API key, Stronghold,
+or Rust command work is pulled forward. This applies the single-mutation-path discipline to the
+read side.
+
+**Minor deviation from the draft spec:** evidence-link `goTo` targets are any valid nav id
+(`inbox`, `health` included), not only the five the spec's example enum listed — otherwise
+untriaged-inbox evidence (named in intents 2 and 5) could not link anywhere sensible.
+
+## 2026-09-06 — Jarvie Phase B: confirmed actions + light memory (still local, no LLM)
+
+**Decision:** Jarvie can now carry out a fixed set of typed commands
+(`docs/JARVIE-PHASE-B.md` §5) — "advance X to Y", "mark handoff in progress", "create task …",
+etc. — plus session-only conversation context ("why is *it* blocked") and a
+"since I last looked" window. Still fully local: no Claude API, no Stronghold, no Rust, no
+schema/dependency change. New file `src/lib/jarvieAct.js`; `src/lib/jarvie.js` stays read-only.
+
+**Why "propose → you confirm → Jarvie executes":** commands run through the **existing action
+layer** — the same functions the UI calls (`PHASE1-SPEC.md` §4). Jarvie adds a proposal card you
+must accept; the action layer's own `confirmGate` (external/write, high-impact + typed APPROVE)
+still fires on top. Two gates, and Jarvie never executes without a fresh confirmation for that
+exact proposal. No autonomous or batched action.
+
+**Why the read module stays pure:** `jarvie.js` still imports only `queries.js` and never
+mutates. `jarvieAct.js` is the single sanctioned act path and only mutates inside
+`executeProposal()`, which needs a confirmed proposal token (stale/replayed tokens are rejected,
+so a card can't fire after the data moved underneath it).
+
+**Why "since I last looked" uses `localStorage`, not the DB:** it's a per-machine renderer
+convenience, not Command Center state — keeping it out of SQLite means it never crosses the
+action layer, never appears in `activity_event` or backups, and the Single-Writer Boundary
+(§2) is untouched. Storing it in `legacy_state` would have made a read-path feature into a write.
+
+**Deviation from the draft:** conversation context is cleared on *entry* to the Ask Jarvie
+screen (not on exit) — same observable result (no stale "it" from a past visit) with a simpler
+hook, since screens have no unmount callback.
+
+**Phase C (Claude API) is scoped in `docs/JARVIE-PHASE-B.md` §11 but deliberately not built** —
+it's the secrets-boundary phase (Stronghold read/write + Rust command for the API key) and
+deserves its own pass.
+
 ## Environment limits on this build (verify manually — see docs/PHASE1-ACCEPTANCE.md)
 
 This build was done in a sandboxed Linux container with **no Rust/Cargo toolchain, no
