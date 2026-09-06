@@ -30,6 +30,7 @@ export const ACTION_TIERS = {
   UpdateTask: TIER.REVERSIBLE_LOCAL,
   CompleteTask: TIER.REVERSIBLE_LOCAL,
   AdvanceDoorStage: TIER.EXTERNAL_WRITE,
+  CreateDoorBrief: TIER.REVERSIBLE_LOCAL,
   UpdateDoorBriefField: TIER.REVERSIBLE_LOCAL,
   AdvanceProductionStage: TIER.EXTERNAL_WRITE,
   CreateArtifact: TIER.EXTERNAL_WRITE,

@@ -5,7 +5,7 @@
 // (distinct urgentNeed/customerIntent keys) is preserved by construction — see actions.js
 // DOOR_FIELDS / DOOR_FIELD_COLUMN.
 
-import { esc, setHeader, withErrorToast } from '../lib/ui.js';
+import { esc, setHeader, withErrorToast, toast } from '../lib/ui.js';
 import { listDoorBriefs, listClients } from '../lib/queries.js';
 import { CreateDoorBrief, UpdateDoorBriefField, AdvanceDoorStage } from '../lib/actions.js';
 
@@ -42,7 +42,7 @@ async function renderList() {
       <div class="field"><label>CLIENT (OPTIONAL)</label>
         <select id="newBriefClient"><option value="">No client yet</option>${clients.map((c) => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('')}</select>
       </div>
-      <div class="field"><label>PROJECT / BUSINESS NAME</label><input id="newBriefBusiness" placeholder="Frederick Legacy Law"></div>
+      <div class="field"><label>PROJECT / BUSINESS NAME</label><input id="newBriefBusiness" placeholder="e.g. Frederick Legacy Law"></div>
       <div class="actions"><button class="btn primary" id="startBrief">START MISSION</button></div>
     </div>
     <div class="grid two" style="margin-top:14px">
@@ -55,9 +55,11 @@ async function renderList() {
     </div>`;
 
   document.getElementById('startBrief').onclick = () => withErrorToast(async () => {
+    const business = document.getElementById('newBriefBusiness').value.trim();
+    if (!business) { toast('Enter a project / business name first.', true); return; }
     const id = await CreateDoorBrief({
       clientId: document.getElementById('newBriefClient').value || null,
-      business: document.getElementById('newBriefBusiness').value.trim(),
+      business,
     });
     activeBriefId = id; activeStep = 0; showSummary = false;
     renderDoor();
@@ -98,6 +100,9 @@ async function captureFields(brief) {
     const domKey = el.dataset.field;
     const val = el.value.trim();
     if ((brief[domKey] || '') === val) continue;
+    // The business/project name is required (see CreateDoorBrief) — never let an edit blank it
+    // back out to an "Untitled mission".
+    if (domKey === 'business' && !val) { el.value = brief.business || ''; continue; }
     const field = FIELD_KEY_MAP[domKey] || domKey;
     await UpdateDoorBriefField({ id: brief.id, field, value: val });
     brief[domKey] = val;
@@ -117,6 +122,7 @@ async function renderWizard() {
       <div class="kicker">STEP ${s + 1} OF 6 · PLANNING STEP: ${esc(brief.planning_step.toUpperCase())}</div>
       <div class="big">${DOOR_STEPS[s][0].replace(/^\d\. /, '')}</div>
       <div class="muted">${DOOR_STEPS[s][1]}</div>
+      ${doorField(brief, 'PROJECT / BUSINESS NAME', 'business', 'e.g. Frederick Legacy Law', 'input')}
       ${stepBody(brief, s)}
       <div class="actions">
         <button class="btn" data-prev ${s === 0 ? 'disabled' : ''}>BACK</button>

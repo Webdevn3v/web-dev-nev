@@ -1,6 +1,6 @@
 // Clients + Projects — PHASE1-SPEC.md §9.2. CRUD, list/detail.
 
-import { esc, setHeader, withErrorToast } from '../lib/ui.js';
+import { esc, setHeader, withErrorToast, toast } from '../lib/ui.js';
 import { listClients, listProjects } from '../lib/queries.js';
 import { CreateClient, UpdateClient, CreateProject, UpdateProjectStatus, AdvanceProductionStage, PRODUCTION_STAGES } from '../lib/actions.js';
 
@@ -17,7 +17,7 @@ export async function renderClients() {
     <div class="card">
       <div class="kicker">NEW CLIENT</div>
       <div class="grid two">
-        <div class="field"><label>NAME</label><input id="newClientName" placeholder="Frederick Legacy Law"></div>
+        <div class="field"><label>NAME</label><input id="newClientName" placeholder="e.g. Frederick Legacy Law"></div>
         <div class="field"><label>CONTACT INFO</label><input id="newClientContact" placeholder="email / phone"></div>
       </div>
       <div class="field"><label>STATUS</label>
@@ -36,7 +36,7 @@ export async function renderClients() {
 
   document.getElementById('addClient').onclick = () => withErrorToast(async () => {
     const name = document.getElementById('newClientName').value.trim();
-    if (!name) return;
+    if (!name) { toast('Enter a client name first.', true); return; }
     await CreateClient({
       name,
       contactInfo: document.getElementById('newClientContact').value.trim(),
@@ -112,7 +112,7 @@ async function renderDetail() {
   });
   document.getElementById('addProject').onclick = () => withErrorToast(async () => {
     const title = document.getElementById('newProjectTitle').value.trim();
-    if (!title) return;
+    if (!title) { toast('Enter a project title first.', true); return; }
     await CreateProject({ clientId: client.id, title, type: document.getElementById('newProjectType').value.trim() });
     renderClients();
   });

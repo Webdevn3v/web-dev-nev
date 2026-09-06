@@ -242,10 +242,16 @@ const DOOR_FIELD_COLUMN = {
 };
 
 export async function CreateDoorBrief({ clientId = null, business = '' }) {
+  // The brief's business/project name is a required output of the workflow
+  // (docs/DIGITAL-DOOR-WORKFLOW.md "Workflow output" → "client / project") and is the
+  // only human-readable label the mission ever has in the list, Today and Business Health
+  // views — a nameless brief renders as "Untitled mission" / a raw id everywhere. Validate
+  // it here so an unnamed brief can't be created, matching CreateClient/CreateTask.
+  required(business, 'business');
   if (clientId) await assertExists('client', clientId, 'Client');
   const id = newId('door');
   const ts = nowIso();
-  return runAction('UpdateDoorBriefField', {
+  return runAction('CreateDoorBrief', {
     mutate: async () => {
       await getDb().execute(
         'INSERT INTO digital_door_brief (id, client_id, planning_step, business, created_at, updated_at) VALUES ($1,$2,$3,$4,$5,$6)',
