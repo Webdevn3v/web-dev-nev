@@ -36,6 +36,40 @@ const INTENT_RULES = [
     /\bwhat(?:'s| is| has| had)?\s+chang/, /\bwhat\s+happened/, /\bwhat(?:'s| is)\s+new\b/,
     /recent (?:activity|events|changes)/, /\bwhat(?:'s| has)?\s+been happening/, /anything new\b/,
   ] },
+  // Combined daily briefing (calendar + tasks + approvals). Before needs_me/calendar_lookup so
+  // "what's happening today" / "what's on today" get the rollup, but "what do I have today"
+  // stays calendar-only (no "have" here).
+  { intent: 'whats_today', patterns: [
+    /what(?:'s| is)\s+(?:happening|going on|on|up|the plan|the story)\s+(?:today|right now|this morning|this afternoon)\b/,
+    /what(?:'s| is)\s+(?:my\s+)?(?:day|today)\s+(?:look|looking|shaping)/,
+    /how(?:'s| is)\s+(?:my\s+)?(?:day|today)\s+(?:look|shaping)/,
+    /\b(?:brief me|daily brief(?:ing)?|morning brief(?:ing)?|my briefing|the briefing)\b/,
+    /catch me up on (?:today|my day|the day)/,
+    /what(?:'s| is)\s+(?:on\s+)?(?:my\s+)?(?:plate|agenda)\s+today/,
+    /what do i need to know (?:today|this morning|right now)/,
+  ] },
+  // Approvals / client work waiting on Nev. Before needs_me so "what client work is waiting on
+  // me" isn't swallowed by needs_me's generic "waiting on me".
+  { intent: 'awaiting_approval', patterns: [
+    /awaiting (?:your |my )?(?:approval|sign[- ]?off|decision|review)/,
+    /(?:waiting|pending)\s+(?:for |on )?(?:your |my )?(?:approval|sign[- ]?off)/,
+    /(?:what|anything|which)\b[^?]{0,30}\b(?:needs?|for|up for)\s+(?:approv|sign(?:ing)?[- ]?off)/,
+    /needs? (?:your |my )?sign[- ]?off/,
+    /what(?:'s| is)\s+(?:up )?for approval/,
+    /(?:what|anything)\b[^?]{0,30}\bto approve\b/,
+    /what client work is waiting on me/,
+    /(?:what|which)\s+(?:client|customer)\s+work\b/,
+    /what do (?:my |the )?clients?\s+need\b/,
+  ] },
+  { intent: 'business_overview', patterns: [
+    /how(?:'s| is| are)\s+(?:the\s+)?(?:business|digital[\s\-]side|company|things|it all|everything)\b/,
+    /\bhow are things\b/,
+    /(?:state|status|health|overview|pulse|snapshot|shape)\s+of\s+(?:the\s+)?(?:business|digital[\s\-]side|company)/,
+    /(?:business|company|digital[\s\-]side)\s+(?:overview|status|health|update|pulse|snapshot|summary)\b/,
+    /what(?:'s| is)\s+(?:happening|going on|the story|new)\s+(?:with|at|for|in)\s+(?:the\s+)?(?:business|digital[\s\-]side|company)/,
+    /\bbig picture\b/,
+    /where do (?:things|we)\s+stand\s+overall/,
+  ] },
   { intent: 'needs_me', patterns: [
     /what needs me/, /needs? my attention/, /waiting on me/, /waiting for me/, /my queue/,
     /what should i (?:do|work on)(?! next)/, /what do i need to do/, /on my plate/, /needs? a decision/,
@@ -70,6 +104,22 @@ const INTENT_RULES = [
     /where do .+ stand/, /how are .+ doing/,
     /^\s*(?:and )?(?:its|their)\s+\w/, /what about (?:it|that|its|their)/, /tell me about (?:it|that)/,
     /^\s*(?:it|that|this|that one)\s*\??\s*$/,
+  ] },
+  // After why_blocked / where_stands so an entity-named question ("why is the high-priority
+  // task blocked", "the active door mission") isn't captured here.
+  { intent: 'high_priority_tasks', patterns: [
+    /(?:what|which|list|show|any)\b[^?]{0,30}\bhigh[- ]?priority (?:tasks?|work|items?)\b/,
+    /(?:what|which|list|show|any)\b[^?]{0,30}\burgent tasks?\b/,
+    /what(?:'s| is)\s+urgent\b/,
+    /\bmy (?:top )?priorit(?:y|ies)\b/,
+    /(?:most|top) (?:important|urgent) tasks?/,
+  ] },
+  { intent: 'active_doors', patterns: [
+    /(?:what|which|list|show|any|are there)\b[^?]{0,40}\b(?:digital\s+)?door\s+(?:projects?|briefs?|missions?)\b/,
+    /(?:what|which|list|show|any|are there)\b[^?]{0,20}\b(?:active|open|running|ongoing)\s+(?:digital\s+)?door\b/,
+    /(?:what(?:'s| is)?|which)\s+(?:in|going on in|happening in)\s+the\s+door\s+(?:workflow|pipeline)/,
+    /\bdoor (?:pipeline|workflow)\b[^?]{0,30}\b(?:active|open|status|missions?|going|progress)\b/,
+    /(?:what|which)\s+missions?\s+(?:are\s+)?(?:active|open|running|in motion|on the go|going)/,
   ] },
   { intent: 'whats_stalled', patterns: [
     /what(?:'s| is) stalled/, /what(?:'s| is) at risk/, /what(?:'s| is) slipping/,
@@ -287,6 +337,41 @@ function tally(items, keyFn) {
   const m = new Map();
   for (const it of items) { const k = keyFn(it); m.set(k, (m.get(k) || 0) + 1); }
   return [...m.entries()].sort((a, b) => b[1] - a[1]);
+}
+
+const plural = (n) => (n === 1 ? '' : 's');
+function joinAnd(parts) {
+  const p = parts.filter(Boolean);
+  if (p.length <= 1) return p[0] || '';
+  if (p.length === 2) return `${p[0]} and ${p[1]}`;
+  return `${p.slice(0, -1).join(', ')}, and ${p[p.length - 1]}`;
+}
+const upperFirst = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+
+// One shared read of "the day", reused by the Today screen (todayBrief) and the whats_today
+// Jarvie answer so both tell the same story from the same live data. Pure read.
+async function gatherDay() {
+  const now = new Date();
+  const todayStr = localDateStr(now);
+  const tomorrowStr = localDateStr(addDays(now, 1));
+  const in4Str = localDateStr(addDays(now, 4));
+  const todayIso = now.toISOString().slice(0, 10);
+  const in7Iso = new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
+  const [calToday, calSoon, view, health, dueWeek] = await Promise.all([
+    listCalendarEventsBetween({ from: todayStr, to: tomorrowStr }),
+    listCalendarEventsBetween({ from: tomorrowStr, to: in4Str }),
+    getTodayView(),
+    getBusinessHealth(),
+    listTasksDueBetween({ from: todayIso, to: in7Iso, includeDone: false }),
+  ]);
+  const overdue = health.overdueTasks || [];
+  const overdueIds = new Set(overdue.map((t) => t.id));
+  const highPri = (view.highPriorityTasks || []).filter((t) => !overdueIds.has(t.id));
+  const approvals = view.awaitingApproval || [];
+  const midBriefs = view.midStageBriefs || [];
+  const dueToday = dueWeek.filter((t) => t.due_date === todayIso && !overdueIds.has(t.id));
+  const dueSoon = dueWeek.filter((t) => t.due_date > todayIso);
+  return { todayIso, calToday, calSoon, overdue, highPri, approvals, midBriefs, dueToday, dueSoon, dueWeek };
 }
 
 const EVENT_ENTITY_SCREEN = {
@@ -748,11 +833,171 @@ async function buildQuietClients() {
   };
 }
 
+// "What's happening today?" — the daily briefing as an answer. Combines calendar, overdue /
+// due-today tasks, high-priority tasks, and approvals from the same read the Today screen uses.
+async function buildWhatsToday() {
+  const d = await gatherDay();
+  const bits = [];
+  if (d.calToday.length) bits.push(`${d.calToday.length} event${plural(d.calToday.length)} today`);
+  if (d.overdue.length) bits.push(`${d.overdue.length} overdue task${plural(d.overdue.length)}`);
+  if (d.dueToday.length) bits.push(`${d.dueToday.length} task${plural(d.dueToday.length)} due today`);
+  if (d.highPri.length) bits.push(`${d.highPri.length} high-priority task${plural(d.highPri.length)}`);
+  if (d.approvals.length) bits.push(`${d.approvals.length} awaiting your approval`);
+  const count = d.calToday.length + d.overdue.length + d.dueToday.length + d.highPri.length + d.approvals.length;
+  return {
+    intent: 'whats_today',
+    title: count ? `Today — ${count} thing${plural(count)} to know` : 'Today — all clear',
+    summary: bits.length
+      ? 'You have ' + joinAnd(bits) + '.'
+      : 'Your day is clear — nothing on the calendar, nothing overdue, and nothing waiting on you.',
+    evidence: [
+      ...d.calToday.map((e) => ({ kind: 'calendar_event', id: e.id, label: `${calTime(e.starts_at)} — ${e.title} · ${CAL_CATEGORY_LABEL[e.category] || e.category}${e.location ? ` · ${e.location}` : ''}`, goTo: 'calendar' })),
+      ...d.overdue.map((t) => ({ kind: 'task', id: t.id, label: `Overdue: ${t.title} (was due ${t.due_date})`, goTo: 'tasks' })),
+      ...d.dueToday.map((t) => ({ kind: 'task', id: t.id, label: `Due today: ${t.title} (${t.priority})`, goTo: 'tasks' })),
+      ...d.highPri.map((t) => ({ kind: 'task', id: t.id, label: `${t.priority === 'urgent' ? 'Urgent' : 'High-priority'}: ${t.title}${t.due_date ? ` (due ${t.due_date})` : ''}`, goTo: 'tasks' })),
+      ...d.approvals.map((h) => ({ kind: 'handoff', id: h.id, label: `Awaiting approval: “${h.objective}” (${h.from_worker} → ${h.to_worker})`, goTo: 'ai' })),
+    ],
+    records: { ...d },
+  };
+}
+
+// "What's awaiting approval?" / "What client work is waiting on me?" — returned handoffs plus
+// the two other places work sits waiting on Nev: Door missions parked at the handoff step and
+// paused projects.
+async function buildAwaitingApproval() {
+  const [handoffs, briefs, projects, clients] = await Promise.all([
+    listHandoffs(), listDoorBriefs(), listProjects(), listClients(),
+  ]);
+  const clientName = (id) => clients.find((c) => c.id === id)?.name;
+  const returned = handoffs.filter((h) => h.status === 'returned');
+  const doorHandoff = briefs.filter((b) => b.planning_step === 'handoff');
+  const paused = projects.filter((p) => p.status === 'paused');
+  const total = returned.length + doorHandoff.length + paused.length;
+  const parts = [];
+  if (returned.length) parts.push(`${returned.length} handoff${plural(returned.length)} returned for your approve/reject`);
+  if (doorHandoff.length) parts.push(`${doorHandoff.length} Door mission${plural(doorHandoff.length)} at the handoff step`);
+  if (paused.length) parts.push(`${paused.length} project${plural(paused.length)} paused and waiting on you`);
+  return {
+    intent: 'awaiting_approval',
+    title: total ? `${total} thing${plural(total)} waiting on your decision` : 'Nothing is waiting on your approval',
+    summary: total
+      ? upperFirst(joinAnd(parts)) + '.'
+      : 'No returned handoffs, no Door missions at the handoff step, and no paused projects.',
+    evidence: [
+      ...returned.map((h) => ({ kind: 'handoff', id: h.id, label: `Approve / reject: “${h.objective}” (${h.from_worker} → ${h.to_worker})`, goTo: 'ai' })),
+      ...doorHandoff.map((b) => ({ kind: 'door_brief', id: b.id, label: `At handoff: ${b.business || 'Untitled mission'}${b.client_id && clientName(b.client_id) ? ` · ${clientName(b.client_id)}` : ''}`, goTo: 'door' })),
+      ...paused.map((p) => ({ kind: 'project', id: p.id, label: `Paused: ${p.title}${p.client_id && clientName(p.client_id) ? ` · ${clientName(p.client_id)}` : ''}`, goTo: 'clients' })),
+    ],
+    records: { returned, doorHandoff, paused },
+  };
+}
+
+// "What Door projects are active?" — every Digital Door mission not marked complete, with its
+// planning step and client.
+async function buildActiveDoors() {
+  const [briefs, clients] = await Promise.all([listDoorBriefs(), listClients()]);
+  const clientName = (id) => clients.find((c) => c.id === id)?.name;
+  const active = briefs.filter((b) => b.planning_step !== 'complete');
+  const started = active.filter((b) => b.planning_step !== 'outcome');
+  const byStep = tally(active, (b) => b.planning_step);
+  return {
+    intent: 'active_doors',
+    title: active.length
+      ? `${active.length} Door mission${plural(active.length)} open${started.length !== active.length ? ` (${started.length} past intake)` : ''}`
+      : 'No Door missions open',
+    summary: active.length
+      ? byStep.map(([s, n]) => `${n} at "${s.replace(/_/g, ' ')}"`).join(', ') + '.'
+      : 'Every Digital Door mission is complete or not yet created. Start one from the Door Workflow screen.',
+    evidence: active.map((b) => ({
+      kind: 'door_brief', id: b.id,
+      label: `${b.business || 'Untitled mission'} — ${b.planning_step}${b.client_id && clientName(b.client_id) ? ` · ${clientName(b.client_id)}` : ''}`,
+      goTo: 'door',
+    })),
+    records: { active, byStep },
+  };
+}
+
+// "What are my high-priority tasks?" — open tasks marked high or urgent, urgent first, then by
+// due date, overdue flagged.
+async function buildHighPriorityTasks() {
+  const [tasks, projects] = await Promise.all([listTasks(), listProjects()]);
+  const projTitle = (id) => projects.find((p) => p.id === id)?.title;
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const open = tasks.filter((t) => t.status !== 'done' && (t.priority === 'high' || t.priority === 'urgent'));
+  const urgent = open.filter((t) => t.priority === 'urgent');
+  const overdue = open.filter((t) => t.due_date && t.due_date < todayIso);
+  const sorted = [...open].sort((a, b) => {
+    const u = (b.priority === 'urgent' ? 1 : 0) - (a.priority === 'urgent' ? 1 : 0);
+    if (u) return u;
+    return (a.due_date || '9999-99-99') < (b.due_date || '9999-99-99') ? -1 : 1;
+  });
+  const parts = [];
+  if (urgent.length) parts.push(`${urgent.length} urgent`);
+  if (open.length - urgent.length) parts.push(`${open.length - urgent.length} high`);
+  if (overdue.length) parts.push(`${overdue.length} overdue`);
+  return {
+    intent: 'high_priority_tasks',
+    title: open.length ? `${open.length} high-priority task${plural(open.length)}` : 'No high-priority tasks',
+    summary: open.length ? joinAnd(parts) + '.' : 'Nothing open is marked high or urgent.',
+    evidence: sorted.map((t) => ({
+      kind: 'task', id: t.id,
+      label: `${t.priority === 'urgent' ? 'Urgent' : 'High'}: ${t.title}${t.due_date ? ` · due ${t.due_date}${t.due_date < todayIso ? ' (overdue)' : ''}` : ''}${t.project_id && projTitle(t.project_id) ? ` · ${projTitle(t.project_id)}` : ''}`,
+      goTo: 'tasks',
+    })),
+    records: { open, urgent, overdue },
+  };
+}
+
+// "What's happening with The Digital Side?" — a business rollup from the entities already in
+// Command Center. Personal/family calendar rows are excluded on purpose (only digital_side
+// events count toward the business view).
+async function buildBusinessOverview() {
+  const now = new Date();
+  const [clients, projects, briefs, handoffs, health, weekEvents] = await Promise.all([
+    listClients(), listProjects(), listDoorBriefs(), listHandoffs(), getBusinessHealth(),
+    listCalendarEventsBetween({ from: localDateStr(now), to: localDateStr(addDays(now, 7)) }),
+  ]);
+  const activeClients = clients.filter((c) => c.status === 'active');
+  const prospects = clients.filter((c) => c.status === 'prospect');
+  const activeProjects = projects.filter((p) => p.status === 'active');
+  const missionsInMotion = briefs.filter((b) => b.planning_step !== 'complete');
+  const approvals = handoffs.filter((h) => h.status === 'returned');
+  const dsWeek = weekEvents.filter((e) => e.category === 'digital_side');
+  const overdue = health.overdueTasks || [];
+  const stale = (health.stalledBriefs || []).length + (health.staleHandoffs || []).length;
+
+  const parts = [
+    `${activeClients.length} active client${plural(activeClients.length)}`,
+    `${activeProjects.length} active project${plural(activeProjects.length)}`,
+    `${missionsInMotion.length} Door mission${plural(missionsInMotion.length)} in motion`,
+  ];
+  const flags = [];
+  if (approvals.length) flags.push(`${approvals.length} awaiting approval`);
+  if (overdue.length) flags.push(`${overdue.length} overdue task${plural(overdue.length)}`);
+  if (stale) flags.push(`${stale} item${plural(stale)} going stale`);
+  if (dsWeek.length) flags.push(`${dsWeek.length} Digital Side event${plural(dsWeek.length)} this week`);
+
+  return {
+    intent: 'business_overview',
+    title: 'The Digital Side — right now',
+    summary: upperFirst(joinAnd(parts)) + '.'
+      + (prospects.length ? ` ${prospects.length} prospect${plural(prospects.length)} in the pipeline.` : '')
+      + (flags.length ? ` Flags: ${flags.join(', ')}.` : ' Nothing flagged.'),
+    evidence: [
+      ...approvals.map((h) => ({ kind: 'handoff', id: h.id, label: `Awaiting approval: “${h.objective}”`, goTo: 'ai' })),
+      ...missionsInMotion.map((b) => ({ kind: 'door_brief', id: b.id, label: `Mission: ${b.business || 'Untitled mission'} — ${b.planning_step}`, goTo: 'door' })),
+      ...activeProjects.map((p) => ({ kind: 'project', id: p.id, label: `Project: ${p.title} — ${(p.production_stage || 'intake').replace(/_/g, ' ')}`, goTo: 'clients' })),
+      ...dsWeek.map((e) => ({ kind: 'calendar_event', id: e.id, label: `${e.starts_at.slice(0, 10)} ${calTime(e.starts_at)} — ${e.title}`, goTo: 'calendar' })),
+    ],
+    records: { activeClients, activeProjects, missionsInMotion, approvals, dsWeek, overdue, prospects },
+  };
+}
+
 function buildCapabilities() {
   return {
     intent: 'unknown',
-    title: 'Ask me about the system of record',
-    summary: 'I answer from live data only — what changed, what needs you, why something is blocked, where something stands, and what looks stalled. Try one of the suggested questions.',
+    title: "That's not something I can answer from your data",
+    summary: 'I only answer from what\'s saved in Command Center — your calendar, tasks, clients, projects, Door missions, handoffs, inbox and activity log. I can tell you what\'s happening today, what needs you, what\'s awaiting approval, where a client or mission stands, what\'s on the calendar, and how The Digital Side is doing overall. Try one of the suggested questions.',
     evidence: [],
     records: {},
   };
@@ -761,14 +1006,20 @@ function buildCapabilities() {
 // ---------------------------------------------------------------- public entry points
 
 export async function suggestedQuestions() {
-  const base = ['What changed today?', 'What needs me?', 'What do I have today?', "What's stalled?", "What's coming up this week?", 'Which clients are quiet?'];
+  const base = [
+    "What's happening today?",
+    'What do I have tomorrow?',
+    'What needs my attention?',
+    "What's awaiting approval?",
+    'What are my high-priority tasks?',
+    'What Door projects are active?',
+    "What's happening with The Digital Side?",
+  ];
   try {
-    const [clients, projects, briefs] = await Promise.all([listClients(), listProjects(), listDoorBriefs()]);
-    const name = clients[0]?.name || projects[0]?.title || briefs[0]?.business;
-    base.push(name ? `Where does ${name} stand?` : 'Where does … stand? (name a client, project, or mission)');
-  } catch {
-    base.push('Where does … stand? (name a client, project, or mission)');
-  }
+    const clients = await listClients();
+    const name = clients.find((c) => c.status === 'active')?.name || clients[0]?.name;
+    if (name) base.push(`Where does ${name} stand?`);
+  } catch { /* no clients yet — the fixed list is still useful */ }
   return base;
 }
 
@@ -797,6 +1048,11 @@ export async function answerQuestion(question, opts = {}) {
     case 'whats_next': return buildWhatsNext();
     case 'calendar_lookup': return buildCalendarLookup(text);
     case 'quiet_clients': return buildQuietClients();
+    case 'whats_today': return buildWhatsToday();
+    case 'awaiting_approval': return buildAwaitingApproval();
+    case 'high_priority_tasks': return buildHighPriorityTasks();
+    case 'active_doors': return buildActiveDoors();
+    case 'business_overview': return buildBusinessOverview();
     default: return buildCapabilities();
   }
 }
@@ -821,41 +1077,45 @@ export function capabilityManifest() {
     { name: 'whats_next', when: 'the user asks what is next / coming up / due this week / on deck / what to do next' },
     { name: 'calendar_lookup', when: 'the user asks what is on their calendar / schedule for today, tomorrow, this week or this weekend — including narrowed to one category (personal / family / Digital Side) or to a person or thing named in an event (e.g. "what does Zen have this week")' },
     { name: 'quiet_clients', when: 'the user asks which active clients have gone quiet / need a check-in / have had no recent activity' },
+    { name: 'whats_today', when: 'the user asks what is happening today / to be briefed on their day / what is on their plate today — a combined view of calendar, overdue and due-today tasks, high-priority tasks and approvals' },
+    { name: 'awaiting_approval', when: 'the user asks what is awaiting approval / needs their sign-off / what client work is waiting on them' },
+    { name: 'high_priority_tasks', when: 'the user asks for their high-priority or urgent tasks' },
+    { name: 'active_doors', when: 'the user asks which Digital Door projects / missions are active or in progress' },
+    { name: 'business_overview', when: 'the user asks how the business / The Digital Side is doing overall' },
   ];
 }
 
-export const FORCEABLE_INTENTS = ['what_changed', 'needs_me', 'why_blocked', 'where_stands', 'whats_stalled', 'whats_next', 'calendar_lookup', 'quiet_clients'];
+export const FORCEABLE_INTENTS = ['what_changed', 'needs_me', 'why_blocked', 'where_stands', 'whats_stalled', 'whats_next', 'calendar_lookup', 'quiet_clients', 'whats_today', 'awaiting_approval', 'high_priority_tasks', 'active_doors', 'business_overview'];
 
-// Phase D §7 — a deterministic one-line synthesis + the single most important next action, for
-// the Today screen. Reuses the intent builders; pure read, no writes.
+// Deterministic daily briefing for the Today screen: a one-line synthesis, the single most
+// important next action, an orb pressure level, and the raw sections the screen renders. Same
+// live read (gatherDay) the "what's happening today" Jarvie answer uses. Pure read, no writes.
 export async function todayBrief() {
-  const [needs, next, quiet, stalled] = await Promise.all([
-    buildNeedsMe(), buildWhatsNext(), buildQuietClients(), buildWhatsStalled(),
-  ]);
-  const approvals = needs.records.approvals || [];
-  const overdue = needs.records.overdue || [];
-  const dueSoon = next.records.due || [];
-  const quietC = quiet.records.quiet || [];
-  const midBriefs = stalled.records.briefs || [];
+  const d = await gatherDay();
+  const nowHM = new Date().toTimeString().slice(0, 5);
 
   const bits = [];
-  if (approvals.length) bits.push(`${approvals.length} awaiting approval`);
-  if (overdue.length) bits.push(`${overdue.length} overdue`);
-  if (dueSoon.length) bits.push(`${dueSoon.length} due this week`);
-  if (quietC.length) bits.push(`${quietC.length} quiet client${quietC.length === 1 ? '' : 's'}`);
-  const headline = bits.length ? bits.join(', ') + '.' : 'Nothing is waiting on you and nothing is due this week.';
-  // Drives the Jarvie orb on the Today screen — honest, straight from the retrieved data.
-  const pressure = (approvals.length || overdue.length) ? 'urgent' : (bits.length ? 'attention' : 'clear');
+  if (d.calToday.length) bits.push(`${d.calToday.length} event${plural(d.calToday.length)} today`);
+  if (d.overdue.length) bits.push(`${d.overdue.length} overdue`);
+  if (d.dueToday.length) bits.push(`${d.dueToday.length} due today`);
+  if (d.highPri.length) bits.push(`${d.highPri.length} high-priority task${plural(d.highPri.length)}`);
+  if (d.approvals.length) bits.push(`${d.approvals.length} awaiting approval`);
+  const headline = bits.length
+    ? 'You have ' + joinAnd(bits) + '.'
+    : 'Nothing urgent is waiting on you and nothing is scheduled today.';
+  // Drives the Jarvie orb — honest, straight from the retrieved data.
+  const pressure = (d.approvals.length || d.overdue.length) ? 'urgent' : (bits.length ? 'attention' : 'clear');
 
-  const in2 = new Date(Date.now() + 2 * 86400000).toISOString().slice(0, 10);
+  const nextEvt = d.calToday.find((e) => (e.starts_at.slice(11, 16) || '') >= nowHM) || d.calToday[0];
   let top = null;
-  if (approvals[0]) top = { label: `Approve or reject “${approvals[0].objective}”`, goTo: 'ai' };
-  else if (overdue[0]) top = { label: `Finish the overdue task “${overdue[0].title}”`, goTo: 'tasks' };
-  else if (dueSoon.find((t) => t.due_date <= in2)) { const t = dueSoon.find((x) => x.due_date <= in2); top = { label: `“${t.title}” is due ${t.due_date}`, goTo: 'tasks' }; }
-  else if (quietC[0]) top = { label: `Check in with ${quietC[0].name} — quiet 14+ days`, goTo: 'clients' };
-  else if (midBriefs[0]) top = { label: `Move “${midBriefs[0].business || 'Untitled mission'}” forward`, goTo: 'door' };
+  if (d.approvals[0]) top = { label: `Approve or reject “${d.approvals[0].objective}”`, goTo: 'ai' };
+  else if (d.overdue[0]) top = { label: `Finish the overdue task “${d.overdue[0].title}”`, goTo: 'tasks' };
+  else if (d.dueToday[0]) top = { label: `“${d.dueToday[0].title}” is due today`, goTo: 'tasks' };
+  else if (nextEvt) top = { label: `${calTime(nextEvt.starts_at)} — ${nextEvt.title}`, goTo: 'calendar' };
+  else if (d.highPri[0]) top = { label: `Start the high-priority task “${d.highPri[0].title}”`, goTo: 'tasks' };
+  else if (d.midBriefs[0]) top = { label: `Move “${d.midBriefs[0].business || 'Untitled mission'}” forward`, goTo: 'door' };
 
-  return { headline, top, pressure };
+  return { headline, top, pressure, day: d };
 }
 
 export const __INTERNAL__ = { classify, extractEntityPhrase, matchByName, waitingOn, windowFromQuestion, calendarWindow, calendarFilter, context };

@@ -2,7 +2,12 @@ import { initDb } from './lib/db.js';
 import { loadLegacyState } from './lib/legacyState.js';
 import { listIntegrations } from './lib/queries.js';
 import { withErrorToast } from './lib/ui.js';
-import { mountJarvieOrb, setJarvieState } from './lib/jarvieOrb.js';
+import { mountJarvieOrb, setJarvieState, syncPresence, jarvieRest, isJarviePresenting } from './lib/jarvieOrb.js';
+import { initJarvieVoice, stopJarvieVoice } from './lib/jarvieVoice.js';
+
+// Today presents on entry (Jarvie delivers the briefing and stays). Ask Jarvie drives Jarvie's
+// travel itself, per question — so it is NOT in this set.
+const PRESENTING_SCREENS = new Set(['today']);
 
 import { renderToday } from './screens/today.js';
 import { renderCalendar } from './screens/calendar.js';
@@ -94,10 +99,18 @@ async function renderSystems() {
 async function render() {
   renderNav();
   await renderSystems();
-  // Default resting state; the Today and Ask Jarvie screens refine it from real data.
-  setJarvieState('idle');
+  const willPresent = PRESENTING_SCREENS.has(active);
+  // Leaving a screen Jarvie was presenting on → he travels back to his dock and Jarvie goes quiet.
+  const returningHome = isJarviePresenting() && !willPresent;
+  if (returningHome) stopJarvieVoice();
+  else if (!willPresent) setJarvieState('idle', { react: false });
   const fn = SCREENS[active] || SCREENS.today;
   await withErrorToast(() => fn());
+  if (returningHome) jarvieRest();
+  else syncPresence();
+  // Restrained screen-change transition (CSS handles prefers-reduced-motion).
+  const view = document.getElementById('view');
+  if (view) { view.classList.remove('view-in'); void view.offsetWidth; view.classList.add('view-in'); }
 }
 
 function tick() {
@@ -116,6 +129,7 @@ async function boot() {
     document.getElementById('offlineState')?.classList.add('off');
   }
   mountJarvieOrb({ onOpen: () => goTo('jarvie') });
+  initJarvieVoice();
   await render();
   if (!booted) setJarvieState('sleeping');
   tick();

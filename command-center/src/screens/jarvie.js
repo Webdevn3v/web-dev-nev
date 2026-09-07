@@ -8,7 +8,8 @@
 
 import { esc, setHeader, withErrorToast, toast } from '../lib/ui.js';
 import { answerQuestion, suggestedQuestions, clearContext } from '../lib/jarvie.js';
-import { setJarvieState } from '../lib/jarvieOrb.js';
+import { setJarvieState, getJarvieState, jarvieFigureHTML, jarviePresent } from '../lib/jarvieOrb.js';
+import { speakJarvie, stopJarvieVoice, voiceSupported, primeJarvieAudio } from '../lib/jarvieVoice.js';
 import { LINES } from '../lib/jarviePersona.js';
 import { parseCommand, executeProposal } from '../lib/jarvieAct.js';
 import {
@@ -27,8 +28,10 @@ function lsGet(k) { try { return localStorage.getItem(k); } catch { return null;
 function lsSet(k, v) { try { localStorage.setItem(k, v); } catch { /* private mode */ } }
 
 export async function renderJarvie(goTo) {
-  setHeader('READ-ONLY ANSWERS + CONFIRMED ACTIONS', 'Ask Jarvie');
+  setHeader('YOUR COMMAND CENTER, ANSWERED', 'Ask Jarvie');
   clearContext();
+  // Jarvie arrives calm here — ready for a question, not still flagging the Today briefing.
+  if (getJarvieState() !== 'working') setJarvieState('idle', { react: false });
   const sinceLastSeen = lsGet(LAST_SEEN_KEY);
   lsSet(LAST_SEEN_KEY, new Date().toISOString());
   let proseMode = lsGet(PROSE_KEY) === '1';
@@ -39,30 +42,33 @@ export async function renderJarvie(goTo) {
     : st.backend === 'local' ? `local model (${st.localModel})` : 'off';
 
   view().innerHTML = `
-    <div class="card">
-      <div class="kicker">ASK OR TELL JARVIE</div>
-      <p class="muted" style="margin-top:4px">${esc(LINES.greeting)}</p>
+    <div class="card glow jarvie-ask">
+      <div class="kicker">ASK JARVIE</div>
+      <p class="jarvie-brief__say" style="margin-top:3px;font-size:.92rem">${esc(LINES.greeting)}</p>
+      <p class="muted" style="margin-top:4px;font-size:.72rem">He's in his orb, bottom-right — ask, and he'll come over with the answer.</p>
       <div class="field">
-        <label>QUESTION OR COMMAND</label>
-        <input id="jarvieQ" placeholder="What needs me?  ·  advance Frederick to paths" value="${esc(lastQuestion)}" autocomplete="off">
+        <label>ASK A QUESTION OR GIVE A COMMAND</label>
+        <input id="jarvieQ" placeholder="What's happening today?" value="${esc(lastQuestion)}" autocomplete="off">
       </div>
-      <div class="actions"><button class="btn primary" id="jarvieAsk">SEND</button></div>
-      <div class="actions">
+      <div class="actions"><button class="btn primary" id="jarvieAsk">ASK</button></div>
+      <div class="kicker" style="margin-top:14px">TRY ASKING</div>
+      <div class="actions" style="margin-top:8px">
         ${suggestions.map((q) => `<button class="btn" data-suggest="${esc(q)}">${esc(q)}</button>`).join('')}
-        <button class="btn" data-suggest="What changed since I last looked?">What changed since I last looked?</button>
       </div>
-      <p class="muted" style="margin-top:10px">
-        Questions are read-only and unlogged. Commands are shown for your OK before anything changes.
+      <p class="muted" style="margin-top:12px;font-size:.72rem">
+        Answers come only from your saved Command Center data and are never logged. A command
+        (e.g. “advance Frederick to paths”) is always shown for your OK before anything changes.
+        ${voiceSupported() ? 'Jarvie reads answers aloud — mute or unmute with the dot on his orb.' : ''}
         ${llmOn
-          ? `<br>Language layer <span class="status ready">ON</span> · ${esc(backendName)} — it phrases answers and understands vague requests; the deterministic answer is always the fallback.
-             <label style="margin-left:8px"><input type="checkbox" id="proseToggle" ${proseMode ? 'checked' : ''} style="width:auto;margin-right:5px">prose answers</label>`
-          : 'Language layer <span class="status">OFF</span> — everything works locally without it. Turn it on below to add phrasing and fuzzy understanding.'}
+          ? `Language layer <span class="status ready">ON</span> · ${esc(backendName)}.
+             <label style="margin-left:6px"><input type="checkbox" id="proseToggle" ${proseMode ? 'checked' : ''} style="width:auto;margin-right:4px">phrase answers</label>`
+          : ''}
       </p>
     </div>
     <div id="jarvieAnswer" style="margin-top:14px"></div>
 
-    <details class="card" style="margin-top:14px" ${llmOn ? '' : 'open'}>
-      <summary class="kicker" style="cursor:pointer">JARVIE LANGUAGE LAYER — ${llmOn ? esc(backendName.toUpperCase()) : 'OFF'}</summary>
+    <details class="card" style="margin-top:14px">
+      <summary class="kicker" style="cursor:pointer;list-style:none">⚙ LANGUAGE LAYER (OPTIONAL) — ${llmOn ? esc(backendName.toUpperCase()) : 'OFF'}</summary>
       <p class="muted" style="margin-top:8px">
         Optional. The call is always made from the native side (never the browser layer) and every failure falls back to the
         deterministic answer. Turn it off and Jarvie is exactly as it was — local, offline-capable.
@@ -108,6 +114,9 @@ export async function renderJarvie(goTo) {
 
   const box = document.getElementById('jarvieAnswer');
   const input = document.getElementById('jarvieQ');
+  // Jarvie visibly attends while the ask box is focused (UI focus only — not microphone).
+  input.addEventListener('focus', () => { if (['idle', 'sleeping'].includes(getJarvieState())) setJarvieState('attention'); });
+  input.addEventListener('blur', () => { if (getJarvieState() === 'attention') setJarvieState('idle'); });
   const toggle = document.getElementById('proseToggle');
   if (toggle) toggle.onchange = () => { proseMode = toggle.checked; lsSet(PROSE_KEY, proseMode ? '1' : '0'); };
 
@@ -151,17 +160,38 @@ export async function renderJarvie(goTo) {
     renderJarvie(goTo);
   });
 
+  // While "working" Jarvie is still in his orb (doing the scan) — these cards are text only.
+  const showThinking = () => {
+    box.innerHTML = `<div class="card"><div class="kicker">JARVIE</div><p class="muted" style="margin-top:2px">Checking your Command Center data…</p></div>`;
+  };
+  const showError = (msg) => {
+    lastRender = null;
+    box.innerHTML = `<div class="card"><div class="kicker">JARVIE — SOMETHING WENT WRONG</div><p class="muted" style="margin-top:2px">${esc(msg || 'Could not read the data for that question. Try again, or pick a suggested question.')}</p></div>`;
+  };
+
   const send = (q, entityId) => withErrorToast(async () => {
     lastQuestion = q;
     input.value = q;
+    primeJarvieAudio();         // resume the AudioContext inside the user gesture
+    stopJarvieVoice();          // a new question cuts off whatever Jarvie was saying
     setJarvieState('working');
+    showThinking();
 
-    // 1 — is it a command?
-    const proposal = await parseCommand(q, entityId || null);
+    let proposal, a;
+    try {
+      // 1 — is it a command?
+      proposal = await parseCommand(q, entityId || null);
+    } catch (err) {
+      setJarvieState('idle'); showError(err?.message); return;
+    }
     if (proposal) { renderCommand(box, goTo, proposal, q); setJarvieState('idle'); return; }
 
     // 2 — deterministic intent
-    let a = await answerQuestion(q, { entityId: entityId || null, sinceLastSeen });
+    try {
+      a = await answerQuestion(q, { entityId: entityId || null, sinceLastSeen });
+    } catch (err) {
+      setJarvieState('idle'); showError(err?.message); return;
+    }
     let note = null;
 
     // 3 — unrecognised → ask the model to route it (still validated + re-parsed by parseCommand)
@@ -189,6 +219,10 @@ export async function renderJarvie(goTo) {
 
     renderAnswer(box, goTo, a, note);
     setJarvieState(a.evidence && a.evidence.length ? 'found_something' : 'idle');
+    // Jarvie visibly travels from his orb to the answer, then reads it aloud. onstart/onend drive
+    // the "speaking" pulse; when speech ends he travels back and docks. Muted = silent + no trip.
+    jarviePresent();
+    speakJarvie(a.title, a.intent === 'unknown' ? '' : a.summary);
   });
 
   document.getElementById('jarvieAsk').onclick = () => {
@@ -199,7 +233,17 @@ export async function renderJarvie(goTo) {
   input.onkeydown = (e) => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('jarvieAsk').click(); } };
   view().querySelectorAll('[data-suggest]').forEach((b) => b.onclick = () => send(b.dataset.suggest));
 
-  if (lastRender) lastRender.fn(box, goTo);
+  if (lastRender) {
+    lastRender.fn(box, goTo);
+  } else {
+    box.innerHTML = `
+      <div class="card">
+        <div class="kicker">JARVIE</div>
+        <p class="muted" style="margin-top:2px">Ask about your day, what needs you, where a client
+        or Door mission stands, what's on the calendar, or how The Digital Side is doing. I answer
+        only from what's saved in Command Center — if something isn't in here, I'll say so rather than guess.</p>
+      </div>`;
+  }
 }
 
 // ---------------------------------------------------------------- read answers
@@ -207,10 +251,15 @@ export async function renderJarvie(goTo) {
 function renderAnswer(box, goTo, a, note) {
   lastRender = { fn: (b, g) => renderAnswer(b, g, a, note) };
   box.innerHTML = `
-    <div class="card glow">
-      <div class="kicker">${esc(String(a.intent || 'answer').replace(/_/g, ' ').toUpperCase())}</div>
-      <div class="big">${esc(a.title)}</div>
-      <p class="muted">${esc(a.summary)}</p>
+    <div class="card glow jarvie-answer">
+      <div class="jarvie-answer__head">
+        ${jarvieFigureHTML({ size: 42, echo: true })}
+        <div>
+          <div class="kicker">${esc(String(a.intent || 'answer').replace(/_/g, ' ').toUpperCase())}</div>
+          <div class="big">${esc(a.title)}</div>
+        </div>
+      </div>
+      <p class="muted" style="margin-top:10px">${esc(a.summary)}</p>
       ${note ? `<p class="muted" style="font-size:.68rem;opacity:.75">${esc(note)}</p>` : ''}
       ${a.evidence && a.evidence.length ? `
         <div class="kicker" style="margin-top:14px">EVIDENCE · ${a.evidence.length}</div>

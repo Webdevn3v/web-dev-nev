@@ -37,31 +37,32 @@ fi
 
 # TCP probe with no external tools (bash /dev/tcp). Returns 0 if something accepts on the port.
 port_open() { (exec 3<>"/dev/tcp/${HOST}/${PORT}") 2>/dev/null && exec 3>&- 2>/dev/null; }
+# Does the running Vite have Jarvie's TTS endpoint (i.e. was it started with the current
+# vite.config.js)? An old Vite from before this config won't — restart it so Jarvie gets a voice.
+tts_ready() {
+  command -v curl >/dev/null 2>&1 || return 0   # can't check → assume fine
+  curl -sf -m 2 "http://${HOST}:${PORT}/jarvie-tts/health" 2>/dev/null | grep -q '"ok":true'
+}
+start_vite() {
+  [ -f "$VITE" ] && [ -x "$NODE" ] || { log "FATAL: dev build needs $NODE + $VITE"; exit 1; }
+  log "starting Vite dev server on ${PORT}"
+  setsid nohup "$NODE" "$VITE" --port "$PORT" --strictPort --host "$HOST" > "$SCRIPT_DIR/vite.log" 2>&1 &
+  for _ in $(seq 1 60); do port_open && { log "Vite is up"; sleep 1; return 0; }; sleep 0.5; done
+  log "FATAL: Vite did not open ${HOST}:${PORT} within 30s (see $SCRIPT_DIR/vite.log)"
+  exit 1
+}
 
 # A dev build contains the literal dev-server URL; a standalone build does not.
 if grep -qa "localhost:${PORT}\|127.0.0.1:${PORT}" "$BIN"; then
-  if port_open; then
-    log "dev server already on ${HOST}:${PORT} — reusing it"
+  if port_open && tts_ready; then
+    log "dev server already on ${HOST}:${PORT} (with TTS) — reusing it"
+  elif port_open; then
+    log "Vite is up but has no TTS endpoint — restarting it for Jarvie's voice"
+    VPID="$(ss -ltnp 2>/dev/null | grep ":${PORT} " | grep -oE 'pid=[0-9]+' | head -1 | cut -d= -f2)"
+    [ -n "${VPID:-}" ] && kill "$VPID" 2>/dev/null && sleep 2
+    start_vite
   else
-    if [ ! -f "$VITE" ] || [ ! -x "$NODE" ]; then
-      log "FATAL: dev build needs $NODE + $VITE to serve the UI"
-      exit 1
-    fi
-    log "starting Vite dev server on ${PORT}"
-    setsid nohup "$NODE" "$VITE" --port "$PORT" --strictPort --host "$HOST" \
-      > "$SCRIPT_DIR/vite.log" 2>&1 &
-    ok=""
-    for _ in $(seq 1 60); do          # up to ~30s
-      if port_open; then ok=1; break; fi
-      sleep 0.5
-    done
-    if [ -n "$ok" ]; then
-      log "Vite is up"
-      sleep 1                          # tiny grace for the HTTP layer after the socket opens
-    else
-      log "FATAL: Vite did not open ${HOST}:${PORT} within 30s (see $SCRIPT_DIR/vite.log)"
-      exit 1
-    fi
+    start_vite
   fi
 else
   log "standalone binary — no dev server needed"

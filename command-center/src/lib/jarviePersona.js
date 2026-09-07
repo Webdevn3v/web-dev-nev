@@ -44,14 +44,24 @@ export const PERSONA_PREAMBLE = [
   'Never invent facts, numbers, names, or dates beyond what you are given.',
 ].join(' ');
 
-// The visual-shell states this pass supports (docs/JARVIE-PERSONA.md "Jarvie's Home" lists more;
-// these five are the placeholder set). A state must only ever be shown when it reflects
-// something that actually happened — Jarvie must never look like it is monitoring or has
-// "found something" when it has not.
+// The visual-shell states. Each has a distinct at-a-glance look (see styles.css) so Nev never
+// has to read the label. A state must only ever be shown when it reflects something that
+// actually happened — Jarvie must never look like he is monitoring, listening or has "found
+// something" when he has not.
+//   sleeping        — powered down
+//   idle            — soft steady white glow + faint lime ring
+//   attention       — brighter gentle pulse (Jarvie is focused on you; e.g. the ask box is focused)
+//   working         — restrained rotating lime scan
+//   speaking        — soft pulse in sync with TTS playback (DORMANT: reserved for the voice chunk)
+//   found_something — brief white/lime confirmation pop, then a held glow
+//   urgent          — stronger, faster lime pulse
+// `listening` (mic/wake-word) is deliberately NOT here — it belongs to the later mic chunk.
 export const JARVIE_STATES = {
   sleeping:        { label: 'Sleeping',        blurb: 'Powered down. Not watching anything.' },
   idle:            { label: 'Idle',            blurb: 'Home in the orb, ready when you are.' },
+  attention:       { label: 'Attentive',       blurb: 'Focused on you, waiting for the question.' },
   working:         { label: 'Working',         blurb: 'Looking something up right now.' },
+  speaking:        { label: 'Speaking',        blurb: 'Reading the answer aloud.' },
   found_something: { label: 'Found something', blurb: 'Turned up something worth a glance.' },
   urgent:          { label: 'Urgent',          blurb: 'Something needs you now.' },
 };

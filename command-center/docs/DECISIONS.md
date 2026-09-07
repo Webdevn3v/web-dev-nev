@@ -538,7 +538,235 @@ Working approach — run the **already-built** binary directly, never `tauri dev
   produces a standalone binary `launch.sh` then runs with no Vite step; a later `tauri dev`
   reverts it to a dev binary and the script goes back to managing Vite.
 
-## Deferred from Phase 1
+## 2026-09-07 — Today = daily command center; Ask Jarvie made usable
+
+**Today is now a real briefing built from one shared read.** `todayBrief()` and the new
+`whats_today` Jarvie answer both call a single internal `gatherDay()` in `src/lib/jarvie.js`
+(calendar today + next few days, `getTodayView`, `getBusinessHealth`, tasks due this week) so
+the screen and the chat answer tell the same story from the same live queries — no parallel
+model, no new storage. The screen keeps the existing card system and now shows: a deterministic
+one-line headline ("You have 1 event today.", "Nothing urgent is waiting on you…"), a single
+"start with" action, a metric row, today's calendar, coming-up (calendar + tasks due this week),
+priority/overdue tasks, and needs-a-decision (returned handoffs) + Door work in progress. Every
+card has a truthful empty state — it only claims something when its list is non-empty. `today.js`
+no longer imports `getTodayView` directly; it consumes `brief.day`.
+
+**Five new deterministic Jarvie intents** (still `queries.js`-only, no LLM, no writes):
+`whats_today`, `awaiting_approval` (returned handoffs + Door missions at the handoff step +
+paused projects; also answers "what client work is waiting on me"), `high_priority_tasks`,
+`active_doors` (Door missions not complete), `business_overview` ("what's happening with The
+Digital Side" — active clients/projects, missions in motion, week's digital_side events, health
+flags; personal/family calendar rows deliberately excluded). Ordering in `INTENT_RULES` puts the
+briefing/approval/business rules before `needs_me`/`calendar_lookup`, but `high_priority_tasks`
+and `active_doors` after `why_blocked`/`where_stands` so an entity-named "why is the high-priority
+task blocked" still routes to `why_blocked`. 39/39 classification cases pass (10 required
+questions + regressions + collision guards). `buildCapabilities` (the unknown fallback) now says
+plainly that it can't answer from the data rather than implying it might.
+
+**Ask Jarvie screen polish** (not a chatbot redesign — still question → answer + linked
+evidence): cleaner header, tighter intro, a real empty state, a "Checking your Command Center
+data…" working state, an explicit error card, the seven listed questions as suggestion chips,
+and the language-layer config demoted to a collapsed `⚙` `<details>` at the bottom. No new
+imports on the mutation surface.
+
+## 2026-09-07 — Jarvie visual presence + command-deck game-feel pass
+
+**Jarvie is a white digital ghost, and his body stays white.** `src/lib/jarvieOrb.js` now draws
+an inline SVG ghost (rounded top, three-bump hem, two eyes + sleeping lids). His body is `fill:#fff`
+in every state; his *reactions* to the system — an aura ring, a rotating scan sweep, an edge glow,
+a pulse, a one-shot pop — are all Digital Lime, the one system accent. No red on Jarvie (the
+`urgent` state is a more insistent lime, not a colour change). No external asset, no network, no
+audio, no wake word.
+
+**One state, two surfaces.** `setJarvieState(state, {react})` updates every `[data-jarvie]`
+element at once: the docked orb and any inline figures. States are `sleeping / idle / working /
+found_something / urgent`, set only from real application state (Today's `brief.pressure`; the
+Ask Jarvie query lifecycle). `idle` breathes; `working` shows the scan sweep + a busy bob;
+`found_something` holds a brighter glow; the one-shot pop fires only on a real found→ transition
+and only when `react` is true (the Today screen passes `react:false` so navigating there isn't a
+performance).
+
+**The orb has a home.** It moved out of a floating bottom-right button into `#jarvieDock` in the
+left rail (added to `index.html`), styled as part of the rail chrome — ghost + a mono state tag,
+click opens Ask Jarvie. A `.jarvie-orb--float` fallback remains if the dock element is absent.
+Rail-footer `margin-top` adjusted so the dock sits above the clock.
+
+**Jarvie presents, rather than being a card.** `jarvieFigureHTML({size})` embeds a larger figure:
+on Today the briefing is `figure + speech` (a lime hairline down the left of the headline —
+deterministic text unchanged); on Ask Jarvie the intro, thinking, answer, error and empty cards
+all lead with the figure. The answer card figure goes `working → found_something` (pop) or
+`working → idle` (quiet) with the real result — no fake success state when nothing is found.
+
+**Restrained command-deck atmosphere** in `styles.css`: a 0.32s fade/rise `#view` transition
+between screens (`main.js` toggles `.view-in`), lime corner ticks on `.card.glow` (active
+panels), a lime edge indicator on nav hover/active, `.btn:active` press feedback + a lime hover
+glow on primary buttons, and a slow ambient pulse on the two system dots. Digital Lime only —
+no rainbow, no RGB. A `prefers-reduced-motion` block collapses every animation/transition to
+~1ms and disables the view transition. All motion is transform/opacity (no layout shift, no
+click-blocking overlays). Responsive: the dock collapses to icon-only at ≤900px, the briefing
+figure shrinks at ≤560px.
+
+Not touched: Jarvie's query logic, Calendar, SQLite, actions, migrations, or any screen other
+than Today / Ask Jarvie.
+
+### 2026-09-07 — Jarvie character redesign (visual correction)
+
+Feedback after seeing it live: the first white figure read like a generic Pac-Man ghost.
+Redesigned as an **original "signal wisp"** in `jarvieOrb.js` `ghostSvg()`: a rounded head that
+tapers to a single curled tail on the lower-left (not a scalloped hem), a floating system crest
+above the right shoulder (its own slow bob, out of phase with the body), large expressive eyes
+with white catchlights, a soft smile, and two small mitts that tuck behind the body so only the
+outer nub shows. Sleeping swaps eyes/mouth for closed lids and dims the crest. Body is still
+`fill:#fff` in every state; the crest picks up a lime **glow** (drop-shadow, never a fill) when
+working/found/urgent — an allowed interaction effect, not a colour change.
+
+The orb moved back to a **fixed bottom-right dock** (rail dock and `#jarvieDock` removed from
+`index.html` — net no change to that file): a 64px rounded HUD panel with corner ticks, a dark
+interior, and a state-driven lime underglow. New "one character" behaviour: `syncPresence()`
+sets the dock `data-home="away"` whenever a `.jarvie-figure` is on the page (Today / Ask Jarvie)
+— the dock then shows him faded/shrunk, i.e. "he's out" — and back to `"home"` on any other
+screen (`main.js render()` calls it after each screen renders). The inline figure animates in
+with `jArrive` from the lower-right (the dock's direction), so it reads as the same companion
+moving between his home and the screen that needs him. All new motion is transform/opacity and
+is covered by the existing `prefers-reduced-motion` collapse.
+
+### 2026-09-07 — Jarvie orb state feedback (readable at a glance)
+
+Each state now has a distinct look so Nev never reads a label. `jarvieOrb.js` gained a steady
+`.jarvie-orb__ring` (the baseline lime ring) and the state visuals in `styles.css` are:
+`idle` steady white glow + faint lime ring, no pulsing; `attention` brighter ring + gentle 2s
+pulse (set when the Ask box is focused — UI focus, **not** microphone); `working` restrained
+rotating lime scan; `speaking` soft 0.5s rhythmic pulse — **dormant**, driven by `data-speaking`
+via `setJarvieSpeaking()`, reserved for the voice/TTS chunk; `found_something` the existing
+white/lime confirmation pop then a held glow; `urgent` a stronger, faster (1.15s) lime pulse on
+ring + aura. `listening` is still not implemented — reserved for the mic/wake-word chunk.
+
+`muted` is an orthogonal user preference (`jarvie:muted` in localStorage, toggled by a small
+dot on the dock that shows on hover / stays visible while muted). It sets `data-muted="1"` on
+every `[data-jarvie]` element and visually dominates: opacity ~0.4, desaturated, all
+animations/glow off, crest dimmed, the tag reads "Muted". `setJarvieState`'s one-shot reaction
+is suppressed while muted. Persists across sessions.
+
+The dock markup changed from a single `<button>` to `<div>` + `.jarvie-orb__open` (main click)
++ `.jarvie-orb__mute` (toggle) + tag. Still one state source: `applyMeta()` stamps
+`data-state` / `data-muted` / tag / title on all `[data-jarvie]` elements at once. No new colour
+— lime + white only. New keyframes are in the `prefers-reduced-motion` collapse.
+
+### 2026-09-07 — Orb home + one-character movement + first voice
+
+**Orb home** is now a proper charging orb, not a button: 76px, rounded dark-glass shell
+(`backdrop-filter: blur`), a soft white energy halo Jarvie sits in (`.jarvie-orb__glow`), the
+lime ring + corner ticks, and a slow 5.2s breathe on the shell + halo. Still unobtrusive
+(mostly dark glass, bottom-right).
+
+**Movement — one element travels.** `jarvieOrb.js` mounts a single fixed `#jarvieCourier` (a
+Jarvie figure). `jarviePresent()` (called by Today / Ask Jarvie after they render their figure
+slot) measures the dock ghost and the slot ghost, places the courier at the dock, then FLIP-
+transitions its `transform` (translate + scale) to the slot over ~0.55s; on `transitionend` the
+inline figure fades in and the courier hides. `jarvieRest()` (called by `main.js render()` when
+leaving a presenting screen — Today/Ask Jarvie → anywhere else) reverses it and settles the dock
+to idle. A safety timeout guarantees the figure/dock end visible if a transition never fires.
+`prefers-reduced-motion` skips the trip (figure just appears / dock just settles). `syncPresence()`
+stays as the non-animated fallback for the `data-home` flag.
+
+**First voice — Web Speech API, local.** The WebKitGTK runtime here (`libwebkit2gtk-4.1` 2.52.3)
+is linked against `libflite` with the full CMU voice set, so `window.speechSynthesis` works with
+no dependency, no Rust, no capability change, and no network. `src/lib/jarvieVoice.js`:
+`speakJarvie(title, summary)` reads the **actual deterministic answer** (arrows/bullets stripped,
+capped at 600 chars, an `en`/`slt` voice preferred). The orb's `speaking` state is entered on the
+utterance's real `onstart` and left on `onend`/`onerror` — never a timer (a 1.2s watchdog only
+un-sticks the state if the platform never fires `onstart`; it does not drive the animation).
+`screens/jarvie.js` calls it right after `renderAnswer` and calls `stopJarvieVoice()` at the
+start of any new question and when leaving the screen. `speaking` is a real `data-state` now
+(soft ~0.46s pulse on ghost + aura + ring), replacing the earlier dormant `data-speaking` flag.
+The existing orb **mute dot** now silences the voice too (`speakJarvie` bails when
+`isJarvieMuted()`), and it stays persisted in `jarvie:muted`. No paid API, no Claude/OpenAI, no
+mic, no wake word.
+
+### 2026-09-07 — Voice fix (male, British-leaning) + movement made obvious
+
+**Voice.** The first pass picked `slt` (Flite female) → "robotic GPS". Probed the real
+`speechSynthesis.getVoices()` in the running app: this WebKitGTK/Flite build exposes exactly
+**four**, all `lang="en-US"`: `kal` (default, male, robotic), `slt` (female), `rms` (US male,
+clean), `awb` (**CMU AWB — Scottish English male**). No `en-GB` voice exists. `jarvieVoice.js`
+`chooseVoice()` is now deterministic: (1) a real `en-GB` male, (2) any non-female voice reading
+British/Scottish/RP by name or lang — this is where **`awb`** lands, (3) the clearest US male in
+order `rms` → `kal`, (4) any non-female English voice, (5) any English / any non-female / default.
+`slt` is only ever used if it is the sole option. Rate `0.94`, pitch `0.9` — measured and calm,
+not navigation-speak. `selectedVoiceInfo()` exposes the pick. **Selected here: `awb`.**
+
+**Movement.** The earlier version had a `if (out) return` that skipped the flight, and Ask
+Jarvie kept a static intro figure, so the trip was imperceptible. Reworked:
+- Ask Jarvie's intro has **no figure** — Jarvie stays in his orb. On **ask**, after the answer
+  renders (with a faint `data-echo` placeholder figure), `jarviePresent()` flies the courier
+  from the orb across to the answer (~620ms, cubic ease), the figure brightens, Jarvie speaks
+  there; on `onend`/`onerror` `jarvieTravelHome()` flies him back and the figure fades to the
+  echo. Today still presents on entry and rests on leave.
+- The courier is bolder: larger during flight (×1.35), white + lime body glow, lit crest, a
+  small in-flight wobble. `z-index` raised above toasts.
+- `data-echo="1"` marks a figure Jarvie has left behind; `syncPresence()` ignores echoes so the
+  dock doesn't snap back to "away".
+- While Jarvie is away speaking, his **empty home visibly pulses** (`[data-home="away"]
+  [data-state="speaking"]` boosts the orb aura/ring + halo) — you can see he's active from the
+  orb even though he's over by the answer.
+- `main.js`: `PRESENTING_SCREENS` is now just `today`; Ask Jarvie drives its own travel per
+  question. Leaving any screen while Jarvie is out → `stopJarvieVoice()` + `jarvieRest()`.
+- Reduced-motion still skips every trip (figure just appears / dock just settles).
+- Presence is now managed *only* by `jarviePresent()` / `jarvieTravelHome()` — `setJarvieState`
+  no longer calls `syncPresence()` (that was silently resetting `out` and cancelling trips).
+  `syncPresence()` is a bare safety net (reset an orphaned "out" when nothing live is on screen).
+### 2026-09-07 — Travel rebuilt on the Web Animations API; voice → `rms`
+
+CSS transitions + forced-reflow FLIP still read as a teleport in the live app. Rebuilt
+`flyCourier` on **`element.animate()`** (WAAPI, confirmed supported here): a 3-keyframe arc
+(from → lifted midpoint → to), one `cubic-bezier(.42,0,.4,1)` easing, duration distance-scaled
+`clamp(560, dist*0.66, 820) ms`, `fill:'forwards'`, `onfinish` reveals the destination figure and
+only then retires the courier (`opacity` fades ~40ms later, at the same spot/size — no swap).
+Courier bumped to 54px, ×1.5 scale in flight, brighter lime+white glow, a gentle rock. Same
+visible path is reversed on the way home. A probe with real `getBoundingClientRect()` sampling
+confirmed the courier interpolates dock↔figure along the arc and completes cleanly (motion is
+chunky only in an un-focused probe window — WAAPI runs at 60 fps foregrounded).
+
+**Voice**: `chooseVoice()` now *scores* every `getVoices()` entry (en-GB male ≫ known-natural
+male name ≫ British-reading male ≫ any male; `slt`/female disqualified; `kal`/robotic penalised)
+and picks the top. In this environment the four Flite voices score `rms` 70, `awb` 32, `kal` −30,
+`slt` −1000 → **`rms` selected** (cleaner CMU recording than the Scottish `awb`). Rate **1.04**,
+pitch **1.0** (was 0.94/0.9 — too slow/low). The answer is split into sentence-sized utterances
+queued back-to-back and mid-sentence separators (`·`, `—`, `;`) become commas, so Flite's rough
+punctuation prosody is avoided. `voiceReport()` exposes the pick + all scores. Honest caveat
+recorded: all four are lightweight Flite voices — `rms` is the best available, not genuinely
+natural; a real upgrade needs a different local engine (Piper/larynx) in a later chunk.
+
+### 2026-09-07 — Jarvie speaks with Piper (local neural TTS); Flite is now the fallback
+
+The Flite voices are too choppy. Replaced with **Piper** (rhasspy/piper 1.2.0) + voice
+**`en_GB-alan-medium`** — a natural British male, ~22 kHz. Fully offline: no network, no cloud,
+no paid/Claude/OpenAI/ElevenLabs. Install lives **outside the repo** at
+`~/.local/share/org.thedigitalside.commandcenter/piper/` (binary+libs 42 MB, model 61 MB, ~102 MB
+total; the unused Arabic `libtashkeel_model.ort` was deleted to save 10 MB).
+
+**No Rust / no CSP change / no native rebuild.** The renderer can't spawn a process and a Tauri
+command would mean a slow native rebuild + a CSP baked into the binary. Instead a **Vite dev
+plugin** (`vite.config.js`, dev-only — `vite build` unaffected) exposes
+`GET /jarvie-tts/say?text=…`, which shells out to Piper (`--length_scale 0.96 --sentence_silence
+0.16`) and streams back a WAV. Same origin as the app → `connect-src 'self'` already covers it.
+The renderer fetches the WAV and plays it through **Web Audio** (`decodeAudioData` +
+`AudioBufferSourceNode`), so `src.start()`/`src.onended` drive the `speaking` state precisely —
+the orb pulses only while audio is really playing, and Jarvie travels home on `onended`.
+`launch.sh` gained a `/jarvie-tts/health` check: if a Vite from before this config is running, it
+restarts it so Jarvie gets a voice.
+
+`jarvieVoice.js` rewritten: `speakJarvie()` normalises the text (arrows/bullets/`;`→comma,
+`e.g.`→"for example", etc. — the visible answer is untouched), sends the **whole utterance** to
+Piper (no manual chunking — Piper does natural per-sentence prosody), and on any failure (Piper
+down, fetch/decode error) falls back to the chunked `speechSynthesis` path. Mute silences both.
+`primeJarvieAudio()` is called from the ask click so the `AudioContext` is running.
+
+Verified in the running app: health `ok:true`; a real 3-sentence answer generated in ~0.8–1.7 s
+(warm), played via Web Audio (PulseAudio stream from `tds-command-center`), `found_something` →
+`speaking` at playback start, back to home/idle on `onended`; the 503-fallback and mute paths
+confirmed headlessly. Deferred: a persistent Piper process (would shave the ~0.5 s per-call model
+load); other/larger voices.
 
 - Claude API
 - OpenAI API

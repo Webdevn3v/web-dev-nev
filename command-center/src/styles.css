@@ -33,6 +33,9 @@ select{width:100%;border:1px solid var(--line);background:#0f1113;color:var(--of
 .modal-backdrop[hidden]{display:none}
 .modal{width:min(420px,90vw);background:linear-gradient(180deg,rgba(26,28,31,.98),rgba(17,19,21,.98));border:1px solid rgba(166,255,0,.22);border-radius:12px;padding:22px;box-shadow:0 24px 70px rgba(0,0,0,.5)}
 
+details>summary{list-style:none}details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:'▸ ';color:#656b70}details[open]>summary::before{content:'▾ '}
+
 /* Calendar (migration 007) — dark, compact, belongs to the Command Center shell.
    Category identity colours (all NON-lime; lime stays reserved for active/selected/primary):
    personal = sky, family = amber, digital_side = violet. */
@@ -110,26 +113,254 @@ select{width:100%;border:1px solid var(--line);background:#0f1113;color:var(--of
   .cal-cell{min-height:52px;padding:4px}.cal-cell__num{font-size:.66rem}
 }
 
-/* Jarvie visual shell — placeholder only (docs/JARVIE-PERSONA.md). Not an animation system. */
-.jarvie-orb{position:fixed;right:20px;bottom:20px;width:52px;height:52px;border-radius:50%;z-index:20;
-  border:1px solid var(--line);background:radial-gradient(circle at 38% 32%,rgba(255,255,255,.08),rgba(12,13,15,.92));
-  display:grid;place-items:center;cursor:pointer;padding:0;transition:box-shadow .35s ease,border-color .35s ease,opacity .35s ease,transform .2s ease}
-.jarvie-orb:hover{transform:translateY(-2px)}
-.jarvie-orb__ring{position:absolute;inset:-3px;border-radius:50%;border:1px solid transparent;transition:border-color .35s ease}
-.jarvie-ghost{position:relative;width:24px;height:26px;border-radius:12px 12px 10px 10px;background:var(--soft);
-  transition:background .35s ease,opacity .35s ease;-webkit-mask:radial-gradient(circle at 20% 100%,transparent 3px,#000 3.5px) 0 0/8px 8px repeat-x;mask:radial-gradient(circle at 20% 100%,transparent 3px,#000 3.5px) 0 0/8px 8px repeat-x}
-.jarvie-ghost__face{position:absolute;top:8px;left:0;right:0;display:flex;gap:5px;justify-content:center}
-.jarvie-ghost__eye{width:3.5px;height:3.5px;border-radius:50%;background:var(--black)}
-.jarvie-orb__tip{position:absolute;right:60px;bottom:14px;white-space:nowrap;font:.52rem var(--mono);letter-spacing:.08em;
-  color:var(--soft);background:rgba(12,13,15,.92);border:1px solid var(--line);border-radius:6px;padding:4px 8px;opacity:0;pointer-events:none;transition:opacity .2s ease}
-.jarvie-orb:hover .jarvie-orb__tip{opacity:1}
-.jarvie-orb[data-state="sleeping"]{opacity:.4}
-.jarvie-orb[data-state="sleeping"] .jarvie-ghost{background:#5b6167}
-.jarvie-orb[data-state="working"]{border-color:rgba(166,255,0,.4)}
-.jarvie-orb[data-state="working"] .jarvie-orb__ring{border-color:rgba(166,255,0,.35)}
-.jarvie-orb[data-state="working"] .jarvie-ghost{background:var(--off)}
-.jarvie-orb[data-state="found_something"]{border-color:rgba(166,255,0,.5);box-shadow:0 0 22px rgba(166,255,0,.18)}
-.jarvie-orb[data-state="found_something"] .jarvie-ghost{background:var(--lime)}
-.jarvie-orb[data-state="urgent"]{border-color:rgba(255,94,87,.6);box-shadow:0 0 24px rgba(255,94,87,.22);animation:pulse 1.7s ease-in-out infinite}
-.jarvie-orb[data-state="urgent"] .jarvie-ghost{background:var(--red)}
-@media(max-width:900px){.jarvie-orb{right:14px;bottom:14px;width:46px;height:46px}}
+/* ============================================================ Jarvie — white digital companion
+   An original "signal wisp": rounded head, curled tail, expressive eyes + catchlights, tiny
+   mitts, a floating system crest. Body is ALWAYS white (#fff). Reactions — crest glow, aura,
+   scan sweep, pulse, arrival trail — are Digital Lime, the one system accent. Never lime-bodied,
+   never red, never a new colour. All motion is transform/opacity and is collapsed under
+   prefers-reduced-motion below. Spec: docs/JARVIE-PERSONA.md + game-feel pass. */
+
+.jghost{width:100%;height:100%;display:block;overflow:visible}
+.jghost__body{fill:#fff;filter:drop-shadow(0 1.5px 2px rgba(0,0,0,.5)) drop-shadow(0 0 7px rgba(255,255,255,.1));transition:filter .4s ease}
+.jghost__arm{fill:#f4f5f6;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.35))}
+.jghost__eye{fill:#0b0d0f}
+.jghost__spark{fill:#fff}
+.jghost__mouth{fill:none;stroke:#0b0d0f;stroke-width:1.5;stroke-linecap:round}
+.jghost__lids{opacity:0}
+.jghost__lids path{fill:none;stroke:#0b0d0f;stroke-width:1.6;stroke-linecap:round}
+.jghost__eyes,.jghost__mouth{transition:opacity .3s ease}
+.jghost__crest{fill:#fff;filter:drop-shadow(0 0 2px rgba(255,255,255,.5));transform-box:fill-box;transform-origin:center;transition:filter .4s ease}
+
+/* -- the dock: Jarvie's charging-home orb, bottom-right of the shell.
+   Dark glass shell · soft white energy around Jarvie · lime ring + corner ticks · slow breathe. */
+.jarvie-orb{position:fixed;right:22px;bottom:22px;z-index:20;width:76px;height:76px;
+  transition:transform .2s cubic-bezier(.2,.9,.3,1)}
+.jarvie-orb:hover{transform:translateY(-3px)}
+.jarvie-orb__open{position:relative;width:100%;height:100%;display:grid;place-items:center;
+  padding:0;border:0;background:transparent;cursor:pointer;font:inherit}
+.jarvie-orb__open:active{transform:translateY(1px) scale(.97)}
+.jarvie-orb__frame{position:absolute;inset:0;border-radius:22px;pointer-events:none;
+  background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.10),rgba(16,18,21,.62) 52%,rgba(8,9,11,.9) 100%);
+  border:1px solid rgba(255,255,255,.12);
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  box-shadow:0 22px 48px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 30px rgba(0,0,0,.45);
+  animation:jDockBreathe 5.2s ease-in-out infinite;
+  transition:border-color .3s ease,box-shadow .4s ease}
+.jarvie-orb:hover .jarvie-orb__frame{border-color:rgba(166,255,0,.4);box-shadow:0 22px 48px rgba(0,0,0,.55),0 0 24px rgba(166,255,0,.16),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 30px rgba(0,0,0,.45)}
+.jarvie-orb__frame::before,.jarvie-orb__frame::after{content:'';position:absolute;width:9px;height:9px;opacity:.6}
+.jarvie-orb__frame::before{top:6px;left:6px;border-top:1px solid var(--lime);border-left:1px solid var(--lime)}
+.jarvie-orb__frame::after{bottom:6px;right:6px;border-bottom:1px solid var(--lime);border-right:1px solid var(--lime)}
+/* soft white "energy" halo Jarvie sits in while docked */
+.jarvie-orb__glow{position:absolute;left:50%;top:50%;width:56px;height:56px;transform:translate(-50%,-50%);
+  border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(circle,rgba(255,255,255,.22),rgba(255,255,255,.05) 55%,rgba(255,255,255,0) 72%);
+  animation:jGlowBreathe 5.2s ease-in-out infinite;transition:opacity .4s ease}
+.jarvie-orb .jghost{width:46px;height:46px;position:relative;z-index:3;transition:opacity .4s ease,transform .45s cubic-bezier(.2,.9,.3,1)}
+/* steady lime ring — the baseline "idle / home" read */
+.jarvie-orb__ring{position:absolute;left:50%;top:50%;width:52px;height:52px;transform:translate(-50%,-50%);
+  border-radius:50%;border:1px solid rgba(166,255,0,.16);pointer-events:none;z-index:2;
+  transition:border-color .4s ease,box-shadow .4s ease}
+.jarvie-orb__aura{position:absolute;left:50%;top:50%;width:54px;height:54px;transform:translate(-50%,-50%);
+  border-radius:50%;pointer-events:none;z-index:2;box-shadow:0 0 0 0 rgba(166,255,0,0);transition:box-shadow .45s ease}
+.jarvie-orb__scan{position:absolute;left:50%;top:50%;width:58px;height:58px;transform:translate(-50%,-50%) rotate(0deg);
+  border-radius:50%;pointer-events:none;z-index:2;opacity:0;transition:opacity .3s ease;
+  background:conic-gradient(from 0deg,rgba(166,255,0,0) 0deg,rgba(166,255,0,.5) 45deg,rgba(166,255,0,0) 130deg);
+  -webkit-mask:radial-gradient(circle,transparent 22px,#000 23px);mask:radial-gradient(circle,transparent 22px,#000 23px)}
+.jarvie-orb__tag{position:absolute;left:50%;bottom:-19px;transform:translateX(-50%);white-space:nowrap;
+  font:.5rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#72787e;opacity:0;transition:opacity .2s ease}
+.jarvie-orb:hover .jarvie-orb__tag{opacity:1}
+/* persistent mute/unmute — small dot, appears on hover, stays visible while muted */
+.jarvie-orb__mute{position:absolute;top:-4px;right:-4px;width:19px;height:19px;border-radius:50%;z-index:5;
+  border:1px solid var(--line);background:rgba(10,11,13,.97);cursor:pointer;padding:0;
+  display:grid;place-items:center;opacity:0;transition:opacity .2s ease,border-color .2s ease}
+.jarvie-orb:hover .jarvie-orb__mute{opacity:1}
+.jarvie-orb__mute::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--lime);opacity:.65;transition:opacity .2s ease,background .2s ease}
+.jarvie-orb__mute::after{content:'';position:absolute;width:13px;height:1.5px;background:#c9ccce;transform:rotate(-45deg);opacity:0;transition:opacity .2s ease}
+.jarvie-orb[data-muted="1"] .jarvie-orb__mute{opacity:1;border-color:rgba(255,255,255,.22)}
+.jarvie-orb[data-muted="1"] .jarvie-orb__mute::before{opacity:.3;background:#8d9298}
+.jarvie-orb[data-muted="1"] .jarvie-orb__mute::after{opacity:.85}
+
+/* he's out presenting — his home sits lit but empty (the courier carries him there/back) */
+.jarvie-orb[data-home="away"] .jghost{opacity:0;transform:scale(.7)}
+.jarvie-orb[data-home="away"] .jarvie-orb__glow{opacity:.35}
+.jarvie-orb[data-home="away"] .jarvie-orb__ring{border-color:rgba(166,255,0,.1)}
+
+@media(max-width:600px){
+  .jarvie-orb{right:14px;bottom:14px;width:62px;height:62px}
+  .jarvie-orb .jghost{width:38px;height:38px}
+  .jarvie-orb__glow{width:46px;height:46px}
+}
+
+/* -- the courier: the ONE element that visibly flies dock <-> presentation area.
+   The trip transform is driven by the Web Animations API (jarvieOrb.js) — no CSS transition on
+   `transform` here. Only `opacity` fades, and only after arrival. -- */
+.jarvie-courier{position:fixed;left:0;top:0;width:54px;height:54px;z-index:35;pointer-events:none;opacity:0;
+  display:grid;place-items:center;will-change:transform,opacity;transition:opacity .22s ease}
+.jarvie-courier .jghost{width:100%;height:100%;position:relative;z-index:2}
+.jarvie-courier .jghost__body{fill:#fff;filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
+.jarvie-courier.is-flying .jghost{animation:jFlyBob .58s ease-in-out infinite}
+.jarvie-courier.is-flying .jghost__body{filter:drop-shadow(0 0 14px rgba(166,255,0,.6)) drop-shadow(0 0 7px rgba(255,255,255,.55)) drop-shadow(0 4px 5px rgba(0,0,0,.45))}
+.jarvie-courier.is-flying .jghost__crest{filter:drop-shadow(0 0 7px rgba(166,255,0,.95))}
+.jarvie-courier .jarvie-figure__aura{position:absolute;inset:-22%;border-radius:50%;
+  background:radial-gradient(circle,rgba(166,255,0,.3),rgba(166,255,0,0) 66%);opacity:0;transition:opacity .3s}
+.jarvie-courier.is-flying .jarvie-figure__aura{opacity:.9}
+@keyframes jFlyBob{0%,100%{transform:translateY(1px) rotate(-4deg)}50%{transform:translateY(-1.5px) rotate(4deg)}}
+
+/* -- inline figure: where Jarvie presents next to text (Today briefing, Ask Jarvie answer).
+   No entrance animation of its own — the courier does the travel; JS controls its opacity.
+   data-echo="1" = a faint placeholder while Jarvie is still in his orb. -- */
+.jarvie-figure{position:relative;display:inline-flex;flex:none;align-items:center;justify-content:center;
+  width:var(--jsize,44px);height:var(--jsize,44px);transition:opacity .25s ease}
+.jarvie-figure[data-echo="1"]{opacity:.14}
+.jarvie-figure .jghost{width:88%;height:88%;position:relative;z-index:2}
+.jarvie-figure__aura{position:absolute;inset:2%;border-radius:50%;pointer-events:none;z-index:1;opacity:0;
+  background:radial-gradient(circle,rgba(166,255,0,.2),rgba(166,255,0,0) 70%);transition:opacity .45s ease}
+
+/* -- states — each visually distinct at a glance. Body stays white in every state. -- */
+[data-jarvie] .jghost__crest{animation:jCrest 3.7s ease-in-out infinite}
+
+/* idle / home — soft steady white glow + faint lime ring, gentle breathe (no pulsing glow) */
+[data-jarvie][data-state="idle"] .jghost{animation:jBreathe 4.6s ease-in-out infinite}
+[data-jarvie][data-state="idle"] .jarvie-figure__aura{opacity:.26}
+.jarvie-orb[data-state="idle"] .jarvie-orb__ring{border-color:rgba(166,255,0,.22)}
+.jarvie-orb[data-state="idle"] .jarvie-orb__aura{box-shadow:0 0 14px 1px rgba(166,255,0,.09)}
+
+/* attention — brighter, gently pulsing ring + aura (Jarvie is focused on you) */
+[data-jarvie][data-state="attention"] .jghost{animation:jBreathe 3.1s ease-in-out infinite}
+[data-jarvie][data-state="attention"] .jarvie-figure__aura{opacity:.5;animation:jPulseAura 2s ease-in-out infinite}
+.jarvie-orb[data-state="attention"] .jarvie-orb__ring{border-color:rgba(166,255,0,.5);animation:jRingPulse 2s ease-in-out infinite}
+.jarvie-orb[data-state="attention"] .jarvie-orb__aura{box-shadow:0 0 18px 2px rgba(166,255,0,.2);animation:jPulseAura 2s ease-in-out infinite}
+
+/* sleeping — dim, eyes shut, barely moving */
+[data-jarvie][data-state="sleeping"]{opacity:.5}
+[data-jarvie][data-state="sleeping"] .jghost__eyes,
+[data-jarvie][data-state="sleeping"] .jghost__mouth{opacity:0}
+[data-jarvie][data-state="sleeping"] .jghost__lids{opacity:1}
+[data-jarvie][data-state="sleeping"] .jghost{animation:jBreathe 7.5s ease-in-out infinite}
+[data-jarvie][data-state="sleeping"] .jghost__crest{animation:none;opacity:.35}
+.jarvie-orb[data-state="sleeping"] .jarvie-orb__ring{border-color:rgba(255,255,255,.06)}
+
+/* working / thinking — restrained rotating lime scan */
+.jarvie-orb[data-state="working"] .jarvie-orb__frame{border-color:rgba(166,255,0,.4)}
+.jarvie-orb[data-state="working"] .jarvie-orb__ring{border-color:rgba(166,255,0,.3)}
+.jarvie-orb[data-state="working"] .jarvie-orb__scan{opacity:1;animation:jScan 1s linear infinite}
+[data-jarvie][data-state="working"] .jghost{animation:jBob .9s ease-in-out infinite}
+[data-jarvie][data-state="working"] .jghost__crest{filter:drop-shadow(0 0 4px rgba(166,255,0,.7))}
+[data-jarvie][data-state="working"] .jarvie-figure__aura{opacity:.5;animation:jPulseAura 1.1s ease-in-out infinite}
+
+/* speaking — soft rhythmic pulse, started/stopped by the real TTS lifecycle (jarvieVoice.js) */
+[data-jarvie][data-state="speaking"] .jghost{animation:jSpeak .46s ease-in-out infinite}
+[data-jarvie][data-state="speaking"] .jghost__crest{filter:drop-shadow(0 0 4px rgba(166,255,0,.7))}
+[data-jarvie][data-state="speaking"] .jarvie-figure__aura{opacity:.6;animation:jSpeakAura .46s ease-in-out infinite}
+.jarvie-orb[data-state="speaking"] .jarvie-orb__aura{animation:jSpeakGlow .46s ease-in-out infinite}
+.jarvie-orb[data-state="speaking"] .jarvie-orb__ring{border-color:rgba(166,255,0,.45);animation:jSpeakRing .46s ease-in-out infinite}
+.jarvie-orb[data-state="speaking"] .jarvie-orb__glow{opacity:1;animation:jSpeakGlowHalo .46s ease-in-out infinite}
+/* Jarvie is away presenting/speaking — his empty home still clearly pulses to show he's active */
+.jarvie-orb[data-home="away"][data-state="speaking"] .jarvie-orb__aura{box-shadow:0 0 22px 4px rgba(166,255,0,.34);animation:jSpeakGlow .46s ease-in-out infinite}
+.jarvie-orb[data-home="away"][data-state="speaking"] .jarvie-orb__ring{border-color:rgba(166,255,0,.5)}
+.jarvie-orb[data-home="away"][data-state="working"] .jarvie-orb__scan{opacity:1;animation:jScan 1s linear infinite}
+.jarvie-orb[data-home="away"][data-state="working"] .jarvie-orb__ring{border-color:rgba(166,255,0,.34)}
+
+/* found something — brief white/lime confirmation pop (JS toggles .is-reacting ~720ms), then a held glow */
+.jarvie-orb[data-state="found_something"] .jarvie-orb__aura{box-shadow:0 0 20px 3px rgba(166,255,0,.3)}
+.jarvie-orb[data-state="found_something"] .jarvie-orb__ring{border-color:rgba(166,255,0,.42)}
+[data-jarvie][data-state="found_something"] .jghost{animation:jBreathe 4.6s ease-in-out infinite}
+[data-jarvie][data-state="found_something"] .jarvie-figure__aura{opacity:.62}
+[data-jarvie][data-state="found_something"] .jghost__body{filter:drop-shadow(0 1.5px 2px rgba(0,0,0,.5)) drop-shadow(0 0 6px rgba(166,255,0,.4))}
+[data-jarvie][data-state="found_something"] .jghost__crest{filter:drop-shadow(0 0 5px rgba(166,255,0,.8))}
+
+/* urgent — stronger, faster lime pulse. Same family as attention; no red on Jarvie. */
+.jarvie-orb[data-state="urgent"] .jarvie-orb__aura{box-shadow:0 0 24px 4px rgba(166,255,0,.44);animation:jPulseAura 1.15s ease-in-out infinite}
+.jarvie-orb[data-state="urgent"] .jarvie-orb__ring{border-color:rgba(166,255,0,.65);animation:jRingPulse 1.15s ease-in-out infinite}
+[data-jarvie][data-state="urgent"] .jarvie-figure__aura{opacity:.85;animation:jPulseAura 1.15s ease-in-out infinite}
+[data-jarvie][data-state="urgent"] .jghost{animation:jBreathe 2.2s ease-in-out infinite}
+[data-jarvie][data-state="urgent"] .jghost__body{filter:drop-shadow(0 1.5px 2px rgba(0,0,0,.5)) drop-shadow(0 0 6px rgba(166,255,0,.5))}
+[data-jarvie][data-state="urgent"] .jghost__crest{filter:drop-shadow(0 0 6px rgba(166,255,0,.95))}
+
+/* one-shot confirmation pop */
+[data-jarvie].is-reacting .jghost{animation:jPop .55s cubic-bezier(.34,1.56,.64,1)}
+[data-jarvie].is-reacting .jarvie-figure__aura{animation:jFlash .62s ease-out}
+.jarvie-orb.is-reacting .jarvie-orb__aura{animation:jFlashOrb .62s ease-out}
+
+/* muted — visibly subdued AND silent (jarvieVoice.js won't speak). Overrides state motion + glow. */
+[data-jarvie][data-muted="1"]{opacity:.4;filter:saturate(.6)}
+.jarvie-orb[data-muted="1"] .jghost,
+.jarvie-orb[data-muted="1"] .jghost__crest,
+.jarvie-orb[data-muted="1"] .jarvie-orb__aura,
+.jarvie-orb[data-muted="1"] .jarvie-orb__scan,
+.jarvie-orb[data-muted="1"] .jarvie-orb__ring,
+.jarvie-orb[data-muted="1"] .jarvie-orb__frame,
+.jarvie-orb[data-muted="1"] .jarvie-orb__glow,
+[data-jarvie][data-muted="1"] .jarvie-figure__aura{animation:none!important}
+[data-jarvie][data-muted="1"] .jarvie-orb__aura{box-shadow:none}
+[data-jarvie][data-muted="1"] .jarvie-orb__scan,
+[data-jarvie][data-muted="1"] .jarvie-figure__aura{opacity:0}
+[data-jarvie][data-muted="1"] .jarvie-orb__glow{opacity:.3}
+[data-jarvie][data-muted="1"] .jarvie-orb__ring{border-color:rgba(255,255,255,.09)}
+[data-jarvie][data-muted="1"] .jghost__crest{opacity:.22;filter:none}
+[data-jarvie][data-muted="1"] .jghost__body{filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+
+@keyframes jBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-.7px) scale(1.04)}}
+@keyframes jBob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-1.6px) rotate(1.5deg)}}
+@keyframes jCrest{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.4px)}}
+@keyframes jScan{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes jPulseAura{0%,100%{opacity:.34}50%{opacity:.9}}
+@keyframes jRingPulse{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.13)}}
+@keyframes jSpeak{0%,100%{transform:scale(1)}50%{transform:scale(1.055)}}
+@keyframes jSpeakAura{0%,100%{opacity:.4}50%{opacity:.8}}
+@keyframes jSpeakGlow{0%,100%{box-shadow:0 0 12px 1px rgba(166,255,0,.16)}50%{box-shadow:0 0 22px 3px rgba(166,255,0,.42)}}
+@keyframes jSpeakRing{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.09)}}
+@keyframes jSpeakGlowHalo{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+@keyframes jPop{0%{transform:scale(1)}45%{transform:scale(1.13)}100%{transform:scale(1)}}
+@keyframes jFlash{0%{opacity:.9;transform:scale(.8)}100%{opacity:0;transform:scale(1.6)}}
+@keyframes jFlashOrb{0%{box-shadow:0 0 0 0 rgba(166,255,0,.5)}100%{box-shadow:0 0 26px 12px rgba(166,255,0,0)}}
+@keyframes jDockBreathe{0%,100%{box-shadow:0 22px 48px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 30px rgba(0,0,0,.45)}50%{box-shadow:0 22px 48px rgba(0,0,0,.55),0 0 14px rgba(166,255,0,.05),inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 30px rgba(0,0,0,.42)}}
+@keyframes jGlowBreathe{0%,100%{opacity:.85;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}}
+
+/* -- Jarvie presenting: Today briefing + Ask Jarvie heads -- */
+.jarvie-brief{display:flex;gap:16px;align-items:flex-start}
+.jarvie-brief__figure{flex:none;padding-top:2px}
+.jarvie-brief__body{flex:1;min-width:0}
+.jarvie-brief__say{font-size:1.05rem;font-weight:600;line-height:1.45;color:var(--off);
+  padding-left:12px;border-left:2px solid rgba(166,255,0,.4);margin-top:3px}
+.jarvie-answer__head{display:flex;gap:12px;align-items:flex-start}
+.jarvie-answer__head>div{flex:1;min-width:0}
+@media(max-width:560px){
+  .jarvie-brief{gap:12px}
+  .jarvie-brief__figure .jarvie-figure{width:52px!important;height:52px!important}
+  .jarvie-brief__say{font-size:.98rem;padding-left:10px}
+}
+
+/* ============================================================ command-deck atmosphere
+   Restrained HUD framing, screen transitions, hover/press feedback. Digital Lime only. */
+#view.view-in{animation:viewIn .32s ease both}
+@keyframes viewIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+.card{position:relative}
+.card.glow::before,.card.glow::after{content:'';position:absolute;width:10px;height:10px;pointer-events:none;opacity:.5}
+.card.glow::before{top:7px;left:7px;border-top:1px solid var(--lime);border-left:1px solid var(--lime)}
+.card.glow::after{bottom:7px;right:7px;border-bottom:1px solid var(--lime);border-right:1px solid var(--lime)}
+
+.navbtn{position:relative;overflow:hidden}
+.navbtn::before{content:'';position:absolute;left:0;top:7px;bottom:7px;width:2px;border-radius:2px;background:var(--lime);
+  transform:scaleY(0);transition:transform .18s ease}
+.navbtn:hover::before{transform:scaleY(.45)}
+.navbtn.active::before{transform:scaleY(1)}
+.navbtn.active{box-shadow:inset 0 0 24px rgba(166,255,0,.06)}
+
+.btn{transition:border-color .18s ease,transform .08s ease,box-shadow .2s ease,background .18s ease}
+.btn:active{transform:translateY(1px)}
+.btn.primary:hover{box-shadow:0 0 16px rgba(166,255,0,.28)}
+
+.brand__dot,.sysdot{animation:sysPulse 3.4s ease-in-out infinite}
+@keyframes sysPulse{0%,100%{opacity:.82}50%{opacity:1;box-shadow:0 0 13px rgba(166,255,0,.5)}}
+
+@media (prefers-reduced-motion: reduce){
+  *,#view.view-in,.jghost,.jghost__crest,.jarvie-figure,.jarvie-courier,.jarvie-orb__scan,
+  .jarvie-orb__ring,.jarvie-orb__frame,.jarvie-orb__glow,.jarvie-figure__aura,.jarvie-orb__aura,
+  .brand__dot,.sysdot{
+    animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important;
+  }
+  #view.view-in{animation:none!important;opacity:1!important;transform:none!important}
+  .jarvie-orb__scan{opacity:0!important}
+}
