@@ -11,6 +11,11 @@ import { invoke } from '@tauri-apps/api/core';
 import { capabilityManifest, FORCEABLE_INTENTS } from './jarvie.js';
 import { grammarManifest, commandObjectToString } from './jarvieAct.js';
 
+// Persona foundation lives in ./jarviePersona.js (docs/JARVIE-PERSONA.md). PERSONA_PREAMBLE there
+// is the hook a later phase turns on to let this layer phrase answers in Jarvie's voice. It is
+// deliberately NOT wired into llmProse() yet: the "use ONLY the given facts, no persona" guard
+// below is the current safety stance and stays until persona phrasing is its own reviewed pass.
+
 let _status = null;
 const OFF = { hasKey: false, model: 'haiku', enabled: false, backend: 'off', localUrl: 'http://localhost:11434/v1', localModel: 'llama3.2' };
 

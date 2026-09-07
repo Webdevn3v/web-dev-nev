@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=The Digital Side — Command Center
+GenericName=Business Command Center
+Comment=Local-first command center for The Digital Side
+Exec=/home/webdevn3v/web-dev-nev/command-center/desktop/launch.sh
+Path=/home/webdevn3v/web-dev-nev/command-center
+Icon=/home/webdevn3v/web-dev-nev/command-center/src-tauri/icons/icon.png
+Terminal=false
+Categories=Office;ProjectManagement;
+StartupNotify=false

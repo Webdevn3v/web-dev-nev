@@ -464,6 +464,80 @@ plugins, and tauri-plugin-sql's specific connection-pooling behavior isn't somet
 SQLite engine can observe. See docs/PHASE1-ACCEPTANCE.md for exactly which acceptance criteria
 that leaves unverified and what running them for real requires.
 
+## 2026-09-07 — Calendar (migration 007) + Jarvie persona/visual foundation
+
+**Calendar is a personal-operations surface, kept out of the business audit trail.**
+`calendar_event` (migration 007: id, title, category, starts_at, ends_at, location, notes,
+created_at, updated_at; category ∈ personal/family/digital_side) is written only through
+`src/lib/actions.js` (`CreateCalendarEvent` / `DeleteCalendarEvent`) so the single-writer
+boundary holds and nothing calls `.execute(` outside the allowed files. But unlike every Phase 1
+entity, it has **no `activity_event` trigger**: a personal/family event must never land in the
+Activity Log or any client/project record (docs/JARVIE-PERSONA.md "Two Worlds"). Both actions are
+`reversible_local`; the Calendar screen puts an explicit `confirmGate()` in front of delete
+(the persona spec requires a confirm for deletions) rather than promoting the tier.
+
+**Timestamps: naive local wall-clock for the event, ISO-UTC for the audit fields.**
+`starts_at` / `ends_at` are stored as `'YYYY-MM-DDTHH:MM'` with no timezone, so day-bucketing
+and Jarvie's "today / tomorrow / this week / this weekend" filters are plain string comparisons
+with zero timezone drift. `created_at` / `updated_at` stay ISO-UTC to match the rest of the app.
+
+**Jarvie reads Calendar via a new deterministic intent.** `calendar_lookup` in
+`src/lib/jarvie.js` answers "what do I have today / tomorrow / this week / this weekend" from
+`calendar_event` only (all three categories), and `whats_next` now folds in the coming week's
+events. Still read-only, still no LLM, still `queries.js`-only imports. It also narrows on
+request: by category ("what Digital Side things are coming up") and by a name that literally
+appears in a stored event ("what does Zen have this week" — there is no attendee column, so
+"Zen" only matches an event whose title/notes/location contains it; nothing is invented).
+
+**Calendar UI checkpoint (2026-09-07, same day).** The screen is now a desktop month view:
+6-week grid on graphite cells, prev/next-month + Today, per-date category dots, a selected-day
+panel, a compact add/**edit** panel, an upcoming list, and Personal/Family/Digital Side filter
+chips. Category identity colours are all non-lime (personal = sky, family = amber,
+digital_side = violet); lime stays reserved for the selected day, the active filter chip, and
+primary buttons. Inputs are dark/compact with `color-scheme: dark`. `UpdateCalendarEvent` was
+added to `actions.js` (reversible-local, no trigger — same rationale as create/delete). Layout
+collapses to one column at ≤1100px and tightens again at ≤560px; the shell/sidebar is untouched.
+
+**Persona + visual shell are a foundation, not a personality engine.** `src/lib/jarviePersona.js`
+is the single source of truth for how Jarvie sounds and the placeholder visual states
+(sleeping / idle / working / found_something / urgent). `src/lib/jarvieOrb.js` mounts one small
+ghost-in-an-orb in the shell; clicking it opens Ask Jarvie. States are only ever set from real,
+just-retrieved data (Today's brief, an actual query result) — never implying monitoring that
+isn't happening. `PERSONA_PREAMBLE` exists but is deliberately NOT wired into `llmProse()` yet;
+the "facts only, no persona" guard there stays until persona phrasing gets its own reviewed pass.
+No animation system, no wake word, no microphone, no paid APIs — all still deferred.
+
+**Desktop launcher (revised 2026-09-07).** No `tauri.conf.json` change: `bundle.active: true` /
+`targets: "all"` already covers packaged installers. For the Chromebook/Crostini "open it from
+the app launcher, no terminal" ask, `command-center/desktop/` holds a per-user XDG launcher.
+
+First attempt failed in use: the launcher ran `npx tauri dev`, which triggers a full `cargo`
+recompile on click — glacial in this environment (a `tauri build --debug` here never finished
+linking in ~an hour) — so the window never opened and the ChromeOS shelf spun forever. That
+build approach was abandoned; a standalone bundle also needs an AppImage/deb toolchain download
+this box can't rely on.
+
+Working approach — run the **already-built** binary directly, never `tauri dev`, never cargo:
+- `launch.sh` (what the `.desktop` `Exec` runs): if `src-tauri/target/debug/tds-command-center`
+  is a standalone build (no `localhost:1420` string) it's exec'd as-is; if it's a dev build, the
+  script first makes sure Vite is serving :1420 (starts `node node_modules/vite/bin/vite.js
+  --port 1420 --strictPort` detached, `flock`-guarded, waits up to 30s for HTTP 200) then execs
+  the binary. Absolute interpreter paths (`/usr/bin/node`, `/usr/bin/curl`) because the launcher
+  env has a minimal PATH. Reuses an existing :1420 server, so it coexists with `npm run tauri
+  dev`. Logs to `desktop/launch.log`.
+- `.desktop`: `Terminal=false`, `StartupNotify=false` (a wrapper script breaks the startup-id
+  handshake — with notify on, ChromeOS shows an indefinite spinner), `Path=` the checkout,
+  `Icon=` existing `src-tauri/icons/icon.png`. No `StartupWMClass` (Tauri runs on the Wayland
+  backend here; the value can't be verified and a wrong one only hurts shelf grouping).
+- `install-launcher.sh` writes `~/.local/share/applications/the-digital-side-command-center.desktop`
+  with paths for the checkout. Idempotent. ChromeOS surfaces that dir in the launcher.
+- Verified live (this box has `DISPLAY`/`WAYLAND_DISPLAY` via sommelier): a cold click from a
+  minimal env starts Vite and the app process persists with `WebKitWebProcess`/`WebKitNetworkProcess`
+  children (= window rendered); a warm click reuses Vite. No Command Center source touched.
+- Optional speed-up, not required: a one-time `npm run tauri build -- --debug --no-bundle`
+  produces a standalone binary `launch.sh` then runs with no Vite step; a later `tauri dev`
+  reverts it to a dev binary and the script goes back to managing Vite.
+
 ## Deferred from Phase 1
 
 - Claude API

@@ -15,7 +15,7 @@
 import {
   listClients, listProjects, listTasks, listDoorBriefs, listHandoffs, listInboxItems,
   listArtifacts, listActivityEvents, listActivityEventsSince, listActivityEventsForEntity,
-  listTasksDueBetween, getTodayView, getBusinessHealth,
+  listTasksDueBetween, getTodayView, getBusinessHealth, listCalendarEventsBetween,
 } from './queries.js';
 
 // Ordered stage lists — domain facts, duplicated here (not imported) to keep the queries-only
@@ -39,6 +39,25 @@ const INTENT_RULES = [
   { intent: 'needs_me', patterns: [
     /what needs me/, /needs? my attention/, /waiting on me/, /waiting for me/, /my queue/,
     /what should i (?:do|work on)(?! next)/, /what do i need to do/, /on my plate/, /needs? a decision/,
+  ] },
+  // Calendar (migration 007). Tight phrasing so it can't swallow "what changed today" (which is
+  // matched first, above) or "what's due this week" (whats_next, below). "What's coming up this
+  // week?" lands here; buildWhatsNext also folds in the week's events for the plain "what's next".
+  { intent: 'calendar_lookup', patterns: [
+    /what(?:'s| is| do i have| have i got| am i doing)\s+(?:on\s+)?(?:today|tomorrow|this week|this weekend)\b/,
+    /what(?:'s| is| do i have)\s+(?:on\s+)?(?:coming up|planned|scheduled|happening)\s+(?:today|tomorrow|this week|this weekend)/,
+    /what(?:'s| is)\s+(?:on|in)\s+(?:my|the)\s+(?:calendar|schedule|agenda|diary)/,
+    /what do i have (?:on (?:my )?(?:calendar|the calendar|the schedule)|scheduled|planned|going on)/,
+    /\b(?:my|the)\s+(?:calendar|schedule|agenda|diary)\b/,
+    /(?:do i have|have i got|is there)\s+(?:anything|any events?|any plans?|any appointments?)\s+(?:on\s+)?(?:today|tomorrow|this week|this weekend)/,
+    /what(?:'s| is)\s+(?:coming up|happening)\s+this week/,
+    // "what does Zen have this week", "what is Zoe doing tomorrow"
+    /what\s+(?:does|do|is|are|has|have|will)\s+[a-z][a-z'’.\-]+\s+(?:have|has|got|get|getting|doing|do|scheduled|planned|on|up to|going on)\b/,
+    /(?:what(?:'s| is)?|when(?:'s| is)?)\s+(?:on\s+|in\s+)?[a-z][a-z'’.\-]+'s\s+(?:calendar|schedule|agenda|day|week|diary|plate|plans?)/,
+    // "what Digital Side things are coming up", "anything for the family this week"
+    /\bdigital[\s\-]side\b.*\b(?:coming up|this week|this weekend|next|soon|scheduled|planned|events?|things|stuff|deadlines?|happening)\b/,
+    /(?:coming up|scheduled|planned|anything|events?)\b.*\bfor\s+(?:the\s+)?(?:family|kids?|personal|digital[\s\-]side)\b/,
+    /what(?:'s| is| are)?\s+(?:the\s+)?(?:family|personal|digital[\s\-]side)\s+(?:events?|calendar|schedule|things?)\b/,
   ] },
   { intent: 'why_blocked', patterns: [
     /why is .+ (?:blocked|stuck|stalled)/, /why(?:'s| is) .+ not (?:moving|done|finished)/,
@@ -217,6 +236,43 @@ function windowFromQuestion(q, opts = {}) {
 }
 function startOfToday() { const d = new Date(); d.setHours(0, 0, 0, 0); return d.toISOString(); }
 function daysAgo(n) { return new Date(Date.now() - n * 24 * 60 * 60 * 1000).toISOString(); }
+
+// Calendar (migration 007) works in naive local wall-clock strings, not ISO/UTC — matching how
+// src/screens/calendar.js stores starts_at — so "today" for the calendar is the user's local
+// day, not a UTC slice.
+function pad2(n) { return String(n).padStart(2, '0'); }
+function localDateStr(d = new Date()) { return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`; }
+function addDays(d, n) { const x = new Date(d); x.setDate(x.getDate() + n); return x; }
+
+const CAL_CATEGORY_LABEL = { personal: 'Personal', family: 'Family', digital_side: 'Digital Side' };
+
+function calTime(startsAt) {
+  const s = String(startsAt || '');
+  try {
+    const d = new Date(s.replace(' ', 'T'));
+    if (!isNaN(d.getTime())) return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  } catch { /* fall through */ }
+  return s.length >= 16 ? s.slice(11, 16) : 'all day';
+}
+
+// today | tomorrow | this weekend | this week (default: today)
+function calendarWindow(q) {
+  const s = q.toLowerCase();
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  if (/tomorrow/.test(s)) {
+    const from = addDays(today, 1);
+    return { from: localDateStr(from), to: localDateStr(addDays(from, 1)), label: 'tomorrow' };
+  }
+  if (/this weekend|the weekend/.test(s)) {
+    const daysToSat = (6 - today.getDay() + 7) % 7;
+    const sat = addDays(today, daysToSat);
+    return { from: localDateStr(sat), to: localDateStr(addDays(sat, 2)), label: 'this weekend' };
+  }
+  if (/this week|coming up|next 7 days|next week|the week/.test(s)) {
+    return { from: localDateStr(today), to: localDateStr(addDays(today, 7)), label: 'the next 7 days' };
+  }
+  return { from: localDateStr(today), to: localDateStr(addDays(today, 1)), label: 'today' };
+}
 
 export function humanizeEventType(t) {
   return String(t || 'event').replace(/_/g, ' ').replace(/^\w/, (c) => c.toUpperCase());
@@ -573,24 +629,92 @@ async function buildWhatsStalled() {
 async function buildWhatsNext() {
   const today = new Date().toISOString().slice(0, 10);
   const in7 = new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
-  const [due, briefs] = await Promise.all([
+  const calFrom = localDateStr(new Date());
+  const calTo = localDateStr(addDays(new Date(), 7));
+  const [due, briefs, calEvents] = await Promise.all([
     listTasksDueBetween({ from: today, to: in7, includeDone: false }),
     listDoorBriefs(),
+    listCalendarEventsBetween({ from: calFrom, to: calTo }),
   ]);
   const since = daysAgo(3);
   const inMotion = briefs.filter((b) => b.planning_step !== 'complete' && b.updated_at >= since);
   const parts = [];
   if (due.length) parts.push(`${due.length} task${due.length === 1 ? '' : 's'} due in the next 7 days`);
+  if (calEvents.length) parts.push(`${calEvents.length} calendar event${calEvents.length === 1 ? '' : 's'} this week`);
   if (inMotion.length) parts.push(`${inMotion.length} Door mission${inMotion.length === 1 ? '' : 's'} in motion`);
   return {
     intent: 'whats_next',
-    title: due.length ? `${due.length} task${due.length === 1 ? '' : 's'} due this week` : 'Nothing due this week',
-    summary: parts.length ? parts.join(', ') + '.' : 'No tasks due in the next 7 days and no Door missions touched in the last 3 days.',
+    title: due.length || calEvents.length
+      ? [
+          due.length ? `${due.length} task${due.length === 1 ? '' : 's'} due` : '',
+          calEvents.length ? `${calEvents.length} event${calEvents.length === 1 ? '' : 's'}` : '',
+        ].filter(Boolean).join(', ') + ' · next 7 days'
+      : 'Nothing due this week',
+    summary: parts.length ? parts.join(', ') + '.' : 'No tasks due in the next 7 days, no calendar events, and no Door missions touched in the last 3 days.',
     evidence: [
       ...due.map((t) => ({ kind: 'task', id: t.id, label: `Due ${t.due_date}: ${t.title} (${t.priority})`, goTo: 'tasks' })),
+      ...calEvents.map((e) => ({ kind: 'calendar_event', id: e.id, label: `${e.starts_at.slice(0, 10)} ${calTime(e.starts_at)} — ${e.title} · ${CAL_CATEGORY_LABEL[e.category] || e.category}`, goTo: 'calendar' })),
       ...inMotion.map((b) => ({ kind: 'door_brief', id: b.id, label: `In motion: ${b.business || 'Untitled mission'} — ${b.planning_step}`, goTo: 'door' })),
     ],
-    records: { due, inMotion },
+    records: { due, inMotion, calEvents },
+  };
+}
+
+// An optional category and/or person the question narrows to. `name` is matched literally
+// against the stored title / notes / location — it never invents an attendee the data doesn't
+// have (there is no attendee column; "Zen" only matches because an event literally mentions it).
+function calendarFilter(q) {
+  const s = ` ${q.toLowerCase()} `;
+  let category = null;
+  if (/digital[\s\-]side/.test(s)) category = 'digital_side';
+  else if (/\bfamily\b|\bkids?\b|\bschool\b/.test(s)) category = 'family';
+  else if (/\bpersonal\b/.test(s)) category = 'personal';
+
+  const STOP = new Set(['i', 'we', 'you', 'they', 'the', 'my', 'our', 'it', 'that', 'this',
+    'digital', 'side', 'family', 'personal', 'everyone', 'anyone', 'someone', 'kids']);
+  let name = null;
+  let m = s.match(/(?:what(?:'s| is)?|when(?:'s| is)?)\s+(?:on\s+|in\s+)?([a-z][a-z'’.\-]+)'s\s+(?:calendar|schedule|agenda|day|week|diary|plate|plans?)/);
+  if (!m) m = s.match(/what\s+(?:does|do|is|are|has|have|will)\s+([a-z][a-z'’.\-]+)\s+(?:have|has|got|get|getting|doing|do|scheduled|planned|on|up to|going)/);
+  if (m && !STOP.has(m[1])) name = m[1].replace(/[.'’\-]+$/, '');
+  return { category, name };
+}
+const cap = (w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w);
+
+// Calendar (migration 007) — "what do I have today / tomorrow / this week / this weekend", plus
+// optional narrowing by category ("what Digital Side things are coming up") or by a name that
+// literally appears in an event ("what does Zen have this week"). Reads calendar_event only;
+// pure read — never writes, never touches a client/project record, never fabricates an event.
+async function buildCalendarLookup(question) {
+  const win = calendarWindow(question);
+  const { category, name } = calendarFilter(question);
+  let events = await listCalendarEventsBetween({ from: win.from, to: win.to });
+  if (category) events = events.filter((e) => e.category === category);
+  if (name) {
+    const n = name.toLowerCase();
+    events = events.filter((e) => `${e.title} ${e.notes || ''} ${e.location || ''}`.toLowerCase().includes(n));
+  }
+  const scopeBits = [name ? cap(name) : null, category ? CAL_CATEGORY_LABEL[category] : null].filter(Boolean);
+  const scopeLabel = scopeBits.length ? `${scopeBits.join(' · ')} · ${win.label}` : win.label;
+  const datePrefix = (win.label === 'today' || win.label === 'tomorrow') ? '' : true;
+  const byCat = tally(events, (e) => e.category);
+  const label = (e) => {
+    const cat = CAL_CATEGORY_LABEL[e.category] || e.category;
+    const day = datePrefix ? `${e.starts_at.slice(0, 10)} ` : '';
+    return `${day}${calTime(e.starts_at)} — ${e.title} · ${cat}${e.location ? ` · ${e.location}` : ''}`;
+  };
+  const nothing = scopeBits.length
+    ? `Nothing on the calendar for ${scopeBits.join(' · ')} ${win.label}.`
+    : `Nothing on your calendar for ${win.label}.`;
+  return {
+    intent: 'calendar_lookup',
+    title: events.length
+      ? `${events.length} event${events.length === 1 ? '' : 's'} · ${scopeLabel}`
+      : `Calendar clear · ${scopeLabel}`,
+    summary: events.length
+      ? byCat.map(([c, n]) => `${n} ${(CAL_CATEGORY_LABEL[c] || c).toLowerCase()}`).join(', ') + '.'
+      : nothing,
+    evidence: events.map((e) => ({ kind: 'calendar_event', id: e.id, label: label(e), goTo: 'calendar' })),
+    records: { window: win.label, from: win.from, to: win.to, category, name, byCategory: byCat, events },
   };
 }
 
@@ -637,7 +761,7 @@ function buildCapabilities() {
 // ---------------------------------------------------------------- public entry points
 
 export async function suggestedQuestions() {
-  const base = ['What changed today?', 'What needs me?', "What's stalled?", "What's due this week?", 'Which clients are quiet?'];
+  const base = ['What changed today?', 'What needs me?', 'What do I have today?', "What's stalled?", "What's coming up this week?", 'Which clients are quiet?'];
   try {
     const [clients, projects, briefs] = await Promise.all([listClients(), listProjects(), listDoorBriefs()]);
     const name = clients[0]?.name || projects[0]?.title || briefs[0]?.business;
@@ -671,6 +795,7 @@ export async function answerQuestion(question, opts = {}) {
     case 'where_stands': return buildWhereStands(text, entityId);
     case 'whats_stalled': return buildWhatsStalled();
     case 'whats_next': return buildWhatsNext();
+    case 'calendar_lookup': return buildCalendarLookup(text);
     case 'quiet_clients': return buildQuietClients();
     default: return buildCapabilities();
   }
@@ -694,11 +819,12 @@ export function capabilityManifest() {
     { name: 'where_stands', when: 'the user asks the status of / where a specific named thing stands / to be caught up on it' },
     { name: 'whats_stalled', when: 'the user asks what is stalled / at risk / slipping / overdue / needs chasing (no specific name)' },
     { name: 'whats_next', when: 'the user asks what is next / coming up / due this week / on deck / what to do next' },
+    { name: 'calendar_lookup', when: 'the user asks what is on their calendar / schedule for today, tomorrow, this week or this weekend — including narrowed to one category (personal / family / Digital Side) or to a person or thing named in an event (e.g. "what does Zen have this week")' },
     { name: 'quiet_clients', when: 'the user asks which active clients have gone quiet / need a check-in / have had no recent activity' },
   ];
 }
 
-export const FORCEABLE_INTENTS = ['what_changed', 'needs_me', 'why_blocked', 'where_stands', 'whats_stalled', 'whats_next', 'quiet_clients'];
+export const FORCEABLE_INTENTS = ['what_changed', 'needs_me', 'why_blocked', 'where_stands', 'whats_stalled', 'whats_next', 'calendar_lookup', 'quiet_clients'];
 
 // Phase D §7 — a deterministic one-line synthesis + the single most important next action, for
 // the Today screen. Reuses the intent builders; pure read, no writes.
@@ -718,6 +844,8 @@ export async function todayBrief() {
   if (dueSoon.length) bits.push(`${dueSoon.length} due this week`);
   if (quietC.length) bits.push(`${quietC.length} quiet client${quietC.length === 1 ? '' : 's'}`);
   const headline = bits.length ? bits.join(', ') + '.' : 'Nothing is waiting on you and nothing is due this week.';
+  // Drives the Jarvie orb on the Today screen — honest, straight from the retrieved data.
+  const pressure = (approvals.length || overdue.length) ? 'urgent' : (bits.length ? 'attention' : 'clear');
 
   const in2 = new Date(Date.now() + 2 * 86400000).toISOString().slice(0, 10);
   let top = null;
@@ -727,7 +855,7 @@ export async function todayBrief() {
   else if (quietC[0]) top = { label: `Check in with ${quietC[0].name} — quiet 14+ days`, goTo: 'clients' };
   else if (midBriefs[0]) top = { label: `Move “${midBriefs[0].business || 'Untitled mission'}” forward`, goTo: 'door' };
 
-  return { headline, top };
+  return { headline, top, pressure };
 }
 
-export const __INTERNAL__ = { classify, extractEntityPhrase, matchByName, waitingOn, windowFromQuestion, context };
+export const __INTERNAL__ = { classify, extractEntityPhrase, matchByName, waitingOn, windowFromQuestion, calendarWindow, calendarFilter, context };

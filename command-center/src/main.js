@@ -2,8 +2,10 @@ import { initDb } from './lib/db.js';
 import { loadLegacyState } from './lib/legacyState.js';
 import { listIntegrations } from './lib/queries.js';
 import { withErrorToast } from './lib/ui.js';
+import { mountJarvieOrb, setJarvieState } from './lib/jarvieOrb.js';
 
 import { renderToday } from './screens/today.js';
+import { renderCalendar } from './screens/calendar.js';
 import { renderDoor } from './screens/door.js';
 import { renderClients } from './screens/clients.js';
 import { renderTasks } from './screens/tasks.js';
@@ -22,6 +24,7 @@ import { renderInventory, renderJobs, renderRunway, renderWatch, renderMoney } f
 const NAV = [
   { group: 'PHASE 1' },
   ['today', 'TODAY'],
+  ['calendar', 'CALENDAR'],
   ['door', 'DOOR WORKFLOW'],
   ['clients', 'CLIENTS'],
   ['tasks', 'TASKS'],
@@ -43,6 +46,7 @@ const NAV = [
 
 const SCREENS = {
   today: () => renderToday(goTo),
+  calendar: () => renderCalendar(goTo),
   door: renderDoor,
   clients: renderClients,
   tasks: renderTasks,
@@ -90,6 +94,8 @@ async function renderSystems() {
 async function render() {
   renderNav();
   await renderSystems();
+  // Default resting state; the Today and Ask Jarvie screens refine it from real data.
+  setJarvieState('idle');
   const fn = SCREENS[active] || SCREENS.today;
   await withErrorToast(() => fn());
 }
@@ -100,14 +106,18 @@ function tick() {
 }
 
 async function boot() {
+  let booted = true;
   try {
     await initDb();
     await loadLegacyState();
   } catch (err) {
     console.error(err);
+    booted = false;
     document.getElementById('offlineState')?.classList.add('off');
   }
+  mountJarvieOrb({ onOpen: () => goTo('jarvie') });
   await render();
+  if (!booted) setJarvieState('sleeping');
   tick();
   setInterval(tick, 30000);
   document.getElementById('shell').hidden = false;

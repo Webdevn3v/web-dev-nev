@@ -481,6 +481,71 @@ export async function DismissInboxItem({ id }) {
   });
 }
 
+// ---------------------------------------------------------------- Calendar (migration 007)
+// Personal + family + Digital Side events. Still routed through this single-writer boundary (no
+// `.execute(` lives outside actions.js), but deliberately NOT part of the business audit trail:
+// calendar_event has no activity_event trigger, so a personal event never lands in the Activity
+// Log or any client/project record (docs/JARVIE-PERSONA.md "Two Worlds"). Both actions are
+// reversible-local; the Calendar screen gates the delete with its own confirm.
+
+const CALENDAR_CATEGORIES = ['personal', 'family', 'digital_side'];
+
+export async function CreateCalendarEvent({ title, category, startsAt, endsAt = null, location = null, notes = null }) {
+  required(title, 'title');
+  required(startsAt, 'startsAt');
+  oneOf(category, CALENDAR_CATEGORIES, 'category');
+  if (endsAt && String(endsAt) < String(startsAt)) {
+    throw new ValidationError('endsAt cannot be before startsAt');
+  }
+  const id = newId('cal');
+  const ts = nowIso();
+  return runAction('CreateCalendarEvent', {
+    mutate: async () => {
+      await getDb().execute(
+        `INSERT INTO calendar_event (id, title, category, starts_at, ends_at, location, notes, created_at, updated_at)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+        [id, title.trim(), category, startsAt, endsAt || null, (location || '').trim() || null, (notes || '').trim() || null, ts, ts]
+      );
+      return id;
+    },
+  });
+}
+
+export async function UpdateCalendarEvent({ id, title, category, startsAt, endsAt = null, location = null, notes = null }) {
+  required(id, 'id');
+  required(title, 'title');
+  required(startsAt, 'startsAt');
+  oneOf(category, CALENDAR_CATEGORIES, 'category');
+  await assertExists('calendar_event', id, 'Calendar event');
+  if (endsAt && String(endsAt) < String(startsAt)) {
+    throw new ValidationError('endsAt cannot be before startsAt');
+  }
+  return runAction('UpdateCalendarEvent', {
+    mutate: async () => {
+      // One statement — calendar_event has no trigger, but the single-writer convention (one
+      // db.execute per action) still holds.
+      await getDb().execute(
+        `UPDATE calendar_event SET
+           title = $1, category = $2, starts_at = $3, ends_at = $4, location = $5, notes = $6, updated_at = $7
+         WHERE id = $8`,
+        [title.trim(), category, startsAt, endsAt || null, (location || '').trim() || null, (notes || '').trim() || null, nowIso(), id]
+      );
+      return id;
+    },
+  });
+}
+
+export async function DeleteCalendarEvent({ id }) {
+  required(id, 'id');
+  await assertExists('calendar_event', id, 'Calendar event');
+  return runAction('DeleteCalendarEvent', {
+    mutate: async () => {
+      await getDb().execute('DELETE FROM calendar_event WHERE id = $1', [id]);
+      return id;
+    },
+  });
+}
+
 // ---------------------------------------------------------------- Legacy screens (pre-Phase-1)
 // Inventory / Client Jobs / Runway / Watchtower / Money predate PHASE1-SPEC.md and are not part
 // of it (Watchtower and Money are explicitly deferred, §11). They are preserved as working
@@ -500,4 +565,4 @@ export async function SaveLegacyState({ key, value }) {
   });
 }
 
-export { DOOR_STAGES, DOOR_FIELDS, ARTIFACT_TYPES, WORKERS, HANDOFF_STATUSES, PRODUCTION_STAGES };
+export { DOOR_STAGES, DOOR_FIELDS, ARTIFACT_TYPES, WORKERS, HANDOFF_STATUSES, PRODUCTION_STAGES, CALENDAR_CATEGORIES };

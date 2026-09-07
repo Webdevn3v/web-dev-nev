@@ -22,6 +22,7 @@ import m003 from './migrations/003_rename_stage_to_planning_step.sql?raw';
 import m004 from './migrations/004_add_production_stage.sql?raw';
 import m005 from './migrations/005_artifact_handoff_link.sql?raw';
 import m006 from './migrations/006_activity_event_triggers.sql?raw';
+import m007 from './migrations/007_calendar_events.sql?raw';
 import { splitSqlStatements } from './sqlSplit.js';
 
 const MIGRATIONS = [
@@ -31,6 +32,7 @@ const MIGRATIONS = [
   { version: 4, description: 'corrective patch: add project.production_stage (12-stage pipeline)', sql: m004 },
   { version: 5, description: 'link artifact to handoff for audit-result events', sql: m005 },
   { version: 6, description: 'atomic activity_event triggers per entity mutation', sql: m006 },
+  { version: 7, description: 'add local calendar events', sql: m007 },
 ];
 
 export async function runMigrations(db) {

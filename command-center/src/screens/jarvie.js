@@ -8,6 +8,8 @@
 
 import { esc, setHeader, withErrorToast, toast } from '../lib/ui.js';
 import { answerQuestion, suggestedQuestions, clearContext } from '../lib/jarvie.js';
+import { setJarvieState } from '../lib/jarvieOrb.js';
+import { LINES } from '../lib/jarviePersona.js';
 import { parseCommand, executeProposal } from '../lib/jarvieAct.js';
 import {
   llmStatus, llmRoute, llmProse, modelLabel, usageNote, layerLive, isLocalUrl,
@@ -39,6 +41,7 @@ export async function renderJarvie(goTo) {
   view().innerHTML = `
     <div class="card">
       <div class="kicker">ASK OR TELL JARVIE</div>
+      <p class="muted" style="margin-top:4px">${esc(LINES.greeting)}</p>
       <div class="field">
         <label>QUESTION OR COMMAND</label>
         <input id="jarvieQ" placeholder="What needs me?  ·  advance Frederick to paths" value="${esc(lastQuestion)}" autocomplete="off">
@@ -151,10 +154,11 @@ export async function renderJarvie(goTo) {
   const send = (q, entityId) => withErrorToast(async () => {
     lastQuestion = q;
     input.value = q;
+    setJarvieState('working');
 
     // 1 — is it a command?
     const proposal = await parseCommand(q, entityId || null);
-    if (proposal) { renderCommand(box, goTo, proposal, q); return; }
+    if (proposal) { renderCommand(box, goTo, proposal, q); setJarvieState('idle'); return; }
 
     // 2 — deterministic intent
     let a = await answerQuestion(q, { entityId: entityId || null, sinceLastSeen });
@@ -184,6 +188,7 @@ export async function renderJarvie(goTo) {
     }
 
     renderAnswer(box, goTo, a, note);
+    setJarvieState(a.evidence && a.evidence.length ? 'found_something' : 'idle');
   });
 
   document.getElementById('jarvieAsk').onclick = () => {
@@ -267,7 +272,7 @@ function renderCommand(box, goTo, p, command, note) {
     </div>`;
   wireLinks(box, goTo);
   document.getElementById('jarvieCancel').onclick = () => {
-    box.innerHTML = `<div class="card"><div class="kicker">JARVIE</div><p class="muted">Cancelled — nothing changed.</p></div>`;
+    box.innerHTML = `<div class="card"><div class="kicker">JARVIE</div><p class="muted">${esc(LINES.cancelled)}</p></div>`;
   };
   document.getElementById('jarviePropose').onclick = () => withErrorToast(async () => {
     const res = await executeProposal(p);

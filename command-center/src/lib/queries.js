@@ -97,6 +97,34 @@ export async function listTasksDueBetween({ from, to, includeDone = false } = {}
   );
 }
 
+// ---------------------------------------------------------------- Calendar (migration 007)
+// Personal + family + Digital Side events. `starts_at` / `ends_at` are stored as naive local
+// wall-clock strings 'YYYY-MM-DDTHH:MM' (no timezone) — see src/screens/calendar.js for why —
+// so day-bucketing and "today / tomorrow / this week" filters are plain lexicographic string
+// comparisons. Read-only, like everything else in this file. calendar_event has no
+// activity_event trigger by design: personal calendar data stays out of the business audit
+// trail (docs/JARVIE-PERSONA.md "Two Worlds"; docs/DECISIONS.md).
+export async function listCalendarEvents({ limit = 500 } = {}) {
+  return getDb().select('SELECT * FROM calendar_event ORDER BY starts_at ASC LIMIT $1', [limit]);
+}
+
+// `from` inclusive, `to` exclusive — both 'YYYY-MM-DD' or a full local datetime string.
+export async function listCalendarEventsBetween({ from, to, limit = 500 } = {}) {
+  return getDb().select(
+    'SELECT * FROM calendar_event WHERE starts_at >= $1 AND starts_at < $2 ORDER BY starts_at ASC LIMIT $3',
+    [from, to, limit]
+  );
+}
+
+// Everything at or after `from` (a 'YYYY-MM-DD' string), oldest first — the Calendar screen's
+// upcoming list. Pass the start of today so events earlier today still show.
+export async function listUpcomingCalendarEvents({ from, limit = 200 } = {}) {
+  return getDb().select(
+    'SELECT * FROM calendar_event WHERE starts_at >= $1 ORDER BY starts_at ASC LIMIT $2',
+    [from, limit]
+  );
+}
+
 export async function getLegacyState(key, fallback) {
   const rows = await getDb().select('SELECT value FROM legacy_state WHERE key = $1', [key]);
   if (!rows.length) return fallback;

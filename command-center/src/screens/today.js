@@ -4,6 +4,7 @@
 import { esc, setHeader } from '../lib/ui.js';
 import { getTodayView } from '../lib/queries.js';
 import { todayBrief } from '../lib/jarvie.js';
+import { setJarvieState } from '../lib/jarvieOrb.js';
 
 export async function renderToday(goTo) {
   setHeader('DAILY BRIEFING', 'Today');
@@ -11,6 +12,7 @@ export async function renderToday(goTo) {
   const [{ highPriorityTasks, midStageBriefs, awaitingApproval }, brief] = await Promise.all([
     getTodayView(), todayBrief(),
   ]);
+  setJarvieState({ urgent: 'urgent', attention: 'found_something', clear: 'idle' }[brief.pressure] || 'idle');
 
   view.innerHTML = `
     <div class="card glow">

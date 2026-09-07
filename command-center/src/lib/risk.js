@@ -40,6 +40,13 @@ export const ACTION_TIERS = {
   RecordAuditResult: TIER.EXTERNAL_WRITE,
   ApproveChange: TIER.HIGH_IMPACT,
   RejectChange: TIER.HIGH_IMPACT,
+  // Calendar (migration 007) — personal operations, not business records. Creating an event is
+  // a reversible local write with no gate; deleting one is still reversible-local, but the
+  // Calendar screen puts an explicit confirm in front of it (per the persona spec) via
+  // confirmGate() directly.
+  CreateCalendarEvent: TIER.REVERSIBLE_LOCAL,
+  UpdateCalendarEvent: TIER.REVERSIBLE_LOCAL,
+  DeleteCalendarEvent: TIER.REVERSIBLE_LOCAL,
   CaptureInboxItem: TIER.REVERSIBLE_LOCAL,
   ConvertInboxItem: TIER.REVERSIBLE_LOCAL,
   DismissInboxItem: TIER.REVERSIBLE_LOCAL,
