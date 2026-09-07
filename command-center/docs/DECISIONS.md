@@ -385,6 +385,36 @@ Rust command supports `format` passthrough for later. (3) `reqwest` uses the `na
 feature — SChannel on the Windows target, OS OpenSSL on Linux/macOS — rather than `rustls`,
 which in this reqwest version pulls the `aws-lc-sys` C/asm build.
 
+## 2026-09-06 — Jarvie Phase D: deterministic deepening (no model, no paid service)
+
+**Decision:** Jarvie gets wider and deeper entirely from the local database
+(`docs/JARVIE-PHASE-D.md`), approved exactly as drafted:
+- `why is X blocked?` traces the real chain — a paused parent, the gating production stage
+  *with its open child tasks named*, a `returned` handoff's audit verdict. `where does X
+  stand?` is now an exhaustive descendant rollup with a last-activity date.
+- Two new intents: `whats_next` (not-yet-overdue tasks due within **7 days** + Door missions
+  touched in the last 3 days) and `quiet_clients` (active clients with no activity in **14+
+  days**).
+- Seven new typed commands: `create project`, `hand off … to <worker>`, `triage <inbox> as
+  task|project|client`, `dismiss <inbox>`, `set <task> priority …`, `set <task> due …`,
+  `rename <task> to "…"`. Each maps to an action that already has a `risk.js` tier — no
+  `risk.js` change; `hand off` is external/write so it still hits `confirmGate`.
+- A "JARVIE" card on Today: one deterministic headline + the single highest-priority next
+  action (returned handoff → overdue → due within 2 days → quiet client → mid-stage brief).
+
+**Why no schema/dependency change:** every builder reads through `queries.js` (one new helper,
+`listTasksDueBetween`, plus `related_handoff_id` added to `listArtifacts`). No migration, no
+Rust, no `package.json` change, no network.
+
+**`inbox_item` as a resolvable kind:** added to `KIND_META` for the triage/dismiss commands,
+but kept out of the default question-resolution order (`DEFAULT_KINDS`) so a normal "where does
+X stand?" never accidentally resolves to an inbox note.
+
+**Phase C untouched:** `jarvie_llm*.rs`, `jarvieLLM.js`, and the Ask-Jarvie Claude card are not
+modified. Phase C stays optional and off by default; the new intents/verbs are added to
+`capabilityManifest()` / `grammarManifest()` so *if* Phase C is later enabled its fuzzy routing
+covers them, but nothing here turns it on or calls it.
+
 ## Environment limits on this build (verify manually — see docs/PHASE1-ACCEPTANCE.md)
 
 This build was done in a sandboxed Linux container with **no Rust/Cargo toolchain, no

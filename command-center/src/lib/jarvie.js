@@ -13,9 +13,9 @@
 //     ever re-querying (JARVIE-PHASE-A.md §6, JARVIE-PHASE-B.md §11).
 
 import {
-  listClients, listProjects, listTasks, listDoorBriefs, listHandoffs,
-  listActivityEventsSince, listActivityEventsForEntity,
-  getTodayView, getBusinessHealth,
+  listClients, listProjects, listTasks, listDoorBriefs, listHandoffs, listInboxItems,
+  listArtifacts, listActivityEvents, listActivityEventsSince, listActivityEventsForEntity,
+  listTasksDueBetween, getTodayView, getBusinessHealth,
 } from './queries.js';
 
 // Ordered stage lists — domain facts, duplicated here (not imported) to keep the queries-only
@@ -38,7 +38,7 @@ const INTENT_RULES = [
   ] },
   { intent: 'needs_me', patterns: [
     /what needs me/, /needs? my attention/, /waiting on me/, /waiting for me/, /my queue/,
-    /what should i (?:do|work on)/, /what do i need to do/, /on my plate/, /needs? a decision/,
+    /what should i (?:do|work on)(?! next)/, /what do i need to do/, /on my plate/, /needs? a decision/,
   ] },
   { intent: 'why_blocked', patterns: [
     /why is .+ (?:blocked|stuck|stalled)/, /why(?:'s| is) .+ not (?:moving|done|finished)/,
@@ -56,6 +56,19 @@ const INTENT_RULES = [
     /what(?:'s| is) stalled/, /what(?:'s| is) at risk/, /what(?:'s| is) slipping/,
     /what(?:'s| is) (?:falling behind|behind)/, /anything (?:overdue|stale|slipping)/,
     /what needs chasing/,
+  ] },
+  // Phase D
+  { intent: 'whats_next', patterns: [
+    /what(?:'s| is)?\s+next\b/, /what(?:'s| is)?\s+(?:coming up|on deck)\b/, /\bon deck\b/,
+    /what should i do next/, /(?:anything |what(?:'s| is) )?due (?:this week|soon)/,
+    /what(?:'s| is)? (?:up )?(?:this|next) week/, /coming due/, /what(?:'s| is)?\s+due\b/,
+  ] },
+  { intent: 'quiet_clients', patterns: [
+    /which clients? (?:are |have been )?quiet/, /quiet clients?/, /who (?:needs?|need) a check.?in/,
+    /who have i been ignoring/, /stale (?:relationship|client)/,
+    /(?:any|which) clients? .*(?:neglect|quiet|ignor)/, /been neglecting/,
+    /who haven'?t i (?:heard from|talked to|contacted|touched)/,
+    /clients? .*(?:no|without) (?:recent )?activity/,
   ] },
 ];
 
@@ -93,23 +106,30 @@ const KIND_META = {
   door_brief: { field: 'business',  goTo: 'door' },
   handoff:    { field: 'objective', goTo: 'ai' },
   task:       { field: 'title',     goTo: 'tasks' },
+  // Phase D — only reachable when a command passes kinds:['inbox_item'] (triage/dismiss);
+  // never in the default question-resolution order (DEFAULT_KINDS below).
+  inbox_item: { field: 'raw_text',  goTo: 'inbox' },
 };
+const DEFAULT_KINDS = ['client', 'project', 'door_brief', 'handoff', 'task'];
 
 function refOf(kind, rec) {
   const field = KIND_META[kind].field;
-  const label = kind === 'door_brief' ? (rec.business || 'Untitled mission') : (rec[field] || '(untitled)');
+  const label = kind === 'door_brief' ? (rec.business || 'Untitled mission')
+    : kind === 'inbox_item' ? ((rec.raw_text || '(empty note)').slice(0, 60))
+    : (rec[field] || '(untitled)');
   return { kind, id: rec.id, label, goTo: KIND_META[kind].goTo };
 }
 
 async function loadEntities() {
-  const [clients, projects, briefs, handoffs, tasks] = await Promise.all([
+  const [clients, projects, briefs, handoffs, tasks, inbox] = await Promise.all([
     listClients(), listProjects(), listDoorBriefs(), listHandoffs(), listTasks(),
+    listInboxItems({ status: 'untriaged' }),
   ]);
-  return { clients, projects, briefs, handoffs, tasks };
+  return { clients, projects, briefs, handoffs, tasks, inbox };
 }
 
 function entityList(all, kind) {
-  return { client: all.clients, project: all.projects, door_brief: all.briefs, handoff: all.handoffs, task: all.tasks }[kind];
+  return { client: all.clients, project: all.projects, door_brief: all.briefs, handoff: all.handoffs, task: all.tasks, inbox_item: all.inbox }[kind];
 }
 
 function findById(all, id) {
@@ -129,7 +149,7 @@ function findById(all, id) {
 function matchByName(all, needleRaw, kinds = null) {
   const needle = needleRaw.toLowerCase().trim();
   if (!needle) return { status: 'empty' };
-  const order = (kinds && kinds.length ? kinds : Object.keys(KIND_META));
+  const order = (kinds && kinds.length ? kinds : DEFAULT_KINDS);
   for (const kind of order) {
     const meta = KIND_META[kind];
     if (!meta) continue;
@@ -310,6 +330,85 @@ function waitingOn(ref, rec) {
   return 'no rule matched';
 }
 
+// Phase D §4.1 — an ordered list of { reason?, ev? } for "why is X blocked". `reason` strings
+// (most-proximate first) become the answer; `ev` items become linkable evidence rows.
+async function blockingChain(ref, rec, all) {
+  const chain = [];
+  const say = (reason, ev) => chain.push({ reason, ev });
+  const today = new Date().toISOString().slice(0, 10);
+
+  if (ref.kind === 'task') {
+    if (rec.status === 'done') { say('nothing — this task is done'); return chain; }
+    const proj = all.projects.find((p) => p.id === rec.project_id);
+    if (proj && proj.status === 'paused') say(`its project “${proj.title}” is paused`, { kind: 'project', id: proj.id, label: `Open ${proj.title}`, goTo: 'clients' });
+    if (rec.due_date && rec.due_date < today) say(`it is overdue (was due ${rec.due_date}) — needs you`);
+    else say(rec.status === 'doing' ? 'it is in progress — needs finishing' : 'it has not been started');
+    return chain;
+  }
+
+  if (ref.kind === 'handoff') {
+    if (rec.status === 'accepted' || rec.status === 'rejected') { say(`nothing — this handoff is ${rec.status} and closed`); return chain; }
+    if (rec.status === 'pending') { say('it has not been picked up yet'); return chain; }
+    if (rec.status === 'in_progress') { say('work is in progress — then “Submit for audit”'); return chain; }
+    const audit = (await listArtifacts({ relatedHandoffId: ref.id })).find((a) => a.type === 'audit_report');
+    if (audit) {
+      const passed = /^PASS/i.test(audit.reference || '');
+      say(passed ? 'audit passed — waiting on your Approve / Reject' : `audit said FIX REQUIRED — ${audit.reference}`,
+        { kind: 'artifact', id: audit.id, label: audit.reference, goTo: 'activity' });
+    } else say('it is back for your review — record an audit result, then Approve / Reject');
+    return chain;
+  }
+
+  if (ref.kind === 'project') {
+    if (rec.status === 'complete') { say('nothing — this project is complete'); return chain; }
+    if (rec.status === 'paused') { say('you paused it'); return chain; }
+    const next = nextInList(PRODUCTION_STAGES, rec.production_stage || 'intake');
+    if (next) say(`the next production stage (${rec.production_stage || 'intake'} → ${next})`);
+    const openTasks = all.tasks.filter((t) => t.project_id === ref.id && t.status !== 'done');
+    if (openTasks.length) {
+      say(`${openTasks.length} open task${openTasks.length === 1 ? '' : 's'}: ${openTasks.slice(0, 4).map((t) => t.title).join(', ')}${openTasks.length > 4 ? ', …' : ''}`);
+      for (const t of openTasks.slice(0, 5)) chain.push({ ev: { kind: 'task', id: t.id, label: `Task: ${t.title} (${t.status})`, goTo: 'tasks' } });
+    }
+    if (['qa_audit', 'client_approval', 'launch'].includes(next)) {
+      const gate = all.handoffs.find((h) => h.status === 'returned');
+      if (gate) say(`a handoff is back for your review: “${gate.objective}”`, { kind: 'handoff', id: gate.id, label: `Open ${gate.objective}`, goTo: 'ai' });
+    }
+    return chain;
+  }
+
+  if (ref.kind === 'door_brief') {
+    if (rec.planning_step === 'complete') { say('nothing — planning is complete'); return chain; }
+    const next = nextInList(DOOR_STEPS, rec.planning_step);
+    say(`the next planning step (${rec.planning_step}${next ? ` → ${next}` : ''})`);
+    const stepFields = { outcome: ['primary_goal', 'urgent_need'], customer: ['customer', 'customer_intent', 'tone'], paths: ['paths'], destinations: ['destinations'], build: ['deliverables'], handoff: ['handoff'] };
+    const blanks = (stepFields[rec.planning_step] || []).filter((f) => !(rec[f] || '').trim());
+    if (blanks.length) say(`step “${rec.planning_step}” still has blank fields: ${blanks.join(', ')}`);
+    return chain;
+  }
+
+  if (ref.kind === 'client') {
+    if (rec.status === 'prospect') { say('you to move it from prospect to active'); return chain; }
+    const projs = all.projects.filter((p) => p.client_id === ref.id);
+    const open = projs.filter((p) => p.status !== 'complete');
+    if (open.length) {
+      say(`${open.length} of ${projs.length} project${projs.length === 1 ? '' : 's'} still open`);
+      for (const p of open) chain.push({ ev: { kind: 'project', id: p.id, label: `Project: ${p.title} — ${p.status}`, goTo: 'clients' } });
+    } else say(projs.length ? 'nothing specific — all its projects are complete' : 'nothing specific — no projects yet');
+    return chain;
+  }
+
+  say('no rule matched');
+  return chain;
+}
+
+// Phase D §4.2 — most recent activity across a set of entity ids. One read, filter client-side.
+async function lastActivityAcross(ids) {
+  const set = new Set(ids.filter(Boolean));
+  const events = await listActivityEvents({ limit: 400 });
+  const hit = events.find((e) => set.has(e.related_entity_id)); // DESC by created_at
+  return hit ? fmtWhen(hit.created_at) : 'nothing logged';
+}
+
 async function resolveOrExplain(question, entityId, intent) {
   const all = await loadEntities();
   if (entityId) {
@@ -354,21 +453,22 @@ async function buildWhyBlocked(question, entityId) {
   const r = await resolveOrExplain(question, entityId, 'why_blocked');
   if (r.answer) return r.answer;
   if (r.needPhrase) return buildWhatsStalled(); // "what's blocked?" with no name → the stalled view
-  const { ref, rec } = r;
-  const events = await listActivityEventsForEntity({ relatedEntityId: ref.id, limit: 8 });
-  const wait = waitingOn(ref, rec);
-  const statusBit = ref.kind === 'door_brief' ? `planning step “${rec.planning_step}”`
-    : ref.kind === 'project' ? `status “${rec.status}”, production stage “${rec.production_stage || 'intake'}”`
-    : `status “${rec.status}”`;
+  const { ref, rec, all } = r;
+  const chain = await blockingChain(ref, rec, all);
+  const reasons = chain.filter((c) => c.reason).map((c) => c.reason);
+  const evs = chain.filter((c) => c.ev).map((c) => c.ev);
+  const events = await listActivityEventsForEntity({ relatedEntityId: ref.id, limit: 3 });
+  const top = reasons[0] || 'not blocked';
   return {
     intent: 'why_blocked',
-    title: `${ref.label} — waiting on ${wait}`,
-    summary: `Currently ${statusBit}. ${events.length ? `Last activity ${fmtWhen(events[0].created_at)}.` : 'No activity logged yet.'}`,
+    title: `${ref.label} — ${top}`,
+    summary: (reasons.length ? reasons.join('; ') + '.' : 'Not blocked by any rule.')
+      + (events.length ? ` Last activity ${fmtWhen(events[0].created_at)}.` : ''),
     evidence: [
       { kind: ref.kind, id: ref.id, label: `Open ${ref.label}`, goTo: ref.goTo },
-      ...events.map((e) => ({ kind: 'event', id: e.id, label: `${humanizeEventType(e.event_type)}${e.payload ? ` — ${e.payload}` : ''} · ${fmtWhen(e.created_at)}`, goTo: 'activity' })),
+      ...evs,
     ],
-    records: { ref, rec, events },
+    records: { ref, rec, chain: reasons },
   };
 }
 
@@ -385,28 +485,49 @@ async function buildWhereStands(question, entityId) {
     };
   }
   const { ref, rec, all } = r;
-  const events = await listActivityEventsForEntity({ relatedEntityId: ref.id, limit: 3 });
   let rollup = '';
   const extra = [];
 
   if (ref.kind === 'client') {
     const projects = all.projects.filter((p) => p.client_id === ref.id);
-    const byStatus = tally(projects, (p) => p.status);
-    rollup = `Status ${rec.status}. ${projects.length} project${projects.length === 1 ? '' : 's'}${byStatus.length ? ` (${byStatus.map(([s, n]) => `${n} ${s}`).join(', ')})` : ''}.`;
-    extra.push(...projects.map((p) => ({ kind: 'project', id: p.id, label: `Project: ${p.title} — ${p.status}`, goTo: 'clients' })));
+    const cbriefs = all.briefs.filter((b) => b.client_id === ref.id);
+    const projIds = new Set(projects.map((p) => p.id));
+    const ctasks = all.tasks.filter((t) => projIds.has(t.project_id));
+    const openTasks = ctasks.filter((t) => t.status !== 'done').length;
+    const pByStatus = tally(projects, (p) => p.status);
+    const bByStep = tally(cbriefs, (b) => b.planning_step);
+    const last = await lastActivityAcross([ref.id, ...projects.map((p) => p.id), ...cbriefs.map((b) => b.id), ...ctasks.map((t) => t.id)]);
+    rollup = `Status ${rec.status}. ${projects.length} project${projects.length === 1 ? '' : 's'}`
+      + (pByStatus.length ? ` (${pByStatus.map(([s, n]) => `${n} ${s}`).join(', ')})` : '')
+      + `, ${ctasks.length} task${ctasks.length === 1 ? '' : 's'} (${openTasks} open)`
+      + (cbriefs.length ? `, ${cbriefs.length} Door mission${cbriefs.length === 1 ? '' : 's'} (${bByStep.map(([s, n]) => `${n} ${s}`).join(', ')})` : '')
+      + `. Last activity: ${last}.`;
+    extra.push(...projects.map((p) => ({ kind: 'project', id: p.id, label: `Project: ${p.title} — ${p.status} · ${p.production_stage || 'intake'}`, goTo: 'clients' })));
+    extra.push(...cbriefs.map((b) => ({ kind: 'door_brief', id: b.id, label: `Mission: ${b.business || 'Untitled mission'} — ${b.planning_step}`, goTo: 'door' })));
   } else if (ref.kind === 'project') {
-    const tasks = await listTasks({ projectId: ref.id });
-    const open = tasks.filter((t) => t.status !== 'done').length;
-    rollup = `Status ${rec.status}, production stage “${rec.production_stage || 'intake'}”. ${tasks.length} task${tasks.length === 1 ? '' : 's'}, ${open} open.`;
+    const tasks = all.tasks.filter((t) => t.project_id === ref.id);
+    const byStatus = tally(tasks, (t) => t.status);
+    const arts = await listArtifacts({ relatedProjectId: ref.id });
+    const last = await lastActivityAcross([ref.id, ...tasks.map((t) => t.id)]);
+    rollup = `Status ${rec.status}, production stage “${rec.production_stage || 'intake'}”. `
+      + `${tasks.length} task${tasks.length === 1 ? '' : 's'}`
+      + (byStatus.length ? ` (${byStatus.map(([s, n]) => `${n} ${s}`).join(', ')})` : '')
+      + `, ${arts.length} artifact${arts.length === 1 ? '' : 's'}. Last activity: ${last}.`;
+    extra.push(...tasks.filter((t) => t.status !== 'done').map((t) => ({ kind: 'task', id: t.id, label: `Task: ${t.title} (${t.status}${t.due_date ? `, due ${t.due_date}` : ''})`, goTo: 'tasks' })));
   } else if (ref.kind === 'door_brief') {
     const fields = ['primary_goal', 'customer', 'urgent_need', 'customer_intent', 'tone', 'paths', 'destinations', 'deliverables', 'handoff', 'notes'];
-    const filled = fields.filter((f) => (rec[f] || '').trim()).length;
-    rollup = `Planning step “${rec.planning_step}”. ${filled}/${fields.length} brief fields filled.`;
+    const blank = fields.filter((f) => !(rec[f] || '').trim());
+    const client = all.clients.find((c) => c.id === rec.client_id);
+    rollup = `Planning step “${rec.planning_step}”. ${fields.length - blank.length}/${fields.length} fields filled`
+      + (blank.length ? `; still blank: ${blank.join(', ')}` : '')
+      + (client ? `. Client: ${client.name}.` : '.');
   } else if (ref.kind === 'handoff') {
-    rollup = `${rec.from_worker} → ${rec.to_worker}, status “${rec.status}”. Objective: ${rec.objective}`;
+    const last = await lastActivityAcross([ref.id]);
+    rollup = `${rec.from_worker} → ${rec.to_worker}, status “${rec.status}”. Objective: ${rec.objective}. Last activity: ${last}.`;
   } else if (ref.kind === 'task') {
     const proj = all.projects.find((p) => p.id === rec.project_id);
-    rollup = `Status ${rec.status}, priority ${rec.priority}${rec.due_date ? `, due ${rec.due_date}` : ''}${proj ? `, under ${proj.title}` : ', standalone'}.`;
+    const last = await lastActivityAcross([ref.id]);
+    rollup = `Status ${rec.status}, priority ${rec.priority}${rec.due_date ? `, due ${rec.due_date}` : ''}${proj ? `, under ${proj.title}` : ', standalone'}. Last activity: ${last}.`;
   }
 
   return {
@@ -416,9 +537,8 @@ async function buildWhereStands(question, entityId) {
     evidence: [
       { kind: ref.kind, id: ref.id, label: `Open ${ref.label}`, goTo: ref.goTo },
       ...extra,
-      ...events.map((e) => ({ kind: 'event', id: e.id, label: `${humanizeEventType(e.event_type)} · ${fmtWhen(e.created_at)}`, goTo: 'activity' })),
     ],
-    records: { ref, rec, events },
+    records: { ref, rec },
   };
 }
 
@@ -449,6 +569,61 @@ async function buildWhatsStalled() {
   };
 }
 
+// Phase D §5.1
+async function buildWhatsNext() {
+  const today = new Date().toISOString().slice(0, 10);
+  const in7 = new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
+  const [due, briefs] = await Promise.all([
+    listTasksDueBetween({ from: today, to: in7, includeDone: false }),
+    listDoorBriefs(),
+  ]);
+  const since = daysAgo(3);
+  const inMotion = briefs.filter((b) => b.planning_step !== 'complete' && b.updated_at >= since);
+  const parts = [];
+  if (due.length) parts.push(`${due.length} task${due.length === 1 ? '' : 's'} due in the next 7 days`);
+  if (inMotion.length) parts.push(`${inMotion.length} Door mission${inMotion.length === 1 ? '' : 's'} in motion`);
+  return {
+    intent: 'whats_next',
+    title: due.length ? `${due.length} task${due.length === 1 ? '' : 's'} due this week` : 'Nothing due this week',
+    summary: parts.length ? parts.join(', ') + '.' : 'No tasks due in the next 7 days and no Door missions touched in the last 3 days.',
+    evidence: [
+      ...due.map((t) => ({ kind: 'task', id: t.id, label: `Due ${t.due_date}: ${t.title} (${t.priority})`, goTo: 'tasks' })),
+      ...inMotion.map((b) => ({ kind: 'door_brief', id: b.id, label: `In motion: ${b.business || 'Untitled mission'} — ${b.planning_step}`, goTo: 'door' })),
+    ],
+    records: { due, inMotion },
+  };
+}
+
+// Phase D §5.2
+async function buildQuietClients() {
+  const [clients, projects, briefs, tasks, events] = await Promise.all([
+    listClients(), listProjects(), listDoorBriefs(), listTasks(),
+    listActivityEventsSince({ since: daysAgo(14), limit: 500 }),
+  ]);
+  const projClient = new Map(projects.map((p) => [p.id, p.client_id]));
+  const briefClient = new Map(briefs.map((b) => [b.id, b.client_id]));
+  const taskClient = new Map(tasks.map((t) => [t.id, projClient.get(t.project_id) || null]));
+  const touched = new Set();
+  for (const e of events) {
+    const t = e.related_entity_type; const id = e.related_entity_id;
+    if (t === 'client') touched.add(id);
+    else if (t === 'project') touched.add(projClient.get(id));
+    else if (t === 'digital_door_brief') touched.add(briefClient.get(id));
+    else if (t === 'task') touched.add(taskClient.get(id));
+  }
+  const active = clients.filter((c) => c.status === 'active');
+  const quiet = active.filter((c) => !touched.has(c.id));
+  return {
+    intent: 'quiet_clients',
+    title: quiet.length ? `${quiet.length} active client${quiet.length === 1 ? '' : 's'} quiet 14+ days`
+      : (active.length ? 'Every active client has recent activity' : 'No active clients'),
+    summary: quiet.length ? `No logged activity in the last 14 days for: ${quiet.map((c) => c.name).join(', ')}.`
+      : (active.length ? `All ${active.length} active client${active.length === 1 ? '' : 's'} had activity in the last 14 days.` : 'There are no active clients.'),
+    evidence: quiet.map((c) => ({ kind: 'client', id: c.id, label: `${c.name} — no activity in 14+ days`, goTo: 'clients' })),
+    records: { quiet, activeCount: active.length },
+  };
+}
+
 function buildCapabilities() {
   return {
     intent: 'unknown',
@@ -462,7 +637,7 @@ function buildCapabilities() {
 // ---------------------------------------------------------------- public entry points
 
 export async function suggestedQuestions() {
-  const base = ['What changed today?', 'What changed this week?', 'What needs me?', "What's stalled?"];
+  const base = ['What changed today?', 'What needs me?', "What's stalled?", "What's due this week?", 'Which clients are quiet?'];
   try {
     const [clients, projects, briefs] = await Promise.all([listClients(), listProjects(), listDoorBriefs()]);
     const name = clients[0]?.name || projects[0]?.title || briefs[0]?.business;
@@ -495,6 +670,8 @@ export async function answerQuestion(question, opts = {}) {
     case 'why_blocked': return buildWhyBlocked(text, entityId);
     case 'where_stands': return buildWhereStands(text, entityId);
     case 'whats_stalled': return buildWhatsStalled();
+    case 'whats_next': return buildWhatsNext();
+    case 'quiet_clients': return buildQuietClients();
     default: return buildCapabilities();
   }
 }
@@ -516,9 +693,41 @@ export function capabilityManifest() {
     { name: 'why_blocked', when: 'the user asks why a specific named thing is blocked/stuck or what it is waiting on' },
     { name: 'where_stands', when: 'the user asks the status of / where a specific named thing stands / to be caught up on it' },
     { name: 'whats_stalled', when: 'the user asks what is stalled / at risk / slipping / overdue / needs chasing (no specific name)' },
+    { name: 'whats_next', when: 'the user asks what is next / coming up / due this week / on deck / what to do next' },
+    { name: 'quiet_clients', when: 'the user asks which active clients have gone quiet / need a check-in / have had no recent activity' },
   ];
 }
 
-export const FORCEABLE_INTENTS = ['what_changed', 'needs_me', 'why_blocked', 'where_stands', 'whats_stalled'];
+export const FORCEABLE_INTENTS = ['what_changed', 'needs_me', 'why_blocked', 'where_stands', 'whats_stalled', 'whats_next', 'quiet_clients'];
+
+// Phase D §7 — a deterministic one-line synthesis + the single most important next action, for
+// the Today screen. Reuses the intent builders; pure read, no writes.
+export async function todayBrief() {
+  const [needs, next, quiet, stalled] = await Promise.all([
+    buildNeedsMe(), buildWhatsNext(), buildQuietClients(), buildWhatsStalled(),
+  ]);
+  const approvals = needs.records.approvals || [];
+  const overdue = needs.records.overdue || [];
+  const dueSoon = next.records.due || [];
+  const quietC = quiet.records.quiet || [];
+  const midBriefs = stalled.records.briefs || [];
+
+  const bits = [];
+  if (approvals.length) bits.push(`${approvals.length} awaiting approval`);
+  if (overdue.length) bits.push(`${overdue.length} overdue`);
+  if (dueSoon.length) bits.push(`${dueSoon.length} due this week`);
+  if (quietC.length) bits.push(`${quietC.length} quiet client${quietC.length === 1 ? '' : 's'}`);
+  const headline = bits.length ? bits.join(', ') + '.' : 'Nothing is waiting on you and nothing is due this week.';
+
+  const in2 = new Date(Date.now() + 2 * 86400000).toISOString().slice(0, 10);
+  let top = null;
+  if (approvals[0]) top = { label: `Approve or reject “${approvals[0].objective}”`, goTo: 'ai' };
+  else if (overdue[0]) top = { label: `Finish the overdue task “${overdue[0].title}”`, goTo: 'tasks' };
+  else if (dueSoon.find((t) => t.due_date <= in2)) { const t = dueSoon.find((x) => x.due_date <= in2); top = { label: `“${t.title}” is due ${t.due_date}`, goTo: 'tasks' }; }
+  else if (quietC[0]) top = { label: `Check in with ${quietC[0].name} — quiet 14+ days`, goTo: 'clients' };
+  else if (midBriefs[0]) top = { label: `Move “${midBriefs[0].business || 'Untitled mission'}” forward`, goTo: 'door' };
+
+  return { headline, top };
+}
 
 export const __INTERNAL__ = { classify, extractEntityPhrase, matchByName, waitingOn, windowFromQuestion, context };

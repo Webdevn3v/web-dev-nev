@@ -3,14 +3,27 @@
 
 import { esc, setHeader } from '../lib/ui.js';
 import { getTodayView } from '../lib/queries.js';
+import { todayBrief } from '../lib/jarvie.js';
 
 export async function renderToday(goTo) {
   setHeader('DAILY BRIEFING', 'Today');
   const view = document.getElementById('view');
-  const { highPriorityTasks, midStageBriefs, awaitingApproval } = await getTodayView();
+  const [{ highPriorityTasks, midStageBriefs, awaitingApproval }, brief] = await Promise.all([
+    getTodayView(), todayBrief(),
+  ]);
 
   view.innerHTML = `
-    <div class="grid three">
+    <div class="card glow">
+      <div class="kicker">JARVIE</div>
+      <p class="muted">${esc(brief.headline)}</p>
+      ${brief.top ? `<div style="font-weight:600;margin-top:4px">Start with: ${esc(brief.top.label)}</div>` : ''}
+      <div class="actions">
+        ${brief.top ? `<button class="btn" data-go="${esc(brief.top.goTo)}">OPEN →</button>` : ''}
+        <button class="btn primary" data-go="jarvie">ASK JARVIE</button>
+      </div>
+    </div>
+
+    <div class="grid three" style="margin-top:14px">
       <div class="card glow"><div class="kicker">HIGH-PRIORITY TASKS</div><div class="metric">${highPriorityTasks.length}</div><div class="muted">Open, priority high or urgent.</div></div>
       <div class="card"><div class="kicker">DOOR BRIEFS MID-STAGE</div><div class="metric">${midStageBriefs.length}</div><div class="muted">Between outcome and complete.</div></div>
       <div class="card"><div class="kicker">AWAITING APPROVAL</div><div class="metric">${awaitingApproval.length}</div><div class="muted">Handoffs returned, waiting on you.</div></div>

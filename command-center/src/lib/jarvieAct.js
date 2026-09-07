@@ -11,7 +11,8 @@ import {
   AdvanceDoorStage, AdvanceProductionStage, UpdateHandoffStatus, SubmitForAudit,
   ApproveChange, RejectChange, CreateTask, CompleteTask, CaptureInboxItem,
   CreateClient, UpdateClient, UpdateProjectStatus,
-  ActionDeclinedError, DOOR_STAGES, PRODUCTION_STAGES,
+  CreateProject, CreateHandoff, ConvertInboxItem, DismissInboxItem, UpdateTask,
+  ActionDeclinedError, DOOR_STAGES, PRODUCTION_STAGES, WORKERS,
 } from './actions.js';
 import { resolveTier, requiresConfirmation, TIER, TIER_LABEL } from './risk.js';
 import { resolveEntity, noteEntity } from './jarvie.js';
@@ -20,11 +21,25 @@ const ACTION_FNS = {
   AdvanceDoorStage, AdvanceProductionStage, UpdateHandoffStatus, SubmitForAudit,
   ApproveChange, RejectChange, CreateTask, CompleteTask, CaptureInboxItem,
   CreateClient, UpdateClient, UpdateProjectStatus,
+  CreateProject, CreateHandoff, ConvertInboxItem, DismissInboxItem, UpdateTask,
 };
 
 const CLIENT_STATUS = ['prospect', 'active', 'archived'];
 const PROJECT_STATUS = ['active', 'paused', 'complete'];
-const IMPERATIVE = /^(advance|move|mark|start|submit|approve|reject|create|add|complete|finish|capture|note|set|pause|resume|delete|remove)\b/;
+const PRIORITIES = ['low', 'normal', 'high', 'urgent'];
+const IMPERATIVE = /^(advance|move|mark|start|submit|approve|reject|create|add|complete|finish|capture|note|set|pause|resume|hand\s*off|handoff|triage|dismiss|rename|delete|remove)\b/;
+
+// Fuzzy-map a typed worker name to the WORKERS enum (Phase D §6).
+function matchWorker(s) {
+  const n = String(s || '').trim().toLowerCase().replace(/[\s-]+/g, '_');
+  if (WORKERS.includes(n)) return n;
+  if (/cowork/.test(n)) return 'claude_cowork';
+  if (/claude_?code/.test(n)) return 'claude_code';
+  if (/chat_?gpt|^gpt|openai/.test(n)) return 'chatgpt';
+  if (/^claude/.test(n)) return 'claude';
+  if (/^nev/.test(n)) return 'nev';
+  return null;
+}
 
 // ---- proposals held by token so a stale card can't be replayed after data shifts (§6) ----
 const pending = new Map();
@@ -192,6 +207,112 @@ const RULES = [
       return err(`“set … status …” works on a client or a project, not a ${r.ref.kind.replace('_', ' ')}.`);
     },
   },
+  // ---------------------------------------------------------------- Phase D (docs/JARVIE-PHASE-D.md §6)
+  { // set <task> priority <p>  ·  set <task> due <YYYY-MM-DD>
+    re: /^set\s+(.+?)\s+(priority|due)\s+(.+?)\s*$/,
+    async build(m, _raw, resolve) {
+      const r = await resolve(m[1], ['task']); const bad = kindGuard(r, 'task', m[1]); if (bad) return bad;
+      const field = m[2]; const val = m[3].trim();
+      const meta = tierMeta('UpdateTask');
+      if (field === 'priority') {
+        if (!PRIORITIES.includes(val)) return err(`Priority must be one of: ${PRIORITIES.join(', ')}.`);
+        return stash('UpdateTask', { id: r.ref.id, priority: val }, r.ref, {
+          title: `Set “${r.ref.label}” priority → ${val}`, lines: meta.tierLines, ...meta,
+        });
+      }
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(val)) return err('Due date must be YYYY-MM-DD.');
+      return stash('UpdateTask', { id: r.ref.id, dueDate: val }, r.ref, {
+        title: `Set “${r.ref.label}” due → ${val}`, lines: meta.tierLines, ...meta,
+      });
+    },
+  },
+  { // rename <task> to "<new title>"
+    re: /^rename\s+(.+?)\s+to\s+["“][^"”]+["”]\s*$/,
+    async build(m, raw, resolve) {
+      const r = await resolve(m[1], ['task']); const bad = kindGuard(r, 'task', m[1]); if (bad) return bad;
+      const qm = raw.match(/\bto\s+["“]([^"”]+)["”]\s*$/i);
+      const newTitle = (qm ? qm[1] : '').trim();
+      if (!newTitle) return err('Put the new title in quotes — rename <task> to "New title".');
+      const meta = tierMeta('UpdateTask');
+      return stash('UpdateTask', { id: r.ref.id, title: newTitle }, r.ref, {
+        title: `Rename task → “${newTitle}”`, lines: [`Was “${r.ref.label}”.`, ...meta.tierLines], ...meta,
+      });
+    },
+  },
+  { // create project "<title>" for <client> [type <type>]
+    re: /^create\s+project\b/,
+    async build(_m, raw, resolve) {
+      const q = raw.match(/["“]([^"”]+)["”]/);
+      if (!q) return err('Put the project title in quotes — e.g. create project "Full site rebuild" for Frederick Legacy Law.');
+      const title = q[1].trim();
+      const forM = raw.toLowerCase().match(/\bfor\s+(.+?)(?:\s+type\s+|\s*$)/);
+      if (!forM) return err('Name the client — e.g. create project "…" for <client>.');
+      const r = await resolve(forM[1].replace(/["“”]/g, '').trim(), ['client']);
+      if (r.status === 'many') return disambig(forM[1], r.hits, raw);
+      const bad = emptyOrNone(r, forM[1]); if (bad) return bad;
+      const ti = raw.match(/\btype\s+(.+?)\s*$/i);
+      const type = ti ? ti[1].trim() : '';
+      const meta = tierMeta('CreateProject');
+      return stash('CreateProject', { clientId: r.ref.id, title, type }, r.ref, {
+        title: `Create project “${title}”`,
+        lines: [`For client “${r.ref.label}”${type ? `, type ${type}` : ''}.`, ...meta.tierLines], ...meta,
+      });
+    },
+  },
+  { // hand off "<objective>" to <worker> [from <worker>]
+    re: /^hand\s*off\b/,
+    async build(_m, raw) {
+      const q = raw.match(/["“]([^"”]+)["”]/);
+      if (!q) return err('Put the objective in quotes — e.g. hand off "Build the Frederick door page" to claude code.');
+      const objective = q[1].trim();
+      const low = raw.toLowerCase();
+      const toM = low.match(/\bto\s+([a-z ]+?)(?:\s+from\s+|\s*$)/);
+      if (!toM) return err(`Say who it goes to — one of: ${WORKERS.join(', ')}.`);
+      const toWorker = matchWorker(toM[1]);
+      if (!toWorker) return err(`“${toM[1].trim()}” isn’t a known worker. One of: ${WORKERS.join(', ')}.`);
+      const fromM = low.match(/\bfrom\s+([a-z ]+?)\s*$/);
+      const fromWorker = fromM ? (matchWorker(fromM[1]) || 'nev') : 'nev';
+      const meta = tierMeta('CreateHandoff');
+      return stash('CreateHandoff', { fromWorker, toWorker, objective }, null, {
+        title: `Hand off “${objective}”`, lines: [`${fromWorker} → ${toWorker}.`, ...meta.tierLines], ...meta,
+      });
+    },
+  },
+  { // triage <inbox item> as task|project|client [for <project|client>]
+    re: /^triage\s+(.+?)\s+as\s+(task|project|client)\b/,
+    async build(m, raw, resolve) {
+      const r = await resolve(m[1], ['inbox_item']); const bad = kindGuard(r, 'inbox_item', m[1]); if (bad) return bad;
+      const toType = m[2];
+      const forM = raw.toLowerCase().match(/\bfor\s+(.+?)\s*$/);
+      const args = { id: r.ref.id, toEntityType: toType };
+      let ctx = '';
+      if (toType === 'project') {
+        if (!forM) return err('Triaging to a project needs a client — "… as project for <client>".');
+        const cr = await resolve(forM[1].replace(/["“”]/g, '').trim(), ['client']);
+        const cbad = emptyOrNone(cr, forM[1]); if (cbad) return cbad;
+        args.clientId = cr.ref.id; ctx = ` under client “${cr.ref.label}”`;
+      } else if (toType === 'task' && forM) {
+        const pr = await resolve(forM[1].replace(/["“”]/g, '').trim(), ['project']);
+        const pbad = emptyOrNone(pr, forM[1]); if (pbad) return pbad;
+        args.projectId = pr.ref.id; ctx = ` under project “${pr.ref.label}”`;
+      }
+      const meta = tierMeta('ConvertInboxItem');
+      return stash('ConvertInboxItem', args, r.ref, {
+        title: `Triage “${r.ref.label}” → ${toType}`,
+        lines: [`Creates a ${toType}${ctx} and marks the inbox item converted.`, ...meta.tierLines], ...meta,
+      });
+    },
+  },
+  { // dismiss <inbox item>
+    re: /^dismiss\s+(.+?)\s*$/,
+    async build(m, _raw, resolve) {
+      const r = await resolve(m[1], ['inbox_item']); const bad = kindGuard(r, 'inbox_item', m[1]); if (bad) return bad;
+      const meta = tierMeta('DismissInboxItem');
+      return stash('DismissInboxItem', { id: r.ref.id }, r.ref, {
+        title: `Dismiss “${r.ref.label}”`, lines: ['Inbox item → dismissed.', ...meta.tierLines], ...meta,
+      });
+    },
+  },
   { // create task "<title>" [for <project>] [priority <p>] [due <date>]
     re: /^(?:create|add)\s+task\b/,
     async build(_m, raw, resolve) {
@@ -297,13 +418,21 @@ export function grammarManifest() {
       { verb: 'set_status', args: 'target (a client or project), status', example: 'set <target> status <value>' },
       { verb: 'pause', args: 'target (a project)', example: 'pause <target>' },
       { verb: 'resume', args: 'target (a project)', example: 'resume <target>' },
+      // Phase D
+      { verb: 'create_project', args: 'title (required), target (the client name, required), optional type', example: 'create project "<title>" for <client>' },
+      { verb: 'hand_off', args: 'title (the objective), to (a worker), optional from (a worker)', example: 'hand off "<objective>" to <worker>' },
+      { verb: 'triage', args: 'target (an inbox item), to (task|project|client), optional for (a project or client)', example: 'triage <target> as task' },
+      { verb: 'dismiss', args: 'target (an inbox item)', example: 'dismiss <target>' },
+      { verb: 'set_task_field', args: 'target (a task), one of priority (low|normal|high|urgent) or due (YYYY-MM-DD)', example: 'set <target> priority high' },
+      { verb: 'rename_task', args: 'target (a task), title (the new name)', example: 'rename <target> to "<title>"' },
     ],
     enums: {
       doorSteps: DOOR_STAGES,
       productionStages: PRODUCTION_STAGES,
       clientStatus: CLIENT_STATUS,
       projectStatus: PROJECT_STATUS,
-      priorities: ['low', 'normal', 'high', 'urgent'],
+      priorities: PRIORITIES,
+      workers: WORKERS,
     },
   };
 }
@@ -314,6 +443,7 @@ export function grammarManifest() {
 export function commandObjectToString(cmd) {
   if (!cmd || typeof cmd !== 'object') return null;
   const t = (cmd.target || '').trim();
+  const f = (cmd.for || '').trim();
   const q = (s) => `"${String(s).replace(/"/g, '')}"`;
   switch (cmd.verb) {
     case 'advance': return t ? (cmd.to ? `advance ${t} to ${cmd.to}` : `advance ${t}`) : null;
@@ -335,6 +465,13 @@ export function commandObjectToString(cmd) {
       if (cmd.due) s += ` due ${cmd.due}`;
       return s;
     }
+    // Phase D
+    case 'create_project': return cmd.title && t ? `create project ${q(cmd.title)} for ${t}${cmd.type ? ` type ${cmd.type}` : ''}` : null;
+    case 'hand_off': return cmd.title && cmd.to ? `hand off ${q(cmd.title)} to ${cmd.to}${cmd.from ? ` from ${cmd.from}` : ''}` : null;
+    case 'triage': return t && cmd.to ? `triage ${t} as ${cmd.to}${f ? ` for ${f}` : ''}` : null;
+    case 'dismiss': return t ? `dismiss ${t}` : null;
+    case 'set_task_field': return t && cmd.priority ? `set ${t} priority ${cmd.priority}` : (t && cmd.due ? `set ${t} due ${cmd.due}` : null);
+    case 'rename_task': return t && cmd.title ? `rename ${t} to ${q(cmd.title)}` : null;
     default: return null;
   }
 }
@@ -342,11 +479,14 @@ export function commandObjectToString(cmd) {
 export function capabilityText() {
   return [
     'I can do these (I’ll show you the exact change and wait for your OK):',
-    '• advance <mission|project> to <step|stage>   • advance <mission|project>',
+    '• advance <mission|project> [to <step|stage>]',
     '• mark <handoff> in progress   • submit <handoff> for audit   • approve/reject <handoff>',
+    '• hand off "<objective>" to <worker>',
     '• create task "<title>" [for <project>] [priority <p>] [due YYYY-MM-DD]',
-    '• complete task <task>   • capture <text>   • add client "<name>"',
-    '• set <client|project> status <value>   • pause/resume <project>',
+    '• create project "<title>" for <client> [type <type>]',
+    '• complete task <task>   • rename <task> to "<title>"   • set <task> priority|due <value>',
+    '• capture <text>   • triage <inbox item> as task|project|client [for <X>]   • dismiss <inbox item>',
+    '• add client "<name>"   • set <client|project> status <value>   • pause/resume <project>',
   ].join('\n');
 }
 
@@ -386,6 +526,13 @@ function successMessage(rec) {
     case 'CreateClient': return `Client “${rec.args.name}” added.`;
     case 'UpdateClient': return `“${L}” status set to ${rec.args.status}.`;
     case 'UpdateProjectStatus': return `“${L}” status set to ${rec.args.status}.`;
+    case 'CreateProject': return `Project “${rec.args.title}” created.`;
+    case 'CreateHandoff': return `Handed off “${rec.args.objective}” to ${rec.args.toWorker}.`;
+    case 'ConvertInboxItem': return `Triaged to a ${rec.args.toEntityType}.`;
+    case 'DismissInboxItem': return `“${L}” dismissed.`;
+    case 'UpdateTask': return rec.args.title ? `Renamed to “${rec.args.title}”.`
+      : rec.args.priority ? `“${L}” priority set to ${rec.args.priority}.`
+      : rec.args.dueDate ? `“${L}” due date set to ${rec.args.dueDate}.` : `“${L}” updated.`;
     default: return 'Done.';
   }
 }

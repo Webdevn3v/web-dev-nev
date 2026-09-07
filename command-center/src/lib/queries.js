@@ -48,9 +48,10 @@ export async function listHandoffs({ status } = {}) {
   return getDb().select('SELECT * FROM handoff ORDER BY updated_at DESC');
 }
 
-export async function listArtifacts({ relatedTaskId, relatedProjectId } = {}) {
+export async function listArtifacts({ relatedTaskId, relatedProjectId, relatedHandoffId } = {}) {
   if (relatedTaskId) return getDb().select('SELECT * FROM artifact WHERE related_task_id = $1 ORDER BY created_at DESC', [relatedTaskId]);
   if (relatedProjectId) return getDb().select('SELECT * FROM artifact WHERE related_project_id = $1 ORDER BY created_at DESC', [relatedProjectId]);
+  if (relatedHandoffId) return getDb().select('SELECT * FROM artifact WHERE related_handoff_id = $1 ORDER BY created_at DESC', [relatedHandoffId]);
   return getDb().select('SELECT * FROM artifact ORDER BY created_at DESC');
 }
 
@@ -82,6 +83,17 @@ export async function listActivityEventsForEntity({ relatedEntityId, limit = 20 
   return getDb().select(
     'SELECT * FROM activity_event WHERE related_entity_id = $1 ORDER BY created_at DESC LIMIT $2',
     [relatedEntityId, limit]
+  );
+}
+
+// Jarvie Phase D (docs/JARVIE-PHASE-D.md §5.1): tasks with a due date inside a window.
+// `from`/`to` are 'YYYY-MM-DD' strings (task.due_date is stored that way); lexicographic
+// comparison is correct. Read-only, no schema change.
+export async function listTasksDueBetween({ from, to, includeDone = false } = {}) {
+  const done = includeDone ? '' : " AND status != 'done'";
+  return getDb().select(
+    `SELECT * FROM task WHERE due_date IS NOT NULL AND due_date >= $1 AND due_date <= $2${done} ORDER BY due_date ASC`,
+    [from, to]
   );
 }
 
