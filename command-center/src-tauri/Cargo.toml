@@ -22,9 +22,10 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 # Jarvie Phase C (docs/JARVIE-PHASE-C.md): the only outbound HTTPS call in the app, made
 # native-side so the API key never touches the renderer. reqwest is already in the tree via
-# Tauri; this only adds a TLS backend + json. rustls-webpki-roots avoids a system cert-store
-# / OpenSSL dependency on the Windows target.
-reqwest = { version = "0.13", default-features = false, features = ["json", "rustls", "http2"] }
+# Tauri; this adds json + a TLS backend. native-tls => SChannel on the Windows target (zero
+# extra system deps) and the OS OpenSSL on Linux/macOS — much lighter than the rustls +
+# aws-lc-sys (C/asm) build the `rustls` feature pulls.
+reqwest = { version = "0.13", default-features = false, features = ["json", "native-tls", "http2"] }
 
 [profile.dev.package.scrypt]
 opt-level = 3

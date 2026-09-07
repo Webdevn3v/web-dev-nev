@@ -6,7 +6,8 @@ default Haiku 4.5; spec-first then build). Built the same day — see `docs/DECI
 key-entry UI lives on the Ask Jarvie screen (a collapsible card), not Integrations (which now
 only *reflects* the status); the fuzzy-intent call asks for JSON in the prompt and parses
 defensively instead of using the structured-output `format` param (the Rust command still
-passes `format` through for later); `reqwest` feature is `rustls`.
+passes `format` through for later); `reqwest` uses the `native-tls` feature (SChannel on the
+Windows target, OS OpenSSL elsewhere) — lighter than `rustls` + `aws-lc-sys`.
 **Scope discipline:** one build session. Phase C is an **enhancement layer** — every path still
 works with no key, offline, or with the feature off, and is then byte-identical to Phase A/B.
 **Builds on:** `docs/JARVIE-PHASE-A.md` (read-only Q&A) and `docs/JARVIE-PHASE-B.md`
@@ -81,7 +82,7 @@ src-tauri/src/jarvie_llm.rs  NEW — #[tauri::command]
    jarvie_llm_clear_key()
    jarvie_llm_set_model(m)    → write …/jarvie-model.txt   (haiku|sonnet|opus)
    jarvie_llm_set_enabled(b)  → write …/jarvie-enabled.txt
-   jarvie_llm_ask(req)        → POST https://api.anthropic.com/v1/messages (reqwest+rustls),
+   jarvie_llm_ask(req)        → POST https://api.anthropic.com/v1/messages (reqwest + native-tls),
                                 returns { ok, text?, route?, usage?, error? }
 src-tauri/src/lib.rs          + .invoke_handler(tauri::generate_handler![ jarvie_llm_* ])
 src/screens/integrations.js   + a "Jarvie / Claude API" card: key field, model select,
@@ -189,7 +190,7 @@ Jarvie never shows an error *instead of* an answer because of the LLM.
 | `src/screens/integrations.js` | + Jarvie/Claude card: key input (write-only), model `<select>`, enable toggle, call-count + last-error note. |
 | `src-tauri/src/jarvie_llm.rs` | **new** — the six commands above. |
 | `src-tauri/src/lib.rs` | `mod jarvie_llm;` + `.invoke_handler(generate_handler![...])`. |
-| `src-tauri/Cargo.toml` | `reqwest` promoted to a direct dep with `["json","rustls-tls"]`; `dirs`/path already available via `tauri`. |
+| `src-tauri/Cargo.toml` | `reqwest` promoted to a direct dep with `["json","native-tls","http2"]` — SChannel on Windows, no rustls/aws-lc build. |
 | `docs/DECISIONS.md` | "Jarvie Phase C" entry. |
 
 **Not touched:** migrations, the action layer, `risk.js`, `queries.js` write surface, the CSP,
@@ -204,7 +205,7 @@ capability permissions, `package.json`.
 - `jarvie_llm_set_key` writing to the real `app_local_data_dir()` under a running Tauri app.
 - The Integrations key-entry flow clicked through in the webview.
 
-**Verified here:** `cargo build` of the new Rust (including the `reqwest`/rustls addition);
+**Verified here:** `cargo build` of the new Rust (including the `reqwest` + native-tls addition);
 the `jarvieLLM` seam and every fallback path via the jsdom harness with `invoke` mocked
 (success, 401, timeout, malformed, good route, bad route); deterministic answers unchanged
 when the feature is off; `npm run build`.

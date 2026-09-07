@@ -381,8 +381,9 @@ overridden here per the approved decision.)
 screen, not Integrations — Integrations stays a pure read-only view and just reflects the
 status. (2) The fuzzy-intent call asks for a JSON object in the prompt and parses defensively,
 rather than using the structured-outputs `format` param — more robust to API shape drift; the
-Rust command supports `format` passthrough for later. (3) `reqwest` feature is `rustls` (this
-tree's reqwest 0.13.4 doesn't expose `rustls-tls-webpki-roots`).
+Rust command supports `format` passthrough for later. (3) `reqwest` uses the `native-tls`
+feature — SChannel on the Windows target, OS OpenSSL on Linux/macOS — rather than `rustls`,
+which in this reqwest version pulls the `aws-lc-sys` C/asm build.
 
 ## Environment limits on this build (verify manually — see docs/PHASE1-ACCEPTANCE.md)
 
