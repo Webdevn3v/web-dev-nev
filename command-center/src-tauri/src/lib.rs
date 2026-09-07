@@ -12,6 +12,9 @@ pub fn run() {
             jarvie_llm::jarvie_llm_clear_key,
             jarvie_llm::jarvie_llm_set_model,
             jarvie_llm::jarvie_llm_set_enabled,
+            jarvie_llm::jarvie_llm_set_backend,
+            jarvie_llm::jarvie_llm_set_local,
+            jarvie_llm::jarvie_llm_ping_local,
             jarvie_llm::jarvie_llm_ask,
         ])
         .setup(|app| {

@@ -5,21 +5,28 @@
 
 import { esc, setHeader } from '../lib/ui.js';
 import { listIntegrations } from '../lib/queries.js';
-import { llmStatus, modelLabel } from '../lib/jarvieLLM.js';
+import { llmStatus, modelLabel, layerLive } from '../lib/jarvieLLM.js';
 
 export async function renderIntegrations() {
   setHeader('WHAT IS ACTUALLY CONNECTED', 'Integrations');
   const [integrations, llm] = await Promise.all([listIntegrations(), llmStatus(true).catch(() => null)]);
   const view = document.getElementById('view');
 
-  // Phase C: the Claude row's real state comes from whether a key is stored + the layer enabled
-  // (set on the Ask Jarvie screen). Still honest — nothing is shown "connected" that isn't.
-  const claudeLive = !!(llm && llm.hasKey && llm.enabled);
+  // The Jarvie language layer's real state comes from the Ask Jarvie screen (backend + enabled).
+  // Only the Claude API backend is a paid integration; a local model is the user's own software.
+  const live = !!(llm && layerLive(llm));
   const rows = integrations.map((i) => {
     if (i.service_name !== 'Claude') return i;
-    return claudeLive
-      ? { ...i, status: 'connected', notes: `Jarvie Phase C: key stored native-side, calls made from Rust. Model: ${modelLabel(llm.model)}.` }
-      : { ...i, notes: llm && llm.hasKey ? 'Jarvie Phase C key stored but the layer is off (Ask Jarvie → Claude API).' : i.notes };
+    if (live && llm.backend === 'claude') {
+      return { ...i, status: 'connected', notes: `Jarvie language layer: Claude API, key stored native-side, calls from Rust. Model: ${modelLabel(llm.model)}.` };
+    }
+    if (live && llm.backend === 'local') {
+      return { ...i, notes: `Jarvie language layer is ON but running a LOCAL model (${llm.localModel} at ${llm.localUrl}) — the Claude API is not in use.` };
+    }
+    if (llm && llm.hasKey) {
+      return { ...i, notes: 'Jarvie Claude key is stored but the language layer is off (Ask Jarvie → language layer).' };
+    }
+    return i;
   });
 
   view.innerHTML = `

@@ -1,16 +1,17 @@
 // Ask Jarvie — screen.
 //   Phase A: read-only Q&A over the system of record.
 //   Phase B: typed commands — propose → you confirm → Jarvie executes.
-//   Phase C: optional Claude API layer — prose answers + fuzzy routing of unrecognised input,
-//            with the deterministic layer as the fallback for every failure.
-// Specs: docs/JARVIE-PHASE-A.md, -B.md, -C.md.
+//   Phase C: optional Claude API layer — prose + fuzzy routing, deterministic fallback.
+//   Phase D: wider/deeper deterministic answers + more commands + a Today brief.
+//   Phase E: the language layer can run against a local model instead of the Claude API.
+// Specs: docs/JARVIE-PHASE-A.md .. -E.md.
 
 import { esc, setHeader, withErrorToast, toast } from '../lib/ui.js';
 import { answerQuestion, suggestedQuestions, clearContext } from '../lib/jarvie.js';
 import { parseCommand, executeProposal } from '../lib/jarvieAct.js';
 import {
-  llmStatus, llmRoute, llmProse, modelLabel, usageNote,
-  llmSetKey, llmClearKey, llmSetModel, llmSetEnabled,
+  llmStatus, llmRoute, llmProse, modelLabel, usageNote, layerLive, isLocalUrl,
+  llmSetKey, llmClearKey, llmSetModel, llmSetEnabled, llmSetBackend, llmSetLocal, llmPingLocal,
 } from '../lib/jarvieLLM.js';
 
 const LAST_SEEN_KEY = 'jarvie:lastSeen';
@@ -31,7 +32,9 @@ export async function renderJarvie(goTo) {
   let proseMode = lsGet(PROSE_KEY) === '1';
 
   const [suggestions, st] = await Promise.all([suggestedQuestions(), llmStatus(true)]);
-  const llmOn = st.enabled && st.hasKey;
+  const llmOn = layerLive(st);
+  const backendName = st.backend === 'claude' ? modelLabel(st.model)
+    : st.backend === 'local' ? `local model (${st.localModel})` : 'off';
 
   view().innerHTML = `
     <div class="card">
@@ -48,35 +51,56 @@ export async function renderJarvie(goTo) {
       <p class="muted" style="margin-top:10px">
         Questions are read-only and unlogged. Commands are shown for your OK before anything changes.
         ${llmOn
-          ? `<br>Claude is <span class="status ready">ON</span> (${esc(modelLabel(st.model))}) — it phrases answers and understands vague requests; the deterministic answer is always the fallback.
+          ? `<br>Language layer <span class="status ready">ON</span> · ${esc(backendName)} — it phrases answers and understands vague requests; the deterministic answer is always the fallback.
              <label style="margin-left:8px"><input type="checkbox" id="proseToggle" ${proseMode ? 'checked' : ''} style="width:auto;margin-right:5px">prose answers</label>`
-          : 'Claude is <span class="status">OFF</span> — add a key in Integrations to enable phrasing and fuzzy understanding.'}
+          : 'Language layer <span class="status">OFF</span> — everything works locally without it. Turn it on below to add phrasing and fuzzy understanding.'}
       </p>
     </div>
     <div id="jarvieAnswer" style="margin-top:14px"></div>
 
     <details class="card" style="margin-top:14px" ${llmOn ? '' : 'open'}>
-      <summary class="kicker" style="cursor:pointer">CLAUDE API (JARVIE PHASE C) — ${llmOn ? 'ON' : 'OFF'}</summary>
+      <summary class="kicker" style="cursor:pointer">JARVIE LANGUAGE LAYER — ${llmOn ? esc(backendName.toUpperCase()) : 'OFF'}</summary>
       <p class="muted" style="margin-top:8px">
-        The key is stored by the native side (a private file, mode 0600), never in the browser layer, the database, or a backup.
-        Every call is made from Rust. Turn this off or remove the key and Jarvie is exactly as it was — deterministic, local, offline-capable.
+        Optional. The call is always made from the native side (never the browser layer) and every failure falls back to the
+        deterministic answer. Turn it off and Jarvie is exactly as it was — local, offline-capable.
       </p>
-      <div class="grid two">
-        <div class="field"><label>ANTHROPIC API KEY ${st.hasKey ? '(stored — leave blank to keep)' : ''}</label>
-          <input id="llmKey" type="password" placeholder="sk-ant-..." autocomplete="off"></div>
-        <div class="field"><label>MODEL</label>
-          <select id="llmModel">
-            <option value="haiku" ${st.model === 'haiku' ? 'selected' : ''}>Claude Haiku 4.5 — cheapest, recommended</option>
-            <option value="sonnet" ${st.model === 'sonnet' ? 'selected' : ''}>Claude Sonnet 5</option>
-            <option value="opus" ${st.model === 'opus' ? 'selected' : ''}>Claude Opus 5 — priciest</option>
-          </select>
+      <div class="field"><label>BACKEND</label>
+        <select id="llmBackend">
+          <option value="off" ${st.backend === 'off' ? 'selected' : ''}>Off — deterministic only</option>
+          <option value="claude" ${st.backend === 'claude' ? 'selected' : ''}>Claude API (paid, needs a key)</option>
+          <option value="local" ${st.backend === 'local' ? 'selected' : ''}>Local model (free — you run it)</option>
+        </select>
+      </div>
+
+      <div id="llmClaudeCfg" ${st.backend === 'claude' ? '' : 'hidden'}>
+        <div class="grid two">
+          <div class="field"><label>ANTHROPIC API KEY ${st.hasKey ? '(stored — leave blank to keep)' : ''}</label>
+            <input id="llmKey" type="password" placeholder="sk-ant-..." autocomplete="off"></div>
+          <div class="field"><label>MODEL</label>
+            <select id="llmModel">
+              <option value="haiku" ${st.model === 'haiku' ? 'selected' : ''}>Claude Haiku 4.5 — cheapest, recommended</option>
+              <option value="sonnet" ${st.model === 'sonnet' ? 'selected' : ''}>Claude Sonnet 5</option>
+              <option value="opus" ${st.model === 'opus' ? 'selected' : ''}>Claude Opus 5 — priciest</option>
+            </select>
+          </div>
         </div>
+        ${st.hasKey ? '<div class="actions"><button class="btn" id="llmClear">REMOVE KEY</button></div>' : ''}
       </div>
-      <div class="field"><label><input type="checkbox" id="llmEnabled" ${st.enabled ? 'checked' : ''} style="width:auto;margin-right:8px">Enable the Claude layer</label></div>
-      <div class="actions">
-        <button class="btn primary" id="llmSave">SAVE</button>
-        ${st.hasKey ? '<button class="btn" id="llmClear">REMOVE KEY</button>' : ''}
+
+      <div id="llmLocalCfg" ${st.backend === 'local' ? '' : 'hidden'}>
+        <div class="grid two">
+          <div class="field"><label>ENDPOINT (OpenAI-compatible)</label>
+            <input id="llmLocalUrl" value="${esc(st.localUrl)}" placeholder="http://localhost:11434/v1" autocomplete="off"></div>
+          <div class="field"><label>MODEL NAME</label>
+            <input id="llmLocalModel" value="${esc(st.localModel)}" placeholder="llama3.2" autocomplete="off"></div>
+        </div>
+        <p class="muted" style="font-size:.7rem">Run Ollama (<code>ollama pull llama3.2 &amp;&amp; ollama serve</code>), llama.cpp, or LM Studio yourself. Nothing is downloaded or installed by this app.</p>
+        <div id="llmLocalWarn" class="muted" style="font-size:.7rem;color:var(--amber)" ${isLocalUrl(st.localUrl) ? 'hidden' : ''}>That endpoint is not a local address — it may reach an external service.</div>
+        <div class="actions"><button class="btn" id="llmPing">TEST CONNECTION</button><span id="llmPingResult" class="muted" style="font-size:.72rem"></span></div>
       </div>
+
+      <div class="field"><label><input type="checkbox" id="llmEnabled" ${st.enabled ? 'checked' : ''} style="width:auto;margin-right:8px">Enable the language layer</label></div>
+      <div class="actions"><button class="btn primary" id="llmSave">SAVE</button></div>
     </details>`;
 
   const box = document.getElementById('jarvieAnswer');
@@ -84,19 +108,43 @@ export async function renderJarvie(goTo) {
   const toggle = document.getElementById('proseToggle');
   if (toggle) toggle.onchange = () => { proseMode = toggle.checked; lsSet(PROSE_KEY, proseMode ? '1' : '0'); };
 
+  const backendSel = document.getElementById('llmBackend');
+  backendSel.onchange = () => {
+    const b = backendSel.value;
+    document.getElementById('llmClaudeCfg').hidden = b !== 'claude';
+    document.getElementById('llmLocalCfg').hidden = b !== 'local';
+  };
+  const urlInput = document.getElementById('llmLocalUrl');
+  if (urlInput) urlInput.oninput = () => {
+    document.getElementById('llmLocalWarn').hidden = isLocalUrl(urlInput.value.trim());
+  };
+  const pingBtn = document.getElementById('llmPing');
+  if (pingBtn) pingBtn.onclick = () => withErrorToast(async () => {
+    const out = document.getElementById('llmPingResult');
+    out.textContent = 'testing…';
+    await llmSetLocal(urlInput.value.trim(), document.getElementById('llmLocalModel').value.trim());
+    const r = await llmPingLocal();
+    out.textContent = r.ok ? '✓ reachable' : `✗ ${r.error || 'not reachable'}`;
+  });
+
   document.getElementById('llmSave').onclick = () => withErrorToast(async () => {
-    const key = document.getElementById('llmKey').value.trim();
-    if (key) await llmSetKey(key);
-    await llmSetModel(document.getElementById('llmModel').value);
-    await llmSetEnabled(document.getElementById('llmEnabled').checked);
-    toast('Claude settings saved.');
+    const b = backendSel.value;
+    await llmSetBackend(b);
+    if (b === 'claude') {
+      const key = document.getElementById('llmKey').value.trim();
+      if (key) await llmSetKey(key);
+      await llmSetModel(document.getElementById('llmModel').value);
+    } else if (b === 'local') {
+      await llmSetLocal(document.getElementById('llmLocalUrl').value.trim(), document.getElementById('llmLocalModel').value.trim());
+    }
+    await llmSetEnabled(document.getElementById('llmEnabled').checked && b !== 'off');
+    toast('Language-layer settings saved.');
     renderJarvie(goTo);
   });
   const clearBtn = document.getElementById('llmClear');
   if (clearBtn) clearBtn.onclick = () => withErrorToast(async () => {
     await llmClearKey();
-    await llmSetEnabled(false);
-    toast('Key removed. Jarvie is fully local again.');
+    toast('Key removed.');
     renderJarvie(goTo);
   });
 
@@ -112,7 +160,7 @@ export async function renderJarvie(goTo) {
     let a = await answerQuestion(q, { entityId: entityId || null, sinceLastSeen });
     let note = null;
 
-    // 3 — unrecognised → ask Claude to route it (still validated + re-parsed)
+    // 3 — unrecognised → ask the model to route it (still validated + re-parsed by parseCommand)
     if (a.intent === 'unknown') {
       const r = await llmRoute(q).catch(() => null);
       if (r?.kind === 'intent') {

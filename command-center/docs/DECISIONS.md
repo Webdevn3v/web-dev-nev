@@ -415,6 +415,33 @@ modified. Phase C stays optional and off by default; the new intents/verbs are a
 `capabilityManifest()` / `grammarManifest()` so *if* Phase C is later enabled its fuzzy routing
 covers them, but nothing here turns it on or calls it.
 
+## 2026-09-06 — Jarvie Phase E: local-model backend for the language layer
+
+**Decision:** the Phase C language layer (prose + fuzzy intent) can now run against a
+**local model you host yourself** — Ollama / llama.cpp / LM Studio / any OpenAI-compatible
+server — instead of the Claude API (`docs/JARVIE-PHASE-E.md`, approved as drafted). Adds no
+paid service: the app never bundles, downloads, or manages a runtime.
+
+- One selector: **Off / Claude API / Local model**. Local shows an endpoint URL
+  (default `http://localhost:11434/v1`) + a model name (default `llama3.2`) + a
+  **Test connection** button (`jarvie_llm_ping_local` → `GET <url>/models`).
+- `jarvie_llm_ask` branches in Rust: `claude` → the Phase C Anthropic path unchanged;
+  `local` → `POST <url>/chat/completions` (OpenAI chat shape, no auth, no `cache_control`,
+  20s timeout, `temperature: 0`). Missing `jarvie-backend.txt` still defaults to `claude`
+  when a key exists, else `off` — Phase C users are unaffected.
+- The route prompt gets three worked examples appended when `backend === 'local'` — a 3B
+  model needs the format shown, not just described.
+- A non-loopback endpoint shows a one-line "not a local address" notice (warn, not block —
+  LAN Ollama on another machine is legitimate).
+
+**Why still Rust-side for a localhost call:** one code path, and the renderer's CSP stays
+unchanged (no `connect-src` for `localhost`). No `Cargo.toml`/lock change — `reqwest` already
+has `json` + `native-tls`, and plain HTTP to localhost needs neither.
+
+**Unchanged:** every non-negotiable from Phase C carries — retrieval deterministic and
+read-only, the model never executes (routed command re-parsed by `parseCommand`), deterministic
+fallback for every failure, off by default. The deterministic layer (A–D) is untouched.
+
 ## Environment limits on this build (verify manually — see docs/PHASE1-ACCEPTANCE.md)
 
 This build was done in a sandboxed Linux container with **no Rust/Cargo toolchain, no
