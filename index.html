@@ -1018,8 +1018,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <!-- ─── OPENING QUESTIONS ─────────────────── -->
 <section class="door-questions" aria-label="Questions about your customer experience">
 <style>
-.door-questions{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.door-question{min-height:72svh;display:flex;align-items:center;justify-content:center;padding:72px 28px;position:relative;overflow:hidden}
+.door-questions{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:1180px;margin:0 auto}
+.door-question{min-height:44svh;display:flex;align-items:center;justify-content:center;padding:64px 34px;position:relative;overflow:hidden}
 .door-question + .door-question{border-top:1px solid rgba(255,255,255,.035)}
 .door-question::before{content:'';position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,var(--lime-glow),transparent 68%);filter:blur(12px);opacity:.45}
 .door-question__inner{position:relative;z-index:1;max-width:780px;text-align:center}
@@ -1029,7 +1029,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .door-question__signal{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 10px var(--signal-glow);margin-right:8px;vertical-align:1px}
 .door-question--answer h2{max-width:18ch}
 .door-question--answer .door-question__small{color:var(--light)}
-@media(max-width:620px){.door-question{min-height:62svh;padding:64px 24px}}
+@media(max-width:720px){.door-questions{grid-template-columns:1fr}.door-question{min-height:42svh;padding:54px 24px}}
 </style>
   <div class="door-question reveal">
     <div class="door-question__inner">
@@ -1180,24 +1180,28 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     </div>
     <div class="work__grid">
       <div class="proj-card reveal d1" style="--card-color:#b8a98a;--icon-color:#b8a98a;--icon-bg:rgba(184,169,138,.08);--icon-border:rgba(184,169,138,.2);--icon-bg-hover:rgba(184,169,138,.15);--card-accent:linear-gradient(90deg,#b8a98a,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&amp;q=75')"></div>
         <div class="proj-card__num">01</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v4c0 5.25 3.75 10.15 9 11.35C17.25 21.15 21 16.25 21 11V7L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <div class="proj-card__industry">Legal · Law Firm</div><h3>Frederick Legacy Law</h3>
         <details class="proj-desc"><summary>About this build</summary><p>A restrained professional Door built around planning, estate handling, family legacy questions, and urgent matters.</p></details>
         <div class="proj-card__footer"><div class="proj-card__actions"><a href="key-frederick.html" class="proj-card__link proj-card__link--ghost">Owner Key</a><a href="door-frederick-legacy-law.html" class="proj-card__link">View Door →</a><a href="frederick-legacy-law-mobile.html" class="proj-card__link proj-card__link--ghost">Index Site ↗</a></div></div>
       </div>
       <div class="proj-card reveal d2" style="--card-color:#7ecfcf;--icon-color:#7ecfcf;--icon-bg:rgba(126,207,207,.08);--icon-border:rgba(126,207,207,.2);--icon-bg-hover:rgba(126,207,207,.15);--card-accent:linear-gradient(90deg,#7ecfcf,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1200&amp;q=75')"></div>
         <div class="proj-card__num">02</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2c-2.5 0-4.5 1.5-5.5 3.5C5.5 7 4 7.5 3 9c-1.5 2.5-.5 5.5 1 7 .8 1 1.5 2.5 2 4.5.3 1.2.8 2 1.5 2s1-.5 1.5-1.5c.5-1 1-2.5 3-2.5s2.5 1.5 3 2.5c.5 1 .8 1.5 1.5 1.5s1.2-.8 1.5-2c.5-2 1.2-3.5 2-4.5 1.5-1.5 2.5-4.5 1-7-1-1.5-2.5-2-3.5-3.5C16.5 3.5 14.5 2 12 2z"/></svg></div>
         <div class="proj-card__industry">Healthcare · Dental</div><h3>Lumina Dental Studio</h3>
         <details class="proj-desc"><summary>About this build</summary><p>A calm patient-first Door for appointments, treatment discovery, returning patients, insurance questions, and forms.</p></details>
         <div class="proj-card__footer"><div class="proj-card__actions"><a href="key-lumina.html" class="proj-card__link proj-card__link--ghost">Owner Key</a><a href="lumina-door.html" class="proj-card__link">View Door →</a><a href="https://webdevn3v.github.io/dental-office-demo/" target="_blank" rel="noopener" class="proj-card__link proj-card__link--ghost">Index Site ↗</a></div></div>
       </div>
       <div class="proj-card reveal d3" style="--card-color:#c98a52;--icon-color:#c98a52;--icon-bg:rgba(201,138,82,.08);--icon-border:rgba(201,138,82,.2);--icon-bg-hover:rgba(201,138,82,.15);--card-accent:linear-gradient(90deg,#c98a52,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1632759145351-1d592919f522?w=1200&amp;q=75')"></div>
         <div class="proj-card__num">03</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
         <div class="proj-card__industry">Home Services · Roofing</div><h3>Northline Roofing Co.</h3>
         <details class="proj-desc"><summary>About this build</summary><p>Inspection, storm response, replacement, and current-customer support organized around urgency and fast decisions.</p></details>
         <div class="proj-card__footer"><div class="proj-card__actions"><a href="key-northline.html" class="proj-card__link proj-card__link--ghost">Owner Key</a><a href="northline-door.html" class="proj-card__link">View Door →</a><a href="northline-full-site.html" class="proj-card__link proj-card__link--ghost">Index Site ↗</a></div></div>
       </div>
       <div class="proj-card reveal d2" style="--card-color:#b89478;--icon-color:#b89478;--icon-bg:rgba(184,148,120,.08);--icon-border:rgba(184,148,120,.2);--icon-bg-hover:rgba(184,148,120,.15);--card-accent:linear-gradient(90deg,#b89478,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&amp;q=75')"></div>
         <div class="proj-card__num">04</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V8l6-4 6 4v12"/><path d="M9 13h6"/></svg></div>
         <div class="proj-card__industry">Interiors · Design</div><h3>Atelier House</h3>
         <details class="proj-desc"><summary>About this build</summary><p>An editorial Door built around portfolio discovery, style direction, project fit, and current-client access.</p></details>
@@ -1205,30 +1209,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
     </div>
 
-    <div class="reveal" style="margin-top:16px;padding:28px 30px;background:linear-gradient(135deg,rgba(255,255,255,.035),rgba(169,177,162,.025));border:1px solid var(--border-md);border-radius:var(--r-lg);display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center">
-      <div>
-        <div class="tag" style="margin-bottom:10px">Standalone Event Page · $100</div>
-        <h3 style="font-size:1.35rem;margin-bottom:8px">Stone &amp; Stardust</h3>
-        <p style="font-size:.86rem;color:var(--muted);line-height:1.75;max-width:650px">A focused mobile page for markets, pop-ups, launches, fundraisers, seasonal events, or any business that needs one polished place to send people. No Digital Key, full Digital Door, or website overhaul required.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:16px">
-          <span style="font-family:var(--display);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--border-md);border-radius:3px;color:var(--muted)">Mobile Page</span>
-          <span style="font-family:var(--display);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--border-md);border-radius:3px;color:var(--muted)">Event Info</span>
-          <span style="font-family:var(--display);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--border-md);border-radius:3px;color:var(--muted)">Custom Inquiry</span>
-          <span style="font-family:var(--display);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--border-md);border-radius:3px;color:var(--muted)">Shareable Link</span>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px;align-items:stretch">
-        <div style="font-family:var(--heading);font-size:2rem;font-weight:900;color:var(--white);text-align:right">$100</div>
-        <a href="https://webdevn3v.github.io/stoneandstardust/" target="_blank" rel="noopener" class="proj-card__link">View Event Page →</a>
-      </div>
-    </div>
-    <style>
-      @media(max-width:640px){
-        .work .container > .reveal[style*="grid-template-columns:1fr auto"]{grid-template-columns:1fr!important}
-        .work .container > .reveal[style*="grid-template-columns:1fr auto"] > div:last-child{align-items:flex-start!important}
-        .work .container > .reveal[style*="grid-template-columns:1fr auto"] > div:last-child > div{text-align:left!important}
-      }
-    </style>
   </div>
 </section>
 
@@ -1268,13 +1248,21 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
 <!-- ─── SERVICES ──────────────────────────── -->
 <section class="services" id="services">
+<style>
+.offer-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.offer-option{border:1px solid var(--border-md);background:rgba(169,177,162,.035);padding:0 22px}.offer-option summary{list-style:none;cursor:pointer;padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px}.offer-option summary::-webkit-details-marker{display:none}.offer-option summary strong{font-family:var(--heading);color:var(--white)}.offer-option summary span{font-family:var(--display);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}.offer-option summary::after{content:'+';color:var(--lime);font-size:1.2rem}.offer-option[open] summary::after{content:'−'}.offer-option__body{padding:0 0 22px;color:var(--muted);font-size:.84rem;line-height:1.7}.offer-option__body b{display:block;color:var(--white);margin-bottom:6px}.offer-option__body a{display:inline-block;margin-top:12px;color:var(--lime)}
+@media(max-width:700px){.offer-options{grid-template-columns:1fr}.services__grid{grid-template-columns:1fr!important}.services__grid .svc{grid-column:auto!important}}
+</style>
   <div class="container">
     <div class="reveal"><div class="tag">The Breakdown</div><h2>Start where the problem is.</h2><p class="lead" style="margin-top:14px">The Digital Door is the core entry product. Deeper site work gets scoped only when the business behind it actually needs more.</p></div>
     <div class="services__grid" style="grid-template-columns:repeat(2,1fr)">
       <div class="svc reveal d1"><div class="svc__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>Signal Check</h3><p>A short consult to identify what is actually getting in the way before paying for a build.</p><div class="svc__tag">FREE</div></div>
-      <div class="svc reveal d2"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M9 12h6"/></svg></div><h3>Digital Door</h3><p>Digital Key + Digital Door + Customer Paths + Apple Wallet access + the usable QR asset.</p><div class="svc__tag">$350</div></div>
-      <div class="reveal" style="grid-column:1/-1;padding:20px 24px;border:1px solid var(--border-md);background:rgba(169,177,162,.035);color:var(--muted);font-size:.84rem;line-height:1.65"><strong style="color:var(--white)">Need the existing site behind the Door to catch up?</strong> Mobile-Optimized Desktop, Revive, and Evolve are follow-up add-ons. They are scoped when the existing site needs cleanup, a visual refresh, or a larger evolution — without forcing a second standalone product.</div><div class="reveal" style="grid-column:1/-1;padding:20px 24px;border:1px solid var(--border-md);background:rgba(169,177,162,.035);color:var(--muted);font-size:.84rem;line-height:1.65"><strong style="color:var(--white)">Built once. Handed over cleanly.</strong> TDS project work does not require an ongoing TDS subscription to keep using what was built. New systems can start without personal passwords or inbox access; existing logins only come into play when cleanup, migration, or the digital junk drawer is part of the job. Third-party domains, email, forms, or other services remain the client's responsibility after handoff.</div>
-      <div class="svc reveal d3" style="grid-column:1/-1;opacity:.78"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg></div><h3>Connect the Dots</h3><p>Full custom build: Digital Door + a brand-new responsive in-depth site.</p><div class="svc__tag">$750+</div></div>
+      <div class="svc reveal d2"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M9 12h6"/></svg></div><h3>Digital Door</h3><p>Digital Key + Digital Door + Customer Paths + one programmed physical NFC card.</p><div class="svc__tag">$350</div></div>
+      <div class="svc reveal d3"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M4 7h6v6H4zM14 11h6v6h-6z"/><path d="M10 10h4M7 13v4h7"/></svg></div><h3>Connect the Dots</h3><p>Connect the Door, Paths, current website, booking tools, forms, reviews, and contact points into one working system.</p><div class="svc__tag">$500+</div></div>
+      <div class="svc reveal d4"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"/></svg></div><h3>Customized Full Build</h3><p>A custom responsive website and complete customer journey built from start to finish.</p><div class="svc__tag">$750+</div></div>
+    </div>
+    <div class="offer-options reveal">
+      <details class="offer-option"><summary><span>Need less?</span><strong>Vendor Door · $100</strong></summary><div class="offer-option__body"><b>One focused page for businesses that do not need the entire system.</b>Upcoming events, products, a mini portfolio, contact information, and socials—organized in one easy place. Pay once; keep the page and QR.<br><a href="https://webdevn3v.github.io/stoneandstardust/" target="_blank" rel="noopener">View Stone &amp; Stardust →</a></div></details>
+      <details class="offer-option"><summary><span>Need more?</span><strong>Enhance the system</strong></summary><div class="offer-option__body"><b>Add only what the business actually needs.</b>Mobile Optimization, Revive, Evolve, team cards, bracelets, keychains, tap displays, and other custom physical formats.</div></details>
     </div>
   </div>
 </section>
@@ -1405,17 +1393,17 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .contact-collapse{border-top:1px solid var(--border-md);border-bottom:1px solid var(--border-md)}
 .contact-collapse>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:28px 0}
 .contact-collapse>summary::-webkit-details-marker{display:none}.contact-collapse__label{display:flex;flex-direction:column;gap:6px}.contact-collapse__label small{font-family:var(--display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}.contact-collapse__label strong{font-family:var(--heading);font-size:clamp(1.35rem,3vw,1.9rem);color:var(--white)}.contact-collapse__plus{color:var(--lime);font-size:1.4rem}.contact-collapse[open] .contact-collapse__plus{transform:rotate(45deg)}
-.contact-simple{padding:8px 0 38px}.contact-simple__intro{max-width:690px;color:var(--muted);line-height:1.7;margin-bottom:24px}.inquiry-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.inquiry-card{background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:28px}.inquiry-card h3{font-size:1.25rem;margin:8px 0}.inquiry-card p{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:20px}.quick-fields{display:grid;gap:10px}.quick-fields input,.quick-fields textarea{width:100%;padding:13px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border-md);border-radius:var(--r);color:var(--white)}.quick-fields textarea{min-height:110px;resize:vertical}.quick-note{font-size:.68rem!important;margin:10px 0 0!important}.inquiry-actions{display:flex;gap:10px;flex-wrap:wrap}
+.contact-simple{padding:8px 0 38px}.contact-simple__intro{max-width:690px;color:var(--muted);line-height:1.7;margin-bottom:24px}.inquiry-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.inquiry-card{background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:28px}.inquiry-card h3{font-size:1.25rem;margin:8px 0}.inquiry-card p{font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:20px}.quick-fields{display:grid;gap:10px}.quick-fields input,.quick-fields select,.quick-fields textarea{width:100%;padding:13px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border-md);border-radius:var(--r);color:var(--white)}.quick-fields select option{background:var(--card);color:var(--white)}.quick-fields textarea{min-height:110px;resize:vertical}.quick-note{font-size:.68rem!important;margin:10px 0 0!important}.inquiry-actions{display:flex;gap:10px;flex-wrap:wrap}
 @media(max-width:760px){.inquiry-grid{grid-template-columns:1fr}}
 </style>
 <div class="container">
 <details class="contact-collapse">
 <summary><span class="contact-collapse__label"><small>New Project Inquiry</small><strong>Tell Me About Your Business</strong></span><span class="contact-collapse__plus">+</span></summary>
 <div class="contact-simple">
-<p class="contact-simple__intro">Start with the short version or use the full project intake when the details are ready. No phone call or video meeting is required to get started.</p>
+<p class="contact-simple__intro">Send the short version, or open the full project intake when you are ready to share the complete picture.</p>
 <div class="inquiry-grid">
-<div class="inquiry-card"><div class="tag">Quick version</div><h3>Send the part you know.</h3><p>A business name, link, problem, repeated customer question, or unfinished thought is enough to start.</p><form id="indexQuick" class="quick-fields"><input id="iqName" placeholder="Your name" required><input id="iqEmail" type="email" placeholder="Email" required><input id="iqBusiness" placeholder="Business name or link"><textarea id="iqMessage" placeholder="Tell me about your business or what needs help." required></textarea><button class="btn btn--lime" type="submit">Send Inquiry →</button><p class="quick-note" id="indexQuickStatus">Short-form submission is not live until the Formspree connection is added.</p></form></div>
-<div class="inquiry-card"><div class="tag">Full project intake</div><h3>Share the full picture.</h3><p>Use the longer questionnaire for goals, current setup, assets, customer needs, and the bigger picture.</p><div class="inquiry-actions"><a class="btn btn--lime" href="client-intake.html">Open Full Intake →</a><a class="btn btn--outline" href="mailto:handled@thedigitalside.org">Email Directly</a></div></div>
+<div class="inquiry-card"><div class="tag">New project inquiry</div><h3>Tell The Digital Side what needs handling.</h3><form id="indexQuick" class="quick-fields"><input id="iqName" placeholder="Your name" required><input id="iqEmail" type="email" placeholder="Email" required><input id="iqBusiness" placeholder="Business name or link"><select id="iqInterest"><option value="Not sure yet">Interested in something specific? — Not sure yet</option><option>Free Signal Check</option><option>Digital Door</option><option>Connect the Dots</option><option>Customized Full Build</option><option>Vendor Door</option><option>Mobile Optimization</option><option>Revive</option><option>Evolve</option><option>Physical Key or Team Enhancement</option></select><textarea id="iqMessage" placeholder="What needs help?" required></textarea><button class="btn btn--lime" type="submit">Send Inquiry →</button><p class="quick-note" id="indexQuickStatus">Your email app will open with the details filled in.</p></form></div>
+<div class="inquiry-card"><div class="tag">Full project intake</div><h3>Ready to share more?</h3><p>Open the longer questionnaire for goals, current setup, assets, customer needs, and project details.</p><div class="inquiry-actions"><a class="btn btn--lime" href="client-intake.html">Open Full Intake →</a><a class="btn btn--outline" href="mailto:handled@thedigitalside.org">Email Directly</a></div></div>
 </div></div></details>
 </div></section>
 
@@ -1642,27 +1630,17 @@ if(doorExampleModal) doorExampleModal.addEventListener('click', e => { if(e.targ
 document.addEventListener('keydown', e => { if(e.key === 'Escape') setDoorModal(false); });
 
 const indexQuick=document.getElementById('indexQuick');
-const INDEX_FORM_ENDPOINT='https://formspree.io/f/YOUR_FORM_ID';
-if(indexQuick){indexQuick.addEventListener('submit',async e=>{
+if(indexQuick){indexQuick.addEventListener('submit',e=>{
   e.preventDefault();
   if(!indexQuick.reportValidity()) return;
-  const status=document.getElementById('indexQuickStatus');
-  if(INDEX_FORM_ENDPOINT.includes('YOUR_FORM_ID')){
-    if(status) status.textContent='This form still needs the live Formspree ID before it can submit.';
-    return;
-  }
-  const btn=indexQuick.querySelector('button[type="submit"]');
-  if(btn){btn.disabled=true;btn.textContent='Sending…'}
-  try{
-    const res=await fetch(INDEX_FORM_ENDPOINT,{method:'POST',body:new FormData(indexQuick),headers:{Accept:'application/json'}});
-    if(!res.ok) throw new Error('submit failed');
-    indexQuick.reset();
-    if(status) status.textContent='Sent. The Digital Side has your short version.';
-  }catch(err){
-    if(status) status.textContent='Something did not send. Please use the full intake or email handled@thedigitalside.org.';
-  }finally{
-    if(btn){btn.disabled=false;btn.textContent='Send Inquiry →'}
-  }
+  const name=document.getElementById('iqName').value.trim();
+  const email=document.getElementById('iqEmail').value.trim();
+  const business=document.getElementById('iqBusiness').value.trim();
+  const interest=document.getElementById('iqInterest').value;
+  const message=document.getElementById('iqMessage').value.trim();
+  const subject=encodeURIComponent('Digital Side inquiry from '+name);
+  const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nBusiness or link: '+business+'\nInterested in: '+interest+'\n\nWhat needs handling:\n'+message);
+  window.location.href='mailto:handled@thedigitalside.org?subject='+subject+'&body='+body;
 })}
 
 function handleForm(e){
