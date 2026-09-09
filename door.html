@@ -61,7 +61,7 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 }
 .brand-reveal{position:relative;width:min(76vw,340px);text-align:center;opacity:0;transform:translateY(10px) scale(.985);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .entered .brand-reveal{opacity:1;transform:none}
-.brand-reveal img{width:100%;height:auto;display:block}.brand-reveal::after{content:'.';position:absolute;right:-3px;bottom:-14px;color:var(--signal);font:700 2rem/1 var(--mono);text-shadow:0 0 12px rgba(166,255,0,.35)}
+.brand-reveal img{width:100%;height:auto;display:block}
 .brand-tag{margin-top:14px;font:700 .58rem/1.5 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:#a7adb2}
 .scroll-cue{position:absolute;bottom:58px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font:700 .54rem/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#767e84}
 .scroll-cue::after{content:'';width:1px;height:28px;background:linear-gradient(#d7dadd,transparent);animation:cue 1.8s ease-in-out infinite}
@@ -572,7 +572,7 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 .contact-help{min-height:18px;margin:11px 2px 0;color:#8f979d;font-size:.68rem;line-height:1.45;text-align:center}
 
 /* SEPTEMBER REFINEMENT — one Key, compact offers, no lime */
-.brand-reveal img,.key-built .logo-key{filter:grayscale(1)}
+.key-built .logo-key{filter:grayscale(1)}
 .tds-choice-btn--primary{box-shadow:none}
 .tds-tier.featured{border-color:rgba(20,24,28,.16)!important}
 .tds-offer-grid{display:grid;grid-template-columns:1fr;gap:10px}
