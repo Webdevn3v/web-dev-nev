@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>New Project Inquiry — The Digital Side</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0f1113;--graphite:#242628;--gray:#72777b;--off:#f3f1ec;--lime:#a6ff00;--mono:'Space Mono',monospace;--sans:'Inter',sans-serif}
+*{box-sizing:border-box}
+body{min-height:100vh;margin:0;background:var(--black);background-image:radial-gradient(rgba(90,95,99,.16) 1px,transparent 1px);background-size:26px 26px;color:var(--off);font-family:var(--sans)}
+.wrap{max-width:520px;margin:auto;padding:calc(env(safe-area-inset-top,0px) + 24px) 22px 50px}
+.back{display:inline-block;margin-bottom:34px;color:var(--gray);font:700 .62rem var(--mono);letter-spacing:.12em;text-transform:uppercase;text-decoration:none}
+.kicker{color:var(--lime);font:.68rem var(--mono);letter-spacing:.18em;text-transform:uppercase;margin-bottom:13px}
+h1{font:700 clamp(1.6rem,7vw,2.25rem)/1.15 var(--mono);text-transform:uppercase;margin:0 0 12px}
+.intro{color:var(--gray);font-size:.88rem;line-height:1.65;margin:0 0 32px}
+.field{margin-bottom:20px}
+label{display:block;margin-bottom:8px;font:.66rem var(--mono);letter-spacing:.06em;text-transform:uppercase}
+input,select,textarea{width:100%;padding:14px;background:rgba(36,38,40,.55);border:1px solid var(--graphite);border-radius:2px;color:var(--off);font:inherit;font-size:.88rem}
+select option{background:var(--black)}
+textarea{min-height:120px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--lime)}
+button{width:100%;padding:15px;border:1px solid var(--lime);background:var(--lime);color:var(--black);font:700 .7rem var(--mono);letter-spacing:.09em;text-transform:uppercase;cursor:pointer}
+.note{margin-top:14px;color:var(--gray);font-size:.72rem;line-height:1.55}
+.full{display:block;margin-top:28px;padding-top:20px;border-top:1px solid var(--graphite);color:var(--off);font:.66rem var(--mono);letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
+.full span{color:var(--lime)}
+</style>
+</head>
+<body>
+<main class="wrap">
+<a class="back" href="door.html">← Back to Digital Door</a>
+<div class="kicker">New Project Inquiry</div>
+<h1>Tell The Digital Side what needs handling.</h1>
+<p class="intro">A few details are enough to start. The technical pieces can be sorted out later.</p>
+<form id="short">
+  <div class="field"><label for="name">Your name</label><input id="name" required></div>
+  <div class="field"><label for="email">Email</label><input id="email" type="email" required></div>
+  <div class="field"><label for="business">Business name or link</label><input id="business"></div>
+  <div class="field"><label for="interest">Interested in something specific?</label><select id="interest"><option>Not sure yet</option><option>Free Signal Check</option><option>Digital Door</option><option>Connect the Dots</option><option>Simple Door</option><option>Customized Full Build</option><option>Live Owner Update System</option><option>Physical Key or Team Enhancement</option></select></div>
+  <div class="field"><label for="message">What needs help?</label><textarea id="message" required></textarea></div>
+  <button type="submit">Open email to send →</button>
+  <p class="note">Your email app will open with the details filled in. Nothing sends until you choose to send it.</p>
+</form>
+<a class="full" href="client-intake.html">Have more ready? <span>Open the full project intake →</span></a>
+</main>
+<script>
+document.getElementById('short').addEventListener('submit',function(e){
+  e.preventDefault();
+  if(!this.reportValidity()) return;
+  const name=document.getElementById('name').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const business=document.getElementById('business').value.trim();
+  const interest=document.getElementById('interest').value;
+  const message=document.getElementById('message').value.trim();
+  const subject=encodeURIComponent('Digital Side inquiry from '+name);
+  const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nBusiness or link: '+business+'\nInterested in: '+interest+'\n\nWhat needs handling:\n'+message);
+  location.href='mailto:handled@thedigitalside.org?subject='+subject+'&body='+body;
+});
+</script>
+</body>
+</html>
