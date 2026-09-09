@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hallow &amp; Grace — Owner Digital Key</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0e0f;--deep:#171719;--ivory:#f4f0e8;--muted:#99958e;--gold:#a99773;--sage:#7a8c78}
+*{box-sizing:border-box}
+body{min-height:100vh;margin:0;display:grid;place-items:center;padding:24px;background:#09090a;color:var(--ivory);font-family:'Jost',sans-serif}
+.key{width:min(350px,88vw);aspect-ratio:.58;border:1px solid rgba(244,240,232,.22);border-radius:28px;padding:30px 28px;background:linear-gradient(rgba(14,14,15,.76),rgba(14,14,15,.95)),url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&q=70') center/cover;display:flex;flex-direction:column;align-items:center;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.55);position:relative;overflow:hidden}
+.key:before{content:'';position:absolute;inset:14px;border:1px solid rgba(169,151,115,.18);border-radius:20px;pointer-events:none}
+.mark{font:400 2rem 'Cormorant Garamond',serif;letter-spacing:.08em;margin-top:10px}.mark em{color:var(--gold);font-style:normal}
+.rule{width:1px;height:46px;margin:20px auto;background:linear-gradient(transparent,var(--gold),transparent)}
+.person{margin-top:auto}.person strong{display:block;font:500 1.18rem 'Cormorant Garamond',serif;letter-spacing:.04em}.person span{display:block;margin-top:6px;color:var(--muted);font-size:.61rem;letter-spacing:.17em;text-transform:uppercase}
+.qr{width:132px;height:132px;margin:24px 0 12px;padding:7px;background:var(--ivory)}
+.scan{color:var(--sage);font-size:.57rem;letter-spacing:.17em;text-transform:uppercase;margin-bottom:9px}
+</style>
+</head>
+<body>
+<article class="key">
+  <div class="mark">Hallow <em>&amp;</em> Grace</div>
+  <div class="rule"></div>
+  <div class="person"><strong>Evelyn Hallow</strong><span>Funeral Director</span></div>
+  <img class="qr" src="https://quickchart.io/qr?text=https%3A%2F%2Fthedigitalside.org%2Fhallow-grace-door.html&amp;size=260&amp;margin=1" alt="QR code for the Hallow and Grace Digital Door">
+  <div class="scan">Scan to open the Digital Door</div>
+</article>
+</body>
+</html>
