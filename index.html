@@ -1029,7 +1029,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .door-question__signal{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 10px var(--signal-glow);margin-right:8px;vertical-align:1px}
 .door-question--answer h2{max-width:18ch}
 .door-question--answer .door-question__small{color:var(--light)}
-@media(max-width:720px){.door-questions{grid-template-columns:1fr}.door-question{min-height:42svh;padding:54px 24px}}
+@media(max-width:720px){.door-questions{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;max-width:none;padding:0 8vw}.door-questions::-webkit-scrollbar{display:none}.door-question{flex:0 0 84vw;min-height:52svh;padding:44px 22px;scroll-snap-align:center;border-left:1px solid rgba(255,255,255,.06)}.door-question h2{font-size:clamp(1.8rem,9vw,2.8rem)}.door-question__small{font-size:.82rem}.door-question + .door-question{border-top:0}}
 </style>
   <div class="door-question reveal">
     <div class="door-question__inner">
@@ -1077,10 +1077,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .owner-showcase__point{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--light)}
 .owner-showcase__point::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 8px var(--signal-glow);margin-top:9px;flex-shrink:0}
 .owner-showcase__wallet{font-family:var(--display);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:16px;border-top:1px solid var(--border)}
-.door-placements{max-width:900px;margin:0 auto 60px}
-.door-placements__label{text-align:center;font-family:var(--display);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.door-placements__chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px}
-.door-placements__chips span{font-family:var(--display);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--light);padding:7px 12px;border:1px solid var(--border-md);border-radius:999px;background:var(--card)}
 .path-library{max-width:900px;margin:0 auto}
 .path-library__head{text-align:center;max-width:600px;margin:0 auto 28px}
 .path-library__head h3{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:10px}
@@ -1123,19 +1119,12 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <h3>The Door is for customers. The Owner Key is for the people representing the business.</h3>
         <p>Pull it up while networking, let someone scan the QR, and send them straight into the Digital Door — without searching for the business, spelling out a URL, or digging through a social profile.</p>
         <div class="owner-showcase__points">
-          <div class="owner-showcase__point">The Door also has its own direct link for social media bios and other digital touchpoints.</div>
-          <div class="owner-showcase__point">QR access can be placed on cards, signs, packaging, vehicles, menus, event material, or wherever the business actually meets customers.</div>
+          <div class="owner-showcase__point">You receive the direct Door link, ready to use anywhere customers already find the business.</div>
+          <div class="owner-showcase__point">The QR asset is also yours at handoff for physical places where the business meets customers.</div>
           <div class="owner-showcase__point">The Owner Key can be customized for the business owner, manager, salesperson, or another person who regularly networks for the business.</div>
         </div>
-        <div class="owner-showcase__wallet">Apple Wallet access is optional and quoted by project scope.</div>
+        <div class="owner-showcase__wallet">Apple Wallet access can be included when it fits the project.</div>
         <a href="door-frederick-legacy-law.html" class="btn btn--outline" style="margin-top:22px">Experience the Frederick Door <span class="btn__arr">→</span></a>
-      </div>
-    </div>
-
-    <div class="door-placements reveal">
-      <div class="door-placements__label">The direct Door link can be used in</div>
-      <div class="door-placements__chips">
-        <span>Social Bio</span><span>Business Card</span><span>Signage</span><span>Vehicle</span><span>Email Signature</span><span>Packaging</span><span>Event Material</span>
       </div>
     </div>
 
@@ -1164,7 +1153,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <div class="proj-card__footer"><div class="proj-card__actions"><a href="key-frederick.html" class="proj-card__link proj-card__link--ghost">Owner Key</a><a href="door-frederick-legacy-law.html" class="proj-card__link">View Door →</a><a href="frederick-legacy-law-mobile.html" class="proj-card__link proj-card__link--ghost">Index Site ↗</a></div></div>
       </div>
       <div class="proj-card reveal d2" style="--card-color:#7ecfcf;--icon-color:#7ecfcf;--icon-bg:rgba(126,207,207,.08);--icon-border:rgba(126,207,207,.2);--icon-bg-hover:rgba(126,207,207,.15);--card-accent:linear-gradient(90deg,#7ecfcf,transparent)">
-        <div class="proj-card__bg" style="background-image:url('https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1200&amp;q=75')"></div>
+        <div class="proj-card__bg" style="background-image:url('https://images.pexels.com/videos/6070803/pexels-photo-6070803.jpeg?auto=compress&amp;dpr=1&amp;h=900&amp;w=1400')"></div>
         <div class="proj-card__num">02</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2c-2.5 0-4.5 1.5-5.5 3.5C5.5 7 4 7.5 3 9c-1.5 2.5-.5 5.5 1 7 .8 1 1.5 2.5 2 4.5.3 1.2.8 2 1.5 2s1-.5 1.5-1.5c.5-1 1-2.5 3-2.5s2.5 1.5 3 2.5c.5 1 .8 1.5 1.5 1.5s1.2-.8 1.5-2c.5-2 1.2-3.5 2-4.5 1.5-1.5 2.5-4.5 1-7-1-1.5-2.5-2-3.5-3.5C16.5 3.5 14.5 2 12 2z"/></svg></div>
         <div class="proj-card__industry">Healthcare · Dental</div><h3>Lumina Dental Studio</h3>
         <details class="proj-desc"><summary>About this build</summary><p>A calm patient-first Door for appointments, treatment discovery, returning patients, insurance questions, and forms.</p></details>
@@ -1320,31 +1309,34 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <style>
 .refresh{background:var(--black);padding:88px 0}
 @media(max-width:860px){.refresh{padding:56px 0}.refresh__card{padding:32px 24px}}
-.refresh__card{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:44px 40px;text-align:center}
+.refresh__card{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:44px 40px;text-align:center}.refresh__card>summary{list-style:none;cursor:pointer}.refresh__card>summary::-webkit-details-marker{display:none}.refresh__summary-plus{display:none}.refresh__body{padding-top:12px}
 .refresh__card h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:8px}
 .refresh__card .lead{margin:0 auto 24px;max-width:440px;text-align:center}
 .refresh__uses{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:24px}
 .refresh__uses span{font-family:var(--display);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 12px;border:1px solid var(--border-md);border-radius:3px}
 .refresh__note{font-size:.82rem;color:var(--muted);margin-bottom:24px}
 .refresh__note strong{color:var(--lime)}
+@media(max-width:700px){.refresh__card{padding:0 22px;text-align:left}.refresh__card>summary{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:18px}.refresh__card>summary .tag{justify-content:flex-start;margin:0}.refresh__card>summary h2{font-size:1.2rem;margin:7px 0 0}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding:0 0 26px;text-align:center}.refresh__body .lead{font-size:.84rem}.refresh__uses{margin-bottom:18px}.refresh__uses span{font-size:.52rem}}
 </style>
   <div class="container">
-    <div class="refresh__card reveal">
-      <div class="tag" style="justify-content:center">Digital Refresh</div>
-      <h2>Things Change.<br>Come Back When They Do.</h2>
+    <details class="refresh__card reveal" id="refreshDetails">
+      <summary><div><div class="tag" style="justify-content:center">Digital Refresh</div><h2>Things Change.<br>Come Back When They Do.</h2></div><span class="refresh__summary-plus">+</span></summary>
+      <div class="refresh__body">
       <p class="lead">Seasonal updates, new offers, pricing changes, new photos — handled à la carte, whenever you need it.</p>
       <div class="refresh__uses">
         <span>Seasonal Updates</span><span>New Services</span><span>Pricing Changes</span><span>New Photos</span><span>Booking Changes</span><span>QR Updates</span><span>Promotions</span>
       </div>
       <p class="refresh__note">No mandatory monthly plan. <strong>Quick, Seasonal, or Full Refresh</strong> — come back only when your business does.</p>
       <a href="#contact" class="btn btn--lime">Request a Refresh →</a>
-    </div>
+      </div>
+    </details>
   </div>
 </section>
 
 
 <!-- ─── PROCESS ───────────────────────────── -->
 <section class="process" id="process">
+<style>@media(max-width:700px){.process{padding:58px 0}.process .lead{font-size:.82rem!important;line-height:1.55}.process__steps{margin-top:34px}.process__step{padding-top:4px;padding-bottom:10px}}</style>
   <div class="container">
     <div style="text-align:center;max-width:540px;margin:0 auto" class="reveal">
       <div class="tag">How It Works</div>
@@ -1434,8 +1426,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <div class="container">
 <div class="about-simple__grid">
 <div class="about-simple__photo reveal rl"><div class="about-simple__photo-title"><span>Meet the</span><strong>Developer.</strong></div><img src="about_mim.png" alt="Nev Gonzalez with Method in Motion"><div style="padding-top:14px;font-family:var(--heading);font-size:1.15rem;font-weight:800;color:var(--white)">Nev Gonzalez</div></div>
-<div class="about-simple__copy reveal rr"><div class="tag">The Developer</div><h2>Digital work shaped around the business behind it.</h2><p>The Digital Side combines small-business operations, customer experience, design, and development to make digital systems clearer, more useful, and easier to own.</p><p>Each build starts with the real friction: repeated questions, buried next steps, scattered systems, or a website that exists without doing enough. The result is something intentional, practical, and connected to how the business actually works.</p>
-<div class="about-simple__story"><div><strong>Business first.</strong><span>Early experience centered on entrepreneurship, customer-facing work, and the day-to-day reality behind small-business decisions.</span></div><div><strong>Then technology.</strong><span>That eventually shifted into digital business, a Salesforce internship, self-taught web development, and building for local businesses.</span></div><div><strong>Now the two live together.</strong><span>Business thinking, design, and development shape Digital Doors and full sites around the customer experience instead of forcing every business into the same template.</span></div></div>
+<div class="about-simple__copy reveal rr"><div class="tag">The Developer · Maryland</div><h2>The Digital Side grew from seeing both sides of a business.</h2><p>For nearly ten years, Nev helped run the front and back of a restaurant in downtown Frederick. That meant seeing the customer experience and the work behind it at the same time: the repeated questions, daily changes, operational pressure, and small details that keep a business moving.</p><p>Studies in business management and forensic accounting sharpened the instinct to trace where information, time, and responsibility get lost. After leaving school, that same problem-solving moved into digital business, a Salesforce internship, self-taught web development, and building for local businesses.</p>
+<div class="about-simple__story"><div><strong>That is where The Digital Side came from.</strong><span>Not just making a website look better, but understanding what the business is trying to handle and creating a clearer path for the customer.</span></div><div><strong>Business and technology belong together.</strong><span>Every Door, refresh, and full build is shaped around how the business actually works instead of forcing it into the same template as everyone else.</span></div><div><strong>Built in Maryland.</strong><span>The work is grounded in real small-business experience and designed to leave the owner with something useful, organized, and theirs.</span></div></div>
 <a href="mailto:handled@thedigitalside.org?subject=The%20Digital%20Side%20Inquiry" class="btn btn--lime">Email Nev Directly <span class="btn__arr">→</span></a>
 </div></div>
 </div></section>
@@ -1646,6 +1638,12 @@ if(indexQuick){indexQuick.addEventListener('submit',e=>{
   const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nBusiness or link: '+business+'\nInterested in: '+interest+'\n\nWhat needs handling:\n'+message);
   window.location.href='mailto:handled@thedigitalside.org?subject='+subject+'&body='+body;
 })}
+
+const refreshDetails=document.getElementById('refreshDetails');
+const refreshMedia=window.matchMedia('(min-width: 701px)');
+function syncRefreshDisclosure(){if(refreshDetails)refreshDetails.open=refreshMedia.matches}
+syncRefreshDisclosure();
+if(refreshMedia.addEventListener)refreshMedia.addEventListener('change',syncRefreshDisclosure);
 
 function handleForm(e){
   e.preventDefault();
