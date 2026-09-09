@@ -601,7 +601,9 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 .about-mini img{border-radius:12px}
 .about-mini p{color:#a0a7ac;line-height:1.62;margin-top:14px;font-size:.86rem}
 .about-mini .tds-btn{margin-top:18px;background:#eef0f2!important;color:#111417!important;border-color:#eef0f2!important}
-@media(min-width:760px){.tds-offer-grid{grid-template-columns:1fr 1.12fr 1fr}.tds-tier.compact{align-content:start}}
+.tds-choice select{width:100%;padding:11px;margin:5px 0;border:1px solid rgba(20,24,28,.12);background:#f8f7f4;color:#17191b}
+.tds-offer-grid>.tds-tier>summary{grid-column:1/-1;list-style:none;cursor:pointer;padding:0;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}.tds-offer-grid>.tds-tier>summary::-webkit-details-marker{display:none}.tds-offer-grid>.tds-tier>summary:after{content:'+';grid-column:2;grid-row:1/3;color:var(--signal);font-size:1.2rem;align-self:center}.tds-offer-grid>.tds-tier[open]>summary:after{content:'−'}.tds-offer-grid>.tds-tier>summary small,.tds-offer-grid>.tds-tier>summary h3{grid-column:1}.tds-offer-grid>.tds-tier>a{grid-column:1/-1;color:var(--signal);font:700 .58rem var(--mono);letter-spacing:.08em;text-transform:uppercase}
+@media(min-width:760px){.tds-offer-grid{grid-template-columns:repeat(2,1fr)}.tds-tier.compact{align-content:start}}
 </style>
 </head>
 <body>
@@ -641,54 +643,44 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 <section class="tds-what"><div class="tds-wrap">
   <div class="tds-intro">
     <div class="tds-kicker">The Digital Door</div>
-    <h1>Get people where they need to go.</h1>
-    <p class="tds-lede">A simpler way into the digital side of a business.</p>
+    <h1>Start with what you came to do.</h1>
+    <p class="tds-lede">Choose a path below, or visit the full site for the complete picture.</p>
   </div>
-
-  <div class="tds-system tds-system--front">
-    <details class="tds-step"><summary><small>01</small><h3>Digital Key</h3><span class="step-plus">+</span></summary><p>Scan or tap to enter.</p></details>
-    <details class="tds-step"><summary><small>02</small><h3>Digital Door</h3><span class="step-plus">+</span></summary><p>A branded starting point.</p></details>
-    <details class="tds-step"><summary><small>03</small><h3>Customer Paths</h3><span class="step-plus">+</span></summary><p>Choose why you're here.</p></details>
-    <details class="tds-step"><summary><small>04</small><h3>Destination</h3><span class="step-plus">+</span></summary><p>Get where you need to go.</p></details>
-  </div>
-
-  <div class="tds-entryline tds-entryline--front"><strong>One Door. Any entry point.</strong><span>QR · card · storefront · social · print</span></div>
-
-  <div class="tds-next-choice">
-    <a class="tds-choice-btn tds-choice-btn--primary" href="#simple"><small>Need something simple?</small><strong>Vendor + Event Page →</strong></a>
-    <a class="tds-choice-btn tds-choice-btn--quiet" href="#lookAround"><small>Want to look around?</small><strong>Explore The Digital Side ↓</strong></a>
-  </div>
-  <div id="lookAround"></div>
 </div></section>
 <section class="tds-modules"><div class="tds-wrap">
 <details class="tds-module"><summary><div><small>Real examples</small><strong>Walk a Path</strong></div><span class="tds-plus">+</span></summary><div class="tds-body"><div class="tds-demos">
 <article class="tds-demo"><div class="tds-kicker">Law</div><h3>Frederick Legacy Law</h3><p>Planning, estate handling, family legacy questions, and urgent matters routed without making the client learn legal vocabulary first.</p><div class="tds-actions"><a class="tds-btn" href="key-frederick.html">Owner Key</a><a class="tds-btn primary" href="door-frederick-legacy-law.html">View Door</a><a class="tds-btn" href="frederick-legacy-law-mobile.html">Index Site</a></div></article>
-<article class="tds-demo"><div class="tds-kicker">Dental</div><h3>Lumina Dental Studio</h3><p>New visits, treatment discovery, existing-patient needs, insurance questions, and booking in a calmer first layer.</p><div class="tds-actions"><a class="tds-btn" href="key-lumina.html">Owner Key</a><a class="tds-btn primary" href="lumina-door.html">View Door</a><a class="tds-btn" href="https://webdevn3v.github.io/dental-office-demo/" target="_blank" rel="noopener">Index Site</a></div></article>
+<article class="tds-demo"><div class="tds-kicker">Funeral Care</div><h3>Hallow &amp; Grace</h3><p>Immediate help, planning ahead, service information, and aftercare presented with calm direction and the same refined identity as the full site.</p><div class="tds-actions"><a class="tds-btn primary" href="hallow-grace-door.html">View Door</a><a class="tds-btn" href="https://webdevn3v.github.io/Funeral-home-demo/" target="_blank" rel="noopener">Index Site</a></div></article>
 <article class="tds-demo"><div class="tds-kicker">Roofing</div><h3>Northline Roofing Co.</h3><p>Inspection, storm response, replacement, and current-customer support organized around urgency.</p><div class="tds-actions"><a class="tds-btn" href="key-northline.html">Owner Key</a><a class="tds-btn primary" href="northline-door.html">View Door</a><a class="tds-btn" href="northline-full-site.html">Index Site</a></div></article>
 <article class="tds-demo"><div class="tds-kicker">Interiors</div><h3>Atelier House</h3><p>Portfolio discovery, style direction, project fit, and current-client access without flattening the brand into a generic menu.</p><div class="tds-actions"><a class="tds-btn" href="key-atelier.html">Owner Key</a><a class="tds-btn primary" href="atelier-door.html">View Door</a><a class="tds-btn" href="atelier-house-full-site.html">Index Site</a></div></article>
 </div></div></details>
-<details class="tds-module" id="simple"><summary><div><small>Choose the right size</small><strong>Need less, the Door, or more?</strong></div><span class="tds-plus">+</span></summary><div class="tds-body">
+<details class="tds-module" id="simple"><summary><div><small>Ways to work together</small><strong>Find the right level</strong></div><span class="tds-plus">+</span></summary><div class="tds-body">
 <div class="tds-offer-grid">
-  <div class="tds-tier compact"><small>Need less?</small><h3>Event Page</h3><b>$100</b><p>One polished page for events, pop-ups, markets, and updates. Pay once; keep the page and QR.</p><a class="tds-text-link" href="https://webdevn3v.github.io/stoneandstardust/" target="_blank" rel="noopener">View example →</a></div>
-  <div class="tds-tier featured compact"><small>Core system</small><h3>Digital Door</h3><b>$350</b><p>Digital Key + Digital Door + Customer Paths + Apple Wallet access + QR asset.</p><div class="tds-door-addon"><strong>Need the site behind it cleaned up too?</strong><span>Add Mobile-Optimized Desktop, Revive, or Evolve.</span></div></div>
-  <div class="tds-tier compact"><small>Need more?</small><h3>Full Build</h3><b>$750+</b><p>Digital Door plus a brand-new responsive, in-depth website.</p></div>
+  <div class="tds-tier compact"><small>Start here</small><h3>Signal Check</h3><b>Free</b><p>A short consultation to identify what is getting in the way and what actually needs handling.</p></div>
+  <div class="tds-tier featured compact"><small>Core system</small><h3>Digital Door</h3><b>$350</b><p>Digital Key + Digital Door + Customer Paths + one programmed physical NFC card.</p></div>
+  <div class="tds-tier compact"><small>Connect</small><h3>Connect the Dots</h3><b>$500+</b><p>Bring the Door, Paths, existing site, booking tools, forms, reviews, and contact points into one working system.</p></div>
+  <div class="tds-tier compact"><small>Build</small><h3>Customized Full Build</h3><b>$750+</b><p>A custom responsive website and customer journey built from start to finish.</p></div>
 </div>
-<a class="tds-signal-row" href="#start"><span>Not sure what fits?</span><strong>Start with a free Signal Check →</strong></a>
+<div class="tds-offer-grid" style="margin-top:14px">
+  <details class="tds-tier compact"><summary><small>Need less?</small><h3>Vendor Door · $100</h3></summary><p>A focused page for events, products, a mini portfolio, contact information, and socials. Pay once; keep the page and QR.</p><a class="tds-text-link" href="https://webdevn3v.github.io/stoneandstardust/" target="_blank" rel="noopener">View example →</a></details>
+  <details class="tds-tier compact"><summary><small>Need more?</small><h3>Enhance the system</h3></summary><p>Mobile Optimization, Revive, Evolve, team cards, bracelets, keychains, tap displays, and other custom physical formats.</p></details>
+</div>
 </div></details>
-<details class="tds-module" id="start"><summary><div><small>Start</small><strong>Tell The Digital Side what needs handling</strong></div><span class="tds-plus">+</span></summary><div class="tds-body"><div class="tds-intakes">
-<div class="tds-choice"><div class="tds-kicker">Quick version</div><h3>Start with the messy part.</h3><p>Name, email, and whatever feels off. A populated email draft opens; nothing sends until you choose to send it.</p><form id="quick"><input id="qname" placeholder="Name" required><input id="qemail" type="email" placeholder="Email" required><textarea id="qmsg" placeholder="What needs help?" required></textarea><button class="tds-send" type="submit">Send the short version →</button><div class="notice" id="doorQuickStatus">Your email app will open with the details filled in.</div></form></div>
-<div class="tds-choice"><div class="tds-kicker">Full intake</div><h3>Share more details.</h3><p>Use the longer intake when the goals, current setup, and project details are ready to put in one place.</p><a class="tds-btn primary" href="client-intake.html">Open full intake →</a></div>
+<details class="tds-module" id="start"><summary><div><small>New project inquiry</small><strong>Tell The Digital Side what needs handling</strong></div><span class="tds-plus">+</span></summary><div class="tds-body"><div class="tds-intakes">
+<div class="tds-choice"><h3>Start with the short version.</h3><form id="quick"><input id="qname" placeholder="Name" required><input id="qemail" type="email" placeholder="Email" required><select id="qinterest"><option value="Not sure yet">Interested in something specific? — Not sure yet</option><option>Free Signal Check</option><option>Digital Door</option><option>Connect the Dots</option><option>Customized Full Build</option><option>Vendor Door</option><option>Mobile Optimization</option><option>Revive</option><option>Evolve</option><option>Physical Key or Team Enhancement</option></select><textarea id="qmsg" placeholder="What needs help?" required></textarea><button class="tds-send" type="submit">Send inquiry →</button><div class="notice" id="doorQuickStatus">Your email app will open with the details filled in.</div></form></div>
+<div class="tds-choice"><div class="tds-kicker">Full project intake</div><h3>Ready to share more?</h3><a class="tds-btn primary" href="client-intake.html">Open full intake →</a></div>
 </div></div></details>
 <details class="tds-module"><summary><div><small>Good to know</small><strong>Ownership, access + what happens next</strong></div><span class="tds-plus">+</span></summary><div class="tds-body">
 <div class="tds-tier"><h3>You own what gets built.</h3><p>The finished system, project files, QR asset, and handoff materials belong to the client. TDS project work is a one-time build payment — no required TDS subscription just to keep using what was purchased.</p></div>
 <div class="tds-tier"><h3>No passwords needed to start.</h3><p>A new system can be built without access to personal accounts, inboxes, or existing logins. Existing access only becomes relevant when the project includes cleanup, migration, or organizing the business's digital junk drawer.</p></div>
 <div class="tds-tier"><h3>Third-party services stay in the client's name.</h3><p>If a domain, business email, form service, or another outside service is needed, setup can be prepared as far as possible before the client completes any required ownership, billing, or verification step. Any future third-party renewal belongs to that service — not a TDS subscription.</p></div>
+<div class="tds-tier"><h3>You leave with a digital and physical key.</h3><p>Every Digital Door includes the owner-facing Digital Key and one programmed physical NFC card. Additional team cards, bracelets, keychains, tap displays, and custom formats can be added when they fit the business.</p></div>
 </div></details>
 </div></section>
 <section class="tds-handoff"><div class="tds-wrap"><div class="tds-kicker">Need the full picture?</div><h2>The Door gets customers moving. The full site goes deeper.</h2><p>See the complete desktop experience for services, process, portfolio work, and the story behind The Digital Side.</p><a class="tds-btn primary" href="index.html">Explore the full Digital Side →</a></div></section>
 <footer class="tds-footer"><div class="tds-wrap"><div class="tds-footer-links"><button id="keyBtn">View the Digital Key</button><button id="aboutBtn">Meet the developer</button><a href="mailto:handled@thedigitalside.org">handled@thedigitalside.org</a></div></div></footer>
 </main>
-<div class="tds-modal" id="keyModal"><div class="tds-modal-card tds-modal-card--key"><button class="tds-modal-close" data-close aria-label="Close">×</button><div class="key-built"><img class="logo-key" src="tds-logo.webp" alt="The Digital Side"><div class="key-person"><strong>Nev Gonzalez</strong><span>Developer · The Digital Side</span></div><img class="qr-key" src="digitalside-door-qr.png" alt="QR code for The Digital Door"><div class="key-actions"><a class="key-action key-action--save" href="the-digital-side.vcf">Save Contact</a><a class="key-action" href="tel:+12029341126">Call</a><a class="key-action" href="sms:+12029341126">Text</a><a class="key-action" href="mailto:handled@thedigitalside.org">Email</a></div></div></div></div>
+<div class="tds-modal" id="keyModal"><div class="tds-modal-card tds-modal-card--key"><button class="tds-modal-close" data-close aria-label="Close">×</button><div class="key-built"><img class="logo-key" src="tds-logo.webp" alt="The Digital Side"><div class="key-person"><strong>Nev Gonzalez</strong><span>Developer · The Digital Side</span></div><img class="qr-key" src="digitalside-door-qr.png" alt="QR code for The Digital Door"><div class="brand-tag">Scan to open the Digital Door</div></div></div></div>
 <div class="tds-modal" id="aboutModal"><div class="tds-modal-card"><button class="tds-modal-close" data-close aria-label="Close">×</button><div class="about-mini"><div class="tds-kicker">Meet the developer</div><h2>Nev Gonzalez</h2><img src="about_mim.png" alt="Nev Gonzalez with Method in Motion"><p>With roots in entrepreneurship and customer-facing business, Nev moved into digital business through a Salesforce internship, self-taught web development, and building for local businesses.</p><p>The Digital Side brings that business experience, customer thinking, design, and development together—so every build fits how the business actually works.</p><a class="tds-btn primary" href="index.html#about">Read the full story →</a></div></div></div>
 <script>
 (()=>{const gate=document.getElementById('gate'),tap=document.getElementById('tdsTap');let entering=false;function enter(){if(entering)return;entering=true;if(tap)tap.style.opacity='0';gate.classList.add('opening-in-place');setTimeout(()=>{document.documentElement.classList.remove('gate-lock');document.documentElement.classList.add('entered');gate.classList.add('hide');if(tap)tap.remove()},2350)}gate.addEventListener('click',enter);gate.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enter()}})
@@ -698,9 +690,10 @@ doorQuick.addEventListener('submit',e=>{
   if(!doorQuick.reportValidity()) return;
   const name=document.getElementById('qname').value.trim();
   const email=document.getElementById('qemail').value.trim();
+  const interest=document.getElementById('qinterest').value;
   const message=document.getElementById('qmsg').value.trim();
   const subject=encodeURIComponent('Digital Side inquiry from '+name);
-  const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\nWhat needs handling:\n'+message);
+  const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nInterested in: '+interest+'\n\nWhat needs handling:\n'+message);
   window.location.href='mailto:handled@thedigitalside.org?subject='+subject+'&body='+body;
 });
 const km=document.getElementById('keyModal'),am=document.getElementById('aboutModal');document.getElementById('keyBtn').onclick=()=>km.classList.add('open');document.getElementById('aboutBtn').onclick=()=>am.classList.add('open');document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.tds-modal').classList.remove('open'));document.querySelectorAll('.tds-modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.tds-modal.open').forEach(m=>m.classList.remove('open'))})
