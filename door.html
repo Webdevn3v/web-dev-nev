@@ -551,6 +551,25 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
   .tds-choice-btn{min-height:74px}
 }
 
+
+/* CONTACT CARD + BRIGHTER REFINED CANVAS */
+.tds-main{background:#fffefb}
+.tds-what{background:linear-gradient(180deg,#fffefb 0%,#f7f6f1 100%)}
+.tds-modules{background:#f8f7f3}
+.tds-demo,.tds-choice,.tds-tier{background:#fffefb}
+.tds-module[open]{background:rgba(255,255,255,.42)}
+.tds-choice-btn--primary,.tds-send,.tds-btn.primary{background:#111417}
+.tds-choice-btn--primary{box-shadow:inset 3px 0 0 var(--signal)}
+.tds-handoff,.tds-footer{background:#fffefb}
+.contact-card{width:min(350px,84vw);margin:16px auto 0;padding:18px;border:1px solid rgba(255,255,255,.13);border-radius:18px;background:#111417;color:#eef0f2}
+.contact-card-head{padding-bottom:15px;border-bottom:1px solid rgba(255,255,255,.12)}
+.contact-card-head small{display:block;font:700 .5rem/1 var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+.contact-card-head strong{display:block;font:600 1.08rem/1.2 var(--sans)}
+.contact-card-head span{display:block;margin-top:5px;font-size:.75rem;color:#9da4a9}
+.contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.contact-action{min-height:48px;display:flex;align-items:center;justify-content:center;padding:11px 10px;border:1px solid rgba(255,255,255,.14);border-radius:10px;color:#eef0f2;font:700 .55rem/1.25 var(--mono);letter-spacing:.07em;text-transform:uppercase;text-align:center;background:rgba(255,255,255,.04)}
+.contact-action.primary{grid-column:1/-1;background:#eef0f2;color:#111417;border-color:#eef0f2}
+.contact-help{min-height:18px;margin:11px 2px 0;color:#8f979d;font-size:.68rem;line-height:1.45;text-align:center}
 </style>
 </head>
 <body>
@@ -646,34 +665,22 @@ html.gate-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 <section class="tds-handoff"><div class="tds-wrap"><div class="tds-kicker">Need the full picture?</div><h2>The Door gets customers moving. The full site goes deeper.</h2><p>See the complete desktop experience for services, process, portfolio work, and the story behind The Digital Side.</p><a class="tds-btn primary" href="index.html">Explore the full Digital Side →</a></div></section>
 <footer class="tds-footer"><div class="tds-wrap"><div class="tds-footer-links"><button id="keyBtn">View the Digital Key</button><button id="aboutBtn">Meet the developer</button><a href="mailto:handled@thedigitalside.org">handled@thedigitalside.org</a></div></div></footer>
 </main>
-<div class="tds-modal" id="keyModal"><div class="tds-modal-card"><button class="tds-modal-close" data-close>×</button><div class="key-built"><img class="logo-key" src="tds-logo.webp" alt="The Digital Side"><div class="key-person"><small>Digital Key holder</small><strong>Nevada L. Gonzalez</strong><span>Developer · The Digital Side</span></div><img class="qr-key" src="digitalside-door-qr.png" alt="The Digital Side QR code"><small>DIGITAL KEY</small></div></div></div>
+<div class="tds-modal" id="keyModal"><div class="tds-modal-card"><button class="tds-modal-close" data-close aria-label="Close">×</button><div class="key-built"><img class="logo-key" src="tds-logo.webp" alt="The Digital Side"><div class="key-person"><small>Digital Key holder</small><strong>Nevada L. Gonzalez</strong><span>Developer · The Digital Side</span></div><img class="qr-key" src="digitalside-door-qr.png" alt="The Digital Side QR code"><small>DIGITAL KEY</small></div><div class="contact-card"><div class="contact-card-head"><small>Digital business card</small><strong>Nevada L. Gonzalez</strong><span>Developer · The Digital Side</span></div><div class="contact-actions"><a class="contact-action primary" href="the-digital-side.vcf" download>Save contact</a><a class="contact-action" href="mailto:handled@thedigitalside.org">Email</a><a class="contact-action" href="https://thedigitalside.org/" target="_blank" rel="noopener">Website</a><button class="contact-action" type="button" id="shareCard">Share</button><button class="contact-action" type="button" id="saveSite">Save website</button></div><div class="contact-help" id="contactHelp">Save the contact or keep the website one tap away.</div></div></div></div>
 <div class="tds-modal" id="aboutModal"><div class="tds-modal-card"><button class="tds-modal-close" data-close>×</button><div style="font:700 clamp(1.6rem,5vw,2.3rem)/1 var(--sans);letter-spacing:-.05em;color:#f2f4f5;margin-bottom:16px">Meet the Developer</div><img src="about_mim.png" alt="Nev Gonzalez with Method in Motion"><div style="margin-top:15px;font:700 1.08rem var(--sans);color:#f2f4f5">Nev Gonzalez</div><p style="color:#a0a7ac;line-height:1.7;margin-top:10px">The Digital Side grew from the overlap between small-business operations, customer experience, design, and development. The work focuses on the friction customers actually feel: buried next steps, scattered systems, repeated questions, and digital experiences that make a business harder to use than it needs to be. Those pieces become something clearer, more useful, and easier to own.</p></div></div>
 <script>
 (()=>{const gate=document.getElementById('gate'),tap=document.getElementById('tdsTap');let entering=false;function enter(){if(entering)return;entering=true;if(tap)tap.style.opacity='0';gate.classList.add('opening-in-place');setTimeout(()=>{document.documentElement.classList.remove('gate-lock');document.documentElement.classList.add('entered');gate.classList.add('hide');if(tap)tap.remove()},2350)}gate.addEventListener('click',enter);gate.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enter()}})
 const doorQuick=document.getElementById('quick');
-const DOOR_FORM_ENDPOINT='https://formspree.io/f/YOUR_FORM_ID';
-doorQuick.addEventListener('submit',async e=>{
+doorQuick.addEventListener('submit',e=>{
   e.preventDefault();
   if(!doorQuick.reportValidity()) return;
-  const status=document.getElementById('doorQuickStatus');
-  if(DOOR_FORM_ENDPOINT.includes('YOUR_FORM_ID')){
-    if(status) status.textContent='This form still needs the live Formspree ID before it can submit.';
-    return;
-  }
-  const btn=doorQuick.querySelector('button[type="submit"]');
-  if(btn){btn.disabled=true;btn.textContent='Sending…'}
-  try{
-    const res=await fetch(DOOR_FORM_ENDPOINT,{method:'POST',body:new FormData(doorQuick),headers:{Accept:'application/json'}});
-    if(!res.ok) throw new Error('submit failed');
-    doorQuick.reset();
-    if(status) status.textContent='Sent. The Digital Side has your short version.';
-  }catch(err){
-    if(status) status.textContent='Something did not send. Please use the full intake or email handled@thedigitalside.org.';
-  }finally{
-    if(btn){btn.disabled=false;btn.textContent='Send the short version →'}
-  }
+  const name=document.getElementById('qname').value.trim();
+  const email=document.getElementById('qemail').value.trim();
+  const message=document.getElementById('qmsg').value.trim();
+  const subject=encodeURIComponent('Digital Side inquiry from '+name);
+  const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\nWhat needs handling:\n'+message);
+  window.location.href='mailto:handled@thedigitalside.org?subject='+subject+'&body='+body;
 });
-const km=document.getElementById('keyModal'),am=document.getElementById('aboutModal');document.getElementById('keyBtn').onclick=()=>km.classList.add('open');document.getElementById('aboutBtn').onclick=()=>am.classList.add('open');document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.tds-modal').classList.remove('open'));document.querySelectorAll('.tds-modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.tds-modal.open').forEach(m=>m.classList.remove('open'))})
+const km=document.getElementById('keyModal'),am=document.getElementById('aboutModal');document.getElementById('keyBtn').onclick=()=>km.classList.add('open');document.getElementById('aboutBtn').onclick=()=>am.classList.add('open');const shareCard=document.getElementById('shareCard'),saveSite=document.getElementById('saveSite'),contactHelp=document.getElementById('contactHelp');if(shareCard)shareCard.onclick=async()=>{const data={title:'The Digital Side',text:'The Digital Side — handled by Nev Gonzalez',url:'https://thedigitalside.org/'};try{if(navigator.share){await navigator.share(data)}else{await navigator.clipboard.writeText(data.url);contactHelp.textContent='Website link copied.'}}catch(e){if(e.name!=='AbortError')contactHelp.textContent='Use your browser’s Share button to send the website.'}};if(saveSite)saveSite.onclick=async()=>{try{await navigator.clipboard.writeText('https://thedigitalside.org/door.html');contactHelp.textContent='Door link copied. On iPhone, tap Share → Add to Home Screen or Add Bookmark.'}catch(e){contactHelp.textContent='On iPhone, tap Share → Add to Home Screen or Add Bookmark.'}};document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.tds-modal').classList.remove('open'));document.querySelectorAll('.tds-modal').forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove('open')});addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.tds-modal.open').forEach(m=>m.classList.remove('open'))})
 })();
 </script><script>
 document.addEventListener('click',function(e){
