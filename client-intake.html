@@ -213,11 +213,7 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
       </div>
       <div class="field">
         <label class="field-label" for="f_current_site">Current Website<span class="opt">— optional</span></label>
-        <input type="url" id="f_current_site" name="current_website" placeholder="https://">
-      </div>
-      <div class="field">
-        <label class="field-label" for="f_social">Social Media<span class="opt">— optional</span></label>
-        <input type="text" id="f_social" name="social_media">
+        <input type="text" id="f_current_site" name="current_website" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="business.com, a full URL, or “none”">
       </div>
       <div class="field">
         <label class="field-label" for="f_what_business">In a sentence or two, what does your business do?</label>
@@ -445,12 +441,34 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     return steps.filter(function(s){ return parseInt(s.getAttribute('data-step'),10) === current; })[0];
   }
 
+  /* Only explicitly [required] fields block progression. Optional fields —
+     even ones with a type= or pattern= — never prevent Continue. */
   function validateCurrentStep(){
     var el = currentStepEl();
-    var invalid = el.querySelector(':invalid');
-    if(invalid){
-      invalid.reportValidity();
-      return false;
+    var required = Array.prototype.slice.call(el.querySelectorAll('[required]'));
+
+    for(var i = 0; i < required.length; i++){
+      var f = required[i];
+
+      /* skip anything inside a conditional block that isn't currently shown */
+      var cond = f.closest('.conditional');
+      if(cond && !cond.classList.contains('show')) continue;
+
+      var ok;
+      if(f.type === 'radio'){
+        ok = !!el.querySelector('input[name="' + f.name + '"]:checked');
+      }else if(f.type === 'checkbox'){
+        ok = !!el.querySelector('input[name="' + f.name + '"]:checked');
+      }else{
+        ok = f.value.trim() !== '' &&
+             (typeof f.checkValidity !== 'function' || f.checkValidity());
+      }
+
+      if(!ok){
+        if(typeof f.reportValidity === 'function') f.reportValidity();
+        else if(typeof f.focus === 'function') f.focus();
+        return false;
+      }
     }
     return true;
   }
