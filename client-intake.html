@@ -380,8 +380,9 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
 
       <div class="step-nav">
         <button type="button" class="btn-nav" data-goto="4">← Previous</button>
-        <button type="submit" class="btn-nav btn-submit" id="submitBtn">Submit Intake →</button>
+        <button type="submit" class="btn-nav btn-submit" id="submitBtn">Open Email to Send →</button>
       </div>
+      <p class="step-intro" style="margin-top:18px">Your email app will open with your answers filled in. Nothing sends until you choose to send it.</p>
 
       <div class="submit-fallback" id="submitFallback">
         <p>Something didn't send. Copy your answers below and email them to <strong>handled@thedigitalside.org</strong> so nothing gets lost.</p>
@@ -487,14 +488,6 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     });
   });
 
-  /* ── SUBMISSION ──
-     No real backend exists on the site yet. This posts to a Formspree
-     endpoint placeholder — swap FORM_ENDPOINT for the real one once
-     a Formspree form is created. Until then (or if the request fails
-     for any reason), nothing is lost: the fallback panel below lets
-     the client copy their answers or email them directly. */
-  var FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-
   function buildSummary(){
     var fd = new FormData(form);
     var lines = [];
@@ -527,22 +520,9 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
   form.addEventListener('submit', function(e){
     e.preventDefault();
     if(!validateCurrentStep()) return;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
-    fallback.classList.remove('show');
-
-    fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: {'Accept': 'application/json'}
-    }).then(function(res){
-      if(!res.ok) throw new Error('submit failed');
-      showStep(6);
-    }).catch(function(){
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Intake →';
-      fallback.classList.add('show');
-    });
+    var text = buildSummary();
+    mailFallback.href = 'mailto:handled@thedigitalside.org?subject=Client%20Intake&body=' + encodeURIComponent(text).slice(0, 1800);
+    window.location.href = mailFallback.href;
   });
 
   showStep(0);
