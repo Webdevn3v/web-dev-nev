@@ -133,9 +133,10 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
    THANK YOU
 ══════════════════════════════ */
 .thankyou{text-align:center;padding-top:20px}
-.thankyou-mark{width:56px;height:56px;border-radius:50%;border:1px solid var(--lime);display:flex;align-items:center;justify-content:center;margin:0 auto 26px;color:var(--lime);font-size:1.4rem}
+.thankyou-mark{width:78px;height:78px;border-radius:50%;border:1px solid var(--lime);display:flex;align-items:center;justify-content:center;margin:0 auto 26px;color:var(--lime);font:700 1.25rem var(--mono);animation:sentPulse 1.6s ease-out;box-shadow:0 0 0 0 rgba(166,255,0,.45)}
 .thankyou h1{font-family:var(--mono);font-weight:700;font-size:1.4rem;letter-spacing:.02em;color:var(--off);margin-bottom:10px}
 .thankyou p{font-size:.9rem;color:var(--gray);line-height:1.65;margin-bottom:26px}
+@keyframes sentPulse{0%{transform:scale(.72);box-shadow:0 0 0 0 rgba(166,255,0,.55)}55%{transform:scale(1.06);box-shadow:0 0 0 24px rgba(166,255,0,0)}100%{transform:scale(1)}}
 .security-note{
   font-size:.72rem;color:var(--gray);line-height:1.65;
   padding:14px 16px;border:1px solid var(--graphite);text-align:left;margin-bottom:26px;
@@ -330,8 +331,8 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     <!-- STEP 4 — SHOW ME WHAT YOU'VE GOT -->
     <div class="step" data-step="4">
       <div class="step-num">04</div>
-      <div class="step-title">Show Me What You've Got.</div>
-      <p class="step-intro">Already have it? Great. Starting fresh? That's fine too.</p>
+      <div class="step-title">What Already Exists?</div>
+      <p class="step-intro">Check anything the business already has. Starting fresh is fine too.</p>
 
       <div class="field">
         <div class="choice-group">
@@ -346,7 +347,6 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
         </div>
       </div>
 
-      <div class="note">We'll handle file sharing separately — no need to cram everything into this form.</div>
 
       <div class="field">
         <label class="field-label" for="f_keep">Anything you definitely want to keep?<span class="opt">— optional</span></label>
@@ -380,9 +380,8 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
 
       <div class="step-nav">
         <button type="button" class="btn-nav" data-goto="4">← Previous</button>
-        <button type="submit" class="btn-nav btn-submit" id="submitBtn">Open Email to Send →</button>
+        <button type="submit" class="btn-nav btn-submit" id="submitBtn">Send Intake →</button>
       </div>
-      <p class="step-intro" style="margin-top:18px">Your email app will open with your answers filled in. Nothing sends until you choose to send it.</p>
 
       <div class="submit-fallback" id="submitFallback">
         <p>Something didn't send. Copy your answers below and email them to <strong>handled@thedigitalside.org</strong> so nothing gets lost.</p>
@@ -397,9 +396,9 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     <!-- STEP 6 — THANK YOU -->
     <div class="step" data-step="6">
       <div class="thankyou">
-        <div class="thankyou-mark">✓</div>
-        <h1>That's It.</h1>
-        <p>“I've got your side. I'll take it from here.”</p>
+        <div class="thankyou-mark">04</div>
+        <h1>Thanks—it’s sent.</h1>
+        <p>You’ll hear back soon. I’ve got your side from here.</p>
         <div class="security-note">
           <strong>Security note:</strong> Never send passwords through this form or by email. If I need access to an account, I'll tell you exactly what I need and how to share it safely.
         </div>
@@ -419,7 +418,7 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
   var dots = Array.prototype.slice.call(document.querySelectorAll('.progress-dot'));
   var current = 0;
 
-  var stepNames = ['', 'Your Business', 'What Should People Do?', 'What Are We Working With?', 'Show Me What You\'ve Got', 'What Does Done Look Like?', ''];
+  var stepNames = ['', 'Your Business', 'What Should People Do?', 'What Are We Working With?', 'What Already Exists?', 'What Does Done Look Like?', ''];
 
   function showStep(i){
     steps.forEach(function(s){
@@ -517,12 +516,15 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     mailFallback.href = 'mailto:handled@thedigitalside.org?subject=Client%20Intake&body=' + encodeURIComponent(text).slice(0, 1800);
   });
 
-  form.addEventListener('submit', function(e){
+  form.addEventListener('submit', async function(e){
     e.preventDefault();
     if(!validateCurrentStep()) return;
-    var text = buildSummary();
-    mailFallback.href = 'mailto:handled@thedigitalside.org?subject=Client%20Intake&body=' + encodeURIComponent(text).slice(0, 1800);
-    window.location.href = mailFallback.href;
+    submitBtn.disabled=true;submitBtn.textContent='Sending…';fallback.classList.remove('show');
+    var data={};new FormData(form).forEach(function(value,key){data[key]=data[key]?data[key]+', '+value:value});data._subject='New full project intake';data._template='table';data._captcha='false';
+    try{
+      var response=await fetch('https://formsubmit.co/ajax/handled@thedigitalside.org',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
+      if(!response.ok)throw new Error('send failed');showStep(6);
+    }catch(error){submitBtn.disabled=false;submitBtn.textContent='Try Sending Again →';fallback.classList.add('show')}
   });
 
   showStep(0);
