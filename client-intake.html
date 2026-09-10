@@ -538,9 +538,9 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     e.preventDefault();
     if(!validateCurrentStep()) return;
     submitBtn.disabled=true;submitBtn.textContent='Sending…';fallback.classList.remove('show');
-    var data={};new FormData(form).forEach(function(value,key){data[key]=data[key]?data[key]+', '+value:value});data._subject='New full project intake';data._template='table';data._captcha='false';
+    var data={};new FormData(form).forEach(function(value,key){data[key]=data[key]?data[key]+', '+value:value});data._subject='New full project intake';data._replyto=data.email;
     try{
-      var response=await fetch('https://formsubmit.co/ajax/handled@thedigitalside.org',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
+      var response=await fetch('https://formspree.io/f/xaeyjzrk',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
       if(!response.ok)throw new Error('send failed');showStep(6);
     }catch(error){submitBtn.disabled=false;submitBtn.textContent='Try Sending Again →';fallback.classList.add('show')}
   });
