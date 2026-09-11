@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Nev Gonzalez · Owner Digital Key</title>
+<style>
+:root{
+  --black:#080a0c;
+  --charcoal:#12161b;
+  --graphite:#262b31;
+  --soft:#b8bdc2;
+  --off:#eeedef;
+  --line:rgba(255,255,255,.11);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--black)}
+body{
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  color:var(--off);
+  font-family:Inter,Arial,sans-serif;
+  overflow:hidden;
+}
+.key{
+  width:min(430px,100vw);
+  min-height:100svh;
+  position:relative;
+  overflow:hidden;
+  padding:calc(34px + env(safe-area-inset-top)) 28px calc(30px + env(safe-area-inset-bottom));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 23%,rgba(255,255,255,.06),transparent 22%),
+    linear-gradient(180deg,#0b0e11 0%,#080a0c 62%,#050607 100%);
+}
+.key::before{
+  content:'';
+  position:absolute;
+  inset:-20% -35%;
+  background:
+    linear-gradient(110deg,transparent 37%,rgba(255,255,255,.045) 48%,transparent 58%);
+  transform:rotate(-8deg);
+  pointer-events:none;
+}
+.key::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:31%;
+  width:280px;
+  height:280px;
+  transform:translate(-50%,-50%);
+  border:1px solid rgba(255,255,255,.045);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 28px rgba(255,255,255,.018),
+    0 0 0 70px rgba(255,255,255,.012);
+  pointer-events:none;
+}
+.brand{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:"Courier New",monospace;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:lowercase;
+}
+.brand-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--off);
+}
+.key-label{
+  position:relative;
+  z-index:2;
+  margin-top:54px;
+  font-family:"Courier New",monospace;
+  font-size:.53rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:#7f878e;
+}
+.name{
+  position:relative;
+  z-index:2;
+  margin-top:12px;
+  font-size:clamp(2.15rem,9vw,3rem);
+  line-height:.98;
+  letter-spacing:-.05em;
+  font-weight:700;
+}
+.role{
+  position:relative;
+  z-index:2;
+  margin-top:10px;
+  font-family:"Courier New",monospace;
+  font-size:.56rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#959ca2;
+}
+.qr-wrap{
+  position:relative;
+  z-index:2;
+  width:210px;
+  height:210px;
+  margin-top:42px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:18px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 24px 70px rgba(0,0,0,.42);
+}
+.qr-wrap::before{
+  content:'';
+  position:absolute;
+  inset:12px;
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:12px;
+}
+.qr{
+  width:166px;
+  height:166px;
+  object-fit:contain;
+  background:#080a0c;
+  filter:grayscale(1) invert(1) brightness(1.28) contrast(1.5);
+  opacity:.88;
+  border-radius:8px;
+}
+.scan{
+  position:relative;
+  z-index:2;
+  margin-top:22px;
+  font-family:"Courier New",monospace;
+  font-size:.58rem;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:#a7adb2;
+}
+.rule{
+  position:relative;
+  z-index:2;
+  width:42px;height:1px;background:#4b5157;margin:22px 0 0;
+}
+.tagline{
+  position:relative;
+  z-index:2;
+  margin-top:auto;
+  font-family:"Courier New",monospace;
+  font-size:.58rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#737a80;
+}
+.tagline strong{color:#cfd3d6;font-weight:600}
+@media(max-height:720px){
+  .key-label{margin-top:30px}
+  .qr-wrap{margin-top:28px;width:188px;height:188px}
+  .qr{width:150px;height:150px}
+}
+</style>
+</head>
+<body>
+<main class="key">
+  <div class="brand">the digital side<div class="brand-dot"></div></div>
+  <div class="key-label">Owner Digital Key</div>
+  <div class="name">Nev Gonzalez</div>
+  <div class="role">Founder &amp; Lead Developer</div>
+
+  <div class="qr-wrap">
+    <img class="qr" src="digitalside-door-qr.png" alt="QR code to open The Digital Door">
+  </div>
+  <div class="scan">Scan to open the Digital Door</div>
+  <div class="rule"></div>
+
+  <div class="tagline"><strong>The Digital Side, handled.</strong></div>
+</main>
+</body>
+</html>
