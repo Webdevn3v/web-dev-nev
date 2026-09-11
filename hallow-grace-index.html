@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hallow & Grace — Honoring Lives. Comforting Families.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:    #0e0c0a;
+  --deep:     #141210;
+  --warm:     #1c1916;
+  --card:     #221f1b;
+  --card-lt:  #2a2620;
+  --border:   rgba(255,245,230,.06);
+  --border-md:rgba(255,245,230,.12);
+  --ivory:    #f5f0e8;
+  --off:      #e8e0d0;
+  --muted:    #8a8070;
+  --fog:      #4a4438;
+  --gold:     #c8a96e;
+  --gold-lt:  rgba(200,169,110,.15);
+  --gold-glow:rgba(200,169,110,.08);
+  --sage:     #7a8c78;
+  --display:  'Cormorant Garamond', Georgia, serif;
+  --body:     'Jost', 'Gill Sans', sans-serif;
+  --max:      1080px;
+  --ease:     cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--black);color:var(--ivory);
+  font-family:var(--body);font-weight:300;
+  line-height:1.7;letter-spacing:.02em;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ── CONTAINER ── */
+.container{max-width:var(--max);margin:0 auto;padding:0 40px}
+@media(max-width:600px){.container{padding:0 24px}}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:24px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .4s,padding .4s;
+}
+nav.scrolled{
+  background:rgba(14,12,10,.95);
+  backdrop-filter:blur(12px);
+  padding:16px 40px;
+  border-bottom:1px solid var(--border);
+}
+.nav__logo{
+  font-family:var(--display);
+  font-size:1.3rem;font-weight:400;letter-spacing:.08em;
+  color:var(--ivory);
+}
+.nav__logo span{color:var(--gold);font-style:italic}
+.nav__links{display:flex;gap:36px;list-style:none}
+.nav__links a{
+  font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(245,240,232,.5);transition:color .3s;
+}
+.nav__links a:hover{color:var(--ivory)}
+.nav__cta{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  padding:10px 22px;
+  border:1px solid rgba(200,169,110,.4);
+  color:var(--gold);border-radius:2px;
+  transition:all .3s;
+}
+.nav__cta:hover{background:var(--gold-lt);border-color:var(--gold)}
+@media(max-width:768px){.nav__links{display:none}}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+.hero__bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to bottom, rgba(14,12,10,.3) 0%, rgba(14,12,10,.6) 50%, rgba(14,12,10,.95) 100%),
+    url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600&q=70') center/cover no-repeat;
+}
+.hero__content{
+  position:relative;z-index:2;
+  max-width:680px;
+  padding:0 24px;
+}
+.hero__rule{
+  width:1px;height:60px;
+  background:linear-gradient(to bottom,transparent,var(--gold));
+  margin:0 auto 32px;
+  animation:fadeDown 1.2s var(--ease) both;
+}
+.hero__eyebrow{
+  font-family:var(--body);font-size:.68rem;
+  letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);opacity:.8;
+  margin-bottom:20px;
+  animation:fadeUp .9s .2s var(--ease) both;
+}
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(3rem,7vw,5.5rem);
+  font-weight:300;line-height:1.1;
+  letter-spacing:.04em;
+  color:var(--ivory);
+  margin-bottom:10px;
+  animation:fadeUp 1s .35s var(--ease) both;
+}
+.hero h1 em{font-style:italic;color:var(--gold);font-weight:300}
+.hero__tagline{
+  font-family:var(--body);
+  font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(245,240,232,.45);
+  margin-bottom:48px;
+  animation:fadeUp .9s .5s var(--ease) both;
+}
+.hero__actions{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp .9s .65s var(--ease) both;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--body);font-size:.72rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  padding:14px 30px;border-radius:2px;
+  transition:all .3s var(--ease);cursor:pointer;border:none;
+}
+.btn--gold{
+  background:var(--gold);color:var(--black);
+  font-weight:500;
+}
+.btn--gold:hover{background:#d4b97e;box-shadow:0 8px 32px rgba(200,169,110,.3)}
+.btn--outline{
+  border:1px solid rgba(245,240,232,.25);
+  color:rgba(245,240,232,.7);background:transparent;
+}
+.btn--outline:hover{border-color:var(--ivory);color:var(--ivory)}
+.hero__scroll{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-family:var(--body);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(245,240,232,.2);
+}
+.hero__scroll-line{
+  width:1px;height:48px;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+  animation:scrollLine 2.2s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%{transform:scaleY(0);transform-origin:top;opacity:0}
+  40%{opacity:1}60%{transform:scaleY(1);transform-origin:top}
+  60.01%{transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom;opacity:0}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
+
+/* ── DIVIDER ── */
+.divider{
+  display:flex;align-items:center;gap:20px;
+  max-width:320px;margin:0 auto;
+  padding:80px 0 0;
+}
+.divider::before,.divider::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(to right,transparent,rgba(200,169,110,.3),transparent);
+}
+.divider__icon{
+  font-family:var(--display);font-size:1.2rem;
+  color:rgba(200,169,110,.4);font-style:italic;
+}
+
+/* ── SECTION HEADERS ── */
+.section-label{
+  font-family:var(--body);font-size:.62rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);opacity:.7;margin-bottom:14px;
+}
+.section-title{
+  font-family:var(--display);
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:300;letter-spacing:.03em;line-height:1.2;
+  color:var(--ivory);margin-bottom:20px;
+}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-body{
+  font-size:.95rem;color:var(--muted);
+  line-height:1.95;max-width:560px;
+}
+
+/* ── ABOUT ── */
+.about{background:var(--deep);padding:120px 0}
+.about__grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+@media(max-width:768px){.about__grid{grid-template-columns:1fr;gap:48px}}
+.about__img{
+  position:relative;
+}
+.about__img img{
+  width:100%;aspect-ratio:3/4;object-fit:cover;
+  border-radius:2px;
+  filter:brightness(.85) saturate(.7);
+}
+.about__img::before{
+  content:'';position:absolute;
+  top:-16px;left:-16px;right:16px;bottom:16px;
+  border:1px solid rgba(200,169,110,.2);
+  border-radius:2px;z-index:-1;
+}
+.about__quote{
+  margin-top:0;
+  padding:24px 28px;
+  border-left:2px solid var(--gold);
+  background:var(--warm);
+}
+.about__quote p{
+  font-family:var(--display);font-size:1.1rem;
+  font-style:italic;font-weight:300;
+  color:rgba(245,240,232,.7);line-height:1.8;
+}
+.about__quote cite{
+  display:block;margin-top:10px;
+  font-family:var(--body);font-size:.7rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);font-style:normal;
+}
+
+/* ── SERVICES ── */
+.services{background:var(--warm);padding:120px 0}
+.services__header{text-align:center;max-width:560px;margin:0 auto 72px}
+.services__header .section-body{margin:0 auto}
+.services__grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+@media(max-width:768px){.services__grid{grid-template-columns:1fr}}
+.svc-card{
+  background:var(--card);
+  padding:48px 36px;
+  position:relative;overflow:hidden;
+  transition:background .3s;
+}
+.svc-card::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0);transition:transform .5s var(--ease);
+}
+.svc-card:hover{background:var(--card-lt)}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-card__icon{
+  width:48px;height:48px;margin-bottom:28px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(200,169,110,.2);border-radius:50%;
+}
+.svc-card__icon svg{
+  width:20px;height:20px;stroke:var(--gold);
+  fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;
+}
+.svc-card h3{
+  font-family:var(--display);font-size:1.3rem;
+  font-weight:400;letter-spacing:.02em;
+  color:var(--ivory);margin-bottom:14px;
+}
+.svc-card p{
+  font-size:.85rem;color:var(--muted);line-height:1.9;
+}
+
+/* ── PREPLANNING ── */
+.preplanning{background:var(--deep);padding:120px 0}
+.preplanning__inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+@media(max-width:768px){.preplanning__inner{grid-template-columns:1fr;gap:48px}}
+.preplanning__steps{display:flex;flex-direction:column;gap:32px;margin-top:40px}
+.step{
+  display:grid;grid-template-columns:40px 1fr;
+  gap:20px;align-items:start;
+}
+.step__num{
+  font-family:var(--display);font-size:1.8rem;
+  font-weight:300;color:rgba(200,169,110,.3);
+  line-height:1;
+}
+.step h4{
+  font-family:var(--display);font-size:1.05rem;
+  font-weight:400;color:var(--ivory);margin-bottom:6px;
+}
+.step p{font-size:.83rem;color:var(--muted);line-height:1.85}
+.preplanning__visual{
+  position:relative;
+}
+.preplanning__visual img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;
+  border-radius:2px;filter:brightness(.75) saturate(.6);
+}
+.preplanning__badge{
+  position:absolute;bottom:-20px;right:-20px;
+  background:var(--gold);color:var(--black);
+  padding:24px 28px;border-radius:2px;
+  font-family:var(--display);
+}
+.preplanning__badge-num{font-size:2.2rem;font-weight:500;line-height:1}
+.preplanning__badge-lbl{
+  font-family:var(--body);font-size:.62rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  margin-top:4px;color:rgba(0,0,0,.6);
+}
+@media(max-width:768px){.preplanning__badge{right:0;bottom:-10px}}
+
+/* ── GRIEF RESOURCES ── */
+.grief{background:var(--black);padding:120px 0}
+.grief__header{text-align:center;max-width:540px;margin:0 auto 68px}
+.grief__header .section-body{margin:0 auto}
+.grief__grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:2px;
+}
+@media(max-width:640px){.grief__grid{grid-template-columns:1fr}}
+.grief-card{
+  background:var(--warm);padding:40px 36px;
+  border-left:2px solid transparent;
+  transition:all .3s;
+}
+.grief-card:hover{
+  background:var(--card);
+  border-left-color:var(--gold);
+}
+.grief-card h3{
+  font-family:var(--display);font-size:1.15rem;
+  font-weight:400;color:var(--ivory);margin-bottom:10px;
+}
+.grief-card p{font-size:.85rem;color:var(--muted);line-height:1.9}
+.grief-card__link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:16px;font-size:.72rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);transition:gap .3s;
+}
+.grief-card:hover .grief-card__link{gap:10px}
+
+/* ── TESTIMONIALS ── */
+.testimonials{background:var(--warm);padding:120px 0}
+.testimonials__header{text-align:center;margin-bottom:64px}
+.testimonials__grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+@media(max-width:768px){.testimonials__grid{grid-template-columns:1fr}}
+.testimonial{
+  background:var(--card);padding:40px 32px;
+  position:relative;
+}
+.testimonial::before{
+  content:'\201C';
+  position:absolute;top:20px;left:28px;
+  font-family:var(--display);font-size:4rem;
+  color:rgba(200,169,110,.12);line-height:1;
+}
+.testimonial__stars{
+  display:flex;gap:4px;margin-bottom:20px;
+}
+.testimonial__stars span{color:var(--gold);font-size:.8rem}
+.testimonial p{
+  font-family:var(--display);font-size:.98rem;
+  font-style:italic;font-weight:300;
+  color:rgba(245,240,232,.65);line-height:1.9;
+  margin-bottom:20px;
+}
+.testimonial__author{
+  font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+}
+
+/* ── CONTACT ── */
+.contact{background:var(--deep);padding:120px 0}
+.contact__inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;
+}
+@media(max-width:768px){.contact__inner{grid-template-columns:1fr;gap:48px}}
+.contact__info{padding-top:8px}
+.contact__note{
+  font-size:.88rem;color:var(--muted);line-height:1.9;
+  margin-bottom:40px;
+}
+.contact__detail{
+  display:flex;align-items:start;gap:16px;
+  margin-bottom:24px;
+}
+.contact__detail-icon{
+  width:36px;height:36px;flex-shrink:0;
+  border:1px solid rgba(200,169,110,.2);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;margin-top:2px;
+}
+.contact__detail-icon svg{
+  width:14px;height:14px;stroke:var(--gold);
+  fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+}
+.contact__detail-label{
+  font-size:.65rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:4px;
+}
+.contact__detail-val{
+  font-size:.92rem;color:rgba(245,240,232,.7);
+}
+.contact__hours{
+  margin-top:36px;padding:24px 28px;
+  background:var(--warm);border-radius:2px;
+  border-top:1px solid rgba(200,169,110,.15);
+}
+.contact__hours h4{
+  font-family:var(--display);font-size:1rem;
+  font-weight:400;color:var(--ivory);margin-bottom:14px;
+}
+.contact__hours-row{
+  display:flex;justify-content:space-between;
+  font-size:.82rem;color:var(--muted);
+  padding:6px 0;border-bottom:1px solid var(--border);
+}
+.contact__hours-row:last-child{border-bottom:none}
+/* Form */
+.form{display:flex;flex-direction:column;gap:16px}
+.form__group{display:flex;flex-direction:column;gap:6px}
+.form__label{
+  font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);
+}
+.form__input,.form__textarea,.form__select{
+  background:var(--warm);
+  border:1px solid var(--border-md);
+  border-radius:2px;padding:14px 16px;
+  color:var(--ivory);font-family:var(--body);
+  font-size:.9rem;font-weight:300;
+  transition:border-color .3s;outline:none;
+  width:100%;
+}
+.form__input:focus,.form__textarea:focus,.form__select:focus{
+  border-color:rgba(200,169,110,.4);
+}
+.form__textarea{resize:vertical;min-height:130px}
+.form__select option{background:var(--warm)}
+.form__row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:480px){.form__row{grid-template-columns:1fr}}
+.form__note{
+  font-size:.75rem;color:var(--muted);
+  line-height:1.7;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--black);
+  border-top:1px solid var(--border);
+  padding:56px 40px 32px;
+}
+.footer__inner{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;
+  gap:48px;margin-bottom:48px;
+}
+@media(max-width:768px){.footer__inner{grid-template-columns:1fr;gap:32px}}
+.footer__brand p{
+  font-size:.85rem;color:var(--muted);
+  line-height:1.9;max-width:280px;margin-top:12px;
+}
+.footer__col h4{
+  font-family:var(--display);font-size:.9rem;
+  font-weight:400;color:var(--ivory);
+  margin-bottom:16px;letter-spacing:.04em;
+}
+.footer__col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer__col ul a{
+  font-size:.82rem;color:var(--muted);
+  transition:color .3s;
+}
+.footer__col ul a:hover{color:var(--ivory)}
+.footer__bottom{
+  max-width:var(--max);margin:0 auto;
+  padding-top:24px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;
+}
+.footer__copy{font-size:.72rem;color:var(--fog);letter-spacing:.08em}
+.footer__tagline{
+  font-family:var(--display);font-size:.85rem;
+  font-style:italic;color:rgba(200,169,110,.4);
+}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal.rl{transform:translateX(-28px)}
+.reveal.rr{transform:translateX(28px)}
+.reveal.rl.visible,.reveal.rr.visible{transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav__logo">Hallow <span>&</span> Grace</div>
+  <ul class="nav__links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#preplanning">Pre-Planning</a></li>
+    <li><a href="#grief">Resources</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav__cta">Reach Out</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero__bg"></div>
+  <div class="hero__content">
+    <div class="hero__rule"></div>
+    <div class="hero__eyebrow">Serving Families Since 1952</div>
+    <h1>Hallow <em>&</em> Grace</h1>
+    <p class="hero__tagline">Honoring Lives. Comforting Families.</p>
+    <div class="hero__actions">
+      <a href="#contact" class="btn btn--gold">Speak With Us</a>
+      <a href="#preplanning" class="btn btn--outline">Plan Ahead</a>
+    </div>
+  </div>
+  <div class="hero__scroll">
+    <span>scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about__grid">
+      <div class="reveal rl">
+        <div class="about__quote">
+          <p>"Every life is a story worth telling with care."</p>
+          <cite>— The Grace Family, Founders</cite>
+        </div>
+      </div>
+      <div class="reveal rr">
+        <div class="section-label">Our Story</div>
+        <h2 class="section-title">Three generations of <em>gentle guidance</em></h2>
+        <p class="section-body" style="margin-bottom:20px">Since 1952, Hallow & Grace has served the families of Frederick County with quiet dignity and unwavering compassion. What began as a small family practice has grown into a trusted institution — but our values have never changed.</p>
+        <p class="section-body" style="margin-bottom:32px">We believe that every life deserves to be honored fully, and every family deserves to feel held through one of life's most difficult transitions. We are here — not just to help you plan, but to walk alongside you.</p>
+        <div style="display:flex;gap:40px">
+          <div>
+            <div style="font-family:var(--display);font-size:2.2rem;font-weight:300;color:var(--ivory)">70+</div>
+            <div style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px">Years Serving</div>
+          </div>
+          <div>
+            <div style="font-family:var(--display);font-size:2.2rem;font-weight:300;color:var(--ivory)">12k+</div>
+            <div style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px">Families Served</div>
+          </div>
+          <div>
+            <div style="font-family:var(--display);font-size:2.2rem;font-weight:300;color:var(--ivory)">24/7</div>
+            <div style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px">Always Available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services__header reveal">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Services offered with <em>care</em></h2>
+      <p class="section-body">Every arrangement is handled personally. We offer a full range of services designed to honor your loved one in the way that feels most true to who they were.</p>
+    </div>
+    <div class="services__grid">
+      <div class="svc-card reveal d1">
+        <div class="svc-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Traditional Services</h3>
+        <p>A full traditional service with visitation, funeral ceremony, and committal. We coordinate every detail — flowers, clergy, music, and transportation — so your family can simply be present.</p>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-card__icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Cremation Services</h3>
+        <p>Dignified cremation options ranging from direct cremation to full memorial services. We guide you through every choice with patience and without pressure.</p>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h3>Memorial Celebrations</h3>
+        <p>A personalized celebration of life that reflects who your loved one truly was. We help you create a gathering that feels meaningful, warm, and deeply personal.</p>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Graveside Services</h3>
+        <p>An intimate ceremony at the burial site. Simple, meaningful, and unhurried. We coordinate with cemeteries throughout the region on your behalf.</p>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-card__icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Veteran Honors</h3>
+        <p>We are honored to serve those who served. Full military honors coordination, including flag presentation, bugle call, and burial in a veterans cemetery.</p>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Transportation</h3>
+        <p>Professional, dignified transportation for your loved one — locally and across state lines. Available 24 hours a day, every day of the year.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREPLANNING -->
+<section class="preplanning" id="preplanning">
+  <div class="container">
+    <div class="preplanning__inner">
+      <div class="reveal rl">
+        <div class="section-label">Plan Ahead</div>
+        <h2 class="section-title">A gift of <em>clarity</em> for those you love</h2>
+        <p class="section-body" style="margin-bottom:8px">Pre-planning your arrangements is one of the most considerate things you can do for your family. It removes the burden of difficult decisions during an already painful time.</p>
+        <div class="preplanning__steps">
+          <div class="step reveal d1">
+            <div class="step__num">01</div>
+            <div>
+              <h4>Schedule a Conversation</h4>
+              <p>Sit down with one of our planners — in person, by phone, or virtually. There is no obligation, no pressure. Just a quiet conversation.</p>
+            </div>
+          </div>
+          <div class="step reveal d2">
+            <div class="step__num">02</div>
+            <div>
+              <h4>Document Your Wishes</h4>
+              <p>Together we record your preferences — service type, music, readings, flowers, burial or cremation. Every detail, honored exactly as you intended.</p>
+            </div>
+          </div>
+          <div class="step reveal d3">
+            <div class="step__num">03</div>
+            <div>
+              <h4>Secure Your Plan</h4>
+              <p>Lock in today's pricing with flexible funding options. Your family will never have to wonder what you would have wanted.</p>
+            </div>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn--outline" style="margin-top:36px;display:inline-flex">Begin Pre-Planning →</a>
+      </div>
+      <div class="reveal rr">
+        <div class="preplanning__visual">
+          <div style="width:100%;aspect-ratio:4/5;background:var(--card);border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:1px dashed rgba(200,169,110,.2);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(200,169,110,.4)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span style="font-family:var(--body);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,169,110,.35)">Client Photography</span>
+          </div>
+          <div class="preplanning__badge">
+            <div class="preplanning__badge-num">100%</div>
+            <div class="preplanning__badge-lbl">Transferable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRIEF RESOURCES -->
+<section class="grief" id="grief">
+  <div class="container">
+    <div class="grief__header reveal">
+      <div class="section-label">Grief Support</div>
+      <h2 class="section-title">You are not <em>alone</em></h2>
+      <p class="section-body">Grief does not end when the service does. We remain available to the families we serve long after the arrangements are complete.</p>
+    </div>
+    <div class="grief__grid">
+      <div class="grief-card reveal d1">
+        <h3>Grief Support Groups</h3>
+        <p>We host free monthly gatherings for those navigating loss. A quiet space to share, listen, and feel less alone in the process of grieving.</p>
+        <a href="#contact" class="grief-card__link">Learn More →</a>
+      </div>
+      <div class="grief-card reveal d2">
+        <h3>One-on-One Counseling</h3>
+        <p>Referrals to licensed grief counselors in the area. We maintain relationships with trusted professionals who understand loss deeply.</p>
+        <a href="#contact" class="grief-card__link">Get a Referral →</a>
+      </div>
+      <div class="grief-card reveal d1">
+        <h3>Children & Grief</h3>
+        <p>Resources specifically for families navigating how to talk to children about death and loss — age-appropriate, compassionate, and honest.</p>
+        <a href="#contact" class="grief-card__link">Access Resources →</a>
+      </div>
+      <div class="grief-card reveal d2">
+        <h3>Community Resources</h3>
+        <p>Local hospice partners, clergy connections, meal coordination, and practical support for families in the weeks following a loss.</p>
+        <a href="#contact" class="grief-card__link">View Resources →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="testimonials__header reveal">
+      <div class="section-label">Families We've Served</div>
+      <h2 class="section-title">Words from those <em>we've walked with</em></h2>
+    </div>
+    <div class="testimonials__grid">
+      <div class="testimonial reveal d1">
+        <div class="testimonial__stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p>"From the first phone call, we felt cared for. They handled everything with such grace and patience. My mother would have been grateful."</p>
+        <div class="testimonial__author">— Patricia M., Frederick MD</div>
+      </div>
+      <div class="testimonial reveal d2">
+        <div class="testimonial__stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p>"We had no idea where to begin. The team at Hallow & Grace walked us through every step gently. We will be forever grateful for their kindness."</p>
+        <div class="testimonial__author">— The Reyes Family</div>
+      </div>
+      <div class="testimonial reveal d3">
+        <div class="testimonial__stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p>"My father was a veteran and they honored him with so much dignity. Every detail was perfect. This is a truly special place."</p>
+        <div class="testimonial__author">— James T., Hagerstown MD</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact__inner">
+      <div class="reveal rl">
+        <div class="section-label">Reach Out</div>
+        <h2 class="section-title">We are here, <em>whenever you need us</em></h2>
+        <p class="contact__note">There is no wrong time to call. Whether you are in the middle of a loss, planning ahead, or simply have questions — we welcome your call with open hands.</p>
+        <div class="contact__detail">
+          <div class="contact__detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.04 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact__detail-label">24-Hour Line</div>
+            <div class="contact__detail-val">(301) 555-0192</div>
+          </div>
+        </div>
+        <div class="contact__detail">
+          <div class="contact__detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact__detail-label">Email</div>
+            <div class="contact__detail-val">care@hallowandgrace.com</div>
+          </div>
+        </div>
+        <div class="contact__detail">
+          <div class="contact__detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact__detail-label">Location</div>
+            <div class="contact__detail-val">112 Grace Lane, Frederick MD 21701</div>
+          </div>
+        </div>
+        <div class="contact__hours">
+          <h4>Office Hours</h4>
+          <div class="contact__hours-row"><span>Monday — Friday</span><span>8am — 6pm</span></div>
+          <div class="contact__hours-row"><span>Saturday</span><span>9am — 4pm</span></div>
+          <div class="contact__hours-row"><span>Sunday</span><span>By appointment</span></div>
+          <div class="contact__hours-row"><span>Emergency Line</span><span>24 / 7</span></div>
+        </div>
+      </div>
+      <div class="reveal rr">
+        <div class="form">
+          <div class="form__group">
+            <label class="form__label">Your Name</label>
+            <input type="text" class="form__input" placeholder="Full name">
+          </div>
+          <div class="form__row">
+            <div class="form__group">
+              <label class="form__label">Phone</label>
+              <input type="tel" class="form__input" placeholder="(301) 555-0000">
+            </div>
+            <div class="form__group">
+              <label class="form__label">Email</label>
+              <input type="email" class="form__input" placeholder="you@email.com">
+            </div>
+          </div>
+          <div class="form__group">
+            <label class="form__label">How Can We Help</label>
+            <select class="form__select">
+              <option value="">Select a reason</option>
+              <option>I've experienced a recent loss</option>
+              <option>I'd like to pre-plan arrangements</option>
+              <option>I have a general question</option>
+              <option>I'm looking for grief support</option>
+            </select>
+          </div>
+          <div class="form__group">
+            <label class="form__label">Message</label>
+            <textarea class="form__textarea" placeholder="Please share anything you'd like us to know before we speak..."></textarea>
+          </div>
+          <p class="form__note">We respond to all messages within a few hours. For immediate needs, please call our 24-hour line.</p>
+          <button class="btn btn--gold" style="width:100%;justify-content:center">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div style="font-family:var(--display);font-size:1.2rem;font-weight:400;letter-spacing:.08em">Hallow <span style="color:var(--gold);font-style:italic">&</span> Grace</div>
+      <p>Serving the families of Frederick County with dignity, compassion, and care since 1952.</p>
+    </div>
+    <div class="footer__col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Traditional Services</a></li>
+        <li><a href="#services">Cremation</a></li>
+        <li><a href="#services">Celebrations of Life</a></li>
+        <li><a href="#services">Veteran Honors</a></li>
+        <li><a href="#preplanning">Pre-Planning</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#grief">Grief Resources</a></li>
+        <li><a href="#grief">Support Groups</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#about">Our Story</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__copy">© 2025 Hallow & Grace Funeral Home. All rights reserved.</div>
+    <div class="footer__tagline">"Every life, honored fully."</div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
