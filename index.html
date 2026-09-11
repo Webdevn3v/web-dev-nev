@@ -1022,7 +1022,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .door-questions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:1100px;margin:0 auto;padding:0 28px 28px;gap:1px}
 .door-question{min-height:0;padding:28px 24px;background:var(--card);border:1px solid var(--border);position:relative;overflow:hidden}
 .door-question__inner{text-align:left;max-width:none}.door-question__kicker{font-family:var(--display);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}.door-question h2{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.16;max-width:22ch;margin:0}.door-question__small{margin:10px 0 0;max-width:460px;font-size:.78rem;color:var(--muted);line-height:1.55}.door-question__signal{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--signal);margin-right:7px;vertical-align:1px}
-@media(max-width:700px){.question-fold>summary{padding:20px 20px}.door-questions{grid-template-columns:1fr;padding:0 20px 20px}.door-question{padding:20px 18px}.door-question h2{font-size:1.15rem}.door-question__small{font-size:.74rem}}
+@media(max-width:700px){.question-fold>summary{padding:20px 20px}.door-questions{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 8vw 20px;gap:12px}.door-questions::-webkit-scrollbar{display:none}.door-question{flex:0 0 84vw;padding:24px 20px;scroll-snap-align:center}.door-question__inner{text-align:center}.door-question h2{font-size:1.25rem;max-width:22ch;margin:0 auto}.door-question__small{font-size:.76rem;margin:10px auto 0}.door-question__kicker{text-align:center}}
 </style>
 <details class="question-fold">
 <summary><span class="question-fold__label"><small>Think like the customer</small><strong>A few questions worth asking.</strong></span><span class="question-fold__plus">+</span></summary>
@@ -1030,7 +1030,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker"><span class="door-question__signal"></span>Mobile</div><h2>When was the last time you used your business on mobile?</h2><p class="door-question__small">Not checked whether it loads. Actually used it the way a customer would.</p></div></div>
   <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">Repeated questions</div><h2>Do customers keep asking you the same thing?</h2><p class="door-question__small">Can they get the answer before they have to ask you?</p></div></div>
   <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">The next step</div><h2>What do you want them to do next?</h2><p class="door-question__small">Book. Call. Order. Text. Visit. Request a quote.</p></div></div>
-  <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">The Digital Side</div><h2>That is the path we build.</h2><p class="door-question__small">Simple when simple is enough. More interactive when the business benefits from it.</p></div></div>
+  <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">The Digital Side</div><h2>Let’s build the right way through.</h2><p class="door-question__small">Built around what they came to do.</p></div></div>
 </section>
 </details>
 
