@@ -1015,59 +1015,29 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
 <!-- ─── OPENING QUESTIONS ─────────────────── -->
 <style>
-.door-questions-wrap{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.door-questions{background:var(--black);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:1180px;margin:0 auto}
-.door-question{min-height:32svh;display:flex;align-items:center;justify-content:center;padding:46px 34px;position:relative;overflow:hidden}
-.door-question + .door-question{border-top:1px solid rgba(255,255,255,.035)}
-.door-question::before{content:'';position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,var(--lime-glow),transparent 68%);filter:blur(12px);opacity:.45}
-.door-question__inner{position:relative;z-index:1;max-width:780px;text-align:center}
-.door-question__kicker{font-family:var(--display);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
-.door-question h2{font-size:clamp(1.55rem,3.2vw,2.7rem);line-height:1.12;max-width:18ch;margin:0 auto}
-.door-question__small{margin:18px auto 0;max-width:500px;font-size:clamp(.86rem,1.3vw,1rem);color:var(--muted);line-height:1.75}
-.door-question__signal{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 10px var(--signal-glow);margin-right:8px;vertical-align:1px}
-.door-question--answer h2{max-width:18ch}
-.door-question--answer .door-question__small{color:var(--light)}
-.door-question-nav{display:none}
-@media(max-width:720px){.door-questions{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;max-width:none;padding:0 8vw}.door-questions::-webkit-scrollbar{display:none}.door-question{flex:0 0 84vw;min-height:52svh;padding:44px 22px;scroll-snap-align:center;border-left:1px solid rgba(255,255,255,.06)}.door-question h2{font-size:clamp(1.8rem,9vw,2.8rem)}.door-question__small{font-size:.82rem}.door-question + .door-question{border-top:0}.door-question-nav{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 0 20px}.door-question-dots{display:flex;gap:8px}.door-question-dot{width:7px;height:7px;border-radius:999px;background:#3b3e3f;transition:width .25s,background .25s}.door-question-dot.active{width:24px;background:var(--lime);box-shadow:0 0 12px var(--lime-glow)}.door-question-hint{font-family:var(--display);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}}
+.question-fold{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.question-fold>summary{list-style:none;cursor:pointer;max-width:1100px;margin:auto;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.question-fold>summary::-webkit-details-marker{display:none}.question-fold__label small{display:block;font-family:var(--display);font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}.question-fold__label strong{font-family:var(--heading);font-size:clamp(1.15rem,2.4vw,1.65rem);color:var(--white)}.question-fold__plus{font-size:1.35rem;color:var(--lime);transition:transform .2s}.question-fold[open] .question-fold__plus{transform:rotate(45deg)}
+.door-questions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:1100px;margin:0 auto;padding:0 28px 28px;gap:1px}
+.door-question{min-height:0;padding:28px 24px;background:var(--card);border:1px solid var(--border);position:relative;overflow:hidden}
+.door-question__inner{text-align:left;max-width:none}.door-question__kicker{font-family:var(--display);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}.door-question h2{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.16;max-width:22ch;margin:0}.door-question__small{margin:10px 0 0;max-width:460px;font-size:.78rem;color:var(--muted);line-height:1.55}.door-question__signal{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--signal);margin-right:7px;vertical-align:1px}
+@media(max-width:700px){.question-fold>summary{padding:20px 20px}.door-questions{grid-template-columns:1fr;padding:0 20px 20px}.door-question{padding:20px 18px}.door-question h2{font-size:1.15rem}.door-question__small{font-size:.74rem}}
 </style>
-<div class="door-questions-wrap">
+<details class="question-fold">
+<summary><span class="question-fold__label"><small>Think like the customer</small><strong>A few questions worth asking.</strong></span><span class="question-fold__plus">+</span></summary>
 <section class="door-questions" id="doorQuestions" aria-label="Questions about your customer experience">
-  <div class="door-question reveal">
-    <div class="door-question__inner">
-      <div class="door-question__kicker"><span class="door-question__signal"></span>Think like the customer</div>
-      <h2>When was the last time you used your business on mobile?</h2>
-      <p class="door-question__small">Not checked whether it loads. Actually used it the way a customer would.</p>
-    </div>
-  </div>
-  <div class="door-question reveal">
-    <div class="door-question__inner">
-      <div class="door-question__kicker">A question worth noticing</div>
-      <h2>Do customers keep asking you the same thing?</h2>
-      <p class="door-question__small">What is it — and can they get the answer before they have to ask you?</p>
-    </div>
-  </div>
-  <div class="door-question reveal">
-    <div class="door-question__inner">
-      <div class="door-question__kicker">The next step</div>
-      <h2>What do you want them to do next?</h2>
-      <p class="door-question__small">Book. Call. Order. Text. Visit. Request a quote. The Door gets them there without making them hunt for it.</p>
-    </div>
-  </div>
-  <div class="door-question door-question--answer reveal">
-    <div class="door-question__inner">
-      <div class="door-question__kicker"><span class="door-question__signal"></span>The Digital Side</div>
-      <h2>That is the path we build.</h2>
-      <p class="door-question__small">Simple when simple is enough. More interactive when the business actually benefits from it.</p>
-    </div>
-  </div>
+  <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker"><span class="door-question__signal"></span>Mobile</div><h2>When was the last time you used your business on mobile?</h2><p class="door-question__small">Not checked whether it loads. Actually used it the way a customer would.</p></div></div>
+  <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">Repeated questions</div><h2>Do customers keep asking you the same thing?</h2><p class="door-question__small">Can they get the answer before they have to ask you?</p></div></div>
+  <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">The next step</div><h2>What do you want them to do next?</h2><p class="door-question__small">Book. Call. Order. Text. Visit. Request a quote.</p></div></div>
+  <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">The Digital Side</div><h2>That is the path we build.</h2><p class="door-question__small">Simple when simple is enough. More interactive when the business benefits from it.</p></div></div>
 </section>
-<div class="door-question-nav" aria-hidden="true"><div class="door-question-dots"><i class="door-question-dot active"></i><i class="door-question-dot"></i><i class="door-question-dot"></i><i class="door-question-dot"></i></div><span class="door-question-hint">Swipe to continue →</span></div>
-</div>
+</details>
 
 <!-- ─── DIGITAL DOOR / CUSTOMER PATH ───────── -->
 <section class="cpath" id="cpath">
 <style>
-.cpath{background:var(--black);padding:112px 0}
+.cpath{background:var(--black);padding:48px 0}
+.cpath-fold{max-width:900px;margin:0 auto}.cpath-fold>summary{list-style:none;cursor:pointer;padding:22px 4px;border-top:1px solid var(--border-md);border-bottom:1px solid var(--border-md);display:flex;justify-content:space-between;align-items:center;gap:18px}.cpath-fold>summary::-webkit-details-marker{display:none}.cpath-fold>summary small{display:block;font-family:var(--display);font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}.cpath-fold>summary strong{font-family:var(--heading);font-size:clamp(1.25rem,2.8vw,1.8rem);color:var(--white)}.cpath-fold>summary b{color:var(--lime);font-size:1.3rem;transition:transform .2s}.cpath-fold[open]>summary b{transform:rotate(45deg)}.cpath-fold__intro{font-size:.82rem;color:var(--muted);line-height:1.65;margin:22px auto;max-width:680px;text-align:center}
 .cpath__header{text-align:center;max-width:650px;margin:0 auto 56px}
 .cpath__header p{font-size:.94rem;color:var(--muted);margin-top:14px;line-height:1.8}
 .owner-showcase{max-width:900px;margin:0 auto 58px;display:grid;grid-template-columns:minmax(230px,.72fr) 1.28fr;gap:44px;align-items:center;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-xl);padding:30px}
@@ -1107,12 +1077,9 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 @media(max-width:760px){.owner-showcase__visual iframe{height:72svh}}
 </style>
   <div class="container">
-    <div class="cpath__header reveal">
-      <div class="tag" style="justify-content:center">Explore the clearest example</div>
-      <h2>Built Around What They Came to Do.</h2>
-      <p>The Door is the focused mobile experience. It can stand in front of an existing website, connect to the tools a business already uses, and keep deeper information available without making every customer dig for it first.</p>
-    </div>
-
+    <details class="cpath-fold">
+      <summary><span><small>Explore the clearest example</small><strong>Built Around What They Came to Do.</strong></span><b>+</b></summary>
+      <p class="cpath-fold__intro">The Door is the focused mobile experience. It can stand in front of an existing website, connect to the tools a business already uses, and keep deeper information available without making every customer dig for it first.</p>
     <div class="owner-showcase reveal" id="ownerKeyShowcase">
       <div class="owner-showcase__visual">
         <iframe src="key-frederick.html" title="Avery Bennett Digital Key" loading="lazy"></iframe>
@@ -1128,6 +1095,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <a href="door-frederick-legacy-law.html" class="btn btn--outline" style="margin-top:22px">Experience the Frederick Door <span class="btn__arr">→</span></a>
       </div>
     </div>
+    </details>
 
   </div>
 </section>
@@ -1206,12 +1174,12 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .services__grid .svc--wide p{align-self:start;max-width:680px}
 .services__grid .svc--wide .svc__tag{grid-column:3;grid-row:1/3;margin:0;white-space:nowrap}
 .services .path-library-collapsed{margin-top:38px}
-.owner-update-addon{margin-top:14px;padding:0 24px;border:1px solid var(--border-md);background:rgba(169,177,162,.035)}.owner-update-addon summary{list-style:none;cursor:pointer;padding:20px 0;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}.owner-update-addon summary::-webkit-details-marker{display:none}.owner-update-addon__eyebrow{font-family:var(--display);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}.owner-update-addon strong{font-family:var(--heading);font-size:1rem;color:var(--white)}.owner-update-addon p{font-size:.82rem;color:var(--muted);line-height:1.65;padding:0 0 20px}.owner-update-addon__price{font-family:var(--display);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--light);white-space:nowrap}
+.owner-update-addon{margin-top:14px;padding:0 24px;border:1px solid var(--border-md);background:rgba(169,177,162,.035)}.owner-update-addon summary{list-style:none;cursor:pointer;padding:18px 0;display:flex;gap:12px;align-items:baseline}.owner-update-addon__eyebrow{min-width:0}.owner-update-addon strong{flex:1}.owner-update-addon__price{margin-left:auto}.owner-update-addon summary::-webkit-details-marker{display:none}.owner-update-addon__eyebrow{font-family:var(--display);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}.owner-update-addon strong{font-family:var(--heading);font-size:1rem;color:var(--white)}.owner-update-addon p{font-size:.82rem;color:var(--muted);line-height:1.65;padding:0 0 20px}.owner-update-addon__price{font-family:var(--display);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--light);white-space:nowrap}
 .services .refresh{margin-top:14px;padding:0;background:transparent}.services .refresh>.container{width:100%;padding:0}.services .refresh__card{max-width:none}.work .path-library-collapsed{margin-top:34px}
 .services{padding-bottom:36px}
 @media(max-width:700px){.services__grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.services__grid .svc:not(.svc--wide){min-height:310px;padding:28px 18px}.services__grid .svc--wide{grid-column:1/-1!important;min-height:170px;padding:25px 20px;grid-template-columns:42px minmax(0,1fr) auto;column-gap:14px}.services__grid .svc--wide .svc__icon{width:40px;height:40px}.services__grid .svc--wide .svc__tag{font-size:.5rem}.services__grid .svc h3{font-size:.88rem}.services__grid .svc p{font-size:.75rem;line-height:1.6}.offer-option{padding:0 14px}.offer-option summary{align-items:flex-start;flex-direction:column;gap:5px;position:relative;padding-right:22px}.offer-option summary::after{position:absolute;right:0;top:20px}.offer-option summary strong{font-size:.82rem}.offer-option summary span{font-size:.5rem}.offer-option__body{font-size:.76rem}}
 @media(max-width:390px){.services__grid .svc:not(.svc--wide){min-height:290px;padding:24px 14px}.services__grid .svc--wide{grid-template-columns:36px minmax(0,1fr);grid-template-rows:auto auto auto}.services__grid .svc--wide .svc__icon{grid-row:1/3;width:34px;height:34px}.services__grid .svc--wide .svc__tag{grid-column:2;grid-row:3;margin-top:12px}.services__grid .svc p{font-size:.7rem}}
-@media(max-width:700px){.owner-update-addon{grid-template-columns:1fr auto;gap:8px 14px;padding:18px}.owner-update-addon p{grid-column:1/-1}.owner-update-addon__price{grid-column:2;grid-row:1}}
+@media(max-width:700px){.owner-update-addon{padding:0 18px}.owner-update-addon summary{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}.owner-update-addon__eyebrow{grid-column:1}.owner-update-addon strong{grid-column:1;font-size:.92rem}.owner-update-addon__price{grid-column:2;grid-row:1/3;align-self:center}.owner-update-addon p{padding-bottom:18px}}
 </style>
   <div class="container">
     <div class="reveal"><div class="tag">The Breakdown</div><h2>Start where the problem is.</h2><p class="lead" style="margin-top:14px">The Digital Door is the core entry product. Deeper site work gets scoped only when the business behind it actually needs more.</p></div>
@@ -1245,7 +1213,15 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
-<!-- ─── WHAT'S BEHIND THE RESULTS ──────────── -->
+<!-- ─── CUSTOMER + PROCESS PAIR ───────────── -->
+<style>
+.experience-pair{background:var(--dark);padding:46px 0}.experience-pair__grid{width:100%;max-width:1100px;margin:auto;padding:0 28px;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.experience-pair .behind,.experience-pair .process{padding:0;background:transparent}.experience-pair .behind>.container,.experience-pair .process>.container{padding:28px;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);height:100%}
+.experience-pair .behind__header,.experience-pair .process .reveal:first-child{text-align:left!important;margin:0 0 26px!important;max-width:none!important}.experience-pair .behind__header .tag,.experience-pair .process .tag{justify-content:flex-start!important}.experience-pair h2{font-size:clamp(1.45rem,2.5vw,2.1rem)!important}.experience-pair .behind__grid{grid-template-columns:1fr;gap:17px;margin:0}.experience-pair .behind-item[style]{grid-column:auto!important;max-width:none!important;margin:0!important}.experience-pair .process__steps{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}.experience-pair .process__step{padding:0!important}.experience-pair .process__circle{width:42px;height:42px}.experience-pair .process__dots{display:none}.experience-pair .process .lead{font-size:.78rem!important;line-height:1.5!important;text-align:left!important;margin:10px 0 0!important}
+@media(max-width:780px){.experience-pair{padding:30px 0}.experience-pair__grid{grid-template-columns:1fr;padding:0 20px}.experience-pair .behind>.container,.experience-pair .process>.container{padding:22px}.experience-pair .process__steps{grid-template-columns:1fr 1fr}.experience-pair .behind-item p,.experience-pair .process__step p{font-size:.74rem}}
+</style>
+<div class="experience-pair"><div class="experience-pair__grid">
+
 <section class="behind" id="behind">
 <style>
 .behind{background:var(--dark);padding:100px 0}
@@ -1289,37 +1265,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
-<!-- ─── DIGITAL REFRESH ────────────────────── -->
-<section class="refresh" id="refresh">
-<style>
-.refresh{background:var(--black);padding:88px 0}
-@media(max-width:860px){.refresh{padding:56px 0}.refresh__card{padding:32px 24px}}
-.refresh__card{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:44px 40px;text-align:center}.refresh__card>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px}.refresh__card>summary::-webkit-details-marker{display:none}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding-top:12px}
-.refresh__card h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:8px}
-.refresh__card .lead{margin:0 auto 24px;max-width:440px;text-align:center}
-.refresh__uses{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:24px}
-.refresh__uses span{font-family:var(--display);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 12px;border:1px solid var(--border-md);border-radius:3px}
-.refresh__note{font-size:.82rem;color:var(--muted);margin-bottom:24px}
-.refresh__note strong{color:var(--lime)}
-@media(max-width:700px){.refresh__card{padding:0 22px;text-align:left}.refresh__card>summary{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:18px}.refresh__card>summary .tag{justify-content:flex-start;margin:0}.refresh__card>summary h2{font-size:1.2rem;margin:7px 0 0}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding:0 0 26px;text-align:center}.refresh__body .lead{font-size:.84rem}.refresh__uses{margin-bottom:18px}.refresh__uses span{font-size:.52rem}}
-</style>
-  <div class="container">
-    <details class="refresh__card reveal" id="refreshDetails">
-      <summary><div><div class="tag" style="justify-content:center">Digital Refresh</div><h2>Things Change.<br>Come Back When They Do.</h2></div><span class="refresh__summary-plus">+</span></summary>
-      <div class="refresh__body">
-      <p class="lead">Seasonal updates, new offers, pricing changes, new photos — handled à la carte, whenever you need it.</p>
-      <div class="refresh__uses">
-        <span>Seasonal Updates</span><span>New Services</span><span>Pricing Changes</span><span>New Photos</span><span>Booking Changes</span><span>QR Updates</span><span>Promotions</span>
-      </div>
-      <p class="refresh__note">No mandatory monthly plan. <strong>Quick, Seasonal, or Full Refresh</strong> — come back only when your business does.</p>
-      <a href="project-inquiry.html?request=refresh" class="btn btn--lime">Request a Refresh →</a>
-      </div>
-    </details>
-  </div>
-</section>
 
 
-<!-- ─── PROCESS ───────────────────────────── -->
 <section class="process" id="process">
 <style>@media(max-width:700px){.process{padding:58px 0}.process .lead{font-size:.82rem!important;line-height:1.55}.process__steps{margin-top:34px}.process__step{padding-top:4px;padding-bottom:10px}}</style>
   <div class="container">
@@ -1368,11 +1315,44 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
+
+</div></div>
+
+<!-- ─── DIGITAL REFRESH ────────────────────── -->
+<section class="refresh" id="refresh">
+<style>
+.refresh{background:var(--black);padding:34px 0 42px}
+@media(max-width:860px){.refresh{padding:56px 0}.refresh__card{padding:32px 24px}}
+.refresh__card{max-width:900px;margin:0 auto;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:0 28px;text-align:left}.refresh__card>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0}.refresh__card>summary::-webkit-details-marker{display:none}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding:0 0 24px}
+.refresh__card h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:8px}
+.refresh__card .lead{margin:0 0 20px;max-width:560px;text-align:left}
+.refresh__uses{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:8px;margin-bottom:20px}
+.refresh__uses span{font-family:var(--display);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 12px;border:1px solid var(--border-md);border-radius:3px}
+.refresh__note{font-size:.82rem;color:var(--muted);margin-bottom:24px}
+.refresh__note strong{color:var(--lime)}
+@media(max-width:700px){.refresh__card{padding:0 22px;text-align:left}.refresh__card>summary{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:18px}.refresh__card>summary .tag{justify-content:flex-start;margin:0}.refresh__card>summary h2{font-size:1.2rem;margin:7px 0 0}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding:0 0 26px;text-align:center}.refresh__body .lead{font-size:.84rem}.refresh__uses{margin-bottom:18px}.refresh__uses span{font-size:.52rem}}
+</style>
+  <div class="container">
+    <details class="refresh__card reveal" id="refreshDetails">
+      <summary><div><div class="tag" style="justify-content:center">Digital Refresh</div><h2>Things Change.<br>Come Back When They Do.</h2></div><span class="refresh__summary-plus">+</span></summary>
+      <div class="refresh__body">
+      <p class="lead">Seasonal updates, new offers, pricing changes, new photos — handled à la carte, whenever you need it.</p>
+      <div class="refresh__uses">
+        <span>Seasonal Updates</span><span>New Services</span><span>Pricing Changes</span><span>New Photos</span><span>Booking Changes</span><span>QR Updates</span><span>Promotions</span>
+      </div>
+      <p class="refresh__note">No mandatory monthly plan. <strong>Quick, Seasonal, or Full Refresh</strong> — come back only when your business does.</p>
+      <a href="project-inquiry.html?request=refresh" class="btn btn--lime">Request a Refresh →</a>
+      </div>
+    </details>
+  </div>
+</section>
+
+
 <!-- ─── CONTACT ───────────────────────────── -->
-<section class="contact" id="contact">
+<section class="contact" id="contact" style="padding:24px 0 0">
 <style>
 .contact-collapse{border-top:1px solid var(--border-md);border-bottom:1px solid var(--border-md)}
-.contact-collapse>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:28px 0}
+.contact-collapse>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 0}
 .contact-collapse>summary::-webkit-details-marker{display:none}.contact-collapse__label{display:flex;flex-direction:column;gap:6px}.contact-collapse__label small{font-family:var(--display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}.contact-collapse__label strong{font-family:var(--heading);font-size:clamp(1.35rem,3vw,1.9rem);color:var(--white)}.contact-collapse__plus{color:var(--lime);font-size:1.4rem}.contact-collapse[open] .contact-collapse__plus{transform:rotate(45deg)}
 .contact-simple{padding:8px 0 38px}.contact-simple__intro{max-width:690px;color:var(--muted);line-height:1.7;margin-bottom:24px}.inquiry-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.inquiry-card{min-height:150px;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:28px;display:flex;flex-direction:column;justify-content:center;transition:transform .2s,border-color .2s}.inquiry-card:hover{transform:translateY(-2px);border-color:rgba(166,255,0,.45)}.inquiry-card .tag{margin-bottom:8px}.inquiry-card h3{font-size:1.25rem;margin:0 0 8px}.inquiry-card p{font-size:.84rem;color:var(--muted);line-height:1.6;margin:0}.inquiry-card--short{box-shadow:inset 3px 0 0 var(--lime)}
 @media(max-width:760px){.inquiry-card{padding:20px 16px;min-height:132px}.inquiry-card h3{font-size:.95rem}.inquiry-card p{font-size:.72rem}}
@@ -1391,9 +1371,9 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <!-- ─── ABOUT ──────────────────────────────── -->
 <section class="about-teaser" id="aboutTeaser" aria-label="Meet the Developer">
 <style>
-.about-teaser{background:var(--dark);padding:0;margin-top:-24px}
+.about-teaser{background:var(--dark);padding:0;margin-top:0}
 .about-teaser .container{border-top:1px solid var(--border)}
-.about-teaser__button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:24px 0;border:0;border-bottom:1px solid var(--border-md);background:transparent!important;color:var(--light)!important;font-family:var(--display);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;text-align:left;cursor:pointer;box-shadow:none!important;border-radius:0!important}
+.about-teaser__button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 0;border:0;border-bottom:1px solid var(--border-md);background:transparent!important;color:var(--light)!important;font-family:var(--display);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;text-align:left;cursor:pointer;box-shadow:none!important;border-radius:0!important}
 .about-teaser__button:hover{color:var(--lime)!important;border-bottom-color:rgba(166,255,0,.48)}
 .about-teaser__arrow{color:var(--lime);font-size:1rem}
 </style>
@@ -1446,20 +1426,6 @@ document.querySelectorAll('a,button,.proj-card,.svc,.price-card,.process__step')
 /* ── NAV ─────────────────────────────── */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>60));
-
-const questionTrack=document.getElementById('doorQuestions');
-const questionDots=[...document.querySelectorAll('.door-question-dot')];
-if(questionTrack&&questionDots.length){
-  const syncQuestionDots=()=>{
-    const cards=[...questionTrack.querySelectorAll('.door-question')];
-    const center=questionTrack.scrollLeft+questionTrack.clientWidth/2;
-    let active=0,closest=Infinity;
-    cards.forEach((card,index)=>{const distance=Math.abs(card.offsetLeft+card.offsetWidth/2-center);if(distance<closest){closest=distance;active=index}});
-    questionDots.forEach((dot,index)=>dot.classList.toggle('active',index===active));
-  };
-  questionTrack.addEventListener('scroll',syncQuestionDots,{passive:true});
-  syncQuestionDots();
-}
 
 const refreshSection=document.getElementById('refresh');
 const ownerUpdate=document.querySelector('.owner-update-addon');
