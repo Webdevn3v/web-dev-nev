@@ -230,8 +230,8 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     <!-- STEP 2 — WHAT SHOULD PEOPLE DO -->
     <div class="step" data-step="2">
       <div class="step-num">02</div>
-      <div class="step-title">What Should People Do?</div>
-      <p class="step-intro">When someone finds you online, where should we get them?</p>
+      <div class="step-title">What Should Customers Do?</div>
+      <p class="step-intro">Choose the action that matters most, then add anything customers repeatedly ask or struggle to find.</p>
 
       <div class="field">
         <label class="field-label">What's the main thing you want a customer to do?</label>
@@ -265,7 +265,7 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     <!-- STEP 3 — WHAT ARE WE WORKING WITH -->
     <div class="step" data-step="3">
       <div class="step-num">03</div>
-      <div class="step-title">What Are We Working With?</div>
+      <div class="step-title">What Already Exists?</div>
       <p class="step-intro">No technical knowledge required. “I don't know” is a perfectly good answer.</p>
 
       <div class="field">
@@ -316,6 +316,10 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
           <label class="choice"><input type="checkbox" name="already_use" value="Analytics"><span>Analytics</span></label>
           <label class="choice"><input type="checkbox" name="already_use" value="None / I'm not sure"><span>None / I'm not sure</span></label>
         </div>
+      </div>
+
+      <div class="security-note" style="margin-top:24px">
+        <strong>For Digital Junk Drawer or Full Build projects:</strong> account access may be needed later. Never send passwords by email. If access is needed, you’ll receive exact instructions for the safest way to share it.
       </div>
 
       <div class="step-nav">
@@ -392,12 +396,9 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
     <!-- STEP 6 — THANK YOU -->
     <div class="step" data-step="6">
       <div class="thankyou">
-        <div class="thankyou-mark">04</div>
+        <div class="thankyou-mark">✓</div>
         <h1>Thanks—it’s sent.</h1>
-        <p>You’ll hear back soon. I’ve got your side from here.</p>
-        <div class="security-note">
-          <strong>Security note:</strong> Never send passwords through this form or by email. If I need access to an account, I'll tell you exactly what I need and how to share it safely.
-        </div>
+        <p>Your intake is in. You’ll hear back soon.</p>
         <a href="door.html" class="back-link" style="justify-content:center">← Back to Digital Door</a>
       </div>
     </div>
@@ -414,7 +415,7 @@ textarea{min-height:96px;resize:vertical;line-height:1.5}
   var dots = Array.prototype.slice.call(document.querySelectorAll('.progress-dot'));
   var current = 0;
 
-  var stepNames = ['', 'Your Business', 'What Should People Do?', 'What Are We Working With?', 'What Already Exists?', 'What Does Done Look Like?', ''];
+  var stepNames = ['', 'Your Business', 'What Should Customers Do?', 'What Already Exists?', 'What You Already Have', 'What Does Done Look Like?', ''];
 
   function showStep(i){
     steps.forEach(function(s){
