@@ -938,7 +938,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <a href="#contact">Contact</a>
       </div>
       <div class="nav__right">
-        <a href="door.html" class="btn btn--lime nav__cta">Enter the Door <span class="btn__arr">→</span></a>
         <div class="nav__ham" id="ham" onclick="toggleNav()">
           <span></span><span></span><span></span>
         </div>
@@ -954,7 +953,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <a href="#process" onclick="toggleNav()">Process</a>
   <a href="#about" onclick="toggleNav()">About</a>
   <a href="#contact" onclick="toggleNav()">Contact</a>
-  <a href="door.html" onclick="toggleNav()" class="btn btn--lime" style="margin-top:auto">Enter the Door →</a>
 </div>
 
 <!-- ─── HERO ──────────────────────────────── -->
@@ -1019,12 +1017,12 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <style>
 .door-questions-wrap{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .door-questions{background:var(--black);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:1180px;margin:0 auto}
-.door-question{min-height:44svh;display:flex;align-items:center;justify-content:center;padding:64px 34px;position:relative;overflow:hidden}
+.door-question{min-height:32svh;display:flex;align-items:center;justify-content:center;padding:46px 34px;position:relative;overflow:hidden}
 .door-question + .door-question{border-top:1px solid rgba(255,255,255,.035)}
 .door-question::before{content:'';position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,var(--lime-glow),transparent 68%);filter:blur(12px);opacity:.45}
 .door-question__inner{position:relative;z-index:1;max-width:780px;text-align:center}
 .door-question__kicker{font-family:var(--display);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
-.door-question h2{font-size:clamp(2rem,6vw,4.6rem);line-height:1.08;max-width:15ch;margin:0 auto}
+.door-question h2{font-size:clamp(1.55rem,3.2vw,2.7rem);line-height:1.12;max-width:18ch;margin:0 auto}
 .door-question__small{margin:18px auto 0;max-width:500px;font-size:clamp(.86rem,1.3vw,1rem);color:var(--muted);line-height:1.75}
 .door-question__signal{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:0 0 10px var(--signal-glow);margin-right:8px;vertical-align:1px}
 .door-question--answer h2{max-width:18ch}
@@ -1121,14 +1119,12 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
       <div class="owner-showcase__copy">
         <div class="tag">Frederick Legacy Law · Digital Key</div>
-        <h3>Customers get the Door. The people representing the business get the keys.</h3>
-        <p>Open the Owner Key while networking and let someone scan straight into the Digital Door—no searching, spelling out a URL, or digging through a social profile.</p>
+        <h3>The Door is for customers. The Key is for the people representing the business.</h3>
+        <p>Open the Key while networking and let someone scan straight into the Digital Door.</p>
         <div class="owner-showcase__points">
-          <div class="owner-showcase__point">Every Door includes an Owner Key for Apple Wallet or Google Wallet, the direct Door link, QR asset, and one programmed physical NFC card.</div>
-          <div class="owner-showcase__point">Custom NFC formats can include bracelets, keychains, plaques, signs, or another idea that fits the business.</div>
-          <div class="owner-showcase__point">Team Key enhancements give designated crew members their own digital key or physical tap.</div>
+          <div class="owner-showcase__point">Door clients leave with the direct link, QR asset, digital Key, and one programmed physical NFC card.</div>
+          <div class="owner-showcase__point">Team Keys and custom NFC formats can be added when the business needs more ways in.</div>
         </div>
-        <div class="owner-showcase__wallet">Owner access, built into the Door.</div>
         <a href="door-frederick-legacy-law.html" class="btn btn--outline" style="margin-top:22px">Experience the Frederick Door <span class="btn__arr">→</span></a>
       </div>
     </div>
@@ -1196,7 +1192,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .services__grid .svc--wide p{align-self:start;max-width:680px}
 .services__grid .svc--wide .svc__tag{grid-column:3;grid-row:1/3;margin:0;white-space:nowrap}
 .services .path-library-collapsed{margin-top:38px}
-.owner-update-addon{margin-top:14px;padding:22px 24px;border:1px solid var(--border-md);background:rgba(169,177,162,.035);display:grid;grid-template-columns:minmax(210px,.7fr) 1.3fr auto;gap:24px;align-items:center}.owner-update-addon strong{font-family:var(--heading);font-size:1rem;color:var(--white)}.owner-update-addon p{font-size:.82rem;color:var(--muted);line-height:1.65}.owner-update-addon__price{font-family:var(--display);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.owner-update-addon{margin-top:14px;padding:0 24px;border:1px solid var(--border-md);background:rgba(169,177,162,.035)}.owner-update-addon summary{list-style:none;cursor:pointer;padding:20px 0;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}.owner-update-addon summary::-webkit-details-marker{display:none}.owner-update-addon__eyebrow{font-family:var(--display);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}.owner-update-addon strong{font-family:var(--heading);font-size:1rem;color:var(--white)}.owner-update-addon p{font-size:.82rem;color:var(--muted);line-height:1.65;padding:0 0 20px}.owner-update-addon__price{font-family:var(--display);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--light);white-space:nowrap}
 .services .refresh{margin-top:14px;padding:0;background:transparent}.services .refresh>.container{width:100%;padding:0}.services .refresh__card{max-width:none}.work .path-library-collapsed{margin-top:34px}
 .services{padding-bottom:36px}
 @media(max-width:700px){.services__grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.services__grid .svc:not(.svc--wide){min-height:310px;padding:28px 18px}.services__grid .svc--wide{grid-column:1/-1!important;min-height:170px;padding:25px 20px;grid-template-columns:42px minmax(0,1fr) auto;column-gap:14px}.services__grid .svc--wide .svc__icon{width:40px;height:40px}.services__grid .svc--wide .svc__tag{font-size:.5rem}.services__grid .svc h3{font-size:.88rem}.services__grid .svc p{font-size:.75rem;line-height:1.6}.offer-option{padding:0 14px}.offer-option summary{align-items:flex-start;flex-direction:column;gap:5px;position:relative;padding-right:22px}.offer-option summary::after{position:absolute;right:0;top:20px}.offer-option summary strong{font-size:.82rem}.offer-option summary span{font-size:.5rem}.offer-option__body{font-size:.76rem}}
@@ -1214,23 +1210,23 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <details class="offer-option"><summary><span>Need less?</span><strong>Simple Door</strong></summary><div class="offer-option__body"><b>Starting at $100</b>One focused page for schedules, events, products, portfolio highlights, contact information, and social links. Pay once; keep the page and QR.<br><a href="https://webdevn3v.github.io/stoneandstardust/" target="_blank" rel="noopener">View Stone &amp; Stardust →</a></div></details>
       <details class="offer-option"><summary><span>Need more?</span><strong>Customized Full Build</strong></summary><div class="offer-option__body"><b>Starting at $750</b>A custom responsive website and complete customer journey built from start to finish.</div></details>
     </div>
-    <div class="owner-update-addon reveal"><strong>Live Owner Update System</strong><p>For information that changes often, connect an existing tool or include a simple owner-controlled update option at handoff.</p><span class="owner-update-addon__price">+$75 enhancement</span></div>
-    <details class="path-library path-library-collapsed" id="otherDoorPaths"><summary class="path-library-toggle"><span>More businesses that can benefit from a Door</span><span>+</span></summary><div class="path-library__inside">
+    <details class="owner-update-addon reveal"><summary><span class="owner-update-addon__eyebrow">Need enhancement?</span><strong>Live System</strong><span class="owner-update-addon__price">+$75</span></summary><p>For information that changes often, connect an existing tool or include a simple owner-controlled update option at handoff.</p></details>
+    <details class="path-library path-library-collapsed" id="otherDoorPaths"><summary class="path-library-toggle"><span>More businesses. Different customer paths.</span><span>+</span></summary><div class="path-library__inside">
       <div class="path-library__head reveal">
         <div class="tag" style="justify-content:center">Different Business. Different Path.</div>
         <h3>A Door fits the business it is built for.</h3>
         <p>Open an example to see how different customers can be routed without repeating one template across every industry.</p>
       </div>
       <div class="path-examples">
-        <details class="path-example reveal"><summary><span class="path-example__name">Restaurant + Catering</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Menu</span><span>Order + Reserve</span><span>Hours + Directions</span><span>Catering</span><span>Private Events</span><span>Event Inquiry</span></div><p class="path-example__note">Someone planning dinner should not have to take the same route as someone planning a 75-person event.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Realtor + Property Team</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Featured Listings</span><span>Buy</span><span>Sell</span><span>Schedule</span><span>Save Contact</span><span>Call + Text</span></div><p class="path-example__note">A clean entry point can separate active listings, new leads, and direct contact without losing the personal connection.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">HVAC + Home Comfort</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Emergency Service</span><span>Repair</span><span>Replacement</span><span>Maintenance</span><span>Financing</span><span>Request Service</span></div><p class="path-example__note">Urgent repair customers and planned replacement customers should not have to follow the same route.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Auto Body Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Collision + Dent + Paint</span><span>Vehicle Info</span><span>Send Damage Photos</span><span>Estimate</span><span>Call + Text</span><span>Directions</span></div><p class="path-example__note">Photos and basic vehicle details can reduce back-and-forth before the shop responds.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Tattoo Artist + Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Portfolio</span><span>Styles + Artists</span><span>Custom Inquiry</span><span>Upload Inspo</span><span>Book</span><span>Policies</span></div><p class="path-example__note">For visual businesses, the work itself can appear much earlier because seeing the portfolio helps the customer decide.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Fitness + Community Group</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Next Meetup</span><span>Schedule</span><span>Location</span><span>Join</span><span>Updates</span><span>Socials</span></div><p class="path-example__note">Recurring groups can keep the next time, place, and update easy to find without answering the same questions every week.</p></details>
         <details class="path-example reveal"><summary><span class="path-example__name">Independent Stylist + Barber</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Services + Pricing</span><span>Portfolio</span><span>New Client Info</span><span>Book</span><span>Text</span><span>Location</span></div><p class="path-example__note">Especially useful for booth renters who need a polished personal entry point without building an entire salon website.</p></details>
         <details class="path-example reveal"><summary><span class="path-example__name">Maker + Custom Orders</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Collections</span><span>Inspo</span><span>Custom Request</span><span>Upload Reference</span><span>Upcoming Events</span><span>Where to Shop</span></div><p class="path-example__note">Custom requests can collect the useful details up front so the maker starts the conversation with something to work from.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Tattoo Artist + Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Portfolio</span><span>Styles + Artists</span><span>Custom Inquiry</span><span>Upload Inspo</span><span>Book</span><span>Policies</span></div><p class="path-example__note">For visual businesses, the work itself can appear much earlier because seeing the portfolio helps the customer decide.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Auto Body Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Collision + Dent + Paint</span><span>Vehicle Info</span><span>Send Damage Photos</span><span>Estimate</span><span>Call + Text</span><span>Directions</span></div><p class="path-example__note">Photos and basic vehicle details can reduce back-and-forth before the shop responds.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Realtor + Property Team</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Featured Listings</span><span>Buy</span><span>Sell</span><span>Schedule</span><span>Save Contact</span><span>Call + Text</span></div><p class="path-example__note">A clean entry point can separate active listings, new leads, and direct contact without losing the personal connection.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Fitness + Community Group</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Next Meetup</span><span>Schedule</span><span>Location</span><span>Join</span><span>Updates</span><span>Socials</span></div><p class="path-example__note">Recurring groups can keep the next time, place, and update easy to find without answering the same questions every week.</p></details>
+        <details class="path-example reveal"><summary><span class="path-example__name">Restaurant + Catering</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Menu</span><span>Order + Reserve</span><span>Hours + Directions</span><span>Catering</span><span>Private Events</span><span>Event Inquiry</span></div><p class="path-example__note">Someone planning dinner should not have to take the same route as someone planning a 75-person event.</p></details>
       </div>
-      <div class="path-finish reveal"><div class="path-finish__actions">Call · Text · Email · Full Website ↗</div><p>Every path can end with a quiet utility layer so someone who needs more can keep going. The full website stays available — it just does not have to be the first obstacle.</p></div>
     </div></details>
   </div>
 </section>
@@ -1284,7 +1280,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <style>
 .refresh{background:var(--black);padding:88px 0}
 @media(max-width:860px){.refresh{padding:56px 0}.refresh__card{padding:32px 24px}}
-.refresh__card{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:44px 40px;text-align:center}.refresh__card>summary{list-style:none;cursor:pointer}.refresh__card>summary::-webkit-details-marker{display:none}.refresh__summary-plus{display:none}.refresh__body{padding-top:12px}
+.refresh__card{max-width:760px;margin:0 auto;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:44px 40px;text-align:center}.refresh__card>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px}.refresh__card>summary::-webkit-details-marker{display:none}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding-top:12px}
 .refresh__card h2{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:8px}
 .refresh__card .lead{margin:0 auto 24px;max-width:440px;text-align:center}
 .refresh__uses{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:24px}
@@ -1302,7 +1298,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <span>Seasonal Updates</span><span>New Services</span><span>Pricing Changes</span><span>New Photos</span><span>Booking Changes</span><span>QR Updates</span><span>Promotions</span>
       </div>
       <p class="refresh__note">No mandatory monthly plan. <strong>Quick, Seasonal, or Full Refresh</strong> — come back only when your business does.</p>
-      <a href="#contact" class="btn btn--lime">Request a Refresh →</a>
+      <a href="project-inquiry.html?request=refresh" class="btn btn--lime">Request a Refresh →</a>
       </div>
     </details>
   </div>
@@ -1400,8 +1396,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 </style>
 <div class="container">
 <div class="about-simple__grid">
-<div class="about-simple__photo reveal rl"><div class="about-simple__photo-title"><span>Meet the</span><strong>Developer.</strong></div><img src="about_mim.png" alt="Nev Gonzalez with Method in Motion"><div style="padding-top:14px;font-family:var(--heading);font-size:1.15rem;font-weight:800;color:var(--white)">Nev Gonzalez</div></div>
-<div class="about-simple__copy reveal rr"><div class="tag">The Developer · Maryland</div><h2>The Digital Side grew from seeing both sides of a business.</h2><p>For nearly ten years, Nev helped keep a small business in downtown Frederick moving—at the front of the business and behind the scenes. That meant understanding the customer experience alongside the daily changes, repeated questions, operational pressure, and small details owners carry every day.</p><p>While studying business management and forensic accounting, a Salesforce internship added a closer look at how technology supports the work. After leaving school, self-taught web development brought those experiences together. The result is a practical eye for finding where information, time, and responsibility get lost—then organizing the digital side around how the business actually operates.</p><p>Bring the ideas, unfinished plans, and digital mess. Nev will sort through it, prioritize what matters, and turn what makes sense into a clear system for the business and its customers.</p>
+<div class="about-simple__photo reveal rl"><div class="about-simple__photo-title"><span>Meet the</span><strong>Developer.</strong></div><img src="about_mim.png" alt="Nev Gonzalez with Method in Motion"><div style="padding-top:14px;font-family:var(--heading);font-size:1.15rem;font-weight:800;color:var(--white)">Nev Gonzalez</div><div style="margin-top:4px;font-family:var(--display);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Founder &amp; Lead Developer · The Digital Side · Method in Motion</div></div>
+<div class="about-simple__copy reveal rr"><div class="tag">Developer · Business Systems · Maryland</div><h2>Hey, I’m Nev.</h2><p>Nearly a decade inside a small business in downtown Frederick built the foundation: customer experience, daily operations, repeated questions, changing information, and the details owners carry behind the scenes.</p><p>Business studies, a Salesforce internship, and self-taught web development brought the technical side into the picture. The Digital Side combines those pieces into focused customer paths, custom web experiences, and organized handoff systems built around how a business actually works.</p><p>Bring the unfinished pieces and the digital mess. The job here is to make the next move clearer.</p>
 <div class="about-actions"><a href="mailto:handled@thedigitalside.org?subject=Let%27s%20talk%20about%20my%20business&body=Hi%20Nev%2C%0A%0AI%27d%20like%20to%20talk%20about%20the%20digital%20side%20of%20my%20business.%0A%0ABusiness%20name%20or%20link%3A%20%0AWhat%20feels%20messy%20or%20needs%20handling%3A%20" class="btn btn--lime">Email Nev Directly <span class="btn__arr">→</span></a><a href="the-digital-side.vcf" class="btn btn--outline">Save Complete Contact <span class="btn__arr">↓</span></a></div>
 </div></div>
 </div></section>
@@ -1412,7 +1408,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     <div style="display:flex;justify-content:space-between;gap:28px;align-items:flex-start;flex-wrap:wrap;padding-bottom:28px;border-bottom:1px solid var(--border)">
       <div><div class="footer__brand"><div class="footer__brand-name">the digital side</div><div class="footer__brand-dot"></div></div><p class="footer__tagline" style="margin:0">The Digital Side, handled.<br>Based in Maryland.</p></div>
     </div>
-    <div class="footer__bottom"><div class="footer__copy">&copy; 2026 the digital side · Nev Gonzalez. All rights reserved.</div><p class="footer__legal">Custom HTML, CSS &amp; JavaScript.</p></div>
+    <div class="footer__bottom"><div class="footer__copy">&copy; 2026 the digital side · Nev Gonzalez. All rights reserved.</div><p class="footer__legal"><strong style="color:var(--light);font-weight:600">Built in-house.</strong> Custom development · direct ownership · clean handoff.<br><span style="opacity:.7">HTML · CSS · JavaScript</span></p></div>
   </div>
 </footer>
 
