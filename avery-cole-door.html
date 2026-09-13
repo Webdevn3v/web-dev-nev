@@ -7,14 +7,25 @@
 .stage.done{opacity:0;visibility:hidden;pointer-events:none}
 .scene{position:absolute;top:50%;left:50%;width:1024px;height:1536px;transform:translate(-50%,-50%) scale(var(--door-scale,1));transform-origin:center center}
 .backdrop{position:absolute;inset:0;background:url('avery-door-scene.jpg') center/cover no-repeat;z-index:0}
-.glow{position:absolute;left:28.9063%;top:9.8958%;width:41.9922%;height:64.7135%;z-index:1;opacity:0;transition:opacity 1s ease .1s;
-  background:radial-gradient(130% 95% at 28% 38%,rgba(255,201,130,.92),rgba(150,96,38,.4) 55%,rgba(9,7,5,0) 82%)}
-.door-leaf{position:absolute;left:28.9063%;top:9.8958%;width:41.9922%;height:64.7135%;z-index:2;
+.threshold{position:absolute;left:28.9063%;top:9.8958%;width:41.9922%;height:64.7135%;z-index:1;display:grid;place-items:center;text-align:center;overflow:hidden;background:
+  radial-gradient(90% 70% at 50% 18%,rgba(224,176,108,.22),transparent 58%),
+  linear-gradient(180deg,#2a1b12 0%,#120c08 48%,#090705 100%);
+  box-shadow:inset 0 0 0 1px rgba(234,209,165,.15),inset 0 0 70px rgba(0,0,0,.58)}
+.threshold:before{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,transparent 49.6%,rgba(234,209,165,.08) 50%,transparent 50.4%),
+  linear-gradient(180deg,rgba(234,209,165,.08),transparent 18%);opacity:.6}
+.threshold-copy{position:relative;z-index:1;padding:24px;color:var(--cream);opacity:0;transform:translateY(10px);transition:opacity .45s ease .35s,transform .45s ease .35s}
+.threshold-copy strong{display:block;font:italic 400 2.15rem/1 Georgia,serif;letter-spacing:.02em}
+.threshold-copy span{display:block;margin-top:12px;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)}
+.glow{position:absolute;left:28.9063%;top:9.8958%;width:41.9922%;height:64.7135%;z-index:2;opacity:0;transition:opacity 1s ease .1s;
+  background:radial-gradient(130% 95% at 28% 38%,rgba(255,201,130,.5),rgba(150,96,38,.2) 55%,rgba(9,7,5,0) 82%)}
+.door-leaf{position:absolute;left:28.9063%;top:9.8958%;width:41.9922%;height:64.7135%;z-index:3;
   background:url('avery-door-leaf.jpg') center/100% 100% no-repeat;
   transform-origin:0% 50%;transform-style:preserve-3d;backface-visibility:hidden;
   box-shadow:2px 0 26px rgba(0,0,0,.45);
   transition:transform 1.05s cubic-bezier(.65,0,.35,1),box-shadow 1.05s}
 .stage.open .glow{opacity:1}
+.stage.open .threshold-copy{opacity:1;transform:translateY(0)}
 .stage.open .door-leaf{transform:rotateY(-100deg);box-shadow:10px 0 60px rgba(0,0,0,.6)}
 .bottom-scrim{position:absolute;left:0;right:0;bottom:0;height:42%;z-index:3;pointer-events:none;
   background:linear-gradient(rgba(9,7,5,0),rgba(9,7,5,.88) 68%)}
@@ -52,6 +63,7 @@
 <section class="stage" id="stage">
   <div class="scene">
     <div class="backdrop"></div>
+    <div class="threshold"><div class="threshold-copy"><strong>You&rsquo;re In.</strong><span>Let&rsquo;s get you where you want to go.</span></div></div>
     <div class="glow"></div>
     <div class="door-leaf" id="doorLeaf"></div>
   </div>
