@@ -1067,25 +1067,45 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   </div>
 </section>
 
-<!-- ─── OPENING QUESTIONS ─────────────────── -->
+<!-- ─── THINK LIKE YOUR CUSTOMER ─────────── -->
 <style>
-.question-carousel{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0 42px}
-.question-carousel__head{max-width:1100px;margin:0 auto 22px;padding:0 28px}
-.question-carousel__head small{display:block;font-family:var(--display);font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.question-carousel__head strong{font-family:var(--heading);font-size:clamp(1.15rem,2.4vw,1.65rem);color:var(--white)}
-.door-questions{display:flex;max-width:1100px;margin:0 auto;padding:0 28px 8px;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.customer-think{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 0 62px}
+.customer-think__prompt{max-width:1100px;margin:0 auto;padding:0 28px}
+.customer-think__eyebrow{font-family:var(--display);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--signal);margin-bottom:10px}
+.customer-think__prompt h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:12px}
+.customer-think__answer{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;font-family:var(--display);font-size:clamp(.78rem,1.4vw,1rem);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.customer-think__rotator{color:var(--signal);font-size:clamp(1rem,2vw,1.35rem);font-weight:700;transition:opacity .22s ease,transform .22s ease;display:inline-block}
+.customer-think__rotator.is-changing{opacity:0;transform:translateY(5px)}
+.customer-think__start{margin-top:12px;font-family:var(--heading);font-style:italic;font-weight:700;color:var(--light)}
+.customer-think details{max-width:1100px;margin:34px auto 0;border-top:1px solid var(--border-md)}
+.customer-think summary{list-style:none;cursor:pointer;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.customer-think summary::-webkit-details-marker{display:none}
+.customer-think__summary-copy small{display:block;font-family:var(--display);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--signal);margin-bottom:4px}
+.customer-think__summary-copy strong{font-family:var(--heading);font-size:clamp(1.15rem,2.4vw,1.55rem);color:var(--white)}
+.customer-think__plus{font-size:1.5rem;color:var(--signal);transition:transform .2s}
+.customer-think details[open] .customer-think__plus{transform:rotate(45deg)}
+.door-questions{display:flex;max-width:1100px;margin:0 auto;padding:4px 28px 10px;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .door-questions::-webkit-scrollbar{display:none}
-.door-question{flex:0 0 calc((100% - 24px)/3);min-height:185px;padding:28px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px;position:relative;overflow:hidden;scroll-snap-align:start;display:flex;align-items:flex-end}
-.door-question__inner{text-align:left;max-width:none}.door-question__kicker{font-family:var(--display);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.door-question h2{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.16;max-width:22ch;margin:0}.door-question__signal{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--signal);margin-right:7px;vertical-align:1px}
-@media(max-width:760px){.question-carousel{padding:28px 0 34px}.question-carousel__head{padding:0 20px;margin-bottom:16px}.door-questions{padding:0 8vw 6px;gap:12px}.door-question{flex:0 0 84vw;min-height:190px;padding:24px 20px;scroll-snap-align:center}.door-question__inner{text-align:left}.door-question h2{font-size:1.3rem;max-width:22ch}.door-question__kicker{text-align:left}}
+.door-question{flex:0 0 calc((100% - 24px)/3);min-height:200px;padding:28px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px;scroll-snap-align:start;display:flex;align-items:flex-end}
+.door-question h2{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.16;max-width:22ch;margin:0}
+.door-question__icon{width:40px;height:40px;border:1px solid rgba(166,255,0,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--signal);font-family:var(--display);font-size:1.05rem;margin-bottom:18px;box-shadow:0 0 18px rgba(166,255,0,.06)}
+@media(max-width:760px){.customer-think{padding:42px 0 46px}.customer-think__prompt{padding:0 20px}.customer-think summary{padding:18px 20px}.customer-think details{margin-top:28px}.door-questions{padding:4px 8vw 8px}.door-question{flex:0 0 84vw;min-height:190px;padding:24px 20px;scroll-snap-align:center}.door-question h2{font-size:1.3rem}}
 </style>
-<section class="question-carousel" aria-label="Questions about your customer experience">
-  <div class="question-carousel__head"><small>Think like the customer</small><strong>A few questions worth asking.</strong></div>
-  <div class="door-questions" id="doorQuestions">
-    <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker"><span class="door-question__signal"></span>Mobile</div><h2>When was the last time you used your business on mobile?</h2></div></div>
-    <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">Repeated questions</div><h2>Do customers keep asking you the same thing?</h2></div></div>
-    <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">The next step</div><h2>What do you want them to do next?</h2></div></div>
+<section class="customer-think" aria-label="Think like your customer">
+  <div class="customer-think__prompt">
+    <div class="customer-think__eyebrow">Think like your customer</div>
+    <h2>What do you want them to do next?</h2>
+    <div class="customer-think__answer"><span>Your Digital Door can lead them to</span><span class="customer-think__rotator" id="customerNextStep">BOOK</span></div>
+    <div class="customer-think__start">That’s where we start.</div>
   </div>
+  <details>
+    <summary><span class="customer-think__summary-copy"><small>Think like your customer</small><strong>A few questions worth asking.</strong></span><span class="customer-think__plus">+</span></summary>
+    <div class="door-questions">
+      <div class="door-question"><div><div class="door-question__icon">▯</div><h2>When was the last time you used your business on mobile?</h2></div></div>
+      <div class="door-question"><div><div class="door-question__icon">?</div><h2>Do customers keep asking you the same thing?</h2></div></div>
+      <div class="door-question"><div><div class="door-question__icon">↔</div><h2>What do you want them to do next?</h2></div></div>
+    </div>
+  </details>
 </section>
 
 <!-- ─── SERVICES ──────────────────────────── -->
