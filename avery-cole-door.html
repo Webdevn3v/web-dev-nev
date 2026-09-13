@@ -1,15 +1,71 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Avery Cole Digital Door</title><style>
-*{box-sizing:border-box}html,body{margin:0;background:#090705;color:#f6efe4;font-family:Arial,sans-serif}button,a{font:inherit;color:inherit}
-.entry{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:radial-gradient(circle at 50% 18%,#3a2b1c 0,#120d09 36%,#080604 72%);perspective:1600px;transition:.6s}
-.entry.done{opacity:0;visibility:hidden;pointer-events:none}.wrap{text-align:center;width:min(520px,92vw)}
-.name{font:400 2rem Georgia,serif;letter-spacing:.18em}.sub{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#ccb895;margin:8px 0 18px}
-.frame{width:min(360px,76vw);height:min(620px,66svh);margin:auto;border:1px solid #725a3d;box-shadow:0 24px 70px #000}
-.door{width:100%;height:100%;border:0;background:linear-gradient(155deg,#211911,#090705 72%);position:relative;cursor:pointer;transform-origin:left center;transition:transform 1.15s cubic-bezier(.65,0,.35,1);box-shadow:inset 0 0 0 18px #100c09,inset 0 0 0 20px #5b452c}
-.entry.open .door{transform:rotateY(-105deg)}.mono{font:400 7rem Georgia,serif;color:#d7b27a;position:absolute;inset:0;display:grid;place-items:center;letter-spacing:-.16em}.msg{position:absolute;left:0;right:0;bottom:16%;font:400 .65rem/1.8 Georgia,serif;letter-spacing:.2em;text-transform:uppercase;color:#e9d1ac}
-.open{border:0;background:transparent;margin-top:16px;text-transform:uppercase;letter-spacing:.2em;font-size:.58rem}.open:before{content:"⌄";display:block;font-size:2rem;color:#d7b27a}
-.path{min-height:100svh;background:linear-gradient(#1a120c,#090705);padding:22px 16px}.inner{width:min(720px,100%);margin:auto;text-align:center}.inner h1{font:400 2rem Georgia,serif;letter-spacing:.16em;margin:0}.inner p{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:#c9b393}.inner h2{font:italic 400 clamp(2rem,7vw,4rem)/1 Georgia,serif;margin:42px 0 18px}.call{display:block;background:#f5efe6;color:#100d0a;border-radius:999px;padding:16px;margin-bottom:14px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;text-decoration:none}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{border:1px solid #493722;background:#120d09;border-radius:14px;padding:22px 12px;min-height:108px;display:grid;place-items:center;text-decoration:none}.card b{font:400 1rem Georgia,serif}.utils{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid #493722}.utils a{font-size:.48rem;text-transform:uppercase;text-decoration:none}.dot{display:grid;place-items:center;width:34px;height:34px;border:1px solid #725a3d;border-radius:50%;margin:auto auto 6px;color:#d7b27a}
+:root{--ink:#0b0907;--cream:#f4eadb;--gold:#d2ad73;--gold2:#ead1a5;--line:rgba(210,173,115,.28);--muted:#c7b69d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}html,body{margin:0;background:#090705;color:var(--cream);font-family:Arial,sans-serif}button,a{font:inherit;color:inherit}a{text-decoration:none}
+.entry{position:fixed;inset:0;z-index:20;overflow:hidden;perspective:1800px;background:linear-gradient(#302117 0 10%,#1e1712 10% 100%);transition:opacity .6s,visibility .6s}
+.entry.done{opacity:0;visibility:hidden;pointer-events:none}
+.facade{position:absolute;inset:0;background:
+linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(#312720 0 12%,#271e18 12% 100%);background-size:42px 100%,100% 100%}
+.facade:before,.facade:after{content:"";position:absolute;top:0;bottom:0;width:27vw;max-width:260px;background:
+linear-gradient(90deg,rgba(0,0,0,.38),rgba(0,0,0,.05)),
+repeating-linear-gradient(0deg,#362a22 0 14px,#30251e 14px 28px);opacity:.9}
+.facade:before{left:0}.facade:after{right:0;transform:scaleX(-1)}
+.entry-wrap{position:relative;z-index:2;width:min(760px,100%);height:100svh;margin:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 18px 24px}
+.identity{text-align:center;margin-bottom:12px;text-shadow:0 3px 24px #000}.identity h1{font:400 clamp(1.9rem,5vw,3.1rem)/1 Georgia,serif;letter-spacing:.16em;margin:0}.identity p{margin:8px 0 0;font-size:.62rem;letter-spacing:.21em;text-transform:uppercase}.identity small{display:block;margin-top:8px;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.scene{position:relative;width:min(560px,88vw);height:min(680px,69svh);display:flex;align-items:center;justify-content:center}
+.side-window{position:absolute;top:12%;bottom:9%;width:21%;border:1px solid rgba(255,255,255,.12);background:
+linear-gradient(rgba(42,31,22,.1),rgba(18,12,8,.26)),
+linear-gradient(90deg,transparent 48%,rgba(214,185,145,.26) 49%,rgba(214,185,145,.26) 51%,transparent 52%),
+linear-gradient(0deg,transparent 48%,rgba(214,185,145,.2) 49%,rgba(214,185,145,.2) 51%,transparent 52%),
+#5a432d;box-shadow:inset 0 0 34px rgba(250,196,120,.12)}
+.side-window.left{left:0}.side-window.right{right:0}
+.lantern{position:absolute;top:24%;width:28px;height:54px;border:1px solid rgba(225,190,138,.5);background:linear-gradient(#1b1714,#080706);box-shadow:0 0 26px 12px rgba(255,182,82,.16)}
+.lantern:before{content:"";position:absolute;inset:9px 7px;background:#d6a65f;box-shadow:0 0 18px #d6943d}
+.lantern.left{left:20%}.lantern.right{right:20%}
+.planter{position:absolute;bottom:4%;width:86px;height:104px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(#282521,#111);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.planter:before{content:"✦";position:absolute;left:0;right:0;bottom:70px;text-align:center;font-size:4rem;color:#33402d;text-shadow:0 0 16px rgba(140,158,112,.18)}
+.planter.left{left:8%}.planter.right{right:8%}
+.door-frame{position:relative;width:46%;height:86%;border:1px solid rgba(210,173,115,.45);box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 22px rgba(210,173,115,.1)}
+.door-frame:before{content:"";position:absolute;inset:-14px;border:1px solid rgba(210,173,115,.22);pointer-events:none}
+.door{width:100%;height:100%;border:0;position:relative;cursor:pointer;background:linear-gradient(155deg,#1f1711,#090705 72%);transform-origin:left center;transform-style:preserve-3d;transition:transform 1.15s cubic-bezier(.65,0,.35,1),box-shadow 1.15s;box-shadow:inset 0 0 0 20px #0f0b08,inset 0 0 0 22px rgba(210,173,115,.14)}
+.door:before{content:"";position:absolute;inset:10%;border:1px solid rgba(210,173,115,.28)}
+.door:after{content:"";position:absolute;left:18px;top:48%;width:8px;height:64px;border-radius:4px;background:linear-gradient(#e3c18c,#7e5e37);box-shadow:0 0 12px rgba(227,193,140,.25)}
+.entry.open .door{transform:rotateY(-104deg);box-shadow:0 20px 80px rgba(0,0,0,.58)}
+.monogram{position:absolute;inset:0;display:grid;place-items:center;font:400 clamp(4.7rem,14vw,7rem)/1 Georgia,serif;color:var(--gold);letter-spacing:-.17em;text-shadow:0 3px 20px rgba(0,0,0,.35)}
+.msg{position:absolute;left:0;right:0;bottom:16%;text-align:center;font:400 .62rem/1.8 Georgia,serif;letter-spacing:.19em;text-transform:uppercase;color:var(--gold2)}
+.step{position:absolute;bottom:0;left:17%;right:17%;height:7%;background:linear-gradient(#4d4036,#2d261f);box-shadow:0 12px 24px rgba(0,0,0,.35)}
+.step:before{content:"HOMES  |  PEOPLE  |  COMMUNITY";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;color:#cbb99d;font-size:.42rem;letter-spacing:.12em}
+.open{margin-top:14px;border:0;background:transparent;color:var(--cream);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;cursor:pointer}.open:before{content:"⌄";display:block;font-size:2rem;line-height:1;color:var(--gold);animation:bob 1.6s ease-in-out infinite}@keyframes bob{50%{transform:translateY(5px)}}
+.entry.open .open,.entry.open .identity{opacity:.25;transition:opacity .35s}
+.path{min-height:100svh;background:linear-gradient(#1a120c,#090705);padding:22px 16px}.inner{width:min(720px,100%);margin:auto;text-align:center}.inner h1{font:400 2rem Georgia,serif;letter-spacing:.16em;margin:0}.inner p{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:#c9b393}.inner h2{font:italic 400 clamp(2rem,7vw,4rem)/1 Georgia,serif;margin:42px 0 18px}.call{display:block;background:#f5efe6;color:#100d0a;border-radius:999px;padding:16px;margin-bottom:14px;text-transform:uppercase;letter-spacing:.1em;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{border:1px solid #493722;background:#120d09;border-radius:14px;padding:22px 12px;min-height:108px;display:grid;place-items:center}.card b{font:400 1rem Georgia,serif}.utils{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid #493722}.utils a{font-size:.48rem;text-transform:uppercase}.dot{display:grid;place-items:center;width:34px;height:34px;border:1px solid #725a3d;border-radius:50%;margin:auto auto 6px;color:#d7b27a}
+@media(max-width:560px){.entry-wrap{padding:12px}.identity{margin-bottom:8px}.scene{width:100%;height:68svh}.door-frame{width:54%;height:82%}.side-window{width:19%}.lantern.left{left:17%}.lantern.right{right:17%}.planter{width:58px;height:86px}.planter:before{font-size:3rem;bottom:58px}.step{left:12%;right:12%}}
 </style></head><body>
-<section class="entry" id="entry"><div class="wrap"><div class="name">AVERY COLE</div><div class="sub">REALTOR | Howard County, Maryland</div><div class="frame"><button class="door" id="door"><div class="mono">AC</div><div class="msg">Your Next Move<br>Starts Here.</div></button></div><button class="open" id="openDoor">Open the Door</button></div></section>
+<section class="entry" id="entry">
+  <div class="facade"></div>
+  <div class="entry-wrap">
+    <div class="identity">
+      <h1>AVERY COLE</h1>
+      <p>REALTOR</p>
+      <small>Howard County, Maryland</small>
+    </div>
+    <div class="scene">
+      <div class="side-window left"></div>
+      <div class="side-window right"></div>
+      <div class="lantern left"></div>
+      <div class="lantern right"></div>
+      <div class="planter left"></div>
+      <div class="planter right"></div>
+      <div class="door-frame">
+        <button class="door" id="door" type="button" aria-label="Open Avery Cole Digital Door">
+          <div class="monogram">AC</div>
+          <div class="msg">Your Next Move<br>Starts Here.</div>
+        </button>
+      </div>
+      <div class="step"></div>
+    </div>
+    <button class="open" id="openDoor" type="button">Open the Door</button>
+  </div>
+</section>
 <main class="path"><div class="inner"><h1>AVERY COLE</h1><p>REALTOR | Howard County, Maryland</p><h2>Let's find your<br>next move.</h2><a class="call" href="#">Call Avery</a><div class="grid"><a class="card" href="realtor-index.html#properties"><b>View Listings</b></a><a class="card" href="#"><b>Book a Showing</b></a><a class="card" href="#"><b>I'm Buying</b></a><a class="card" href="#"><b>I'm Selling</b></a></div><nav class="utils"><a href="realtor-key.html"><span class="dot">+</span>Save Contact</a><a href="#"><span class="dot">C</span>Call Now</a><a href="#"><span class="dot">T</span>Text</a><a href="#"><span class="dot">@</span>Email</a><a href="realtor-index.html"><span class="dot">S</span>Full Site</a></nav></div></main>
 <script>const e=document.getElementById('entry');const go=()=>{e.classList.add('open');setTimeout(()=>e.classList.add('done'),1150)};document.getElementById('door').onclick=go;document.getElementById('openDoor').onclick=go;</script>
 </body></html>
