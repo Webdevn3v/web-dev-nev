@@ -985,28 +985,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <a href="door.html" class="btn btn--outline">Enter the Digital Door</a>
         <a href="#contact" class="btn btn--ghost">Contact</a>
       </div>
-      <div class="hero__stats">
-        <div class="hero__stat">
-          <div class="hero__stat-num"><span class="counter-num" data-target="10">10</span><span class="accent">+</span></div>
-          <div class="hero__stat-label">Business Paths</div>
-        </div>
-        <div>
-          <div class="hero__stat-num">100<span class="accent">%</span></div>
-          <div class="hero__stat-label">Built to Fit</div>
-        </div>
-        <div>
-          <div class="hero__stat-num"><span class="accent">✓</span></div>
-          <div class="hero__stat-label">Yours at Handoff</div>
-        </div>
-      </div>
-      <div class="hero__capabilities" aria-label="Services offered">
-        <span class="hero__cap-label">Door can lead to</span>
-        <span class="hero__cap-rotator" id="heroCapability">Booking</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero__scroll">
+        <div class="hero__scroll">
     <span>scroll</span>
     <div class="hero__scroll-line"></div>
   </div>
@@ -1020,27 +999,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .hero__cap-rotator.is-changing{opacity:0;transform:translateY(4px)}
 @media(max-width:520px){.hero__capabilities{margin-top:16px;font-size:.56rem;gap:7px;flex-wrap:wrap}}
 </style>
-
-<!-- ─── OPENING QUESTIONS ─────────────────── -->
-<style>
-.question-carousel{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0 42px}
-.question-carousel__head{max-width:1100px;margin:0 auto 22px;padding:0 28px}
-.question-carousel__head small{display:block;font-family:var(--display);font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
-.question-carousel__head strong{font-family:var(--heading);font-size:clamp(1.15rem,2.4vw,1.65rem);color:var(--white)}
-.door-questions{display:flex;max-width:1100px;margin:0 auto;padding:0 28px 8px;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.door-questions::-webkit-scrollbar{display:none}
-.door-question{flex:0 0 calc((100% - 24px)/3);min-height:185px;padding:28px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px;position:relative;overflow:hidden;scroll-snap-align:start;display:flex;align-items:flex-end}
-.door-question__inner{text-align:left;max-width:none}.door-question__kicker{font-family:var(--display);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.door-question h2{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.16;max-width:22ch;margin:0}.door-question__signal{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--signal);margin-right:7px;vertical-align:1px}
-@media(max-width:760px){.question-carousel{padding:28px 0 34px}.question-carousel__head{padding:0 20px;margin-bottom:16px}.door-questions{padding:0 8vw 6px;gap:12px}.door-question{flex:0 0 84vw;min-height:190px;padding:24px 20px;scroll-snap-align:center}.door-question__inner{text-align:left}.door-question h2{font-size:1.3rem;max-width:22ch}.door-question__kicker{text-align:left}}
-</style>
-<section class="question-carousel" aria-label="Questions about your customer experience">
-  <div class="question-carousel__head"><small>Think like the customer</small><strong>A few questions worth asking.</strong></div>
-  <div class="door-questions" id="doorQuestions">
-    <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker"><span class="door-question__signal"></span>Mobile</div><h2>When was the last time you used your business on mobile?</h2></div></div>
-    <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">Repeated questions</div><h2>Do customers keep asking you the same thing?</h2></div></div>
-    <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">The next step</div><h2>What do you want them to do next?</h2></div></div>
-  </div>
-</section>
 
 <!-- ─── WORK ───────────────────────────────── -->
 <section class="work" id="work">
@@ -1106,6 +1064,27 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ─── OPENING QUESTIONS ─────────────────── -->
+<style>
+.question-carousel{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0 42px}
+.question-carousel__head{max-width:1100px;margin:0 auto 22px;padding:0 28px}
+.question-carousel__head small{display:block;font-family:var(--display);font-size:.54rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.question-carousel__head strong{font-family:var(--heading);font-size:clamp(1.15rem,2.4vw,1.65rem);color:var(--white)}
+.door-questions{display:flex;max-width:1100px;margin:0 auto;padding:0 28px 8px;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.door-questions::-webkit-scrollbar{display:none}
+.door-question{flex:0 0 calc((100% - 24px)/3);min-height:185px;padding:28px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px;position:relative;overflow:hidden;scroll-snap-align:start;display:flex;align-items:flex-end}
+.door-question__inner{text-align:left;max-width:none}.door-question__kicker{font-family:var(--display);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}.door-question h2{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.16;max-width:22ch;margin:0}.door-question__signal{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--signal);margin-right:7px;vertical-align:1px}
+@media(max-width:760px){.question-carousel{padding:28px 0 34px}.question-carousel__head{padding:0 20px;margin-bottom:16px}.door-questions{padding:0 8vw 6px;gap:12px}.door-question{flex:0 0 84vw;min-height:190px;padding:24px 20px;scroll-snap-align:center}.door-question__inner{text-align:left}.door-question h2{font-size:1.3rem;max-width:22ch}.door-question__kicker{text-align:left}}
+</style>
+<section class="question-carousel" aria-label="Questions about your customer experience">
+  <div class="question-carousel__head"><small>Think like the customer</small><strong>A few questions worth asking.</strong></div>
+  <div class="door-questions" id="doorQuestions">
+    <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker"><span class="door-question__signal"></span>Mobile</div><h2>When was the last time you used your business on mobile?</h2></div></div>
+    <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">Repeated questions</div><h2>Do customers keep asking you the same thing?</h2></div></div>
+    <div class="door-question"><div class="door-question__inner"><div class="door-question__kicker">The next step</div><h2>What do you want them to do next?</h2></div></div>
   </div>
 </section>
 
