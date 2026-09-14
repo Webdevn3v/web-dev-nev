@@ -1,46 +1,20 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Avery Cole | Digital Door</title><style>
-:root{--cream:#f4eadb;--gold:#d2ad73;--gold2:#ead1a5;--muted:#c7b69d}
-*{box-sizing:border-box}html{scroll-behavior:smooth}html,body{margin:0;background:#090705;color:var(--cream);font-family:Arial,sans-serif}a,button{font:inherit;color:inherit}a{text-decoration:none}
-.stage{position:fixed;inset:0;z-index:20;overflow:hidden;background:#090705;transition:opacity .45s ease,visibility .45s ease}
-.stage.done{opacity:0;visibility:hidden;pointer-events:none}
-.scene{position:absolute;inset:0;background:
-linear-gradient(180deg,rgba(9,7,5,.12) 0%,rgba(9,7,5,.08) 52%,rgba(9,7,5,.72) 84%,rgba(9,7,5,.94) 100%),
-url('avery-door-scene.jpg') center/cover no-repeat}
-.info{position:absolute;left:0;right:0;bottom:0;z-index:2;text-align:center;padding:0 22px calc(34px + env(safe-area-inset-bottom));text-shadow:0 3px 22px rgba(0,0,0,.58)}
-.info p{margin:0;font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:#e7d3ac}
-.info h1{margin:8px 0 0;font:400 clamp(2.05rem,8vw,3.15rem)/1 Georgia,serif;letter-spacing:.12em;color:var(--cream)}
-.info .role{margin:10px 0 2px;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase}
-.info .place{display:block;font-size:.52rem;letter-spacing:.2em;color:var(--muted)}
-.enter{margin-top:22px;border:1px solid rgba(245,239,230,.62);background:rgba(10,8,6,.42);backdrop-filter:blur(6px);color:var(--cream);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;padding:15px 34px;border-radius:999px;cursor:pointer}
-.path{min-height:100svh;background:linear-gradient(180deg,#21150e 0%,#120d09 38%,#090705 100%);padding:34px 16px 28px}
-.inner{width:min(720px,100%);margin:auto;text-align:center}
-.arrival{padding:18px 8px 28px}
-.arrival .kicker{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:#c9b393}
-.arrival h2{font:italic 400 clamp(2.5rem,9vw,4.7rem)/.95 Georgia,serif;margin:10px 0 10px}
-.arrival p{margin:0 auto;max-width:420px;font-size:.72rem;line-height:1.6;color:#cdbda8}
-.call{display:block;background:#f5efe6;color:#100d0a;border-radius:999px;padding:17px;margin:8px 0 14px;text-transform:uppercase;letter-spacing:.1em;font-weight:700;font-size:.92rem}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{border:1px solid #493722;background:#120d09;border-radius:14px;padding:22px 12px;min-height:108px;display:grid;place-items:center}.card b{font:400 1rem Georgia,serif}
-.utils{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid #493722}.utils a{font-size:.48rem;text-transform:uppercase}.dot{display:grid;place-items:center;width:34px;height:34px;border:1px solid #725a3d;border-radius:50%;margin:auto auto 6px;color:#d7b27a}
-.note{margin-top:22px;font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:#7a6b57}
-@media(max-width:560px){.grid{gap:8px}}
+:root{--ink:#17110d;--espresso:#21150e;--cream:#f3eadf;--paper:#fbf7f0;--gold:#b9905d;--line:#d9c8b1;--muted:#786b5c}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif}a{text-decoration:none;color:inherit}
+.door{position:fixed;inset:0;z-index:20;background:#090705;overflow:hidden;transition:opacity .55s ease,visibility .55s ease}.door.done{opacity:0;visibility:hidden;pointer-events:none}.scene{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,4,.04) 0%,rgba(8,6,4,.1) 48%,rgba(8,6,4,.86) 100%),url('avery-door-scene.jpg') center/cover no-repeat}.identity{position:absolute;left:0;right:0;bottom:0;padding:0 24px calc(32px + env(safe-area-inset-bottom));text-align:center;color:#f6eee3}.broker{font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:#e1c79e}.identity h1{font:400 clamp(2.6rem,10vw,4.5rem)/.95 Georgia,serif;letter-spacing:.08em;margin:10px 0}.meta{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#e7d7c1;line-height:1.8}.enter{margin-top:22px;min-width:210px;padding:15px 30px;border:1px solid rgba(255,255,255,.68);border-radius:999px;background:rgba(12,9,6,.32);backdrop-filter:blur(8px);color:white;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase}
+.path{min-height:100svh;overflow:hidden}.intro{padding:58px 22px 34px;background:var(--cream)}.wrap{max-width:760px;margin:auto}.eyebrow{font-size:.53rem;letter-spacing:.25em;text-transform:uppercase;color:#8c704d}.intro h2{font:italic 400 clamp(3.25rem,14vw,6rem)/.88 Georgia,serif;letter-spacing:-.045em;margin:12px 0 18px}.intro p{max-width:420px;font:400 .83rem/1.65 Arial,sans-serif;color:#65594d;margin:0}
+.routes{background:var(--paper)}.route{position:relative;min-height:48svh;display:flex;align-items:flex-end;overflow:hidden}.route.photo{color:white;background-position:center;background-size:cover}.route.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 24%,rgba(13,9,6,.76) 100%)}.buy{background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=90')}.tour{background-image:url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=90')}.route-copy{position:relative;z-index:2;padding:30px 22px;width:100%}.num{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;opacity:.72}.route h3{font:400 clamp(2.35rem,11vw,4.2rem)/.95 Georgia,serif;margin:7px 0 9px}.route p{font-size:.68rem;line-height:1.55;max-width:370px;margin:0 0 17px;opacity:.84}.go{display:inline-flex;align-items:center;gap:12px;border-bottom:1px solid currentColor;padding-bottom:5px;font-size:.55rem;letter-spacing:.17em;text-transform:uppercase}.sell{min-height:43svh;background:#25170f;color:#f7eee2;align-items:center}.sell .route-copy{padding-top:50px;padding-bottom:50px}.sell h3{font-style:italic}.local{min-height:44svh;background:#d7c2a6;color:#20150f;align-items:center}.local .route-copy{padding-top:48px;padding-bottom:48px}.local h3{max-width:500px}.towns{margin-top:18px;font:italic 400 .9rem Georgia,serif;word-spacing:8px;color:#5e4937}
+.connectbar{position:fixed;z-index:12;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));height:62px;background:rgba(24,16,11,.94);backdrop-filter:blur(14px);color:#f6eee3;border:1px solid rgba(220,193,155,.25);border-radius:18px;display:flex;align-items:center;padding:9px 10px 9px 13px;box-shadow:0 15px 45px rgba(0,0,0,.22)}.monogram{width:38px;height:38px;border:1px solid #b89567;border-radius:50%;display:grid;place-items:center;font:italic 1rem Georgia,serif;margin-right:10px}.who{flex:1}.who b{display:block;font:400 .82rem Georgia,serif}.who small{font-size:.43rem;letter-spacing:.11em;text-transform:uppercase;color:#c5b39c}.connectbtn{border:1px solid #8d704e;background:transparent;color:#f7eee2;border-radius:999px;padding:11px 14px;font-size:.48rem;letter-spacing:.13em;text-transform:uppercase}
+.sheet{position:fixed;z-index:30;left:0;right:0;bottom:0;background:#f8f2e9;color:#1d140e;border-radius:26px 26px 0 0;padding:12px 18px calc(24px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 -20px 60px rgba(0,0,0,.24)}.sheet.open{transform:translateY(0)}.handle{width:40px;height:4px;border-radius:9px;background:#cbbba7;margin:0 auto 22px}.sheethead{display:flex;justify-content:space-between;align-items:start}.sheet h4{font:400 1.7rem Georgia,serif;margin:0}.sheet p{font-size:.52rem;letter-spacing:.13em;text-transform:uppercase;color:#806f5c}.close{border:0;background:none;font-size:1.5rem}.save{display:block;text-align:center;background:#21150e;color:white;border-radius:999px;padding:15px;margin:18px 0 12px;font-size:.57rem;letter-spacing:.17em;text-transform:uppercase}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.quick a{text-align:center;border:1px solid #d8c7b2;border-radius:14px;padding:16px 6px;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase}
+.footer-space{height:105px;background:#d7c2a6}@media(min-width:760px){.intro{padding:90px 7vw 60px}.routes{display:grid;grid-template-columns:1.15fr .85fr}.route{min-height:62vh}.sell,.local{min-height:31vh}.sell{grid-column:2;grid-row:1}.tour{grid-column:1;grid-row:2}.local{grid-column:2;grid-row:2}.route-copy{padding:45px}.connectbar{left:auto;width:370px}}
 </style></head><body>
-<section class="stage" id="stage"><div class="scene"></div><div class="info"><p>Rivermore Real Estate</p><h1>Avery Cole</h1><div class="role">Realtor</div><small class="place">Howard County, Maryland</small><div><button class="enter" id="enterPath" type="button">Enter</button></div></div></section>
-<main class="path" id="path"><div class="inner">
-<section class="arrival"><div class="kicker">Welcome</div><h2>You&rsquo;re In.</h2><p>Let&rsquo;s get you where you want to go.</p></section>
-<a class="call" href="tel:+15555550142">Call Avery Now</a>
-<div class="grid">
-<a class="card" href="realtor-index.html#properties"><b>View Listings</b></a>
-<a class="card" href="mailto:avery@rivermorerealestate.com?subject=Showing%20Request&body=Hi%20Avery%2C%20I%27d%20like%20to%20request%20a%20showing."><b>Book a Showing</b></a>
-<a class="card" href="realtor-index.html#buy"><b>I&rsquo;m Buying</b></a>
-<a class="card" href="realtor-index.html#sell"><b>I&rsquo;m Selling</b></a>
-</div>
-<nav class="utils">
-<a href="sms:+15555550142"><span class="dot">T</span>Text</a>
-<a href="mailto:avery@rivermorerealestate.com"><span class="dot">@</span>Email</a>
-<a href="avery-cole.vcf"><span class="dot">+</span>Save Contact</a>
-<a href="realtor-index.html"><span class="dot">S</span>Full Site</a>
-</nav>
-<p class="note">Demo &middot; Digital Door by The Digital Side</p>
-</div></main>
-<script>document.getElementById('enterPath').addEventListener('click',function(){document.getElementById('stage').classList.add('done');window.scrollTo({top:0,behavior:'instant'})});</script>
-</body></html>
+<section class="door" id="door"><div class="scene"></div><div class="identity"><div class="broker">Rivermore Real Estate</div><h1>Avery Cole</h1><div class="meta">Realtor<br>Howard County, Maryland</div><button class="enter" id="enter">Enter</button></div></section>
+<main class="path"><section class="intro"><div class="wrap"><div class="eyebrow">Welcome in</div><h2>Where are<br>you headed?</h2><p>Buying, selling, or just beginning to look — start where you are.</p></div></section>
+<section class="routes">
+<a class="route photo buy" href="realtor-index.html#properties"><div class="route-copy"><div class="num">01 / Buying</div><h3>Find a home.</h3><p>Explore homes and start narrowing in on what feels right.</p><span class="go">Browse with Avery →</span></div></a>
+<a class="route sell" href="realtor-index.html#sell"><div class="route-copy"><div class="num">02 / Selling</div><h3>Sell yours.</h3><p>Start with your home, your timing, and what a smart move could look like.</p><span class="go">Start a seller conversation →</span></div></a>
+<a class="route photo tour" href="mailto:avery@rivermorerealestate.com?subject=Showing%20Request&body=Hi%20Avery%2C%20I%27d%20like%20to%20see%20a%20property."><div class="route-copy"><div class="num">03 / Showing</div><h3>See a home.</h3><p>Already found one? Go straight to requesting a showing.</p><span class="go">Request a tour →</span></div></a>
+<a class="route local" href="realtor-index.html#about"><div class="route-copy"><div class="num">04 / Local</div><h3>Howard County,<br>through Avery&rsquo;s eyes.</h3><p>Get oriented before you decide where to land.</p><div class="towns">Columbia · Ellicott City · Clarksville · Fulton</div></div></a>
+</section><div class="footer-space"></div></main>
+<div class="connectbar"><div class="monogram">AC</div><div class="who"><b>Avery Cole</b><small>Realtor · Rivermore</small></div><button class="connectbtn" id="connect">Connect ↑</button></div>
+<section class="sheet" id="sheet"><div class="handle"></div><div class="sheethead"><div><h4>Avery Cole</h4><p>Realtor · Rivermore Real Estate</p></div><button class="close" id="close">×</button></div><a class="save" href="avery-cole.vcf">Save Avery to Contacts</a><div class="quick"><a href="tel:+15555550142">Call</a><a href="sms:+15555550142">Text</a><a href="mailto:avery@rivermorerealestate.com">Email</a></div></section>
+<script>const door=document.getElementById('door'),sheet=document.getElementById('sheet');document.getElementById('enter').onclick=()=>door.classList.add('done');document.getElementById('connect').onclick=()=>sheet.classList.add('open');document.getElementById('close').onclick=()=>sheet.classList.remove('open');</script></body></html>
