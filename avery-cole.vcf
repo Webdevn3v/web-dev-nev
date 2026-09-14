@@ -4,7 +4,8 @@ FN:Avery Cole
 ORG:Rivermore Real Estate
 TITLE:REALTOR
 TEL;TYPE=CELL,VOICE:+15555550142
+TEL;TYPE=CELL,TEXT:+15555550142
 EMAIL;TYPE=WORK:avery@rivermorerealestate.com
-URL:https://thedigitalside.org/realtor-door.html
-ADR;TYPE=WORK:;;Howard County;MD;;;USA
+ADR;TYPE=WORK:;Suite 310;220 Merriweather Lane;Columbia;MD;21044;USA
+URL:https://thedigitalside.org/avery-cole-door.html
 END:VCARD

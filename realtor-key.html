@@ -1,3 +1,53 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Avery Cole | Digital Key</title><style>
-*{box-sizing:border-box}body{margin:0;min-height:100svh;background:#050505;display:grid;place-items:center;font-family:Arial,sans-serif;color:#f5eadb}.phone{width:min(430px,100vw);min-height:100svh;padding:38px 28px;display:flex;flex-direction:column;text-align:center;background:linear-gradient(180deg,rgba(9,7,5,.42),rgba(9,7,5,.62)),url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=90') center/cover}.brokerage{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#e7d3ac}.name{font:400 2rem Georgia,serif;letter-spacing:.1em;margin-top:22px}.role{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;margin-top:8px;color:#f5eadb}.place{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-top:6px;color:#c9b593}.qr{width:200px;height:200px;margin:34px auto 8px;display:block;filter:sepia(.2) contrast(1.05);mix-blend-mode:screen}.line{width:48px;height:1px;background:#d8c5a8;margin:20px auto}.bottom{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;line-height:1.7;margin-top:auto}
-</style></head><body><main class="phone"><div class="brokerage">Rivermore Real Estate</div><div class="name">Avery Cole</div><div class="role">Realtor</div><div class="place">Howard County, Maryland</div><img class="qr" alt="Scan to open Avery Cole's Digital Door" src="https://api.qrserver.com/v1/create-qr-code/?size=340x340&amp;data=https%3A%2F%2Fthedigitalside.org%2Frealtor-door.html&amp;color=DCC59C&amp;bgcolor=0B0806&amp;margin=0"><div class="line"></div><div class="bottom">Your Next Move<br>Starts Here.</div></main></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Avery Cole | Digital Key</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17110d;--espresso:#21150e;--cream:#f3eadf;--paper:#fbf7f0;--gold:#b9905d;--line:#d9c8b1;--muted:#786b5c}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{min-height:100svh;background:var(--espresso);display:grid;place-items:center;font-family:'Karla',Arial,sans-serif;color:var(--paper)}
+.key{width:min(430px,100vw);min-height:100svh;position:relative;overflow:hidden;display:flex;flex-direction:column;background:#0c0805 url('avery-door-leaf.jpg') center/cover no-repeat}
+.key::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,8,5,.18) 0%,rgba(15,10,6,.55) 38%,rgba(16,11,7,.93) 58%,var(--espresso) 72%,var(--espresso) 100%)}
+.content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:34px 26px calc(28px + env(safe-area-inset-bottom))}
+.top{text-align:center;padding-top:6px}
+.brokerage{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:#e7d3ac}
+.name{font:400 2.5rem 'Bodoni Moda',Georgia,serif;letter-spacing:.03em;margin:14px 0 6px;color:var(--paper)}
+.role{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--paper)}
+.place{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-top:6px;color:#c9b593}
+.spacer{flex:1;min-height:18px}
+.scan-block{margin-top:auto;display:flex;flex-direction:column;align-items:center;text-align:center}
+.qr-card{background:var(--paper);border-radius:18px;padding:16px;box-shadow:0 18px 45px rgba(0,0,0,.45)}
+.qr-card img{display:block;width:176px;height:176px}
+.scan-label{margin-top:14px;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#e7d3ac}
+.line{width:40px;height:1px;background:#8d704e;margin:20px 0}
+.actions{display:flex;align-items:center;justify-content:center;gap:0;width:100%}
+.actions a{color:var(--paper);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;padding:10px 14px;opacity:.86}
+.actions .divider{width:1px;height:11px;background:rgba(247,238,226,.28)}
+.save{display:block;width:100%;margin-top:14px;text-align:center;padding:14px;border:1px solid rgba(247,238,226,.32);border-radius:999px;color:var(--paper);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase}
+.tag{margin-top:20px;font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:#9c8975;text-align:center;line-height:1.7}
+</style></head><body>
+<main class="key" aria-label="Avery Cole Digital Key">
+  <div class="content">
+    <div class="top">
+      <div class="brokerage">Rivermore Real Estate</div>
+      <div class="name">Avery Cole</div>
+      <div class="role">Realtor</div>
+      <div class="place">Howard County, Maryland</div>
+    </div>
+    <div class="spacer"></div>
+    <div class="scan-block">
+      <div class="qr-card">
+        <img alt="Scan to open Avery Cole's Digital Door" src="https://api.qrserver.com/v1/create-qr-code/?size=352x352&amp;data=https%3A%2F%2Fthedigitalside.org%2Favery-cole-door.html&amp;color=17110D&amp;bgcolor=FBF7F0&amp;margin=0">
+      </div>
+      <div class="scan-label">Scan to open the Digital Door</div>
+      <div class="line"></div>
+      <div class="actions">
+        <a href="tel:+15555550142">Call</a><span class="divider"></span>
+        <a href="sms:+15555550142">Text</a><span class="divider"></span>
+        <a href="mailto:avery@rivermorerealestate.com">Email</a>
+      </div>
+      <a class="save" href="avery-cole.vcf">Save Avery to Contacts</a>
+      <div class="tag">Your Next Move<br>Starts Here.</div>
+    </div>
+  </div>
+</main>
+</body></html>
