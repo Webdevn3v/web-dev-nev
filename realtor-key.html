@@ -1,29 +1,34 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Avery Cole | Digital Key</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="view-transition" content="same-origin"><title>Avery Cole | Digital Key</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#17110d;--espresso:#21150e;--cream:#f3eadf;--paper:#fbf7f0;--gold:#b9905d;--line:#d9c8b1;--muted:#786b5c}
+:root{--ink:#17110d;--espresso:#21150e;--cream:#f3eadf;--paper:#fbf7f0;--gold:#b9905d;--gold-soft:rgba(185,144,93,.16);--line:#d9c8b1;--muted:#786b5c;--display:'Bodoni Moda',Georgia,serif;--sans:'Karla',Arial,sans-serif;--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1)}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
-body{min-height:100svh;background:var(--espresso);display:grid;place-items:center;font-family:'Karla',Arial,sans-serif;color:var(--paper)}
-.key{width:min(430px,100vw);min-height:100svh;position:relative;overflow:hidden;display:flex;flex-direction:column;background:#0c0805 url('avery-door-leaf.jpg') center/cover no-repeat}
-.key::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,8,5,.18) 0%,rgba(15,10,6,.55) 38%,rgba(16,11,7,.93) 58%,var(--espresso) 72%,var(--espresso) 100%)}
-.content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:34px 26px calc(28px + env(safe-area-inset-bottom))}
-.top{text-align:center;padding-top:6px}
-.brokerage{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:#e7d3ac}
-.name{font:400 2.5rem 'Bodoni Moda',Georgia,serif;letter-spacing:.03em;margin:14px 0 6px;color:var(--paper)}
-.role{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--paper)}
-.place{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;margin-top:6px;color:#c9b593}
-.spacer{flex:1;min-height:18px}
-.scan-block{margin-top:auto;display:flex;flex-direction:column;align-items:center;text-align:center}
-.qr-card{background:var(--paper);border-radius:18px;padding:16px;box-shadow:0 18px 45px rgba(0,0,0,.45)}
-.qr-card img{display:block;width:176px;height:176px}
-.scan-label{margin-top:14px;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#e7d3ac}
+body{min-height:100svh;background:var(--espresso);display:grid;place-items:center;font-family:var(--sans);color:var(--paper)}
+.key{view-transition-name:avery-portrait;width:min(430px,100vw);min-height:100svh;position:relative;overflow:hidden;display:flex;flex-direction:column;background:#1a120c url('avery-tds-bracelet.png') center 14%/cover no-repeat}
+.key::after{content:'';position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(120% 60% at 50% 0%,rgba(201,158,90,.1),transparent 62%),linear-gradient(180deg,rgba(9,6,4,.6) 0%,rgba(10,7,5,.2) 20%,rgba(11,7,5,.06) 38%,rgba(12,8,5,.26) 56%,rgba(14,9,6,.76) 72%,var(--espresso) 88%,var(--espresso) 100%);background-size:140px 140px,auto,auto;background-blend-mode:normal,soft-light,normal}
+.content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;padding:clamp(26px,7vw,34px) 22px calc(26px + env(safe-area-inset-bottom))}
+.top{text-align:center;padding-top:4px}
+.brokerage{font-size:.6875rem;letter-spacing:.22em;text-transform:uppercase;color:#e7d3ac;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.name{view-transition-name:avery-name;font:400 clamp(2.1rem,9vw,2.6rem) var(--display);letter-spacing:.03em;margin:14px 0 6px;color:var(--paper);text-shadow:0 2px 14px rgba(0,0,0,.55)}
+.role{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--paper);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.place{font-size:.6875rem;letter-spacing:.15em;text-transform:uppercase;margin-top:6px;color:#c9b593;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.spacer{flex:1;min-height:16px}
+.scan-block{margin-top:auto;display:flex;flex-direction:column;align-items:center;text-align:center;width:100%}
+.qr-wrap{background:var(--espresso);border:1px solid rgba(185,144,93,.4);border-radius:18px;padding:14px;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.qr-wrap img{display:block;width:160px;height:160px;border-radius:6px}
+.scan-label{margin-top:16px;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;color:#e7d3ac}
 .line{width:40px;height:1px;background:#8d704e;margin:20px 0}
-.actions{display:flex;align-items:center;justify-content:center;gap:0;width:100%}
-.actions a{color:var(--paper);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;padding:10px 14px;opacity:.86}
-.actions .divider{width:1px;height:11px;background:rgba(247,238,226,.28)}
-.save{display:block;width:100%;margin-top:14px;text-align:center;padding:14px;border:1px solid rgba(247,238,226,.32);border-radius:999px;color:var(--paper);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase}
-.tag{margin-top:20px;font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:#9c8975;text-align:center;line-height:1.7}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;width:100%}
+.actions a{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 10px;border:1px solid rgba(247,238,226,.3);border-radius:999px;color:var(--paper);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(12,9,6,.32);backdrop-filter:blur(6px);transition:transform 140ms var(--ease-out),background-color 140ms var(--ease-out)}
+.actions a span{font-size:.85rem;line-height:1}
+.actions a:active{transform:scale(.97);background-color:rgba(12,9,6,.5)}
+.save{display:block;width:100%;margin-top:14px;text-align:center;padding:14px;border:1px solid rgba(247,238,226,.32);border-radius:999px;color:var(--paper);font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;transition:transform 140ms var(--ease-out),background-color 140ms var(--ease-out)}
+.save:active{transform:scale(.97);background-color:rgba(247,238,226,.08)}
+.tag{margin-top:20px;font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;color:#9c8975;text-align:center;line-height:1.7}
+@media(prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+::view-transition-group(root){animation-duration:420ms}
+::view-transition-old(root),::view-transition-new(root){animation-timing-function:var(--ease-in-out)}
 </style></head><body>
 <main class="key" aria-label="Avery Cole Digital Key">
   <div class="content">
@@ -35,15 +40,16 @@ body{min-height:100svh;background:var(--espresso);display:grid;place-items:cente
     </div>
     <div class="spacer"></div>
     <div class="scan-block">
-      <div class="qr-card">
-        <img alt="Scan to open Avery Cole's Digital Door" src="https://api.qrserver.com/v1/create-qr-code/?size=352x352&amp;data=https%3A%2F%2Fthedigitalside.org%2Favery-cole-door.html&amp;color=17110D&amp;bgcolor=FBF7F0&amp;margin=0">
+      <div class="qr-wrap">
+        <img alt="Scan to open Avery Cole's Digital Door" src="https://api.qrserver.com/v1/create-qr-code/?size=360x360&amp;data=https%3A%2F%2Fthedigitalside.org%2Favery-cole-door.html&amp;color=F3EADF&amp;bgcolor=21150E&amp;margin=2&amp;ecc=H">
       </div>
-      <div class="scan-label">Scan to open the Digital Door</div>
+      <div class="scan-label">Scan to Open the Digital Door</div>
       <div class="line"></div>
       <div class="actions">
-        <a href="tel:+15555550142">Call</a><span class="divider"></span>
-        <a href="sms:+15555550142">Text</a><span class="divider"></span>
-        <a href="mailto:avery@rivermorerealestate.com">Email</a>
+        <a href="tel:+15555550142"><span>&#9742;</span>Call</a>
+        <a href="sms:+15555550142"><span>&#9993;</span>Text</a>
+        <a href="mailto:avery@rivermorerealestate.com"><span>&#9993;</span>Email</a>
+        <a href="avery-cole-door.html"><span>&#8599;</span>Door</a>
       </div>
       <a class="save" href="avery-cole.vcf">Save Avery to Contacts</a>
       <div class="tag">Your Next Move<br>Starts Here.</div>
