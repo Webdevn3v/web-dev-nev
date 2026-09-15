@@ -279,6 +279,17 @@ body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
 .dispatch-action span{color:var(--copper-soft);font-size:1rem}
 @media(max-width:560px){.stat-scroll{grid-template-columns:1fr auto;gap:4px 10px}.stat-label{grid-column:1/-1}.stat-window{display:block}.stat-value,.stat-detail{display:block}.stat-detail{margin-top:3px}.stat-count{grid-row:2}.dispatch-grid strong{font-size:.68rem}}
 @media(prefers-reduced-motion:reduce){.stat-progress,.dispatch-route b{animation:none}}
+/* ---- make family profiles read as interactive contact controls ---- */
+.family-hint{margin:7px 0 0;color:var(--muted);font-size:.66rem;line-height:1.4}
+.fam-row{align-items:flex-start}
+.fam{position:relative;min-width:70px;padding:3px 2px 7px;border-radius:14px;transition:background-color .2s,transform .2s}
+.fam:hover,.fam:focus-visible{background:rgba(255,255,255,.045);outline:1px solid rgba(155,202,221,.22)}
+.fam-photo{position:relative;box-shadow:0 0 0 1px rgba(155,202,221,.18),0 8px 22px rgba(0,0,0,.22)}
+.fam-photo i{position:absolute;right:-4px;bottom:1px;width:18px;height:18px;border-radius:50%;background:var(--cool-soft);border:2px solid var(--graphite-950);box-shadow:0 4px 10px rgba(0,0,0,.35)}
+.fam-photo i:before{content:"";position:absolute;left:5px;top:4px;width:5px;height:5px;border-right:1.5px solid var(--graphite-950);border-bottom:1.5px solid var(--graphite-950);transform:rotate(-45deg)}
+.fam-action{display:flex;align-items:center;justify-content:center;gap:3px;margin-top:-2px;padding:3px 6px;border-radius:999px;border:1px solid rgba(155,202,221,.22);color:var(--cool-soft);font-size:.5rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+.fam-action span{font-size:.62rem}
+@media(max-width:390px){.fam-row{gap:7px}.fam{min-width:62px}.fam-action{padding:3px 4px;font-size:.45rem}}
 </style>
 </head>
 <body>
@@ -361,11 +372,12 @@ body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
 
 <section class="family reveal" id="family">
   <span class="eyebrow">Meet The Family</span>
+  <p class="family-hint">Tap a profile to call, text, email, or save contact.</p>
   <div class="fam-row">
-    <button class="fam" data-person="dad"><span class="fam-photo f-dad"></span><b>Dad</b></button>
-    <button class="fam" data-person="danny"><span class="fam-photo f-danny"></span><b>Danny</b></button>
-    <button class="fam" data-person="curtis"><span class="fam-photo f-curtis"></span><b>Curtis</b></button>
-    <button class="fam" data-person="pete"><span class="fam-photo f-pete"></span><b>Pete</b></button>
+    <button class="fam" data-person="dad" aria-label="View Dad's founder story"><span class="fam-photo f-dad"><i aria-hidden="true"></i></span><b>Dad</b><small class="fam-action">View story <span>&rarr;</span></small></button>
+    <button class="fam" data-person="danny" aria-label="Open Danny's contact options"><span class="fam-photo f-danny"><i aria-hidden="true"></i></span><b>Danny</b><small class="fam-action">Contact <span>&rarr;</span></small></button>
+    <button class="fam" data-person="curtis" aria-label="Open Curtis's contact options"><span class="fam-photo f-curtis"><i aria-hidden="true"></i></span><b>Curtis</b><small class="fam-action">Contact <span>&rarr;</span></small></button>
+    <button class="fam" data-person="pete" aria-label="Open Pete's contact options"><span class="fam-photo f-pete"><i aria-hidden="true"></i></span><b>Pete</b><small class="fam-action">Contact <span>&rarr;</span></small></button>
   </div>
 </section>
 

@@ -245,6 +245,14 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
   .stat-count{grid-row:2}
 }
 @media(prefers-reduced-motion:reduce){.stat-progress{animation:none}}
+/* ---- use a real image element so mobile Safari cannot stretch the background ---- */
+.service-media{position:relative;min-width:0;min-height:410px;margin:0;overflow:hidden;background:var(--graphite-950)}
+.service-media img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:42% center}
+.service-media:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 58%,var(--graphite-900) 100%);pointer-events:none}
+@media(max-width:820px){
+  .service-media{min-height:0;aspect-ratio:16/10;width:100%}
+  .service-media:after{background:linear-gradient(180deg,transparent 72%,var(--graphite-900) 100%)}
+}
 </style>
 </head>
 <body>
@@ -262,7 +270,9 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
 </section>
 
 <section class="lower reveal" id="process">
-  <div class="service-photo" role="img" aria-label="HVAC technician servicing an outdoor residential air conditioning system"></div>
+  <figure class="service-media">
+    <img src="hvac-condenser-service.png" alt="HVAC technician servicing an outdoor residential air conditioning system" width="2048" height="1365" loading="eager">
+  </figure>
   <div class="service-copy">
     <span class="eyebrow">Local service. Clear answers.</span>
     <h2>When Comfort Stops,<br>We Show Up.</h2>
