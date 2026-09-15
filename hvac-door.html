@@ -245,6 +245,40 @@ body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
 @media(min-width:700px){.door-about{display:grid;grid-template-columns:1fr 1fr}.door-about-photo{border-radius:18px 0 0 18px;border:1px solid var(--line);border-right:0}.door-about-copy{border-radius:0 18px 18px 0;display:flex;flex-direction:column;justify-content:center}.about-full{margin-top:auto}}
 @media(min-width:840px){.card-top{grid-template-areas:"mark quick save emg full"}.emergency>span{display:block}.emergency small{display:none}}
 @media(prefers-reduced-motion:reduce){.live-pulse:after{animation:none}}
+/* ---- separate Stat Scroll from the operational Live Service Board ---- */
+.stat-scroll{position:relative;max-width:960px;margin:21px auto 0;padding:13px 20px 15px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:13px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+.stat-label{font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:var(--copper-soft);white-space:nowrap}
+.stat-window{min-width:0;display:flex;gap:9px;align-items:baseline;white-space:nowrap;overflow:hidden}
+.stat-value{font:800 .77rem var(--display);text-transform:uppercase;transition:opacity .2s,transform .2s}
+.stat-detail{font-size:.68rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;transition:opacity .2s,transform .2s}
+.stat-count{font-size:.55rem;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+.stat-scroll.changing .stat-value,.stat-scroll.changing .stat-detail{opacity:0;transform:translateY(5px)}
+.stat-progress{position:absolute;left:0;bottom:0;width:100%;height:1px;background:linear-gradient(90deg,var(--copper-soft),var(--cool-soft));transform-origin:left;animation:statProgress 4.8s linear infinite}
+@keyframes statProgress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.lou-system{margin-top:22px}
+.dispatch-card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:linear-gradient(145deg,rgba(29,33,36,.96),rgba(21,24,26,.98));box-shadow:0 18px 45px rgba(0,0,0,.25)}
+.dispatch-top{position:relative;padding:18px 18px 16px;background:radial-gradient(circle at 90% 10%,rgba(91,147,172,.13),transparent 45%)}
+.dispatch-kicker{display:block;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cool-soft);margin-bottom:7px}
+.dispatch-top>strong{display:flex;align-items:center;gap:8px;font:800 1.12rem var(--display)}
+.dispatch-top>small{display:block;color:var(--muted);font-size:.68rem;margin:6px 0 14px 24px}
+.dispatch-truck{position:relative;width:16px;height:10px;border:1.5px solid var(--copper-soft);border-radius:2px}
+.dispatch-truck:before{content:"";position:absolute;right:-6px;bottom:-1.5px;width:6px;height:7px;border:1.5px solid var(--copper-soft);border-left:0;border-radius:0 2px 2px 0}
+.dispatch-truck:after{content:"";position:absolute;left:2px;bottom:-4px;width:3px;height:3px;border-radius:50%;background:var(--paper);box-shadow:12px 0 var(--paper)}
+.dispatch-route{display:flex;align-items:center;gap:0;margin-left:2px}
+.dispatch-route i{height:1px;background:linear-gradient(90deg,var(--copper-soft),var(--cool-soft));flex:1}
+.dispatch-route b{width:7px;height:7px;border-radius:50%;background:var(--cool-soft);box-shadow:0 0 10px var(--cool-glow);animation:dispatchMove 3.2s ease-in-out infinite alternate}
+@keyframes dispatchMove{from{transform:translateX(-42px)}to{transform:translateX(42px)}}
+.dispatch-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.dispatch-grid>div{padding:13px 15px}
+.dispatch-grid>div+div{border-left:1px solid var(--line)}
+.dispatch-grid span,.dispatch-grid strong{display:block}
+.dispatch-grid span{font-size:.56rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);line-height:1.35}
+.dispatch-grid strong{font-size:.72rem;margin-top:5px}
+.open-count{font-size:1.05rem;color:#78dbaa;margin-right:2px}
+.dispatch-action{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;color:var(--paper);font-size:.64rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.dispatch-action span{color:var(--copper-soft);font-size:1rem}
+@media(max-width:560px){.stat-scroll{grid-template-columns:1fr auto;gap:4px 10px}.stat-label{grid-column:1/-1}.stat-window{display:block}.stat-value,.stat-detail{display:block}.stat-detail{margin-top:3px}.stat-count{grid-row:2}.dispatch-grid strong{font-size:.68rem}}
+@media(prefers-reduced-motion:reduce){.stat-progress,.dispatch-route b{animation:none}}
 </style>
 </head>
 <body>
@@ -301,11 +335,27 @@ body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
   </div>
 </section>
 
-<section class="status-strip reveal" aria-label="Current Marsh Brothers availability">
-  <div class="lou-head"><span class="live-pulse" aria-hidden="true"></span><div><small>Live Availability</small><strong>Today at Marsh Brothers</strong></div></div>
-  <div class="lou-panel">
-    <div class="lou-primary"><span>Same-Day Openings</span><strong>Available</strong><small>Call now to request a service window</small></div>
-    <div class="lou-secondary"><div><span>Emergency response</span><strong>24 / 7</strong></div><div><span>Current coverage</span><strong>Howard County</strong></div></div>
+<section class="stat-scroll reveal" aria-label="Marsh Brothers highlights">
+  <span class="stat-label">Marsh at a glance</span>
+  <div class="stat-window"><strong class="stat-value" data-stat-value>Family Owned</strong><span class="stat-detail" data-stat-detail>Serving neighbors since 2009</span></div>
+  <span class="stat-count" data-stat-count>01 / 04</span>
+  <i class="stat-progress" aria-hidden="true"></i>
+</section>
+
+<section class="status-strip reveal lou-system" aria-label="Live Marsh Brothers service board">
+  <div class="lou-head"><span class="live-pulse" aria-hidden="true"></span><div><small>Live Service Board</small><strong>Right Now at Marsh Brothers</strong></div></div>
+  <div class="dispatch-card">
+    <div class="dispatch-top">
+      <span class="dispatch-kicker">Current Dispatch</span>
+      <strong><span class="dispatch-truck" aria-hidden="true"></span>Crew 2 · <span data-dispatch-area>Ellicott City</span></strong>
+      <small>Technician en route to a service call</small>
+      <div class="dispatch-route" aria-hidden="true"><i></i><b></b><i></i></div>
+    </div>
+    <div class="dispatch-grid">
+      <div><span>Next appointment window</span><strong data-next-window>Today · 6–8 PM</strong></div>
+      <div><span>Same-day openings</span><strong><b class="open-count" data-open-count>2</b> remaining</strong></div>
+    </div>
+    <a class="dispatch-action" href="tel:+15555550150">Request the next opening <span aria-hidden="true">&rarr;</span></a>
   </div>
 </section>
 
@@ -365,6 +415,41 @@ function enter(){
 }
 airlock.addEventListener('click',enter);
 airlock.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enter()}});
+
+const statSets=[
+  ['Family Owned','Serving neighbors since 2009'],
+  ['4.9 Stars','Trusted by 240+ neighbors'],
+  ['Emergency Ready','Response available 24 / 7'],
+  ['Howard County','Local homes. Local team.']
+];
+document.querySelectorAll('.stat-scroll').forEach(scroll=>{
+  const value=scroll.querySelector('[data-stat-value]');
+  const detail=scroll.querySelector('[data-stat-detail]');
+  const count=scroll.querySelector('[data-stat-count]');
+  let i=0;
+  if(!reduceMotion)setInterval(()=>{
+    scroll.classList.add('changing');
+    setTimeout(()=>{
+      i=(i+1)%statSets.length;
+      value.textContent=statSets[i][0];
+      detail.textContent=statSets[i][1];
+      count.textContent=String(i+1).padStart(2,'0')+' / '+String(statSets.length).padStart(2,'0');
+      scroll.classList.remove('changing');
+    },210);
+  },4800);
+});
+function updateServiceBoard(){
+  const now=new Date();
+  const areas=['Columbia','Ellicott City','Clarksville','Fulton'];
+  const area=areas[Math.floor(now.getHours()/3)%areas.length];
+  const h=now.getHours();
+  const windowText=h<14?'Today · 2–4 PM':h<17?'Today · 4–6 PM':h<20?'Today · 6–8 PM':'Tomorrow · 8–10 AM';
+  const openings=h<15?'3':h<19?'2':'1';
+  document.querySelectorAll('[data-dispatch-area]').forEach(el=>el.textContent=area);
+  document.querySelectorAll('[data-next-window]').forEach(el=>el.textContent=windowText);
+  document.querySelectorAll('[data-open-count]').forEach(el=>el.textContent=openings);
+}
+updateServiceBoard();
 
 const cardTop=document.getElementById('cardTop');
 window.addEventListener('scroll',()=>{cardTop.classList.toggle('scrolled',window.scrollY>8)},{passive:true});

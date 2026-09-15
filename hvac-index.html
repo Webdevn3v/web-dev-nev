@@ -212,6 +212,39 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
   .founder-copy{padding:22px 22px 26px}
   .status-meta span{display:flex;flex-direction:column;gap:3px}
 }
+/* ---- Stat Scroll + operational Live Service Board ---- */
+.stat-scroll{position:relative;margin:0;padding:13px 5vw 15px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;background:#101315;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+.stat-label{font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--copper-soft);white-space:nowrap}
+.stat-window{min-width:0;display:flex;align-items:baseline;gap:10px;white-space:nowrap;overflow:hidden}
+.stat-value{font:800 .78rem var(--display);text-transform:uppercase;transition:opacity .2s,transform .2s}
+.stat-detail{font-size:.68rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;transition:opacity .2s,transform .2s}
+.stat-count{font-size:.56rem;letter-spacing:.1em;color:var(--muted)}
+.stat-scroll.changing .stat-value,.stat-scroll.changing .stat-detail{opacity:0;transform:translateY(5px)}
+.stat-progress{position:absolute;left:0;bottom:0;height:1px;width:100%;background:linear-gradient(90deg,var(--copper-soft),var(--cool-soft));transform-origin:left;animation:statProgress 4.8s linear infinite}
+@keyframes statProgress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.live-dispatch{padding:18px 20px}
+.index-dispatch{padding:12px 0 14px}
+.index-dispatch span,.index-dispatch strong,.index-dispatch small{display:block}
+.index-dispatch span{font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cool-soft)}
+.index-dispatch strong{font:800 1.05rem var(--display);margin-top:4px}
+.index-dispatch strong b{color:var(--paper)}
+.index-dispatch small{font-size:.68rem;color:var(--muted);margin-top:4px}
+.index-live-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);padding-top:12px}
+.index-live-grid>div+div{border-left:1px solid var(--line);padding-left:15px}
+.index-live-grid span,.index-live-grid b{display:block}
+.index-live-grid span{font-size:.55rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.index-live-grid b{font-size:.7rem;margin-top:4px}
+.index-live-grid em{font-style:normal;color:#76daa8;font-size:.95rem}
+@media(max-width:820px){
+  .service-photo{min-height:0!important;aspect-ratio:16/10;background:linear-gradient(180deg,transparent 70%,var(--graphite-900) 100%),url('hvac-condenser-service.png') 42% center/cover!important}
+  .stat-scroll{grid-template-columns:1fr auto;gap:4px 10px;padding:12px 6vw 14px}
+  .stat-label{grid-column:1/-1}
+  .stat-window{display:block}
+  .stat-value,.stat-detail{display:block}
+  .stat-detail{margin-top:3px}
+  .stat-count{grid-row:2}
+}
+@media(prefers-reduced-motion:reduce){.stat-progress{animation:none}}
 </style>
 </head>
 <body>
@@ -219,6 +252,13 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
 <nav id="mainNav"><div class="brand"><svg class="icon" viewBox="0 0 32 24" fill="none" aria-hidden="true"><path d="M10 3c0 0-5 6-5 10a5 5 0 0 0 10 0c0-2.4-1.6-4-1.6-4s.4 2.4-1.2 2.4c-.8 0-1.2-.8-.8-1.6.4-.8.8-1.6-.4-3.2C10.4 5.2 10 3 10 3z" fill="#e0a374"/><g stroke="#9bcadd" stroke-width="1.3" stroke-linecap="round"><line x1="24" y1="6" x2="24" y2="18"/><line x1="18.5" y1="9" x2="29.5" y2="15"/><line x1="29.5" y1="9" x2="18.5" y2="15"/></g></svg><div>MARSH BROTHERS<small>Heating &amp; Air</small></div></div><div class="navlinks"><a href="#">Home</a><a href="#services">Services</a><a href="#team">Family</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div><a class="navbtn" href="hvac-door.html">Book a Service</a></nav>
 <div class="hero-copy"><div class="eyebrow eyebrow-sentence">Cleaner air. A more comfortable tomorrow.</div><h1>Heating &amp; Cooling<br>for Real Life.</h1><p>Reliable HVAC solutions for homes and businesses. Install. Repair. Maintain. Breathe easier.</p><p class="tagline">Built on repeat customers, not ads.</p><div class="actions"><a class="btn copper" href="hvac-door.html">&#9635; Book a Service</a><a class="btn" href="#services">&#10052; Explore Services</a></div></div>
 <div class="featurebar" id="services"><a><span>&#10052;</span><b>Heating</b><small>Stay warm.</small></a><a><span>&#10024;</span><b>Cooling</b><small>Stay cool.</small></a><a><span>&#9682;</span><b>Indoor Air</b><small>Breathe better.</small></a><a><span>&#8981;</span><b>Repairs</b><small>Get it fixed.</small></a><a id="maintenance"><span>&#9635;</span><b>Maintenance</b><small>Keep it running.</small></a><a><span>&#9638;</span><b>Commercial</b><small>Built for business.</small></a></div>
+</section>
+
+<section class="stat-scroll reveal" aria-label="Marsh Brothers highlights">
+  <span class="stat-label">Marsh at a glance</span>
+  <div class="stat-window"><strong class="stat-value" data-stat-value>Family Owned</strong><span class="stat-detail" data-stat-detail>Serving neighbors since 2009</span></div>
+  <span class="stat-count" data-stat-count>01 / 04</span>
+  <i class="stat-progress" aria-hidden="true"></i>
 </section>
 
 <section class="lower reveal" id="process">
@@ -229,10 +269,13 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
     <p>Repairs, maintenance, and system care from a family team that knows the homes and seasons of Howard County.</p>
     <a class="btn" href="hvac-door.html">Request Service</a>
   </div>
-  <div class="status">
-    <div class="status-kicker"><span class="dot"></span>Current Availability</div>
-    <strong>Same-day openings available</strong>
-    <div class="status-meta"><span>Emergency response <b>24 / 7</b></span><span>Serving <b>Howard County</b></span></div>
+  <div class="status live-dispatch">
+    <div class="status-kicker"><span class="dot"></span>Live Service Board</div>
+    <div class="index-dispatch"><span>Current Dispatch</span><strong>Crew 2 · <b data-dispatch-area>Ellicott City</b></strong><small>Technician en route</small></div>
+    <div class="index-live-grid">
+      <div><span>Next appointment</span><b data-next-window>Today · 6–8 PM</b></div>
+      <div><span>Openings</span><b><em data-open-count>2</em> remaining</b></div>
+    </div>
   </div>
 </section>
 
@@ -316,6 +359,41 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
 
 <script>
 const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const statSets=[
+  ['Family Owned','Serving neighbors since 2009'],
+  ['4.9 Stars','Trusted by 240+ neighbors'],
+  ['Emergency Ready','Response available 24 / 7'],
+  ['Howard County','Local homes. Local team.']
+];
+document.querySelectorAll('.stat-scroll').forEach(scroll=>{
+  const value=scroll.querySelector('[data-stat-value]');
+  const detail=scroll.querySelector('[data-stat-detail]');
+  const count=scroll.querySelector('[data-stat-count]');
+  let i=0;
+  if(!reduceMotion)setInterval(()=>{
+    scroll.classList.add('changing');
+    setTimeout(()=>{
+      i=(i+1)%statSets.length;
+      value.textContent=statSets[i][0];
+      detail.textContent=statSets[i][1];
+      count.textContent=String(i+1).padStart(2,'0')+' / '+String(statSets.length).padStart(2,'0');
+      scroll.classList.remove('changing');
+    },210);
+  },4800);
+});
+function updateServiceBoard(){
+  const now=new Date();
+  const areas=['Columbia','Ellicott City','Clarksville','Fulton'];
+  const area=areas[Math.floor(now.getHours()/3)%areas.length];
+  const h=now.getHours();
+  const windowText=h<14?'Today · 2–4 PM':h<17?'Today · 4–6 PM':h<20?'Today · 6–8 PM':'Tomorrow · 8–10 AM';
+  const openings=h<15?'3':h<19?'2':'1';
+  document.querySelectorAll('[data-dispatch-area]').forEach(el=>el.textContent=area);
+  document.querySelectorAll('[data-next-window]').forEach(el=>el.textContent=windowText);
+  document.querySelectorAll('[data-open-count]').forEach(el=>el.textContent=openings);
+}
+updateServiceBoard();
+
 const nav=document.getElementById('mainNav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>10)},{passive:true});
 
