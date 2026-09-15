@@ -48,13 +48,13 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
 .utility-actions{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:13px}
 .utility-actions a{font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.94);border-bottom:1px solid rgba(255,255,255,.55);padding:2px 2px 3px;text-shadow:0 1px 6px rgba(0,0,0,.55)}
 
-/* ---- stat scroll ---- */
-.stat-scroll{display:flex;overflow:hidden;background:#17110d;color:var(--cream);border-top:1px solid rgba(243,234,223,.18);border-bottom:1px solid rgba(243,234,223,.18);padding:15px 0}
-.stat-track{display:flex;align-items:center;flex:none;min-width:max-content;animation:statMove 26s linear infinite}
-.stat{display:flex;align-items:center;gap:18px;padding-right:18px;font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
-.stat strong{font:500 1.05rem var(--display);letter-spacing:.01em;color:#fff}
-.stat-mark{color:var(--gold);font-size:.52rem}
-@keyframes statMove{to{transform:translateX(-100%)}}
+/* ---- rotating stat ---- */
+.stat-scroll{display:grid;place-items:center;overflow:hidden;min-height:92px;background:#17110d;color:var(--cream);border-top:1px solid rgba(243,234,223,.18);border-bottom:1px solid rgba(243,234,223,.18);padding:17px 24px;text-align:center}
+.stat-rotator{display:flex;align-items:baseline;justify-content:center;gap:11px;width:100%;transition:opacity .28s ease,transform .28s var(--ease-out)}
+.stat-rotator.changing{opacity:0;transform:translateY(7px)}
+.stat-value{font:500 clamp(1.65rem,7vw,2.25rem)/1 var(--display);letter-spacing:.01em;color:#fff;white-space:nowrap}
+.stat-label{font-size:.65rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#ddc7a6;text-align:left}
+.stat-mark{color:var(--gold);font-size:.52rem;align-self:center}
 
 /* ---- live availability ---- */
 .live-availability{background:var(--cream);color:var(--ink);padding:42px 24px 38px;border-top:1px solid rgba(185,144,93,.34);border-bottom:1px solid var(--line)}
@@ -121,7 +121,7 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
 .listings{grid-column:2;grid-row:2;min-height:28vh}
 .route-copy{padding:45px}
 }
-@media(prefers-reduced-motion:reduce){.door{transition:opacity .01s linear,visibility .01s linear}.door:after{transition:none}.scene{transition:none}.door.entering .scene{transform:none;filter:none}.door.entering .identity{transition:none}.route-sheet{transition:none}.glint{display:none}.route{transition:none;transform:none;opacity:1}.stat-track,.live-dot{animation:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+@media(prefers-reduced-motion:reduce){.door{transition:opacity .01s linear,visibility .01s linear}.door:after{transition:none}.scene{transition:none}.door.entering .scene{transform:none;filter:none}.door.entering .identity{transition:none}.route-sheet{transition:none}.glint{display:none}.route{transition:none;transform:none;opacity:1}.stat-rotator{transition:none}.live-dot{animation:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
 ::view-transition-group(root){animation-duration:420ms}
 ::view-transition-old(root),::view-transition-new(root){animation-timing-function:var(--ease-in-out)}
 </style></head><body>
@@ -146,21 +146,8 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
   </div>
 </section>
 </div>
-<section class="stat-scroll" aria-label="Avery Cole highlights">
-  <div class="stat-track">
-    <span class="stat"><strong>$40M+</strong> Sold <i class="stat-mark">◆</i></span>
-    <span class="stat"><strong>Top 1%</strong> Howard County Agent <i class="stat-mark">◆</i></span>
-    <span class="stat"><strong>120+</strong> Families Guided <i class="stat-mark">◆</i></span>
-    <span class="stat"><strong>5.0</strong> Client Rating <i class="stat-mark">◆</i></span>
-    <span class="stat"><strong>2025</strong> Rivermore Top Producer <i class="stat-mark">◆</i></span>
-  </div>
-  <div class="stat-track" aria-hidden="true">
-    <span class="stat"><strong>$40M+</strong> Sold <i class="stat-mark">◆</i></span>
-    <span class="stat"><strong>Top 1%</strong> Howard County Agent <i class="stat-mark">◆</i></span>
-    <span class="stat"><strong>120+</strong> Families Guided <i class="stat-mark">◆</i></span>
-    <span class="stat"><strong>5.0</strong> Client Rating <i class="stat-mark">◆</i></span>
-    <span class="stat"><strong>2025</strong> Rivermore Top Producer <i class="stat-mark">◆</i></span>
-  </div>
+<section class="stat-scroll" aria-label="Avery Cole highlights: over 40 million dollars sold; top one percent Howard County agent; over 120 families guided; five-star client rating; 2025 Rivermore Top Producer">
+  <div class="stat-rotator" id="statRotator" aria-hidden="true"><i class="stat-mark">◆</i><strong class="stat-value" id="statValue">$40M+</strong><span class="stat-label" id="statLabel">Sold</span><i class="stat-mark">◆</i></div>
 </section>
 <div class="actions-head"><span class="eyebrow">Where to next</span><h2>What can Avery help with?</h2></div>
 <section class="routes" id="routes">
@@ -222,6 +209,15 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
 <script>
 const door=document.getElementById('door'),routeSheet=document.getElementById('routeSheet');
 const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const statRotator=document.getElementById('statRotator');
+const statValue=document.getElementById('statValue');
+const statLabel=document.getElementById('statLabel');
+const statHighlights=[['$40M+','Sold'],['Top 1%','Howard County Agent'],['120+','Families Guided'],['5.0','Client Rating'],['2025','Rivermore Top Producer']];
+let statIndex=0;
+if(!reduceMotion){setInterval(()=>{
+  statRotator.classList.add('changing');
+  setTimeout(()=>{statIndex=(statIndex+1)%statHighlights.length;statValue.textContent=statHighlights[statIndex][0];statLabel.textContent=statHighlights[statIndex][1];statRotator.classList.remove('changing')},280);
+},3200)}
 document.querySelectorAll('.live-group').forEach(group=>group.addEventListener('toggle',()=>{
   if(group.open) document.querySelectorAll('.live-group').forEach(other=>{if(other!==group) other.open=false});
 }));
