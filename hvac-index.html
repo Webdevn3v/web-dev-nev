@@ -155,6 +155,63 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
   .hero-copy{padding-top:11vh}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* ---- family-led refinement pass ---- */
+.lower{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:0;padding:0;background:var(--graphite-900);min-height:410px}
+.service-photo{min-height:410px;background:linear-gradient(90deg,transparent 60%,var(--graphite-900) 100%),url('hvac-condenser-service.png') center/cover}
+.service-copy{align-self:center;padding:48px clamp(28px,5vw,70px) 112px 34px}
+.service-copy h2{font:800 clamp(2rem,4vw,3.5rem)/.98 var(--display);letter-spacing:-.035em;margin:12px 0 16px}
+.service-copy p{color:#b4bfc3;line-height:1.65;font-size:.9rem;max-width:480px;margin:0 0 24px}
+.status{position:absolute;right:5vw;bottom:34px;width:min(42%,520px);padding:18px 20px;border-radius:14px;background:rgba(29,33,36,.88);backdrop-filter:blur(12px)}
+.status-kicker{font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;color:#81dfaF;margin-bottom:6px}
+.status strong{display:block;font:800 1.05rem var(--display)}
+.status-meta{display:flex;gap:18px;margin-top:12px;padding-top:11px;border-top:1px solid var(--line);font-size:.68rem;color:var(--muted)}
+.status-meta b{color:var(--paper);font-weight:700}
+.team{padding-top:70px;overflow:hidden}
+.section-head p{color:var(--muted);line-height:1.55;font-size:.86rem;margin:12px auto 0;max-width:480px}
+.team-photo{background-image:url('marsh-family-about.png');aspect-ratio:16/10;max-width:920px;background-position:center 34%;margin-bottom:18px}
+.legacy-copy{max-width:720px;margin:0 auto 42px;text-align:center;color:#c0c8cb;font-size:.9rem;line-height:1.65;padding:0 14px}
+.founder{position:relative;max-width:820px;min-height:265px;padding:0;margin:0 auto 58px;display:grid;grid-template-columns:38% 1fr;overflow:hidden;background:linear-gradient(120deg,rgba(193,122,74,.13),var(--graphite-800) 55%);border-color:rgba(193,122,74,.28)}
+.founder:after{content:"2009";position:absolute;right:18px;bottom:-15px;font:900 5.6rem var(--display);color:rgba(255,255,255,.025);pointer-events:none}
+.founder-photo{min-height:265px;background:url('dad-headshot.png') center 20%/cover}
+.founder-copy{align-self:center;padding:28px 34px;position:relative;z-index:1}
+.founder-est{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--copper-soft)}
+.founder h3{font:800 2.15rem var(--display);margin:6px 0 9px}
+.founder p{color:#b9c2c6;font-size:.84rem;line-height:1.6;margin:0}
+.brothers-heading{max-width:1000px;margin:0 auto 17px;display:flex;align-items:end;justify-content:space-between;padding:0 2px}
+.brothers-heading h3{font:800 1.55rem var(--display);margin:5px 0 0}
+.swipe-cue{display:none;color:var(--muted);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase}
+.staff-track{display:flex;gap:18px;max-width:1000px;margin:0 auto;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 2px 14px}
+.staff-track::-webkit-scrollbar{display:none}
+.staff-card{flex:0 0 calc((100% - 36px)/3);scroll-snap-align:center}
+.staff-actions{grid-template-columns:repeat(4,1fr)}
+.sa{justify-content:center;color:var(--paper);font-size:.62rem}
+.staff-dots{display:none;justify-content:center;gap:8px;margin-top:13px}
+.staff-dots button{width:6px;height:6px;border:0;padding:0;border-radius:50%;background:var(--graphite-600);transition:transform .2s,background-color .2s}
+.staff-dots button.active{background:var(--copper-soft);transform:scale(1.5)}
+@media(max-width:820px){
+  .lower{grid-template-columns:1fr;padding:0}
+  .service-photo{min-height:285px;background:linear-gradient(180deg,transparent 56%,var(--graphite-900) 100%),url('hvac-condenser-service.png') 42% center/cover}
+  .service-copy{padding:16px 6vw 28px;margin-top:-28px;position:relative}
+  .service-copy h2{font-size:2.35rem}
+  .status{position:relative;right:auto;bottom:auto;width:auto;margin:0 6vw 38px}
+  .status-meta{display:grid;grid-template-columns:1fr 1fr}
+  .team{padding-left:0;padding-right:0}
+  .team>.section-head,.legacy-copy,.founder,.brothers-heading{margin-left:6vw;margin-right:6vw}
+  .team-photo{margin-left:6vw;margin-right:6vw;width:88vw;aspect-ratio:4/5;background-position:center top}
+  .founder{grid-template-columns:42% 1fr;min-height:235px}
+  .founder-photo{min-height:235px}
+  .founder-copy{padding:22px 20px}
+  .founder h3{font-size:1.8rem}
+  .staff-track{max-width:none;padding:4px 6vw 15px;gap:14px}
+  .staff-card{flex-basis:82vw}
+  .swipe-cue,.staff-dots{display:flex}
+}
+@media(max-width:520px){
+  .founder{grid-template-columns:1fr;min-height:0;text-align:left;padding:0}
+  .founder-photo{min-height:245px;background-position:center 20%}
+  .founder-copy{padding:22px 22px 26px}
+  .status-meta span{display:flex;flex-direction:column;gap:3px}
+}
 </style>
 </head>
 <body>
@@ -164,70 +221,61 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
 <div class="featurebar" id="services"><a><span>&#10052;</span><b>Heating</b><small>Stay warm.</small></a><a><span>&#10024;</span><b>Cooling</b><small>Stay cool.</small></a><a><span>&#9682;</span><b>Indoor Air</b><small>Breathe better.</small></a><a><span>&#8981;</span><b>Repairs</b><small>Get it fixed.</small></a><a id="maintenance"><span>&#9635;</span><b>Maintenance</b><small>Keep it running.</small></a><a><span>&#9638;</span><b>Commercial</b><small>Built for business.</small></a></div>
 </section>
 
-<section class="lower">
-<div class="process"><div class="tech"></div><div><h2>Comfort Keeps<br>Life Moving.</h2><p>Local. Reliable. Ready when you need us.</p><a class="btn" href="#about">Our Process</a></div></div>
-<div class="status"><b><span class="dot"></span>Live System Status</b><p>All Systems Operational</p><p>&#8982; Serving Howard County &amp; Surrounding Areas</p></div>
+<section class="lower reveal" id="process">
+  <div class="service-photo" role="img" aria-label="HVAC technician servicing an outdoor residential air conditioning system"></div>
+  <div class="service-copy">
+    <span class="eyebrow">Local service. Clear answers.</span>
+    <h2>When Comfort Stops,<br>We Show Up.</h2>
+    <p>Repairs, maintenance, and system care from a family team that knows the homes and seasons of Howard County.</p>
+    <a class="btn" href="hvac-door.html">Request Service</a>
+  </div>
+  <div class="status">
+    <div class="status-kicker"><span class="dot"></span>Current Availability</div>
+    <strong>Same-day openings available</strong>
+    <div class="status-meta"><span>Emergency response <b>24 / 7</b></span><span>Serving <b>Howard County</b></span></div>
+  </div>
 </section>
 
 <section class="team reveal" id="team">
-  <div class="section-head"><span class="eyebrow">The People Behind The Van</span><h2>Family Owned &amp; Operated Since 2009</h2></div>
-  <div class="team-photo" role="img" aria-label="Danny, Curtis, and Pete Marsh with their dad and the shop dog outside the Marsh Brothers Heating &amp; Air garage"></div>
-  <div class="founder">
-    <div class="photo" role="img" aria-label="Dad, founder of Marsh Brothers"></div>
-    <div class="txt"><b>Dad</b><div class="role">Founder</div><p class="quote">Started Marsh Brothers in 2009 with one truck and a promise: show up, every time. Danny, Curtis, and Pete grew up in the business &mdash; now they run the day-to-day.</p></div>
+  <div class="section-head">
+    <span class="eyebrow">The Marsh Legacy</span>
+    <h2>Family Owned &amp; Operated Since 2009</h2>
+    <p>One father, three sons, and a reputation built house by house—not ad by ad.</p>
   </div>
-  <div class="staff-grid">
-    <div class="staff-card">
-      <div class="photo p-danny" role="img" aria-label="Danny Marsh"></div>
-      <div class="body">
-        <b>Danny</b><div class="role">Owner &amp; Master Technician</div>
-        <p class="desc">Runs the day-to-day and still takes the tough calls himself.</p>
-        <div class="staff-actions">
-          <a class="sa" href="tel:+15555550151"><span>&#9742;</span>Call</a>
-          <a class="sa" href="sms:+15555550151"><span>&#9993;</span>Text</a>
-          <a class="sa" href="mailto:danny@marshbrothershvac.com"><span>&#9993;</span>Email</a>
-          <a class="sa" href="danny-marsh.vcf"><span>&#10003;</span>Save</a>
-        </div>
-      </div>
-    </div>
-    <div class="staff-card">
-      <div class="photo p-curtis" role="img" aria-label="Curtis Marsh"></div>
-      <div class="body">
-        <b>Curtis</b><div class="role">Service Manager</div>
-        <p class="desc">Keeps every system running long after the install truck leaves.</p>
-        <div class="staff-actions">
-          <a class="sa" href="tel:+15555550152"><span>&#9742;</span>Call</a>
-          <a class="sa" href="sms:+15555550152"><span>&#9993;</span>Text</a>
-          <a class="sa" href="mailto:curtis@marshbrothershvac.com"><span>&#9993;</span>Email</a>
-          <a class="sa" href="curtis-marsh.vcf"><span>&#10003;</span>Save</a>
-        </div>
-      </div>
-    </div>
-    <div class="staff-card">
-      <div class="photo p-pete" role="img" aria-label="Pete Marsh"></div>
-      <div class="body">
-        <b>Pete</b><div class="role">Installation Lead</div>
-        <p class="desc">Leads every new install, start to final walkthrough.</p>
-        <div class="staff-actions">
-          <a class="sa" href="tel:+15555550153"><span>&#9742;</span>Call</a>
-          <a class="sa" href="sms:+15555550153"><span>&#9993;</span>Text</a>
-          <a class="sa" href="mailto:pete@marshbrothershvac.com"><span>&#9993;</span>Email</a>
-          <a class="sa" href="pete-marsh.vcf"><span>&#10003;</span>Save</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <div class="team-photo" role="img" aria-label="Dad, Danny, Curtis, and Pete Marsh together outdoors"></div>
+  <p class="legacy-copy">Dad started Marsh Brothers in 2009 with one truck and a promise to show up. Danny, Curtis, and Pete grew up alongside the business and now carry that same promise into every home they serve.</p>
 
-<section class="story reveal" id="story">
-  <div class="story-inner">
-    <div class="story-media" role="img" aria-label="Dad, Danny, Curtis, and Pete Marsh outside the Marsh Brothers shop sign reading Good People, Comfortable Homes"></div>
-    <div class="story-copy">
-      <span class="eyebrow">Our Story</span>
-      <h2>Built On Repeat Customers, Not Ads.</h2>
-      <p>Dad built this company one truck at a time, on the idea that a fair price and a promise kept beats any ad campaign. Danny, Curtis, and Pete grew up riding along on service calls &mdash; now they run the day-to-day, and most of our new customers still come from a neighbor who already trusted us.</p>
+  <article class="founder">
+    <div class="founder-photo" role="img" aria-label="Dad, founder of Marsh Brothers"></div>
+    <div class="founder-copy">
+      <span class="founder-est">Founder · Est. 2009</span>
+      <h3>Dad</h3>
+      <p>He built the company around the kind of service people remember: a fair answer, a kept promise, and someone who comes back when you call.</p>
     </div>
+  </article>
+
+  <div class="brothers-heading"><div><span class="eyebrow">The Next Generation</span><h3>Meet the Brothers</h3></div><span class="swipe-cue">Swipe <b>&rarr;</b></span></div>
+  <div class="staff-track" id="staffTrack">
+    <article class="staff-card">
+      <div class="photo p-danny" role="img" aria-label="Danny Marsh"></div>
+      <div class="body"><b>Danny</b><div class="role">Owner &amp; Master Technician</div><p class="desc">Runs the day-to-day and still takes the toughest service calls himself.</p>
+        <div class="staff-actions"><a class="sa" href="tel:+15555550151">Call</a><a class="sa" href="sms:+15555550151">Text</a><a class="sa" href="mailto:danny@marshbrothershvac.com">Email</a><a class="sa" href="danny-marsh.vcf">Save</a></div>
+      </div>
+    </article>
+    <article class="staff-card">
+      <div class="photo p-curtis" role="img" aria-label="Curtis Marsh"></div>
+      <div class="body"><b>Curtis</b><div class="role">Service Manager</div><p class="desc">Keeps every system running smoothly long after the original installation.</p>
+        <div class="staff-actions"><a class="sa" href="tel:+15555550152">Call</a><a class="sa" href="sms:+15555550152">Text</a><a class="sa" href="mailto:curtis@marshbrothershvac.com">Email</a><a class="sa" href="curtis-marsh.vcf">Save</a></div>
+      </div>
+    </article>
+    <article class="staff-card">
+      <div class="photo p-pete" role="img" aria-label="Pete Marsh"></div>
+      <div class="body"><b>Pete</b><div class="role">Installation Lead</div><p class="desc">Leads new installations from the first measurement through the final walkthrough.</p>
+        <div class="staff-actions"><a class="sa" href="tel:+15555550153">Call</a><a class="sa" href="sms:+15555550153">Text</a><a class="sa" href="mailto:pete@marshbrothershvac.com">Email</a><a class="sa" href="pete-marsh.vcf">Save</a></div>
+      </div>
+    </article>
   </div>
+  <div class="staff-dots" id="staffDots" aria-label="Team carousel"></div>
 </section>
 
 <section class="reviews reveal" id="reviews">
@@ -245,7 +293,7 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
     </div>
     <div class="review-card" data-review>
       <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p class="review-q">Curtis has serviced our system twice a year for six years. Same guy, same van, same straight answers every time. That kind of consistency is rare.</p>
+      <p class="review-q">Curtis has serviced our system twice a year for six years. Same familiar technician, same straight answers every time. That kind of consistency is rare.</p>
       <div class="review-who">&mdash; Priya S., Columbia</div>
       <span class="review-more">Read more</span>
     </div>
@@ -285,6 +333,38 @@ document.querySelectorAll('[data-review]').forEach(card=>{
     if(label)label.textContent=open?'Show less':'Read more';
   });
 });
+
+const staffTrack=document.getElementById('staffTrack');
+const staffCards=staffTrack?[...staffTrack.querySelectorAll('.staff-card')]:[];
+const staffDots=document.getElementById('staffDots');
+let staffTimer;
+if(staffTrack&&staffCards.length&&staffDots){
+  staffDots.innerHTML=staffCards.map((_,i)=>'<button aria-label="Show brother '+(i+1)+'"></button>').join('');
+  const sd=[...staffDots.querySelectorAll('button')];
+  sd[0].classList.add('active');
+  const showStaff=i=>{
+    staffCards[i].scrollIntoView({behavior:reduceMotion?'auto':'smooth',inline:'center',block:'nearest'});
+    sd.forEach((d,n)=>d.classList.toggle('active',n===i));
+  };
+  sd.forEach((d,i)=>d.addEventListener('click',()=>showStaff(i)));
+  if('IntersectionObserver' in window){
+    const sio=new IntersectionObserver(entries=>entries.forEach(en=>{
+      if(en.isIntersecting){const i=staffCards.indexOf(en.target);sd.forEach((d,n)=>d.classList.toggle('active',n===i));}
+    }),{root:staffTrack,threshold:.66});
+    staffCards.forEach(c=>sio.observe(c));
+  }
+  const startStaff=()=>{
+    if(reduceMotion||window.innerWidth>820)return;
+    clearInterval(staffTimer);
+    staffTimer=setInterval(()=>{
+      const active=Math.max(0,sd.findIndex(d=>d.classList.contains('active')));
+      showStaff((active+1)%staffCards.length);
+    },5200);
+  };
+  ['pointerdown','touchstart'].forEach(evt=>staffTrack.addEventListener(evt,()=>clearInterval(staffTimer),{passive:true}));
+  staffTrack.addEventListener('pointerup',startStaff,{passive:true});
+  startStaff();
+}
 
 const track=document.getElementById('reviewTrack');
 const dotsEl=document.getElementById('reviewDots');
