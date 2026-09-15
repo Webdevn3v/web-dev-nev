@@ -271,7 +271,7 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
   </div>
   <div class="status live-dispatch">
     <div class="status-kicker"><span class="dot"></span>Live Service Board</div>
-    <div class="index-dispatch"><span>Current Dispatch</span><strong>Crew 2 · <b data-dispatch-area>Ellicott City</b></strong><small>Technician en route</small></div>
+    <div class="index-dispatch"><span>Current Dispatch</span><strong>Crew 2 · <b data-dispatch-area>Ellicott City</b></strong><small data-dispatch-status>Technician en route</small></div>
     <div class="index-live-grid">
       <div><span>Next appointment</span><b data-next-window>Today · 6–8 PM</b></div>
       <div><span>Openings</span><b><em data-open-count>2</em> remaining</b></div>
@@ -381,18 +381,18 @@ document.querySelectorAll('.stat-scroll').forEach(scroll=>{
     },210);
   },4800);
 });
-function updateServiceBoard(){
-  const now=new Date();
-  const areas=['Columbia','Ellicott City','Clarksville','Fulton'];
-  const area=areas[Math.floor(now.getHours()/3)%areas.length];
-  const h=now.getHours();
-  const windowText=h<14?'Today · 2–4 PM':h<17?'Today · 4–6 PM':h<20?'Today · 6–8 PM':'Tomorrow · 8–10 AM';
-  const openings=h<15?'3':h<19?'2':'1';
-  document.querySelectorAll('[data-dispatch-area]').forEach(el=>el.textContent=area);
-  document.querySelectorAll('[data-next-window]').forEach(el=>el.textContent=windowText);
-  document.querySelectorAll('[data-open-count]').forEach(el=>el.textContent=openings);
-}
-updateServiceBoard();
+/* Owner-controlled LOU demo data.
+   In a client build, this object is populated by their update form or scheduling connection. */
+const liveServiceUpdate={
+  dispatchArea:'Ellicott City',
+  dispatchStatus:'Technician en route',
+  nextWindow:'Today · 6–8 PM',
+  openings:'2'
+};
+document.querySelectorAll('[data-dispatch-area]').forEach(el=>el.textContent=liveServiceUpdate.dispatchArea);
+document.querySelectorAll('[data-dispatch-status]').forEach(el=>el.textContent=liveServiceUpdate.dispatchStatus);
+document.querySelectorAll('[data-next-window]').forEach(el=>el.textContent=liveServiceUpdate.nextWindow);
+document.querySelectorAll('[data-open-count]').forEach(el=>el.textContent=liveServiceUpdate.openings);
 
 const nav=document.getElementById('mainNav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>10)},{passive:true});

@@ -348,7 +348,7 @@ body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
     <div class="dispatch-top">
       <span class="dispatch-kicker">Current Dispatch</span>
       <strong><span class="dispatch-truck" aria-hidden="true"></span>Crew 2 · <span data-dispatch-area>Ellicott City</span></strong>
-      <small>Technician en route to a service call</small>
+      <small><span data-dispatch-status>Technician en route</span> to a service call</small>
       <div class="dispatch-route" aria-hidden="true"><i></i><b></b><i></i></div>
     </div>
     <div class="dispatch-grid">
@@ -438,18 +438,18 @@ document.querySelectorAll('.stat-scroll').forEach(scroll=>{
     },210);
   },4800);
 });
-function updateServiceBoard(){
-  const now=new Date();
-  const areas=['Columbia','Ellicott City','Clarksville','Fulton'];
-  const area=areas[Math.floor(now.getHours()/3)%areas.length];
-  const h=now.getHours();
-  const windowText=h<14?'Today · 2–4 PM':h<17?'Today · 4–6 PM':h<20?'Today · 6–8 PM':'Tomorrow · 8–10 AM';
-  const openings=h<15?'3':h<19?'2':'1';
-  document.querySelectorAll('[data-dispatch-area]').forEach(el=>el.textContent=area);
-  document.querySelectorAll('[data-next-window]').forEach(el=>el.textContent=windowText);
-  document.querySelectorAll('[data-open-count]').forEach(el=>el.textContent=openings);
-}
-updateServiceBoard();
+/* Owner-controlled LOU demo data.
+   In a client build, this object is populated by their update form or scheduling connection. */
+const liveServiceUpdate={
+  dispatchArea:'Ellicott City',
+  dispatchStatus:'Technician en route',
+  nextWindow:'Today · 6–8 PM',
+  openings:'2'
+};
+document.querySelectorAll('[data-dispatch-area]').forEach(el=>el.textContent=liveServiceUpdate.dispatchArea);
+document.querySelectorAll('[data-dispatch-status]').forEach(el=>el.textContent=liveServiceUpdate.dispatchStatus);
+document.querySelectorAll('[data-next-window]').forEach(el=>el.textContent=liveServiceUpdate.nextWindow);
+document.querySelectorAll('[data-open-count]').forEach(el=>el.textContent=liveServiceUpdate.openings);
 
 const cardTop=document.getElementById('cardTop');
 window.addEventListener('scroll',()=>{cardTop.classList.toggle('scrolled',window.scrollY>8)},{passive:true});
