@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Pete Marsh
+ORG:Marsh Brothers Heating & Air
+TITLE:Installation Lead
+TEL;TYPE=CELL,VOICE:+15555550153
+TEL;TYPE=CELL,TEXT:+15555550153
+EMAIL;TYPE=WORK:pete@marshbrothershvac.com
+URL:https://thedigitalside.org/hvac-door.html
+END:VCARD

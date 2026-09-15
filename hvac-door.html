@@ -1,4 +1,335 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Northflow HVAC · Digital Door</title><style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#03101a;color:#fff;font-family:Inter,Arial,sans-serif}a{text-decoration:none;color:inherit}.entry{position:fixed;inset:0;z-index:50;background:#03101a;perspective:1500px;overflow:hidden;transition:opacity .55s,visibility .55s}.entry.done{opacity:0;visibility:hidden;pointer-events:none}.door{position:absolute;inset:0;cursor:pointer}.leaf{position:absolute;top:0;bottom:0;width:50%;background:radial-gradient(circle at 50% 50%,rgba(18,193,238,.28),transparent 30%),linear-gradient(145deg,#04111c,#06253a);border:1px solid rgba(18,193,238,.34);transition:transform 1.45s cubic-bezier(.65,0,.35,1);backface-visibility:hidden;overflow:hidden}.leaf:before,.leaf:after{content:'';position:absolute;width:130%;height:40%;border-radius:50%;border:2px solid rgba(28,202,244,.35);left:-15%;top:25%;transform:rotate(-12deg);box-shadow:0 0 32px rgba(16,189,232,.2)}.leaf:after{top:48%;transform:rotate(10deg)}.left{left:0;transform-origin:left}.right{right:0;transform-origin:right}.entry.open .left{transform:rotateY(-102deg)}.entry.open .right{transform:rotateY(102deg)}.seal{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:92px;height:92px;border-radius:50%;display:grid;place-items:center;border:2px solid #1bc8ef;background:#06202e;color:#c9f5ff;font:800 .72rem Inter,Arial,sans-serif;letter-spacing:.11em;text-align:center;transition:.6s;box-shadow:0 0 30px rgba(27,200,239,.22)}.entry.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.6)}.cue{position:absolute;z-index:5;left:50%;bottom:max(42px,env(safe-area-inset-bottom));transform:translateX(-50%);white-space:nowrap;color:#b9f1ff;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
-.portal{min-height:100svh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 44%,rgba(0,179,255,.19),transparent 24%),linear-gradient(#03101a,#041723);position:relative;overflow:hidden}.ring,.ring2{position:absolute;width:min(520px,90vw);height:min(720px,80svh);border-radius:50%;border:3px solid rgba(20,197,239,.55);box-shadow:0 0 45px rgba(20,197,239,.35),inset 0 0 55px rgba(20,197,239,.22);transform:rotate(8deg)}.ring2{width:min(590px,98vw);height:min(760px,86svh);border-color:rgba(78,220,255,.22);transform:rotate(-9deg)}.content{position:relative;z-index:2;text-align:center;max-width:420px;padding:28px}.logo{font-weight:900;letter-spacing:.08em}.logo span{display:block;color:#1fc9ef;font-size:2rem}.content h1{font:400 clamp(3rem,10vw,5rem)/.9 Georgia,serif;margin:1.8em 0 .25em}.sub{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#b8e6f1;line-height:1.6}.arrow{width:66px;height:66px;border-radius:50%;border:1px solid #bcecff;display:grid;place-items:center;margin:24px auto;font-size:1.5rem}.tag{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#bcecff;line-height:1.7}.nav{position:absolute;bottom:16px;left:16px;right:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;border-top:1px solid rgba(255,255,255,.2);padding-top:14px}.nav a{font-size:.54rem;text-transform:uppercase}.nav span{display:block;color:#1fc9ef;font-size:1rem;margin-bottom:4px}
-</style></head><body><div class="entry" id="entry" role="button" tabindex="0" aria-label="Enter Northflow HVAC"><div class="door"><div class="leaf left"></div><div class="leaf right"></div><div class="seal">NORTHFLOW<br>HVAC</div><div class="cue">Comfort Ahead</div></div></div><main class="portal"><div class="ring2"></div><div class="ring"></div><div class="content"><div class="logo"><span>≈</span>NORTHFLOW<br>HVAC</div><h1>COMFORT<br>AHEAD.</h1><div class="sub">Cleaner air.<br>A more comfortable tomorrow.</div><a class="arrow" href="hvac-index.html#services">→</a><div class="tag">For homes.<br>For businesses.<br>For what matters.</div></div><div class="nav"><a href="hvac-index.html#services"><span>✽</span>Service</a><a href="hvac-index.html#maintenance"><span>▣</span>Maintenance</a><a href="hvac-index.html#services"><span>◒</span>Indoor Air</a><a href="hvac-index.html#about"><span>⌕</span>About</a><a href="mailto:service@northflow.example"><span>✉</span>Contact</a></div></main><script>const entry=document.getElementById('entry');function enter(){entry.classList.add('open');setTimeout(()=>entry.classList.add('done'),1450)}entry.onclick=enter;entry.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enter()}}</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Marsh Brothers Heating & Air | Digital Door</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --graphite-950:#0d0f11;--graphite-900:#15181a;--graphite-800:#1d2124;--graphite-700:#292e32;--graphite-600:#3a4045;
+  --paper:#f2efe8;--muted:#9aa5ab;--line:rgba(255,255,255,.09);
+  --copper:#c17a4a;--copper-soft:#e0a374;--copper-glow:rgba(193,122,74,.34);
+  --cool:#5b93ac;--cool-soft:#9bcadd;--cool-glow:rgba(91,147,172,.32);
+  --display:'Archivo',Arial,sans-serif;--sans:'Archivo',Arial,sans-serif;
+  --ease-out:cubic-bezier(.22,1,.36,1);--ease-in-out:cubic-bezier(.77,0,.175,1);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--graphite-950);color:var(--paper);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+svg{display:block}
+
+/* ---- airlock entrance: climate-convergence gauge ---- */
+.airlock{position:fixed;inset:0;z-index:60;background:var(--graphite-950);overflow:hidden;cursor:pointer;transition:opacity .5s var(--ease-out),visibility .5s}
+.airlock.done{opacity:0;visibility:hidden;pointer-events:none}
+.airlock:before{content:"";position:absolute;inset:0;background-image:var(--grain);background-size:140px 140px;opacity:.5;mix-blend-mode:overlay;pointer-events:none}
+.flow{position:absolute;border-radius:50%;filter:blur(46px);opacity:.8;transition:transform 1s var(--ease-in-out),opacity .9s var(--ease-out),filter 1s var(--ease-in-out)}
+.flow.warm{width:52vw;height:52vw;left:-14vw;top:10vh;background:radial-gradient(circle at 40% 40%,rgba(193,122,74,.5),transparent 68%)}
+.flow.cool{width:56vw;height:56vw;right:-16vw;bottom:6vh;background:radial-gradient(circle at 60% 60%,rgba(91,147,172,.46),transparent 68%)}
+@media(prefers-reduced-motion:no-preference){
+  .flow.warm{animation:driftWarm 8s ease-in-out infinite alternate}
+  .flow.cool{animation:driftCool 10s ease-in-out infinite alternate}
+}
+@keyframes driftWarm{from{transform:translate(0,0) scale(1)}to{transform:translate(3vw,2vh) scale(1.1)}}
+@keyframes driftCool{from{transform:translate(0,0) scale(1)}to{transform:translate(-2vw,-3vh) scale(1.08)}}
+.airlock.releasing .flow{transform:scale(.15) translate(0,0);filter:blur(20px);opacity:0}
+.seam{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,transparent 0%,rgba(13,15,17,.5) 46%,var(--graphite-950) 78%)}
+.gauge{position:absolute;top:50%;left:50%;width:min(72vw,290px);height:min(72vw,290px);transform:translate(-50%,-50%);z-index:1}
+.gauge-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.14)}
+.gauge-ring.r1{inset:0}
+.gauge-ring.r1:before,.gauge-ring.r1:after{content:'';position:absolute;top:-3px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--copper-soft);box-shadow:0 0 8px rgba(193,122,74,.7)}
+.gauge-ring.r1:after{background:var(--cool-soft);box-shadow:0 0 8px rgba(91,147,172,.7);top:auto;bottom:-3px}
+.gauge-ring.r2{inset:15%;border-color:rgba(255,255,255,.08)}
+@media(prefers-reduced-motion:no-preference){
+  .gauge-ring.r1{animation:spin 26s linear infinite}
+  .gauge-ring.r2{animation:spin 19s linear infinite reverse}
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.airlock.releasing .gauge-ring{transform:scale(.25)!important;opacity:0;transition:transform .55s var(--ease-in-out),opacity .4s}
+.gauge-dot{position:absolute;inset:0;width:9px;height:9px;border-radius:50%;background:var(--copper-soft);box-shadow:0 0 12px rgba(193,122,74,.65)}
+@media(prefers-reduced-motion:no-preference){
+  .gauge-dot{offset-path:circle(43.5% at 50% 50%);animation:orbit 9s linear infinite,tempshift 9s ease-in-out infinite}
+}
+@keyframes orbit{to{offset-distance:100%}}
+@keyframes tempshift{0%,100%{background:var(--copper-soft);box-shadow:0 0 12px rgba(193,122,74,.65)}50%{background:var(--cool-soft);box-shadow:0 0 12px rgba(91,147,172,.65)}}
+.airlock.releasing .gauge-dot{opacity:0;transition:opacity .3s}
+.airlock-content{position:relative;z-index:2;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;transition:opacity .35s ease,transform .4s ease}
+.airlock.releasing .airlock-content{opacity:0;transform:scale(.96)}
+.mark{display:flex;flex-direction:column;align-items:center;gap:8px}
+.mark .icon{width:34px;height:26px}
+.mark .wordmark{font:900 .82rem var(--display);letter-spacing:.14em;text-transform:uppercase}
+.mark .submark{font:600 .72rem var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.cue{margin-top:30px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--paper)}
+.cue-sub{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.03em;text-transform:none;color:var(--muted)}
+.tapring{width:52px;height:52px;border-radius:50%;border:1px solid rgba(242,239,232,.4);display:grid;place-items:center;margin:18px auto 0;font-size:1.1rem;transition:transform .2s var(--ease-out),border-color .2s}
+.airlock:active .tapring{transform:scale(.92);border-color:var(--copper-soft)}
+
+/* ---- top card: mark + actions ---- */
+.card-top{position:sticky;top:0;z-index:20;background:var(--graphite-950);padding:16px 20px calc(14px + env(safe-area-inset-top));border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+.card-top.scrolled{border-color:var(--line);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.mini-mark{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.mini-mark .icon{width:27px;height:20px;flex:none}
+.mini-mark .word{font:900 .84rem var(--display);letter-spacing:.05em;text-transform:uppercase}
+.mini-mark small{display:block;font:600 .68rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:1px}
+.top-actions{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin-bottom:10px}
+.top-actions::-webkit-scrollbar{display:none}
+.ta{display:flex;align-items:center;gap:6px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--graphite-800);font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;flex:none;white-space:nowrap;transition:transform 140ms var(--ease-out),border-color 140ms,background-color 140ms}
+.ta span{font-size:.8rem;line-height:1}
+.ta:hover{border-color:var(--copper-soft);background-color:rgba(193,122,74,.12)}
+.ta:active{transform:scale(.96)}
+.top-cta{display:flex;gap:9px;flex-wrap:wrap}
+.emergency{flex:1 1 220px;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 14px;border-radius:12px;background:var(--copper);color:#160d07;font:800 .78rem var(--display);text-transform:uppercase;letter-spacing:.02em;transition:transform 140ms var(--ease-out),box-shadow 140ms}
+.emergency:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,.4)}
+.emergency:active{transform:scale(.98)}
+.fullsite{display:flex;align-items:center;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--line);color:var(--paper);font:700 .74rem var(--display);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;transition:border-color 140ms,background-color 140ms}
+.fullsite:hover{border-color:var(--copper-soft);background-color:rgba(255,255,255,.03)}
+@media(min-width:840px){
+  .card-top{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 5vw}
+  .mini-mark{margin-bottom:0}
+  .top-actions{margin-bottom:0}
+  .top-cta{flex-wrap:nowrap}
+}
+
+/* ---- hero: full-bleed blended photo ---- */
+.path{padding-bottom:6px}
+.hero{position:relative;min-height:50vh;overflow:hidden}
+@media(min-width:760px){.hero{min-height:62vh}}
+.hero-photo{position:absolute;inset:0;background-image:url('marsh-family-candid.png');background-size:cover;background-position:center 15%}
+body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
+@keyframes heroIn{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){body.revealed .hero-photo{animation:none}}
+.hero-fade{position:absolute;inset:0;background-image:var(--grain),radial-gradient(120% 60% at 50% 0%,rgba(193,122,74,.12),transparent 55%),linear-gradient(180deg,var(--graphite-950) 0%,rgba(13,15,17,.32) 9%,rgba(13,15,17,.06) 24%,rgba(13,15,17,.04) 40%,rgba(13,15,17,.64) 80%,var(--graphite-950) 100%);background-size:140px 140px,auto,auto;background-blend-mode:overlay,soft-light,normal}
+.hero-cap{position:absolute;left:0;right:0;bottom:0;padding:0 24px 20px;text-align:center}
+.hero-cap h1{font-weight:800;font-size:clamp(1.35rem,4.6vw,2.1rem);line-height:1.08;font-family:var(--display);letter-spacing:-.01em;margin:0 0 .3em;color:var(--paper)}
+.hero-cap .tagline{font:italic 600 .88rem var(--sans);color:var(--copper-soft);margin:0}
+
+/* ---- status strip ---- */
+.status-strip{max-width:1000px;margin:22px auto 0;padding:0 20px}
+.status-strip .head{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.stat-card{display:grid;grid-template-columns:1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--graphite-900)}
+.stat{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--line)}
+.stat:last-child{border-bottom:0}
+.stat .ic{font-size:1.05rem;color:var(--cool-soft);flex:none;width:22px;text-align:center}
+.stat b{display:block;font:800 .78rem var(--display);letter-spacing:.01em}
+.stat small{display:block;font-size:.76rem;color:var(--muted);margin-top:1px}
+@media(min-width:700px){
+  .stat-card{grid-template-columns:repeat(3,1fr)}
+  .stat{border-bottom:0;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+}
+
+/* ---- reveal-on-scroll ---- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
+.reveal.in-view{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* ---- family: compact circular portraits ---- */
+.family{max-width:1000px;margin:0 auto;padding:30px 20px 6px;text-align:center}
+.family .eyebrow{color:var(--copper-soft);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+.fam-row{display:flex;justify-content:center;gap:14px;margin-top:16px;flex-wrap:wrap}
+.fam{background:none;border:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent}
+.fam-photo{width:66px;height:66px;border-radius:50%;background-size:cover;background-position:center top;border:2px solid var(--line);transition:border-color .2s var(--ease-out),transform .2s var(--ease-out)}
+.fam-photo.f-dad{background-image:url('dad-headshot.png')}
+.fam-photo.f-danny{background-image:url('danny-headshot.png')}
+.fam-photo.f-curtis{background-image:url('curtis-headshot.png')}
+.fam-photo.f-pete{background-image:url('pete-headshot.png')}
+.fam:hover .fam-photo,.fam:focus-visible .fam-photo{border-color:var(--copper-soft);transform:translateY(-3px)}
+.fam:active .fam-photo{transform:scale(.95)}
+.fam b{font-size:.78rem;font-weight:700}
+@media(min-width:480px){.fam-photo{width:78px;height:78px}}
+
+.fam-sheet{position:fixed;z-index:55;left:0;right:0;bottom:0;background:var(--graphite-900);border-radius:22px 22px 0 0;padding:16px 20px calc(24px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .36s var(--ease-in-out);box-shadow:0 -24px 60px rgba(0,0,0,.5);max-height:74svh;overflow:auto;border-top:1px solid var(--line)}
+.fam-sheet.open{transform:translateY(0)}
+.fam-sheet .handle{width:38px;height:4px;border-radius:8px;background:var(--graphite-600);margin:0 auto 18px}
+.fam-close{position:absolute;right:16px;top:14px;background:none;border:0;color:var(--muted);font-size:1.5rem;line-height:1;padding:4px;transition:transform 140ms var(--ease-out)}
+.fam-close:active{transform:scale(.9)}
+.fam-sheet-top{display:flex;align-items:center;gap:16px}
+.fam-sheet-top .ph{width:64px;height:64px;border-radius:50%;background-size:cover;background-position:center top;flex:none;border:1px solid var(--line)}
+.fam-sheet-top b{display:block;font:800 1.05rem var(--display)}
+.fam-sheet-top .role{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cool-soft);margin:2px 0 0}
+.fam-sheet-desc{font-size:.82rem;line-height:1.5;color:var(--muted);margin:14px 0 0}
+.fam-sheet-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.fs-a{display:flex;flex-direction:column;align-items:center;gap:4px;padding:11px 4px;border:1px solid var(--line);border-radius:12px;font-size:.7rem;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);transition:transform 140ms var(--ease-out),border-color 140ms,color 140ms,background-color 140ms;min-height:44px}
+.fs-a span{font-size:.95rem;color:var(--paper)}
+.fs-a:hover{border-color:var(--copper-soft);color:var(--paper);background-color:rgba(193,122,74,.1)}
+.fs-a:active{transform:scale(.94)}
+.sheet-backdrop{position:fixed;inset:0;z-index:54;background:rgba(0,0,0,.4);opacity:0;visibility:hidden;transition:opacity .3s}
+.sheet-backdrop.open{opacity:1;visibility:visible}
+
+/* ---- condensed reviews ---- */
+.reviews{max-width:1040px;margin:0 auto;padding:34px 0 28px}
+.reviews .head{padding:0 20px;text-align:center}
+.reviews .eyebrow{color:var(--cool-soft);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+.rating-row{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0 0;font-size:.8rem;color:var(--muted)}
+.stars{color:var(--copper-soft);letter-spacing:.04em}
+.review-strip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:16px 20px 4px}
+.review-strip::-webkit-scrollbar{display:none}
+.rq{flex:0 0 auto;max-width:280px;scroll-snap-align:start;background:var(--graphite-800);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:.82rem;line-height:1.42;color:var(--paper)}
+.rq b{display:block;margin-top:7px;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+@media(min-width:760px){.review-strip{justify-content:center;flex-wrap:wrap}}
+
+@media(prefers-reduced-motion:reduce){
+  .airlock,.flow,.gauge-ring,.gauge-dot,.airlock-content,.hero-photo,.card-top{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+
+<div class="airlock" id="airlock" role="button" tabindex="0" aria-label="Enter Marsh Brothers Heating &amp; Air">
+  <div class="flow warm"></div>
+  <div class="flow cool"></div>
+  <div class="seam"></div>
+  <div class="gauge" aria-hidden="true">
+    <div class="gauge-ring r1"></div>
+    <div class="gauge-ring r2"></div>
+    <div class="gauge-dot"></div>
+  </div>
+  <div class="airlock-content">
+    <div class="mark">
+      <svg class="icon" viewBox="0 0 32 24" fill="none" aria-hidden="true"><path d="M10 3c0 0-5 6-5 10a5 5 0 0 0 10 0c0-2.4-1.6-4-1.6-4s.4 2.4-1.2 2.4c-.8 0-1.2-.8-.8-1.6.4-.8.8-1.6-.4-3.2C10.4 5.2 10 3 10 3z" fill="#e0a374"/><g stroke="#9bcadd" stroke-width="1.3" stroke-linecap="round"><line x1="24" y1="6" x2="24" y2="18"/><line x1="18.5" y1="9" x2="29.5" y2="15"/><line x1="29.5" y1="9" x2="18.5" y2="15"/></g></svg>
+      <span class="wordmark">Marsh Brothers</span>
+      <span class="submark">Heating &amp; Air</span>
+    </div>
+    <div class="cue">Tap to Enter<span class="cue-sub">Family Owned · Howard County</span></div>
+    <div class="tapring">→</div>
+  </div>
+</div>
+
+<main class="path">
+
+<header class="card-top" id="cardTop">
+  <div class="mini-mark">
+    <svg class="icon" viewBox="0 0 32 24" fill="none" aria-hidden="true"><path d="M10 3c0 0-5 6-5 10a5 5 0 0 0 10 0c0-2.4-1.6-4-1.6-4s.4 2.4-1.2 2.4c-.8 0-1.2-.8-.8-1.6.4-.8.8-1.6-.4-3.2C10.4 5.2 10 3 10 3z" fill="#e0a374"/><g stroke="#9bcadd" stroke-width="1.3" stroke-linecap="round"><line x1="24" y1="6" x2="24" y2="18"/><line x1="18.5" y1="9" x2="29.5" y2="15"/><line x1="29.5" y1="9" x2="18.5" y2="15"/></g></svg>
+    <div><span class="word">Marsh Brothers</span><small>Heating &amp; Air</small></div>
+  </div>
+  <div class="top-actions">
+    <a class="ta" href="tel:+15555550150"><span>&#9742;</span>Call</a>
+    <a class="ta" href="sms:+15555550150"><span>&#9993;</span>Text</a>
+    <a class="ta" href="mailto:service@marshbrothershvac.com"><span>&#9993;</span>Email</a>
+    <a class="ta" href="marsh-brothers.vcf"><span>&#10003;</span>Save Contact</a>
+  </div>
+  <div class="top-cta">
+    <a class="emergency" href="tel:+15555550150"><span>&#9888;</span>Emergency &middot; Call Now</a>
+    <a class="fullsite" href="hvac-index.html">Full Site &rarr;</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-photo" role="img" aria-label="Danny, Curtis, and Pete Marsh with their dad and the shop dog outside the Marsh Brothers garage"></div>
+  <div class="hero-fade"></div>
+  <div class="hero-cap">
+    <h1>Comfort, Kept In The Family.</h1>
+    <p class="tagline">Built on repeat customers, not ads.</p>
+  </div>
+</section>
+
+<section class="status-strip reveal">
+  <div class="head">Today at Marsh Brothers</div>
+  <div class="stat-card">
+    <div class="stat"><span class="ic">&#9201;</span><div><b>Same-Day Service</b><small>Available today</small></div></div>
+    <div class="stat"><span class="ic">&#9742;</span><div><b>Emergency Response</b><small>24/7, every day</small></div></div>
+    <div class="stat"><span class="ic">&#8982;</span><div><b>Service Area</b><small>Howard County &amp; surrounding</small></div></div>
+  </div>
+</section>
+
+<section class="family reveal" id="family">
+  <span class="eyebrow">Meet The Family</span>
+  <div class="fam-row">
+    <button class="fam" data-person="dad"><span class="fam-photo f-dad"></span><b>Dad</b></button>
+    <button class="fam" data-person="danny"><span class="fam-photo f-danny"></span><b>Danny</b></button>
+    <button class="fam" data-person="curtis"><span class="fam-photo f-curtis"></span><b>Curtis</b></button>
+    <button class="fam" data-person="pete"><span class="fam-photo f-pete"></span><b>Pete</b></button>
+  </div>
+</section>
+
+<section class="reviews reveal" id="reviews">
+  <div class="head">
+    <span class="eyebrow">Proof, Not Promises</span>
+    <div class="rating-row"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>4.9 from 240+ neighbors</div>
+  </div>
+  <div class="review-strip">
+    <div class="rq">&ldquo;Danny walked us through everything &mdash; no upsell, just a fair price and a fixed furnace by dinner.&rdquo;<b>&mdash; Marcus T., Ellicott City</b></div>
+    <div class="rq">&ldquo;Curtis has serviced our system twice a year for six years straight. Same guy, same answers.&rdquo;<b>&mdash; Priya S., Columbia</b></div>
+    <div class="rq">&ldquo;Pete's install still runs like new three years later. We've sent every neighbor his number.&rdquo;<b>&mdash; Renee K., Clarksville</b></div>
+  </div>
+</section>
+
+</main>
+
+<div class="fam-sheet" id="famSheet" role="dialog" aria-modal="true" aria-label="Family member details">
+  <div class="handle"></div>
+  <button class="fam-close" id="famClose" aria-label="Close">&times;</button>
+  <div class="fam-sheet-top">
+    <span class="ph" id="famPh"></span>
+    <div><b id="famName"></b><div class="role" id="famRole"></div></div>
+  </div>
+  <p class="fam-sheet-desc" id="famDesc"></p>
+  <div class="fam-sheet-actions" id="famActions"></div>
+</div>
+
+<script>
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const airlock=document.getElementById('airlock');
+function enter(){
+  if(reduceMotion){airlock.classList.add('done');document.body.classList.add('revealed');return}
+  airlock.classList.add('releasing');
+  setTimeout(()=>{airlock.classList.add('done');document.body.classList.add('revealed')},480);
+}
+airlock.addEventListener('click',enter);
+airlock.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enter()}});
+
+const cardTop=document.getElementById('cardTop');
+window.addEventListener('scroll',()=>{cardTop.classList.toggle('scrolled',window.scrollY>8)},{passive:true});
+
+if('IntersectionObserver' in window){
+  const revealIO=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{if(en.isIntersecting)en.target.classList.add('in-view')});
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>revealIO.observe(el));
+}
+
+const family={
+  dad:{name:'Dad',role:'Founder',photo:'dad-headshot.png',desc:'Started Marsh Brothers in 2009 with one truck and a promise: show up, every time.'},
+  danny:{name:'Danny',role:'Owner &amp; Master Technician',photo:'danny-headshot.png',desc:'Runs the day-to-day and still takes the tough calls himself.',tel:'+15555550151',email:'danny@marshbrothershvac.com',vcf:'danny-marsh.vcf'},
+  curtis:{name:'Curtis',role:'Service Manager',photo:'curtis-headshot.png',desc:'Keeps every system running long after the install truck leaves.',tel:'+15555550152',email:'curtis@marshbrothershvac.com',vcf:'curtis-marsh.vcf'},
+  pete:{name:'Pete',role:'Installation Lead',photo:'pete-headshot.png',desc:'Leads every new install, start to final walkthrough.',tel:'+15555550153',email:'pete@marshbrothershvac.com',vcf:'pete-marsh.vcf'}
+};
+const famSheet=document.getElementById('famSheet');
+const sheetBackdrop=document.getElementById('sheetBackdrop');
+function openFam(key){
+  const p=family[key];
+  document.getElementById('famPh').style.backgroundImage="url('"+p.photo+"')";
+  document.getElementById('famName').textContent=p.name;
+  document.getElementById('famRole').innerHTML=p.role;
+  document.getElementById('famDesc').textContent=p.desc;
+  const actionsEl=document.getElementById('famActions');
+  if(p.tel){
+    actionsEl.innerHTML=
+      '<a class="fs-a" href="tel:'+p.tel+'"><span>&#9742;</span>Call</a>'+
+      '<a class="fs-a" href="sms:'+p.tel+'"><span>&#9993;</span>Text</a>'+
+      '<a class="fs-a" href="mailto:'+p.email+'"><span>&#9993;</span>Email</a>'+
+      '<a class="fs-a" href="'+p.vcf+'"><span>&#10003;</span>Save</a>';
+    actionsEl.style.display='grid';
+  }else{
+    actionsEl.innerHTML='';
+    actionsEl.style.display='none';
+  }
+  famSheet.classList.add('open');
+  sheetBackdrop.classList.add('open');
+}
+function closeFam(){famSheet.classList.remove('open');sheetBackdrop.classList.remove('open')}
+document.querySelectorAll('[data-person]').forEach(btn=>{
+  btn.addEventListener('click',()=>openFam(btn.dataset.person));
+});
+document.getElementById('famClose').addEventListener('click',closeFam);
+sheetBackdrop.addEventListener('click',closeFam);
+</script>
+</body>
+</html>
