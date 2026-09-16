@@ -18,105 +18,106 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#d8d0c6;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
-button,a{font:inherit;color:inherit}button{border:0;background:none}a{text-decoration:none}
+button,a{font:inherit;color:inherit}button{border:0;background:none;cursor:pointer}a{text-decoration:none}
 .shell{position:relative;max-width:560px;min-height:100dvh;margin:auto;background:var(--paper);overflow:hidden;box-shadow:0 25px 80px rgba(23,21,18,.16)}
 
-/* ---------------- MAIN DOOR — editorial interior design identity ---------------- */
-.mast{
-  position:relative;padding:22px 22px 0;background:var(--paper)
-}
+/* ---------------- MASTHEAD ---------------- */
+.mast{position:relative;padding:22px 22px 0;background:var(--paper)}
 .mast-row{display:flex;align-items:center;justify-content:space-between}
 .brand-lock{font:400 1.1rem var(--serif);letter-spacing:.035em}
 .brand-lock span{display:block;margin-top:3px;font:600 .52rem var(--sans);letter-spacing:.19em;text-transform:uppercase;color:var(--clay)}
 .issue{font:600 .54rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#81776e}
 
-.editorial-hero{
-  position:relative;
-  min-height:390px;
-  padding:52px 22px 48px;
-  background:linear-gradient(145deg,var(--paper) 0 62%,#eee5da 62% 100%);
-  overflow:hidden
-}
-.editorial-hero .kicker{
-  display:block;
-  font:700 .58rem var(--mono);
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--sage);
-  margin-bottom:12px
-}
-.editorial-hero h1{
-  position:relative;z-index:4;
-  width:86%;
-  margin:0;
-  font:500 clamp(3.2rem,14vw,5rem)/.88 "Fraunces",var(--serif);
-  letter-spacing:-.055em
-}
-.editorial-hero h1 em{display:block;font-weight:400;color:var(--clay);margin-left:22%}
-.hero-note{
-  position:relative;
-  z-index:4;
-  width:58%;
-  margin:22px 0 0 auto;
-  color:#71675f;
-  font-size:.9rem;
-  line-height:1.62
-}
+/* ---------------- OWNER CARD — "deal the cards" ---------------- */
+.card-scene{margin:16px 22px 4px;padding:26px 18px 20px;background:linear-gradient(180deg,#efe6da,#e6dac8)}
+.biz-card{display:flex;align-items:center;gap:14px;padding:16px 16px 18px;background:var(--paper);box-shadow:0 16px 34px rgba(23,21,18,.18);transform:rotate(-1.1deg);position:relative;z-index:2}
+.card-photo{width:58px;height:58px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--line)}
+.card-eyebrow{display:block;font:700 .74rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#8a5236;margin-bottom:5px}
+.card-id h2{margin:0;font:400 1.4rem/1.05 var(--serif)}
+.card-id p{margin:3px 0 0;color:#71675f;font-size:.8rem}
+.card-fan{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-top:14px;position:relative;z-index:1}
+.fan-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:13px 12px;font-size:.78rem;font-weight:700;background:var(--clay);color:#fff;
+  opacity:0;transform:translateY(14px) rotate(calc(var(--i) * 1.1deg - 2deg));
+  transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1);
+  transition-delay:calc(var(--i) * 70ms + .55s)}
+.fan-item:nth-child(4),.fan-item:nth-child(5){background:#e6ddd2;color:var(--espresso)}
+body.entered .fan-item{opacity:1;transform:none}
+.fan-item:hover,.fan-item:focus-visible{transform:translateY(-3px) !important;transition-delay:0s !important}
 
-.material-strip{
-  display:grid;grid-template-columns:1.15fr .8fr 1fr .7fr;
-  height:74px;margin-top:0
-}
-.mat{position:relative}
-.mat span{position:absolute;left:9px;bottom:8px;font:700 .48rem var(--mono);letter-spacing:.1em;text-transform:uppercase}
-.m1{background:#bda88f}.m2{background:#5f6658;color:white}
-.m3{background:repeating-linear-gradient(90deg,#d7cbbf 0 11px,#c8baad 12px 13px)}
-.m4{background:#8e6756;color:white}
+/* ---------------- HERO — "double-door reveal" ---------------- */
+.hero-scene{position:relative;min-height:420px;overflow:hidden;display:flex;align-items:flex-end}
+.hero-photo{position:absolute;inset:0;background:url('atelier-house-hero-exterior.png') center 20%/cover no-repeat;
+  clip-path:inset(0 50% 0 50%);transition:clip-path 1.05s cubic-bezier(.16,1,.3,1) .1s}
+body.entered .hero-photo{clip-path:inset(0 0 0 0)}
+.hero-plate{position:relative;z-index:2;margin:0 18px 22px;max-width:80%;padding:22px 20px;background:rgba(251,248,243,.96);
+  opacity:0;transform:translateY(16px);transition:opacity .6s ease .95s,transform .6s cubic-bezier(.16,1,.3,1) .95s}
+body.entered .hero-plate{opacity:1;transform:none}
+.hero-plate .kicker{display:block;font:700 .58rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
+.hero-plate h1{margin:0;font:500 clamp(2.4rem,10vw,3.4rem)/.94 "Fraunces",var(--serif);letter-spacing:-.045em}
+.hero-plate h1 em{display:block;font-weight:400;color:var(--clay)}
+.hero-plate .hero-note{margin:14px 0 0;color:#71675f;font-size:.86rem;line-height:1.58}
 
-/* pathways as an editorial contents page instead of dental-like rows */
-.contents{padding:34px 22px 18px;background:#efe8de}
-.contents-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:23px}
-.contents-head h2{margin:0;font:400 2rem/.95 var(--serif)}
-.contents-head span{font:700 .52rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#81776e}
-.path-card{
-  position:relative;
-  width:100%;
-  min-height:145px;
-  margin:0 0 14px;
-  padding:20px;
-  text-align:left;
-  overflow:hidden;
-  background:var(--paper);
-  border:1px solid rgba(23,21,18,.08);
-  cursor:pointer;
-  transition:transform .22s ease,box-shadow .22s ease
-}
-.path-card:active{transform:scale(.985)}
-.path-card .index{font:700 .53rem var(--mono);letter-spacing:.12em;color:var(--clay)}
-.path-card h3{position:relative;z-index:2;margin:28px 0 5px;width:70%;font:400 1.65rem/.98 var(--serif)}
-.path-card p{position:relative;z-index:2;margin:0;width:68%;color:#72685f;font-size:.78rem;line-height:1.45}
-.path-card .go{position:absolute;right:18px;bottom:17px;font-size:1.35rem;color:var(--clay)}
-.path-card .shape{position:absolute;right:-12px;top:-15px;width:135px;height:135px;opacity:.88}
-.portfolio .shape{background:linear-gradient(145deg,#a87960 0 48%,#d8c9b9 49% 70%,#6f7567 71%);clip-path:polygon(28% 0,100% 0,100% 100%,0 100%,0 31%)}
-.style .shape{background:radial-gradient(circle at 36% 33%,#d9c3a7 0 27%,transparent 28%),linear-gradient(135deg,#6e7567 0 48%,#e7ddd1 49%)}
-.project .shape{background:repeating-linear-gradient(0deg,rgba(23,21,18,.18) 0 1px,transparent 1px 22px),repeating-linear-gradient(90deg,rgba(23,21,18,.18) 0 1px,transparent 1px 22px),#d8cec1}
-.client .shape{background:linear-gradient(90deg,#2e2925 0 42%,#8d725f 42% 70%,#c8b9a5 70%)}
+/* ---------------- CUSTOMER PATHS — "material swipe" ---------------- */
+.routes{padding:36px 20px 10px;background:#efe8de}
+.routes-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:6px}
+.routes-head h2{margin:0;font:400 2rem/.95 var(--serif)}
+.routes-head span{font:700 .74rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#81776e}
+.routes-list{border-top:1px solid var(--line)}
+.route-row{position:relative;display:flex;align-items:center;gap:14px;width:100%;padding:22px 6px;border-bottom:1px solid var(--line);text-align:left;overflow:hidden}
+.route-swatch{position:absolute;inset:0;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1);z-index:0}
+.route-row[data-mat="oak"] .route-swatch{background:#bda88f}
+.route-row[data-mat="sage"] .route-swatch{background:#5f6658}
+.route-row[data-mat="linen"] .route-swatch{background:repeating-linear-gradient(90deg,#d7cbbf 0 11px,#c8baad 12px 13px)}
+.route-row[data-mat="clay"] .route-swatch{background:#8e6756}
+.route-row:hover .route-swatch,.route-row:focus-visible .route-swatch,.route-row:active .route-swatch{transform:scaleX(1)}
+.route-num{position:relative;z-index:1;flex:none;width:24px;font:700 .78rem var(--mono);color:var(--clay);transition:color .3s ease}
+.route-text{position:relative;z-index:1;flex:1 1 auto}
+.route-text b{display:block;font:400 1.4rem/1.06 var(--serif);transition:color .3s ease}
+.route-text i{display:block;font-style:normal;margin-top:4px;color:#655c53;font-size:.82rem;line-height:1.42;transition:color .3s ease}
+.route-tag{position:relative;z-index:1;flex:none;font:700 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#9a8f83;transition:color .3s ease}
+.route-go{position:relative;z-index:1;flex:none;font-size:1.15rem;color:var(--clay);transition:color .3s ease}
+.route-row[data-mat="oak"]:hover .route-num,.route-row[data-mat="oak"]:hover .route-text b,.route-row[data-mat="oak"]:hover .route-text i,.route-row[data-mat="oak"]:hover .route-tag,.route-row[data-mat="oak"]:hover .route-go,
+.route-row[data-mat="linen"]:hover .route-num,.route-row[data-mat="linen"]:hover .route-text b,.route-row[data-mat="linen"]:hover .route-text i,.route-row[data-mat="linen"]:hover .route-tag,.route-row[data-mat="linen"]:hover .route-go{color:var(--ink)}
+.route-row[data-mat="sage"]:hover .route-num,.route-row[data-mat="sage"]:hover .route-text b,.route-row[data-mat="sage"]:hover .route-text i,.route-row[data-mat="sage"]:hover .route-tag,.route-row[data-mat="sage"]:hover .route-go,
+.route-row[data-mat="clay"]:hover .route-num,.route-row[data-mat="clay"]:hover .route-text b,.route-row[data-mat="clay"]:hover .route-text i,.route-row[data-mat="clay"]:hover .route-tag,.route-row[data-mat="clay"]:hover .route-go{color:#fff}
 
-.help-block{
-  margin:10px 22px 32px;
-  display:grid;grid-template-columns:42% 58%;
-  min-height:188px;
-  background:var(--espresso);color:white
+/* ---------------- INSIDE THE STUDIO — "paint-chip flip" ---------------- */
+.studio{padding:36px 20px 6px;background:var(--cream)}
+.studio-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px}
+.studio-head h2{margin:0;font:400 1.9rem/.98 var(--serif)}
+.studio-head span{font:700 .74rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#81776e}
+.studio-banner{margin:0 0 16px;overflow:hidden}
+.studio-banner img{width:100%;height:210px;object-fit:cover;display:block}
+.chip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;perspective:1200px}
+.chip{position:relative;aspect-ratio:1/1;padding:0;-webkit-tap-highlight-color:transparent}
+.chip-face{position:absolute;inset:0;backface-visibility:hidden;transition:transform .6s cubic-bezier(.4,.2,.2,1)}
+.chip-front{transform:rotateY(0)}
+.chip-front img{width:100%;height:100%;object-fit:cover;display:block}
+.chip-back{transform:rotateY(180deg);background:var(--espresso);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8px}
+.chip-back b{font:400 1rem var(--serif)}
+.chip-back i{display:block;font-style:normal;margin-top:3px;font-size:.72rem;color:#d6baa7}
+.chip-back em{display:block;font-style:normal;margin-top:8px;font-size:.66rem;line-height:1.35;color:rgba(255,255,255,.62);padding:0 4px}
+.chip.flipped .chip-front{transform:rotateY(180deg)}
+.chip.flipped .chip-back{transform:rotateY(360deg)}
+@media(hover:hover){
+  .chip:hover .chip-front{transform:rotateY(180deg)}
+  .chip:hover .chip-back{transform:rotateY(360deg)}
 }
-.help-visual{position:relative;background:#756f63;overflow:hidden}
-.help-visual:before{content:"";position:absolute;left:18px;bottom:0;width:75px;height:105px;background:#c4a888;border-radius:42px 42px 6px 6px}
-.help-visual:after{content:"";position:absolute;right:-25px;top:15px;width:90px;height:90px;border-radius:50%;background:#d9c7b0}
-.help-copy{padding:20px 18px}.help-copy .micro{font:700 .5rem var(--mono);letter-spacing:.13em;text-transform:uppercase;color:#d7c6b3}
-.help-copy h3{font:400 1.45rem/1 var(--serif);margin:16px 0 9px}.help-copy p{font-size:.76rem;line-height:1.5;color:rgba(255,255,255,.62);margin:0 0 18px}
+@media(max-width:400px){.chip-back em{display:none}}
+
+/* ---------------- LITTLE HELP — "focus pull" ---------------- */
+.help-block{margin:10px 20px 32px;display:grid;grid-template-columns:42% 58%;min-height:188px;background:var(--espresso);color:white;overflow:hidden}
+.help-visual{position:relative;overflow:hidden;background:#3a332c}
+.help-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:18% 30%;
+  filter:grayscale(.2) brightness(.7) contrast(1.05);transition:transform .55s cubic-bezier(.16,1,.3,1),filter .55s ease}
+.help-block:hover .help-visual img{transform:scale(1.07);filter:grayscale(0) brightness(.8) contrast(1.08)}
+.help-copy{padding:22px 18px}
+.help-copy h3{font:400 1.3rem/1.15 var(--serif);margin:0 0 10px}
+.help-copy p{font-size:.76rem;line-height:1.5;color:rgba(255,255,255,.62);margin:0 0 18px}
 .help-copy button{color:#dfc5b4;font-weight:700;font-size:.79rem;padding:0}
 .fullsite{padding:0 22px 34px;text-align:center}.fullsite a{font-weight:700;font-size:.8rem;color:var(--clay)}
 
-/* ---------------- PATH EXPERIENCE ---------------- */
+/* ---------------- PATH EXPERIENCE (panel, unchanged mechanics) ---------------- */
 .panel{position:fixed;inset:0;z-index:60;background:rgba(23,21,18,.35);overflow:auto;transform:translateY(105%);transition:transform .52s cubic-bezier(.16,1,.3,1)}
 .panel.open{transform:none}
 .panel-inner{max-width:560px;min-height:100dvh;margin:auto;background:var(--paper);position:relative}
@@ -132,7 +133,7 @@ button,a{font:inherit;color:inherit}button{border:0;background:none}a{text-decor
 .actions{padding:22px 20px;display:grid;gap:10px}.cta{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:var(--clay);color:white;font-weight:700}.cta.secondary{background:#e6ddd2;color:var(--espresso)}
 .deep{margin:5px 20px 30px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--clay);font-weight:700;font-size:.82rem}
 
-/* Style finder */
+/* Style finder (inside panel) */
 .quiz{padding:22px 20px 34px}.quiz-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .swatch{min-height:150px;text-align:left;position:relative;overflow:hidden;border:0;cursor:pointer}
 .swatch:before{content:"";position:absolute;inset:0;background:var(--look)}
@@ -143,166 +144,87 @@ button,a{font:inherit;color:inherit}button{border:0;background:none}a{text-decor
 .swatch[data-style="natural"]{--look:linear-gradient(135deg,#b8b69e,#707866 50%,#d9c9b2 50%)}
 .quiz-result{display:none;margin-top:16px;padding:22px;background:#eee6dc}.quiz-result.show{display:block}.quiz-result h3{font:400 1.55rem var(--serif);margin:5px 0 8px}.quiz-result p{margin:0;color:#6d645d;font-size:.86rem;line-height:1.55}
 
-/* ---------------- ENTRY — clean split wordmark, no door/sketch imagery ---------------- */
+/* ---------------- ENTRY — clean split wordmark ---------------- */
 .entry{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  background:
-    radial-gradient(ellipse at center,rgba(255,255,255,.3) 0 40%,rgba(82,65,50,.04) 78%,rgba(58,51,44,.08) 100%),
-    #fbf8f3;
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(ellipse at center,rgba(255,255,255,.3) 0 40%,rgba(82,65,50,.04) 78%,rgba(58,51,44,.08) 100%),#fbf8f3;
   transition:opacity .5s ease,visibility .5s ease;
 }
 .entry.done{opacity:0;visibility:hidden;pointer-events:none}
-
-.mark-trigger{
-  position:relative;
-  width:min(84vw,420px);
-  height:150px;
-  cursor:pointer;
-  animation:mark-float 5.2s ease-in-out 1.15s infinite;
-  isolation:isolate;
-  -webkit-tap-highlight-color:transparent;
-}
-.mark-trigger:focus-visible{
-  outline:1px solid rgba(165,111,85,.5);
-  outline-offset:10px;
-}
+.mark-trigger{position:relative;width:min(84vw,420px);height:150px;cursor:pointer;animation:mark-float 5.2s ease-in-out 1.15s infinite;isolation:isolate;-webkit-tap-highlight-color:transparent}
+.mark-trigger:focus-visible{outline:1px solid rgba(165,111,85,.5);outline-offset:10px}
 .mark-trigger::before{
-  content:"";
-  position:absolute;
-  z-index:5;
-  left:50%;
-  top:24%;
-  width:2px;
-  height:52%;
-  transform:translateX(-50%) scaleY(.08);
-  transform-origin:center;
-  opacity:0;
+  content:"";position:absolute;z-index:5;left:50%;top:24%;width:2px;height:52%;
+  transform:translateX(-50%) scaleY(.08);transform-origin:center;opacity:0;
   background:linear-gradient(90deg,var(--clay) 0 50%,var(--sage) 50% 100%);
-  box-shadow:
-    -5px 0 16px rgba(165,111,85,.28),
-    5px 0 16px rgba(125,131,115,.28);
-  pointer-events:none;
+  box-shadow:-5px 0 16px rgba(165,111,85,.28),5px 0 16px rgba(125,131,115,.28);pointer-events:none;
 }
-.mark-stage{
-  position:absolute;
-  inset:0;
-  transform-origin:center;
-}
-
-.mark-half{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  white-space:nowrap;
-  transition:transform .62s cubic-bezier(.16,1,.3,1),opacity .48s ease,filter .48s ease;
-}
-.mark-half strong{
-  display:block;
-  font:500 clamp(2.1rem,8vw,3.1rem)/1 "Fraunces",var(--serif);
-  letter-spacing:-.03em;
-  color:#3a332c;
-}
-.mark-half > span{
-  display:block;
-  margin-top:10px;
-  font:700 .58rem var(--mono);
-  letter-spacing:.24em;
-  text-transform:uppercase;
-  color:var(--clay);
-}
-.word-piece{
-  display:inline-block;
-  opacity:0;
-  transform:translateY(13px);
-  animation:mark-rise .72s cubic-bezier(.16,1,.3,1) forwards;
-}
+.mark-stage{position:absolute;inset:0;transform-origin:center}
+.mark-half{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;white-space:nowrap;
+  transition:transform .62s cubic-bezier(.16,1,.3,1),opacity .48s ease,filter .48s ease}
+.mark-half strong{display:block;font:500 clamp(2.1rem,8vw,3.1rem)/1 "Fraunces",var(--serif);letter-spacing:-.03em;color:#3a332c}
+.mark-half > span{display:block;margin-top:10px;font:700 .58rem var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--clay)}
+.word-piece{display:inline-block;opacity:0;transform:translateY(13px);animation:mark-rise .72s cubic-bezier(.16,1,.3,1) forwards}
 .mark-half strong .word-piece:nth-child(1){animation-delay:.12s}
 .mark-half strong .word-piece:nth-child(2){animation-delay:.22s}
 .mark-half > span .word-piece:nth-child(1){animation-delay:.35s}
 .mark-half > span .word-piece:nth-child(2){animation-delay:.43s}
 .mark-left{clip-path:inset(0 50% 0 0)}
 .mark-right{clip-path:inset(0 0 0 50%)}
-
-.tap-cue{
-  position:absolute;
-  left:50%;
-  bottom:16%;
-  transform:translateX(-50%);
-  font:700 .53rem var(--mono);
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  color:#8a8177;
-  opacity:0;
-  white-space:nowrap;
-  transition:opacity .3s ease;
-  animation:cue-in .45s ease .82s forwards;
-}
-
-/* OPENING: wordmark splits apart and clears */
+.tap-cue{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);font:700 .53rem var(--mono);letter-spacing:.15em;text-transform:uppercase;color:#8a8177;opacity:0;white-space:nowrap;transition:opacity .3s ease;animation:cue-in .45s ease .82s forwards}
 .entry.pressing .mark-stage{animation:mark-press .16s ease-out both}
 .entry.opening .mark-trigger{animation-play-state:paused}
 .entry.opening .mark-trigger::before{animation:seam-bloom .64s cubic-bezier(.16,1,.3,1) both}
-.entry.opening .mark-left{
-  transform:translateX(-58%);
-  opacity:0;
-  filter:blur(2px);
-}
-.entry.opening .mark-right{
-  transform:translateX(58%);
-  opacity:0;
-  filter:blur(2px);
-}
+.entry.opening .mark-left{transform:translateX(-58%);opacity:0;filter:blur(2px)}
+.entry.opening .mark-right{transform:translateX(58%);opacity:0;filter:blur(2px)}
 .entry.opening .tap-cue{opacity:0}
-
-@keyframes mark-rise{
-  from{opacity:0;transform:translateY(13px)}
-  to{opacity:1;transform:translateY(0)}
-}
+@keyframes mark-rise{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
 @keyframes cue-in{to{opacity:.75}}
-@keyframes mark-float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-4px)}
-}
-@keyframes mark-press{
-  0%{transform:scale(1)}
-  48%{transform:scale(.972)}
-  100%{transform:scale(1.008)}
-}
-@keyframes seam-bloom{
-  0%{opacity:0;transform:translateX(-50%) scaleY(.08)}
-  24%{opacity:.95;transform:translateX(-50%) scaleY(1)}
-  66%{opacity:.72;transform:translateX(-50%) scaleY(1.14)}
-  100%{opacity:0;transform:translateX(-50%) scaleY(.72)}
-}
+@keyframes mark-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes mark-press{0%{transform:scale(1)}48%{transform:scale(.972)}100%{transform:scale(1.008)}}
+@keyframes seam-bloom{0%{opacity:0;transform:translateX(-50%) scaleY(.08)}24%{opacity:.95;transform:translateX(-50%) scaleY(1)}66%{opacity:.72;transform:translateX(-50%) scaleY(1.14)}100%{opacity:0;transform:translateX(-50%) scaleY(.72)}}
 
-.door-ready{
-  opacity:0;
-  transform:scale(1.025);
-  filter:blur(8px);
-  transition:
-    opacity .68s ease,
-    transform .78s cubic-bezier(.16,1,.3,1),
-    filter .68s ease;
-}
-body.entered .door-ready{
-  opacity:1;
-  transform:scale(1);
-  filter:blur(0);
-}
+.door-ready{opacity:0;transform:scale(1.025);filter:blur(8px);transition:opacity .68s ease,transform .78s cubic-bezier(.16,1,.3,1),filter .68s ease}
+body.entered .door-ready{opacity:1;transform:scale(1);filter:blur(0)}
 
 @media(prefers-reduced-motion:reduce){
   .entry{display:none!important}
   .door-ready{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
   .mark-left,.mark-right{transition:none!important}
+  .hero-photo{clip-path:inset(0)!important;transition:none!important}
+  .hero-plate{opacity:1!important;transform:none!important;transition:none!important}
+  .fan-item{opacity:1!important;transform:none!important;transition:none!important}
+  .route-swatch{transition:none!important}
+  .chip-face{transition:none!important}
+  .help-visual img{transition:none!important}
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media(min-width:700px){
+  .shell{max-width:660px}
+  .card-scene{padding:32px 26px 26px}
+  .biz-card{padding:20px 22px 22px}
+  .hero-scene{min-height:480px}
+  .hero-plate{max-width:64%}
+  .routes{padding:46px 30px 10px}
+  .route-row{padding:26px 8px}
+  .studio{padding:46px 30px 10px}
+  .studio-banner img{height:260px}
+  .help-block{grid-template-columns:38% 62%}
+}
+@media(min-width:1100px){
+  .shell{max-width:860px}
+  .card-scene{display:flex;align-items:center;gap:30px;padding:32px 36px}
+  .biz-card{flex:1 1 52%;transform:none}
+  .card-eyebrow{white-space:nowrap}
+  .card-fan{flex:1 1 48%;margin-top:0}
+  .hero-scene{min-height:560px}
+  .hero-plate{max-width:44%;padding:28px 26px}
+  .hero-plate h1{font-size:clamp(3.2rem,4.6vw,4.4rem)}
+  .routes-head h2{font-size:2.5rem}
+  .route-text b{font-size:1.7rem}
+  .chip-grid{gap:18px}
+  .studio-banner img{height:340px}
 }
 </style>
 </head>
@@ -332,46 +254,93 @@ body.entered .door-ready{
     </div>
   </section>
 
-  <section class="editorial-hero">
-    <span class="kicker">Spaces with a point of view</span>
-    <h1>Rooms that feel <em>like yours.</em></h1>
-    <p class="hero-note">Start with the work, your style, or the project already taking shape in your head.</p>
+  <section class="card-scene" id="ownerCard">
+    <div class="biz-card">
+      <img class="card-photo" src="atelier-house-owner-headshot.png" alt="Lillian Hart, Principal Designer at Atelier House">
+      <div class="card-id">
+        <span class="card-eyebrow">Owner · Digital Business Card</span>
+        <h2>Lillian Hart</h2>
+        <p>Principal Designer · Creative Director</p>
+      </div>
+    </div>
+    <div class="card-fan">
+      <a class="fan-item" style="--i:0" href="tel:+15555550142"><span>Call</span><span>↗</span></a>
+      <a class="fan-item" style="--i:1" href="sms:+15555550142"><span>Text</span><span>↗</span></a>
+      <a class="fan-item" style="--i:2" href="mailto:hello@atelierhouse.example"><span>Email</span><span>↗</span></a>
+      <a class="fan-item" style="--i:3" href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AN%3AHart%3BLillian%3B%3B%3B%0AFN%3ALillian%20Hart%0AORG%3AAtelier%20House%20Interior%20Design%0ATITLE%3APrincipal%20Designer%20%C2%B7%20Creative%20Director%0ATEL%3BTYPE%3DWORK%2CVOICE%3A%2B15555550142%0AEMAIL%3Ahello%40atelierhouse.example%0AADR%3BTYPE%3DWORK%3A%3B%3B140%20Maple%20Row%20Suite%203%3B%3B%3B%3B%0AURL%3Ahttps%3A%2F%2Fatelierhouse.example%0AEND%3AVCARD" download="lillian-hart-atelier-house.vcf"><span>Save Contact</span><span>↗</span></a>
+      <a class="fan-item" style="--i:4" href="https://www.google.com/maps/search/?api=1&query=140+Maple+Row%2C+Suite+3" target="_blank" rel="noopener"><span>Directions</span><span>↗</span></a>
+    </div>
   </section>
 
-  <div class="material-strip" aria-hidden="true">
-    <div class="mat m1"><span>Oak</span></div>
-    <div class="mat m2"><span>Sage</span></div>
-    <div class="mat m3"><span>Linen</span></div>
-    <div class="mat m4"><span>Clay</span></div>
-  </div>
+  <section class="hero-scene">
+    <div class="hero-photo" role="img" aria-label="Atelier House storefront exterior with signage and entry"></div>
+    <div class="hero-plate">
+      <span class="kicker">Spaces with a point of view</span>
+      <h1>Rooms that feel <em>like yours.</em></h1>
+      <p class="hero-note">Start with the work, your style, or the project already taking shape in your head.</p>
+    </div>
+  </section>
 
-  <section class="contents" id="paths">
-    <div class="contents-head"><h2>Where do you want<br>to begin?</h2><span>04 paths</span></div>
+  <section class="routes" id="paths">
+    <div class="routes-head"><h2>Where do you want<br>to begin?</h2><span>04 paths</span></div>
+    <div class="routes-list">
+      <button class="route-row" data-path="portfolio" data-mat="oak">
+        <div class="route-swatch" aria-hidden="true"></div>
+        <span class="route-num">01</span>
+        <span class="route-text"><b>See the Portfolio</b><i>Browse transformations, rooms, and finished spaces.</i></span>
+        <span class="route-tag">Oak</span>
+        <span class="route-go">↗</span>
+      </button>
+      <button class="route-row" data-path="style" data-mat="sage">
+        <div class="route-swatch" aria-hidden="true"></div>
+        <span class="route-num">02</span>
+        <span class="route-text"><b>What's My Style?</b><i>Choose what pulls you in. We'll name the direction.</i></span>
+        <span class="route-tag">Sage</span>
+        <span class="route-go">↗</span>
+      </button>
+      <button class="route-row" data-path="project" data-mat="linen">
+        <div class="route-swatch" aria-hidden="true"></div>
+        <span class="route-num">03</span>
+        <span class="route-text"><b>I Have a Project in Mind</b><i>Turn the idea into the right kind of design project.</i></span>
+        <span class="route-tag">Linen</span>
+        <span class="route-go">↗</span>
+      </button>
+      <button class="route-row" data-path="client" data-mat="clay">
+        <div class="route-swatch" aria-hidden="true"></div>
+        <span class="route-num">04</span>
+        <span class="route-text"><b>I'm Already a Client</b><i>Updates, selections, documents, and your next step.</i></span>
+        <span class="route-tag">Clay</span>
+        <span class="route-go">↗</span>
+      </button>
+    </div>
+  </section>
 
-    <button class="path-card portfolio" data-path="portfolio">
-      <span class="index">01 · THE WORK</span><div class="shape"></div>
-      <h3>See the Portfolio</h3><p>Browse transformations, rooms, and finished spaces.</p><span class="go">↗</span>
-    </button>
-
-    <button class="path-card style" data-path="style">
-      <span class="index">02 · FIND YOUR LOOK</span><div class="shape"></div>
-      <h3>What's My Style?</h3><p>Choose what pulls you in. We'll name the direction.</p><span class="go">↗</span>
-    </button>
-
-    <button class="path-card project" data-path="project">
-      <span class="index">03 · START SOMETHING</span><div class="shape"></div>
-      <h3>I Have a Project in Mind</h3><p>Turn the idea into the right kind of design project.</p><span class="go">↗</span>
-    </button>
-
-    <button class="path-card client" data-path="client">
-      <span class="index">04 · CURRENT CLIENT</span><div class="shape"></div>
-      <h3>I'm Already a Client</h3><p>Updates, selections, documents, and your next step.</p><span class="go">↗</span>
-    </button>
+  <section class="studio" id="studio">
+    <div class="studio-head"><h2>Inside the Studio</h2><span>The Team</span></div>
+    <div class="studio-banner"><img src="atelier-house-team.png" alt="The Atelier House design team in the studio"></div>
+    <div class="chip-grid">
+      <button class="chip" data-i="0" aria-label="Lillian Hart, Principal Designer">
+        <span class="chip-face chip-front"><img src="atelier-house-owner-headshot.png" alt="Lillian Hart"></span>
+        <span class="chip-face chip-back"><b>Lillian Hart</b><i>Principal Designer</i><em>Leads with warm, layered interiors.</em></span>
+      </button>
+      <button class="chip" data-i="1" aria-label="Marcus Reyes, Senior Designer">
+        <span class="chip-face chip-front"><img src="atelier-house-male-designer-headshot.png" alt="Marcus Reyes"></span>
+        <span class="chip-face chip-back"><b>Marcus Reyes</b><i>Senior Designer</i><em>Works in natural wood and stone.</em></span>
+      </button>
+      <button class="chip" data-i="2" aria-label="Naomi Cho, Design Associate">
+        <span class="chip-face chip-front"><img src="atelier-house-female-designer-headshot.png" alt="Naomi Cho"></span>
+        <span class="chip-face chip-back"><b>Naomi Cho</b><i>Design Associate</i><em>Focused on quiet, considered detail.</em></span>
+      </button>
+    </div>
   </section>
 
   <section class="help-block">
-    <div class="help-visual"></div>
-    <div class="help-copy"><span class="micro">Small problem. Big difference.</span><h3>I just need a little help.</h3><p>Layout, color, styling, or the room that simply isn't working.</p><button data-path="help">Find the right help →</button></div>
+    <div class="help-visual"><img src="atelier-house-hero-exterior.png" alt="" aria-hidden="true"></div>
+    <div class="help-copy">
+      <h3>Small problem? Big difference with a little help.</h3>
+      <p>Layout, color, styling, or the room that simply isn't working.</p>
+      <button data-path="help">Find the right help →</button>
+    </div>
   </section>
 
   <div class="fullsite"><a href="key-atelier.html">Lillian Hart</a> · <a href="atelier-house-full-site.html">In-depth site</a> · <a href="door.html#doorStart">Back to The Digital Side Path</a></div>
@@ -396,13 +365,13 @@ const data={
   actions:[['Browse the full portfolio','#full-site']]
  },
  style:{
-  eye:'Interactive style path',title:'Let\u2019s find your design language.',
-  intro:'Don\u2019t worry about knowing the right design words. Choose the rooms you\u2019re naturally pulled toward.',
+  eye:'Interactive style path',title:'Let’s find your design language.',
+  intro:'Don’t worry about knowing the right design words. Choose the rooms you’re naturally pulled toward.',
   quiz:true,actions:[['Bring my direction to a consultation','#consult']]
  },
  project:{
-  eye:'Project path',title:'You have the idea. Let\u2019s shape it.',
-  intro:'A few useful starting points help turn \u201cI want to change this\u201d into the right kind of design project.',
+  eye:'Project path',title:'You have the idea. Let’s shape it.',
+  intro:'A few useful starting points help turn “I want to change this” into the right kind of design project.',
   steps:[
    ['What are we designing?','One room, several connected spaces, or a whole-home transformation.'],
    ['How far are we going?','A styling refresh, furnishings + layout, or a more complete design transformation.'],
@@ -413,14 +382,14 @@ const data={
  },
  client:{
   eye:'Current client path',title:'Back to your project.',
-  intro:'The useful project links in one place \u2014 without making you search through the public site.',
+  intro:'The useful project links in one place — without making you search through the public site.',
   menu:['Project updates','Selections + approvals','Project documents','Next meeting','Contact your designer'],
   actions:[['Open client workspace','#client-portal'],['Contact the studio','mailto:hello@atelierhouse.example']]
  },
  help:{
-  eye:'Design help path',title:'The room just isn\u2019t working.',
+  eye:'Design help path',title:'The room just isn’t working.',
   intro:'You do not need a full renovation to need a designer. Start with the thing that keeps bothering you.',
-  menu:['The layout feels wrong','I need help with color','It needs finishing touches','Help me pull the room together','I\u2019m not sure what it needs'],
+  menu:['The layout feels wrong','I need help with color','It needs finishing touches','Help me pull the room together','I’m not sure what it needs'],
   actions:[['Find the right level of help','#consult'],['See design services','#full-site']]
  }
 };
@@ -430,7 +399,7 @@ intro=document.getElementById('panelIntro'),eye=document.getElementById('panelEy
 count=document.getElementById('panelCount');
 
 function quizHTML(){
- return `<div class="quiz"><span style="font:700 .54rem var(--mono);letter-spacing:.13em;text-transform:uppercase;color:#81776e">Choose the room you\u2019d save first</span>
+ return `<div class="quiz"><span style="font:700 .54rem var(--mono);letter-spacing:.13em;text-transform:uppercase;color:#81776e">Choose the room you’d save first</span>
  <div class="quiz-grid">
   <button class="swatch" data-style="warm"><span>Warm + layered</span></button>
   <button class="swatch" data-style="quiet"><span>Quiet + refined</span></button>
@@ -441,8 +410,8 @@ function quizHTML(){
 }
 const results={
  warm:['Warm Modern','You lean toward warmth, texture, and rooms that feel collected rather than overly perfect.'],
- quiet:['Soft Contemporary','You\u2019re drawn to restraint, light, clean lines, and spaces that feel calm without feeling empty.'],
- bold:['Collected Contrast','You like personality \u2014 richer tones, contrast, sculptural pieces, and a room with a point of view.'],
+ quiet:['Soft Contemporary','You’re drawn to restraint, light, clean lines, and spaces that feel calm without feeling empty.'],
+ bold:['Collected Contrast','You like personality — richer tones, contrast, sculptural pieces, and a room with a point of view.'],
  natural:['Organic Modern','You gravitate toward natural materials, grounded color, softness, and an easy connection to the outdoors.']
 };
 function openPath(key){
@@ -451,8 +420,8 @@ function openPath(key){
  count.textContent=key==='style'?'STYLE FINDER':'CUSTOMER PATH';
  if(d.quiz) body.innerHTML=quizHTML();
  else if(d.steps) body.innerHTML=`<div class="steps">${d.steps.map(x=>`<div class="step"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('')}</div>`;
- else body.innerHTML=`<div class="route-menu">${d.menu.map(x=>`<a href="#">${x}<span style="float:right;color:var(--clay)">\u2197</span></a>`).join('')}</div>`;
- actions.innerHTML=(d.actions||[]).map((x,i)=>`<a class="cta ${i?'secondary':''}" href="${x[1]}"><span>${x[0]}</span><span>\u2197</span></a>`).join('');
+ else body.innerHTML=`<div class="route-menu">${d.menu.map(x=>`<a href="#">${x}<span style="float:right;color:var(--clay)">↗</span></a>`).join('')}</div>`;
+ actions.innerHTML=(d.actions||[]).map((x,i)=>`<a class="cta ${i?'secondary':''}" href="${x[1]}"><span>${x[0]}</span><span>↗</span></a>`).join('');
  panel.classList.add('open');panel.setAttribute('aria-hidden','false');panel.scrollTop=0;document.body.style.overflow='hidden';
  if(d.quiz)document.querySelectorAll('.swatch').forEach(btn=>btn.onclick=()=>{
    const r=results[btn.dataset.style],box=document.getElementById('quizResult');
@@ -465,6 +434,11 @@ document.querySelectorAll('[data-path]').forEach(b=>b.addEventListener('click',(
 document.getElementById('back').onclick=closePanel;
 panel.addEventListener('pointerdown',e=>{if(e.target===panel)closePanel()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panel.classList.contains('open'))closePanel()});
+
+/* Studio chip flip: tap/click toggles for touch devices; CSS :hover handles pointer devices. */
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click',()=>chip.classList.toggle('flipped'));
+});
 
 /* Atelier House entry: clean split wordmark, no door imagery. */
 const entry=document.getElementById('entry');
