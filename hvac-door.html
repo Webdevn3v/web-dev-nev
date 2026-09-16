@@ -324,35 +324,93 @@ body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
 .founder-extra>p{font-size:.75rem;line-height:1.55;color:#bac3c7;margin:14px 2px}
 .founder-extra>a{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-radius:11px;background:rgba(193,122,74,.13);border:1px solid rgba(193,122,74,.3);color:var(--paper);font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
 @media(prefers-reduced-motion:reduce){.stream{animation:none}}
+/* ---- final Door: still cover, business-first actions, three dropdowns ---- */
+.photo-cover{background:#0d0f11}
+.cover-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:46% center;filter:saturate(.82) contrast(1.03)}
+.cover-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,17,.55),rgba(13,15,17,.28) 38%,rgba(13,15,17,.68)),radial-gradient(circle at 50% 47%,transparent 0 18%,rgba(13,15,17,.33) 58%,rgba(13,15,17,.72) 100%)}
+.photo-cover .airlock-content{justify-content:center;text-shadow:0 2px 16px rgba(0,0,0,.62)}
+.photo-cover .mark{padding:18px 22px;border-radius:18px;background:rgba(13,15,17,.54);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(9px)}
+.photo-cover .cue{margin-top:22px}
+.photo-cover .tapring{background:rgba(13,15,17,.5);backdrop-filter:blur(7px)}
+.photo-cover.releasing .cover-photo{opacity:0;transform:scale(1.025);transition:opacity .6s var(--ease-out),transform .7s var(--ease-out)}
+.photo-cover.releasing .cover-shade{opacity:0;transition:opacity .55s}
+.simplified-top{grid-template-areas:"mark full" "request request" "quick quick" "emergency emergency";row-gap:9px;position:relative}
+.request-primary{grid-area:request;display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:13px;background:var(--copper);color:#160d07;font:800 .75rem var(--display);text-transform:uppercase;letter-spacing:.04em}
+.request-primary b{font-size:1rem}
+.business-actions{grid-template-columns:repeat(4,1fr)}
+.business-actions .qa{flex-direction:column;gap:5px;padding:10px 3px;font-size:.62rem}
+.business-actions .qa .line-icon{width:17px;height:17px}
+.emergency-note{grid-area:emergency;margin:0;text-align:center;color:var(--muted);font-size:.59rem;letter-spacing:.035em}
+.emergency-note a{color:var(--copper-soft);text-decoration:underline;text-underline-offset:3px}
+.simplified-hero{min-height:0;aspect-ratio:auto;background:var(--graphite-950)}
+.hero-image{display:block;width:100%;height:auto;max-height:none}
+.simplified-hero .hero-fade{background:linear-gradient(180deg,rgba(13,15,17,.14),transparent 45%,rgba(13,15,17,.42) 72%,var(--graphite-950) 100%)}
+.simplified-hero .hero-cap{padding-bottom:22px}
+.live-mini{max-width:960px;margin:10px auto 18px;padding:0 20px}
+.live-mini-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;color:#8fdcaf;font-size:.6rem;letter-spacing:.13em;text-transform:uppercase}
+.live-mini-head span{width:7px;height:7px;border-radius:50%;background:#48d99a}
+.live-mini-grid{display:grid;grid-template-columns:1.1fr 1fr .75fr;border:1px solid var(--line);border-radius:14px;background:var(--graphite-900);overflow:hidden}
+.live-mini-grid>div{padding:12px 13px}
+.live-mini-grid>div+div{border-left:1px solid var(--line)}
+.live-mini-grid small,.live-mini-grid strong{display:block}
+.live-mini-grid small{font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.live-mini-grid strong{font-size:.65rem;margin-top:4px;line-height:1.35}
+.live-mini-grid em{font-style:normal;color:#7bdcae}
+.door-sections{max-width:960px;margin:0 auto;padding:0 20px 34px}
+.door-drop{border-top:1px solid var(--line)}
+.door-drop:last-child{border-bottom:1px solid var(--line)}
+.door-drop summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:17px 2px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.door-drop summary::-webkit-details-marker{display:none}
+.door-drop summary span,.door-drop summary small{display:block}
+.door-drop summary small{font-size:.52rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.door-drop summary span{font:800 .92rem var(--display)}
+.door-drop summary>b{width:27px;height:27px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--cool-soft);font-size:1rem;font-weight:400;transition:transform .22s}
+.door-drop[open] summary>b{transform:rotate(45deg);color:var(--copper-soft)}
+.drop-body{padding:2px 0 20px;animation:dropIn .3s var(--ease-out)}
+@keyframes dropIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.family-drop>p{color:var(--muted);font-size:.68rem;line-height:1.5;margin:0 0 15px}
+.family-drop .fam-row{margin-top:0;justify-content:space-between;gap:8px;flex-wrap:nowrap}
+.family-drop .fam{min-width:0;flex:1}
+.family-drop .fam b{font-size:.7rem}
+.family-drop .fam>small{font-size:.5rem;color:var(--cool-soft);text-transform:uppercase;letter-spacing:.05em}
+.fam-static{cursor:default}
+.fam-static:hover{background:none;outline:0}
+.about-reveal{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:var(--graphite-900)}
+.about-reveal>img{display:block;width:100%;height:auto}
+.about-reveal-copy{padding:21px 18px 18px}
+.about-reveal .eyebrow{font-size:.58rem;color:var(--copper-soft);letter-spacing:.15em}
+.about-reveal h2{font:800 1.35rem/1.06 var(--display);letter-spacing:-.02em;margin:7px 0 10px}
+.about-reveal p{color:#b9c2c6;font-size:.76rem;line-height:1.58;margin:0 0 15px}
+.legacy-numbers{display:grid;grid-template-columns:.8fr .8fr 1.3fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:16px}
+.legacy-numbers span{text-align:center;padding:10px 5px;font-size:.49rem;color:var(--muted);line-height:1.3}
+.legacy-numbers span+span{border-left:1px solid var(--line)}
+.legacy-numbers b{display:block;color:var(--paper);font:800 .9rem var(--display);margin-bottom:2px}
+.reviews-drop .rating-row{justify-content:flex-start;margin:0 0 4px}
+.reviews-drop .review-strip{padding:10px 0 3px}
+.reviews-drop .rq{max-width:none;flex-basis:86%}
+@media(min-width:840px){
+  .simplified-top{grid-template-columns:auto 1fr auto auto;grid-template-areas:"mark quick request full" "emergency emergency emergency emergency";align-items:center}
+  .business-actions{display:grid}
+  .request-primary{width:auto}
+  .about-reveal{display:grid;grid-template-columns:1fr 1fr}
+  .about-reveal>img{height:100%;object-fit:cover}
+}
+@media(prefers-reduced-motion:reduce){.drop-body{animation:none}.photo-cover.releasing .cover-photo{transition:none}}
 </style>
 </head>
 <body>
 
 <div class="sheet-backdrop" id="sheetBackdrop"></div>
 
-<div class="airlock airflow-cover" id="airlock" role="button" tabindex="0" aria-label="Enter Marsh Brothers Heating &amp; Air">
-  <div class="air-scene" aria-hidden="true">
-    <div class="air-glow warm-glow"></div>
-    <div class="air-glow cool-glow"></div>
-    <svg class="air-lines" viewBox="0 0 390 740" preserveAspectRatio="none">
-      <path class="stream stream-warm s1" d="M-35 470 C70 405 115 485 210 430 S345 330 430 395"/>
-      <path class="stream stream-warm s2" d="M-45 525 C80 455 125 545 225 485 S350 390 435 450"/>
-      <path class="stream stream-cool s3" d="M430 265 C325 215 275 315 185 270 S55 175 -35 235"/>
-      <path class="stream stream-cool s4" d="M440 320 C330 270 285 365 185 325 S55 235 -45 290"/>
-    </svg>
-    <div class="vent">
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-    </div>
-    <div class="air-caption warm-caption">WARM AIR</div>
-    <div class="air-caption cool-caption">COOL AIR</div>
-  </div>
+<div class="airlock photo-cover" id="airlock" role="button" tabindex="0" aria-label="Enter Marsh Brothers Heating &amp; Air">
+  <img class="cover-photo" src="hvac-condenser-service.png" alt="" width="2048" height="1365">
+  <div class="cover-shade"></div>
   <div class="airlock-content">
     <div class="mark">
       <svg class="icon" viewBox="0 0 32 24" fill="none" aria-hidden="true"><path d="M10 3c0 0-5 6-5 10a5 5 0 0 0 10 0c0-2.4-1.6-4-1.6-4s.4 2.4-1.2 2.4c-.8 0-1.2-.8-.8-1.6.4-.8.8-1.6-.4-3.2C10.4 5.2 10 3 10 3z" fill="#e0a374"/><g stroke="#9bcadd" stroke-width="1.3" stroke-linecap="round"><line x1="24" y1="6" x2="24" y2="18"/><line x1="18.5" y1="9" x2="29.5" y2="15"/><line x1="29.5" y1="9" x2="18.5" y2="15"/></g></svg>
       <span class="wordmark">Marsh Brothers</span>
       <span class="submark">Heating &amp; Air</span>
     </div>
-    <div class="cover-rule"><span>HEAT</span><i></i><span>COOL</span></div>
     <div class="cue">Tap to Enter<span class="cue-sub">Family Owned · Howard County</span></div>
     <div class="tapring">→</div>
   </div>
@@ -360,26 +418,28 @@ body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
 
 <main class="path">
 
-<header class="card-top" id="cardTop">
+<header class="card-top simplified-top" id="cardTop">
   <div class="mini-mark">
     <svg class="icon" viewBox="0 0 32 24" fill="none" aria-hidden="true"><path d="M10 3c0 0-5 6-5 10a5 5 0 0 0 10 0c0-2.4-1.6-4-1.6-4s.4 2.4-1.2 2.4c-.8 0-1.2-.8-.8-1.6.4-.8.8-1.6-.4-3.2C10.4 5.2 10 3 10 3z" fill="#e0a374"/><g stroke="#9bcadd" stroke-width="1.3" stroke-linecap="round"><line x1="24" y1="6" x2="24" y2="18"/><line x1="18.5" y1="9" x2="29.5" y2="15"/><line x1="29.5" y1="9" x2="18.5" y2="15"/></g></svg>
     <div><span class="word">Marsh Brothers</span><small>Heating &amp; Air</small></div>
   </div>
   <a class="fullsite" href="hvac-index.html">Full Site <span aria-hidden="true">&rarr;</span></a>
-  <a class="emergency" href="tel:+15555550150">
-    <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3"/></svg>
-    <span><small>Need help now?</small>Emergency Call</span>
+
+  <a class="request-primary" href="tel:+15555550150">
+    <span>Request Service</span><b aria-hidden="true">&rarr;</b>
   </a>
-  <div class="quick-row">
+
+  <div class="quick-row business-actions" aria-label="Contact Marsh Brothers">
     <a class="qa" href="tel:+15555550150"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h3l1.5 4-2 1.5a14 14 0 0 0 6 6L17 12.5l4 1.5v3c0 2-1 4-4 4C9 20 4 15 3 7c0-3 2-4 4-4Z"/></svg><span>Call</span></a>
     <a class="qa" href="sms:+15555550150"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg><span>Text</span></a>
     <a class="qa" href="mailto:service@marshbrothershvac.com"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><span>Email</span></a>
+    <a class="qa" href="marsh-brothers.vcf"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 19h14"/></svg><span>Save</span></a>
   </div>
-  <a class="save" href="marsh-brothers.vcf"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 19h14"/></svg><span>Save Contact</span></a>
+  <p class="emergency-note">24/7 emergency response available · <a href="tel:+15555550150">Call now</a></p>
 </header>
 
-<section class="hero">
-  <div class="hero-photo" role="img" aria-label="Danny, Curtis, and Pete Marsh with their dad and the shop dog outside the Marsh Brothers garage"></div>
+<section class="hero simplified-hero">
+  <img class="hero-image" src="marsh-family-about.png" alt="Dad, Danny, Curtis, and Pete Marsh together outdoors">
   <div class="hero-fade"></div>
   <div class="hero-cap">
     <h1>Comfort, Kept In The Family.</h1>
@@ -387,62 +447,54 @@ body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
   </div>
 </section>
 
-<section class="stat-scroll reveal" aria-label="Marsh Brothers highlights">
-  <span class="stat-label">Marsh at a glance</span>
-  <div class="stat-window"><strong class="stat-value" data-stat-value>Family Owned</strong><span class="stat-detail" data-stat-detail>Serving neighbors since 2009</span></div>
-  <span class="stat-count" data-stat-count>01 / 04</span>
-  <i class="stat-progress" aria-hidden="true"></i>
+<section class="live-mini reveal" id="live-service" aria-label="Current Marsh Brothers availability">
+  <div class="live-mini-head"><span aria-hidden="true"></span><b>Current Availability</b></div>
+  <div class="live-mini-grid">
+    <div><small>Dispatch</small><strong>Crew 2 · <span data-dispatch-area>Ellicott City</span></strong></div>
+    <div><small>Next opening</small><strong data-next-window>Today · 6–8 PM</strong></div>
+    <div><small>Same-day</small><strong><em data-open-count>2</em> openings</strong></div>
+  </div>
 </section>
 
-<section class="status-strip reveal lou-system" aria-label="Live Marsh Brothers service board">
-  <div class="lou-head"><span class="live-pulse" aria-hidden="true"></span><div><small>Live Service Board</small><strong>Right Now at Marsh Brothers</strong></div></div>
-  <div class="dispatch-card">
-    <div class="dispatch-top">
-      <span class="dispatch-kicker">Current Dispatch</span>
-      <strong><span class="dispatch-truck" aria-hidden="true"></span>Crew 2 · <span data-dispatch-area>Ellicott City</span></strong>
-      <small><span data-dispatch-status>Technician en route</span> to a service call</small>
-      <div class="dispatch-route" aria-hidden="true"><i></i><b></b><i></i></div>
+<section class="door-sections reveal" aria-label="More about Marsh Brothers">
+  <details class="door-drop" id="family">
+    <summary><span><small>People</small>Meet the Family</span><b aria-hidden="true">+</b></summary>
+    <div class="drop-body family-drop">
+      <p>Marsh Brothers is one family team. Tap a technician when you need their direct contact information.</p>
+      <div class="fam-row">
+        <div class="fam fam-static"><span class="fam-photo f-dad"></span><b>Dad</b><small>Founder</small></div>
+        <button class="fam" data-person="danny" aria-label="Open Danny's contact options"><span class="fam-photo f-danny"><i aria-hidden="true"></i></span><b>Danny</b><small>Contact</small></button>
+        <button class="fam" data-person="curtis" aria-label="Open Curtis's contact options"><span class="fam-photo f-curtis"><i aria-hidden="true"></i></span><b>Curtis</b><small>Contact</small></button>
+        <button class="fam" data-person="pete" aria-label="Open Pete's contact options"><span class="fam-photo f-pete"><i aria-hidden="true"></i></span><b>Pete</b><small>Contact</small></button>
+      </div>
     </div>
-    <div class="dispatch-grid">
-      <div><span>Next appointment window</span><strong data-next-window>Today · 6–8 PM</strong></div>
-      <div><span>Same-day openings</span><strong><b class="open-count" data-open-count>2</b> remaining</strong></div>
+  </details>
+
+  <details class="door-drop" id="about">
+    <summary><span><small>Since 2009</small>About Marsh Brothers</span><b aria-hidden="true">+</b></summary>
+    <div class="drop-body about-reveal">
+      <img src="marsh-family-candid.png" alt="The Marsh family with their shop dog outside the Marsh Brothers garage">
+      <div class="about-reveal-copy">
+        <span class="eyebrow">The Marsh Legacy</span>
+        <h2>Family Built. Neighbor Trusted.</h2>
+        <p>Dad started Marsh Brothers in 2009 with one truck and a promise to show up. Danny, Curtis, and Pete grew up alongside the business and now carry that promise into every home they serve.</p>
+        <div class="legacy-numbers"><span><b>2009</b>Founded</span><span><b>1</b>First truck</span><span><b>3</b>Sons carrying it forward</span></div>
+        <a class="about-full" href="hvac-index.html"><span>Explore the Full Marsh Brothers Site</span><b aria-hidden="true">&rarr;</b></a>
+      </div>
     </div>
-    <a class="dispatch-action" href="tel:+15555550150">Request the next opening <span aria-hidden="true">&rarr;</span></a>
-  </div>
-</section>
+  </details>
 
-<section class="family reveal" id="family">
-  <span class="eyebrow">Meet The Family</span>
-  <p class="family-hint">Tap a profile to call, text, email, or save contact.</p>
-  <div class="fam-row">
-    <button class="fam" data-person="dad" aria-label="View Dad's founder story"><span class="fam-photo f-dad"><i aria-hidden="true"></i></span><b>Dad</b><small class="fam-action">View story <span>&rarr;</span></small></button>
-    <button class="fam" data-person="danny" aria-label="Open Danny's contact options"><span class="fam-photo f-danny"><i aria-hidden="true"></i></span><b>Danny</b><small class="fam-action">Contact <span>&rarr;</span></small></button>
-    <button class="fam" data-person="curtis" aria-label="Open Curtis's contact options"><span class="fam-photo f-curtis"><i aria-hidden="true"></i></span><b>Curtis</b><small class="fam-action">Contact <span>&rarr;</span></small></button>
-    <button class="fam" data-person="pete" aria-label="Open Pete's contact options"><span class="fam-photo f-pete"><i aria-hidden="true"></i></span><b>Pete</b><small class="fam-action">Contact <span>&rarr;</span></small></button>
-  </div>
-</section>
-
-<section class="reviews reveal" id="reviews">
-  <div class="head">
-    <span class="eyebrow">Proof, Not Promises</span>
-    <div class="rating-row"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>4.9 from 240+ neighbors</div>
-  </div>
-  <div class="review-strip">
-    <div class="rq">&ldquo;Danny walked us through everything &mdash; no upsell, just a fair price and a fixed furnace by dinner.&rdquo;<b>&mdash; Marcus T., Ellicott City</b></div>
-    <div class="rq">&ldquo;Curtis has serviced our system twice a year for six years straight. Same guy, same answers.&rdquo;<b>&mdash; Priya S., Columbia</b></div>
-    <div class="rq">&ldquo;Pete's install still runs like new three years later. We've sent every neighbor his number.&rdquo;<b>&mdash; Renee K., Clarksville</b></div>
-  </div>
-</section>
-
-<section class="door-about reveal" id="about">
-  <div class="door-about-photo" role="img" aria-label="The Marsh family together outdoors"></div>
-  <div class="door-about-copy">
-    <span class="eyebrow">The Marsh Legacy</span>
-    <h2>Family Built. Neighbor Trusted.</h2>
-    <p>Dad started Marsh Brothers in 2009 with one truck and a promise to show up. Danny, Curtis, and Pete grew up alongside the business and now carry that promise into every home they serve.</p>
-    <a class="about-full" href="hvac-index.html"><span>Explore the Full Marsh Brothers Site</span><b aria-hidden="true">&rarr;</b></a>
-    <a class="about-save" href="marsh-brothers.vcf">Save Marsh Brothers Contact</a>
-  </div>
+  <details class="door-drop" id="reviews">
+    <summary><span><small>4.9 from 240+ neighbors</small>Reviews</span><b aria-hidden="true">+</b></summary>
+    <div class="drop-body reviews-drop">
+      <div class="rating-row"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>Proof, not promises.</div>
+      <div class="review-strip">
+        <div class="rq">&ldquo;Danny walked us through everything &mdash; no upsell, just a fair price and a fixed furnace by dinner.&rdquo;<b>&mdash; Marcus T., Ellicott City</b></div>
+        <div class="rq">&ldquo;Curtis has serviced our system twice a year for six years straight. Same familiar technician, same straight answers.&rdquo;<b>&mdash; Priya S., Columbia</b></div>
+        <div class="rq">&ldquo;Pete's install still runs like new three years later. We've sent every neighbor his number.&rdquo;<b>&mdash; Renee K., Clarksville</b></div>
+      </div>
+    </div>
+  </details>
 </section>
 
 </main>
@@ -469,33 +521,11 @@ const airlock=document.getElementById('airlock');
 function enter(){
   if(reduceMotion){airlock.classList.add('done');document.body.classList.add('revealed');return}
   airlock.classList.add('releasing');
-  setTimeout(()=>{airlock.classList.add('done');document.body.classList.add('revealed')},480);
+  setTimeout(()=>{airlock.classList.add('done');document.body.classList.add('revealed')},650);
 }
 airlock.addEventListener('click',enter);
 airlock.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enter()}});
 
-const statSets=[
-  ['Family Owned','Serving neighbors since 2009'],
-  ['4.9 Stars','Trusted by 240+ neighbors'],
-  ['Emergency Ready','Response available 24 / 7'],
-  ['Howard County','Local homes. Local team.']
-];
-document.querySelectorAll('.stat-scroll').forEach(scroll=>{
-  const value=scroll.querySelector('[data-stat-value]');
-  const detail=scroll.querySelector('[data-stat-detail]');
-  const count=scroll.querySelector('[data-stat-count]');
-  let i=0;
-  if(!reduceMotion)setInterval(()=>{
-    scroll.classList.add('changing');
-    setTimeout(()=>{
-      i=(i+1)%statSets.length;
-      value.textContent=statSets[i][0];
-      detail.textContent=statSets[i][1];
-      count.textContent=String(i+1).padStart(2,'0')+' / '+String(statSets.length).padStart(2,'0');
-      scroll.classList.remove('changing');
-    },210);
-  },4800);
-});
 /* Owner-controlled LOU demo data.
    In a client build, this object is populated by their update form or scheduling connection. */
 const liveServiceUpdate={
@@ -520,7 +550,6 @@ if('IntersectionObserver' in window){
 }
 
 const family={
-  dad:{name:'Dad',role:'Founder · Est. 2009',photo:'dad-headshot.png',desc:'Dad started Marsh Brothers in 2009 with one truck and a simple standard: answer the call, explain the work honestly, and keep the promise. Danny, Curtis, and Pete grew up riding along, learning the work, and watching trust become the company’s strongest form of advertising.'},
   danny:{name:'Danny',role:'Owner &amp; Master Technician',photo:'danny-headshot.png',desc:'Runs the day-to-day and still takes the tough calls himself.',tel:'+15555550151',email:'danny@marshbrothershvac.com',vcf:'danny-marsh.vcf'},
   curtis:{name:'Curtis',role:'Service Manager',photo:'curtis-headshot.png',desc:'Keeps every system running long after the install truck leaves.',tel:'+15555550152',email:'curtis@marshbrothershvac.com',vcf:'curtis-marsh.vcf'},
   pete:{name:'Pete',role:'Installation Lead',photo:'pete-headshot.png',desc:'Leads every new install, start to final walkthrough.',tel:'+15555550153',email:'pete@marshbrothershvac.com',vcf:'pete-marsh.vcf'}
