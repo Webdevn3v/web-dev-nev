@@ -253,6 +253,14 @@ nav.scrolled{background-color:rgba(13,15,17,.72);backdrop-filter:blur(10px);bord
   .service-media{min-height:0;aspect-ratio:16/10;width:100%}
   .service-media:after{background:linear-gradient(180deg,transparent 72%,var(--graphite-900) 100%)}
 }
+/* ---- final mobile safeguard: no grid or positioned media gaps ---- */
+@media(max-width:820px){
+  .lower{display:block!important;min-height:0!important}
+  .service-media{display:block!important;min-height:0!important;aspect-ratio:auto!important;height:auto!important}
+  .service-media img{position:static!important;display:block!important;width:100%!important;height:auto!important;object-fit:contain!important}
+  .service-media:after{display:none!important}
+  .service-copy{margin-top:0!important;padding-top:28px!important}
+}
 </style>
 </head>
 <body>
@@ -425,33 +433,26 @@ document.querySelectorAll('[data-review]').forEach(card=>{
 const staffTrack=document.getElementById('staffTrack');
 const staffCards=staffTrack?[...staffTrack.querySelectorAll('.staff-card')]:[];
 const staffDots=document.getElementById('staffDots');
-let staffTimer;
 if(staffTrack&&staffCards.length&&staffDots){
   staffDots.innerHTML=staffCards.map((_,i)=>'<button aria-label="Show brother '+(i+1)+'"></button>').join('');
   const sd=[...staffDots.querySelectorAll('button')];
   sd[0].classList.add('active');
   const showStaff=i=>{
-    staffCards[i].scrollIntoView({behavior:reduceMotion?'auto':'smooth',inline:'center',block:'nearest'});
+    const card=staffCards[i];
+    const left=card.offsetLeft-(staffTrack.clientWidth-card.clientWidth)/2;
+    staffTrack.scrollTo({left:left,behavior:reduceMotion?'auto':'smooth'});
     sd.forEach((d,n)=>d.classList.toggle('active',n===i));
   };
   sd.forEach((d,i)=>d.addEventListener('click',()=>showStaff(i)));
   if('IntersectionObserver' in window){
     const sio=new IntersectionObserver(entries=>entries.forEach(en=>{
-      if(en.isIntersecting){const i=staffCards.indexOf(en.target);sd.forEach((d,n)=>d.classList.toggle('active',n===i));}
+      if(en.isIntersecting){
+        const i=staffCards.indexOf(en.target);
+        sd.forEach((d,n)=>d.classList.toggle('active',n===i));
+      }
     }),{root:staffTrack,threshold:.66});
     staffCards.forEach(c=>sio.observe(c));
   }
-  const startStaff=()=>{
-    if(reduceMotion||window.innerWidth>820)return;
-    clearInterval(staffTimer);
-    staffTimer=setInterval(()=>{
-      const active=Math.max(0,sd.findIndex(d=>d.classList.contains('active')));
-      showStaff((active+1)%staffCards.length);
-    },5200);
-  };
-  ['pointerdown','touchstart'].forEach(evt=>staffTrack.addEventListener(evt,()=>clearInterval(staffTimer),{passive:true}));
-  staffTrack.addEventListener('pointerup',startStaff,{passive:true});
-  startStaff();
 }
 
 const track=document.getElementById('reviewTrack');
