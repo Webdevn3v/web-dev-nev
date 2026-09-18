@@ -29,88 +29,85 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 
 /* ============ THRESHOLD (opening gesture) ============ */
 .door-canvas{position:fixed;inset:0;z-index:40;width:100%;height:100%;display:block;pointer-events:none}
-.threshold-inner{position:fixed;inset:0;z-index:41;display:grid;place-items:center;padding:24px;pointer-events:none;
-  transition:opacity .5s var(--ease),transform .6s var(--ease)}
-.threshold-inner.leaving{opacity:0;transform:scale(1.035)}
-.threshold-word{font:400 clamp(1.7rem,7.4vw,2.7rem)/1 var(--serif);color:#efe8d8;letter-spacing:-.01em;text-align:center}
-.threshold-period{pointer-events:auto;position:relative;display:inline-block;width:.2em;height:.2em;margin-left:.07em;
-  border:0;background:#050403;border-radius:50%;cursor:pointer;vertical-align:-.02em;transform:translateY(-.02em)}
-.threshold-period::before{content:'';position:absolute;inset:-320%;border-radius:50%;
-  background:radial-gradient(circle,rgba(166,255,0,.62) 0%,rgba(166,255,0,.2) 42%,transparent 72%);
-  filter:blur(5px);opacity:.85;transition:opacity .3s ease,transform .3s ease}
-.threshold-period:hover::before,.threshold-period:focus-visible::before{opacity:1;transform:scale(1.18)}
+.threshold-inner{position:fixed;inset:0;z-index:41;display:flex;align-items:center;justify-content:flex-start;
+  padding:0 9vw;pointer-events:none;transition:opacity .45s var(--ease),transform .5s var(--ease)}
+.threshold-inner.leaving{opacity:0;transform:translateX(-10px)}
+.threshold-block{max-width:420px}
+.threshold-word{font:400 clamp(1.5rem,6.2vw,2.3rem)/1.08 var(--serif);color:#eee7d7;letter-spacing:-.01em}
+.threshold-period{pointer-events:auto;position:relative;display:inline-block;width:.19em;height:.19em;margin-left:.08em;
+  border:0;background:#050403;border-radius:50%;cursor:pointer;vertical-align:-.02em}
+.threshold-period::before{content:'';position:absolute;inset:-150%;border-radius:50%;
+  background:radial-gradient(circle,rgba(166,255,0,.55) 0%,rgba(166,255,0,.16) 46%,transparent 74%);
+  filter:blur(3px);opacity:.8;transition:opacity .3s ease,transform .3s ease}
+.threshold-period:hover::before,.threshold-period:focus-visible::before{opacity:1;transform:scale(1.15)}
 .threshold-period:focus-visible{outline:2px solid var(--signal);outline-offset:8px}
-.threshold-hint{margin-top:26px;text-align:center;font:700 .6875rem/1.1 var(--mono);letter-spacing:.26em;text-transform:uppercase;
-  color:#8c8574;opacity:0;animation:hintIn .8s ease 1.05s forwards}
+.threshold-hint{margin-top:20px;font:700 .625rem/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;
+  color:#7d7669;opacity:0;animation:hintIn .8s ease 1.1s forwards}
 @keyframes hintIn{to{opacity:1}}
-.threshold-hint::after{content:'';display:block;width:1px;height:22px;margin:12px auto 0;background:linear-gradient(#8c8574,transparent);
-  animation:hintPulse 1.8s ease-in-out infinite}
-@keyframes hintPulse{0%,100%{opacity:.28;transform:scaleY(.4);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
 
 /* ============ WORLD HERO (dimensional code architecture) ============ */
 .world-hero{position:relative;min-height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;
-  background:linear-gradient(175deg,#efe6d1 0%,#e9dec3 52%,#dfd0ab 100%)}
-.world-scene{position:absolute;inset:0;z-index:1;overflow:hidden;perspective:1300px}
-.world-floor{position:absolute;left:-30%;right:-30%;bottom:-14%;height:66%;transform:rotateX(78deg);transform-origin:bottom;
+  background:linear-gradient(165deg,#efe6d1 0%,#e7dbbd 55%,#ddcda3 100%)}
+.world-scene{position:absolute;inset:0;z-index:1;overflow:hidden}
+.world-floor{position:absolute;left:-30%;right:-30%;bottom:-16%;height:60%;transform:rotateX(80deg);transform-origin:bottom;
   background:
-    linear-gradient(90deg,rgba(143,111,57,.30) 1px,transparent 1px) 0 0/68px 68px,
-    linear-gradient(0deg,rgba(143,111,57,.24) 1px,transparent 1px) 0 0/68px 68px,
-    linear-gradient(180deg,rgba(238,224,196,.95),rgba(198,173,124,.55));
-  mask-image:linear-gradient(to top,black 0%,black 48%,transparent 100%);
-  -webkit-mask-image:linear-gradient(to top,black 0%,black 48%,transparent 100%)}
-.world-glow{position:absolute;top:-14%;right:-16%;width:76%;height:72%;z-index:1;filter:blur(8px);
-  background:radial-gradient(circle,rgba(255,247,222,.92),rgba(255,247,222,0) 66%)}
-.world-route{position:absolute;left:5%;right:8%;bottom:6%;top:18%;z-index:2;overflow:visible}
-.world-route path{fill:none;stroke:var(--signal);stroke-width:2.6;stroke-linecap:round;vector-effect:non-scaling-stroke;
-  filter:drop-shadow(0 0 7px rgba(166,255,0,.6));stroke-dasharray:820;stroke-dashoffset:820;
-  animation:routeDraw 2.1s var(--ease) .25s forwards}
+    linear-gradient(90deg,rgba(120,94,48,.26) 1px,transparent 1px) 0 0/56px 56px,
+    linear-gradient(0deg,rgba(120,94,48,.22) 1px,transparent 1px) 0 0/56px 56px,
+    linear-gradient(180deg,rgba(238,224,196,.92),rgba(196,171,120,.5));
+  mask-image:linear-gradient(to top,black 0%,black 42%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to top,black 0%,black 42%,transparent 100%)}
+.world-glow{position:absolute;top:-22%;left:12%;width:80%;height:62%;z-index:1;filter:blur(10px);
+  background:radial-gradient(circle,rgba(255,248,226,.85),rgba(255,248,226,0) 68%)}
+.world-plane{position:absolute;background:rgba(24,20,14,.3);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
+  border:1px solid rgba(201,166,106,.4);border-radius:2px;padding:11px 13px;color:#e9dfc7;
+  font:400 .6rem/1.55 var(--mono);white-space:pre;box-shadow:0 16px 34px rgba(18,13,4,.2);z-index:2;
+  animation:planeFloat 9s ease-in-out infinite}
+@keyframes planeFloat{0%,100%{transform:var(--t)}50%{transform:var(--t) translateY(-6px)}}
+.world-plane.a{width:min(30vw,175px);left:5%;top:9%;--t:perspective(900px) rotateY(9deg)}
+.world-plane.b{width:min(23vw,145px);left:27%;top:31%;--t:perspective(900px) rotateY(6deg);opacity:.8;animation-delay:.6s}
+.world-plane.c{width:min(25vw,158px);left:49%;top:12%;--t:perspective(900px) rotateY(-7deg);animation-delay:1.1s}
+.world-plane.d{width:min(21vw,138px);left:67%;top:38%;--t:perspective(900px) rotateY(-11deg);opacity:.62;animation-delay:.3s}
+.world-plane.e{width:min(19vw,124px);left:84%;top:19%;--t:perspective(900px) rotateY(-13deg);opacity:.46;animation-delay:1.4s}
+.world-route{position:absolute;left:10%;right:18%;bottom:5%;top:40%;z-index:2;overflow:visible}
+.world-route path{fill:none;stroke:var(--signal);stroke-width:1.4;stroke-linecap:round;vector-effect:non-scaling-stroke;
+  filter:drop-shadow(0 0 3px rgba(166,255,0,.4));stroke-dasharray:420;stroke-dashoffset:420;
+  animation:routeDraw 2s var(--ease) .35s forwards}
 @keyframes routeDraw{to{stroke-dashoffset:0}}
-.world-panel{position:absolute;background:linear-gradient(160deg,rgba(19,16,11,.88),rgba(19,16,11,.72));
-  border:1px solid rgba(201,166,106,.42);border-radius:2px;padding:14px 16px;color:#d9cdae;
-  font:400 .64rem/1.6 var(--mono);white-space:pre;box-shadow:0 26px 52px rgba(18,13,4,.28);z-index:2}
-.world-panel b{color:var(--signal);font-weight:400}
-.world-panel.p1{width:min(48vw,250px);right:5%;top:8%;transform:rotateY(-13deg) rotateX(2deg);animation:floatSlow 7.4s ease-in-out infinite}
-.world-panel.p2{width:min(30vw,170px);right:30%;top:33%;transform:rotateY(-9deg);animation:floatSlow 8.4s ease-in-out infinite .8s}
-.world-panel.p3{width:min(33vw,190px);right:1%;top:52%;transform:rotateY(-15deg);animation:floatSlow 9s ease-in-out infinite .4s}
-@keyframes floatSlow{0%,100%{transform:translateY(0) rotateY(var(--ry))}50%{transform:translateY(-9px) rotateY(var(--ry))}}
-.world-panel.p1{--ry:-13deg}.world-panel.p2{--ry:-9deg}.world-panel.p3{--ry:-15deg}
-.world-fog-edge{position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:linear-gradient(100deg,rgba(9,8,6,.92) 0%,rgba(9,8,6,.5) 18%,transparent 44%)}
+.world-fog-edge{position:absolute;left:0;top:0;bottom:0;width:30%;z-index:3;pointer-events:none;
+  background:linear-gradient(to right,rgba(9,8,6,.42) 0%,transparent 100%)}
 .world-foot{position:relative;z-index:4;padding:0 22px 30px}
 .world-brand{font:400 1.05rem var(--serif);color:#221b10;display:inline-flex;align-items:baseline}
 .world-brand .period-dot{width:.2em;height:.2em;background:#050403;border-radius:50%;display:inline-block;margin-left:.06em;position:relative}
-.world-brand .period-dot::before{content:'';position:absolute;inset:-230%;border-radius:50%;
-  background:radial-gradient(circle,rgba(166,255,0,.5),transparent 70%);filter:blur(4px)}
+.world-brand .period-dot::before{content:'';position:absolute;inset:-190%;border-radius:50%;
+  background:radial-gradient(circle,rgba(166,255,0,.45),transparent 70%);filter:blur(3px)}
 .world-tag{display:block;margin-top:6px;font:700 .6875rem/1.2 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#665f4d}
 .scroll-cue{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:4;display:flex;justify-content:center}
-.scroll-cue span{width:1px;height:26px;background:linear-gradient(#221b10,transparent);animation:cue 1.8s ease-in-out infinite}
+.scroll-cue span{width:1px;height:24px;background:linear-gradient(#221b10,transparent);animation:cue 1.8s ease-in-out infinite}
 @keyframes cue{0%,100%{transform:scaleY(.32);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}}
 @media(prefers-reduced-motion:reduce){
-  .world-panel,.world-route path,.scroll-cue span{animation:none!important;stroke-dashoffset:0!important;opacity:1!important}
+  .world-plane,.world-route path,.scroll-cue span{animation:none!important;stroke-dashoffset:0!important;opacity:1!important}
 }
 @media(max-width:640px){
-  .world-panel.p2{display:none}
-  .world-panel.p1{width:60vw;top:10%}
-  .world-panel.p3{width:56vw;top:48%;right:4%}
+  .world-plane.c,.world-plane.e{display:none}
+  .world-plane.a{width:44vw;left:6%;top:8%}
+  .world-plane.b{width:38vw;left:48%;top:26%}
+  .world-plane.d{width:34vw;left:58%;top:44%}
 }
 
 /* ============ EDITORIAL SECTIONS ============ */
 .wrap{width:min(1100px,calc(100% - 44px));margin:0 auto}
-.sec{position:relative;padding:76px 0}
+.sec{position:relative;padding:52px 0}
 .sec::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:var(--line-l)}
 .sec-cream{background:var(--cream);color:var(--ink)}
 .sec-dark{background:var(--ink);color:#f2ede0}
 .sec-dark::before{background:var(--line-d)}
-.sec-dark::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.4;
-  background-image:radial-gradient(rgba(255,255,255,.05) .7px,transparent .8px);background-size:24px 24px;
-  mask-image:linear-gradient(to bottom,black,transparent 78%);-webkit-mask-image:linear-gradient(to bottom,black,transparent 78%)}
-.sec-head{margin-bottom:34px;position:relative;z-index:1}
+.sec-head{margin-bottom:28px;position:relative;z-index:1}
 .kicker{display:block;font:700 .6875rem/1.2 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
 .sec-dark .kicker{color:var(--gold)}
-.sec-head h2{font:400 clamp(2rem,5.2vw,3rem)/1.04 var(--serif);letter-spacing:-.01em;margin-top:14px;max-width:660px}
-.sec-head p.lede{margin-top:16px;font-size:1.02rem;line-height:1.62;color:var(--ink-muted);max-width:560px}
+.sec-head h2{font:400 clamp(1.9rem,5vw,2.8rem)/1.06 var(--serif);letter-spacing:-.01em;margin-top:12px;max-width:640px}
+.sec-head p.lede{margin-top:14px;font-size:1rem;line-height:1.6;color:var(--ink-muted);max-width:540px}
 .sec-dark .sec-head p.lede{color:var(--cream-muted)}
-.top-links{margin-top:24px;display:flex;flex-wrap:wrap;gap:20px 26px}
+.top-links{margin-top:20px;display:flex;flex-wrap:wrap;gap:18px 26px}
 .top-link{display:inline-block;padding-bottom:5px;border-bottom:1px solid rgba(12,10,7,.32);
   font:700 .6875rem/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase}
 
@@ -127,62 +124,62 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 
 /* accordions (native <details>) */
 .acc{border-top:1px solid var(--line-l);border-bottom:1px solid var(--line-l)}
+.acc+.acc{border-top:0}
 .sec-dark .acc{border-color:var(--line-d)}
-.acc>summary{list-style:none;cursor:pointer;padding:22px 2px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+.acc>summary{list-style:none;cursor:pointer;padding:20px 2px;display:flex;justify-content:space-between;align-items:center;gap:18px}
 .acc>summary::-webkit-details-marker{display:none}
 .acc>summary small{display:block;font:700 .6875rem/1.2 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:7px}
 .sec-dark .acc>summary small{color:var(--gold)}
-.acc>summary strong{font:600 clamp(1.15rem,3.6vw,1.5rem)/1.15 var(--sans);letter-spacing:-.02em}
+.acc>summary strong{font:600 clamp(1.1rem,3.4vw,1.4rem)/1.15 var(--sans);letter-spacing:-.02em}
 .acc-plus{flex:none;font-size:1.4rem;line-height:1;color:var(--gold-deep);transition:transform .25s var(--ease)}
 .sec-dark .acc-plus{color:var(--gold)}
 .acc[open]>summary .acc-plus{transform:rotate(45deg)}
-.acc-body{padding:2px 2px 30px}
+.acc-body{padding:2px 2px 26px}
 
-/* nested cascade items reused for demo list + good-to-know list */
+/* nested cascade items — demos, digital+physical key, good-to-know */
 .cas-list{border-top:1px solid var(--line-l)}
 .sec-dark .cas-list{border-color:var(--line-d)}
 .cas-item{border-bottom:1px solid var(--line-l)}
 .sec-dark .cas-item{border-bottom-color:var(--line-d)}
-.cas-item>summary{list-style:none;cursor:pointer;padding:18px 2px;display:flex;align-items:center;gap:14px}
+.cas-item>summary{list-style:none;cursor:pointer;padding:16px 2px;display:flex;align-items:center;gap:14px}
 .cas-item>summary::-webkit-details-marker{display:none}
 .cas-item>summary strong{flex:1 1 auto;font-size:1rem}
 .cas-item>summary span{flex:none;font-size:1.2rem;color:var(--gold-deep);transition:transform .2s var(--ease)}
 .sec-dark .cas-item>summary span{color:var(--gold)}
 .cas-item[open]>summary span{transform:rotate(45deg)}
-.cas-item .cas-body{padding:0 2px 20px;color:var(--ink-muted);font-size:.86rem;line-height:1.6;max-width:640px}
+.cas-item .cas-body{padding:0 2px 18px;color:var(--ink-muted);font-size:.86rem;line-height:1.6;max-width:640px}
 .sec-dark .cas-item .cas-body{color:var(--cream-muted)}
 .cas-item[open]{animation:panelIn .3s var(--ease) both}
 @keyframes panelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* demo cards */
-.demo-grid{display:grid;grid-template-columns:1fr;gap:10px}
-@media(min-width:760px){.demo-grid{grid-template-columns:1fr 1fr}}
-.demo-card{border:1px solid var(--line-d);background:var(--ink-elev)}
-.demo-card>summary{list-style:none;cursor:pointer}
-.demo-card>summary::-webkit-details-marker{display:none}
-.demo-thumb{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;filter:saturate(.92) brightness(.94)}
-.demo-meta{display:flex;align-items:center;gap:12px;padding:16px 16px}
-.demo-meta-text{flex:1 1 auto}
-.demo-meta small{display:block;font:700 .6875rem/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.demo-meta strong{display:block;font-size:1.05rem;letter-spacing:-.02em}
-.demo-meta .acc-plus{color:var(--gold)}
-.demo-card[open] .acc-plus{transform:rotate(45deg)}
-.demo-body{padding:0 16px 20px}
-.demo-body p{color:var(--cream-muted);font-size:.86rem;line-height:1.6;max-width:440px;margin-bottom:16px}
-.demo-actions{display:flex;flex-wrap:wrap;gap:8px}
+/* demo rows — collapsed = text only; photo appears inside the expanded content */
+.demo-item>summary{list-style:none;cursor:pointer;padding:16px 2px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.demo-item>summary::-webkit-details-marker{display:none}
+.demo-item>summary small{display:block;font:700 .6875rem/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.demo-item>summary strong{display:block;font-size:1.02rem;letter-spacing:-.02em}
+.demo-item>summary span{flex:none;font-size:1.3rem;color:var(--gold);transition:transform .2s var(--ease)}
+.demo-item[open]>summary span{transform:rotate(45deg)}
+.demo-photo{width:100%;max-width:260px;aspect-ratio:4/3;object-fit:cover;border-radius:2px;margin-bottom:14px;filter:saturate(.92) brightness(.94)}
+.demo-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+
+/* physical + digital key row (inline inside the existing "digital and physical key" item) */
+.key-row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.key-row figure{width:74px}
+.key-row img{width:74px;height:74px;object-fit:cover;border-radius:4px;border:1px solid var(--line-d)}
+.key-row figcaption{margin-top:6px;font:700 .6875rem/1.2 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--cream-muted);text-align:center}
 
 /* offer tiles */
 .offer-grid{display:grid;grid-template-columns:1fr;gap:10px}
 @media(min-width:760px){.offer-grid{grid-template-columns:repeat(3,1fr)}.offer-grid .wide{grid-column:1/-1}}
-.offer-tile{background:var(--paper);border:1px solid var(--line-l);padding:24px;display:flex;flex-direction:column;gap:8px}
+.offer-tile{background:var(--paper);border:1px solid var(--line-l);padding:22px;display:flex;flex-direction:column;gap:8px}
 .offer-tile small{font:700 .6875rem/1.2 var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--gold-deep)}
-.offer-tile h3{font:600 1.25rem var(--sans);letter-spacing:-.02em}
+.offer-tile h3{font:600 1.25rem var(--sans);letter-spacing:-.02em;color:#100e0b}
 .offer-tile p{font-size:.84rem;line-height:1.58;color:var(--ink-muted)}
 .offer-tile b{margin-top:auto;padding-top:8px;font:700 .74rem var(--mono);color:var(--gold-deep)}
 
 /* level buttons */
-.level-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
-.level-btn{min-height:88px;padding:16px 18px;border-radius:2px;display:flex;flex-direction:column;justify-content:center;gap:5px;
+.level-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.level-btn{min-height:84px;padding:15px 17px;border-radius:2px;display:flex;flex-direction:column;justify-content:center;gap:5px;
   cursor:pointer;transition:transform .2s ease}
 .level-btn:hover{transform:translateY(-2px)}
 .level-btn small{font:700 .6875rem/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase}
@@ -192,17 +189,17 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 .level-btn[data-level="more"]{background:var(--paper);color:#100e0b;border:1px solid var(--line-l)}
 .level-btn[data-level="more"] small{color:var(--gold-deep)}
 .level-btn.active{box-shadow:inset 0 -3px 0 var(--signal)}
-.level-detail{display:none;margin-top:12px;padding:22px;background:var(--paper);border:1px solid var(--line-l)}
+.level-detail{display:none;margin-top:12px;padding:20px;background:var(--paper);border:1px solid var(--line-l)}
 .level-detail.open{display:block;animation:panelIn .28s var(--ease) both}
 .level-detail small{font:700 .6875rem/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
-.level-detail h3{font-size:1.25rem;margin:8px 0}
+.level-detail h3{font-size:1.25rem;margin:8px 0;color:#100e0b}
 .level-detail b{font:700 .6875rem var(--mono);color:var(--gold-deep)}
 .level-detail p{margin-top:10px;color:var(--ink-muted);font-size:.84rem;line-height:1.6}
 
 /* inquiry buttons */
 .inquiry-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:640px){.inquiry-buttons{grid-template-columns:1fr}}
-.inquiry-btn{min-height:112px;padding:18px 18px;border-radius:2px;display:flex;flex-direction:column;justify-content:center;gap:6px;transition:transform .2s ease}
+.inquiry-btn{min-height:104px;padding:17px 18px;border-radius:2px;display:flex;flex-direction:column;justify-content:center;gap:6px;transition:transform .2s ease}
 .inquiry-btn:hover{transform:translateY(-2px)}
 .inquiry-btn small{font:700 .6875rem/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase}
 .inquiry-btn strong{font:650 .95rem var(--sans)}
@@ -212,24 +209,15 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 .inquiry-btn.secondary{background:var(--paper);color:#100e0b;border:1px solid var(--line-l)}
 .inquiry-btn.secondary small{color:var(--gold-deep)}
 
-/* key system showcase */
-.key-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(min-width:820px){.key-grid{grid-template-columns:repeat(4,1fr)}}
-.key-fig{border:1px solid var(--line-d);background:var(--ink-elev)}
-.key-fig img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
-.key-fig figcaption{padding:12px 14px 16px}
-.key-fig small{display:block;font:700 .6875rem/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
-.key-fig span{display:block;font-size:.86rem;color:#eee7d6}
-
 /* handoff / contact / footer */
-.handoff-cta{margin-top:26px}
-.contact-stack{margin-top:36px;padding-top:30px;border-top:1px solid var(--line-d);display:flex;flex-direction:column;align-items:flex-start;gap:14px}
-.about-btn{font:700 .6875rem/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:5px;cursor:pointer}
-.save-contact{font:700 .6875rem/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(201,166,106,.5);padding-bottom:5px}
+.handoff-cta{margin-top:22px}
+.contact-stack{margin-top:30px;padding-top:26px;border-top:1px solid var(--line-l);display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.about-btn{font:700 .6875rem/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;border-bottom:1px solid rgba(12,10,7,.4);padding-bottom:5px;cursor:pointer}
+.save-contact{font:700 .6875rem/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--gold-deep);border-bottom:1px solid rgba(117,90,43,.5);padding-bottom:5px}
 .contact-row{display:flex;gap:24px}
-.contact-row a{font:700 .6875rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:4px}
-.key-link{font:700 .6875rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--cream-muted);border-bottom:1px solid rgba(255,255,255,.22);padding-bottom:4px;cursor:pointer}
-.legal{margin-top:56px;padding-top:22px;border-top:1px solid var(--line-d);text-align:center;font:700 .75rem/1.7 var(--mono);color:#938a71}
+.contact-row a{font:700 .6875rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid rgba(12,10,7,.3);padding-bottom:4px}
+.key-link{font:700 .6875rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);border-bottom:1px solid rgba(12,10,7,.22);padding-bottom:4px;cursor:pointer}
+.legal{margin-top:44px;padding-top:20px;border-top:1px solid var(--line-l);text-align:center;font:700 .75rem/1.7 var(--mono);color:var(--ink-muted)}
 
 /* modals */
 .tds-modal{position:fixed;inset:0;z-index:1100;display:none;place-items:center;padding:24px;background:rgba(5,4,3,.92)}
@@ -256,20 +244,24 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 
 <canvas id="doorCanvas" class="door-canvas" aria-hidden="true"></canvas>
 <div class="threshold-inner" id="thresholdInner">
-  <p class="threshold-word">the digital side<button class="threshold-period" id="periodTap" type="button" aria-label="Enter The Digital Side" autofocus></button></p>
-  <p class="threshold-hint" aria-hidden="true">Tap the period to enter</p>
+  <div class="threshold-block">
+    <p class="threshold-word">the digital side<button class="threshold-period" id="periodTap" type="button" aria-label="Enter The Digital Side" autofocus></button></p>
+    <p class="threshold-hint" aria-hidden="true">Tap the period to enter</p>
+  </div>
 </div>
 
 <section class="world-hero" id="worldHero">
   <div class="world-scene" aria-hidden="true">
     <div class="world-floor"></div>
     <div class="world-glow"></div>
+    <div class="world-plane a">&lt;div class="door"&gt;<br>&nbsp;&nbsp;state: open<br>&lt;/div&gt;</div>
+    <div class="world-plane b">.threshold {<br>&nbsp;&nbsp;background: #0c0b09;<br>&nbsp;&nbsp;transition: .6s;<br>}</div>
+    <div class="world-plane c">function reveal(x) {<br>&nbsp;&nbsp;return world;<br>}</div>
+    <div class="world-plane d">route: [<br>&nbsp;&nbsp;idea,<br>&nbsp;&nbsp;build,<br>&nbsp;&nbsp;scale<br>]</div>
+    <div class="world-plane e">&lt;path<br>&nbsp;&nbsp;d="M0 0 L1 1"<br>/&gt;</div>
     <svg class="world-route" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4,97 C 28,82 24,58 44,50 C 63,43 58,26 94,6" />
+      <path d="M8,92 C 26,80 30,64 46,56 C 60,49 62,36 80,24" />
     </svg>
-    <div class="world-panel p1"><b>&lt;section</b> class="path"&gt;<br>&nbsp;&nbsp;idea &#8594; build<br>&nbsp;&nbsp;scale &#8594; beyond<br><b>&lt;/section&gt;</b></div>
-    <div class="world-panel p2">.signal {<br>&nbsp;&nbsp;color: <b>#A6FF00</b>;<br>&nbsp;&nbsp;stroke-width: 2;<br>}</div>
-    <div class="world-panel p3">const path =<br>&nbsp;&nbsp;document<br>&nbsp;&nbsp;&nbsp;.querySelector(<br>&nbsp;&nbsp;&nbsp;&nbsp;'.route');</div>
   </div>
   <div class="world-fog-edge" aria-hidden="true"></div>
   <div class="world-foot">
@@ -300,71 +292,31 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
     <details class="acc demo-module">
       <summary><div><small>Real examples</small><strong>Explore the Demos</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
-        <div class="demo-grid">
-          <details class="demo-card">
-            <summary>
-              <img class="demo-thumb" src="assets/door/frederick-attorney.webp" width="900" height="1350" alt="Frederick Legacy Law attorney portrait" loading="lazy" decoding="async">
-              <div class="demo-meta"><div class="demo-meta-text"><small>Law · Demo</small><strong>Frederick Legacy Law</strong></div><span class="acc-plus">+</span></div>
-            </summary>
-            <div class="demo-body">
-              <p>Planning, estate handling, family legacy questions, and urgent matters routed without making the client learn legal vocabulary first.</p>
-              <div class="demo-actions">
-                <a class="btn btn-ghost" href="key-frederick.html">Owner Key</a>
-                <a class="btn btn-primary" href="door-frederick-legacy-law.html">View Door</a>
-                <a class="btn btn-ghost" href="frederick-legacy-law-mobile.html">Index Site</a>
-              </div>
-            </div>
-          </details>
-          <details class="demo-card">
-            <summary>
-              <img class="demo-thumb" src="assets/door/rivermore-door-scene.webp" width="900" height="1350" alt="Rivermore Real Estate listing entrance" loading="lazy" decoding="async">
-              <div class="demo-meta"><div class="demo-meta-text"><small>Realtor · Demo</small><strong>Rivermore Real Estate</strong></div><span class="acc-plus">+</span></div>
-            </summary>
-            <div class="demo-body">
-              <p>Buyers, sellers, neighborhood discovery, listings, and live market updates built around the move the customer is actually making.</p>
-              <div class="demo-actions">
-                <a class="btn btn-ghost" href="realtor-key.html">Owner Key</a>
-                <a class="btn btn-primary" href="realtor-door.html">View Door</a>
-                <a class="btn btn-ghost" href="realtor-index.html">Index Site</a>
-              </div>
-            </div>
-          </details>
-          <details class="demo-card">
-            <summary>
-              <img class="demo-thumb" src="assets/door/aerovale-condenser.webp" width="900" height="563" alt="AeroVale Heating & Air technician servicing a condenser" loading="lazy" decoding="async">
-              <div class="demo-meta"><div class="demo-meta-text"><small>HVAC · Demo</small><strong>AeroVale Heating &amp; Air</strong></div><span class="acc-plus">+</span></div>
-            </summary>
-            <div class="demo-body">
-              <p>Emergency service, repair, maintenance, replacement, and commercial service organized around urgency, comfort, and live availability.</p>
-              <div class="demo-actions">
-                <a class="btn btn-ghost" href="hvac-key.html">Owner Key</a>
-                <a class="btn btn-primary" href="hvac-door.html">View Door</a>
-                <a class="btn btn-ghost" href="hvac-index.html">Index Site</a>
-              </div>
-            </div>
-          </details>
-          <details class="demo-card">
-            <summary>
-              <img class="demo-thumb" src="assets/door/northline-owner.webp" width="900" height="1075" alt="Northline Roofing Co. owner reviewing a job on site" loading="lazy" decoding="async">
-              <div class="demo-meta"><div class="demo-meta-text"><small>Roofing · Demo</small><strong>Northline Roofing Co.</strong></div><span class="acc-plus">+</span></div>
-            </summary>
-            <div class="demo-body">
-              <p>Inspection, storm response, replacement, and current-customer support organized around urgency.</p>
-              <div class="demo-actions">
-                <a class="btn btn-ghost" href="key-northline.html">Owner Key</a>
-                <a class="btn btn-primary" href="northline-door.html">View Door</a>
-                <a class="btn btn-ghost" href="northline-full-site.html">Index Site</a>
-              </div>
-            </div>
-          </details>
+        <div class="cas-list">
+          <details class="demo-item"><summary><div><small>Law · Demo</small><strong>Frederick Legacy Law</strong></div><span>+</span></summary><div class="cas-body">
+            <img class="demo-photo" src="assets/door/frederick-attorney.webp" width="900" height="1350" alt="Frederick Legacy Law attorney portrait" loading="lazy" decoding="async">
+            <p>Planning, estate handling, family legacy questions, and urgent matters routed without making the client learn legal vocabulary first.</p>
+            <div class="demo-actions"><a class="btn btn-ghost" href="key-frederick.html">Owner Key</a><a class="btn btn-primary" href="door-frederick-legacy-law.html">View Door</a><a class="btn btn-ghost" href="frederick-legacy-law-mobile.html">Index Site</a></div>
+          </div></details>
+          <details class="demo-item"><summary><div><small>Realtor · Demo</small><strong>Rivermore Real Estate</strong></div><span>+</span></summary><div class="cas-body">
+            <img class="demo-photo" src="assets/door/rivermore-door-scene.webp" width="900" height="1350" alt="Rivermore Real Estate listing entrance" loading="lazy" decoding="async">
+            <p>Buyers, sellers, neighborhood discovery, listings, and live market updates built around the move the customer is actually making.</p>
+            <div class="demo-actions"><a class="btn btn-ghost" href="realtor-key.html">Owner Key</a><a class="btn btn-primary" href="realtor-door.html">View Door</a><a class="btn btn-ghost" href="realtor-index.html">Index Site</a></div>
+          </div></details>
+          <details class="demo-item"><summary><div><small>HVAC · Demo</small><strong>AeroVale Heating &amp; Air</strong></div><span>+</span></summary><div class="cas-body">
+            <img class="demo-photo" src="assets/door/aerovale-condenser.webp" width="900" height="563" alt="AeroVale Heating & Air technician servicing a condenser" loading="lazy" decoding="async">
+            <p>Emergency service, repair, maintenance, replacement, and commercial service organized around urgency, comfort, and live availability.</p>
+            <div class="demo-actions"><a class="btn btn-ghost" href="hvac-key.html">Owner Key</a><a class="btn btn-primary" href="hvac-door.html">View Door</a><a class="btn btn-ghost" href="hvac-index.html">Index Site</a></div>
+          </div></details>
+          <details class="demo-item"><summary><div><small>Roofing · Demo</small><strong>Northline Roofing Co.</strong></div><span>+</span></summary><div class="cas-body">
+            <img class="demo-photo" src="assets/door/northline-owner.webp" width="900" height="1075" alt="Northline Roofing Co. owner reviewing a job on site" loading="lazy" decoding="async">
+            <p>Inspection, storm response, replacement, and current-customer support organized around urgency.</p>
+            <div class="demo-actions"><a class="btn btn-ghost" href="key-northline.html">Owner Key</a><a class="btn btn-primary" href="northline-door.html">View Door</a><a class="btn btn-ghost" href="northline-full-site.html">Index Site</a></div>
+          </div></details>
         </div>
       </div>
     </details>
-  </div>
-</section>
 
-<section class="sec sec-cream">
-  <div class="wrap">
     <details class="acc" id="simple">
       <summary><div><small>Ways to work together</small><strong>Find the right level</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
@@ -380,27 +332,7 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
         <div class="level-detail" id="levelDetail" aria-live="polite"></div>
       </div>
     </details>
-  </div>
-</section>
 
-<section class="sec sec-dark">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="kicker">Physical + Digital</span>
-      <h2>One Door. A key for every pocket.</h2>
-      <p class="lede">The same Owner Key follows the business everywhere. Tap the card, wear the bracelet, plug in the drive, or save it to a phone — every format opens the same Door.</p>
-    </div>
-    <div class="key-grid">
-      <figure class="key-fig"><img src="assets/door/key-card.webp" width="800" height="800" alt="The Digital Side NFC key card" loading="lazy" decoding="async"><figcaption><small>Tap</small><span>NFC Card</span></figcaption></figure>
-      <figure class="key-fig"><img src="assets/door/key-bracelet.webp" width="800" height="800" alt="The Digital Side NFC key bracelet" loading="lazy" decoding="async"><figcaption><small>Wear</small><span>NFC Bracelet</span></figcaption></figure>
-      <figure class="key-fig"><img src="assets/door/key-usb.webp" width="800" height="800" alt="The Digital Side USB key" loading="lazy" decoding="async"><figcaption><small>Carry</small><span>USB Key</span></figcaption></figure>
-      <figure class="key-fig"><img src="assets/door/key-wallet.webp" width="800" height="800" alt="The Digital Side wallet key on a phone screen" loading="lazy" decoding="async"><figcaption><small>Save</small><span>Apple / Google Wallet</span></figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<section class="sec sec-cream">
-  <div class="wrap">
     <details class="acc" id="start">
       <summary><div><small>Start</small><strong>Tell The Digital Side what needs handling</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
@@ -410,6 +342,7 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
         </div>
       </div>
     </details>
+
     <details class="acc">
       <summary><div><small>Good to know</small><strong>Ownership, access + what happens next</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
@@ -417,7 +350,15 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
           <details class="cas-item"><summary><strong>You own what gets built.</strong><span>+</span></summary><div class="cas-body">The finished system, project files, QR asset, and handoff materials belong to the client. TDS project work is a one-time payment. There is no required TDS subscription just to keep using what was purchased.</div></details>
           <details class="cas-item"><summary><strong>No passwords needed to start.</strong><span>+</span></summary><div class="cas-body">A new system can be built without access to personal accounts, inboxes, or existing logins. Existing access only becomes relevant when the project includes cleanup, migration, or organizing the business's digital junk drawer.</div></details>
           <details class="cas-item"><summary><strong>Third-party services stay in the client's name.</strong><span>+</span></summary><div class="cas-body">If a domain, business email, form service, or another outside service is needed, setup can be prepared before the client completes any required ownership, billing, or verification step. Future third-party renewals belong to that service. They are not a TDS subscription.</div></details>
-          <details class="cas-item"><summary><strong>You leave with a digital and physical key.</strong><span>+</span></summary><div class="cas-body">Every Digital Door includes an Owner Key for Apple Wallet or Google Wallet, the direct Door link, QR asset, and one programmed physical NFC card. Custom tap formats can include bracelets, keychains, plaques, signs, or another idea that fits the business.</div></details>
+          <details class="cas-item"><summary><strong>You leave with a digital and physical key.</strong><span>+</span></summary><div class="cas-body">
+            <p>Every Digital Door includes an Owner Key for Apple Wallet or Google Wallet, the direct Door link, QR asset, and one programmed physical NFC card. Custom tap formats can include bracelets, keychains, plaques, signs, or another idea that fits the business.</p>
+            <div class="key-row">
+              <figure><img src="assets/door/key-card.webp" width="800" height="800" alt="NFC key card" loading="lazy" decoding="async"><figcaption>Card</figcaption></figure>
+              <figure><img src="assets/door/key-bracelet.webp" width="800" height="800" alt="NFC key bracelet" loading="lazy" decoding="async"><figcaption>Bracelet</figcaption></figure>
+              <figure><img src="assets/door/key-usb.webp" width="800" height="800" alt="USB key" loading="lazy" decoding="async"><figcaption>USB</figcaption></figure>
+              <figure><img src="assets/door/key-wallet.webp" width="800" height="800" alt="Wallet key on a phone screen" loading="lazy" decoding="async"><figcaption>Wallet</figcaption></figure>
+            </div>
+          </div></details>
           <details class="cas-item"><summary><strong>Need keys for the crew?</strong><span>+</span></summary><div class="cas-body">Team Key enhancements give designated staff members their own digital key or physical tap. Existing booking, ordering, payment, and communication tools can also be connected when they belong in the customer path.</div></details>
         </div>
       </div>
@@ -425,11 +366,11 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
   </div>
 </section>
 
-<section class="sec sec-dark">
+<section class="sec sec-cream">
   <div class="wrap">
     <span class="kicker">Need the full picture?</span>
-    <h2 style="font:400 clamp(1.9rem,5.2vw,3rem)/1.05 var(--serif);letter-spacing:-.01em;margin-top:14px;max-width:640px">The Door gets customers moving. The full site goes deeper.</h2>
-    <p style="margin-top:16px;color:var(--cream-muted);max-width:520px;line-height:1.6">See the complete desktop experience for services, process, portfolio work, and the story behind The Digital Side.</p>
+    <h2 style="font:400 clamp(1.7rem,4.6vw,2.6rem)/1.08 var(--serif);letter-spacing:-.01em;margin-top:12px;max-width:600px">The Door gets customers moving. The full site goes deeper.</h2>
+    <p style="margin-top:14px;color:var(--ink-muted);max-width:500px;line-height:1.6">See the complete desktop experience for services, process, portfolio work, and the story behind The Digital Side.</p>
     <div class="handoff-cta"><a class="btn btn-primary btn-cta" href="index.html">Explore the full Digital Side →</a></div>
     <div class="contact-stack" id="contactUtilities">
       <button class="about-btn" id="aboutBtn" type="button">Meet the Developer →</button>
@@ -461,7 +402,7 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
     <img class="about-photo" src="about_mim.webp" width="1086" height="1448" alt="Nev Gonzalez" loading="lazy" decoding="async">
     <div class="about-id"><strong>Nev Gonzalez</strong><span>Founder &amp; Lead Developer</span></div>
     <span class="about-kicker">Developer · Business Systems · Maryland</span>
-    <h3 class="about-sub">Hey, I'm Nev.</h3>
+    <h3 class="about-sub">Hey, I’m Nev.</h3>
     <div class="about-body">
       <p>For nearly a decade, I worked across both sides of a small business in downtown Frederick, helping customers at the front while also managing the changing information, repeated questions, daily operations, and behind-the-scenes details that keep everything moving.</p>
       <p>While studying Business Management and Forensic Accounting, I gained a stronger understanding of how those moving pieces fit together and where they can start to break down. A Salesforce internship added the technology side of business and opened the path into web development, which gave me a practical way to bring everything I had learned together.</p>
@@ -486,19 +427,14 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
     ctx.setTransform(1,0,0,1,0,0);
     ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    ctx.fillStyle='#0a0906';
+    ctx.fillStyle='#0b0a08';
     ctx.fillRect(0,0,w,h);
-    const g=ctx.createRadialGradient(w*0.5,h*0.42,0,w*0.5,h*0.42,Math.max(w,h)*0.62);
-    g.addColorStop(0,'rgba(64,58,44,0.36)');
-    g.addColorStop(0.55,'rgba(20,18,14,0.16)');
+    const g=ctx.createRadialGradient(w*0.28,h*0.5,0,w*0.28,h*0.5,Math.max(w,h)*0.55);
+    g.addColorStop(0,'rgba(58,52,40,0.3)');
+    g.addColorStop(0.6,'rgba(18,16,12,0.12)');
     g.addColorStop(1,'rgba(6,5,4,0)');
     ctx.fillStyle=g;
     ctx.fillRect(0,0,w,h);
-    ctx.strokeStyle='rgba(255,255,255,0.035)';
-    ctx.lineWidth=1;
-    const step=34;
-    for(let x=0;x<=w;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
-    for(let y=0;y<=h;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
   }
 
   function resize(){
@@ -531,11 +467,16 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
     thresholdInner.remove();
   }
 
+  /* Small-pixel edge sweep: a single growing circular boundary from the
+     tapped period. Everything inside the boundary is revealed instantly;
+     a thin trailing band of small dark chips crumbles/fades just behind
+     the edge; everything beyond stays solid. Tiles are pre-sorted by
+     distance so each frame only touches the handful currently in-band. */
   function dissolve(originX,originY){
     snapshotBg();
-    const tile=w<640?34:46;
-    const cols=Math.ceil(w/tile);
-    const rows=Math.ceil(h/tile);
+    let tile=8;
+    while((w/tile)*(h/tile)>18000) tile+=2;
+    const cols=Math.ceil(w/tile),rows=Math.ceil(h/tile);
     const tiles=[];
     let maxDist=0;
     for(let r=0;r<rows;r++){
@@ -543,57 +484,71 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
         const cx=c*tile+tile/2,cy=r*tile+tile/2;
         const dist=Math.hypot(cx-originX,cy-originY);
         if(dist>maxDist)maxDist=dist;
-        tiles.push({x:c*tile,y:r*tile,dist:dist});
+        tiles.push({x:c*tile,y:r*tile,dist,jx:(Math.random()-0.5)*10,jy:(Math.random()-0.5)*10,sz:tile*(0.7+Math.random()*0.5)});
       }
     }
-    const sweepPortion=0.68;
-    const tileFade=340;
-    const duration=1900;
+    tiles.sort((a,b)=>a.dist-b.dist);
+    const dists=tiles.map(t=>t.dist);
+    function lowerBound(target){
+      let lo=0,hi=dists.length;
+      while(lo<hi){const mid=(lo+hi)>>1; if(dists[mid]<target) lo=mid+1; else hi=mid;}
+      return lo;
+    }
+
+    const band=44;
+    const duration=2400;
+    const reach=maxDist+band;
     const start=performance.now();
 
+    function easeInOutCubic(x){return x<0.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}
+
     function frame(now){
-      const t=now-start;
+      const t=Math.min(1,(now-start)/duration);
+      const r=easeInOutCubic(t)*reach;
+
       ctx.setTransform(1,0,0,1,0,0);
       ctx.clearRect(0,0,canvas.width,canvas.height);
       ctx.setTransform(dpr,0,0,dpr,0,0);
       ctx.drawImage(bgSnapshot,0,0,w,h);
 
       ctx.globalCompositeOperation='destination-out';
-      let openCount=0;
-      for(let i=0;i<tiles.length;i++){
+      ctx.fillStyle='#000';
+      ctx.beginPath();
+      ctx.arc(originX,originY,Math.max(0,r-band),0,Math.PI*2);
+      ctx.fill();
+
+      const loIdx=lowerBound(Math.max(0,r-band));
+      const hiIdx=lowerBound(r);
+      for(let i=loIdx;i<hiIdx;i++){
         const tl=tiles[i];
-        const delay=(tl.dist/maxDist)*duration*sweepPortion;
-        const local=Math.min(1,Math.max(0,(t-delay)/tileFade));
-        if(local<=0)continue;
-        const eased=1-Math.pow(1-local,3);
-        if(eased>=0.999)openCount++;
-        ctx.globalAlpha=eased;
-        const inset=tile*0.06*eased;
-        ctx.fillRect(tl.x+inset,tl.y+inset,tile-inset*2,tile-inset*2);
+        const local=Math.min(1,Math.max(0,(r-tl.dist)/band));
+        const alpha=1-local;
+        if(alpha<=0.01)continue;
+        ctx.globalAlpha=alpha;
+        const drift=local*local;
+        const sz=tl.sz*(1-local*0.35);
+        ctx.fillRect(tl.x+tl.jx*drift,tl.y+tl.jy*drift,sz,sz);
       }
       ctx.globalAlpha=1;
       ctx.globalCompositeOperation='source-over';
 
-      const waveT=t/(duration*sweepPortion);
-      const ringRadius=waveT*maxDist;
-      if(ringRadius>0&&waveT<1.05){
-        const ringAlpha=Math.max(0,1-waveT);
+      if(r>0&&r<maxDist+2){
         ctx.beginPath();
-        ctx.arc(originX,originY,ringRadius,0,Math.PI*2);
-        ctx.lineWidth=2.4;
-        ctx.strokeStyle='rgba(214,255,153,'+(0.5*ringAlpha)+')';
-        ctx.shadowColor='rgba(166,255,0,0.8)';
-        ctx.shadowBlur=18;
+        ctx.arc(originX,originY,r,0,Math.PI*2);
+        ctx.lineWidth=1.6;
+        ctx.strokeStyle='rgba(220,255,170,.55)';
+        ctx.shadowColor='rgba(166,255,0,.55)';
+        ctx.shadowBlur=9;
         ctx.stroke();
         ctx.shadowBlur=0;
       }
 
-      if(openCount<tiles.length){
+      if(t<1){
         requestAnimationFrame(frame);
       }else{
-        canvas.style.transition='opacity .5s ease';
+        canvas.style.transition='opacity .45s ease';
         canvas.style.opacity='0';
-        setTimeout(finishThreshold,520);
+        setTimeout(finishThreshold,480);
       }
     }
     requestAnimationFrame(frame);
