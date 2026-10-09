@@ -43,10 +43,10 @@ button:hover{transform:translateY(-2px)}
   <div class="field"><label for="name">Your name</label><input id="name" required></div>
   <div class="field"><label for="email">Email</label><input id="email" type="email" required></div>
   <div class="field"><label for="business">Business name or link</label><input id="business"></div>
-  <div class="field"><label for="interest">Interested in something specific?</label><select id="interest"><option>Not sure yet</option><option>Free Signal Check</option><option>Digital Door</option><option>Mobile Optimization</option><option>Revive: Update What Exists</option><option>Evolve: Expand What Exists</option><option>Connect the Dots</option><option>Simple Door</option><option>Customized Full Build</option><option>Live System Enhancement</option><option>Custom NFC or Team Key Enhancement</option></select></div>
+  <div class="field"><label for="interest">Interested in something specific?</label><select id="interest"><option>Not sure yet</option><option>Free Signal Check</option><option>Digital Door</option><option>Mobile Optimization</option><option>Revive: Update What Exists</option><option>Evolve: Expand What Exists</option><option>Connect the Dots</option><option>Simple Door</option><option>Customized Full Build</option><option>Live System Enhancement</option><option>Custom NFC or Team Key Enhancement</option><option>Digital business card / NFC prototype</option></select></div>
   <div class="field"><label for="message">What would you like handled?</label><textarea id="message" required></textarea></div>
   <button type="submit" id="sendBtn">Send inquiry →</button>
-</form>
+</form><p id="sendError" role="alert" hidden>That did not go through. Your details are still here. <a id="emailFallback" href="mailto:handled@thedigitalside.org">Send by email instead →</a></p>
 <div class="success" id="success"><div class="success-mark">✓</div><h2>Thanks—it’s sent.</h2><p>Your request is in. You’ll hear back soon.</p></div>
 <a class="full" href="client-intake.html">Have more ready? <span>Open the full project intake →</span></a>
 </main>
@@ -65,7 +65,7 @@ document.getElementById('short').addEventListener('submit',async function(e){
     const response=await fetch('https://formspree.io/f/mjyvrdnj',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
     if(!response.ok)throw new Error('send failed');
     document.querySelector('.wrap').classList.add('sent');document.getElementById('success').classList.add('show');window.scrollTo({top:0,behavior:'smooth'});
-  }catch(error){button.textContent='Try sending again →';button.classList.remove('sending');alert('That did not go through. Please try again.');}
+  }catch(error){button.textContent='Try sending again →';button.classList.remove('sending');document.getElementById('sendError').hidden=false;document.getElementById('emailFallback').href='mailto:handled@thedigitalside.org?subject=Project%20inquiry&body='+encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nBusiness: '+business+'\nInterest: '+interest+'\n\n'+message);}
 });
 </script>
 </body>

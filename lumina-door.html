@@ -203,7 +203,7 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
     <button data-path="arrival" aria-label="Open arrival guide">→</button>
   </section>
 
-  <div class="foot"><a href="key-lumina.html">Dr. Maya Chen</a> · <a href="https://webdevn3v.github.io/dental-office-demo/">In-depth site</a> · <a href="door.html#doorStart">Back to The Digital Side Path</a></div>
+  <div class="foot"><a href="key-lumina.html">Dr. Maya Chen</a> · <a href="lumina-mobile-site.html">In-depth site</a> · <a href="door.html#doorStart">Back to The Digital Side Path</a></div>
 </main>
 
 <section class="panel" id="panel" aria-hidden="true">
@@ -215,7 +215,7 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
     <div class="steps" id="panelSteps"></div>
     <div class="route-menu" id="routeMenu"></div>
     <div class="actions" id="panelActions"></div>
-    <a class="deep" href="https://webdevn3v.github.io/dental-office-demo/"><span>Want the deeper details?</span><span>Open the in-depth site →</span></a>
+    <a class="deep" href="lumina-mobile-site.html"><span>Want the deeper details?</span><span>Open the in-depth site →</span></a>
     </div>
   </div>
 </section>
@@ -239,7 +239,7 @@ doorEntry.addEventListener('keydown',e=>{
  if(e.key==='Enter' || e.key===' '){ e.preventDefault(); enterLumina(); }
 });
 
-const fullSite='https://webdevn3v.github.io/dental-office-demo/';
+const fullSite='lumina-mobile-site.html';
 const phone='tel:+15555550177';
 const email='mailto:hello@luminadental.com';
 
@@ -253,7 +253,7 @@ const data={
      ['3 · Your exam','Plan for about 60–75 minutes for digital X-rays, a comprehensive exam, and a conversation about your goals.'],
      ['4 · Your plan','Leave with clear options, timeline, and pricing — no pressure.']
    ],
-   actions:[['Book my free first visit','#book'],['Insurance + financing',fullSite+'#faq']]
+   actions:[['Book my free first visit',fullSite+'#book'],['Insurance + financing',fullSite+'#faq']]
  },
  need:{
    eye:'Treatment path', title:'You already know the direction.',
@@ -266,7 +266,7 @@ const data={
      ['Dental Implants',fullSite+'#services'],
      ['Sedation Dentistry',fullSite+'#services']
    ],
-   actions:[['Book an appointment','#book'],['Ask a treatment question',email]]
+   actions:[['Book an appointment',fullSite+'#book'],['Ask a treatment question',email]]
  },
  nervous:{
    eye:'Comfort path', title:'Being nervous is allowed here.',
@@ -277,7 +277,7 @@ const data={
      ['No-rush appointments','The practice does not double-book or rush patients. Questions come before treatment.'],
      ['Start with a conversation','You can book a first visit without committing to treatment that day.']
    ],
-   actions:[['Book a low-pressure first visit','#book'],['Learn about sedation',fullSite+'#services']]
+   actions:[['Book a low-pressure first visit',fullSite+'#book'],['Learn about sedation',fullSite+'#services']]
  },
  problem:{
    eye:'Problem path', title:'Something hurts. Start here.',
@@ -288,14 +288,14 @@ const data={
      ['Sensitivity or something feels off','Request an appointment and describe what you are noticing.'],
      ['After hours','Lumina’s voicemail includes guidance and an emergency line for severe situations.']
    ],
-   actions:[['Call Lumina now',phone],['Request an appointment','#book']]
+   actions:[['Call Lumina now',phone],['Request an appointment',fullSite+'#book']]
  },
  patient:{
    eye:'Returning patient path', title:'Welcome back.',
    intro:'The things returning patients need most, without making you dig through the website.',
    menu:[
-     ['Appointment information',fullSite+'#book'],
-     ['Digital forms',fullSite+'#book'],
+     ['Appointment information',fullSite+fullSite+'#book'],
+     ['Digital forms',fullSite+fullSite+'#book'],
      ['Insurance + financing',fullSite+'#faq'],
      ['Directions + hours',fullSite+'#visit'],
      ['Treatment information',fullSite+'#services']
