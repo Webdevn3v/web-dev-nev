@@ -243,6 +243,8 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 @media(min-width:800px){.world-hero{min-height:92svh}.world-scene{background-position:center; background-size:auto 100%}.world-foot{width:100%;max-width:820px;margin:auto auto 0}.contact-intro strong{font-size:1.8rem}}
 .threshold-period::after{content:"";position:absolute;inset:-20px;border-radius:50%}
 .key-showcase{margin-top:36px;border-top:1px solid var(--line-l);padding-top:30px}.key-showcase h3{font:500 clamp(1.8rem,5vw,2.7rem)/1.12 var(--serif);margin:10px 0 14px}.key-showcase>p{color:var(--ink-muted);max-width:580px;line-height:1.6}.key-set-image{display:block;width:100%;height:auto;margin:24px 0}.key-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.key-gallery figure{margin:0;min-width:0}.key-gallery img{display:block;width:100%;height:auto;border:1px solid var(--line-l)}.key-gallery figcaption{font:500 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;margin:12px 0 20px;color:var(--gold-deep)}
+
+body:not(.door-open) #doorStart{display:none}body.door-open #worldHero{display:none}.world-hero{min-height:100svh;display:flex;align-items:flex-end}.world-scene{background-size:cover;background-position:center 40%;opacity:.64}.world-foot{position:relative;margin:0 auto;padding:28px 20px;width:100%;max-width:620px;background:none}.entry-contact{background:linear-gradient(145deg,rgba(13,13,12,.94),rgba(5,5,5,.97));border:1px solid rgba(201,166,106,.36);border-radius:18px;padding:28px;box-shadow:0 24px 90px #0009;backdrop-filter:blur(12px)}.entry-id{display:flex;align-items:center;gap:18px}.entry-id img{width:80px;height:100px;object-fit:cover;object-position:center 22%;border-radius:6px}.entry-id h1{font:400 clamp(1.8rem,6vw,2.6rem)/1.08 var(--serif);color:var(--cream);margin:8px 0}.entry-id p{font:.66rem/1.5 var(--mono);color:var(--cream-muted)}.entry-line{color:var(--cream-muted);font:italic 1.15rem var(--serif);margin:22px 0}.entry-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}.entry-actions a{font:.7rem var(--mono);color:var(--cream);padding:12px 0}.entry-actions .entry-save{background:var(--gold);color:#090908;border-radius:5px;padding:14px 18px}.hero-next{border:0;border-top:1px solid var(--line-d);background:none;text-align:left;width:100%;padding:24px 0 12px;cursor:pointer}.entry-key{font:.65rem var(--mono);color:var(--cream-muted);display:inline-block;padding:12px 0}.demo-links a{display:flex;justify-content:space-between;align-items:center;padding:22px 4px;border-bottom:1px solid var(--line-d);gap:20px}.demo-links small{display:block;color:var(--gold);text-transform:uppercase;font:.6rem var(--mono);letter-spacing:.12em;margin-bottom:8px}.demo-links strong{font:400 1.3rem var(--serif)}.demo-links span{color:var(--gold);font-size:1.4rem}.demo-links a:hover{background:#ffffff08}.key-gallery{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;padding-bottom:12px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}.key-gallery figure{flex:0 0 78%;scroll-snap-align:start}.key-gallery img{aspect-ratio:1;object-fit:contain}.carousel-tools{display:flex;justify-content:space-between;align-items:center;margin:22px 0 16px;font:.65rem var(--mono);color:var(--gold-deep)}.carousel-tools button{width:44px;height:44px;border:1px solid var(--line-l);background:transparent;font-size:1.3rem;color:var(--ink);cursor:pointer}.carousel-tools button+button{margin-left:8px}@media(min-width:700px){.key-gallery figure{flex-basis:46%}}@media(prefers-reduced-motion:reduce){.key-gallery{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -258,7 +260,7 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
 <section class="world-hero" id="worldHero" aria-label="The Digital Side code world">
   <div class="world-scene" aria-hidden="true"></div>
   <div class="world-fog-edge" aria-hidden="true"></div>
-  <div class="world-foot"><span class="world-tag">Nev Gonzalez · Founder &amp; Developer</span><a class="hero-next" href="#doorStart">Step inside <span>↓</span></a></div>
+  <div class="world-foot"><div class="entry-contact"><div class="entry-id"><img src="about_mim.webp" alt="Nev Gonzalez"><div><span class="world-tag">The Digital Side</span><h1>Nev Gonzalez</h1><p>Founder &amp; Developer · Maryland</p></div></div><p class="entry-line">The digital side, handled.</p><div class="entry-actions"><a class="entry-save" href="the-digital-side.vcf">Save Contact ↓</a><a href="tel:+12029341126">Call</a><a href="sms:+12029341126">Text</a><a href="mailto:handled@thedigitalside.org">Email</a></div><button class="hero-next" id="openDoor" type="button">Open my Digital Door <span>↗</span></button><a class="entry-key" href="nev-owner-key.html">View my Owner Key ↗</a></div></div>
   <a class="scroll-cue" href="#doorStart" aria-label="Scroll to explore The Digital Door"><span></span></a>
 </section>
 
@@ -279,14 +281,13 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
     <div class="key-showcase" id="keySet">
       <span class="kicker">The Key Set</span>
       <h3>One Door. More ways in.</h3>
-      <p>Your card, bracelet, or keychain can open the same Digital Door. Here’s the original set of design mock-ups, together and up close.</p>
-      <img class="key-set-image" src="assets/tds-key-set/tds-key-set-hero.png" alt="The original Digital Side mock-up set: NFC card, bracelet, keychain, USB key, and digital Owner Key together" loading="lazy" decoding="async">
-      <div class="key-gallery">
+      <p>Your card, bracelet, or keychain can open the same Digital Door. Explore the original Key Set mock-ups.</p>
+      <div class="carousel-tools"><span>Swipe to explore</span><div><button type="button" id="keyPrev" aria-label="Previous key mock-up">←</button><button type="button" id="keyNext" aria-label="Next key mock-up">→</button></div></div><div class="key-gallery" id="keyCarousel" tabindex="0" aria-label="Key Set mock-ups, swipe or use arrow keys">
         <figure><img src="assets/tds-key-set/tds-key-card.png" alt="Original Digital Side NFC card design mock-up" loading="lazy" decoding="async"><figcaption>NFC card</figcaption></figure>
         <figure><img src="assets/tds-key-set/tds-key-bracelet.png" alt="Original Digital Side Bracelet design mock-up" loading="lazy" decoding="async"><figcaption>Bracelet</figcaption></figure>
         <figure><img src="assets/tds-key-set/%20tds-keychain.png" alt="Original Digital Side Keychain design mock-up" loading="lazy" decoding="async"><figcaption>Keychain</figcaption></figure>
         <figure><img src="assets/tds-key-set/tds-usb-key.png" alt="Original Digital Side USB key design mock-up" loading="lazy" decoding="async"><figcaption>USB key</figcaption></figure>
-        <figure><img src="assets/tds-key-set/tds-wallet-key.png" alt="Original Digital Side Digital Owner Key design mock-up" loading="lazy" decoding="async"><figcaption>Digital Owner Key</figcaption></figure>
+        <figure><img src="assets/tds-key-set/tds-wallet-key.png" alt="Original Digital Side Owner Apple Wallet Key design mock-up" loading="lazy" decoding="async"><figcaption>Owner Apple Wallet Key</figcaption></figure>
       </div>
       <a class="top-link" href="#demos">See the Doors they open ↓</a>
     </div>
@@ -298,29 +299,7 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
     <details class="acc demo-module" id="demos">
       <summary><div><small>Real examples</small><strong>Explore the Demos</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
-        <div class="cas-list">
-          <details class="demo-item"><summary><div><small>Law · Demo</small><strong>Frederick Legacy Law</strong></div><span>+</span></summary><div class="cas-body">
-            <img class="demo-photo" src="assets/door/frederick-attorney.webp" width="900" height="1350" alt="Frederick Legacy Law attorney portrait" loading="lazy" decoding="async">
-            <p>Planning, estate handling, family legacy questions, and urgent matters routed without making the client learn legal vocabulary first.</p>
-            <div class="demo-actions"><a class="btn btn-ghost" href="key-frederick.html">Owner Key</a><a class="btn btn-primary" href="door-frederick-legacy-law.html">View Door</a><a class="btn btn-ghost" href="frederick-legacy-law-mobile.html">Full demo site</a></div>
-          </div></details>
-          <details class="demo-item"><summary><div><small>Realtor · Demo</small><strong>Rivermore Real Estate</strong></div><span>+</span></summary><div class="cas-body">
-            <img class="demo-photo" src="assets/door/rivermore-door-scene.webp" width="900" height="1350" alt="Rivermore Real Estate listing entrance" loading="lazy" decoding="async">
-            <p>Buyers, sellers, neighborhood discovery, listings, and live market updates built around the move the customer is actually making.</p>
-            <div class="demo-actions"><a class="btn btn-ghost" href="realtor-key.html">Owner Key</a><a class="btn btn-primary" href="realtor-door.html">View Door</a><a class="btn btn-ghost" href="realtor-index.html">Full demo site</a></div>
-          </div></details>
-          <details class="demo-item"><summary><div><small>HVAC · Demo</small><strong>Marsh Brothers Heating &amp; Air</strong></div><span>+</span></summary><div class="cas-body">
-            <img class="demo-photo" src="assets/door/aerovale-condenser.webp" width="900" height="563" alt="Marsh Brothers Heating & Air technician servicing a condenser" loading="lazy" decoding="async">
-            <p>Emergency service, repair, maintenance, replacement, and commercial service organized around urgency, comfort, and live availability.</p>
-            <div class="demo-actions"><a class="btn btn-ghost" href="hvac-key.html">Owner Key</a><a class="btn btn-primary" href="hvac-door.html">View Door</a><a class="btn btn-ghost" href="hvac-index.html">Full demo site</a></div>
-          </div></details>
-          <details class="demo-item"><summary><div><small>Roofing · Demo</small><strong>Northline Roofing Co.</strong></div><span>+</span></summary><div class="cas-body">
-            <img class="demo-photo" src="assets/door/northline-owner.webp" width="900" height="1075" alt="Northline Roofing Co. owner reviewing a job on site" loading="lazy" decoding="async">
-            <p>Inspection, storm response, replacement, and current-customer support organized around urgency.</p>
-            <div class="demo-actions"><a class="btn btn-ghost" href="key-northline.html">Owner Key</a><a class="btn btn-primary" href="northline-door.html">View Door</a><a class="btn btn-ghost" href="northline-full-site.html">Full demo site</a></div>
-          </div></details>
-          <details class="demo-item"><summary><div><small>Funeral Care · Demo</small><strong>Hallow &amp; Grace</strong></div><span>+</span></summary><div class="cas-body"><img class="demo-photo" src="hallow-grace-owners.png" alt="The Hallow and Grace funeral care team" loading="lazy"><p>Personal guidance for immediate care, planning ahead, service information, and aftercare.</p><div class="demo-actions"><a class="btn btn-ghost" href="key-hallow-grace.html">Owner Key</a><a class="btn btn-primary" href="hallow-grace-door.html">View Door</a><a class="btn btn-ghost" href="hallow-grace-index.html">Full demo site</a></div></div></details>
-        </div>
+<nav class="demo-links" aria-label="Demo Doors"><a href="realtor-door.html"><div><small>Real estate</small><strong>Rivermore Real Estate</strong></div><span aria-hidden="true">↗</span></a><a href="door-frederick-legacy-law.html"><div><small>Law</small><strong>Frederick Legacy Law</strong></div><span aria-hidden="true">↗</span></a><a href="northline-door.html"><div><small>Roofing</small><strong>Northline Roofing Co.</strong></div><span aria-hidden="true">↗</span></a><a href="hvac-door.html"><div><small>HVAC</small><strong>Marsh Brothers Heating &amp; Air</strong></div><span aria-hidden="true">↗</span></a><a href="hallow-grace-door.html"><div><small>Funeral care</small><strong>Hallow &amp; Grace</strong></div><span aria-hidden="true">↗</span></a></nav>
       </div>
     </details>
 
@@ -576,7 +555,15 @@ html.entry-lock body{overflow:hidden;overscroll-behavior:none;touch-action:none}
     dissolve(rect.left+rect.width/2,rect.top+rect.height/2);
   }
 
-  if(location.hash){entered=true;unlockPage();finishThreshold();if(location.hash==='#demos')document.getElementById('demos').open=true;}
+  entered=true;unlockPage();finishThreshold();
+  function openDoor(){document.body.classList.add('door-open');window.scrollTo(0,0);}
+  document.getElementById('openDoor').addEventListener('click',openDoor);
+  if(location.hash){openDoor();if(location.hash==='#demos')document.getElementById('demos').open=true;requestAnimationFrame(()=>{const target=document.getElementById(location.hash.slice(1));if(target)target.scrollIntoView();});}
+  const carousel=document.getElementById('keyCarousel');
+  function shiftKey(direction){carousel.scrollBy({left:direction*(carousel.querySelector('figure').getBoundingClientRect().width+16),behavior:reduced?'auto':'smooth'});}
+  document.getElementById('keyPrev').onclick=()=>shiftKey(-1);
+  document.getElementById('keyNext').onclick=()=>shiftKey(1);
+  carousel.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();shiftKey(e.key==='ArrowRight'?1:-1);}});
   document.querySelectorAll('a[href="#demos"]').forEach(a=>a.addEventListener('click',()=>document.getElementById('demos').open=true));
   periodBtn.addEventListener('click',enter);
   periodBtn.addEventListener('keydown',e=>{
