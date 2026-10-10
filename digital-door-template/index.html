@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff"><title>Digital Door | Your Name</title>
+<style>
+:root{font-family:'Avenir Next','Segoe UI',Arial,sans-serif;color:#17251e;background:#fff}*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center}.card{width:min(100%,440px);padding:64px 28px;text-align:center}.logo{display:block;max-width:240px;max-height:170px;object-fit:contain;margin:0 auto 78px}.name{font-size:34px;font-weight:600;letter-spacing:-1px;margin:0 0 14px}.role{font-size:13px;color:#66716a;letter-spacing:.3px;margin:0 0 54px}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.actions a{padding:18px 4px;border:1px solid #dfe5e1;border-radius:9px;text-decoration:none;color:inherit;font-size:14px;font-weight:600}.save{display:block;margin-top:20px;padding:19px;border-radius:10px;background:#1c3028;color:#fff;text-decoration:none;font-weight:600}a:focus-visible{outline:3px solid #20b976;outline-offset:3px}
+</style></head><body><main class="card">
+<a href="https://example.com" aria-label="Company website"><img class="logo" src="logo.png" alt="Company logo"></a>
+<h1 class="name">Your Name</h1><p class="role">Your Title · Company Name</p>
+<nav class="actions" aria-label="Contact"><a href="tel:+10000000000">Call</a><a href="sms:+10000000000">Text</a><a href="https://example.com">Website</a></nav>
+<a class="save" id="save" href="#">Save Contact</a>
+</main><script>
+const lines=['BEGIN:VCARD','VERSION:3.0','N:Last;First;;;','FN:Your Name','ORG:Company Name','TITLE:Your Title','TEL;TYPE=CELL:+10000000000','URL:https://example.com','END:VCARD'];
+const blob=new Blob([lines.join('\r\n')],{type:'text/vcard;charset=utf-8'});const url=URL.createObjectURL(blob);const save=document.getElementById('save');save.href=url;save.download='contact.vcf';
+</script></body></html>
