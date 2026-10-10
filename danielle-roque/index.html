@@ -2,28 +2,34 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff"><title>Danielle Roque | Home Source Roofing</title>
 <style>
 :root{font-family:Inter,'Helvetica Neue',Arial,sans-serif;color:#202723;background:#fff}
-*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;background:#f6f8f6}
-.card{position:relative;isolation:isolate;overflow:hidden;width:min(100%,430px);min-height:590px;background:#fff;padding:58px 32px 48px;border:1px solid #e9eeea;box-shadow:0 16px 48px rgba(25,42,32,.045)}
-.card:before{content:"";position:absolute;z-index:-1;pointer-events:none;top:5%;right:-30%;width:135%;height:85%;background:url('Home_source_roofing_logo.PNG') center/contain no-repeat;filter:invert(1) grayscale(1);opacity:.09}
-.identity{position:relative;display:flex;align-items:center;gap:16px;margin-bottom:35px}.identity-copy{flex:1;min-width:0}
-.identity-logo{display:block;width:96px;max-height:90px;object-fit:contain}.identity-logo-link{display:block;flex-shrink:0}
-.name{font-size:clamp(34px,8vw,41px);font-weight:600;letter-spacing:-1.5px;line-height:1.15;margin:0 0 12px}.role{font-size:17px;font-weight:650;color:#243b2c;margin:0;line-height:1.4;letter-spacing:-.3px}
-.role .company{display:block;font-size:12px;font-weight:500;letter-spacing:.3px;color:#6b7b71;margin-top:9px}.section-rule{height:1px;background:linear-gradient(90deg,#2fa66d 0 22%,#dce7df 22%);margin:0 0 29px}.actions{display:flex;justify-content:space-around;align-items:flex-start;gap:12px}
-.actions a{display:flex;flex-direction:column;align-items:center;gap:11px;text-decoration:none;color:#26372d;font-size:13px;font-weight:500;min-width:76px}
-.circle{width:65px;height:65px;border-radius:50%;display:grid;place-items:center;border:1px solid #dce5df;background:rgba(255,255,255,.94);transition:background .15s,border-color .15s}
-.actions svg{width:25px;height:25px;stroke:#274a34;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;display:grid;place-items:center;background:#f6f8f6}
+.card{position:relative;isolation:isolate;overflow:hidden;width:min(100%,430px);min-height:620px;background:#fff;padding:65px 32px 54px;border:1px solid #e9eeea;box-shadow:0 16px 48px rgba(25,42,32,.045)}
+.watermark{position:absolute;z-index:-1;pointer-events:none;top:205px;right:-115px;width:460px;height:460px;background:url('Home_source_roofing_logo.PNG') center/contain no-repeat;opacity:.075;filter:grayscale(1)}
+.identity{position:relative;margin-bottom:45px}
+.name{font-size:clamp(48px,13vw,61px);font-weight:650;letter-spacing:-2.8px;line-height:1.01;margin:0 0 24px}
+.name span{display:block}
+.role{font-size:18px;font-weight:650;color:#243b2c;margin:0;line-height:1.4;letter-spacing:-.3px}
+.company{display:block;font-size:13px;font-weight:500;letter-spacing:.25px;color:#6b7b71;margin-top:10px}
+.actions{display:flex;justify-content:flex-start;gap:44px;margin:0 0 32px}
+.actions a{display:flex;flex-direction:column;align-items:center;gap:11px;text-decoration:none;color:#26372d;font-size:14px;font-weight:550;min-width:76px}
+.circle{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;border:1px solid #dce5df;background:rgba(255,255,255,.96)}
+.actions svg{width:27px;height:27px;stroke:#274a34;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .actions a:hover .circle{border-color:#62ad80;background:#f0f8f2}
-.actions .save .circle{background:#253f30;border-color:#253f30}.actions .save svg{stroke:#fff}
+.save{display:flex;align-items:center;justify-content:center;gap:13px;min-height:60px;background:#253f30;color:white;text-decoration:none;font-weight:600;font-size:15px;border-radius:7px}
+.save svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.website{display:inline-block;margin-top:38px;color:#416c50;font-size:13px;font-weight:550;text-decoration:underline;text-underline-offset:4px}
 a:focus-visible{outline:3px solid #27a56b;outline-offset:3px}
-@media(max-width:480px){body{background:#fff;display:block}.card{min-height:100svh;width:100%;border:0;box-shadow:none;padding:62px 24px 45px}}
-@media(max-width:380px){.identity{gap:10px}.identity-logo{width:80px}.name{font-size:32px}.circle{width:59px;height:59px}}
+@media(max-width:480px){body{background:#fff;display:block}.card{min-height:100svh;width:100%;border:0;box-shadow:none;padding:68px 30px 48px}.watermark{top:200px;right:-120px}}
 </style></head><body><main class="card">
-<div class="identity"><div class="identity-copy"><h1 class="name">Danielle Roque</h1><p class="role">Customer Success Manager<span class="company">Home Source Roofing</span></p></div><a class="identity-logo-link" href="https://homesourceroofing.net/" target="_blank" rel="noopener noreferrer" aria-label="Home Source Roofing website" title="Home Source Roofing website"><img class="identity-logo" src="Home_source_roofing_logo.PNG" alt="Home Source Roofing"></a></div>
+<div class="watermark" aria-hidden="true"></div>
+<header class="identity"><h1 class="name"><span>Danielle</span><span>Roque</span></h1><p class="role">Customer Success Manager<span class="company">Home Source Roofing</span></p></header>
 <nav class="actions" aria-label="Contact Danielle">
 <a href="tel:+13017126612"><span class="circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.37 1.91.71 2.81a2 2 0 0 1-.45 2.11L7.1 9.9a16 16 0 0 0 7 7l1.28-1.26a2 2 0 0 1 2.11-.45c.9.34 1.85.58 2.81.71a2 2 0 0 1 1.7 2z"/></svg></span><span>Call</span></a>
 <a href="sms:+13017126612"><span class="circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg></span><span>Text</span></a>
-<a class="save" id="save" href="#"><span class="circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M19 8h4M21 6v4"/></svg></span><span>Save Contact</span></a>
 </nav>
+<a class="save" id="save" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M19 8h4M21 6v4"/></svg>Save Contact</a>
+<a class="website" href="https://homesourceroofing.net/" target="_blank" rel="noopener noreferrer">Home Source Roofing website</a>
 </main><script>
 const v=['BEGIN:VCARD','VERSION:3.0','N:Roque;Danielle;;;','FN:Danielle Roque','ORG:Home Source Roofing','TITLE:Customer Success Manager','TEL;TYPE=CELL:+13017126612','URL:https://homesourceroofing.net/','END:VCARD'].join('\r\n');
 const url=URL.createObjectURL(new Blob([v],{type:'text/vcard;charset=utf-8'}));document.getElementById('save').href=url;document.getElementById('save').download='Danielle-Roque.vcf';
