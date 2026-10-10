@@ -5,7 +5,7 @@
 *{box-sizing:border-box}
 body{margin:0;min-height:100svh;display:grid;place-items:center;background:#f6f8f6}
 .card{position:relative;isolation:isolate;overflow:hidden;width:min(100%,430px);min-height:620px;background:#fff;padding:65px 32px 54px;border:1px solid #e9eeea;box-shadow:0 16px 48px rgba(25,42,32,.045)}
-.watermark{position:absolute;z-index:-1;pointer-events:none;top:10px;right:18px;width:125px;height:95px;overflow:hidden;opacity:.17;filter:grayscale(1)}
+
 .identity{position:relative;margin-bottom:45px}
 .name{font-size:clamp(48px,13vw,61px);font-weight:650;letter-spacing:-2.8px;line-height:1.01;margin:0 0 24px}
 .name span{display:block}
@@ -18,18 +18,18 @@ body{margin:0;min-height:100svh;display:grid;place-items:center;background:#f6f8
 .actions a:hover .circle{border-color:#62ad80;background:#f0f8f2}
 .save{display:flex;align-items:center;justify-content:center;gap:13px;min-height:60px;background:#253f30;color:white;text-decoration:none;font-weight:600;font-size:15px;border-radius:7px}
 .save svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.website{display:flex;align-items:center;gap:16px;margin-top:42px;padding-top:23px;border-top:1px solid #e5ebe6;color:#34483b;text-decoration:none}.website img{width:104px;height:70px;object-fit:contain;object-position:left center;flex-shrink:0}.website-copy{display:flex;flex-direction:column;gap:5px}.website-copy strong{font-size:13px;font-weight:600}.website-copy small{font-size:12px;color:#718077}.website:hover .website-copy strong{text-decoration:underline;text-underline-offset:3px}
+.corner-logo{position:absolute;top:36px;right:25px;display:block;width:112px;padding:4px;z-index:2}.corner-logo img{display:block;width:100%;height:auto;object-fit:contain}.corner-logo:focus-visible{outline:3px solid #27a56b;outline-offset:3px}
 a:focus-visible{outline:3px solid #27a56b;outline-offset:3px}
-@media(max-width:480px){body{background:#fff;display:block}.card{min-height:100svh;width:100%;border:0;box-shadow:none;padding:68px 30px 48px}.watermark{top:8px;right:14px;width:125px;height:95px}}
+@media(max-width:480px){body{background:#fff;display:block}.card{min-height:100svh;width:100%;border:0;box-shadow:none;padding:68px 30px 48px}.corner-logo{top:30px;right:20px;width:105px}}
 </style></head><body><main class="card">
-<div class="watermark" aria-hidden="true"><img src="Home_source_roofing_logo.PNG" alt="" style="display:block;width:125px;height:auto;max-width:none;clip-path:inset(0 0 53% 0);transform:scale(1.15);transform-origin:top center"></div>
+<a class="corner-logo" href="https://homesourceroofing.net/" target="_blank" rel="noopener noreferrer" aria-label="Visit Home Source Roofing website"><img src="Home_source_roofing_logo.PNG" alt="Home Source Roofing"></a>
 <header class="identity"><h1 class="name"><span>Danielle</span><span>Roque</span></h1><p class="role">Customer Success Manager<span class="company">Home Source Roofing</span></p></header>
 <nav class="actions" aria-label="Contact Danielle">
 <a href="tel:+13017126612"><span class="circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.37 1.91.71 2.81a2 2 0 0 1-.45 2.11L7.1 9.9a16 16 0 0 0 7 7l1.28-1.26a2 2 0 0 1 2.11-.45c.9.34 1.85.58 2.81.71a2 2 0 0 1 1.7 2z"/></svg></span><span>Call</span></a>
 <a href="sms:+13017126612"><span class="circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg></span><span>Text</span></a>
 </nav>
 <a class="save" id="save" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M19 8h4M21 6v4"/></svg>Save Contact</a>
-<a class="website" href="https://homesourceroofing.net/" target="_blank" rel="noopener noreferrer" aria-label="Visit Home Source Roofing website"><img src="Home_source_roofing_logo.PNG" alt=""><span class="website-copy"><strong>Visit website</strong><small>homesourceroofing.net</small></span></a>
+
 </main><script>
 const v=['BEGIN:VCARD','VERSION:3.0','N:Roque;Danielle;;;','FN:Danielle Roque','ORG:Home Source Roofing','TITLE:Customer Success Manager','TEL;TYPE=CELL:+13017126612','URL:https://homesourceroofing.net/','END:VCARD'].join('\r\n');
 const url=URL.createObjectURL(new Blob([v],{type:'text/vcard;charset=utf-8'}));document.getElementById('save').href=url;document.getElementById('save').download='Danielle-Roque.vcf';
