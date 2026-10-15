@@ -413,12 +413,18 @@ img{display:block;max-width:100%}
 @media(min-width:850px){.demo-slide{flex:0 0 min(31%,310px)}.demo-carousel{gap:17px}}
 @media(prefers-reduced-motion:reduce){.demo-carousel{scroll-behavior:auto}}
 
+
+/* Signature TDS collection group photograph */
+.category-tds .category-visual{object-fit:cover;object-position:center 48%;opacity:.67;filter:saturate(.82)}
+.category-tds::before{background:linear-gradient(0deg,rgba(8,7,6,.94) 0%,rgba(8,7,6,.18) 78%)}
+.category-tds:hover .category-visual,.category-tds:focus-visible .category-visual{opacity:.8}
+.collection-example iframe{height:min(72dvh,690px)}
 </style>
 </head>
 <body>
 
 <section class="world-hero" id="worldHero" aria-label="The Digital Side">
-  <a class="world-logo" href="#doorStart" aria-label="The Digital Side — tap to explore">
+  <a class="world-logo" href="#doorStart" aria-label="The Digital Side tap to explore">
     the digital side<i class="period-dot" aria-hidden="true"></i>
   </a>
   <a class="scroll-cue" href="#doorStart" aria-label="Scroll to explore">
@@ -454,12 +460,7 @@ img{display:block;max-width:100%}
       </div>
       <div class="category-grid" aria-label="Services and products">
         <button type="button" class="category-tile category-tds" data-collection="tds" aria-label="View the TDS Collection">
-          <span class="tile-collage" aria-hidden="true">
-            <img src="assets/Tds_pvc_card.PNG" alt="" loading="lazy">
-            <img src="assets/Tds_bracelet.PNG" alt="" loading="lazy">
-            <img src="assets/Tds_usb.PNG" alt="" loading="lazy">
-            <img src="assets/Tds_keychain.PNG" alt="" loading="lazy">
-          </span>
+          <img class="category-visual" src="assets/tds-key-set/tds-key-set-hero.png" alt="" loading="lazy" decoding="async">
           <strong>TDS Collection</strong>
         </button>
         <button type="button" class="category-tile" data-collection="cards" aria-label="View a Digital Business Card"><img class="category-visual" src="avery-tds-bracelet.png" alt="" loading="lazy"><strong>Digital Business Cards</strong></button>
@@ -544,7 +545,7 @@ img{display:block;max-width:100%}
       <div class="acc-body">
         <div class="inquiry-buttons">
           <a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry</strong><span>A few details are enough to start.</span></a>
-          <a class="inquiry-btn secondary" href="client-intake.html"><small>More in-depth</small><strong>Full Project Intake</strong><span>Share the complete project picture.</span></a>
+          <a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake</strong><span>Share the complete project picture.</span></a>
         </div>
       </div>
     </details>
@@ -553,9 +554,9 @@ img{display:block;max-width:100%}
       <summary><div><small>Good to know</small><strong>Ownership, access + what happens next</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
         <div class="cas-list">
-          <details class="cas-item"><summary><strong>You own what gets built.</strong><span>+</span></summary><div class="cas-body">The finished system, project files, QR asset, and handoff materials belong to the client. TDS project work is a one-time payment. There is no required TDS subscription just to keep using what was purchased.</div></details>
+          <details class="cas-item"><summary><strong>You own what gets built.</strong><span>+</span></summary><div class="cas-body">The finished system, project files, QR asset, and handoff materials belong to the client. TDS project work is a one time payment. There is no required TDS subscription just to keep using what was purchased.</div></details>
           <details class="cas-item"><summary><strong>No passwords needed to start.</strong><span>+</span></summary><div class="cas-body">A new system can be built without access to personal accounts, inboxes, or existing logins. Existing access only becomes relevant when the project includes cleanup, migration, or organizing the business's digital junk drawer.</div></details>
-          <details class="cas-item"><summary><strong>Third-party services stay in the client's name.</strong><span>+</span></summary><div class="cas-body">If a domain, business email, form service, or another outside service is needed, setup can be prepared before the client completes any required ownership, billing, or verification step. Future third-party renewals belong to that service. They are not a TDS subscription.</div></details>
+          <details class="cas-item"><summary><strong>Outside services stay in the client's name.</strong><span>+</span></summary><div class="cas-body">If a domain, business email, form service, or another outside service is needed, setup can be prepared before the client completes any required ownership, billing, or verification step. Future outside service renewals belong to that service. They are not a TDS subscription.</div></details>
           <details class="cas-item"><summary><strong>Need keys for the crew?</strong><span>+</span></summary><div class="cas-body">Team Key enhancements give designated staff members their own digital key or physical tap. Existing booking, ordering, payment, and communication tools can also be connected when they belong in the customer path.</div></details>
         </div>
       </div>
@@ -593,9 +594,9 @@ img{display:block;max-width:100%}
     <span class="about-kicker">Developer · Business Systems · Maryland</span>
     <h3 class="about-sub">Hey, I’m Nev.</h3>
     <div class="about-body">
-      <p>For nearly a decade, I worked across both sides of a small business in downtown Frederick, helping customers at the front while also managing the changing information, repeated questions, daily operations, and behind-the-scenes details that keep everything moving.</p>
+      <p>For nearly a decade, I worked across both sides of a small business in downtown Frederick, helping customers at the front while also managing the changing information, repeated questions, daily operations, and behind the scenes details that keep everything moving.</p>
       <p>While studying Business Management and Forensic Accounting, I gained a stronger understanding of how those moving pieces fit together and where they can start to break down. A Salesforce internship added the technology side of business and opened the path into web development, which gave me a practical way to bring everything I had learned together.</p>
-      <p>That is where The Digital Side comes from: understanding how the business works first, then building the customer-facing experience and digital systems around the way the brand actually operates.</p>
+      <p>That is where The Digital Side comes from: understanding how the business works first, then building the customer facing experience and digital systems around the way the brand actually operates.</p>
     </div>
   </div>
 </div>
@@ -645,14 +646,14 @@ const modal=document.getElementById('collectionModal');
 const swipe=document.getElementById('collectionSwipe'),frame=document.getElementById('collectionFrame');
 const example=document.getElementById('collectionExample'),sets=document.getElementById('collectionSets'),links=document.getElementById('collectionLinks');
 const configs={
- tds:{title:'The TDS Collection',description:'Our signature digital and physical keys connect to the destination that matters for your business.',images:[
+ tds:{title:'The TDS Collection',description:'Our signature digital and physical keys. Each one connects to a destination created around what matters for your business.',images:[
  'assets/Tds_pvc_card.PNG','assets/Tds_bracelet.PNG','assets/Tds_usb.PNG','assets/Tds_keychain.PNG','assets/tds-key-set/tds-wallet-key.png','three-plaque-set.png'
- ],links:[['Ask about a TDS key','project-inquiry.html']]},
- cards:{title:'Digital Business Cards',description:'Contact and the next step, all in one mobile experience. Avery’s example opens the real business experience instead of a static photo.',frame:'avery-cole-door.html',links:[['View Avery’s Digital Key','realtor-key.html'],['Lawyer Digital Key','key-frederick.html'],['Contractor Digital Key','key-northline.html']]},
- door:{title:'Digital Door',description:'A focused mobile entry built around what customers came to do. Frederick Legacy Law is one example.',frame:'door-frederick-legacy-law.html',links:[['Open Frederick Legacy Law','door-frederick-legacy-law.html']]},
- sets:{title:'Key Sets',description:'A personal digital card paired with the tap format that fits the business. The example sets are being developed.',sets:true,links:[['Discuss a key set','project-inquiry.html']]},
- websites:{title:'Mobile Websites',description:'Condensed essentials when people want to act quickly. A mobilized full website when they want the complete business picture.',links:[['Realtor Mobile Site','realtor-index.html'],['Lawyer Mobile Site','frederick-legacy-law-mobile.html'],['Contractor Mobile Site','northline-mobile-site.html']]},
- custom:{title:'Custom Tap Products',description:'Custom tap products are built around the business, its identity and the action the customer needs. New client photos will be added as the custom pieces are made.',links:[['Ask about custom products','project-inquiry.html']]}
+ ],links:[['Ask about the collection','project-inquiry.html']]},
+ cards:{title:'Digital Business Cards',description:'A digital introduction with the details that matter. Avery’s card puts contact first and keeps her full Door one step away.',frame:'realtor-key.html',links:[['View Avery’s full card','realtor-key.html'],['Lawyer card','key-frederick.html'],['Contractor card','key-northline.html']]},
+ door:{title:'Digital Door',description:'One mobile place for the actions customers came to take. See how Frederick Legacy Law guides people to the next step.',frame:'door-frederick-legacy-law.html',links:[['Enter the full Digital Door','door-frederick-legacy-law.html']]},
+ sets:{title:'Key Sets',description:'The digital card and physical tap are paired around each person’s work. Our sample combinations are below, with individual product photographs to follow.',sets:true,links:[['Plan a key set','project-inquiry.html']]},
+ websites:{title:'Mobilized Websites',description:'A complete business experience made comfortable on a phone, with deeper information when it is needed.',frame:'realtor-index.html',links:[['Open the realtor site','realtor-index.html'],['Law firm site','frederick-legacy-law-mobile.html'],['Contractor site','northline-mobile-site.html']]},
+ custom:{title:'Custom Tap Products',description:'Branded tap pieces are made to suit the business and the customer action. New custom project photos will be added as the pieces are completed.',links:[['Discuss a custom product','project-inquiry.html']]}
 };
 function reset(){frame.removeAttribute('src');swipe.replaceChildren();links.replaceChildren();swipe.hidden=true;example.hidden=true;sets.hidden=true;}
 function close(){modal.close();reset();}
