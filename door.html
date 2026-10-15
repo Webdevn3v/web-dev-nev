@@ -288,6 +288,42 @@ img{display:block;max-width:100%}
 .contact-stack .save-contact{display:block;width:min(100%,355px);margin:5px auto 0;background:#100e0b;color:var(--cream);border:1px solid #100e0b;padding:14px;text-align:center;font:700 .72rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase}
 .contact-stack .save-contact:hover{background:#3a3025}
 
+
+/* A restrained image behind each category, with the copy fully readable */
+.category-tile{position:relative;isolation:isolate;overflow:hidden;min-height:156px;justify-content:space-between;gap:10px;background:#17120e;border-color:rgba(201,166,106,.32);padding:17px 14px}
+.category-tile .category-visual{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center center;opacity:.30;z-index:0;filter:saturate(.72) contrast(.98);transition:opacity .2s ease}
+.category-tile::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(9,8,6,.81),rgba(9,8,6,.54)),linear-gradient(0deg,rgba(9,8,6,.65),transparent 85%);pointer-events:none}
+.category-tile strong,.category-tile small,.category-tile .cat-open{position:relative;z-index:2;text-shadow:0 2px 12px #070605}
+.category-tile strong{font-weight:650}
+.category-tile small{color:#e0d4c1;line-height:1.5}
+.category-tile .cat-open{font:700 .62rem/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;align-self:flex-end;color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:3px}
+.category-tile:hover .category-visual,.category-tile:focus-visible .category-visual{opacity:.45}
+.category-tile:hover,.category-tile:focus-visible{background:#1e1711;border-color:var(--gold)}
+@media(min-width:720px){.category-tile{min-height:177px}}
+/* The live card is the example, not a separate unframed portrait photograph */
+.card-example{margin-top:18px}
+.card-example[hidden]{display:none!important}
+.card-example-panel{position:relative;min-height:345px;max-width:420px;overflow:hidden;border:1px solid rgba(201,166,106,.43);border-radius:6px;background:#21160f}
+.card-example-panel .card-example-photo{position:absolute;inset:0;width:100%;height:100%;background:url('avery-tds-bracelet.png') center 25%/cover no-repeat}
+.card-example-panel::after{content:"";pointer-events:none;position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,7,5,.61),rgba(10,7,5,.12) 40%,rgba(10,7,5,.66) 68%,rgba(10,7,5,.97))}
+.card-example-panel .card-example-content{position:relative;z-index:1;min-height:345px;padding:27px 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.card-example-panel .card-example-brand{font:700 .58rem/1.4 var(--mono);letter-spacing:.15em;text-transform:uppercase;color:#e1cba7}
+.card-example-panel h4{font:400 clamp(1.9rem,7vw,2.5rem)/1.08 var(--serif);margin-top:10px}
+.card-example-panel .card-example-role{font:.75rem var(--sans);color:#ebdfce;letter-spacing:.08em;margin-top:6px}
+.card-example-spacer{flex:1}
+.card-example-panel .card-example-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;width:100%}
+.card-example-panel .card-example-buttons a{padding:12px 3px;border:1px solid rgba(255,255,255,.44);background:rgba(10,7,5,.54);border-radius:20px;text-align:center;color:#fff;font:700 .7rem var(--mono)}
+.card-example-panel .card-example-save{display:block;width:100%;padding:12px 6px;margin-top:9px;color:#fff;background:rgba(10,7,5,.6);border:1px solid rgba(255,255,255,.38);border-radius:20px;text-align:center;font:700 .7rem var(--mono)}
+.card-example-more{max-width:420px;border-bottom:1px solid var(--line-d);border-top:1px solid var(--line-d);margin-top:10px}
+.card-example-more summary{cursor:pointer;list-style:none;font:700 .73rem/1.5 var(--mono);padding:13px 3px;color:var(--gold)}
+.card-example-more summary::-webkit-details-marker{display:none}
+.card-example-more summary::after{content:" + ";float:right;font-weight:bold}
+.card-example-more[open] summary::after{content:" − "}
+.card-example-more .card-example-details{padding:0 3px 15px}
+.card-example-more .card-example-details p{font-size:.81rem;line-height:1.55;margin:0 0 12px}
+.card-example-more .card-example-details a{font:700 .74rem var(--mono);color:var(--cream);text-decoration:underline;text-underline-offset:4px}
+.contact-stack .contact-row .contact-icon{display:none}
+
 </style>
 </head>
 <body>
@@ -334,12 +370,12 @@ img{display:block;max-width:100%}
         <p>Start with our signature collection or choose a custom setup. Tap any category to explore.</p>
       </div>
       <div class="category-grid" aria-label="Explore The Digital Side services">
-        <button type="button" class="category-tile" data-collection="tds"><strong>TDS Collection</strong><small>Our signature digital and physical keys.</small><span class="cat-open" aria-hidden="true">↗</span></button>
-        <button type="button" class="category-tile" data-collection="cards"><strong>Digital Business Cards</strong><small>Share contact details, business links and the next step.</small><span class="cat-open" aria-hidden="true">↗</span></button>
-        <button type="button" class="category-tile" data-collection="door"><strong>Digital Door</strong><small>A mobile starting point built around the customer.</small><span class="cat-open" aria-hidden="true">↗</span></button>
-        <button type="button" class="category-tile" data-collection="sets"><strong>Key Sets</strong><small>Digital cards with the physical tap formats that fit.</small><span class="cat-open" aria-hidden="true">↗</span></button>
-        <button type="button" class="category-tile" data-collection="websites"><strong>Mobile Websites</strong><small>Condensed experiences or a complete responsive site.</small><span class="cat-open" aria-hidden="true">↗</span></button>
-        <button type="button" class="category-tile" data-collection="custom"><strong>Custom Tap Products</strong><small>Branded keychains, plaques and other useful formats.</small><span class="cat-open" aria-hidden="true">↗</span></button>
+        <button type="button" class="category-tile" data-collection="tds"><img class="category-visual" src="assets/Tds_pvc_card.PNG" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>TDS Collection</strong><small>Our signature digital and physical keys.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
+        <button type="button" class="category-tile" data-collection="cards"><img class="category-visual" src="owner-key-frederick-law.png" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Digital Business Cards</strong><small>Share contact details, business links and the next step.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
+        <button type="button" class="category-tile" data-collection="door"><img class="category-visual" src="digital-door-stone-stardust-example.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Digital Door</strong><small>A mobile starting point built around the customer.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
+        <button type="button" class="category-tile" data-collection="sets"><img class="category-visual" src="assets/tds-key-set/tds-key-set-hero.png" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Key Sets</strong><small>Digital cards with the physical tap formats that fit.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
+        <button type="button" class="category-tile" data-collection="websites"><img class="category-visual" src="td-digital-door-template.png" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Mobile Websites</strong><small>Condensed experiences or a complete responsive site.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
+        <button type="button" class="category-tile" data-collection="custom"><img class="category-visual" src="three-plaque-set.png" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Custom Tap Products</strong><small>Branded keychains, plaques and other useful formats.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
       </div>
       <details class="keys-details">
         <summary><strong>What comes with a Digital Door?</strong><span aria-hidden="true">+</span></summary>
@@ -423,9 +459,9 @@ img{display:block;max-width:100%}
     <div class="contact-stack" id="contactUtilities">
       <button class="about-btn" id="aboutBtn" type="button">Meet the Developer</button>
       <div class="contact-row">
-        <a href="tel:+12029341126"><span class="contact-icon" aria-hidden="true">☎</span>Call</a>
-        <a href="sms:+12029341126"><span class="contact-icon" aria-hidden="true">✉</span>Text</a>
-        <a href="mailto:handled@thedigitalside.org"><span class="contact-icon" aria-hidden="true">✉</span>Email</a>
+        <a href="tel:+12029341126">Call</a>
+        <a href="sms:+12029341126">Text</a>
+        <a href="mailto:handled@thedigitalside.org">Email</a>
       </div>
       <a class="save-contact" href="the-digital-side.vcf" download>Save Contact ↓</a>
     </div>
@@ -484,6 +520,30 @@ img{display:block;max-width:100%}
   <span class="dialog-kicker" id="collectionKicker">Explore</span>
   <h3 id="collectionTitle">The TDS Collection</h3>
   <p id="collectionDescription"></p>
+  <div class="card-example" id="cardExample" hidden>
+    <div class="card-example-panel">
+      <div class="card-example-photo" aria-hidden="true"></div>
+      <div class="card-example-content">
+        <span class="card-example-brand">Rivermore Real Estate</span>
+        <h4>Avery Cole</h4>
+        <span class="card-example-role">Realtor · Howard County, Maryland</span>
+        <div class="card-example-spacer"></div>
+        <div class="card-example-buttons">
+          <a href="tel:+15555550142">Call</a>
+          <a href="sms:+15555550142">Text</a>
+          <a href="mailto:avery@rivermorerealestate.com">Email</a>
+        </div>
+        <a class="card-example-save" href="avery-cole.vcf">Save Contact</a>
+      </div>
+    </div>
+    <details class="card-example-more">
+      <summary>See more of Avery's Digital Door</summary>
+      <div class="card-example-details">
+        <p>Find a home, plan a sale or browse listings. Avery's Digital Door brings those paths together in one place.</p>
+        <a href="avery-cole-door.html">Explore her Door</a>
+      </div>
+    </details>
+  </div>
   <div class="collection-gallery" id="collectionGallery">
     <div class="collection-image-frame" id="collectionImageFrame"><img id="collectionImage" alt=""></div>
     <div class="collection-nav">
@@ -503,9 +563,7 @@ img{display:block;max-width:100%}
     tds:{title:'The TDS Collection',description:'Our signature designs. A ready to use tap experience with an individual digital destination. Swipe through the card, bracelet, USB, keychain, wallet and plaque examples.',photos:[
       ['Card','assets/Tds_pvc_card.PNG'],['Bracelet','assets/Tds_bracelet.PNG'],['USB','assets/Tds_usb.PNG'],['Keychain','assets/Tds_keychain.PNG'],['Wallet','assets/tds-key-set/tds-wallet-key.png'],['Plaques','three-plaque-set.png']
     ],links:[['Ask about a TDS Key','project-inquiry.html']]},
-    cards:{title:'Digital Business Cards',description:'A digital business card can hold your name, contact buttons, service links and one clear next step. Use the page on its own, put it in a wallet pass or connect it to a physical tap. Each card is built around what the person needs to share.',photos:[
-      ['Realtor Digital Card','avery-cole-index-secondary.png'],['Lawyer Digital Card','owner-key-frederick-law.png'],['Contractor Digital Card','northline-owner-key-final.png']
-    ],links:[['Realtor Card','realtor-key.html'],['Lawyer Card','key-frederick.html'],['Contractor Card','key-northline.html']]},
+    cards:{title:'Digital Business Cards',description:'A digital business card keeps the right details within reach. Avery’s example shows how a card can share contact actions first, with more of the Digital Door available only when someone wants it.',photos:[],links:[['Open Avery’s Card','realtor-key.html'],['Lawyer Card','key-frederick.html'],['Contractor Card','key-northline.html']]},
     door:{title:'Digital Door',description:'A focused, mobile first destination that moves people toward the right action. Routes can cover appointments, listings, requests and services, without requiring visitors to search an entire website.',photos:[
       ['Realtor','avery-cole-index-secondary.png'],['Lawyer','frederick-attorney-hero.png'],['Contractor','northline-owner-portrait.png']
     ],links:[['Realtor Door','avery-cole-door.html'],['Lawyer Door','door-frederick-legacy-law.html'],['Contractor Door','northline-door.html']]},
@@ -533,6 +591,7 @@ img{display:block;max-width:100%}
     document.getElementById('collectionKicker').textContent='Explore';
     current=data.photos||[];index=0;
     gallery.classList.toggle('visible',current.length>0);
+    document.getElementById('cardExample').hidden=button.dataset.collection!=='cards';
     const links=document.getElementById('collectionLinks');links.replaceChildren();
     (data.links||[]).forEach(([label,href])=>{const a=document.createElement('a');a.href=href;a.textContent=label;links.appendChild(a)});
     render();modal.showModal();
