@@ -339,6 +339,30 @@ img{display:block;max-width:100%}
 .included-drop{border-bottom:1px solid var(--line-d)}.included-drop summary{list-style:none;cursor:pointer;padding:14px 0;display:flex;justify-content:space-between;color:var(--cream);font:600 .9rem var(--sans)}
 .included-drop summary::-webkit-details-marker{display:none}.included-drop summary:after{content:"+";color:var(--gold)}.included-drop[open] summary:after{content:"−"}
 .included-drop ul{padding:0 0 15px 19px;font-size:.84rem;line-height:1.9}.included-drop p{padding-bottom:16px;line-height:1.7}
+
+.demo-path-grid{display:block}
+.demo-path-card{display:block;padding:0;border:0;border-bottom:1px solid var(--line-d);background:none}
+.demo-path-card summary{display:flex;gap:14px;align-items:center;padding:14px 2px;cursor:pointer;list-style:none}
+.demo-path-card summary::-webkit-details-marker{display:none}
+.demo-path-card summary img{width:66px;height:69px;object-fit:cover;flex:none}
+.demo-path-card .demo-head{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}
+.demo-path-card .demo-head small{font:700 .62rem/1.35 var(--mono);color:var(--gold);letter-spacing:.045em}
+.demo-path-card .demo-head strong{font:600 1.03rem/1.3 var(--sans);color:var(--cream)}
+.demo-path-card .demo-head>span{color:var(--cream-muted);font-size:.75rem}
+.demo-plus{color:var(--gold);font:1.25rem var(--sans)}.demo-path-card[open] .demo-plus{transform:rotate(45deg)}
+.demo-expanded{padding:0 2px 18px 82px}.demo-expanded p{color:var(--cream-muted);font-size:.85rem;line-height:1.66;max-width:620px}
+.demo-expanded .demo-actions a{padding:11px 12px;border-color:var(--line-d)}
+@media(min-width:800px){.demo-path-grid{display:block}.demo-path-card summary img{height:78px;width:75px}.demo-expanded{padding-left:91px}}
+.offer-tile{display:block;cursor:default;min-height:0}
+.offer-tile summary{display:block;cursor:pointer;list-style:none;position:relative;padding-right:23px}
+.offer-tile summary::-webkit-details-marker{display:none}
+.offer-tile summary:after{content:"+";font:1.2rem var(--sans);position:absolute;right:0;top:0;color:var(--gold-deep)}
+.offer-tile[open] summary:after{content:"−"}
+.offer-tile summary b{display:block;margin-top:15px}
+.offer-tile p{margin-top:15px;padding-top:11px;border-top:1px solid var(--line-l);line-height:1.68}
+.cas-item>summary strong{font-size:1.09rem;line-height:1.45}
+.cas-item .cas-body{line-height:1.74;padding-top:4px}
+.level-btn.active{box-shadow:none!important}
 </style>
 </head>
 <body>
@@ -394,38 +418,19 @@ img{display:block;max-width:100%}
         </div>
       </details>
     </div>
-    <div class="demo-paths" id="demos">
-      <div class="demo-paths-head"><span class="kicker">Real Examples</span><h3>See where a key can take you.</h3>
-        <p>Each example starts with a person and their digital business card. Open their key, visit their Door or explore the business site.</p></div>
-      <div class="demo-path-grid">
-        <article class="demo-path-card">
-          <img src="avery-cole-index-secondary.png" alt="Avery Cole of Rivermore Real Estate" loading="lazy" decoding="async">
-          <div><p class="demo-role">Realtor · Wallet and Card</p><h4>Avery Cole</h4><p>Rivermore Real Estate. Listings, contact and a direct route to the information buyers and sellers need.</p>
-            <div class="demo-actions"><a href="realtor-key.html">Digital Card</a><a href="avery-cole-door.html">Digital Door</a><a href="realtor-index.html">Business Site</a></div>
-          </div>
-        </article>
-        <article class="demo-path-card">
-          <img src="frederick-attorney-hero.png" alt="Avery Bennett of Frederick Legacy Law" loading="lazy" decoding="async">
-          <div><p class="demo-role">Lawyer · Wallet and Card</p><h4>Frederick Legacy Law</h4><p>Avery Bennett. Planning, client questions and appointment paths without making visitors hunt for answers.</p>
-            <div class="demo-actions"><a href="key-frederick.html">Digital Card</a><a href="door-frederick-legacy-law.html">Digital Door</a><a href="frederick-legacy-law-mobile.html">Business Site</a></div>
-          </div>
-        </article>
-        <article class="demo-path-card">
-          <img src="northline-owner-portrait.png" alt="Jordan Cole of Northline Roofing Co." loading="lazy" decoding="async">
-          <div><p class="demo-role">Contractor · Keychain and Card</p><h4>Northline Roofing Co.</h4><p>Jordan Cole. A simple tap for introductions and a Door for estimates, inspections and project enquiries.</p>
-            <div class="demo-actions"><a href="key-northline.html">Digital Card</a><a href="northline-door.html">Digital Door</a><a href="northline-full-site.html">Business Site</a></div>
-          </div>
-        </article>
-      </div>
-    </div>
+    <div class="demo-paths" id="demos"><div class="demo-paths-head"><span class="kicker">Real Examples</span><h3>See where a key can take you.</h3><p>The Digital Door gets customers where they came to go. The mobilized business website provides the fuller experience when they need more.</p></div><div class="demo-path-grid">
+      <details class="demo-path-card"><summary><img src="avery-cole-index-secondary.png" alt="" loading="lazy"><span class="demo-head"><small>Realtor · Wallet and Card</small><strong>Avery Cole</strong><span>Rivermore Real Estate</span></span><span class="demo-plus" aria-hidden="true">+</span></summary><div class="demo-expanded"><p>Get straight to listings, contact or a conversation. The mobile business site goes deeper when the customer wants more.</p><div class="demo-actions"><a href="avery-cole-door.html">Experience the Door</a><a href="realtor-key.html">Digital Key</a><a href="realtor-index.html">Mobile Business Site</a></div></div></details>
+      <details class="demo-path-card"><summary><img src="frederick-attorney-hero.png" alt="" loading="lazy"><span class="demo-head"><small>Lawyer · Wallet and Card</small><strong>Frederick Legacy Law</strong><span>Avery Bennett</span></span><span class="demo-plus" aria-hidden="true">+</span></summary><div class="demo-expanded"><p>The Door guides clients toward the service they need. The mobilized business site offers fuller information about the law practice.</p><div class="demo-actions"><a href="door-frederick-legacy-law.html">Experience the Door</a><a href="key-frederick.html">Digital Key</a><a href="frederick-legacy-law-mobile.html">Mobile Business Site</a></div></div></details>
+      <details class="demo-path-card"><summary><img src="northline-owner-portrait.png" alt="" loading="lazy"><span class="demo-head"><small>Contractor · Keychain and Card</small><strong>Northline Roofing Co.</strong><span>Jordan Cole</span></span><span class="demo-plus" aria-hidden="true">+</span></summary><div class="demo-expanded"><p>Quick access to estimates, inspections and contact. A mobile website supports the details of larger projects.</p><div class="demo-actions"><a href="northline-door.html">Experience the Door</a><a href="key-northline.html">Digital Key</a><a href="northline-mobile-site.html">Mobile Business Site</a></div></div></details>
+    </div></div>
 
     <details class="acc" id="simple">
       <summary><div><small>Ways to work together</small><strong>Find the right level</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
         <div class="offer-grid">
-          <div class="offer-tile"><small>Start here</small><h3>Signal Check</h3><p>We walk a customer path together to identify what is getting in the way, where people get stuck, and what actually needs handling.</p><b>Free</b></div>
-          <div class="offer-tile"><small>Core system</small><h3>Digital Door</h3><p>One focused mobile experience with paths to contact, book or learn more. Includes a digital Owner Key, QR asset and one programmed NFC card.</p><b>$250+</b></div>
-          <div class="offer-tile wide"><small>Connect</small><h3>Connect the Dots</h3><p>Connect your Digital Door, mobile website, digital business cards and existing tools into one clear customer journey. Team Keys and custom tap formats can be added.</p><b>$500+</b></div>
+          <details class="offer-tile"><summary><small>Start here</small><h3>Signal Check</h3><b>Free</b></summary><p>We walk a customer path together to identify what is getting in the way, where people get stuck, and what actually needs handling.</p></details>
+          <details class="offer-tile"><summary><small>Core system</small><h3>Digital Door</h3><b>$250+</b></summary><p>One focused mobile experience with paths to contact, book or learn more. Includes a digital Owner Key, QR asset and one programmed NFC card.</p></details>
+          <details class="offer-tile wide"><summary><small>Connect</small><h3>Connect the Dots</h3><b>$500+</b></summary><p>Connect your Digital Door, mobile website, digital business cards and existing tools into one clear customer journey. Team Keys and custom tap formats can be added.</p></details>
         </div>
         <div class="level-buttons">
           <button class="level-btn" type="button" data-level="less" aria-expanded="false" aria-controls="levelDetail"><small>Need less?</small><strong>Something simple</strong></button>
