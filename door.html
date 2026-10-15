@@ -142,11 +142,16 @@ img{display:block;max-width:100%}
 .demo-photo{width:100%;max-width:260px;aspect-ratio:4/3;object-fit:cover;border-radius:2px;margin-bottom:14px;filter:saturate(.92) brightness(.94)}
 .demo-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 
-/* physical + digital key row (inline inside the existing "digital and physical key" item) */
-.key-row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-.key-row figure{width:74px}
-.key-row img{width:74px;height:74px;object-fit:cover;border-radius:4px;border:1px solid var(--line-d)}
-.key-row figcaption{margin-top:6px;font:700 .6875rem/1.2 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--cream-muted);text-align:center}
+/* physical + digital keys: a visible, compact gallery near the top */
+.keys-feature{padding:4px 0 30px;margin-bottom:8px;border-bottom:1px solid var(--line-d)}
+.keys-feature h2{font:400 clamp(1.45rem,4vw,2rem)/1.2 var(--serif);margin:9px 0 12px}
+.keys-feature p{max-width:670px;color:var(--cream-muted);font-size:.9rem;line-height:1.65}
+.keys-feature p+p{margin-top:8px}
+.key-row{display:flex;gap:11px;margin-top:20px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x proximity;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.key-row figure{flex:0 0 102px;min-width:0;scroll-snap-align:start}
+.key-row img{display:block;width:102px;height:102px;object-fit:cover;border-radius:4px;border:1px solid var(--line-d)}
+.key-row figcaption{margin-top:7px;font:700 .6875rem/1.2 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--cream-muted);text-align:center}
+@media(min-width:960px){.key-row{overflow-x:visible;flex-wrap:wrap}.key-row figure{flex-basis:116px}.key-row img{width:116px;height:116px}}
 
 /* offer tiles */
 .offer-grid{display:grid;grid-template-columns:1fr;gap:10px}
@@ -261,6 +266,21 @@ img{display:block;max-width:100%}
 
 <section class="sec sec-dark" id="paths">
   <div class="wrap">
+    <div class="keys-feature" id="keys">
+      <span class="kicker">The Keys</span>
+      <h2>Digital and physical. Built to connect.</h2>
+      <p>Every Digital Door includes an Owner Key for Apple Wallet or Google Wallet, the direct Door link, QR asset, and one programmed physical NFC card. Custom tap formats can include bracelets, keychains, plaques, signs, or another idea that fits the business.</p>
+      <p>Tap plaques can lead people straight to hiring, reviews, events, or the next step that matters.</p>
+      <div class="key-row" aria-label="Digital keys and physical tap product examples">
+        <figure><img src="assets/door/key-card.webp" width="800" height="800" alt="NFC key card" loading="lazy" decoding="async"><figcaption>Card</figcaption></figure>
+        <figure><img src="assets/door/key-bracelet.webp" width="800" height="800" alt="NFC key bracelet" loading="lazy" decoding="async"><figcaption>Bracelet</figcaption></figure>
+        <figure><img src="assets/door/key-usb.webp" width="800" height="800" alt="USB key" loading="lazy" decoding="async"><figcaption>USB</figcaption></figure>
+        <figure><img src="assets/door/key-wallet.webp" width="800" height="800" alt="Wallet key on a phone screen" loading="lazy" decoding="async"><figcaption>Wallet</figcaption></figure>
+        <figure><img src="three-plaque-set.png" width="800" height="800" alt="Set of three custom NFC tap plaques" loading="lazy" decoding="async"><figcaption>Plaques</figcaption></figure>
+        <figure><img src="plaque-hiring-window.jpg" width="800" height="800" alt="Hiring NFC tap plaque on a business window" loading="lazy" decoding="async"><figcaption>Hiring</figcaption></figure>
+        <figure><img src="review-at-bakery-exit.png" width="800" height="800" alt="Reviews tap plaque displayed at a bakery exit" loading="lazy" decoding="async"><figcaption>Reviews</figcaption></figure>
+      </div>
+    </div>
     <details class="acc demo-module">
       <summary><div><small>Real examples</small><strong>Explore the Demos</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
@@ -322,15 +342,6 @@ img{display:block;max-width:100%}
           <details class="cas-item"><summary><strong>You own what gets built.</strong><span>+</span></summary><div class="cas-body">The finished system, project files, QR asset, and handoff materials belong to the client. TDS project work is a one-time payment. There is no required TDS subscription just to keep using what was purchased.</div></details>
           <details class="cas-item"><summary><strong>No passwords needed to start.</strong><span>+</span></summary><div class="cas-body">A new system can be built without access to personal accounts, inboxes, or existing logins. Existing access only becomes relevant when the project includes cleanup, migration, or organizing the business's digital junk drawer.</div></details>
           <details class="cas-item"><summary><strong>Third-party services stay in the client's name.</strong><span>+</span></summary><div class="cas-body">If a domain, business email, form service, or another outside service is needed, setup can be prepared before the client completes any required ownership, billing, or verification step. Future third-party renewals belong to that service. They are not a TDS subscription.</div></details>
-          <details class="cas-item"><summary><strong>You leave with a digital and physical key.</strong><span>+</span></summary><div class="cas-body">
-            <p>Every Digital Door includes an Owner Key for Apple Wallet or Google Wallet, the direct Door link, QR asset, and one programmed physical NFC card. Custom tap formats can include bracelets, keychains, plaques, signs, or another idea that fits the business.</p>
-            <div class="key-row">
-              <figure><img src="assets/door/key-card.webp" width="800" height="800" alt="NFC key card" loading="lazy" decoding="async"><figcaption>Card</figcaption></figure>
-              <figure><img src="assets/door/key-bracelet.webp" width="800" height="800" alt="NFC key bracelet" loading="lazy" decoding="async"><figcaption>Bracelet</figcaption></figure>
-              <figure><img src="assets/door/key-usb.webp" width="800" height="800" alt="USB key" loading="lazy" decoding="async"><figcaption>USB</figcaption></figure>
-              <figure><img src="assets/door/key-wallet.webp" width="800" height="800" alt="Wallet key on a phone screen" loading="lazy" decoding="async"><figcaption>Wallet</figcaption></figure>
-            </div>
-          </div></details>
           <details class="cas-item"><summary><strong>Need keys for the crew?</strong><span>+</span></summary><div class="cas-body">Team Key enhancements give designated staff members their own digital key or physical tap. Existing booking, ordering, payment, and communication tools can also be connected when they belong in the customer path.</div></details>
         </div>
       </div>
