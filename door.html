@@ -129,16 +129,32 @@ img{display:block;max-width:100%}
 .demo-photo{width:100%;max-width:260px;aspect-ratio:4/3;object-fit:cover;border-radius:2px;margin-bottom:14px;filter:saturate(.92) brightness(.94)}
 .demo-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 
-/* physical + digital keys: a visible, compact gallery near the top */
+/* THE KEYS — short one-tap message, product gallery, expandable details */
 .keys-feature{padding:4px 0 30px;margin-bottom:8px;border-bottom:1px solid var(--line-d)}
-.keys-feature h2{font:400 clamp(1.45rem,4vw,2rem)/1.2 var(--serif);margin:9px 0 12px}
-.keys-feature p{max-width:670px;color:var(--cream-muted);font-size:.9rem;line-height:1.65}
-.keys-feature p+p{margin-top:8px}
-.key-row{display:flex;gap:11px;margin-top:20px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x proximity;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
-.key-row figure{flex:0 0 102px;min-width:0;scroll-snap-align:start}
-.key-row img{display:block;width:102px;height:102px;object-fit:cover;border-radius:4px;border:1px solid var(--line-d)}
-.key-row figcaption{margin-top:7px;font:700 .6875rem/1.2 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--cream-muted);text-align:center}
-@media(min-width:960px){.key-row{overflow-x:visible;flex-wrap:wrap}.key-row figure{flex-basis:116px}.key-row img{width:116px;height:116px}}
+.keys-feature h2{font:400 clamp(1.75rem,4.6vw,2.45rem)/1.13 var(--serif);margin:9px 0 12px;max-width:660px}
+.keys-feature .keys-lede{color:var(--cream-muted);font-size:clamp(.92rem,2.9vw,1.06rem);line-height:1.6;max-width:660px}
+.key-row{display:flex;gap:13px;margin-top:22px;overflow-x:auto;padding:0 0 16px;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.key-row figure{flex:0 0 clamp(136px,39vw,192px);min-width:0;scroll-snap-align:start}
+.key-photo{display:block;width:100%;padding:0;cursor:zoom-in;position:relative;border:1px solid var(--line-d);border-radius:5px;overflow:hidden;background:#201b15}
+.key-photo img{width:100%;aspect-ratio:1;object-fit:cover;display:block;transition:transform .25s ease}
+.key-photo:hover img{transform:scale(1.025)}
+.key-photo:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.key-photo::after{content:'↗';position:absolute;right:7px;top:6px;font-size:14px;color:#f3ead8;text-shadow:0 1px 6px #000}
+.key-row figcaption{margin-top:7px;font:700 .6875rem/1.25 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--cream-muted);text-align:center}
+.keys-details{border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);margin-top:17px}
+.keys-details summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;justify-content:space-between;padding:17px 2px}
+.keys-details summary::-webkit-details-marker{display:none}
+.keys-details summary strong{font:600 .92rem/1.35 var(--sans);color:var(--cream)}
+.keys-details summary span{font:400 1.4rem var(--sans);color:var(--gold);transition:transform .2s ease}
+.keys-details[open] summary span{transform:rotate(45deg)}
+.keys-details .keys-body{color:var(--cream-muted);font-size:.86rem;line-height:1.7;max-width:710px;padding:0 2px 19px}
+.keys-details .keys-body p+p{margin-top:10px}
+.key-lightbox{position:fixed;inset:0;margin:auto;max-width:min(94vw,850px);max-height:92dvh;width:100%;padding:36px 14px 18px;overflow:auto;background:#0c0b09;color:var(--cream);border:1px solid rgba(255,255,255,.2);border-radius:8px;box-shadow:0 25px 90px #000}
+.key-lightbox::backdrop{background:rgba(0,0,0,.91)}
+.key-lightbox img{display:block;width:100%;height:auto;max-height:75dvh;object-fit:contain;margin:auto;border-radius:3px}
+.key-lightbox figcaption{text-align:center;font:700 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;padding-top:12px}
+.key-lightbox-close{position:absolute;right:7px;top:5px;display:grid;place-items:center;width:34px;height:34px;color:#fff;background:#29251e;border-radius:50%;cursor:pointer;font-size:1.45rem}
+@media(min-width:960px){.key-row{scroll-snap-type:none;flex-wrap:wrap;overflow-x:visible}.key-row figure{flex:0 0 calc((100% - 65px)/6)}}
 
 /* offer tiles */
 .offer-grid{display:grid;grid-template-columns:1fr;gap:10px}
@@ -243,18 +259,23 @@ img{display:block;max-width:100%}
   <div class="wrap">
     <div class="keys-feature" id="keys">
       <span class="kicker">The Keys</span>
-      <h2>Digital and physical. Built to connect.</h2>
-      <p>Every Digital Door includes an Owner Key for Apple Wallet or Google Wallet, the direct Door link, QR asset, and one programmed physical NFC card. Custom tap formats can include bracelets, keychains, plaques, signs, or another idea that fits the business.</p>
-      <p>Tap plaques can lead people straight to hiring, reviews, events, or the next step that matters.</p>
-      <div class="key-row" aria-label="Digital keys and physical tap product examples">
-        <figure><img src="assets/door/key-card.webp" width="800" height="800" alt="NFC key card" loading="lazy" decoding="async"><figcaption>Card</figcaption></figure>
-        <figure><img src="assets/door/key-bracelet.webp" width="800" height="800" alt="NFC key bracelet" loading="lazy" decoding="async"><figcaption>Bracelet</figcaption></figure>
-        <figure><img src="assets/door/key-usb.webp" width="800" height="800" alt="USB key" loading="lazy" decoding="async"><figcaption>USB</figcaption></figure>
-        <figure><img src="assets/door/key-wallet.webp" width="800" height="800" alt="Wallet key on a phone screen" loading="lazy" decoding="async"><figcaption>Wallet</figcaption></figure>
-        <figure><img src="three-plaque-set.png" width="800" height="800" alt="Set of three custom NFC tap plaques" loading="lazy" decoding="async"><figcaption>Plaques</figcaption></figure>
-        <figure><img src="plaque-hiring-window.jpg" width="800" height="800" alt="Hiring NFC tap plaque on a business window" loading="lazy" decoding="async"><figcaption>Hiring</figcaption></figure>
-        <figure><img src="review-at-bakery-exit.png" width="800" height="800" alt="Reviews tap plaque displayed at a bakery exit" loading="lazy" decoding="async"><figcaption>Reviews</figcaption></figure>
+      <h2>One tap. A smarter first impression.</h2>
+      <p class="keys-lede">Make connecting effortless. We help small businesses evolve how they show up, share information, and guide customers—through focused mobile experiences and seamless, one-tap networking.</p>
+      <div class="key-row" aria-label="Tap to expand digital and physical key products">
+        <figure><button class="key-photo" type="button" data-full="assets/Tds_pvc_card.PNG" data-label="Card" aria-label="Expand Card product photo"><img src="assets/Tds_pvc_card.PNG" alt="The Digital Side NFC PVC card" width="800" height="800" loading="lazy" decoding="async"></button><figcaption>Card</figcaption></figure>
+        <figure><button class="key-photo" type="button" data-full="assets/Tds_bracelet.PNG" data-label="Bracelet" aria-label="Expand Bracelet product photo"><img src="assets/Tds_bracelet.PNG" alt="The Digital Side black-and-gold NFC bracelet" width="800" height="800" loading="lazy" decoding="async"></button><figcaption>Bracelet</figcaption></figure>
+        <figure><button class="key-photo" type="button" data-full="assets/Tds_usb.PNG" data-label="USB" aria-label="Expand USB product photo"><img src="assets/Tds_usb.PNG" alt="The Digital Side branded USB key" width="800" height="800" loading="lazy" decoding="async"></button><figcaption>USB</figcaption></figure>
+        <figure><button class="key-photo" type="button" data-full="assets/Tds_keychain.PNG" data-label="Keychain" aria-label="Expand Keychain product photo"><img src="assets/Tds_keychain.PNG" alt="The Digital Side black resin keychain with gold clip" width="800" height="800" loading="lazy" decoding="async"></button><figcaption>Keychain</figcaption></figure>
+        <figure><button class="key-photo" type="button" data-full="assets/tds-key-set/tds-wallet-key.png" data-label="Wallet" aria-label="Expand Wallet product photo"><img src="assets/tds-key-set/tds-wallet-key.png" alt="The Digital Side digital wallet key" width="800" height="800" loading="lazy" decoding="async"></button><figcaption>Wallet</figcaption></figure>
+        <figure><button class="key-photo" type="button" data-full="three-plaque-set.png" data-label="Plaques" aria-label="Expand Plaques product photo"><img src="three-plaque-set.png" alt="Three tap plaques for reviews, hiring, and following along" width="800" height="800" loading="lazy" decoding="async"></button><figcaption>Plaques</figcaption></figure>
       </div>
+      <details class="keys-details">
+        <summary><strong>What comes with your Digital Door?</strong><span aria-hidden="true">+</span></summary>
+        <div class="keys-body">
+          <p>Every Digital Door includes an Owner Key for Apple Wallet or Google Wallet, a direct Door link, a QR asset, and one programmed physical NFC card. Your key makes it easy to connect people with the next action instead of sending them searching.</p>
+          <p>Custom tap formats can include bracelets, keychains, plaques, signs, or another idea that fits your business. Plaques can lead customers to reviews, events, hiring, and more. Extra physical formats and Team Keys are available as custom enhancements.</p>
+        </div>
+      </details>
     </div>
     <details class="acc demo-module">
       <summary><div><small>Real examples</small><strong>Explore the Demos</strong></div><span class="acc-plus">+</span></summary>
@@ -398,5 +419,28 @@ img{display:block;max-width:100%}
   });
 })();
 </script>
+<dialog class="key-lightbox" id="keyLightbox" aria-label="Expanded product image">
+  <button class="key-lightbox-close" id="keyLightboxClose" type="button" aria-label="Close expanded image">×</button>
+  <figure><img id="keyLightboxImg" alt=""><figcaption id="keyLightboxCaption"></figcaption></figure>
+</dialog>
+<script>
+(function(){
+  const modal=document.getElementById('keyLightbox');
+  const picture=document.getElementById('keyLightboxImg');
+  const caption=document.getElementById('keyLightboxCaption');
+  if(!modal || !picture || !caption) return;
+  document.querySelectorAll('.key-photo').forEach(button=>{
+    button.addEventListener('click',()=>{
+      picture.src=button.getAttribute('data-full');
+      picture.alt=button.querySelector('img')?.alt || 'Expanded product image';
+      caption.textContent=button.getAttribute('data-label') || '';
+      if(typeof modal.showModal==='function') modal.showModal();
+    });
+  });
+  document.getElementById('keyLightboxClose')?.addEventListener('click',()=>modal.close());
+  modal.addEventListener('click',event=>{if(event.target===modal) modal.close()});
+})();
+</script>
+
 </body>
 </html>
