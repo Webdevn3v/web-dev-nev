@@ -447,6 +447,61 @@ img{display:block;max-width:100%}
 .category-grid>.category-tds:hover .category-visual,.category-grid>.category-tds:focus-visible .category-visual{opacity:.8}
 @media(min-width:860px){.category-grid>.category-tile{flex-basis:min(30vw,308px);min-height:230px}}
 @media(prefers-reduced-motion:reduce){.one-tap-disclosure .keys-message{animation:none}}
+
+/* Clear visual narrative */
+.layer-feature{margin:30px 0 27px;padding:22px 0 24px;border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);display:grid;gap:20px;align-items:center}
+.layer-copy .kicker{margin-bottom:10px}.layer-copy h3{font:400 clamp(1.7rem,5.2vw,2.8rem)/1.14 var(--serif);color:var(--cream);max-width:590px}
+.layer-copy p{margin-top:12px;color:var(--cream-muted);font:.88rem/1.7 var(--sans);max-width:480px}
+.layer-frame{position:relative;overflow:hidden;display:grid;place-items:center;min-height:215px;border:1px solid rgba(201,166,106,.22);border-radius:4px;background:radial-gradient(ellipse at 50% 38%,#302720 0%,#14120f 76%);isolation:isolate}
+.layer-frame:before{content:"";position:absolute;inset:9px;border:1px solid rgba(201,166,106,.1);z-index:1;pointer-events:none}
+.layer-frame img{display:block;width:100%;height:auto;max-height:490px;object-fit:contain;transform:translateY(12px) scale(.97);opacity:.8;filter:saturate(.9);transition:transform .85s ease,opacity .85s ease}
+.layer-feature.is-visible .layer-frame img{transform:translateY(0) scale(1);opacity:1}
+@media(min-width:760px){.layer-feature{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:28px;padding:32px 0}.layer-frame{min-height:330px}}
+.browse-section .category-head{margin:0 0 15px}
+.browse-section .category-head .kicker{margin-bottom:8px}
+.browse-section .category-head h3{font:400 clamp(1.7rem,4.4vw,2.25rem)/1.14 var(--serif)}
+.browse-section .category-subline{font:.84rem/1.6 var(--sans);margin:8px 0 0;color:var(--cream-muted)}
+.browse-section .category-grid{display:flex!important;grid-template-columns:none!important;gap:13px;align-items:stretch;overflow-x:auto;overflow-y:hidden;padding:2px 1px 15px;margin:0;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;scrollbar-width:none}
+.browse-section .category-grid::-webkit-scrollbar{display:none}
+.browse-section .category-grid>.category-tile{flex:0 0 clamp(195px,65vw,285px);height:auto;min-height:0;width:auto!important;padding:0;border:0!important;display:flex;flex-direction:column;gap:9px;justify-content:flex-start;align-items:stretch;text-align:left;background:transparent!important;border-radius:0;scroll-snap-align:start}
+.browse-section .category-tile:before{display:none!important}
+.browse-section .category-scene{position:relative;display:block;height:clamp(204px,65vw,305px);width:100%;background:#211b15;overflow:hidden;border-radius:4px;border:1px solid rgba(201,166,106,.26);isolation:isolate}
+.browse-section .category-scene::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(150deg,rgba(255,241,210,.06),transparent 48%,rgba(0,0,0,.17))}
+.browse-section .category-scene img{width:100%;height:100%;object-fit:cover;display:block;opacity:.97}
+.browse-section .category-label{font:700 .63rem/1.4 var(--mono);letter-spacing:.105em;text-transform:uppercase;color:var(--cream);padding:2px 1px 7px}
+.browse-section .category-tile:hover .category-scene,.browse-section .category-tile:focus-visible .category-scene{border-color:var(--gold)}
+.browse-section .category-tile:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.scene-cards{background:linear-gradient(155deg,#3e2f21,#110e0c)}
+.cat-device{position:absolute;left:28%;top:9%;height:91%;width:58%;border:7px solid #1a1612;border-radius:27px 27px 6px 6px;background:linear-gradient(155deg,#16120f,#2c241e);box-shadow:0 0 0 2px #b59261,18px 15px 20px #0b0907}
+.cat-contact:before{content:"";display:block;margin:32px auto 18px;width:35%;height:3px;background:#d4b78b}
+.cat-contact .device-line{display:block;margin:10px auto 28px;width:62%;height:14px;background:#dbbd92;opacity:.55;border-radius:4px}
+.cat-contact .device-name{display:block;margin:0 auto 24px;width:76%;height:9px;background:#f1dfc4;opacity:.75;border-radius:4px}
+.cat-contact .device-action{display:block;width:76%;height:18px;border:1px solid rgba(214,180,128,.62);margin:10px auto;border-radius:5px}
+.cat-contact .device-action.short{width:62%}
+.scene-door{background:linear-gradient(150deg,#413022,#0d0b0a)}
+.cat-portal{position:absolute;inset:14% 20% 0 20%;border:16px solid #282019;box-shadow:0 0 0 2px #4f3a2c,0 0 28px rgba(236,178,91,.2);background:radial-gradient(ellipse at 60% 44%,#ffde93 0%,#b47d43 55%,#5b3924 88%)}
+.cat-portal .portal-leaf{position:absolute;inset:0 41% 0 0;background:linear-gradient(110deg,#141110,#2e261f);box-shadow:7px 0 12px rgba(0,0,0,.35)}
+.cat-floating{position:absolute;width:27%;height:17%;border:1px solid rgba(211,175,117,.6);border-radius:3px;background:rgba(30,23,18,.64);backdrop-filter:blur(4px)}
+.cat-floating.a{left:3%;top:25%}.cat-floating.b{right:3%;bottom:25%}
+.scene-sets{background:radial-gradient(ellipse at 50% 80%,#57442e,#201812 70%)}
+.cat-kit-card{position:absolute;left:10%;top:27%;width:65%;height:41%;transform:rotate(-13deg);border-radius:7px;background:linear-gradient(115deg,#100f0e,#302821);box-shadow:0 9px 20px #080706,0 0 0 2px rgba(192,150,91,.75)}
+.cat-kit-card:before{content:"";position:absolute;left:12%;top:21%;width:23%;height:18%;border:2px solid #c3a475;border-radius:16px}
+.cat-kit-tag{position:absolute;right:11%;bottom:12%;width:29%;height:37%;border-radius:28px 28px 13px 13px;transform:rotate(20deg);background:linear-gradient(150deg,#080807,#302b24);box-shadow:0 3px 0 2px #ad8554,0 10px 18px #0c0a08}
+.cat-kit-ring{position:absolute;right:18%;top:30%;width:34px;height:34px;border:5px solid #d6a557;border-radius:50%;box-shadow:0 3px 12px #0b0807}
+.scene-websites{background:linear-gradient(145deg,#3b3127,#100f0c)}
+.cat-web-page{position:absolute;width:45%;height:77%;top:14%;border:6px solid #1a1715;border-radius:14px 14px 4px 4px;background:#e8dcca;box-shadow:0 0 0 2px rgba(184,150,103,.8)}
+.cat-web-page.rear{left:15%;transform:rotate(-14deg);opacity:.58;background:linear-gradient(180deg,#2a231d 0 26%,#cabaa3 26% 55%,#f4e7d0 55%)}
+.cat-web-page.front{right:15%;transform:rotate(8deg);background:linear-gradient(180deg,#1c1714 0 20%,#d3b795 20% 47%,#f0e7d9 47%)}
+.cat-web-page.front span{display:block;height:6px;margin:12px 12px 0;background:rgba(56,42,31,.25)}
+.cat-web-page.front span:first-child{margin-top:55%}
+.scene-custom{background:linear-gradient(140deg,#34271c,#100e0c)}
+.cat-plaque{position:absolute;width:50%;height:53%;background:linear-gradient(135deg,#090909,#35291e);border:3px solid #be955c;box-shadow:10px 12px 15px #090807;border-radius:5px}
+.cat-plaque.p1{left:14%;top:17%;transform:rotate(-12deg)}
+.cat-plaque.p2{right:8%;top:34%;transform:rotate(10deg)}
+.cat-plaque span{position:absolute;left:22%;right:22%;top:29%;height:36%;border-top:2px solid #d5aa71;border-bottom:2px solid #d5aa71;opacity:.7}
+.cat-custom-disc{position:absolute;left:29%;bottom:9%;width:75px;height:75px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#3e3326,#0a0a09);border:5px solid #c4a16c}
+@media(min-width:800px){.browse-section .category-grid>.category-tile{flex-basis:clamp(220px,29vw,310px)}.browse-section .category-scene{height:275px}}
+@media(prefers-reduced-motion:reduce){.layer-frame img{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -484,28 +539,22 @@ img{display:block;max-width:100%}
           <p class="keys-message">A <strong class="digital-door-emphasis">Digital Door</strong> is a digital business card built around what people need from your business. One easy place to connect, find answers and take the next step without searching through an entire website. Pair it with a physical tap, or keep it simple with just a digital card. When customers need more detail, your mobilized business website is right there.</p>
         </details>
       </div></div>
-      <div class="category-head" id="keyCategories">
-        <h3>Find what fits your business.</h3>
-        <p class="category-subline">Start with our signature collection or choose something built for your business.</p>
-      </div>
-      <div class="category-grid" aria-label="Browse services and products by swiping horizontally" tabindex="0">
-        <button type="button" class="category-tile category-tds" data-collection="tds" aria-label="View the TDS Collection">
-          <img class="category-visual" src="assets/tds-key-set/tds-key-set-hero.png" alt="" loading="lazy" decoding="async">
-          <strong>TDS Collection</strong>
-        </button>
-        <button type="button" class="category-tile tile-digital" data-collection="cards"><strong>Digital Business Cards</strong></button>
-        <button type="button" class="category-tile tile-door" data-collection="door"><strong>Digital Door</strong></button>
-        <button type="button" class="category-tile tile-sets" data-collection="sets"><strong>Key Sets</strong><small>Made for people and teams.</small></button>
-        <button type="button" class="category-tile tile-websites" data-collection="websites"><strong>Mobilized Websites</strong><small>More of the business, made for your phone.</small></button>
-        <button type="button" class="category-tile tile-custom" data-collection="custom"><strong>Custom Tap Products</strong><small>Designed to fit your business.</small></button>
-      </div>
-      <details class="keys-details"><summary><strong>What comes with a Digital Door?</strong><span aria-hidden="true">+</span></summary>
-        <div class="keys-body">
-          <details class="included-drop"><summary>Every Digital Door includes</summary><ul><li>A direct mobile link</li><li>A QR asset</li><li>An Owner Key for Apple Wallet or Google Wallet</li><li>One programmed physical NFC card</li></ul></details>
-          <details class="included-drop"><summary>Need something simpler?</summary><p>A digital business card or an individual tap product can be enough. For a team, we can build personal keys with the links each person needs. Additional physical formats and custom work are quoted separately.</p></details>
-        </div>
-      </details>
     </div>
+    <section class="layer-feature" aria-label="Technology inside the tap">
+      <div class="layer-copy"><span class="kicker">The technology</span><h3>Intelligence beneath the surface.</h3><p>A simple tap on the outside. A connected experience behind it.</p></div>
+      <div class="layer-frame"><img src="assets/tds_layered_keychain.png" alt="Layered view of a black Digital Side keychain showing its concealed technology" loading="lazy" decoding="async"></div>
+    </section>
+    <section class="browse-section" id="keyCategories">
+      <div class="category-head"><span class="kicker">What we create</span><h3>Find what fits your business.</h3><p class="category-subline">Choose a solution that fits what your customers come to do.</p></div>
+      <div class="category-grid" aria-label="Browse The Digital Side solutions" tabindex="0">
+        <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="assets/tds-key-set/tds-key-set-hero.png" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Collection</span></button>
+        <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="cat-device cat-contact"><span class="device-line"></span><span class="device-name"></span><span class="device-action"></span><span class="device-action short"></span><span class="device-action"></span></span></span><span class="category-label">Digital Business Cards</span></button>
+        <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><span class="cat-portal"><span class="portal-leaf"></span><span class="portal-light"></span></span><span class="cat-floating a"></span><span class="cat-floating b"></span></span><span class="category-label">Digital Door</span></button>
+        <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Key Sets examples"><span class="category-scene scene-sets" aria-hidden="true"><span class="cat-kit-card"></span><span class="cat-kit-tag"></span><span class="cat-kit-ring"></span></span><span class="category-label">Key Sets</span></button>
+        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View Mobilized Websites examples"><span class="category-scene scene-websites" aria-hidden="true"><span class="cat-web-page rear"></span><span class="cat-web-page front"><span></span><span></span><span></span></span></span><span class="category-label">Mobilized Websites</span></button>
+        <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><span class="cat-plaque p1"><span></span></span><span class="cat-plaque p2"><span></span></span><span class="cat-custom-disc"></span></span><span class="category-label">Custom Tap Products</span></button>
+      </div>
+    </section>
     <div class="demo-paths" id="demos">
       <div class="demo-paths-head"><span class="kicker">Real Examples</span><h3>See where a key can take you.</h3><p>A Digital Door takes customers to the next step. A mobilized website gives them the fuller business experience.</p></div>
       <div class="demo-carousel" aria-label="Real business example carousel">
@@ -552,7 +601,7 @@ img{display:block;max-width:100%}
     </div>
 
     <details class="acc" id="simple">
-      <summary><div><small>Ways to work together</small><strong>Find the right level</strong></div><span class="acc-plus">+</span></summary>
+      <summary><div><small>Services and pricing</small><strong>How can we help?</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
         <div class="offer-grid">
           <details class="offer-tile"><summary><small>Start here</small><h3>Signal Check</h3><b>Free</b></summary><p>We walk a customer path together to identify what is getting in the way, where people get stuck, and what actually needs handling.</p></details>
@@ -568,7 +617,7 @@ img{display:block;max-width:100%}
     </details>
 
     <details class="acc" id="start">
-      <summary><div><small>Start</small><strong>Tell The Digital Side what needs handling</strong></div><span class="acc-plus">+</span></summary>
+      <summary><div><small>Get started</small><strong>Tell us what you need.</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
         <div class="inquiry-buttons">
           <a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry</strong><span>A few details are enough to start.</span></a>
@@ -578,7 +627,7 @@ img{display:block;max-width:100%}
     </details>
 
     <details class="acc">
-      <summary><div><small>Good to know</small><strong>Ownership, access + what happens next</strong></div><span class="acc-plus">+</span></summary>
+      <summary><div><small>Before we begin</small><strong>Good to know.</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
         <div class="cas-list">
           <details class="cas-item"><summary><strong>You own what gets built.</strong><span>+</span></summary><div class="cas-body">The finished system, project files, QR asset, and handoff materials belong to the client. TDS project work is a one time payment. There is no required TDS subscription just to keep using what was purchased.</div></details>
