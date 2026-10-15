@@ -419,6 +419,34 @@ img{display:block;max-width:100%}
 .category-tds::before{background:linear-gradient(0deg,rgba(8,7,6,.94) 0%,rgba(8,7,6,.18) 78%)}
 .category-tds:hover .category-visual,.category-tds:focus-visible .category-visual{opacity:.8}
 .collection-example iframe{height:min(72dvh,690px)}
+
+/* Interactive one tap headline */
+.one-tap-disclosure{display:block;border:0}
+.one-tap-disclosure>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;justify-content:space-between;padding:2px 0;min-height:68px}
+.one-tap-disclosure>summary::-webkit-details-marker{display:none}
+.one-tap-disclosure>summary h2{margin:0;flex:1;max-width:620px}
+.one-tap-toggle{color:var(--gold);font:400 1.45rem/1 var(--sans);flex:none;transition:transform .2s}
+.one-tap-disclosure[open] .one-tap-toggle{transform:rotate(45deg)}
+.one-tap-disclosure .keys-message{margin:18px 0 0;animation:oneTapReveal .23s ease-out}
+.one-tap-disclosure>summary:focus-visible{outline:2px solid var(--gold);outline-offset:5px}
+@keyframes oneTapReveal{from{opacity:.35;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+/* A single swipe row, rather than a portrait grid */
+.category-grid{display:flex!important;grid-template-columns:none!important;flex-wrap:nowrap!important;gap:12px;overflow-x:auto;overflow-y:hidden;padding:3px 1px 18px;scroll-snap-type:x mandatory;scroll-padding-inline:1px;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:100%}
+.category-grid::-webkit-scrollbar{display:none}
+.category-grid>.category-tile{flex:0 0 clamp(202px,66vw,296px);width:auto!important;min-width:0;min-height:209px;scroll-snap-align:start;padding:19px;display:flex;justify-content:flex-end;align-items:flex-start;box-shadow:none;transition:border-color .2s,transform .2s}
+.category-grid>.category-tile strong{font:500 clamp(1.1rem,3.7vw,1.5rem)/1.16 var(--serif);color:var(--cream);letter-spacing:-.01em}
+.category-grid>.category-tile small{font:.76rem/1.5 var(--sans);color:#d2c6b6}
+.category-grid>.category-tile::before{background:linear-gradient(0deg,rgba(10,8,7,.91),rgba(10,8,7,.13) 78%);z-index:1}
+.category-grid>.category-tile:not(.category-tds){background-color:#201b17;background-image:repeating-linear-gradient(115deg,rgba(198,168,119,.045) 0 1px,transparent 1px 13px),radial-gradient(ellipse at 78% 16%,rgba(178,145,102,.2),transparent 62%),linear-gradient(145deg,#2d2721,#100f0d)}
+.category-grid>.tile-digital{background-image:radial-gradient(ellipse at 85% 12%,rgba(183,151,100,.2),transparent 55%),repeating-linear-gradient(90deg,rgba(195,158,98,.04) 0 1px,transparent 1px 19px),linear-gradient(135deg,#29241e,#13100d)!important}
+.category-grid>.tile-door{background-image:linear-gradient(90deg,transparent 49.7%,rgba(201,166,106,.22) 50%,transparent 50.3%),radial-gradient(ellipse at 50% 38%,rgba(174,148,115,.2),transparent 55%),linear-gradient(145deg,#241e19,#0d0c0a)!important}
+.category-grid>.tile-sets{background-image:linear-gradient(135deg,rgba(186,150,99,.10),transparent 70%),repeating-linear-gradient(0deg,rgba(197,166,119,.045) 0 1px,transparent 1px 17px),linear-gradient(135deg,#28221b,#14110e)!important}
+.category-grid>.tile-websites{background-image:repeating-linear-gradient(0deg,rgba(193,167,128,.08) 0 1px,transparent 1px 36px),linear-gradient(135deg,#332b21,#15110d)!important}
+.category-grid>.tile-custom{background-image:radial-gradient(circle at 80% 26%,rgba(184,145,86,.24),transparent 57%),linear-gradient(145deg,#241e18,#100d0a)!important}
+.category-grid>.category-tds .category-visual{opacity:.67}
+.category-grid>.category-tds:hover .category-visual,.category-grid>.category-tds:focus-visible .category-visual{opacity:.8}
+@media(min-width:860px){.category-grid>.category-tile{flex-basis:min(30vw,308px);min-height:230px}}
+@media(prefers-reduced-motion:reduce){.one-tap-disclosure .keys-message{animation:none}}
 </style>
 </head>
 <body>
@@ -451,23 +479,25 @@ img{display:block;max-width:100%}
   <div class="wrap">
     <div class="keys-feature" id="keys">
       <div class="keys-showcase"><div class="keys-showcase-copy">
-        <h2>One tap. A smarter first impression.</h2>
-        <p class="keys-message">A <strong class="digital-door-emphasis">Digital Door</strong> is a digital business card built around what people need from your business. One easy place to connect, find answers and take the next step without searching through an entire website. Pair it with a physical tap, or keep it simple with just a digital card. When customers need more detail, your mobilized business website is right there.</p>
+        <details class="one-tap-disclosure">
+          <summary><h2>One tap. A smarter first impression.</h2><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
+          <p class="keys-message">A <strong class="digital-door-emphasis">Digital Door</strong> is a digital business card built around what people need from your business. One easy place to connect, find answers and take the next step without searching through an entire website. Pair it with a physical tap, or keep it simple with just a digital card. When customers need more detail, your mobilized business website is right there.</p>
+        </details>
       </div></div>
       <div class="category-head" id="keyCategories">
         <h3>Find what fits your business.</h3>
         <p class="category-subline">Start with our signature collection or choose something built for your business.</p>
       </div>
-      <div class="category-grid" aria-label="Services and products">
+      <div class="category-grid" aria-label="Browse services and products by swiping horizontally" tabindex="0">
         <button type="button" class="category-tile category-tds" data-collection="tds" aria-label="View the TDS Collection">
           <img class="category-visual" src="assets/tds-key-set/tds-key-set-hero.png" alt="" loading="lazy" decoding="async">
           <strong>TDS Collection</strong>
         </button>
-        <button type="button" class="category-tile" data-collection="cards" aria-label="View a Digital Business Card"><img class="category-visual" src="avery-tds-bracelet.png" alt="" loading="lazy"><strong>Digital Business Cards</strong></button>
-        <button type="button" class="category-tile" data-collection="door" aria-label="Explore a Digital Door"><img class="category-visual" src="frederick-attorney-hero.png" alt="" loading="lazy"><strong>Digital Door</strong></button>
-        <button type="button" class="category-tile tile-solid" data-collection="sets"><strong>Key Sets</strong><small>Made for people and teams.</small></button>
-        <button type="button" class="category-tile tile-solid" data-collection="websites"><strong>Mobilized Websites</strong><small>More of the business, made for your phone.</small></button>
-        <button type="button" class="category-tile tile-solid" data-collection="custom"><strong>Custom Tap Products</strong><small>Designed to fit your business.</small></button>
+        <button type="button" class="category-tile tile-digital" data-collection="cards"><strong>Digital Business Cards</strong></button>
+        <button type="button" class="category-tile tile-door" data-collection="door"><strong>Digital Door</strong></button>
+        <button type="button" class="category-tile tile-sets" data-collection="sets"><strong>Key Sets</strong><small>Made for people and teams.</small></button>
+        <button type="button" class="category-tile tile-websites" data-collection="websites"><strong>Mobilized Websites</strong><small>More of the business, made for your phone.</small></button>
+        <button type="button" class="category-tile tile-custom" data-collection="custom"><strong>Custom Tap Products</strong><small>Designed to fit your business.</small></button>
       </div>
       <details class="keys-details"><summary><strong>What comes with a Digital Door?</strong><span aria-hidden="true">+</span></summary>
         <div class="keys-body">
