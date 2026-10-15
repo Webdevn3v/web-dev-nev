@@ -324,6 +324,21 @@ img{display:block;max-width:100%}
 .card-example-more .card-example-details a{font:700 .74rem var(--mono);color:var(--cream);text-decoration:underline;text-underline-offset:4px}
 .contact-stack .contact-row .contact-icon{display:none}
 
+
+.door-intro{border-top:1px solid var(--line-l);margin-top:24px;padding-top:17px;max-width:650px}
+.door-intro strong{font:650 .92rem var(--sans)}.door-intro p{font-size:.85rem;line-height:1.65;color:var(--ink-muted);margin-top:6px}
+.keys-showcase{min-height:0;background:none;border:0;border-radius:0;display:block}.keys-showcase::after{display:none}
+.keys-showcase-copy{padding:0;max-width:760px}.keys-showcase h2{margin:0 0 12px}
+.intro-drop summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:var(--gold);font:700 .69rem/1.6 var(--mono);border-bottom:1px solid rgba(201,166,106,.4);padding:9px 0}
+.intro-drop summary::-webkit-details-marker{display:none}.intro-drop summary:after{content:"+";font-size:.93rem}.intro-drop[open] summary:after{content:"−"}
+.intro-drop p{color:var(--cream-muted);font-size:.86rem;line-height:1.7;padding:12px 0 4px;max-width:710px}
+.category-head{margin-top:28px}.category-grid{margin-top:16px}.category-tile{justify-content:flex-end;min-height:145px}
+.category-tile strong{font:500 clamp(1rem,3vw,1.27rem)/1.3 var(--serif)}.category-tile small{font-size:.69rem}
+.category-tile .category-visual{opacity:.36}.category-tile:before{background:linear-gradient(0deg,rgba(9,8,6,.96),rgba(9,8,6,.32) 78%)}
+.category-tile.tile-solid{background:#1a1714}.category-tile.tile-solid:before{display:none}
+.included-drop{border-bottom:1px solid var(--line-d)}.included-drop summary{list-style:none;cursor:pointer;padding:14px 0;display:flex;justify-content:space-between;color:var(--cream);font:600 .9rem var(--sans)}
+.included-drop summary::-webkit-details-marker{display:none}.included-drop summary:after{content:"+";color:var(--gold)}.included-drop[open] summary:after{content:"−"}
+.included-drop ul{padding:0 0 15px 19px;font-size:.84rem;line-height:1.9}.included-drop p{padding-bottom:16px;line-height:1.7}
 </style>
 </head>
 <body>
@@ -342,13 +357,13 @@ img{display:block;max-width:100%}
 <section class="sec sec-cream">
   <div class="wrap">
     <div class="sec-head">
-      <span class="kicker">The Digital Door</span>
       <h2>Start with what you came to do.</h2>
       <p class="lede">Explore a demo below, or visit the full site for the complete picture.</p>
       <div class="top-links">
         <a class="top-link" href="index.html">View full site →</a>
         <a class="top-link" href="#contactUtilities">Contact now ↓</a>
       </div>
+      <div class="door-intro"><strong>The Digital Door</strong><p>A direct way to reach what someone needs from your business. One focused mobile experience, with a deeper mobile website when they want the full picture.</p></div>
     </div>
   </div>
 </section>
@@ -356,32 +371,26 @@ img{display:block;max-width:100%}
 <section class="sec sec-dark" id="paths">
   <div class="wrap">
     <div class="keys-feature" id="keys">
-      <div class="keys-showcase">
-        <img class="keys-showcase-image" src="assets/tds-key-set/tds-key-set-hero.png" alt="" aria-hidden="true" loading="eager" decoding="async">
-        <div class="keys-showcase-copy">
-          <span class="kicker">The Keys</span>
-          <h2>One tap. A smarter first impression.</h2>
-          <p class="keys-lede">A digital business card built around what people need from you. Pair it with an NFC card, keychain, bracelet or another tap format. If all you need is a quick way to connect, we do that too.</p>
-          <a class="keys-subline" href="#keyCategories">Explore the options ↓</a>
-        </div>
-      </div>
+      <div class="keys-showcase"><div class="keys-showcase-copy">
+        <h2>One tap. A smarter first impression.</h2>
+        <details class="intro-drop"><summary>About the one tap experience</summary><p>A digital business card built around what people need from you. Pair it with an NFC card, keychain, bracelet or another tap format. If all you need is a quick way to connect, we do that too.</p></details>
+      </div></div>
       <div class="category-head" id="keyCategories">
         <h3>Find what fits your business.</h3>
-        <p>Start with our signature collection or choose a custom setup. Tap any category to explore.</p>
+        <details class="intro-drop"><summary>How we can help</summary><p>Start with our signature collection or choose a custom setup. Tap any category to explore.</p></details>
       </div>
-      <div class="category-grid" aria-label="Explore The Digital Side services">
-        <button type="button" class="category-tile" data-collection="tds"><img class="category-visual" src="assets/Tds_pvc_card.PNG" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>TDS Collection</strong><small>Our signature digital and physical keys.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
-        <button type="button" class="category-tile" data-collection="cards"><img class="category-visual" src="owner-key-frederick-law.png" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Digital Business Cards</strong><small>Share contact details, business links and the next step.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
-        <button type="button" class="category-tile" data-collection="door"><img class="category-visual" src="digital-door-stone-stardust-example.webp" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Digital Door</strong><small>A mobile starting point built around the customer.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
-        <button type="button" class="category-tile" data-collection="sets"><img class="category-visual" src="assets/tds-key-set/tds-key-set-hero.png" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Key Sets</strong><small>Digital cards with the physical tap formats that fit.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
-        <button type="button" class="category-tile" data-collection="websites"><img class="category-visual" src="td-digital-door-template.png" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Mobile Websites</strong><small>Condensed experiences or a complete responsive site.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
-        <button type="button" class="category-tile" data-collection="custom"><img class="category-visual" src="three-plaque-set.png" alt="" aria-hidden="true" loading="lazy" decoding="async"><strong>Custom Tap Products</strong><small>Branded keychains, plaques and other useful formats.</small><span class="cat-open" aria-hidden="true">Explore</span></button>
+      <div class="category-grid" aria-label="Services and products">
+        <button type="button" class="category-tile" data-collection="tds"><img class="category-visual" src="assets/tds-key-set/tds-key-set-hero.png" alt="" loading="lazy"><strong>TDS Collection</strong></button>
+        <button type="button" class="category-tile" data-collection="cards"><img class="category-visual" src="avery-tds-bracelet.png" alt="" loading="lazy"><strong>Digital Business Cards</strong></button>
+        <button type="button" class="category-tile" data-collection="door"><img class="category-visual" src="frederick-attorney-hero.png" alt="" loading="lazy"><strong>Digital Door</strong></button>
+        <button type="button" class="category-tile tile-solid" data-collection="sets"><strong>Key Sets</strong><small>Personalized sets for individuals and teams.</small></button>
+        <button type="button" class="category-tile tile-solid" data-collection="websites"><strong>Mobile Websites</strong><small>Condensed and complete mobile experiences.</small></button>
+        <button type="button" class="category-tile tile-solid" data-collection="custom"><strong>Custom Tap Products</strong><small>Designed around your business.</small></button>
       </div>
-      <details class="keys-details">
-        <summary><strong>What comes with a Digital Door?</strong><span aria-hidden="true">+</span></summary>
+      <details class="keys-details"><summary><strong>What comes with a Digital Door?</strong><span aria-hidden="true">+</span></summary>
         <div class="keys-body">
-          <p>Every Digital Door includes a direct mobile link, a QR asset, an Owner Key for Apple Wallet or Google Wallet, and one programmed physical NFC card. It gives customers one clear place to go.</p>
-          <p>Need something simpler? A digital business card or an individual tap product can be enough. For a team, we can build personal keys with the links each person needs. Additional physical formats and custom work are quoted separately.</p>
+          <details class="included-drop"><summary>Every Digital Door includes</summary><ul><li>A direct mobile link</li><li>A QR asset</li><li>An Owner Key for Apple Wallet or Google Wallet</li><li>One programmed physical NFC card</li></ul></details>
+          <details class="included-drop"><summary>Need something simpler?</summary><p>A digital business card or an individual tap product can be enough. For a team, we can build personal keys with the links each person needs. Additional physical formats and custom work are quoted separately.</p></details>
         </div>
       </details>
     </div>
