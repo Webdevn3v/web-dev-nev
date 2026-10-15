@@ -375,6 +375,44 @@ img{display:block;max-width:100%}
 .collection-sets{margin-top:16px}.collection-sets p{margin-bottom:16px}
 .set-rows{display:flex;flex-direction:column;gap:8px}.set-rows a{display:block;padding:13px;border:1px solid var(--line-d);font:700 .72rem var(--mono)}
 .collection-links{margin-top:17px}
+
+/* Customer first introduction and image based category navigation */
+.keys-showcase{background:transparent;border:0;min-height:0;display:block;padding:0}
+.keys-showcase:after,.keys-showcase::after{content:none;display:none}
+.keys-showcase-copy{padding:0;max-width:700px}
+.keys-showcase h2{margin:0 0 17px}
+.keys-message{font:400 clamp(.94rem,2.8vw,1.07rem)/1.75 var(--sans);color:var(--cream-muted);max-width:690px}
+.digital-door-emphasis{font-weight:650;color:var(--cream);border-bottom:1px solid rgba(201,166,106,.55);padding-bottom:2px}
+.category-subline{color:var(--cream-muted);font:.82rem/1.6 var(--sans);margin-top:8px;max-width:620px}
+.category-tile{min-height:160px;text-align:left;cursor:pointer}
+.category-tile:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.category-tds{background:#15110f}
+.category-tds .tile-collage{position:absolute;inset:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:3px;overflow:hidden}
+.category-tds .tile-collage img{width:100%;height:100%;min-width:0;min-height:0;object-fit:cover;object-position:center;filter:saturate(.68)}
+.category-tds:before{background:linear-gradient(0deg,rgba(8,7,6,.97),rgba(8,7,6,.33) 85%);z-index:1}
+.category-tds strong{z-index:2}
+.category-tds:hover .tile-collage img{filter:saturate(.87)}
+/* Horizontal swipe previews of the three business Doors */
+.demo-paths{padding-top:26px}
+.demo-carousel{display:flex;gap:13px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:2px;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:1px 1px 16px}
+.demo-carousel::-webkit-scrollbar{display:none}
+.demo-slide{flex:0 0 min(82vw,285px);scroll-snap-align:start;min-width:0;overflow:hidden;border:1px solid rgba(201,166,106,.28);border-radius:4px;background:#15120f}
+.demo-cover{position:relative;display:block;height:clamp(185px,45vw,232px);overflow:hidden}
+.demo-cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 19%;filter:brightness(.77) saturate(.80)}
+.demo-cover:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(10,8,7,.97) 0%,rgba(10,8,7,.06) 75%)}
+.demo-cover-name{position:absolute;inset:auto 15px 14px;z-index:1;display:flex;flex-direction:column;gap:5px}
+.demo-cover-name small{font:700 .63rem var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}
+.demo-cover-name strong{font:500 1.3rem/1.13 var(--serif);color:var(--cream)}
+.demo-cover-name>span{font:.73rem var(--sans);color:#eadfca}
+.demo-slide-bottom{padding:12px 14px 15px}
+.demo-slide-bottom p{font:.78rem/1.6 var(--sans);color:var(--cream-muted);min-height:60px}
+.demo-slide-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.demo-slide-links a{font:700 .64rem/1.5 var(--mono);letter-spacing:0;padding:9px 9px;color:var(--cream);border:1px solid var(--line-d);border-radius:2px}
+.demo-slide-links .demo-main-link{width:100%;text-align:center;background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.demo-slide-links a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(min-width:850px){.demo-slide{flex:0 0 min(31%,310px)}.demo-carousel{gap:17px}}
+@media(prefers-reduced-motion:reduce){.demo-carousel{scroll-behavior:auto}}
+
 </style>
 </head>
 <body>
@@ -399,7 +437,6 @@ img{display:block;max-width:100%}
         <a class="top-link" href="index.html">View full site →</a>
         <a class="top-link" href="#contactUtilities">Contact now ↓</a>
       </div>
-      <div class="door-intro"><strong>The Digital Door</strong><p>A direct way to reach what someone needs from your business. One focused mobile experience, with a deeper mobile website when they want the full picture.</p></div>
     </div>
   </div>
 </section>
@@ -409,19 +446,27 @@ img{display:block;max-width:100%}
     <div class="keys-feature" id="keys">
       <div class="keys-showcase"><div class="keys-showcase-copy">
         <h2>One tap. A smarter first impression.</h2>
-        <details class="intro-drop"><summary>About the one tap experience</summary><p>A digital business card built around what people need from you. Pair it with an NFC card, keychain, bracelet or another tap format. If all you need is a quick way to connect, we do that too.</p></details>
+        <p class="keys-message">A <strong class="digital-door-emphasis">Digital Door</strong> is a digital business card built around what people need from your business. One easy place to connect, find answers and take the next step without searching through an entire website. Pair it with a physical tap, or keep it simple with just a digital card. When customers need more detail, your mobilized business website is right there.</p>
       </div></div>
       <div class="category-head" id="keyCategories">
         <h3>Find what fits your business.</h3>
-        <details class="intro-drop"><summary>How we can help</summary><p>Start with our signature collection or choose a custom setup. Tap any category to explore.</p></details>
+        <p class="category-subline">Start with our signature collection or choose something built for your business.</p>
       </div>
       <div class="category-grid" aria-label="Services and products">
-        <button type="button" class="category-tile" data-collection="tds"><img class="category-visual" src="assets/tds-key-set/tds-key-set-hero.png" alt="" loading="lazy"><strong>TDS Collection</strong></button>
-        <button type="button" class="category-tile" data-collection="cards"><img class="category-visual" src="avery-tds-bracelet.png" alt="" loading="lazy"><strong>Digital Business Cards</strong></button>
-        <button type="button" class="category-tile" data-collection="door"><img class="category-visual" src="frederick-attorney-hero.png" alt="" loading="lazy"><strong>Digital Door</strong></button>
-        <button type="button" class="category-tile tile-solid" data-collection="sets"><strong>Key Sets</strong><small>Personalized sets for individuals and teams.</small></button>
-        <button type="button" class="category-tile tile-solid" data-collection="websites"><strong>Mobile Websites</strong><small>Condensed and complete mobile experiences.</small></button>
-        <button type="button" class="category-tile tile-solid" data-collection="custom"><strong>Custom Tap Products</strong><small>Designed around your business.</small></button>
+        <button type="button" class="category-tile category-tds" data-collection="tds" aria-label="View the TDS Collection">
+          <span class="tile-collage" aria-hidden="true">
+            <img src="assets/Tds_pvc_card.PNG" alt="" loading="lazy">
+            <img src="assets/Tds_bracelet.PNG" alt="" loading="lazy">
+            <img src="assets/Tds_usb.PNG" alt="" loading="lazy">
+            <img src="assets/Tds_keychain.PNG" alt="" loading="lazy">
+          </span>
+          <strong>TDS Collection</strong>
+        </button>
+        <button type="button" class="category-tile" data-collection="cards" aria-label="View a Digital Business Card"><img class="category-visual" src="avery-tds-bracelet.png" alt="" loading="lazy"><strong>Digital Business Cards</strong></button>
+        <button type="button" class="category-tile" data-collection="door" aria-label="Explore a Digital Door"><img class="category-visual" src="frederick-attorney-hero.png" alt="" loading="lazy"><strong>Digital Door</strong></button>
+        <button type="button" class="category-tile tile-solid" data-collection="sets"><strong>Key Sets</strong><small>Made for people and teams.</small></button>
+        <button type="button" class="category-tile tile-solid" data-collection="websites"><strong>Mobilized Websites</strong><small>More of the business, made for your phone.</small></button>
+        <button type="button" class="category-tile tile-solid" data-collection="custom"><strong>Custom Tap Products</strong><small>Designed to fit your business.</small></button>
       </div>
       <details class="keys-details"><summary><strong>What comes with a Digital Door?</strong><span aria-hidden="true">+</span></summary>
         <div class="keys-body">
@@ -430,11 +475,53 @@ img{display:block;max-width:100%}
         </div>
       </details>
     </div>
-    <div class="demo-paths" id="demos"><div class="demo-paths-head"><span class="kicker">Real Examples</span><h3>See where a key can take you.</h3><p>The Digital Door gets customers where they came to go. The mobilized business website provides the fuller experience when they need more.</p></div><div class="demo-path-grid">
-      <details class="demo-path-card"><summary><img src="avery-cole-index-secondary.png" alt="" loading="lazy"><span class="demo-head"><small>Realtor · Wallet and Card</small><strong>Avery Cole</strong><span>Rivermore Real Estate</span></span><span class="demo-plus" aria-hidden="true">+</span></summary><div class="demo-expanded"><p>Get straight to listings, contact or a conversation. The mobile business site goes deeper when the customer wants more.</p><div class="demo-actions"><a href="avery-cole-door.html">Experience the Door</a><a href="realtor-key.html">Digital Key</a><a href="realtor-index.html">Mobile Business Site</a></div></div></details>
-      <details class="demo-path-card"><summary><img src="frederick-attorney-hero.png" alt="" loading="lazy"><span class="demo-head"><small>Lawyer · Wallet and Card</small><strong>Frederick Legacy Law</strong><span>Avery Bennett</span></span><span class="demo-plus" aria-hidden="true">+</span></summary><div class="demo-expanded"><p>The Door guides clients toward the service they need. The mobilized business site offers fuller information about the law practice.</p><div class="demo-actions"><a href="door-frederick-legacy-law.html">Experience the Door</a><a href="key-frederick.html">Digital Key</a><a href="frederick-legacy-law-mobile.html">Mobile Business Site</a></div></div></details>
-      <details class="demo-path-card"><summary><img src="northline-owner-portrait.png" alt="" loading="lazy"><span class="demo-head"><small>Contractor · Keychain and Card</small><strong>Northline Roofing Co.</strong><span>Jordan Cole</span></span><span class="demo-plus" aria-hidden="true">+</span></summary><div class="demo-expanded"><p>Quick access to estimates, inspections and contact. A mobile website supports the details of larger projects.</p><div class="demo-actions"><a href="northline-door.html">Experience the Door</a><a href="key-northline.html">Digital Key</a><a href="northline-mobile-site.html">Mobile Business Site</a></div></div></details>
-    </div></div>
+    <div class="demo-paths" id="demos">
+      <div class="demo-paths-head"><span class="kicker">Real Examples</span><h3>See where a key can take you.</h3><p>A Digital Door takes customers to the next step. A mobilized website gives them the fuller business experience.</p></div>
+      <div class="demo-carousel" aria-label="Real business example carousel">
+        <article class="demo-slide">
+          <a class="demo-cover" href="avery-cole-door.html" aria-label="Experience the Digital Door for Avery Cole">
+            <img src="avery-cole-index-secondary.png" alt="Avery Cole business example" loading="lazy">
+            <span class="demo-cover-name"><small>Realtor</small><strong>Avery Cole</strong><span>Rivermore Real Estate</span></span>
+          </a>
+          <div class="demo-slide-bottom">
+            <p>Listings, introductions and a faster way to start your next move.</p>
+            <div class="demo-slide-links">
+              <a class="demo-main-link" href="avery-cole-door.html">Experience the Door</a>
+              <a href="realtor-key.html">Digital Key</a>
+              <a href="realtor-index.html">Mobile Business Site</a>
+            </div>
+          </div>
+        </article>
+        <article class="demo-slide">
+          <a class="demo-cover" href="door-frederick-legacy-law.html" aria-label="Experience the Digital Door for Frederick Legacy Law">
+            <img src="frederick-attorney-hero.png" alt="Frederick Legacy Law business example" loading="lazy">
+            <span class="demo-cover-name"><small>Lawyer</small><strong>Frederick Legacy Law</strong><span>Avery Bennett</span></span>
+          </a>
+          <div class="demo-slide-bottom">
+            <p>Get to the right kind of guidance without sorting through legal terminology.</p>
+            <div class="demo-slide-links">
+              <a class="demo-main-link" href="door-frederick-legacy-law.html">Experience the Door</a>
+              <a href="key-frederick.html">Digital Key</a>
+              <a href="frederick-legacy-law-mobile.html">Mobile Business Site</a>
+            </div>
+          </div>
+        </article>
+        <article class="demo-slide">
+          <a class="demo-cover" href="northline-door.html" aria-label="Experience the Digital Door for Northline Roofing Co.">
+            <img src="northline-owner-portrait.png" alt="Northline Roofing Co. business example" loading="lazy">
+            <span class="demo-cover-name"><small>Contractor</small><strong>Northline Roofing Co.</strong><span>Jordan Cole</span></span>
+          </a>
+          <div class="demo-slide-bottom">
+            <p>Inspections, estimates and service information within easy reach.</p>
+            <div class="demo-slide-links">
+              <a class="demo-main-link" href="northline-door.html">Experience the Door</a>
+              <a href="key-northline.html">Digital Key</a>
+              <a href="northline-mobile-site.html">Mobile Business Site</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
 
     <details class="acc" id="simple">
       <summary><div><small>Ways to work together</small><strong>Find the right level</strong></div><span class="acc-plus">+</span></summary>
