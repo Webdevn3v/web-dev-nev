@@ -363,6 +363,18 @@ img{display:block;max-width:100%}
 .cas-item>summary strong{font-size:1.09rem;line-height:1.45}
 .cas-item .cas-body{line-height:1.74;padding-top:4px}
 .level-btn.active{box-shadow:none!important}
+
+.collection-modal{width:min(96vw,700px);max-height:94dvh;padding:30px 15px 20px}
+.collection-modal h3{margin-right:44px}
+.collection-swipe{display:flex;overflow-x:auto;overflow-y:hidden;gap:10px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain;scrollbar-width:none;margin:18px 0 0;padding-bottom:3px}
+.collection-swipe::-webkit-scrollbar{display:none}
+.collection-swipe img{display:block;flex:0 0 100%;width:100%;max-height:65dvh;object-fit:contain;scroll-snap-align:center;scroll-snap-stop:always;background:#19140f;border-radius:3px}
+.collection-swipe[hidden],.collection-example[hidden],.collection-sets[hidden]{display:none!important}
+.collection-example{margin-top:18px;overflow:hidden;border:1px solid var(--line-d);border-radius:4px;background:#100d09}
+.collection-example iframe{display:block;width:100%;height:min(71dvh,660px);min-height:390px;border:0}
+.collection-sets{margin-top:16px}.collection-sets p{margin-bottom:16px}
+.set-rows{display:flex;flex-direction:column;gap:8px}.set-rows a{display:block;padding:13px;border:1px solid var(--line-d);font:700 .72rem var(--mono)}
+.collection-links{margin-top:17px}
 </style>
 </head>
 <body>
@@ -530,95 +542,46 @@ img{display:block;max-width:100%}
 })();
 </script>
 <dialog class="collection-modal" id="collectionModal" aria-labelledby="collectionTitle">
-  <button type="button" class="collection-modal-close" id="collectionClose" aria-label="Close">×</button>
-  <span class="dialog-kicker" id="collectionKicker">Explore</span>
-  <h3 id="collectionTitle">The TDS Collection</h3>
-  <p id="collectionDescription"></p>
-  <div class="card-example" id="cardExample" hidden>
-    <div class="card-example-panel">
-      <div class="card-example-photo" aria-hidden="true"></div>
-      <div class="card-example-content">
-        <span class="card-example-brand">Rivermore Real Estate</span>
-        <h4>Avery Cole</h4>
-        <span class="card-example-role">Realtor · Howard County, Maryland</span>
-        <div class="card-example-spacer"></div>
-        <div class="card-example-buttons">
-          <a href="tel:+15555550142">Call</a>
-          <a href="sms:+15555550142">Text</a>
-          <a href="mailto:avery@rivermorerealestate.com">Email</a>
-        </div>
-        <a class="card-example-save" href="avery-cole.vcf">Save Contact</a>
-      </div>
-    </div>
-    <details class="card-example-more">
-      <summary>See more of Avery's Digital Door</summary>
-      <div class="card-example-details">
-        <p>Find a home, plan a sale or browse listings. Avery's Digital Door brings those paths together in one place.</p>
-        <a href="avery-cole-door.html">Explore her Door</a>
-      </div>
-    </details>
-  </div>
-  <div class="collection-gallery" id="collectionGallery">
-    <div class="collection-image-frame" id="collectionImageFrame"><img id="collectionImage" alt=""></div>
-    <div class="collection-nav">
-      <button type="button" id="collectionPrev" aria-label="Previous product">‹</button>
-      <div><strong id="collectionCaption"></strong><small id="collectionCount"></small></div>
-      <button type="button" id="collectionNext" aria-label="Next product">›</button>
-    </div>
-  </div>
-  <div class="collection-links" id="collectionLinks"></div>
+ <button class="collection-modal-close" type="button" id="collectionClose" aria-label="Close">×</button>
+ <h3 id="collectionTitle"></h3><p id="collectionDescription"></p>
+ <div class="collection-swipe" id="collectionSwipe" tabindex="0" aria-label="Collection photographs"></div>
+ <div class="collection-example" id="collectionExample" hidden><iframe id="collectionFrame" title="Digital business example" loading="lazy"></iframe></div>
+ <div class="collection-sets" id="collectionSets" hidden>
+   <p>Every key set matches the professional and the way they work. We're preparing product photographs for these sample combinations.</p>
+   <div class="set-rows"><a href="avery-cole-door.html">Avery Cole | Realtor</a><a href="door-frederick-legacy-law.html">Frederick Legacy Law | Lawyer</a><a href="northline-door.html">Northline Roofing Co. | Contractor</a></div>
+ </div>
+ <div class="collection-links" id="collectionLinks"></div>
 </dialog>
 <script>
 (()=>{
-  const modal=document.getElementById('collectionModal');
-  const gallery=document.getElementById('collectionGallery');
-  const img=document.getElementById('collectionImage');
-  const config={
-    tds:{title:'The TDS Collection',description:'Our signature designs. A ready to use tap experience with an individual digital destination. Swipe through the card, bracelet, USB, keychain, wallet and plaque examples.',photos:[
-      ['Card','assets/Tds_pvc_card.PNG'],['Bracelet','assets/Tds_bracelet.PNG'],['USB','assets/Tds_usb.PNG'],['Keychain','assets/Tds_keychain.PNG'],['Wallet','assets/tds-key-set/tds-wallet-key.png'],['Plaques','three-plaque-set.png']
-    ],links:[['Ask about a TDS Key','project-inquiry.html']]},
-    cards:{title:'Digital Business Cards',description:'A digital business card keeps the right details within reach. Avery’s example shows how a card can share contact actions first, with more of the Digital Door available only when someone wants it.',photos:[],links:[['Open Avery’s Card','realtor-key.html'],['Lawyer Card','key-frederick.html'],['Contractor Card','key-northline.html']]},
-    door:{title:'Digital Door',description:'A focused, mobile first destination that moves people toward the right action. Routes can cover appointments, listings, requests and services, without requiring visitors to search an entire website.',photos:[
-      ['Realtor','avery-cole-index-secondary.png'],['Lawyer','frederick-attorney-hero.png'],['Contractor','northline-owner-portrait.png']
-    ],links:[['Realtor Door','avery-cole-door.html'],['Lawyer Door','door-frederick-legacy-law.html'],['Contractor Door','northline-door.html']]},
-    sets:{title:'Key Sets',description:'Pair each team member’s digital business card with the format that fits the job. A realtor might use a wallet key and card. A lawyer could use a wallet key and card. A contractor might carry a keychain and a card.',photos:[
-      ['Card','assets/Tds_pvc_card.PNG'],['Keychain','assets/Tds_keychain.PNG'],['Wallet','assets/tds-key-set/tds-wallet-key.png']
-    ],links:[['Plan a Team Set','project-inquiry.html']]},
-    websites:{title:'Mobile Websites',description:'Need the essentials in a compact mobile experience, or a responsive site that goes deeper? We can simplify an existing site or build the next version around your business and its customer paths.',photos:[
-      ['Real Estate Website','avery-cole-index-secondary.png'],['Roofing Website','northline-owner-working.png']
-    ],links:[['Real Estate Site','realtor-index.html'],['Roofing Site','northline-full-site.html'],['Talk About a Website','project-inquiry.html']]},
-    custom:{title:'Custom Tap Products',description:'Need just a tap? Custom NFC keychains, plaques and other business tools can connect people directly to a business card, review page, event or application. Designs and quantities are planned around the project.',photos:[
-      ['Custom Keychain','assets/Tds_keychain.PNG'],['Plaque Set','three-plaque-set.png']
-    ],links:[['Request a Custom Tap','project-inquiry.html']]}
-  };
-  let current=[],index=0;
-  function render(){
-    if(!current.length)return;
-    const item=current[index];img.src=item[1];img.alt=item[0]+' product example';
-    document.getElementById('collectionCaption').textContent=item[0];
-    document.getElementById('collectionCount').textContent=(index+1)+' of '+current.length;
-  }
-  document.querySelectorAll('[data-collection]').forEach(button=>button.addEventListener('click',()=>{
-    const data=config[button.dataset.collection];if(!data)return;
-    document.getElementById('collectionTitle').textContent=data.title;
-    document.getElementById('collectionDescription').textContent=data.description;
-    document.getElementById('collectionKicker').textContent='Explore';
-    current=data.photos||[];index=0;
-    gallery.classList.toggle('visible',current.length>0);
-    document.getElementById('cardExample').hidden=button.dataset.collection!=='cards';
-    const links=document.getElementById('collectionLinks');links.replaceChildren();
-    (data.links||[]).forEach(([label,href])=>{const a=document.createElement('a');a.href=href;a.textContent=label;links.appendChild(a)});
-    render();modal.showModal();
-  }));
-  const move=amount=>{if(current.length){index=(index+amount+current.length)%current.length;render()}};
-  document.getElementById('collectionPrev').addEventListener('click',()=>move(-1));
-  document.getElementById('collectionNext').addEventListener('click',()=>move(1));
-  document.getElementById('collectionClose').addEventListener('click',()=>modal.close());
-  modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});
-  modal.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)});
-  let touchX=null;
-  document.getElementById('collectionImageFrame').addEventListener('touchstart',e=>{touchX=e.changedTouches[0].screenX},{passive:true});
-  document.getElementById('collectionImageFrame').addEventListener('touchend',e=>{if(touchX==null)return;const delta=e.changedTouches[0].screenX-touchX;if(Math.abs(delta)>45)move(delta<0?1:-1);touchX=null},{passive:true});
+const modal=document.getElementById('collectionModal');
+const swipe=document.getElementById('collectionSwipe'),frame=document.getElementById('collectionFrame');
+const example=document.getElementById('collectionExample'),sets=document.getElementById('collectionSets'),links=document.getElementById('collectionLinks');
+const configs={
+ tds:{title:'The TDS Collection',description:'Our signature digital and physical keys connect to the destination that matters for your business.',images:[
+ 'assets/Tds_pvc_card.PNG','assets/Tds_bracelet.PNG','assets/Tds_usb.PNG','assets/Tds_keychain.PNG','assets/tds-key-set/tds-wallet-key.png','three-plaque-set.png'
+ ],links:[['Ask about a TDS key','project-inquiry.html']]},
+ cards:{title:'Digital Business Cards',description:'Contact and the next step, all in one mobile experience. Avery’s example opens the real business experience instead of a static photo.',frame:'avery-cole-door.html',links:[['View Avery’s Digital Key','realtor-key.html'],['Lawyer Digital Key','key-frederick.html'],['Contractor Digital Key','key-northline.html']]},
+ door:{title:'Digital Door',description:'A focused mobile entry built around what customers came to do. Frederick Legacy Law is one example.',frame:'door-frederick-legacy-law.html',links:[['Open Frederick Legacy Law','door-frederick-legacy-law.html']]},
+ sets:{title:'Key Sets',description:'A personal digital card paired with the tap format that fits the business. The example sets are being developed.',sets:true,links:[['Discuss a key set','project-inquiry.html']]},
+ websites:{title:'Mobile Websites',description:'Condensed essentials when people want to act quickly. A mobilized full website when they want the complete business picture.',links:[['Realtor Mobile Site','realtor-index.html'],['Lawyer Mobile Site','frederick-legacy-law-mobile.html'],['Contractor Mobile Site','northline-mobile-site.html']]},
+ custom:{title:'Custom Tap Products',description:'Custom tap products are built around the business, its identity and the action the customer needs. New client photos will be added as the custom pieces are made.',links:[['Ask about custom products','project-inquiry.html']]}
+};
+function reset(){frame.removeAttribute('src');swipe.replaceChildren();links.replaceChildren();swipe.hidden=true;example.hidden=true;sets.hidden=true;}
+function close(){modal.close();reset();}
+document.querySelectorAll('[data-collection]').forEach(button=>button.addEventListener('click',()=>{
+ const data=configs[button.dataset.collection];if(!data)return;reset();
+ document.getElementById('collectionTitle').textContent=data.title;
+ document.getElementById('collectionDescription').textContent=data.description;
+ if(data.images){swipe.hidden=false;data.images.forEach((src,i)=>{const img=document.createElement('img');img.src=src;img.alt='The Digital Side collection product '+(i+1);img.loading='lazy';swipe.appendChild(img)});swipe.scrollLeft=0}
+ if(data.frame){example.hidden=false;frame.src=data.frame}
+ if(data.sets)sets.hidden=false;
+ for(const [label,url] of data.links||[]){const anchor=document.createElement('a');anchor.href=url;anchor.textContent=label;links.appendChild(anchor)}
+ modal.showModal();
+}));
+document.getElementById('collectionClose').addEventListener('click',close);
+modal.addEventListener('click',e=>{if(e.target===modal)close()});
+modal.addEventListener('close',reset);
 })();
 </script>
 </body>
