@@ -923,7 +923,39 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   .services .container{padding-top:0!important}
   .path-library-collapsed{margin-bottom:0!important}
 }
-</style></head>
+</style><style>
+/* Sprint 5: one guided question sequence and a simple experience comparison */
+.tds-questions{padding:39px 0 28px}
+.tds-questions .customer-think__prompt{max-width:1040px}
+.tds-questions .customer-think__prompt h2{margin-bottom:11px}
+.tds-question-lead{font-size:.88rem;line-height:1.65;color:var(--muted);max-width:600px}
+.tds-question-list{max-width:1040px;margin:23px auto 0;padding:0 28px;display:grid;gap:8px}
+.tds-question-list details{border:1px solid var(--border-md);border-radius:10px;background:var(--card);padding:0 18px}
+.tds-question-list summary{list-style:none;display:flex;align-items:center;gap:15px;cursor:pointer;padding:18px 0!important;margin:0!important}
+.tds-question-list summary::-webkit-details-marker{display:none}
+.tds-question-list summary span{font:.65rem var(--display);color:var(--lime);flex:none}
+.tds-question-list summary strong{flex:1;color:var(--white);font:600 clamp(.88rem,2.4vw,1.09rem)/1.4 var(--heading)}
+.tds-question-list summary i{font:400 1.2rem var(--heading);font-style:normal;color:var(--lime)}
+.tds-question-list details[open] summary i{transform:rotate(45deg)}
+.tds-question-list details p{color:var(--muted);border-top:1px solid var(--border);padding:13px 0 18px;font-size:.84rem;line-height:1.65}
+.tds-questions-conclusion{max-width:1040px;margin:17px auto 0;padding:0 28px;color:var(--light);font:500 .88rem var(--heading)}
+.tds-after-hello{background:var(--dark);padding:35px 0 40px;border-bottom:1px solid var(--border)}
+.tds-after-hello h2{font:600 clamp(1.55rem,3.4vw,2.25rem)/1.2 var(--heading);color:var(--white);margin:12px 0}
+.tds-after-intro{font-size:.86rem;line-height:1.65;color:var(--muted);margin-bottom:20px}
+.tds-after-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tds-after-column{padding:21px;border:1px solid var(--border-md);background:var(--card);border-radius:11px}
+.tds-after-column small{display:block;font:.65rem var(--display);text-transform:uppercase;letter-spacing:.11em;color:var(--muted);margin-bottom:17px}
+.tds-after-column--clear{border-color:rgba(185,219,105,.37)}
+.tds-after-column--clear small{color:var(--lime)}
+.tds-after-steps{display:grid;gap:10px}
+.tds-after-steps span{display:flex;align-items:center;gap:11px;font-size:.85rem;color:var(--light)}
+.tds-after-steps span:before{content:"";display:inline-block;width:7px;height:7px;border:1px solid var(--muted);border-radius:50%;flex:none}
+.tds-after-column--clear .tds-after-steps span:before{background:var(--lime);border-color:var(--lime)}
+.tds-after-footnote{margin-top:16px;text-align:center;color:var(--white);font:500 .93rem var(--heading)}
+.tds-process-only .experience-card{width:100%;max-width:960px;margin:0 auto}
+@media(max-width:640px){.tds-question-list{padding:0 20px}.tds-questions-conclusion{padding:0 20px}.tds-after-grid{grid-template-columns:1fr}.tds-after-column{padding:17px}.tds-questions{padding-top:29px}}
+</style>
+</head>
 <body>
 
 <!-- CURSOR -->
@@ -1024,23 +1056,26 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .door-question__icon{width:36px;height:36px;border:1px solid var(--border-md);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--light);font-family:var(--display);font-size:.95rem;margin-bottom:14px;box-shadow:none}
 @media(max-width:760px){.customer-think{padding:42px 0 46px}.customer-think__prompt{padding:0 20px}.customer-think summary{padding:18px 20px}.customer-think details{margin-top:28px}.door-questions{padding:4px 8vw 8px}.door-question{flex:0 0 84vw;min-height:190px;padding:24px 20px;scroll-snap-align:center}.door-question h2{font-size:1.3rem}}
 </style>
-<section class="customer-think" aria-label="Think like your customer">
-  <div class="customer-think__prompt">
-    <div class="customer-think__eyebrow">Think like your customer</div>
-    <h2>What do you want them to do next?</h2>
-    <div class="customer-think__answer"><span>Your Digital Door can lead them to</span><span class="customer-think__rotator" id="customerNextStep">BOOK</span></div>
-    <div class="customer-think__start">That’s where we start.</div>
-  </div>
-  <details>
-    <summary><span class="customer-think__summary-copy"><small>Think like your customer</small><strong>A few questions worth asking.</strong></span><span class="customer-think__plus">+</span></summary>
-    <div class="door-questions">
-      <div class="door-question"><div><div class="door-question__icon">▯</div><h2>When was the last time you used your business on mobile?</h2></div></div>
-      <div class="door-question"><div><div class="door-question__icon">?</div><h2>Do customers keep asking you the same thing?</h2></div></div>
-      <div class="door-question"><div><div class="door-question__icon">↔</div><h2>What do you want them to do next?</h2></div></div>
-    </div>
-  </details>
+<section class="customer-think tds-questions" aria-label="A few questions worth asking">
+ <div class="customer-think__prompt"><div class="customer-think__eyebrow">Think like your customer</div><h2>A few questions worth asking.</h2><p class="tds-question-lead">Think about what happens after someone discovers your business.</p></div>
+ <div class="tds-question-list">
+  <details open><summary><span>01</span><strong>What do your customers need from you?</strong><i>+</i></summary><p>Services, availability, answers, reassurance, or simply a direct way to connect.</p></details>
+  <details><summary><span>02</span><strong>How easily can they find it?</strong><i>+</i></summary><p>Your website may already have everything they need. Can customers find it quickly on their phone?</p></details>
+  <details><summary><span>03</span><strong>What do you want them to do next?</strong><i>+</i></summary><p>Book, request an estimate, save your contact, or explore more. Every business has a different destination.</p></details>
+ </div>
+ <p class="tds-questions-conclusion">That's where The Digital Side comes in.</p>
 </section>
-
+<section class="tds-after-hello" aria-labelledby="afterHelloTitle">
+ <div class="container">
+  <div class="tag">The customer experience</div><h2 id="afterHelloTitle">What happens after hello?</h2>
+  <p class="tds-after-intro">An introduction is only the beginning. The next step should be just as clear.</p>
+  <div class="tds-after-grid">
+   <div class="tds-after-column"><small>Without direction</small><div class="tds-after-steps"><span>Search the website</span><span>Find the right page</span><span>Figure out what to do</span></div></div>
+   <div class="tds-after-column tds-after-column--clear"><small>With a Digital Door</small><div class="tds-after-steps"><span>Connect</span><span>Choose the right path</span><span>Take the next step</span></div></div>
+  </div>
+  <p class="tds-after-footnote">Less searching. Clearer next steps.</p>
+ </div>
+</section>
 <style>
 .tds-journey{padding:44px 0 46px;background:var(--black);border-bottom:1px solid var(--border)}
 .tds-journey h2{font:600 clamp(1.65rem,3.8vw,2.5rem)/1.14 var(--heading);margin:11px 0 13px;color:var(--white);letter-spacing:-.025em}
@@ -1196,32 +1231,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .experience-card{background:linear-gradient(180deg,#12171c,#0e1216);border:1px solid var(--border-md);border-radius:var(--r-lg);overflow:hidden;min-height:118px;align-self:start}.experience-card>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:30px 28px}.experience-card>summary::-webkit-details-marker{display:none}.experience-card__label{font-family:var(--heading);font-size:clamp(1.25rem,2.5vw,1.85rem);font-weight:750;color:var(--white)}.experience-card__plus{color:var(--signal);font-size:1.4rem;text-shadow:0 0 12px var(--signal-glow);transition:transform .2s}.experience-card[open] .experience-card__plus{transform:rotate(45deg)}.experience-card__body{padding:0 28px 28px}.experience-card__headline{font-family:var(--display);font-weight:400;letter-spacing:.06em;text-transform:uppercase;font-size:clamp(.78rem,1.7vw,1.05rem);line-height:1.45;color:var(--light);margin:0 0 24px;text-align:center}.experience-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}.experience-row{padding:16px 14px;border:1px solid var(--border);border-radius:10px;background:#0c1115;text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:112px}.experience-row strong{display:block;font-size:.88rem;color:var(--white);margin-bottom:5px}.experience-row p{font-size:.73rem;color:var(--muted);line-height:1.45}.process-mini{display:grid;grid-template-columns:1fr 1fr;gap:14px}.process-step-mini{position:relative;padding:16px 15px;border:1px solid var(--border);border-radius:10px;background:#0c1115;overflow:hidden;animation:stepGlow 2.8s ease-in-out infinite alternate}.process-step-mini:nth-child(2){animation-delay:.35s}.process-step-mini:nth-child(3){animation-delay:.7s}.process-step-mini:nth-child(4){animation-delay:1.05s}.process-step-mini::before{content:'';position:absolute;width:46px;height:46px;border-radius:50%;right:-12px;top:-12px;background:radial-gradient(circle,var(--signal-glow),transparent 68%)}.process-glyph{width:28px;height:28px;border-radius:50%;border:1px solid rgba(166,255,0,.28);display:grid;place-items:center;color:var(--signal);font-family:var(--display);font-size:.7rem;margin-bottom:10px;box-shadow:0 0 16px rgba(166,255,0,.08)}.process-step-mini b{display:block;color:var(--white);font-size:.88rem;margin-bottom:4px}.process-step-mini p{font-size:.73rem;color:var(--muted);line-height:1.45}@keyframes stepGlow{from{box-shadow:0 0 0 rgba(166,255,0,0)}to{box-shadow:0 0 24px rgba(166,255,0,.06)}}
 @media(max-width:760px){.experience-pair{padding:32px 0}.experience-pair__grid{grid-template-columns:1fr 1fr;padding:0 20px;gap:10px}.experience-card{min-height:104px}.experience-card>summary{padding:22px 16px}.experience-card__label{font-size:1rem}.experience-card__body{padding:0 16px 20px}.experience-card__headline{font-size:.76rem}.process-mini,.experience-list{grid-template-columns:1fr}.experience-row p,.process-step-mini p{font-size:.7rem}}
 </style>
-<div class="experience-pair"><div class="experience-pair__grid">
-<details class="experience-card">
-  <summary><span class="experience-card__label">What the Customer Feels</span><span class="experience-card__plus">+</span></summary>
-  <div class="experience-card__body">
-    <h3 class="experience-card__headline">Less Searching. Faster Next Steps.</h3>
-    <div class="experience-list">
-      <div class="experience-row"><strong>Clearer answers</strong><p>The useful information appears where it belongs.</p></div>
-      <div class="experience-row"><strong>Fewer dead ends</strong><p>Less hunting through navigation just to find the next action.</p></div>
-      <div class="experience-row"><strong>Direct contact</strong><p>Call, text, book, order, upload, or get directions when it makes sense.</p></div>
-      <div class="experience-row"><strong>Ownership</strong><p>Built for the business and organized at handoff.</p></div>
-    </div>
-  </div>
-</details>
-<details class="experience-card">
-  <summary><span class="experience-card__label">How It Works</span><span class="experience-card__plus">+</span></summary>
-  <div class="experience-card__body">
-    <h3 class="experience-card__headline">From “I Need Help” to Handled.</h3>
-    <div class="process-mini">
-      <div class="process-step-mini"><div class="process-glyph">01</div><b>Discovery</b><p>You tell me what is going on. I ask the rest.</p></div>
-      <div class="process-step-mini"><div class="process-glyph">02</div><b>Direction</b><p>You see the direction before the build gets deep.</p></div>
-      <div class="process-step-mini"><div class="process-glyph">03</div><b>Build</b><p>You review, we refine, and it keeps moving.</p></div>
-      <div class="process-step-mini"><div class="process-glyph">04</div><b>Handoff</b><p>Live, organized, and yours. You leave with the keys.</p></div>
-    </div>
-  </div>
-</details>
-</div></div>
+<div class="experience-pair tds-process-only"><details class="experience-card"><summary><span class="experience-card__label">How It Works</span><span class="experience-card__plus">+</span></summary><div class="experience-card__body"><h3 class="experience-card__headline">From first conversation to handoff.</h3><div class="process-mini"><div class="process-step-mini"><div class="process-glyph">01</div><b>Discovery</b><p>Share the challenge. TDS helps identify what matters.</p></div><div class="process-step-mini"><div class="process-glyph">02</div><b>Direction</b><p>Review the plan before the build begins.</p></div><div class="process-step-mini"><div class="process-glyph">03</div><b>Build</b><p>Review the experience and refine the details.</p></div><div class="process-step-mini"><div class="process-glyph">04</div><b>Handoff</b><p>Live, organized, and yours. You leave with the keys.</p></div></div></div></details></div>
 
 <!-- ─── DIGITAL REFRESH ────────────────────── -->
 <section class="refresh" id="refresh">
