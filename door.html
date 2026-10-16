@@ -421,6 +421,9 @@ img{display:block;max-width:100%}
 .collection-example iframe{height:min(72dvh,690px)}
 
 /* Interactive one tap headline */
+.one-tap-headline{display:block;min-width:0;flex:1}
+.one-tap-headline .kicker{display:block;margin:0 0 12px}
+
 .one-tap-disclosure{display:block;border:0}
 .one-tap-disclosure>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;justify-content:space-between;padding:2px 0;min-height:68px}
 .one-tap-disclosure>summary::-webkit-details-marker{display:none}
@@ -665,7 +668,7 @@ img{display:block;max-width:100%}
     <div class="keys-feature" id="keys">
       <div class="keys-showcase"><div class="keys-showcase-copy">
         <details class="one-tap-disclosure">
-          <summary><h2>One tap. A smarter first impression.</h2><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
+          <summary><span class="one-tap-headline"><span class="kicker">The Digital Door</span><h2>One tap. A smarter first impression.</h2></span><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
           <p class="keys-message">A <strong class="digital-door-emphasis">Digital Door</strong> is a digital business card built around what people need from your business. One easy place to connect, find answers and take the next step without searching through an entire website. Pair it with a physical tap, or keep it simple with just a digital card. When customers need more detail, your mobilized business website is right there.</p>
         </details>
       </div></div>
