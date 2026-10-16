@@ -796,6 +796,16 @@ img{display:block;max-width:100%}
 .category-dialog .mobilized-site-example-frame{position:absolute;top:0;left:0;width:375px;height:900px;transform:scale(var(--website-preview-scale,.65));transform-origin:top left;border:0;pointer-events:none}
 .category-dialog .mobilized-site-example-link{font:700 .71rem/1.4 var(--mono);color:var(--gold);border-bottom:1px solid var(--gold);padding:9px}
 
+
+/* Full-height Door entrances. No description cards beneath the original preview. */
+.demo-paths .demo-carousel{align-items:start}
+.demo-paths .demo-slide{overflow:visible;background:transparent;border:0}
+.demo-paths .real-demo-cover{display:block;width:100%;height:auto!important;aspect-ratio:9/16;min-height:0!important;overflow:hidden;border:1px solid rgba(201,166,106,.36);border-radius:5px;background:#0d0b09}
+.demo-paths .real-demo-cover iframe{display:block;width:100%;height:100%;border:0;pointer-events:none}
+.demo-paths .demo-slide-bottom{display:none!important}
+.demo-paths .demo-cover:after{display:none!important}
+@media(max-width:600px){.demo-paths .demo-slide{flex:0 0 min(78vw,310px)}}
+
 </style>
 </head>
 <body>
@@ -871,9 +881,9 @@ img{display:block;max-width:100%}
 <summary><span class="demo-title-group"><span class="kicker">See it in action</span><span class="demo-heading" id="featuredDemosTitle">From tap to destination.</span><span class="demo-intro">Preview how a client enters and moves through each Door.</span></span><span class="demo-plus" aria-hidden="true">+</span></summary>
 <div class="demo-paths-expanded">
 <div class="demo-carousel" aria-label="Featured Digital Door demos">
-<article class="demo-slide"><a class="demo-cover real-demo-cover" href="avery-cole-door.html" aria-label="Enter Avery Cole Digital Door"><iframe src="avery-cole-door.html" tabindex="-1" aria-hidden="true" title="Avery Cole original Door entrance" loading="lazy"></iframe></a><div class="demo-slide-bottom"><strong>Rivermore Real Estate · Realtor</strong><p>Turn introductions and referrals into saved contacts, property inquiries, and showing opportunities.</p></div></article>
-<article class="demo-slide"><a class="demo-cover real-demo-cover" href="door-frederick-legacy-law.html" aria-label="Enter Frederick Legacy Law Digital Door"><iframe src="door-frederick-legacy-law.html" tabindex="-1" aria-hidden="true" title="Frederick Legacy Law original Door entrance" loading="lazy"></iframe></a><div class="demo-slide-bottom"><strong>Frederick Legacy Law · Attorney</strong><p>Guide prospective clients to the right service and a clear next step.</p></div></article>
-<article class="demo-slide"><a class="demo-cover real-demo-cover" href="northline-door.html" aria-label="Enter Northline Roofing Digital Door"><iframe src="northline-door.html" tabindex="-1" aria-hidden="true" title="Northline Roofing original Door entrance" loading="lazy"></iframe></a><div class="demo-slide-bottom"><strong>Northline Roofing · Contractor</strong><p>Give every crew member a direct path to inspections, estimates, and new inquiries.</p></div></article>
+<article class="demo-slide"><a class="demo-cover real-demo-cover" href="avery-cole-door.html" aria-label="Enter Avery Cole Digital Door"><iframe src="avery-cole-door.html" tabindex="-1" aria-hidden="true" title="Avery Cole original Door entrance" loading="lazy"></iframe></a></article>
+<article class="demo-slide"><a class="demo-cover real-demo-cover" href="door-frederick-legacy-law.html" aria-label="Enter Frederick Legacy Law Digital Door"><iframe src="door-frederick-legacy-law.html" tabindex="-1" aria-hidden="true" title="Frederick Legacy Law original Door entrance" loading="lazy"></iframe></a></article>
+<article class="demo-slide"><a class="demo-cover real-demo-cover" href="northline-door.html" aria-label="Enter Northline Roofing Digital Door"><iframe src="northline-door.html" tabindex="-1" aria-hidden="true" title="Northline Roofing original Door entrance" loading="lazy"></iframe></a></article>
 </div><a class="demo-more-link" href="index.html#work">Explore more Digital Door demos →</a>
 </div></details></section>
     <details class="acc" id="simple">
