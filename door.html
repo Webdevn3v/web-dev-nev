@@ -635,6 +635,40 @@ img{display:block;max-width:100%}
   .layer-expanded,.layer-visual-stage img,.layer-annotation{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}
 }
 
+
+/* Sprint 02: compact gallery and real previews without changing the carousel layout */
+.browse-section .category-copy-disclosure{display:block}
+.browse-section .category-copy-disclosure>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}
+.browse-section .category-copy-disclosure>summary::-webkit-details-marker{display:none}
+.browse-section .category-copy-disclosure>summary::marker{content:""}
+.browse-section .category-copy-disclosure>summary h3{margin:0}
+.browse-section .category-copy-disclosure>summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.browse-section .category-copy-toggle{flex:0 0 auto;font:400 1.75rem/1 var(--sans);color:var(--gold);transition:transform .22s ease}
+.browse-section .category-copy-disclosure[open] .category-copy-toggle{transform:rotate(45deg)}
+.browse-section .category-subline{margin:12px 35px 0 0;max-width:625px;animation:oneTapReveal .25s ease both}
+.browse-section .scene-door img{object-fit:contain!important;object-position:center!important;background:#150f0b}
+.browse-section .scene-card-preview{background:#100c0b}
+.browse-section .scene-card-preview iframe{display:block;width:100%;height:100%;border:0;pointer-events:none}
+.browse-section .scene-keyset-composite{background:#140f0c}
+.browse-section .scene-keyset-composite img{position:absolute!important;width:55%!important;height:58%!important;object-fit:cover!important;box-shadow:0 5px 20px rgba(0,0,0,.48);border:1px solid rgba(201,166,106,.2);border-radius:3px}
+.browse-section .scene-keyset-composite .keyset-card{top:6%;left:7%;transform:rotate(-7deg)}
+.browse-section .scene-keyset-composite .keyset-chain{right:5%;top:18%;transform:rotate(7deg)}
+.browse-section .scene-keyset-composite .keyset-wearable{bottom:2%;left:23%;width:49%!important;height:37%!important;transform:rotate(-2deg)}
+.browse-section .scene-site-preview{background:radial-gradient(ellipse at center,#392d22,#120f0d 78%)}
+.browse-section .scene-site-preview .real-site-phone{position:absolute;top:7%;width:61%;height:89%;overflow:hidden;background:#171515;border:5px solid #211b17;border-radius:17px;box-shadow:0 0 0 1px rgba(201,166,106,.5),0 8px 24px #0008}
+.browse-section .scene-site-preview .real-site-phone.rear{left:6%;transform:rotate(-10deg) scale(.92);opacity:.8}
+.browse-section .scene-site-preview .real-site-phone.front{right:7%;transform:rotate(6deg)}
+.browse-section .scene-site-preview iframe{border:0;width:100%;height:100%;display:block;pointer-events:none;background:#090a0b}
+.category-dialog .collection-description-details{margin:8px 0 0}
+.category-dialog .collection-description-details>summary{list-style:none;cursor:pointer;display:flex;gap:9px;align-items:center;justify-content:space-between;color:var(--gold);font:700 .69rem/1.5 var(--mono);letter-spacing:.055em;width:max-content;max-width:100%}
+.category-dialog .collection-description-details>summary::-webkit-details-marker{display:none}
+.category-dialog .collection-description-details>summary span{font-size:1.1rem}
+.category-dialog .collection-description-details[open]>summary span{transform:rotate(45deg)}
+.category-dialog .collection-description-details p{margin:11px 0 3px;max-width:630px}
+.category-dialog .modal-business-card-preview{height:clamp(335px,59dvh,540px);overflow:hidden;border:1px solid rgba(201,166,106,.42);border-radius:4px;background:#100d0c;cursor:default}
+.category-dialog .modal-business-card-preview iframe{width:100%;height:100%;border:0;display:block;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.browse-section .category-copy-toggle{transition:none}}
+
 </style>
 </head>
 <body>
@@ -696,13 +730,19 @@ img{display:block;max-width:100%}
       </details>
     </section>
     <section class="browse-section" id="keyCategories">
-      <div class="category-head"><span class="kicker">What we create</span><h3>Find what fits your business.</h3><p class="category-subline">From a simple tap to a complete mobile experience, explore what each solution can do for your business. Open a category to see examples of the customer journey, the physical keys, and the next steps they make possible.</p></div>
+      <div class="category-head">
+        <span class="kicker">What we create</span>
+        <details class="category-copy-disclosure">
+          <summary><h3>Find what fits your business.</h3><span class="category-copy-toggle" aria-hidden="true">+</span></summary>
+          <p class="category-subline">From a simple tap to a complete mobile experience. Explore the digital connections, physical keys, and customer paths we can build around your business.</p>
+        </details>
+      </div>
       <div class="category-grid" aria-label="Browse The Digital Side solutions" tabindex="0">
         <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="assets/Tds_pvc_card.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Collection</span></button>
-        <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><img src="avery-door-scene.jpg" alt="" loading="lazy"></span><span class="category-label">Digital Business Cards</span></button>
+        <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards scene-card-preview" aria-hidden="true"><iframe src="avery-cole-door.html" title="Avery Cole digital business card" tabindex="-1" loading="lazy" data-card-preview></iframe></span><span class="category-label">Digital Business Cards</span></button>
         <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button>
-        <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Key Sets examples"><span class="category-scene scene-sets" aria-hidden="true"><img src="assets/Tds_keychain.PNG" alt="" loading="lazy"></span><span class="category-label">Key Sets</span></button>
-        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View Mobilized Websites examples"><span class="category-scene scene-websites" aria-hidden="true"><span class="cat-web-page rear"></span><span class="cat-web-page front"><span></span><span></span><span></span></span></span><span class="category-label">Mobilized Websites</span></button>
+        <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Key Sets examples"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="assets/Tds_pvc_card.PNG" alt="" loading="lazy"><img class="keyset-chain" src="assets/Tds_keychain.PNG" alt="" loading="lazy"><img class="keyset-wearable" src="assets/Tds_bracelet.PNG" alt="" loading="lazy"></span><span class="category-label">Key Sets</span></button>
+        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View Mobilized Websites examples"><span class="category-scene scene-websites scene-site-preview" aria-hidden="true"><span class="real-site-phone rear"><iframe src="northline-mobile-site.html" title="Northline mobile website example" tabindex="-1" loading="lazy"></iframe></span><span class="real-site-phone front"><iframe src="realtor-index.html" title="Rivermore mobile website example" tabindex="-1" loading="lazy"></iframe></span></span><span class="category-label">Mobilized Websites</span></button>
         <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="plaque-hiring-window.jpg" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button>
       </div>
     </section>
@@ -823,7 +863,7 @@ img{display:block;max-width:100%}
   <button class="collection-modal-close" type="button" id="collectionClose" aria-label="Close examples">×</button>
   <span class="dialog-kicker">Explore the possibilities</span>
   <h3 id="collectionTitle"></h3>
-  <p id="collectionDescription"></p>
+  <details class="collection-description-details"><summary>About this option <span aria-hidden="true">+</span></summary><p id="collectionDescription"></p></details>
   <div class="collection-swipe" id="collectionSwipe" tabindex="0" role="region" aria-label="Swipeable category examples"></div>
   <div class="collection-links" id="collectionLinks"></div>
 </dialog>
@@ -911,20 +951,41 @@ function sceneFor(example){
  }
  return scene;
 }
+function revealBusinessCard(frame){
+ try{
+  const doc=frame.contentDocument;
+  const opener=doc?.getElementById('enter')||doc?.getElementById('entry')||doc?.getElementById('gate');
+  if(opener)opener.click();
+  if(doc?.documentElement)doc.documentElement.style.scrollBehavior='auto';
+  if(doc?.body)doc.body.style.overflowY='hidden';
+  if(doc?.defaultView)doc.defaultView.scrollTo(0,0);
+ }catch(e){ /* Leave the existing view intact if a preview cannot be accessed. */ }
+}
+document.querySelectorAll('iframe[data-card-preview]').forEach(frame=>{
+ frame.addEventListener('load',()=>revealBusinessCard(frame));
+});
 function renderExample(example){
  const figure=element('figure','modal-slide');
  if(example.type==='photo'){
   const frame=element('div','modal-photo'),img=element('img','');
   img.src=example.src;img.alt=example.alt;img.loading='lazy';img.decoding='async';frame.append(img);figure.append(frame);
  }else if(example.url){
-  const anchor=element('a','modal-door-preview');
-  anchor.href=example.url;anchor.setAttribute('aria-label','Open '+example.brand+' experience');
+  const isBusinessCard=example.kind==='card';
+  const wrapper=element(isBusinessCard?'div':'a',isBusinessCard?'modal-business-card-preview':'modal-door-preview');
+  if(!isBusinessCard){
+   wrapper.href=example.url;
+   wrapper.setAttribute('aria-label','Open '+example.brand+' Digital Door');
+  }else{
+   wrapper.setAttribute('aria-label',example.name+' digital business card preview');
+  }
   const frame=element('iframe','modal-real-preview');
-  frame.src=example.url;frame.title=example.brand+' actual Digital Door preview';frame.tabIndex=-1;frame.loading='lazy';frame.setAttribute('aria-hidden','true');
-  anchor.append(frame,element('span','modal-preview-cta','Tap to open the experience ↗'));figure.append(anchor);
-  if(example.kind==='card')frame.addEventListener('load',()=>{
-   try{const doc=frame.contentDocument;const enter=doc?.getElementById('enter')||doc?.getElementById('entry')||doc?.getElementById('gate');if(enter)enter.click();}catch(e){}
-  });
+  frame.src=example.url;
+  frame.title=example.brand+(isBusinessCard?' digital business card':' Digital Door preview');
+  frame.tabIndex=-1;frame.loading='lazy';frame.setAttribute('aria-hidden','true');
+  wrapper.append(frame);
+  if(!isBusinessCard)wrapper.append(element('span','modal-preview-cta','Open the Digital Door ↗'));
+  figure.append(wrapper);
+  if(isBusinessCard)frame.addEventListener('load',()=>revealBusinessCard(frame));
  }
  if(example.caption||example.brand||example.name){
   const cap=element('figcaption','modal-example-caption');
