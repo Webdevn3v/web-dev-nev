@@ -474,5 +474,22 @@ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   frontDoor.addEventListener('click',openFrontDoor);
 }
 </script>
-</body>
+<script>
+/* TDS demo entry: same branded Door effect, two clear customer destinations. */
+(function(){
+ const mode=new URLSearchParams(location.search).get('view');
+ if(mode!=='card'&&mode!=='paths')return;
+ function start(){
+  const entrance=document.querySelector('#enter, #markTrigger, #doorEntry, #airlock, #gate, #entry');
+  if(entrance){entrance.click()}
+  const target=mode==='paths'
+   ? document.querySelector('#routes, #paths, #northlineServices, #services, .paths, .routes, .service-choices, main')
+   : document.querySelector('#digitalCard, #cardTop, .attorney-card, .hero, .hero-wrap, main');
+  setTimeout(function(){
+   if(target)target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  },1750);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+</script></body>
 </html>
