@@ -556,6 +556,18 @@ img{display:block;max-width:100%}
 .modal-includes ul{margin:8px 0 5px;padding-left:19px}
 @media(min-width:700px){.modal-slide{flex:0 0 64%}}
 @media(prefers-reduced-motion:reduce){.category-dialog .collection-swipe{scroll-behavior:auto}}
+
+.layer-feature{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center}
+.layer-frame{width:100%;cursor:pointer;padding:0;font:inherit}
+.layer-frame:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.layer-hint{font-size:.72rem!important;color:var(--gold)!important}
+.layer-reveal-panel{grid-column:2;background:#1a1511;border-left:1px solid var(--gold);padding:12px 20px}
+.layer-reveal-panel[hidden]{display:none!important}
+.layer-reveal-panel h4{font:500 1.25rem var(--serif);margin-bottom:11px}
+.layer-reveal-panel p{font:.85rem/1.65 var(--sans);color:var(--cream-muted);margin-bottom:12px}
+.layer-reveal-panel strong{color:var(--cream)}
+@media(min-width:800px){.layer-feature:has(.layer-reveal-panel:not([hidden])){grid-template-columns:minmax(0,.64fr) minmax(0,1fr) minmax(0,.85fr)}.layer-feature:has(.layer-reveal-panel:not([hidden])) .layer-reveal-panel{grid-column:3}}
+@media(max-width:799px){.layer-feature{display:block}.layer-frame{margin:18px 0}.layer-reveal-panel{margin:14px 0 0}}
 </style>
 </head>
 <body>
@@ -595,13 +607,14 @@ img{display:block;max-width:100%}
       </div></div>
     </div>
     <section class="layer-feature" aria-label="Technology inside the tap">
-      <div class="layer-copy"><span class="kicker">The technology</span><h3>Intelligence beneath the surface.</h3><p>A simple tap on the outside. A connected experience behind it.</p></div>
-      <div class="layer-frame"><img src="assets/tds_layered_keychain.png" alt="Layered view of a black Digital Side keychain showing its concealed technology" loading="lazy" decoding="async"></div>
+      <div class="layer-copy"><span class="kicker">The technology</span><h3>Intelligence beneath the surface.</h3><p>A simple tap on the outside. A connected experience behind it.</p><p class="layer-hint">Select the keychain to discover what is inside.</p></div>
+      <button class="layer-frame" id="layerReveal" type="button" aria-expanded="false" aria-controls="layerRevealPanel" aria-label="Reveal the technology inside the keychain"><img src="assets/tds_layered_keychain.png" alt="Exploded view of a black keychain showing its layers" loading="lazy"></button>
+      <div class="layer-reveal-panel" id="layerRevealPanel" hidden><h4>Built into every connection.</h4><p><strong>The finished piece.</strong> A polished physical key shaped for the business.</p><p><strong>Concealed NFC technology.</strong> A programmed tag gives a compatible phone a direct destination with one tap.</p><p><strong>The digital experience.</strong> That destination can open a business card, a Digital Door, or a specific customer action.</p></div>
     </section>
     <section class="browse-section" id="keyCategories">
-      <div class="category-head"><span class="kicker">What we create</span><h3>Find what fits your business.</h3><p class="category-subline">Choose a solution that fits what your customers come to do.</p></div>
+      <div class="category-head"><span class="kicker">What we create</span><h3>Find what fits your business.</h3><p class="category-subline">From a simple tap to a complete mobile experience, explore what each solution can do for your business. Open a category to see examples of the customer journey, the physical keys, and the next steps they make possible.</p></div>
       <div class="category-grid" aria-label="Browse The Digital Side solutions" tabindex="0">
-        <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="assets/tds-key-set/tds-key-set-hero.png" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Collection</span></button>
+        <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="tds-nfc-card-front-back-mockup.png" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Collection</span></button>
         <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="cat-device cat-contact"><span class="device-line"></span><span class="device-name"></span><span class="device-action"></span><span class="device-action short"></span><span class="device-action"></span></span></span><span class="category-label">Digital Business Cards</span></button>
         <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><span class="cat-portal"><span class="portal-leaf"></span><span class="portal-light"></span></span><span class="cat-floating a"></span><span class="cat-floating b"></span></span><span class="category-label">Digital Door</span></button>
         <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Key Sets examples"><span class="category-scene scene-sets" aria-hidden="true"><span class="cat-kit-card"></span><span class="cat-kit-tag"></span><span class="cat-kit-ring"></span></span><span class="category-label">Key Sets</span></button>
@@ -609,51 +622,6 @@ img{display:block;max-width:100%}
         <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><span class="cat-plaque p1"><span></span></span><span class="cat-plaque p2"><span></span></span><span class="cat-custom-disc"></span></span><span class="category-label">Custom Tap Products</span></button>
       </div>
     </section>
-    <div class="demo-paths" id="demos">
-      <div class="demo-paths-head"><span class="kicker">Real Examples</span><h3>See where a key can take you.</h3><p>A Digital Door connects customers to the next step. A mobilized website makes the business’s existing site easier to explore on a phone.</p></div>
-      <div class="demo-carousel" aria-label="Real business example carousel">
-        <article class="demo-slide">
-          <a class="demo-cover" href="avery-cole-door.html" aria-label="Experience the Digital Door for Avery Cole">
-            <img src="avery-cole-index-secondary.png" alt="Avery Cole business example" loading="lazy">
-            <span class="demo-cover-name"><small>Realtor</small><strong>Avery Cole</strong><span>Rivermore Real Estate</span></span>
-          </a>
-          <div class="demo-slide-bottom">
-            <p>Listings, introductions and a faster way to start your next move.</p>
-            <div class="demo-slide-links">
-              <a class="demo-main-link" href="avery-cole-door.html">Experience the Door</a>
-              <a href="realtor-index.html">Full Website</a>
-            </div>
-          </div>
-        </article>
-        <article class="demo-slide">
-          <a class="demo-cover" href="door-frederick-legacy-law.html" aria-label="Experience the Digital Door for Frederick Legacy Law">
-            <img src="frederick-attorney-hero.png" alt="Frederick Legacy Law business example" loading="lazy">
-            <span class="demo-cover-name"><small>Lawyer</small><strong>Frederick Legacy Law</strong><span>Avery Bennett</span></span>
-          </a>
-          <div class="demo-slide-bottom">
-            <p>Get to the right kind of guidance without sorting through legal terminology.</p>
-            <div class="demo-slide-links">
-              <a class="demo-main-link" href="door-frederick-legacy-law.html">Experience the Door</a>
-              <a href="frederick-legacy-law-mobile.html">Full Website</a>
-            </div>
-          </div>
-        </article>
-        <article class="demo-slide">
-          <a class="demo-cover" href="northline-door.html" aria-label="Experience the Digital Door for Northline Roofing Co.">
-            <img src="northline-owner-portrait.png" alt="Northline Roofing Co. business example" loading="lazy">
-            <span class="demo-cover-name"><small>Contractor</small><strong>Northline Roofing Co.</strong><span>Jordan Cole</span></span>
-          </a>
-          <div class="demo-slide-bottom">
-            <p>Inspections, estimates and service information within easy reach.</p>
-            <div class="demo-slide-links">
-              <a class="demo-main-link" href="northline-door.html">Experience the Door</a>
-              <a href="northline-mobile-site.html">Full Website</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-
     <details class="acc" id="simple">
       <summary><div><small>Services and pricing</small><strong>How can we help?</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
@@ -775,13 +743,13 @@ const links=document.getElementById('collectionLinks');
 const categories={
  tds:{
   title:'The TDS Collection',
-  description:'Our signature collection of physical and digital keys, designed to make sharing your business simple.',
+  description:'Signature physical keys and digital connections. Explore the card, bracelet, USB, keychain, wallet and plaque designs that give someone a direct way to reach your business.',
   examples:[
-   {type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'TDS tap card'},
-   {type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS tap bracelet'},
-   {type:'photo',src:'assets/Tds_usb.PNG',alt:'TDS USB key'},
-   {type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS keychain'},
-   {type:'photo',src:'assets/tds-key-set/tds-wallet-key.png',alt:'TDS mobile wallet key'},
+   {type:'photo',src:'tds-nfc-card-front-back-mockup.png',alt:'TDS tap card'},
+   {type:'photo',src:'tds-signature-bracelet-mockup.png',alt:'TDS tap bracelet'},
+   {type:'photo',src:'assets/door/key-usb.webp',alt:'TDS USB key'},
+   {type:'photo',src:'tds-tap-keychain-mockup.png',alt:'TDS keychain'},
+   {type:'photo',src:'assets/door/key-wallet.webp',alt:'TDS mobile wallet key'},
    {type:'photo',src:'three-plaque-set.png',alt:'TDS hiring review and follow plaques'}
   ],
   links:[['Ask about the collection','project-inquiry.html']]
@@ -944,6 +912,9 @@ swipe.addEventListener('keydown',e=>{
  if(e.key==='ArrowRight'){swipe.scrollBy({left:width+10,behavior:'smooth'});e.preventDefault()}
  if(e.key==='ArrowLeft'){swipe.scrollBy({left:-width-10,behavior:'smooth'});e.preventDefault()}
 });
+const layerButton=document.getElementById('layerReveal');
+const layerPanel=document.getElementById('layerRevealPanel');
+if(layerButton&&layerPanel){layerButton.addEventListener('click',()=>{const open=layerButton.getAttribute('aria-expanded')!=='true';layerButton.setAttribute('aria-expanded',String(open));layerPanel.hidden=!open;});}
 const feature=document.querySelector('.layer-feature');
 if(feature){
  if('IntersectionObserver' in window){
