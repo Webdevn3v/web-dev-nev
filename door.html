@@ -719,6 +719,56 @@ img{display:block;max-width:100%}
 .demo-paths .demo-cover-name small{font-size:.58rem}
 .demo-paths .demo-cover:after{background:linear-gradient(0deg,rgba(10,8,7,.94),rgba(10,8,7,0) 53%)}
 
+
+/* Sprint 04 — quiet, readable pricing and bottom-of-page hierarchy */
+#simple .acc-body,#start .acc-body{padding:8px 0 27px}
+#simple .offer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#simple .offer-grid .offer-tile.wide{grid-column:1/-1}
+#simple .offer-tile{display:block;min-width:0;padding:0;background:linear-gradient(145deg,#1c1a18,#131211);border:1px solid rgba(205,184,151,.22);border-radius:12px;box-shadow:0 6px 22px rgba(0,0,0,.11);color:#eee7dc;transition:border-color .2s ease,background .2s ease}
+#simple .offer-tile:hover,#simple .offer-tile:focus-within{border-color:rgba(205,171,117,.58)}
+#simple .offer-tile>summary{position:relative;list-style:none;display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:22px 21px 19px;cursor:pointer;min-height:150px}
+#simple .offer-tile>summary::-webkit-details-marker{display:none}
+#simple .offer-tile>summary:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+#simple .offer-tile>summary:after{content:'+';position:absolute;right:18px;top:20px;font:400 1.4rem/1 var(--sans);color:#c7aa7d;transition:transform .25s ease}
+#simple .offer-tile[open]>summary:after{transform:rotate(45deg)}
+#simple .offer-tile small{display:block;margin:0 36px 0 0;font:700 .61rem/1.5 var(--mono);text-transform:uppercase;letter-spacing:.19em;color:#c7aa7d}
+#simple .offer-tile h3{margin:2px 32px 0 0;color:#f0e8da;font:400 clamp(1.37rem,2.6vw,1.85rem)/1.17 var(--serif);letter-spacing:-.025em}
+#simple .offer-tile b{display:block;margin-top:auto;padding:12px 0 0;color:#c7aa7d;font:700 .77rem/1.3 var(--mono);letter-spacing:.025em}
+#simple .offer-tile>p{margin:0 21px 20px;padding:15px 0 0;border-top:1px solid rgba(205,184,151,.18);color:#c9c0b5;font:400 .83rem/1.7 var(--sans);max-width:470px}
+#simple .level-buttons{gap:12px;margin-top:17px}
+#simple .level-btn{min-height:90px;padding:18px;border:1px solid rgba(205,184,151,.22)!important;border-radius:10px;background:#181715!important;color:#ede5d9!important;text-align:left;gap:8px}
+#simple .level-btn small{font:700 .59rem/1.4 var(--mono);letter-spacing:.15em;color:#c7aa7d!important}
+#simple .level-btn strong{font:500 clamp(.89rem,2.4vw,1.09rem)/1.35 var(--sans);color:#f1e8dd}
+#simple .level-btn.active{border-color:#c7aa7d!important;box-shadow:inset 0 -2px 0 #c7aa7d}
+#simple .level-detail{border-radius:10px;background:#211e1a;border:1px solid rgba(205,184,151,.24);padding:19px;color:#eee7da}
+#simple .level-detail small,#simple .level-detail b{color:#c7aa7d}
+#simple .level-detail h3{color:#f2e9dd;font:400 1.45rem/1.25 var(--serif)}
+#simple .level-detail p{color:#c9c0b5}
+#start .inquiry-buttons{gap:12px}
+#start .inquiry-btn{min-height:118px;border-radius:10px!important;padding:19px 20px;gap:8px;border:1px solid rgba(205,184,151,.24)!important;background:#1a1816!important;color:#eee7dc!important}
+#start .inquiry-btn.secondary{background:#24201b!important}
+#start .inquiry-btn small{font:700 .59rem/1.5 var(--mono);letter-spacing:.16em;color:#c7aa7d!important}
+#start .inquiry-btn strong{font:500 clamp(1.07rem,2.7vw,1.35rem)/1.2 var(--serif);color:#f2eadf}
+#start .inquiry-btn span{font:.8rem/1.55 var(--sans);color:#c9c0b5;opacity:1}
+#start .inquiry-btn:hover,#start .inquiry-btn:focus-visible{border-color:#c7aa7d!important}
+.sec-dark .cas-item>summary{padding:18px 5px;gap:17px}
+.sec-dark .cas-item>summary strong{font:500 clamp(.92rem,2.5vw,1.08rem)/1.4 var(--sans);color:#eee7dc;letter-spacing:-.012em}
+.sec-dark .cas-item>summary span{font-size:1.17rem;color:#c7aa7d}
+.sec-dark .cas-item .cas-body{padding:0 24px 20px 5px;color:#c4bbaf;font-size:.82rem;line-height:1.72}
+.sec-dark .acc>summary{padding:22px 2px}
+.sec-dark .acc>summary strong{font:550 clamp(1.16rem,3vw,1.45rem)/1.25 var(--sans);color:#efe9df}
+.sec-dark .acc>summary small{font-size:.61rem;color:#c7aa7d}
+@media(max-width:600px){
+ #simple .offer-grid{grid-template-columns:1fr}
+ #simple .offer-grid .offer-tile.wide{grid-column:auto}
+ #simple .offer-tile>summary{min-height:0;padding:19px 20px 17px;gap:8px}
+ #simple .offer-tile>p{margin:0 20px 18px}
+ #simple .level-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #simple .level-btn{padding:14px;min-height:88px}
+ #start .inquiry-buttons{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){#simple .offer-tile,#simple .offer-tile>summary:after{transition:none}}
+
 </style>
 </head>
 <body>
