@@ -713,6 +713,13 @@ img{display:block;max-width:100%}
 .category-dialog .modal-door-preview{cursor:pointer}
 .category-dialog .modal-door-preview:after{display:none!important}
 
+
+/* Mobilized Websites: side-by-side genuine site previews, not decorative fake devices */
+.browse-section .scene-site-preview .real-site-phone{transform:none!important;opacity:1!important;top:5%;height:90%;width:44%;border-radius:12px;border-width:4px}
+.browse-section .scene-site-preview .real-site-phone.rear{left:4%}
+.browse-section .scene-site-preview .real-site-phone.front{right:4%}
+.category-dialog:has(.modal-door-preview) .modal-door-preview iframe{object-fit:contain}
+
 </style>
 </head>
 <body>
@@ -784,9 +791,9 @@ img{display:block;max-width:100%}
       <div class="category-grid" aria-label="Browse The Digital Side solutions" tabindex="0">
         <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="assets/Tds_pvc_card.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Collection</span></button>
         <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="tds-card-preview tds-card-preview-tile"><span class="tds-card-media"><img src="avery-tds-bracelet.png" alt="" loading="lazy"></span><span class="tds-card-info"><span class="tds-card-brand">Rivermore Real Estate</span><strong>Avery Cole</strong><span class="tds-card-role">Realtor · Howard County</span></span></span></span><span class="category-label">Digital Business Cards</span></button>
+        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View Avery and Jordan mobilized website examples"><span class="category-scene scene-websites scene-site-preview" aria-hidden="true"><span class="real-site-phone rear"><iframe src="northline-mobile-site.html" title="Jordan's actual mobilized site" tabindex="-1" loading="lazy"></iframe></span><span class="real-site-phone front"><iframe src="realtor-index.html" title="Avery's actual mobilized site" tabindex="-1" loading="lazy"></iframe></span></span><span class="category-label">Mobilized Websites</span></button>
         <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button>
         <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Key Sets examples"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="assets/Tds_pvc_card.PNG" alt="" loading="lazy"><img class="keyset-chain" src="assets/Tds_keychain.PNG" alt="" loading="lazy"><img class="keyset-wearable" src="assets/Tds_bracelet.PNG" alt="" loading="lazy"></span><span class="category-label">Key Sets</span></button>
-        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View Mobilized Websites examples"><span class="category-scene scene-websites scene-site-preview" aria-hidden="true"><span class="real-site-phone rear"><iframe src="northline-mobile-site.html" title="Northline mobile website example" tabindex="-1" loading="lazy"></iframe></span><span class="real-site-phone front"><iframe src="realtor-index.html" title="Rivermore mobile website example" tabindex="-1" loading="lazy"></iframe></span></span><span class="category-label">Mobilized Websites</span></button>
         <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="plaque-hiring-window.jpg" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button>
       </div>
     </section>
@@ -939,10 +946,9 @@ sets:{title:'Key Sets',description:'Physical keys paired with the right digital 
 {type:'photo',src:'assets/Tds_keychain.PNG',alt:'Keychain key set option',caption:'Keychain',brand:'Ready to go'},
 {type:'photo',src:'assets/Tds_bracelet.PNG',alt:'Wearable key set option',caption:'Wearable Key',brand:'Within reach'}],
 links:[['Plan a key set','project-inquiry.html']]},
-websites:{title:'Mobilized Websites',description:'Your existing business website, improved for phones. We organize the services, information and customer actions into a cleaner mobile experience.',examples:[
-{type:'demo',brand:'Rivermore Real Estate',name:'Listings and property details',caption:'Realtor website',url:'realtor-index.html'},
-{type:'demo',brand:'Frederick Legacy Law',name:'Practice and services',caption:'Law firm mobile website',url:'frederick-legacy-law-mobile.html'},
-{type:'demo',brand:'Northline Roofing Co.',name:'Projects and estimates',caption:'Contractor mobile website',url:'northline-mobile-site.html'}],
+websites:{title:'Mobilized Websites',description:'Your existing business website, thoughtfully streamlined for phones. Swipe between two real examples to see how information, services and customer actions can be easier to find.',examples:[
+{type:'demo',brand:'Rivermore Real Estate',name:'Avery · Listings and properties',caption:'Mobilized realtor website',url:'realtor-index.html'},
+{type:'demo',brand:'Northline Roofing Co.',name:'Jordan · Inspections and estimates',caption:'Mobilized roofing website',url:'northline-mobile-site.html'}],
 links:[['Discuss a mobilized website','project-inquiry.html']]},
 custom:{title:'Custom Tap Products',description:'Custom branded tap pieces can lead people straight to a specific action. These are concepts, not finished client orders.',examples:[
 {type:'photo',src:'plaque-hiring-window.jpg',alt:'Hiring plaque in a window',caption:'Hiring',brand:'Tap to apply'},
