@@ -568,6 +568,32 @@ img{display:block;max-width:100%}
 .layer-reveal-panel strong{color:var(--cream)}
 @media(min-width:800px){.layer-feature:has(.layer-reveal-panel:not([hidden])){grid-template-columns:minmax(0,.64fr) minmax(0,1fr) minmax(0,.85fr)}.layer-feature:has(.layer-reveal-panel:not([hidden])) .layer-reveal-panel{grid-column:3}}
 @media(max-width:799px){.layer-feature{display:block}.layer-frame{margin:18px 0}.layer-reveal-panel{margin:14px 0 0}}
+/* Real product imagery and live, directly clickable Door previews */
+.category-dialog .modal-photo{height:clamp(290px,58dvh,510px);min-height:0;display:block;background:#17120f}
+.category-dialog .modal-photo img{height:100%;width:100%;object-fit:cover;object-position:center;display:block}
+.category-dialog .modal-example-caption{min-height:0}
+.modal-door-preview{position:relative;display:block;height:clamp(335px,59dvh,540px);overflow:hidden;border:1px solid rgba(201,166,106,.42);border-radius:4px;background:#0d0b09;cursor:pointer}
+.modal-door-preview iframe,.real-demo-cover iframe{display:block;width:100%;height:100%;border:0;pointer-events:none}
+.modal-door-preview:after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(0deg,rgba(0,0,0,.72),transparent);pointer-events:none}
+.modal-preview-cta{position:absolute;z-index:2;bottom:13px;left:15px;right:15px;text-align:center;background:rgba(19,15,12,.78);border:1px solid rgba(210,178,125,.55);color:#fff2dd;padding:12px;font:700 .72rem/1.3 var(--mono)}
+.modal-door-preview:focus-visible,.real-demo-cover:focus-visible,.demo-more-link:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.real-demo-cover{height:clamp(205px,46vw,280px);background:#100e0c}
+.real-demo-cover iframe{opacity:.8}
+.demo-more-link{display:inline-flex;margin:5px 0 24px;padding:10px 0;border-bottom:1px solid var(--gold);font:700 .72rem/1.4 var(--mono);color:var(--cream)}
+/* Photo slides out in its own overlay, never as a text block under the original */
+.layer-detail-modal{inset:0;margin:auto;width:min(96vw,1000px);max-height:91dvh;padding:0;background:#12100e;color:var(--cream);border:1px solid rgba(201,166,106,.45);border-radius:6px;overflow:hidden}
+.layer-detail-modal::backdrop{background:rgba(0,0,0,.88)}
+.layer-detail-close{position:absolute;right:12px;top:12px;z-index:3;width:43px;height:43px;border:1px solid var(--line-d);border-radius:50%;background:rgba(21,16,12,.9);color:var(--cream);font:28px var(--sans);cursor:pointer}
+.layer-detail-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);align-items:center;min-height:400px}
+.layer-detail-image{min-width:0;background:#17120e;overflow:hidden;display:grid;place-items:center}
+.layer-detail-image img{display:block;width:100%;max-height:82dvh;object-fit:contain}
+.layer-detail-copy{padding:clamp(22px,4vw,42px)}
+.layer-detail-copy h3{font:400 clamp(1.4rem,4vw,2.4rem)/1.12 var(--serif);margin:14px 0}
+.layer-detail-copy p{font:.88rem/1.65 var(--sans);color:var(--cream-muted);max-width:280px}
+.layer-detail-modal[open] .layer-detail-image img{animation:layerSlide .55s cubic-bezier(.2,.8,.3,1) both}
+@keyframes layerSlide{from{opacity:.35;transform:translateX(17%) scale(.92)}to{opacity:1;transform:translateX(0) scale(1)}}
+@media(max-width:699px){.layer-detail-layout{display:block;position:relative;min-height:0}.layer-detail-image img{max-height:76dvh}.layer-detail-copy{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,#100e0c,rgba(16,14,12,.88) 75%,transparent);padding:38px 20px 19px;pointer-events:none}.layer-detail-copy h3{font-size:1.35rem;margin:6px 0}.layer-detail-copy p{font-size:.76rem;line-height:1.4;margin:0}}
+@media(prefers-reduced-motion:reduce){.layer-detail-modal[open] .layer-detail-image img{animation:none}}
 </style>
 </head>
 <body>
@@ -607,21 +633,29 @@ img{display:block;max-width:100%}
       </div></div>
     </div>
     <section class="layer-feature" aria-label="Technology inside the tap">
-      <div class="layer-copy"><span class="kicker">The technology</span><h3>Intelligence beneath the surface.</h3><p>A simple tap on the outside. A connected experience behind it.</p><p class="layer-hint">Select the keychain to discover what is inside.</p></div>
-      <button class="layer-frame" id="layerReveal" type="button" aria-expanded="false" aria-controls="layerRevealPanel" aria-label="Reveal the technology inside the keychain"><img src="assets/tds_layered_keychain.png" alt="Exploded view of a black keychain showing its layers" loading="lazy"></button>
-      <div class="layer-reveal-panel" id="layerRevealPanel" hidden><h4>Built into every connection.</h4><p><strong>The finished piece.</strong> A polished physical key shaped for the business.</p><p><strong>Concealed NFC technology.</strong> A programmed tag gives a compatible phone a direct destination with one tap.</p><p><strong>The digital experience.</strong> That destination can open a business card, a Digital Door, or a specific customer action.</p></div>
+      <div class="layer-copy"><span class="kicker">The technology</span><h3>Intelligence beneath the surface.</h3><p>A simple tap on the outside. A connected experience behind it.</p><p class="layer-hint">Tap the image to reveal its layers.</p></div>
+      <button class="layer-frame" id="layerReveal" type="button" aria-haspopup="dialog" aria-controls="layerDetailModal" aria-label="Explore the layered keychain design"><img src="assets/tds_layered_keychain.png" alt="Exploded view of a black keychain showing its layers" loading="lazy"></button>
     </section>
+    <dialog class="layer-detail-modal" id="layerDetailModal" aria-labelledby="layerDetailTitle"><button class="layer-detail-close" id="layerDetailClose" type="button" aria-label="Close layered design">×</button><div class="layer-detail-layout"><div class="layer-detail-image"><img src="assets/tds_layered_keychain.png" alt="The polished keychain separated into its concealed layers"></div><div class="layer-detail-copy"><span class="kicker">Inside the key</span><h3 id="layerDetailTitle">Built into every connection.</h3><p>Crafted shell. Hidden technology. A direct digital destination.</p></div></div></dialog>
     <section class="browse-section" id="keyCategories">
       <div class="category-head"><span class="kicker">What we create</span><h3>Find what fits your business.</h3><p class="category-subline">From a simple tap to a complete mobile experience, explore what each solution can do for your business. Open a category to see examples of the customer journey, the physical keys, and the next steps they make possible.</p></div>
       <div class="category-grid" aria-label="Browse The Digital Side solutions" tabindex="0">
-        <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="tds-nfc-card-front-back-mockup.png" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Collection</span></button>
-        <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="cat-device cat-contact"><span class="device-line"></span><span class="device-name"></span><span class="device-action"></span><span class="device-action short"></span><span class="device-action"></span></span></span><span class="category-label">Digital Business Cards</span></button>
-        <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><span class="cat-portal"><span class="portal-leaf"></span><span class="portal-light"></span></span><span class="cat-floating a"></span><span class="cat-floating b"></span></span><span class="category-label">Digital Door</span></button>
-        <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Key Sets examples"><span class="category-scene scene-sets" aria-hidden="true"><span class="cat-kit-card"></span><span class="cat-kit-tag"></span><span class="cat-kit-ring"></span></span><span class="category-label">Key Sets</span></button>
+        <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="assets/Tds_pvc_card.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Collection</span></button>
+        <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><img src="avery-door-scene.jpg" alt="" loading="lazy"></span><span class="category-label">Digital Business Cards</span></button>
+        <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button>
+        <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Key Sets examples"><span class="category-scene scene-sets" aria-hidden="true"><img src="assets/Tds_keychain.PNG" alt="" loading="lazy"></span><span class="category-label">Key Sets</span></button>
         <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View Mobilized Websites examples"><span class="category-scene scene-websites" aria-hidden="true"><span class="cat-web-page rear"></span><span class="cat-web-page front"><span></span><span></span><span></span></span></span><span class="category-label">Mobilized Websites</span></button>
-        <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><span class="cat-plaque p1"><span></span></span><span class="cat-plaque p2"><span></span></span><span class="cat-custom-disc"></span></span><span class="category-label">Custom Tap Products</span></button>
+        <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="plaque-hiring-window.jpg" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button>
       </div>
     </section>
+    <section class="demo-paths" aria-labelledby="featuredDemosTitle">
+<div class="category-head"><span class="kicker">See it in action</span><h3 id="featuredDemosTitle">Three businesses. Three ways in.</h3><p class="category-subline">Tap an actual Door preview to experience its entrance and customer paths.</p></div>
+<div class="demo-carousel" aria-label="Featured Digital Door demos">
+<article class="demo-slide"><a class="demo-cover real-demo-cover" href="avery-cole-door.html" aria-label="Enter Avery Cole Digital Door"><iframe src="avery-cole-door.html" tabindex="-1" aria-hidden="true" title="Live preview: Avery Cole" loading="lazy"></iframe><span class="demo-cover-name"><small>Realtor · Digital Business Card</small><strong>Rivermore Real Estate</strong><span>Tap to enter Avery’s Door ↗</span></span></a><div class="demo-slide-bottom"><p>For networking and referrals: a digital business card connected to an entire customer experience.</p></div></article>
+<article class="demo-slide"><a class="demo-cover real-demo-cover" href="door-frederick-legacy-law.html" aria-label="Enter Frederick Legacy Law Digital Door"><iframe src="door-frederick-legacy-law.html" tabindex="-1" aria-hidden="true" title="Live preview: Frederick Legacy Law" loading="lazy"></iframe><span class="demo-cover-name"><small>Attorney · Guided Digital Door</small><strong>Frederick Legacy Law</strong><span>Tap to enter the Door ↗</span></span></a><div class="demo-slide-bottom"><p>For clients who need direction: clear routes to answers, services, and the next step.</p></div></article>
+<article class="demo-slide"><a class="demo-cover real-demo-cover" href="northline-door.html" aria-label="Enter Northline Roofing Digital Door"><iframe src="northline-door.html" tabindex="-1" aria-hidden="true" title="Live preview: Northline Roofing" loading="lazy"></iframe><span class="demo-cover-name"><small>Contractor · Team Keys + Door</small><strong>Northline Roofing Co.</strong><span>Tap to enter the Door ↗</span></span></a><div class="demo-slide-bottom"><p>For crews in the field: tap keys pointing clients straight to inspections, estimates and help.</p></div></article>
+</div><a class="demo-more-link" href="index.html#work">Explore more Digital Door demos →</a>
+</section>
     <details class="acc" id="simple">
       <summary><div><small>Services and pricing</small><strong>How can we help?</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
@@ -741,70 +775,38 @@ const modal=document.getElementById('collectionModal');
 const swipe=document.getElementById('collectionSwipe');
 const links=document.getElementById('collectionLinks');
 const categories={
- tds:{
-  title:'The TDS Collection',
-  description:'Signature physical keys and digital connections. Explore the card, bracelet, USB, keychain, wallet and plaque designs that give someone a direct way to reach your business.',
-  examples:[
-   {type:'photo',src:'tds-nfc-card-front-back-mockup.png',alt:'TDS tap card'},
-   {type:'photo',src:'tds-signature-bracelet-mockup.png',alt:'TDS tap bracelet'},
-   {type:'photo',src:'assets/door/key-usb.webp',alt:'TDS USB key'},
-   {type:'photo',src:'tds-tap-keychain-mockup.png',alt:'TDS keychain'},
-   {type:'photo',src:'assets/door/key-wallet.webp',alt:'TDS mobile wallet key'},
-   {type:'photo',src:'three-plaque-set.png',alt:'TDS hiring review and follow plaques'}
-  ],
-  links:[['Ask about the collection','project-inquiry.html']]
- },
- cards:{
-  title:'Digital Business Cards',
-  description:'Your contact details and the right next step in one place. No stack of business cards to carry or replace.',
-  examples:[
-   {type:'card',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',url:'avery-cole-door.html',link:'Open Avery’s card'},
-   {type:'card',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Attorney',url:'door-frederick-legacy-law.html',link:'Open the lawyer’s card'},
-   {type:'card',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Contractor',url:'northline-door.html',link:'Open Jordan’s card'}
-  ],
-  links:[['Discuss a digital card','project-inquiry.html']]
- },
- door:{
-  title:'Digital Door',
-  description:'One focused mobile entry point that moves a customer from a tap to the action they came for.',
-  examples:[
-   {type:'portal',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html',link:'Enter the lawyer’s Door'},
-   {type:'portal',brand:'Rivermore Real Estate',name:'Homes and appointments',caption:'Real estate Door',url:'avery-cole-door.html',link:'Enter Avery’s Door'},
-   {type:'portal',brand:'Northline Roofing Co.',name:'Estimates and inspections',caption:'Contractor Door',url:'northline-door.html',link:'Enter Northline’s Door'}
-  ],
-  details:['Direct mobile link','QR asset','Owner Key for Apple Wallet or Google Wallet','One programmed physical NFC card'],
-  links:[['See Digital Door pricing','#simple'],['Ask about a Door','project-inquiry.html']]
- },
- sets:{
-  title:'Key Sets',
-  description:'A digital destination paired with the physical tools that fit the person or team. These are illustrative combinations, not completed client orders.',
-  examples:[
-   {type:'kit',brand:'Realtor Set',name:'Wallet and card',caption:'Illustrative pairing',url:'avery-cole-door.html',link:'See realtor experience'},
-   {type:'kit',brand:'Lawyer Set',name:'Card and wallet',caption:'Illustrative pairing',url:'door-frederick-legacy-law.html',link:'See lawyer experience'},
-   {type:'kit',brand:'Contractor Set',name:'Keychain and card',caption:'Illustrative pairing',url:'northline-door.html',link:'See contractor experience'}
-  ],
-  links:[['Plan a key set','project-inquiry.html']]
- },
- websites:{
-  title:'Mobilized Websites',
-  description:'Your website. Reimagined for mobile. We improve your existing business website by organizing its services, information and customer actions into a cleaner experience designed for phones. Customers get what they need without navigating a long desktop page.',
-  examples:[
-   {type:'website',brand:'Rivermore Real Estate',name:'Listings and property details',caption:'Mobilized realtor website',url:'realtor-index.html',link:'View realtor site'},
-   {type:'website',brand:'Frederick Legacy Law',name:'Practice and services',caption:'Mobilized law firm website',url:'frederick-legacy-law-mobile.html',link:'View lawyer site'},
-   {type:'website',brand:'Northline Roofing Co.',name:'Projects and estimates',caption:'Mobilized contractor website',url:'northline-mobile-site.html',link:'View contractor site'}
-  ],
-  links:[['Discuss a mobile website','project-inquiry.html']]
- },
- custom:{
-  title:'Custom Tap Products',
-  description:'A custom branded tap piece can take someone straight to the specific action your business needs. These are design concepts, not finished client products.',
-  examples:[
-   {type:'custom',brand:'Hiring',name:'Tap to apply',caption:'Concept for a window or counter sign'},
-   {type:'custom',brand:'Reviews',name:'Tap to leave a review',caption:'Concept for an exit or checkout'},
-   {type:'custom',brand:'Events',name:'Tap for event details',caption:'Concept for a venue or display'}
-  ],
-  links:[['Discuss a custom product','project-inquiry.html']]
- }
+tds:{title:'The TDS Collection',description:'Signature physical keys and digital connections. Swipe through the card, bracelet, USB, keychain, wallet and plaque designs.',examples:[
+{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'TDS tap card',caption:'Tap Card',brand:'A lasting first impression'},
+{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS wearable key',caption:'Bracelet',brand:'A connection you can wear'},
+{type:'photo',src:'assets/Tds_usb.PNG',alt:'TDS USB key',caption:'USB Key',brand:'The project handoff'},
+{type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS keychain',caption:'Keychain',brand:'Everyday connection'},
+{type:'photo',src:'assets/door/key-wallet.webp',alt:'Digital wallet key',caption:'Wallet Key',brand:'Saved on your phone'},
+{type:'photo',src:'three-plaque-set.png',alt:'TDS tap plaques',caption:'Tap Plaques',brand:'Hiring, reviews and follows'}],links:[['Ask about the collection','project-inquiry.html']]},
+cards:{title:'Digital Business Cards',description:'Your contact details and the right next step in one place. No stack of business cards to carry or replace.',examples:[
+{type:'demo',kind:'card',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',url:'avery-cole-door.html'},
+{type:'demo',kind:'card',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Attorney',url:'door-frederick-legacy-law.html'},
+{type:'demo',kind:'card',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Contractor',url:'northline-door.html'}],links:[['Discuss a digital card','project-inquiry.html']]},
+door:{title:'Digital Door',description:'One focused mobile entry point that moves a customer from a tap to the action they came for.',examples:[
+{type:'demo',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html'},
+{type:'demo',brand:'Rivermore Real Estate',name:'Homes and appointments',caption:'Real estate Door',url:'avery-cole-door.html'},
+{type:'demo',brand:'Northline Roofing Co.',name:'Estimates and inspections',caption:'Contractor Door',url:'northline-door.html'}],
+details:['Direct mobile link','QR asset','Owner Key for Apple Wallet or Google Wallet','One programmed physical tap card'],
+links:[['See Digital Door pricing','#simple'],['Ask about a Door','project-inquiry.html']]},
+sets:{title:'Key Sets',description:'Physical keys paired with the right digital destination. These are illustrative combinations, not completed client orders.',examples:[
+{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'Tap card key set option',caption:'Card',brand:'An easy handoff'},
+{type:'photo',src:'assets/Tds_keychain.PNG',alt:'Keychain key set option',caption:'Keychain',brand:'Ready to go'},
+{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'Wearable key set option',caption:'Wearable Key',brand:'Within reach'}],
+links:[['Plan a key set','project-inquiry.html']]},
+websites:{title:'Mobilized Websites',description:'Your existing business website, improved for phones. We organize the services, information and customer actions into a cleaner mobile experience.',examples:[
+{type:'demo',brand:'Rivermore Real Estate',name:'Listings and property details',caption:'Realtor website',url:'realtor-index.html'},
+{type:'demo',brand:'Frederick Legacy Law',name:'Practice and services',caption:'Law firm mobile website',url:'frederick-legacy-law-mobile.html'},
+{type:'demo',brand:'Northline Roofing Co.',name:'Projects and estimates',caption:'Contractor mobile website',url:'northline-mobile-site.html'}],
+links:[['Discuss a mobilized website','project-inquiry.html']]},
+custom:{title:'Custom Tap Products',description:'Custom branded tap pieces can lead people straight to a specific action. These are concepts, not finished client orders.',examples:[
+{type:'photo',src:'plaque-hiring-window.jpg',alt:'Hiring plaque in a window',caption:'Hiring',brand:'Tap to apply'},
+{type:'photo',src:'review-at-bakery-exit.png',alt:'Review plaque near bakery exit',caption:'Reviews',brand:'Tap to review'},
+{type:'photo',src:'plaque-follow-bookstore.png',alt:'Follow plaque at bookstore',caption:'Follow',brand:'Tap to follow'}],
+links:[['Discuss a custom product','project-inquiry.html']]}
 };
 function element(tag,className,textValue){
  const node=document.createElement(tag);
@@ -854,21 +856,24 @@ function sceneFor(example){
 function renderExample(example){
  const figure=element('figure','modal-slide');
  if(example.type==='photo'){
-  const photo=element('div','modal-photo');
-  const img=element('img','');
-  img.src=example.src;img.alt=example.alt;img.loading='lazy';img.decoding='async';
-  photo.append(img);figure.append(photo);
- }else{
-  figure.append(sceneFor(example));
-  const details=element('figcaption','modal-example-caption');
-  details.append(element('span','modal-example-type',example.caption));
-  details.append(element('strong','',example.brand));
-  if(example.name)details.append(element('span','modal-example-name',example.name));
-  if(example.url){
-   const a=element('a','modal-open-example',example.link||'Open example');
-   a.href=example.url;details.append(a);
-  }
-  figure.append(details);
+  const frame=element('div','modal-photo'),img=element('img','');
+  img.src=example.src;img.alt=example.alt;img.loading='lazy';img.decoding='async';frame.append(img);figure.append(frame);
+ }else if(example.url){
+  const anchor=element('a','modal-door-preview');
+  anchor.href=example.url;anchor.setAttribute('aria-label','Open '+example.brand+' experience');
+  const frame=element('iframe','modal-real-preview');
+  frame.src=example.url;frame.title=example.brand+' actual Digital Door preview';frame.tabIndex=-1;frame.loading='lazy';frame.setAttribute('aria-hidden','true');
+  anchor.append(frame,element('span','modal-preview-cta','Tap to open the experience ↗'));figure.append(anchor);
+  if(example.kind==='card')frame.addEventListener('load',()=>{
+   try{const doc=frame.contentDocument;const enter=doc?.getElementById('enter')||doc?.getElementById('entry')||doc?.getElementById('gate');if(enter)enter.click();}catch(e){}
+  });
+ }
+ if(example.caption||example.brand||example.name){
+  const cap=element('figcaption','modal-example-caption');
+  if(example.caption)cap.append(element('span','modal-example-type',example.caption));
+  if(example.brand)cap.append(element('strong','',example.brand));
+  if(example.name)cap.append(element('span','modal-example-name',example.name));
+  figure.append(cap);
  }
  return figure;
 }
@@ -913,8 +918,13 @@ swipe.addEventListener('keydown',e=>{
  if(e.key==='ArrowLeft'){swipe.scrollBy({left:-width-10,behavior:'smooth'});e.preventDefault()}
 });
 const layerButton=document.getElementById('layerReveal');
-const layerPanel=document.getElementById('layerRevealPanel');
-if(layerButton&&layerPanel){layerButton.addEventListener('click',()=>{const open=layerButton.getAttribute('aria-expanded')!=='true';layerButton.setAttribute('aria-expanded',String(open));layerPanel.hidden=!open;});}
+const layerModal=document.getElementById('layerDetailModal');
+const layerClose=document.getElementById('layerDetailClose');
+if(layerButton&&layerModal&&layerClose){
+ layerButton.addEventListener('click',()=>layerModal.showModal());
+ layerClose.addEventListener('click',()=>layerModal.close());
+ layerModal.addEventListener('click',e=>{if(e.target===layerModal)layerModal.close()});
+}
 const feature=document.querySelector('.layer-feature');
 if(feature){
  if('IntersectionObserver' in window){
