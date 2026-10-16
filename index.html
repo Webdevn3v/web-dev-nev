@@ -978,8 +978,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <span class="ghost">One tap</span><br>
         <span class="hl">away.</span>
       </h1>
-      <p class="hero__promise">Custom tap products. Direct digital connections.</p>
-      <p class="hero__sub">We pair customized NFC keychains, bracelets, and cards with simple mobile Digital Doors. One tap brings customers straight to your contact details, booking, quotes, directions, or the next step. Already have a website? Your Door can connect to it—not replace it.</p>
+      <p class="hero__promise">First impressions, reimagined. Connections that keep moving.</p>
+      <p class="hero__sub">From digital QR Keys to wearable technology, we make business networking easier to share and more useful after the introduction. Your Digital Door guides people to the right next step, while a mobilized website makes everything beyond it easier to explore.</p>
       <div class="hero__actions">
         <a href="#work" class="btn btn--lime">Experience the Demos <span class="btn__arr">→</span></a>
         <a href="door.html" class="btn btn--outline">See How One Tap Works</a>
@@ -1000,6 +1000,77 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 @media(max-width:520px){.hero__capabilities{margin-top:16px;font-size:.56rem;gap:7px;flex-wrap:wrap}}
 </style>
 
+<!-- ─── THINK LIKE YOUR CUSTOMER ─────────── -->
+<style>
+.customer-think{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0 38px}
+.customer-think__prompt{max-width:1100px;margin:0 auto;padding:0 28px}
+.customer-think__eyebrow{font-family:var(--display);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.customer-think__prompt h2{font-size:clamp(1.45rem,3vw,2.15rem);margin-bottom:8px}
+.customer-think__answer{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-family:var(--display);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.customer-think__rotator{color:var(--white);font-size:.78rem;font-weight:700;transition:opacity .22s ease,transform .22s ease;display:inline-block}
+.customer-think__rotator.is-changing{opacity:0;transform:translateY(5px)}
+.customer-think__start{margin-top:8px;font-family:var(--heading);font-size:.82rem;font-style:italic;font-weight:600;color:var(--muted)}
+.customer-think details{max-width:1100px;margin:20px auto 0;border-top:1px solid var(--border-md)}
+.customer-think summary{list-style:none;cursor:pointer;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.customer-think summary::-webkit-details-marker{display:none}
+.customer-think__summary-copy small{display:block;font-family:var(--display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.customer-think__summary-copy strong{font-family:var(--heading);font-size:clamp(1.15rem,2.4vw,1.55rem);color:var(--white)}
+.customer-think__plus{font-size:1.35rem;color:var(--muted);transition:transform .2s}
+.customer-think details[open] .customer-think__plus{transform:rotate(45deg)}
+.door-questions{display:flex;max-width:1100px;margin:0 auto;padding:4px 28px 10px;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.door-questions::-webkit-scrollbar{display:none}
+.door-question{flex:0 0 calc((100% - 24px)/3);min-height:200px;padding:28px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px;scroll-snap-align:start;display:flex;align-items:flex-end}
+.door-question h2{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.16;max-width:22ch;margin:0}
+.door-question__icon{width:36px;height:36px;border:1px solid var(--border-md);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--light);font-family:var(--display);font-size:.95rem;margin-bottom:14px;box-shadow:none}
+@media(max-width:760px){.customer-think{padding:42px 0 46px}.customer-think__prompt{padding:0 20px}.customer-think summary{padding:18px 20px}.customer-think details{margin-top:28px}.door-questions{padding:4px 8vw 8px}.door-question{flex:0 0 84vw;min-height:190px;padding:24px 20px;scroll-snap-align:center}.door-question h2{font-size:1.3rem}}
+</style>
+<section class="customer-think" aria-label="Think like your customer">
+  <div class="customer-think__prompt">
+    <div class="customer-think__eyebrow">Think like your customer</div>
+    <h2>What do you want them to do next?</h2>
+    <div class="customer-think__answer"><span>Your Digital Door can lead them to</span><span class="customer-think__rotator" id="customerNextStep">BOOK</span></div>
+    <div class="customer-think__start">That’s where we start.</div>
+  </div>
+  <details>
+    <summary><span class="customer-think__summary-copy"><small>Think like your customer</small><strong>A few questions worth asking.</strong></span><span class="customer-think__plus">+</span></summary>
+    <div class="door-questions">
+      <div class="door-question"><div><div class="door-question__icon">▯</div><h2>When was the last time you used your business on mobile?</h2></div></div>
+      <div class="door-question"><div><div class="door-question__icon">?</div><h2>Do customers keep asking you the same thing?</h2></div></div>
+      <div class="door-question"><div><div class="door-question__icon">↔</div><h2>What do you want them to do next?</h2></div></div>
+    </div>
+  </details>
+</section>
+
+<style>
+.tds-journey{padding:44px 0 46px;background:var(--black);border-bottom:1px solid var(--border)}
+.tds-journey h2{font:600 clamp(1.65rem,3.8vw,2.5rem)/1.14 var(--heading);margin:11px 0 13px;color:var(--white);letter-spacing:-.025em}
+.tds-journey-lead{color:var(--muted);font:.96rem/1.75 var(--heading);max-width:730px;margin-bottom:25px}
+.tds-journey-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tds-journey-items details{min-width:0;border:1px solid var(--border-md);border-radius:11px;background:var(--card);padding:0 19px}
+.tds-journey-items summary{list-style:none;cursor:pointer;position:relative;display:flex;flex-direction:column;gap:11px;padding:20px 20px 21px 0}
+.tds-journey-items summary::-webkit-details-marker{display:none}
+.tds-journey-items summary span{font:600 .6rem/1.5 var(--display);letter-spacing:.12em;color:var(--lime)}
+.tds-journey-items summary strong{font:600 clamp(1rem,2vw,1.25rem)/1.2 var(--heading);color:var(--white);padding-right:12px}
+.tds-journey-items summary i{position:absolute;right:0;top:22px;color:var(--lime);font:400 1.3rem/1 var(--heading);font-style:normal}
+.tds-journey-items details[open] summary i{transform:rotate(45deg)}
+.tds-journey-items details p{font:.83rem/1.7 var(--heading);color:var(--muted);border-top:1px solid var(--border);padding:14px 0 15px}
+.tds-journey-items details a{display:inline-block;color:var(--lime);font-size:.75rem;margin:0 0 20px;text-decoration:underline;text-underline-offset:5px}
+.tds-journey-items summary:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+@media(max-width:700px){.tds-journey{padding:30px 0 34px}.tds-journey-items{display:block}.tds-journey-items details+details{margin-top:9px}.tds-journey-items summary{padding:17px 20px 17px 0}.tds-journey-lead{font-size:.87rem}}
+</style>
+<!-- ─── CONNECTED CUSTOMER JOURNEY ─── -->
+<section class="tds-journey" id="journey" aria-label="Networking evolved">
+  <div class="container">
+    <div class="tag">The networking evolution</div>
+    <h2>Make the introduction. Open what's next.</h2>
+    <p class="tds-journey-lead">A business card shouldn't be the end of the conversation. Give every new connection a clear next step, from the first tap to the full mobile experience.</p>
+    <div class="tds-journey-items">
+      <details><summary><span>01 / FIRST IMPRESSION</span><strong>Keys that connect.</strong><i>+</i></summary><p>A digital QR Key in your phone's Wallet, branded tap cards, keychains, and wearable options. Make your information easy to share without constantly replacing paper cards.</p></details>
+      <details><summary><span>02 / CUSTOMER DIRECTION</span><strong>The Digital Door.</strong><i>+</i></summary><p>One branded, customer-facing entrance that guides people toward contact, appointments, services, quotes, and the actions that matter.</p><a href="door.html">Experience the Digital Door →</a></details>
+      <details><summary><span>03 / GO DEEPER</span><strong>Mobilized websites.</strong><i>+</i></summary><p>Already have a website? We refine its existing content and customer paths for a clearer, easier-to-use phone experience — not another long desktop page squeezed onto a screen.</p></details>
+    </div>
+  </div>
+</section>
 <!-- ─── WORK ───────────────────────────────── -->
 <section class="work" id="work">
 <style>
@@ -1065,47 +1136,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
     </div>
 
   </div>
-</section>
-
-<!-- ─── THINK LIKE YOUR CUSTOMER ─────────── -->
-<style>
-.customer-think{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0 38px}
-.customer-think__prompt{max-width:1100px;margin:0 auto;padding:0 28px}
-.customer-think__eyebrow{font-family:var(--display);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
-.customer-think__prompt h2{font-size:clamp(1.45rem,3vw,2.15rem);margin-bottom:8px}
-.customer-think__answer{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-family:var(--display);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.customer-think__rotator{color:var(--white);font-size:.78rem;font-weight:700;transition:opacity .22s ease,transform .22s ease;display:inline-block}
-.customer-think__rotator.is-changing{opacity:0;transform:translateY(5px)}
-.customer-think__start{margin-top:8px;font-family:var(--heading);font-size:.82rem;font-style:italic;font-weight:600;color:var(--muted)}
-.customer-think details{max-width:1100px;margin:20px auto 0;border-top:1px solid var(--border-md)}
-.customer-think summary{list-style:none;cursor:pointer;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.customer-think summary::-webkit-details-marker{display:none}
-.customer-think__summary-copy small{display:block;font-family:var(--display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.customer-think__summary-copy strong{font-family:var(--heading);font-size:clamp(1.15rem,2.4vw,1.55rem);color:var(--white)}
-.customer-think__plus{font-size:1.35rem;color:var(--muted);transition:transform .2s}
-.customer-think details[open] .customer-think__plus{transform:rotate(45deg)}
-.door-questions{display:flex;max-width:1100px;margin:0 auto;padding:4px 28px 10px;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.door-questions::-webkit-scrollbar{display:none}
-.door-question{flex:0 0 calc((100% - 24px)/3);min-height:200px;padding:28px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px;scroll-snap-align:start;display:flex;align-items:flex-end}
-.door-question h2{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.16;max-width:22ch;margin:0}
-.door-question__icon{width:36px;height:36px;border:1px solid var(--border-md);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--light);font-family:var(--display);font-size:.95rem;margin-bottom:14px;box-shadow:none}
-@media(max-width:760px){.customer-think{padding:42px 0 46px}.customer-think__prompt{padding:0 20px}.customer-think summary{padding:18px 20px}.customer-think details{margin-top:28px}.door-questions{padding:4px 8vw 8px}.door-question{flex:0 0 84vw;min-height:190px;padding:24px 20px;scroll-snap-align:center}.door-question h2{font-size:1.3rem}}
-</style>
-<section class="customer-think" aria-label="Think like your customer">
-  <div class="customer-think__prompt">
-    <div class="customer-think__eyebrow">Think like your customer</div>
-    <h2>What do you want them to do next?</h2>
-    <div class="customer-think__answer"><span>Your Digital Door can lead them to</span><span class="customer-think__rotator" id="customerNextStep">BOOK</span></div>
-    <div class="customer-think__start">That’s where we start.</div>
-  </div>
-  <details>
-    <summary><span class="customer-think__summary-copy"><small>Think like your customer</small><strong>A few questions worth asking.</strong></span><span class="customer-think__plus">+</span></summary>
-    <div class="door-questions">
-      <div class="door-question"><div><div class="door-question__icon">▯</div><h2>When was the last time you used your business on mobile?</h2></div></div>
-      <div class="door-question"><div><div class="door-question__icon">?</div><h2>Do customers keep asking you the same thing?</h2></div></div>
-      <div class="door-question"><div><div class="door-question__icon">↔</div><h2>What do you want them to do next?</h2></div></div>
-    </div>
-  </details>
 </section>
 
 <!-- ─── SERVICES ──────────────────────────── -->
