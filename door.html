@@ -670,26 +670,14 @@ img{display:block;max-width:100%}
 @media(prefers-reduced-motion:reduce){.browse-section .category-copy-toggle{transition:none}}
 
 
-/* Layer reveal: image and text are independent columns; no label overlaps the product. */
+/* Approved fully labeled technology image: simple fade-in only. */
 .layer-expanded{display:block!important}
 .layer-expanded-title{margin:0 0 15px!important}
-.layer-visual-stage.layer-exploded-stage{display:grid!important;grid-template-columns:minmax(0,70%) minmax(0,30%);width:100%;height:auto!important;aspect-ratio:1.35 / 1!important;max-width:1100px;margin:0 auto;background:#e8d8c9;overflow:hidden;border:1px solid rgba(201,166,106,.3);position:relative}
-.layer-image-column{position:relative;min-width:0;height:100%;overflow:hidden}
-.layer-image-column .layer-exploded-photo{position:absolute;inset:0;width:100%!important;height:100%!important;max-height:none!important;display:block;object-fit:contain!important;object-position:center!important;animation:tdsLayerImageCascade .8s ease both}
-.layer-visual-stage.layer-exploded-stage .layer-exploded-callouts{position:relative!important;inset:auto!important;min-width:0;height:100%;overflow:hidden;pointer-events:none;background:#e8d8c9;border-left:1px solid rgba(177,139,85,.22)}
-.layer-visual-stage.layer-exploded-stage .layer-exploded-note{position:absolute!important;left:3%!important;right:4%!important;top:var(--layer-position);width:auto!important;min-width:0;display:grid!important;grid-template-columns:14% minmax(0,1fr);align-items:start;gap:6px;opacity:0;transform:translate(10px,-50%);animation:tdsLayerCalloutIn .6s ease var(--layer-delay) forwards}
-.layer-exploded-note .layer-line{height:1px;width:100%;min-width:0;margin-top:.53em;background:#ad8754;transform:scaleX(0);transform-origin:right;animation:tdsLayerConnectorIn .35s ease var(--layer-delay) forwards}
-.layer-exploded-note h4{font:400 clamp(.78rem,1.35vw,1.16rem)/1.13 Georgia,serif!important;color:#241c17;margin:0 0 .2em;letter-spacing:0}
-.layer-exploded-note p{font:400 clamp(.65rem,.95vw,.84rem)/1.3 Georgia,serif!important;color:#4e4135;margin:0;overflow-wrap:break-word}
-@keyframes tdsLayerCalloutIn{from{opacity:0;transform:translate(10px,-50%)}to{opacity:1;transform:translate(0,-50%)}}
-@keyframes tdsLayerConnectorIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@media(max-width:600px){
- .layer-visual-stage.layer-exploded-stage{grid-template-columns:minmax(0,64%) minmax(0,36%);aspect-ratio:1 / 1.13!important}
- .layer-visual-stage.layer-exploded-stage .layer-exploded-note{grid-template-columns:9% minmax(0,1fr);left:1%!important;right:3%!important;gap:3px}
- .layer-exploded-note h4{font-size:clamp(.56rem,2.1vw,.73rem)!important;line-height:1.1}
- .layer-exploded-note p{font-size:clamp(.47rem,1.66vw,.61rem)!important;line-height:1.18}
-}
-@media(prefers-reduced-motion:reduce){.layer-exploded-photo,.layer-exploded-note,.layer-line{animation:none!important;opacity:1!important;clip-path:none!important}.layer-exploded-note{transform:translateY(-50%)!important}}
+.layer-visual-stage.layer-static-stage{display:block!important;position:relative;width:100%;height:auto!important;aspect-ratio:auto!important;max-width:1100px;margin:0 auto;background:#e8d8c9;overflow:hidden;border:1px solid rgba(201,166,106,.25)}
+.layer-static-photo{display:block;width:100%;height:auto;max-height:none!important;object-fit:contain;opacity:1}
+.layer-disclosure[open] .layer-static-photo{animation:tdsSimpleLayerFade .7s ease both}
+@keyframes tdsSimpleLayerFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.layer-disclosure[open] .layer-static-photo{animation:none!important}}
 /* Card previews: actual existing portraits, with business info BELOW each face. */
 .browse-section .scene-cards{background:#0b0908}
 .tds-card-preview{display:flex;flex-direction:column;background:#100c0a;color:#f5ede1;width:100%;height:100%;overflow:hidden}
@@ -778,10 +766,7 @@ img{display:block;max-width:100%}
         </summary>
         <div class="layer-expanded">
           <h3 class="layer-expanded-title">Intelligence beneath the surface.</h3>
-          <div class="layer-visual-stage layer-exploded-stage"><div class="layer-image-column"><img class="layer-exploded-photo" src="assets/tds_layered_keychain.png" alt="Finished black keychain and four separated protective, design, technology, and foundation layers." loading="lazy" decoding="async"></div><div class="layer-exploded-callouts" aria-label="Four precisely aligned layers"><div class="layer-exploded-note" style="--layer-position:28%;--layer-delay:.45s"><span class="layer-line" aria-hidden="true"></span><div><h4>Protective top coating</h4><p>Crystal-clear, waterproof protection for a polished, elevated finish.</p></div></div>
-<div class="layer-exploded-note" style="--layer-position:46%;--layer-delay:1.1s"><span class="layer-line" aria-hidden="true"></span><div><h4>Signature design layer</h4><p>Refined visual depth with a seamless, luxury look.</p></div></div>
-<div class="layer-exploded-note" style="--layer-position:64%;--layer-delay:1.75s"><span class="layer-line" aria-hidden="true"></span><div><h4>Concealed chip technology</h4><p>Integrated smart connectivity, hidden beneath the surface.</p></div></div>
-<div class="layer-exploded-note" style="--layer-position:82%;--layer-delay:2.4s"><span class="layer-line" aria-hidden="true"></span><div><h4>Foundation layer</h4><p>A smooth, solid core built for durable everyday carry.</p></div></div></div></div>
+          <div class="layer-visual-stage layer-static-stage"><img class="layer-static-photo" src="assets/tds_layered_description.png" alt="Finished keychain with protective coating, design, concealed connectivity, and foundation layer descriptions." loading="lazy" decoding="async"></div>
         </div>
       </details>
     </section>
