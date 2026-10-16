@@ -955,7 +955,21 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .tds-process-only .experience-card{width:100%;max-width:960px;margin:0 auto}
 @media(max-width:640px){.tds-question-list{padding:0 20px}.tds-questions-conclusion{padding:0 20px}.tds-after-grid{grid-template-columns:1fr}.tds-after-column{padding:17px}.tds-questions{padding-top:29px}}
 </style>
-</head>
+<style>
+/* Sprint 5 gallery: one horizontal, touch-friendly showcase */
+.work__grid{display:flex!important;flex-wrap:nowrap!important;gap:14px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory;scroll-padding:0 3px;scrollbar-width:thin;scrollbar-color:var(--border-md) transparent;background:transparent!important;border-radius:0!important;padding:5px 3px 22px;-webkit-overflow-scrolling:touch}
+.work__grid>.proj-card,.work__grid>.proj-card--wide{flex:0 0 clamp(260px,31vw,365px)!important;width:clamp(260px,31vw,365px)!important;min-width:0!important;min-height:370px!important;grid-column:auto!important;scroll-snap-align:start;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:29px 25px!important;border:1px solid var(--border-md);border-radius:12px}
+.work__grid .proj-card__footer{margin-top:auto!important}
+.work__grid .proj-card__body{flex:initial!important}
+.work__grid .proj-card__bg{opacity:.19}
+.work__grid .proj-card:hover .proj-card__bg{opacity:.29}
+.work__grid .proj-card__bg--hallow{background-position:center center;opacity:.27;filter:saturate(.55)}
+.work__grid .proj-card__bg[style*="frederick-attorney"]{background-position:70% 25%!important;background-size:cover!important}
+.work__grid .proj-card__bg[style*="frederick-attorney"]{background-position:72% center!important}
+.work__grid .proj-card__actions{display:flex;flex-wrap:wrap;gap:8px}
+.work__grid .proj-card__link{white-space:normal}
+@media(max-width:700px){.work__grid>.proj-card,.work__grid>.proj-card--wide{flex-basis:min(84vw,325px)!important;width:min(84vw,325px)!important;min-height:355px!important}}
+</style></head>
 <body>
 
 <!-- CURSOR -->
@@ -1056,26 +1070,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .door-question__icon{width:36px;height:36px;border:1px solid var(--border-md);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--light);font-family:var(--display);font-size:.95rem;margin-bottom:14px;box-shadow:none}
 @media(max-width:760px){.customer-think{padding:42px 0 46px}.customer-think__prompt{padding:0 20px}.customer-think summary{padding:18px 20px}.customer-think details{margin-top:28px}.door-questions{padding:4px 8vw 8px}.door-question{flex:0 0 84vw;min-height:190px;padding:24px 20px;scroll-snap-align:center}.door-question h2{font-size:1.3rem}}
 </style>
-<section class="customer-think tds-questions" aria-label="A few questions worth asking">
- <div class="customer-think__prompt"><div class="customer-think__eyebrow">Think like your customer</div><h2>A few questions worth asking.</h2><p class="tds-question-lead">Think about what happens after someone discovers your business.</p></div>
- <div class="tds-question-list">
-  <details open><summary><span>01</span><strong>What do your customers need from you?</strong><i>+</i></summary><p>Services, availability, answers, reassurance, or simply a direct way to connect.</p></details>
-  <details><summary><span>02</span><strong>How easily can they find it?</strong><i>+</i></summary><p>Your website may already have everything they need. Can customers find it quickly on their phone?</p></details>
-  <details><summary><span>03</span><strong>What do you want them to do next?</strong><i>+</i></summary><p>Book, request an estimate, save your contact, or explore more. Every business has a different destination.</p></details>
- </div>
- <p class="tds-questions-conclusion">That's where The Digital Side comes in.</p>
-</section>
-<section class="tds-after-hello" aria-labelledby="afterHelloTitle">
- <div class="container">
-  <div class="tag">The customer experience</div><h2 id="afterHelloTitle">What happens after hello?</h2>
-  <p class="tds-after-intro">An introduction is only the beginning. The next step should be just as clear.</p>
-  <div class="tds-after-grid">
-   <div class="tds-after-column"><small>Without direction</small><div class="tds-after-steps"><span>Search the website</span><span>Find the right page</span><span>Figure out what to do</span></div></div>
-   <div class="tds-after-column tds-after-column--clear"><small>With a Digital Door</small><div class="tds-after-steps"><span>Connect</span><span>Choose the right path</span><span>Take the next step</span></div></div>
-  </div>
-  <p class="tds-after-footnote">Less searching. Clearer next steps.</p>
- </div>
-</section>
 <style>
 .tds-journey{padding:44px 0 46px;background:var(--black);border-bottom:1px solid var(--border)}
 .tds-journey h2{font:600 clamp(1.65rem,3.8vw,2.5rem)/1.14 var(--heading);margin:11px 0 13px;color:var(--white);letter-spacing:-.025em}
@@ -1117,9 +1111,9 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="container">
     <div class="work__header">
       <div class="reveal rl"><div class="tag">Digital Door Demos</div><h2>Different Businesses.<br>Different Ways In.</h2></div>
-      <div class="reveal rr"><p class="lead">Start with the featured Realtor, Law and Roofing Doors from our mobile gallery, then explore the full collection here. These businesses use sample contact details. Every Door has its own entrance effects, customer paths and full-site handoff.</p></div>
+      <div class="reveal rr"><p class="lead">Swipe through real Digital Door demos. Open any Door, Digital Key, or Index to explore.</p></div>
     </div>
-    <div class="work__grid">
+    <div class="work__grid" aria-label="Swipe to explore digital Door examples" tabindex="0">
       <div class="proj-card reveal d1" style="--card-color:#d3b68e;--icon-color:#d3b68e;--icon-bg:rgba(211,182,142,.08);--icon-border:rgba(211,182,142,.2);--icon-bg-hover:rgba(211,182,142,.15);--card-accent:linear-gradient(90deg,#d3b68e,transparent)">
         <div class="proj-card__bg" style="background-image:url('avery-door-scene.jpg')"></div>
         <div class="proj-card__num">01</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
@@ -1163,8 +1157,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <details class="proj-desc"><summary>About this build</summary><p>A motion-led comfort system built around airflow, urgent service, repairs, replacements, and maintenance.</p></details>
         <div class="proj-card__footer"><div class="proj-card__actions"><a href="hvac-key.html" class="proj-card__link proj-card__link--ghost">Owner Key</a><a href="hvac-door.html" class="proj-card__link">View Door →</a><a href="hvac-index.html" class="proj-card__link proj-card__link--ghost">Index Site ↗</a></div></div>
       </div>
-      <div class="proj-card proj-card--wide reveal d3" style="--card-color:#b6aa94;--icon-color:#b6aa94;--icon-bg:rgba(182,170,148,.08);--icon-border:rgba(182,170,148,.2);--icon-bg-hover:rgba(182,170,148,.15);--card-accent:linear-gradient(90deg,#b6aa94,transparent)">
-        <div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M7 8c2-2 3-3 5-5 2 2 3 3 5 5"/><path d="M7 16c2 2 3 3 5 5 2-2 3-3 5-5"/></svg></div>
+      <div class="proj-card reveal d3" style="--card-color:#b6aa94;--icon-color:#b6aa94;--icon-bg:rgba(182,170,148,.08);--icon-border:rgba(182,170,148,.2);--icon-bg-hover:rgba(182,170,148,.15);--card-accent:linear-gradient(90deg,#b6aa94,transparent)">
+        <div class="proj-card__bg proj-card__bg--hallow" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600&q=70')"></div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M7 8c2-2 3-3 5-5 2 2 3 3 5 5"/><path d="M7 16c2 2 3 3 5 5 2-2 3-3 5-5"/></svg></div>
         <div class="proj-card__body"><div class="proj-card__industry">Care · Funeral Home</div><h3>Hallow &amp; Grace</h3><p>A calm, respectful Door built around immediate needs, planning, service information, and a gentler way to find the next step.</p></div>
         <div class="proj-card__footer"><div class="proj-card__actions"><a href="key-hallow-grace.html" class="proj-card__link proj-card__link--ghost">Owner Key</a><a href="hallow-grace-door.html" class="proj-card__link">View Door →</a><a href="hallow-grace-index.html" class="proj-card__link proj-card__link--ghost">Index Site ↗</a></div></div>
       </div>
