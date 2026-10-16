@@ -259,4 +259,21 @@ listings:{k:'Browsing listings',title:'See what’s out there.',desc:'Browse eve
 function openPath(key){const p=paths[key];document.getElementById('routeK').textContent=p.k;document.getElementById('routeTitle').textContent=p.title;document.getElementById('routeDesc').textContent=p.desc;document.getElementById('routeActions').innerHTML=p.actions.map(a=>'<a href="'+a[1]+'">'+a[0]+'</a>').join('');routeSheet.classList.add('open')}
 document.querySelectorAll('[data-path]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openPath(el.dataset.path)}));
 document.getElementById('routeClose').onclick=()=>routeSheet.classList.remove('open');
+</script><script>
+/* TDS demo entry: same branded Door effect, two clear customer destinations. */
+(function(){
+ const mode=new URLSearchParams(location.search).get('view');
+ if(mode!=='card'&&mode!=='paths')return;
+ function start(){
+  const entrance=document.querySelector('#enter, #markTrigger, #doorEntry, #airlock, #gate, #entry');
+  if(entrance){entrance.click()}
+  const target=mode==='paths'
+   ? document.querySelector('#routes, #paths, #northlineServices, #services, .paths, .routes, .service-choices, main')
+   : document.querySelector('#digitalCard, #cardTop, .attorney-card, .hero, .hero-wrap, main');
+  setTimeout(function(){
+   if(target)target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  },1750);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
 </script></body></html>
