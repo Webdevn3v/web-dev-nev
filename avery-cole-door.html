@@ -124,8 +124,9 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
 @media(prefers-reduced-motion:reduce){.door{transition:opacity .01s linear,visibility .01s linear}.door:after{transition:none}.scene{transition:none}.door.entering .scene{transform:none;filter:none}.door.entering .identity{transition:none}.route-sheet{transition:none}.glint{display:none}.route{transition:none;transform:none;opacity:1}.stat-rotator{transition:none}.live-dot{animation:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
 ::view-transition-group(root){animation-duration:420ms}
 ::view-transition-old(root),::view-transition-new(root){animation-timing-function:var(--ease-in-out)}
+.door .door-monogram{bottom:0;padding-bottom:calc(32px + env(safe-area-inset-bottom))}.door .monogram{font:400 clamp(2.7rem,11vw,5rem)/1.12 Georgia,serif;color:#f3e4cd;letter-spacing:.13em;text-shadow:0 2px 12px #0007}.door .monogram-divider{font-size:.68em;color:#c9a66a;padding:0 .13em}.door .door-monogram .enter{display:inline-block}
 </style></head><body>
-<section class="door" id="door"><div class="scene"></div><div class="identity"><div class="broker">Rivermore Real Estate</div><h1>Avery Cole</h1><div class="meta">Realtor<br>Howard County, Maryland</div><button class="enter" id="enter">Enter</button></div></section>
+<section class="door" id="door"><div class="scene"></div><div class="identity door-monogram"><div class="monogram" aria-label="Avery Cole">A<span class="monogram-divider">|</span>C</div><button class="enter" id="enter">Enter</button></div></section>
 <main class="path">
 <div class="hero-wrap">
 <section class="portrait" role="img" aria-label="Avery Cole, Realtor">
