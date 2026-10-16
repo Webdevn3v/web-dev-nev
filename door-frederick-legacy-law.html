@@ -52,4 +52,21 @@
 <div class="panel" id="unsure"><div class="sheet"><button class="close">×</button><div class="eyebrow">Not sure where to begin</div><h2>You don’t need the legal vocabulary first.</h2><p>Explain what changed, what you’re worried about, and what outcome you’re trying to protect.</p><a class="btn" href="mailto:hello@fredericklegacy.example?subject=Not%20sure%20where%20to%20begin">Send the short version</a></div></div>
 <div class="panel" id="urgent"><div class="sheet"><button class="close">×</button><div class="eyebrow">Urgent matter</div><h2>Deadline, hearing, or active estate issue?</h2><p>Call rather than waiting on email when timing matters.</p><a class="btn contact-now" href="tel:+15555550190">Call now</a></div></div>
 <div class="owner" id="owner"><button id="ownerClose">×</button><iframe src="key-frederick.html" title="Avery Bennett Owner Key"></iframe></div>
-<script>const entry=document.getElementById('entry');function enter(){entry.classList.add('open');setTimeout(()=>entry.classList.add('done'),1450)}if(entry){entry.onclick=enter;entry.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enter()}};}document.querySelectorAll('[data-panel]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.panel).classList.add('open'));document.querySelectorAll('.panel').forEach(p=>p.onclick=e=>{if(e.target===p||e.target.classList.contains('close'))p.classList.remove('open')});const owner=document.getElementById('owner');document.getElementById('ownerBtn').onclick=()=>owner.classList.add('open');document.getElementById('ownerClose').onclick=()=>owner.classList.remove('open');owner.onclick=e=>{if(e.target===owner)owner.classList.remove('open')};addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));owner.classList.remove('open')}});</script></body></html>
+<script>const entry=document.getElementById('entry');function enter(){entry.classList.add('open');setTimeout(()=>entry.classList.add('done'),1450)}if(entry){entry.onclick=enter;entry.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enter()}};}document.querySelectorAll('[data-panel]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.panel).classList.add('open'));document.querySelectorAll('.panel').forEach(p=>p.onclick=e=>{if(e.target===p||e.target.classList.contains('close'))p.classList.remove('open')});const owner=document.getElementById('owner');document.getElementById('ownerBtn').onclick=()=>owner.classList.add('open');document.getElementById('ownerClose').onclick=()=>owner.classList.remove('open');owner.onclick=e=>{if(e.target===owner)owner.classList.remove('open')};addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));owner.classList.remove('open')}});</script><script>
+/* TDS demo entry: same branded Door effect, two clear customer destinations. */
+(function(){
+ const mode=new URLSearchParams(location.search).get('view');
+ if(mode!=='card'&&mode!=='paths')return;
+ function start(){
+  const entrance=document.querySelector('#enter, #markTrigger, #doorEntry, #airlock, #gate, #entry');
+  if(entrance){entrance.click()}
+  const target=mode==='paths'
+   ? document.querySelector('#routes, #paths, #northlineServices, #services, .paths, .routes, .service-choices, main')
+   : document.querySelector('#digitalCard, #cardTop, .attorney-card, .hero, .hero-wrap, main');
+  setTimeout(function(){
+   if(target)target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  },1750);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+</script></body></html>
