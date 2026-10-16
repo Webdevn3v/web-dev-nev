@@ -594,6 +594,44 @@ img{display:block;max-width:100%}
 @keyframes layerSlide{from{opacity:.35;transform:translateX(17%) scale(.92)}to{opacity:1;transform:translateX(0) scale(1)}}
 @media(max-width:699px){.layer-detail-layout{display:block;position:relative;min-height:0}.layer-detail-image img{max-height:76dvh}.layer-detail-copy{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,#100e0c,rgba(16,14,12,.88) 75%,transparent);padding:38px 20px 19px;pointer-events:none}.layer-detail-copy h3{font-size:1.35rem;margin:6px 0}.layer-detail-copy p{font-size:.76rem;line-height:1.4;margin:0}}
 @media(prefers-reduced-motion:reduce){.layer-detail-modal[open] .layer-detail-image img{animation:none}}
+
+/* Sprint 01: inline cascading technology reveal — never a modal */
+.layer-feature{display:block!important;grid-template-columns:none!important;gap:0!important;align-items:stretch;padding:22px 0 26px}
+.layer-disclosure{display:block;width:100%;color:var(--cream)}
+.layer-disclosure-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none;padding:4px 0 7px}
+.layer-disclosure-summary::-webkit-details-marker{display:none}
+.layer-disclosure-summary::marker{content:""}
+.layer-disclosure-summary:focus-visible{outline:2px solid var(--gold);outline-offset:6px}
+.layer-disclosure-heading{display:block;min-width:0;max-width:770px}
+.layer-disclosure-heading .kicker{display:block;margin-bottom:13px}
+.layer-disclosure-title{display:block;font:400 clamp(1.75rem,5.2vw,3.1rem)/1.14 var(--serif);letter-spacing:-.025em;color:var(--cream)}
+.layer-disclosure-toggle{flex:0 0 35px;display:grid;place-items:center;width:35px;height:35px;color:var(--gold);font:400 2.1rem/1 var(--sans);transition:transform .35s ease}
+.layer-disclosure[open] .layer-disclosure-toggle{transform:rotate(45deg)}
+.layer-expanded{display:grid;grid-template-columns:minmax(0,1fr);gap:17px;padding-top:23px;animation:tdsLayerSectionIn .35s ease both}
+.layer-expanded-title{font:400 clamp(1.45rem,4.2vw,2.3rem)/1.17 var(--serif);color:var(--cream);letter-spacing:-.02em}
+.layer-visual-stage{min-width:0;overflow:hidden;border:1px solid rgba(201,166,106,.24);border-radius:4px;background:#17120e}
+.layer-visual-stage img{display:block;width:100%;height:auto;max-height:525px;object-fit:contain;object-position:center;transform-origin:center top;animation:tdsLayerImageCascade .95s cubic-bezier(.19,1,.22,1) both}
+.layer-annotations{display:grid;align-content:center;gap:0}
+.layer-annotation{display:grid;grid-template-columns:29px minmax(0,1fr);gap:13px;padding:16px 0;border-bottom:1px solid rgba(201,166,106,.19);opacity:0;animation:tdsLayerNoteIn .52s ease forwards}
+.layer-annotation:first-child{border-top:1px solid rgba(201,166,106,.19);animation-delay:.25s}
+.layer-annotation:nth-child(2){animation-delay:.43s}
+.layer-annotation:nth-child(3){animation-delay:.61s}
+.layer-annotation-number{font:700 .69rem/1.6 var(--mono);color:var(--gold);letter-spacing:.12em}
+.layer-annotation h4{margin:0 0 4px;font:400 1.25rem/1.24 var(--serif);color:var(--cream)}
+.layer-annotation p{margin:0;font:.84rem/1.55 var(--sans);color:var(--cream-muted)}
+@media(min-width:800px){
+  .layer-feature{padding:32px 0!important}
+  .layer-expanded{grid-template-columns:minmax(0,1.3fr) minmax(225px,.7fr);column-gap:30px;align-items:center}
+  .layer-expanded-title{grid-column:1/-1}
+}
+@keyframes tdsLayerSectionIn{from{opacity:0}to{opacity:1}}
+@keyframes tdsLayerImageCascade{from{opacity:.2;transform:translateY(-24px);clip-path:inset(0 0 100% 0)}to{opacity:1;transform:translateY(0);clip-path:inset(0 0 0 0)}}
+@keyframes tdsLayerNoteIn{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+  .layer-disclosure-toggle{transition:none}
+  .layer-expanded,.layer-visual-stage img,.layer-annotation{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -633,10 +671,27 @@ img{display:block;max-width:100%}
       </div></div>
     </div>
     <section class="layer-feature" aria-label="Technology inside the tap">
-      <div class="layer-copy"><span class="kicker">The technology</span><h3>Intelligence beneath the surface.</h3><p>A simple tap on the outside. A connected experience behind it.</p><p class="layer-hint">Tap the image to reveal its layers.</p></div>
-      <button class="layer-frame" id="layerReveal" type="button" aria-haspopup="dialog" aria-controls="layerDetailModal" aria-label="Explore the layered keychain design"><img src="assets/tds_layered_keychain.png" alt="Exploded view of a black keychain showing its layers" loading="lazy"></button>
+      <details class="layer-disclosure" id="technologyLayers">
+        <summary class="layer-disclosure-summary">
+          <span class="layer-disclosure-heading">
+            <span class="kicker">The technology</span>
+            <span class="layer-disclosure-title">A simple tap on the outside.<br>Advanced technology on the inside.</span>
+          </span>
+          <span class="layer-disclosure-toggle" aria-hidden="true">+</span>
+        </summary>
+        <div class="layer-expanded">
+          <h3 class="layer-expanded-title">Intelligence beneath the surface.</h3>
+          <div class="layer-visual-stage">
+            <img src="assets/tds_layered_keychain.png" alt="A polished black keychain beside an exploded view of its protective finish, shell, concealed technology and backing" loading="lazy" decoding="async">
+          </div>
+          <div class="layer-annotations" aria-label="What is inside the key">
+            <div class="layer-annotation"><span class="layer-annotation-number">01</span><div><h4>Crafted shell</h4><p>A refined, customizable exterior.</p></div></div>
+            <div class="layer-annotation"><span class="layer-annotation-number">02</span><div><h4>Hidden technology</h4><p>The connection is discreetly built inside.</p></div></div>
+            <div class="layer-annotation"><span class="layer-annotation-number">03</span><div><h4>Direct destination</h4><p>One tap opens the experience built for your business.</p></div></div>
+          </div>
+        </div>
+      </details>
     </section>
-    <dialog class="layer-detail-modal" id="layerDetailModal" aria-labelledby="layerDetailTitle"><button class="layer-detail-close" id="layerDetailClose" type="button" aria-label="Close layered design">×</button><div class="layer-detail-layout"><div class="layer-detail-image"><img src="assets/tds_layered_keychain.png" alt="The polished keychain separated into its concealed layers"></div><div class="layer-detail-copy"><span class="kicker">Inside the key</span><h3 id="layerDetailTitle">Built into every connection.</h3><p>Crafted shell. Hidden technology. A direct digital destination.</p></div></div></dialog>
     <section class="browse-section" id="keyCategories">
       <div class="category-head"><span class="kicker">What we create</span><h3>Find what fits your business.</h3><p class="category-subline">From a simple tap to a complete mobile experience, explore what each solution can do for your business. Open a category to see examples of the customer journey, the physical keys, and the next steps they make possible.</p></div>
       <div class="category-grid" aria-label="Browse The Digital Side solutions" tabindex="0">
@@ -917,23 +972,6 @@ swipe.addEventListener('keydown',e=>{
  if(e.key==='ArrowRight'){swipe.scrollBy({left:width+10,behavior:'smooth'});e.preventDefault()}
  if(e.key==='ArrowLeft'){swipe.scrollBy({left:-width-10,behavior:'smooth'});e.preventDefault()}
 });
-const layerButton=document.getElementById('layerReveal');
-const layerModal=document.getElementById('layerDetailModal');
-const layerClose=document.getElementById('layerDetailClose');
-if(layerButton&&layerModal&&layerClose){
- layerButton.addEventListener('click',()=>layerModal.showModal());
- layerClose.addEventListener('click',()=>layerModal.close());
- layerModal.addEventListener('click',e=>{if(e.target===layerModal)layerModal.close()});
-}
-const feature=document.querySelector('.layer-feature');
-if(feature){
- if('IntersectionObserver' in window){
-  const observer=new IntersectionObserver(entries=>{
-   if(entries[0]?.isIntersecting){feature.classList.add('is-visible');observer.disconnect()}
-  },{threshold:.2});
-  observer.observe(feature);
- }else feature.classList.add('is-visible');
-}
 })();
 </script>
 </body>
