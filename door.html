@@ -878,6 +878,12 @@ img{display:block;max-width:100%}
     scroll-snap-align:start;
   }
 }
+
+/* Touching the carousel should not leave a browser-blue focus rectangle. */
+.browse-section .category-grid:focus{outline:none}
+.browse-section .category-grid:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.category-dialog .collection-swipe:focus{outline:none}
+.category-dialog .collection-swipe:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -1285,12 +1291,14 @@ swipe.addEventListener('keydown',e=>{
   if(!document.documentElement.contains(thumb))return;
   if(ts-last<50)return;
   last=ts;
-  if(!thumb.getBoundingClientRect().width)return;
+  const rect=thumb.getBoundingClientRect();
+  // Don't run the phone animation while its carousel section is off-screen.
+  if(!rect.width || rect.bottom<0 || rect.top>window.innerHeight)return;
   try{
    const win=thumb.contentWindow,doc=win.document,body=doc.scrollingElement||doc.documentElement;
    const max=Math.max(0,body.scrollHeight-win.innerHeight);
    if(max<80)return;
-   frameStep+=direction*0.7;
+   frameStep+=direction*2.2;
    if(frameStep>=Math.min(max,1350)){direction=-1}
    if(frameStep<=0){direction=1;frameStep=0}
    win.scrollTo(0,Math.max(0,frameStep));
