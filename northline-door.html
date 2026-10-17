@@ -64,29 +64,69 @@
 <div class="panel" id="replace"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">Replacement planning</div><h3>Build the right roof once.</h3><p>Start with an on-site assessment, system recommendations, and a scope that explains materials, ventilation, flashing, cleanup, and warranty.</p><div class="actions"><a class="btn" href="northline-full-site.html#estimate">Request estimate</a><a class="btn alt" href="northline-full-site.html#systems">Compare systems</a></div></div></div>
 <div class="panel" id="customer"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">Project support</div><h3>Your project stays connected.</h3><p>Reach the crew, request a document, or ask a warranty question. Include the service address so we can route it quickly.</p><div class="actions"><a class="btn" href="mailto:crew@northlineroofing.example?subject=Current%20Northline%20project">Email the crew</a><a class="btn alt" href="northline-mobile-site.html#customer">Customer support</a></div></div></div>
 <script>const gate=document.querySelector('#gate');function enter(){gate.classList.add('open');setTimeout(()=>gate.remove(),900)}gate.addEventListener('click',enter);gate.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')enter()});document.querySelectorAll('[data-panel]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.panel).classList.add('active'));document.querySelectorAll('.panel').forEach(p=>{p.onclick=e=>{if(e.target===p||e.target.classList.contains('close'))p.classList.remove('active')}});addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'))});</script><script>
-/* TDS gallery modes: owner card opens at the top; Digital Door begins below the owner card. */
+/* TDS gallery entry: keep the native branded Door animation, THEN land on the correct content. */
 (function(){
  const mode=new URLSearchParams(location.search).get('view');
  if(mode!=='card' && mode!=='paths')return;
- function start(){
-  const entrance=document.querySelector('#door, #gate, #doorEntry, #airlock, #entry');
-  if(entrance){
-   if(entrance.id==='door'){entrance.classList.add('done');document.body.classList.add('revealed');}
-   else if(entrance.id==='gate'){entrance.remove();}
-   else if(entrance.id==='doorEntry'){entrance.classList.add('done');document.body.classList.add('door-open');}
-   else if(entrance.id==='entry' && document.getElementById('markTrigger')){
-    entrance.classList.add('done');document.body.classList.add('entered');
-   }else if(entrance.id==='entry' && document.querySelector('.attorney-card')){
-    entrance.classList.add('open','done');
-   }else{entrance.click();entrance.classList.add('done');}
-  }
-  const target=mode==='card'
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function targetForMode(){
+  return mode==='card'
    ? document.querySelector('#digitalCard, #ownerCard, #cardTop, .northline-card, .attorney-card, .hero-wrap, .hero, main')
    : document.querySelector('#doorPaths, #northlineServices, #services, #routes, #paths, .actions-head, .paths, .routes, main');
-  function position(){if(target)target.scrollIntoView({behavior:'auto',block:'start'});}
-  requestAnimationFrame(position);
-  setTimeout(position,140);
  }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+ function placeTarget(){
+  const target=targetForMode();
+  if(!target)return;
+  // "instant" overrides the site's smooth-scroll CSS so the view does not pass through the business card.
+  target.scrollIntoView({behavior:'instant',block:'start'});
+ }
+ function skipEntranceForCard(){
+  const overlay=document.querySelector('#door, #gate, #doorEntry, #airlock, #entry');
+  if(overlay){
+   switch(overlay.id){
+    case 'door': overlay.classList.add('done');document.body.classList.add('revealed');break;
+    case 'gate': overlay.remove();break;
+    case 'doorEntry': overlay.classList.add('done');document.body.classList.add('door-open');break;
+    case 'airlock': overlay.classList.add('done');document.body.classList.add('revealed');break;
+    case 'entry':
+     if(document.getElementById('markTrigger')){
+      overlay.classList.add('done');document.body.classList.add('entered');
+     }else if(document.querySelector('.attorney-card')){
+      overlay.classList.add('open','done');
+     }else{
+      overlay.classList.add('open');
+     }
+     break;
+   }
+  }
+  requestAnimationFrame(placeTarget);
+ }
+ function openDoorWithEffect(){
+  // Invoke the same control a customer taps, preserving each business's custom animation.
+  const trigger=document.querySelector('#enter, #markTrigger, #doorEntry, #gate, #airlock, #entry button, #entry');
+  if(!trigger){placeTarget();return;}
+  const overlay=trigger.closest('#door, #gate, #doorEntry, #airlock, #entry');
+  const id=overlay ? overlay.id : '';
+  const duration={door:950,gate:1050,doorEntry:1660,airlock:850,
+    entry:document.getElementById('markTrigger')?1400:(document.querySelector('.attorney-card')?1730:1000)}[id] || 1100;
+  // Two frames ensure the closed entrance is painted before its animation begins.
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+   if(reduced && id==='door'){overlay.classList.add('done');document.body.classList.add('revealed');}
+   else if(reduced && id==='airlock'){overlay.classList.add('done');document.body.classList.add('revealed');}
+   else if(reduced && id==='doorEntry'){overlay.classList.add('done');document.body.classList.add('door-open');}
+   else if(reduced && id==='entry' && document.getElementById('markTrigger')){
+    overlay.classList.add('done');document.body.classList.add('entered');
+   }else{
+    trigger.click();
+   }
+   setTimeout(placeTarget,reduced?80:duration);
+  }));
+ }
+ function start(){
+  if(mode==='card')skipEntranceForCard();
+  else openDoorWithEffect();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
+ else start();
 })();
 </script></body></html>
