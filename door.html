@@ -884,6 +884,32 @@ img{display:block;max-width:100%}
 .browse-section .category-grid:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .category-dialog .collection-swipe:focus{outline:none}
 .category-dialog .collection-swipe:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* One tap to open the full digital business card. The gallery is only its hero
+   image; never duplicate contact actions, labels or button overlays here. */
+.category-dialog .modal-card-link{display:block;text-decoration:none}
+.category-dialog .modal-card-link .tds-card-preview-large{
+  display:block;
+  height:clamp(325px,55dvh,535px);
+  overflow:hidden;
+  border-radius:4px;
+  border:1px solid rgba(201,166,106,.42);
+}
+.category-dialog .modal-card-link .tds-card-media{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:0;
+}
+.category-dialog .modal-card-link .tds-card-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 20%;
+}
+.category-dialog .modal-card-link .modal-preview-cta,
+.category-dialog .modal-door-preview .modal-preview-cta{display:none!important}
+.category-dialog .modal-card-link:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -1165,24 +1191,19 @@ function sceneFor(example){
  return scene;
 }
 function renderBusinessCard(example){
+ // Gallery preview is JUST the branded hero visual.
+ // Working contact actions live on the actual business card reached on tap.
  const card=element('div','tds-card-preview tds-card-preview-large tds-card-'+(example.theme||'standard'));
- card.setAttribute('aria-label',example.name+' digital business card');
+ card.setAttribute('aria-label',example.name+' digital business card preview');
  const media=element('div','tds-card-media');
  if(example.photo){
   const photo=element('img','');
-  photo.src=example.photo;photo.alt='Portrait for '+example.name;photo.loading='lazy';photo.decoding='async';
+  photo.src=example.photo;photo.alt=example.name+' portrait';photo.loading='lazy';photo.decoding='async';
   media.append(photo);
  }else{
   media.append(element('div','tds-card-initials',example.initials||''));
  }
- const info=element('div','tds-card-info');
- info.append(element('span','tds-card-brand',example.brand));
- info.append(element('strong','',example.name));
- info.append(element('span','tds-card-role',example.caption));
- const actions=element('div','tds-card-cta');
- for(const label of ['Call','Text','Email'])actions.append(element('span','',label));
- info.append(actions,element('span','tds-card-save','Save Contact'));
- card.append(media,info);
+ card.append(media);
  return card;
 }
 function renderExample(example){
@@ -1193,7 +1214,7 @@ function renderExample(example){
  }else if(example.kind==='card'){
   const wrapper=element('a','modal-card-link');
   wrapper.href=example.url;wrapper.setAttribute('aria-label','Open '+example.name+' digital business card');
-  wrapper.append(renderBusinessCard(example),element('span','modal-preview-cta','Open the digital business card ↗'));
+  wrapper.append(renderBusinessCard(example));
   figure.append(wrapper);
  }else if(example.kind==='website' && example.url){
   const wrapper=element('a','mobilized-site-example');
