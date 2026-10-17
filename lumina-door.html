@@ -192,6 +192,106 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
 .lumina-doctor-art.has-photo .lumina-doctor-art-label,
 .lumina-doctor-art.has-photo .lumina-doctor-art-base{color:#fff;text-shadow:0 1px 8px #071820;z-index:2}
 
+
+/* Lumina — refined, client-facing identity.
+   Portrait remains clean; owner contact and patient journeys are distinct sections. */
+:root{--white:#fff;--off:#fbfaf7;--fog:#f3f8f6;--mint:#e7f2ef;--mint2:#bbd9d2;--teal:#087d71;--tealD:#116a63;--tealL:#3ba997;--ink:#172c3e;--slate:#617782;--muted:#82929b;--line:rgba(22,53,57,.13)}
+body{background:#f4f5f2}
+.shell{max-width:560px;background:#fbfaf7;box-shadow:0 5px 35px rgba(12,34,40,.06)}
+.top{min-height:68px;position:sticky;top:0;z-index:22;padding:12px clamp(16px,4vw,26px);background:rgba(255,254,251,.97);backdrop-filter:blur(15px);border-bottom:1px solid #e8eeeb;gap:12px}
+.brand{min-width:0;display:flex;gap:10px;align-items:center;font:400 clamp(1.02rem,4.2vw,1.3rem)/1.16 var(--serif);letter-spacing:-.025em;color:var(--ink)}
+.brand>span:last-child{min-width:0}
+.mark{flex:none;width:35px;height:35px;background:#087d71;border-radius:10px;color:white;font-family:var(--serif);font-size:1.1rem}
+.lumina-menu{position:relative;flex:none;margin-left:auto}
+.lumina-menu>summary{list-style:none;cursor:pointer;display:grid;place-items:center;width:43px;height:43px;border:1px solid transparent;border-radius:10px}
+.lumina-menu>summary::-webkit-details-marker{display:none}
+.lumina-menu .menu-lines{display:flex;flex-direction:column;gap:5px;width:22px}
+.lumina-menu .menu-lines i{display:block;height:2px;width:100%;background:var(--ink);border-radius:2px}
+.lumina-menu[open]>.menu-lines{opacity:.75}
+.lumina-menu nav{position:absolute;top:calc(100% + 14px);right:0;width:min(78vw,264px);padding:10px;background:#fffefa;border:1px solid #e1e9e4;box-shadow:0 18px 45px #122d3530;border-radius:12px;z-index:25}
+.lumina-menu nav a{display:block;padding:13px 11px;border-bottom:1px solid #edf1ee;font-size:.89rem;color:var(--ink)}
+.lumina-menu nav a:last-child{border-bottom:0}
+.lumina-menu nav a:active{background:var(--mint)}
+.lumina-menu>summary:focus-visible,.lumina-menu nav a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+#digitalCard{scroll-margin-top:68px}
+.lumina-doctor-card{min-height:0;display:block;background:#fbfaf7;scroll-margin-top:68px}
+.lumina-doctor-art{height:clamp(270px,77vw,420px);min-height:0;display:grid;place-items:center;position:relative;overflow:hidden;background:linear-gradient(145deg,#194b52,#072731);color:#fff}
+.lumina-doctor-art::before,.lumina-doctor-art::after,.lumina-doctor-art.has-photo::after{content:none;display:none}
+.lumina-doctor-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;z-index:1}
+.lumina-doctor-emblem{z-index:0}
+.lumina-doctor-art.has-photo .lumina-doctor-emblem{display:none}
+.lumina-doctor-info{position:relative;z-index:2;display:block;background:#fffefa;border-radius:20px 20px 0 0;margin-top:-18px;padding:26px clamp(20px,5.3vw,35px) 24px;box-shadow:0 -5px 18px #122f3012}
+.lumina-doctor-kicker{display:inline-flex;align-items:center;gap:15px;font:700 .64rem/1.4 var(--mono);letter-spacing:.19em;color:var(--teal);text-transform:uppercase}
+.lumina-doctor-kicker::after{content:"";width:33px;height:1px;background:#9fcdc5}
+.lumina-doctor-info h1{font:400 clamp(3.35rem,12.1vw,5.15rem)/.91 var(--serif);letter-spacing:-.055em;margin:14px 0 14px;color:var(--ink)}
+.lumina-doctor-info h1 em{color:var(--teal);font-weight:400}
+.lumina-doctor-role{font:700 1rem/1.4 var(--sans);color:#234752;margin:0}
+.lumina-doctor-lede{margin:22px 0 19px;border-top:1px solid #e2eae6;padding-top:18px;max-width:480px;font:.96rem/1.6 var(--sans);color:#607580}
+.lumina-doctor-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.lumina-doctor-actions a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:54px;padding:11px 7px;border-radius:9px;background:#173d46;color:#fff;font:700 .87rem/1.2 var(--sans)}
+.lumina-doctor-actions a svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.lumina-doctor-utilities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}
+.lumina-doctor-utilities a{min-height:49px;padding:12px 8px;border:1px solid #b4d4cc;display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;color:#23575b;border-radius:9px;font:700 .78rem/1.3 var(--sans);background:#fffefa}
+.lumina-doctor-utilities a span{font-size:.95rem;color:var(--teal)}
+.lumina-doctor-next{display:flex;justify-content:space-between;align-items:center;margin-top:22px;border-top:1px solid #e1e9e5;padding:17px 0 2px;color:var(--teal);font:700 .69rem/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+#doorPaths{scroll-margin-top:67px}
+.hero#doorPaths{padding:46px clamp(21px,5.3vw,36px) 49px;background:#f3f8f6;color:var(--ink);overflow:hidden;position:relative;isolation:isolate}
+.hero#doorPaths::before{content:"";position:absolute;z-index:-1;right:-80px;top:-100px;width:240px;height:285px;background:linear-gradient(148deg,#d3e8e3,#e4f1ed 62%,#f3f8f600);border-radius:38% 0 42% 62%;transform:rotate(-24deg)}
+.hero#doorPaths::after{content:"";position:absolute;z-index:-1;width:154px;height:160px;right:-70px;bottom:-60px;border-radius:75% 0 68% 0;transform:rotate(-31deg);background:#c3ded6a8}
+.hero#doorPaths .eyebrow{font:700 .63rem/1.4 var(--mono);letter-spacing:.2em;color:var(--teal);position:relative}
+.hero#doorPaths h1{position:relative;font:400 clamp(2.95rem,11.1vw,4.4rem)/1.01 var(--serif);letter-spacing:-.057em;margin:21px 0 18px;max-width:480px;color:var(--ink)}
+.hero#doorPaths h1 em{color:var(--teal);font-weight:400}
+.hero#doorPaths p{position:relative;color:#647985;font:.98rem/1.55 var(--sans);max-width:435px;margin:0}
+.paths{position:relative;z-index:1;margin-top:-18px;background:#fffefa;border-radius:20px 20px 0 0;padding:30px clamp(17px,4.2vw,28px) 22px;scroll-margin-top:70px}
+.paths-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 3px 20px}
+.paths h2{font:400 clamp(1.9rem,7vw,2.55rem)/1.07 var(--serif);letter-spacing:-.04em;margin:0;color:var(--ink)}
+.small{color:#82949c}
+.paths-head .small{white-space:nowrap;letter-spacing:.16em;color:#81949c}
+.path{display:grid;grid-template-columns:52px minmax(0,1fr) 24px;align-items:center;gap:13px;width:100%;min-height:100px;padding:14px 13px;margin:0 0 10px;text-align:left;background:#fff;border:1px solid #dfe9e5;border-radius:14px;cursor:pointer;transition:background .2s,transform .2s,border-color .2s}
+.path:last-child{border-bottom:1px solid #dfe9e5}
+.path:hover{border-color:#9ecbc0;background:#f8fbf9}
+.path:active{transform:scale(.99)}
+.path-icon{width:52px;height:52px;display:grid;place-items:center;flex:none;border-radius:50%;background:#eaf4f1;color:var(--tealD)}
+.path-icon svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.path-copy{display:flex;flex-direction:column;gap:6px;min-width:0}
+.path-copy strong{font:400 clamp(1.03rem,4vw,1.22rem)/1.15 var(--serif);letter-spacing:-.025em;color:var(--ink)}
+.path-copy small{color:#6a818a;font:.77rem/1.36 var(--sans)}
+.path .arrow{align-self:center;justify-self:center;font-size:1.55rem;color:var(--teal)}
+.path:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.arrival{margin:13px clamp(17px,4.2vw,28px) 24px;background:#e5f1ee;border:1px solid #cae1db;border-radius:15px;padding:23px 19px}
+.arrival h3{font:400 1.47rem/1.12 var(--serif)}
+.arrival p{color:#5e7681;line-height:1.48}
+.arrival button{background:var(--teal)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:20px clamp(20px,5vw,30px) 34px;border-top:1px solid #e0e9e5;background:#fffefa;font-size:.77rem;color:#697e85}
+.foot a{font-size:.75rem;color:var(--tealD);padding:2px}
+.panel-inner{background:#fffefa}
+.panel-top{background:rgba(255,254,250,.96)}
+.panel-hero{background:#edf6f2;color:var(--ink);padding:39px 25px 32px}
+.panel-hero .small{color:var(--teal)}
+.panel-hero h2{color:var(--ink);font-size:clamp(2.3rem,9vw,3.2rem)}
+.panel-hero p{color:#5f7780}
+.step{border-bottom-color:#dfe8e3}
+.cta{background:#173d46;border-radius:10px}
+.cta.secondary{background:#e5f3ef;color:var(--tealD)}
+.deep{border-top-color:#dbe8e2}
+.route-menu a{border-bottom-color:#dfe8e3}
+@media(max-width:380px){
+ .brand{font-size:1rem}
+ .top{padding-inline:13px}
+ .lumina-doctor-art{height:268px}
+ .lumina-doctor-info{padding:23px 18px}
+ .lumina-doctor-info h1{font-size:3.25rem}
+ .lumina-doctor-actions a{font-size:.81rem;gap:5px}
+ .lumina-doctor-actions a svg{width:16px;height:16px}
+ .lumina-doctor-utilities a{font-size:.73rem}
+ .hero#doorPaths h1{font-size:2.85rem}
+ .paths{padding-inline:15px}
+ .path{grid-template-columns:44px minmax(0,1fr) 21px;gap:11px}
+ .path-icon{width:44px;height:44px}
+ .path-icon svg{width:25px;height:25px}
+}
+@media(prefers-reduced-motion:reduce){.path{transition:none}}
+
 </style>
 </head>
 <body>
@@ -417,6 +517,10 @@ function closePanel(){
 }
 
 document.querySelectorAll('[data-path]').forEach(b=>b.addEventListener('click',e=>openPath(b.dataset.path,e)));
+document.querySelectorAll('.lumina-menu nav a').forEach(link=>link.addEventListener('click',()=>{
+  const menu=document.querySelector('.lumina-menu');
+  if(menu)menu.open=false;
+}));
 document.getElementById('back').onclick=closePanel;
 
 // Desktop backdrop tap: only close when the actual backdrop outside .panel-inner is tapped.
