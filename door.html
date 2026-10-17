@@ -471,9 +471,19 @@ img{display:block;max-width:100%}
 .browse-section .category-scene{position:relative;display:block;height:clamp(204px,65vw,305px);width:100%;background:#211b15;overflow:hidden;border-radius:4px;border:1px solid rgba(201,166,106,.26);isolation:isolate}
 .browse-section .category-scene::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(150deg,rgba(255,241,210,.06),transparent 48%,rgba(0,0,0,.17))}
 .browse-section .category-scene img{width:100%;height:100%;object-fit:cover;display:block;opacity:.97}
-/* Show the complete TDS collection group shot without cropping the phone or products. */
-.browse-section .category-tile-tds .scene-tds{background:#e9ded4}
-.browse-section .category-tile-tds .scene-tds img{object-fit:contain;object-position:center center}
+/* TDS collection: preserve every item in the photograph, but fill the square tile
+   with a soft continuation of the image instead of empty top/bottom letterboxing. */
+.browse-section .category-tile-tds .scene-tds{background:#d6c5b3}
+.browse-section .category-tile-tds .scene-tds::before{
+ content:"";position:absolute;inset:-14px;z-index:0;pointer-events:none;
+ background:url("Tds_key_set.PNG") center center/cover no-repeat;
+ filter:blur(18px) saturate(.78) brightness(.95);
+ transform:scale(1.035)
+}
+.browse-section .category-tile-tds .scene-tds img{
+ position:relative;z-index:1;object-fit:contain;object-position:center center;opacity:1
+}
+.browse-section .category-tile-tds .scene-tds::after{z-index:2}
 .browse-section .category-label{font:700 .63rem/1.4 var(--mono);letter-spacing:.105em;text-transform:uppercase;color:var(--cream);padding:2px 1px 7px}
 .browse-section .category-tile:hover .category-scene,.browse-section .category-tile:focus-visible .category-scene{border-color:var(--gold)}
 .browse-section .category-tile:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
