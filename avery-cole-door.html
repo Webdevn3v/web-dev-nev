@@ -125,6 +125,11 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
 ::view-transition-group(root){animation-duration:420ms}
 ::view-transition-old(root),::view-transition-new(root){animation-timing-function:var(--ease-in-out)}
 .door .door-monogram{bottom:0;padding-bottom:calc(32px + env(safe-area-inset-bottom))}.door .monogram{font:400 clamp(2.7rem,11vw,5rem)/1.12 Georgia,serif;color:#f3e4cd;letter-spacing:.13em;text-shadow:0 2px 12px #0007}.door .monogram-divider{font-size:.68em;color:#c9a66a;padding:0 .13em}.door .door-monogram .enter{display:inline-block}
+
+/* Quiet distinction between the owner's contact card and the separate customer Door. */
+.portrait .tds-card-label{display:block;font:.62rem/1.5 var(--sans);font-weight:700;text-transform:uppercase;letter-spacing:.19em;color:#efe3d0;margin-bottom:9px}
+.stat-scroll .door-section-label{font:.59rem/1.2 var(--sans);font-weight:800;text-transform:uppercase;letter-spacing:.22em;color:#dbba8d;margin:0 0 6px}
+
 </style></head><body>
 <section class="door" id="door"><div class="scene"></div><div class="identity door-monogram"><div class="monogram" aria-label="Avery Cole">A<span class="monogram-divider">|</span>C</div><button class="enter" id="enter">Enter</button></div></section>
 <main class="path">
@@ -132,7 +137,7 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
 <section class="portrait" role="img" aria-label="Avery Cole, Realtor">
   <span class="glint" aria-hidden="true"></span>
   <div class="identity">
-    <div class="broker">Rivermore Real Estate</div>
+    <span class="tds-card-label">Digital Business Card</span><div class="broker">Rivermore Real Estate</div>
     <h1>Avery Cole</h1>
     <div class="meta">Realtor &middot; Howard County, Maryland</div>
     <div class="hero-actions">
@@ -148,7 +153,8 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
   </div>
 </section>
 </div>
-<section class="stat-scroll" id="doorPaths" aria-label="Avery Cole highlights: over 40 million dollars sold; top one percent Howard County agent; over 120 families guided; five-star client rating; 2025 Rivermore Top Producer">
+<section class="stat-scroll" id="doorPaths" aria-label="Avery Cole Digital Door and property highlights">
+  <span class="door-section-label">Digital Door</span>
   <div class="stat-rotator" id="statRotator" aria-hidden="true"><i class="stat-mark">◆</i><strong class="stat-value" id="statValue">$40M+</strong><span class="stat-label" id="statLabel">Sold</span><i class="stat-mark">◆</i></div>
 </section>
 <div class="actions-head"><span class="eyebrow">Where to next</span><h2>What can Avery help with?</h2></div>
