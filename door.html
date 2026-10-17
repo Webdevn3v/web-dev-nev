@@ -471,22 +471,16 @@ img{display:block;max-width:100%}
 .browse-section .category-scene{position:relative;display:block;height:clamp(204px,65vw,305px);width:100%;background:#211b15;overflow:hidden;border-radius:4px;border:1px solid rgba(201,166,106,.26);isolation:isolate}
 .browse-section .category-scene::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(150deg,rgba(255,241,210,.06),transparent 48%,rgba(0,0,0,.17))}
 .browse-section .category-scene img{width:100%;height:100%;object-fit:cover;display:block;opacity:.97}
-/* TDS COLLECTION — showcase the complete landscape product photo without
-   stretching, clipping, duplicated edges, or artificial top/bottom bands.
-   Only the featured TDS tile becomes wider; the carousel and all other tiles
-   remain unchanged. */
-.browse-section .category-grid>.category-tile-tds{
-  flex:0 0 min(80vw,390px);
-}
+/* TDS Collection uses the SAME carousel width as every other tile.
+   Scale the original landscape photo to its natural 3:2 shape; don't enlarge
+   the card, crop products, or insert background/filler above and below it. */
 .browse-section .category-tile-tds .scene-tds{
   width:100%;
   height:auto;
   aspect-ratio:3/2;
   background:#e9ded4;
 }
-.browse-section .category-tile-tds .scene-tds::before{
-  content:none;
-}
+.browse-section .category-tile-tds .scene-tds::before{content:none}
 .browse-section .category-tile-tds .scene-tds img{
   display:block;
   width:100%;
@@ -494,9 +488,6 @@ img{display:block;max-width:100%}
   object-fit:contain;
   object-position:center;
   opacity:1;
-}
-.browse-section .category-tile-tds .category-label{
-  margin-top:auto;
 }
 .browse-section .category-label{font:700 .63rem/1.4 var(--mono);letter-spacing:.105em;text-transform:uppercase;color:var(--cream);padding:2px 1px 7px}
 .browse-section .category-tile:hover .category-scene,.browse-section .category-tile:focus-visible .category-scene{border-color:var(--gold)}
@@ -866,8 +857,7 @@ img{display:block;max-width:100%}
 .tds-card-attorney .tds-card-info{background:linear-gradient(0deg,#181411ef,#36261799)}
 
 
-/* Preserve the landscape TDS Collection framing at every viewport width. */
-.browse-section .category-grid>.category-tile-tds{flex-basis:min(80vw,390px)}
+/* Final override: landscape frame only; use the standard category-tile width. */
 .browse-section .category-tile-tds .scene-tds{height:auto;aspect-ratio:3/2}
 </style>
 </head>
