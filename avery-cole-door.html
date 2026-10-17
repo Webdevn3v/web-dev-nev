@@ -128,7 +128,7 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
 </style></head><body>
 <section class="door" id="door"><div class="scene"></div><div class="identity door-monogram"><div class="monogram" aria-label="Avery Cole">A<span class="monogram-divider">|</span>C</div><button class="enter" id="enter">Enter</button></div></section>
 <main class="path">
-<div class="hero-wrap">
+<div class="hero-wrap" id="digitalCard">
 <section class="portrait" role="img" aria-label="Avery Cole, Realtor">
   <span class="glint" aria-hidden="true"></span>
   <div class="identity">
@@ -151,7 +151,7 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
 <section class="stat-scroll" aria-label="Avery Cole highlights: over 40 million dollars sold; top one percent Howard County agent; over 120 families guided; five-star client rating; 2025 Rivermore Top Producer">
   <div class="stat-rotator" id="statRotator" aria-hidden="true"><i class="stat-mark">◆</i><strong class="stat-value" id="statValue">$40M+</strong><span class="stat-label" id="statLabel">Sold</span><i class="stat-mark">◆</i></div>
 </section>
-<div class="actions-head"><span class="eyebrow">Where to next</span><h2>What can Avery help with?</h2></div>
+<div class="actions-head" id="doorPaths"><span class="eyebrow">Where to next</span><h2>What can Avery help with?</h2></div>
 <section class="routes" id="routes">
 <a class="route photo see" href="#" data-path="see"><div class="route-copy"><div class="num">01 · See a Home</div><h3>See a home.</h3><p>Already found one? Go straight to requesting a showing.</p><span class="go">Request a tour →</span></div></a>
 <a class="route buy" href="#" data-path="buy"><div class="route-copy"><div class="num">02 · Buy</div><h3>Find a home.</h3><p>Build a search around the way you actually want to live.</p><span class="go">Build your search →</span></div></a>
@@ -260,19 +260,28 @@ function openPath(key){const p=paths[key];document.getElementById('routeK').text
 document.querySelectorAll('[data-path]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openPath(el.dataset.path)}));
 document.getElementById('routeClose').onclick=()=>routeSheet.classList.remove('open');
 </script><script>
-/* TDS demo entry: same branded Door effect, two clear customer destinations. */
+/* TDS gallery modes: owner card opens at the top; Digital Door begins below the owner card. */
 (function(){
  const mode=new URLSearchParams(location.search).get('view');
- if(mode!=='card'&&mode!=='paths')return;
+ if(mode!=='card' && mode!=='paths')return;
  function start(){
-  const entrance=document.querySelector('#enter, #markTrigger, #doorEntry, #airlock, #gate, #entry');
-  if(entrance){entrance.click()}
-  const target=mode==='paths'
-   ? document.querySelector('#routes, #paths, #northlineServices, #services, .paths, .routes, .service-choices, main')
-   : document.querySelector('#digitalCard, #cardTop, .attorney-card, .hero, .hero-wrap, main');
-  setTimeout(function(){
-   if(target)target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
-  },1750);
+  const entrance=document.querySelector('#door, #gate, #doorEntry, #airlock, #entry');
+  if(entrance){
+   if(entrance.id==='door'){entrance.classList.add('done');document.body.classList.add('revealed');}
+   else if(entrance.id==='gate'){entrance.remove();}
+   else if(entrance.id==='doorEntry'){entrance.classList.add('done');document.body.classList.add('door-open');}
+   else if(entrance.id==='entry' && document.getElementById('markTrigger')){
+    entrance.classList.add('done');document.body.classList.add('entered');
+   }else if(entrance.id==='entry' && document.querySelector('.attorney-card')){
+    entrance.classList.add('open','done');
+   }else{entrance.click();entrance.classList.add('done');}
+  }
+  const target=mode==='card'
+   ? document.querySelector('#digitalCard, #ownerCard, #cardTop, .northline-card, .attorney-card, .hero-wrap, .hero, main')
+   : document.querySelector('#doorPaths, #northlineServices, #services, #routes, #paths, .actions-head, .paths, .routes, main');
+  function position(){if(target)target.scrollIntoView({behavior:'auto',block:'start'});}
+  requestAnimationFrame(position);
+  setTimeout(position,140);
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
