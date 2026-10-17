@@ -16,7 +16,7 @@
 #northlineServices{scroll-margin-top:70px}
 @media(max-width:650px){main{padding-top:42px}.northline-card{background-position:center 18%}}
 </style></head><body><div class="gate" id="gate" role="button" tabindex="0" aria-label="Enter Northline Roofing"><div class="rain"></div><div class="gate-card"><div class="mark">N<b>L</b></div><h1>Northline</h1><p>Roofing Co.</p><div class="tap">Tap to enter ↓</div></div></div><div class="site">
-<section class="northline-card" aria-label="Jordan Cole digital business card">
+<section class="northline-card" id="digitalCard" aria-label="Jordan Cole digital business card">
   <div class="northline-card-content">
     <span class="northline-card-brand">Northline Roofing Co.</span>
     <h1>Jordan Cole</h1>
@@ -30,25 +30,34 @@
     <a class="northline-card-scroll" href="#northlineServices">Explore the Digital Door <span aria-hidden="true">↓</span></a>
   </div>
 </section>
-<header class="top"><div class="mini">N<b>L</b> NORTHLINE</div><a href="tel:+15555550198">24/7 ROOF LINE</a></header><main><section class="hero" id="northlineServices"><div class="eyebrow">Roofing Co. · Built to Protect</div><h2>What does your roof <em>need?</em></h2><p class="lead">Start where you are. We’ll take you to the right inspection, response, or project information without making you guess.</p></section><section class="paths" aria-label="Choose a roofing path"><button class="path" data-panel="inspection"><span>01 / PLAN</span><h3>I need an inspection</h3><p>Age, leaks, buying a home, or peace of mind.</p></button><button class="path" data-panel="storm"><span>02 / URGENT</span><h3>I have storm damage</h3><p>Fast response, temporary protection, and documentation.</p></button><button class="path" data-panel="replace"><span>03 / BUILD</span><h3>I need a new roof</h3><p>Compare systems and start a clear replacement estimate.</p></button><button class="path" data-panel="customer"><span>04 / SUPPORT</span><h3>I’m a current customer</h3><p>Project questions, documents, warranty, or follow-up.</p></button></section><div class="foot"><span>Not sure? An inspection is the cleanest first step.</span><div><a href="key-northline.html">Jordan Cole</a> · <a href="northline-full-site.html">In-depth site</a> · <a href="door.html#demos">Back to The Digital Side Path</a></div></div></main></div>
+<header class="top"><div class="mini">N<b>L</b> NORTHLINE</div><a href="tel:+15555550198">24/7 ROOF LINE</a></header><main id="doorPaths"><section class="hero" id="northlineServices"><div class="eyebrow">Roofing Co. · Built to Protect</div><h2>What does your roof <em>need?</em></h2><p class="lead">Start where you are. We’ll take you to the right inspection, response, or project information without making you guess.</p></section><section class="paths" aria-label="Choose a roofing path"><button class="path" data-panel="inspection"><span>01 / PLAN</span><h3>I need an inspection</h3><p>Age, leaks, buying a home, or peace of mind.</p></button><button class="path" data-panel="storm"><span>02 / URGENT</span><h3>I have storm damage</h3><p>Fast response, temporary protection, and documentation.</p></button><button class="path" data-panel="replace"><span>03 / BUILD</span><h3>I need a new roof</h3><p>Compare systems and start a clear replacement estimate.</p></button><button class="path" data-panel="customer"><span>04 / SUPPORT</span><h3>I’m a current customer</h3><p>Project questions, documents, warranty, or follow-up.</p></button></section><div class="foot"><span>Not sure? An inspection is the cleanest first step.</span><div><a href="key-northline.html">Jordan Cole</a> · <a href="northline-full-site.html">In-depth site</a> · <a href="door.html#demos">Back to The Digital Side Path</a></div></div></main></div>
 <div class="panel" id="inspection"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">Start with the facts</div><h3>Book a roof inspection.</h3><p>We’ll check the roof system, flashing, drainage, penetrations, and visible interior warning signs—then give you photo-backed findings.</p><div class="actions"><a class="btn" href="northline-mobile-site.html#inspection">Schedule inspection</a><a class="btn alt" href="northline-full-site.html#process">See the process</a></div></div></div>
 <div class="panel" id="storm"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">Storm response</div><h3>Protect the structure first.</h3><p>If water is entering now, move valuables away from the area and call. Northline can assess damage, provide temporary protection, and document conditions.</p><div class="actions"><a class="btn" href="tel:+15555550198">Call roof line</a><a class="btn alt" href="northline-mobile-site.html#storm">Storm checklist</a></div></div></div>
 <div class="panel" id="replace"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">Replacement planning</div><h3>Build the right roof once.</h3><p>Start with an on-site assessment, system recommendations, and a scope that explains materials, ventilation, flashing, cleanup, and warranty.</p><div class="actions"><a class="btn" href="northline-full-site.html#estimate">Request estimate</a><a class="btn alt" href="northline-full-site.html#systems">Compare systems</a></div></div></div>
 <div class="panel" id="customer"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">Project support</div><h3>Your project stays connected.</h3><p>Reach the crew, request a document, or ask a warranty question. Include the service address so we can route it quickly.</p><div class="actions"><a class="btn" href="mailto:crew@northlineroofing.example?subject=Current%20Northline%20project">Email the crew</a><a class="btn alt" href="northline-mobile-site.html#customer">Customer support</a></div></div></div>
 <script>const gate=document.querySelector('#gate');function enter(){gate.classList.add('open');setTimeout(()=>gate.remove(),900)}gate.addEventListener('click',enter);gate.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')enter()});document.querySelectorAll('[data-panel]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.panel).classList.add('active'));document.querySelectorAll('.panel').forEach(p=>{p.onclick=e=>{if(e.target===p||e.target.classList.contains('close'))p.classList.remove('active')}});addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'))});</script><script>
-/* TDS demo entry: same branded Door effect, two clear customer destinations. */
+/* TDS gallery modes: owner card opens at the top; Digital Door begins below the owner card. */
 (function(){
  const mode=new URLSearchParams(location.search).get('view');
- if(mode!=='card'&&mode!=='paths')return;
+ if(mode!=='card' && mode!=='paths')return;
  function start(){
-  const entrance=document.querySelector('#enter, #markTrigger, #doorEntry, #airlock, #gate, #entry');
-  if(entrance){entrance.click()}
-  const target=mode==='paths'
-   ? document.querySelector('#routes, #paths, #northlineServices, #services, .paths, .routes, .service-choices, main')
-   : document.querySelector('#digitalCard, #cardTop, .attorney-card, .hero, .hero-wrap, main');
-  setTimeout(function(){
-   if(target)target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
-  },1750);
+  const entrance=document.querySelector('#door, #gate, #doorEntry, #airlock, #entry');
+  if(entrance){
+   if(entrance.id==='door'){entrance.classList.add('done');document.body.classList.add('revealed');}
+   else if(entrance.id==='gate'){entrance.remove();}
+   else if(entrance.id==='doorEntry'){entrance.classList.add('done');document.body.classList.add('door-open');}
+   else if(entrance.id==='entry' && document.getElementById('markTrigger')){
+    entrance.classList.add('done');document.body.classList.add('entered');
+   }else if(entrance.id==='entry' && document.querySelector('.attorney-card')){
+    entrance.classList.add('open','done');
+   }else{entrance.click();entrance.classList.add('done');}
+  }
+  const target=mode==='card'
+   ? document.querySelector('#digitalCard, #ownerCard, #cardTop, .northline-card, .attorney-card, .hero-wrap, .hero, main')
+   : document.querySelector('#doorPaths, #northlineServices, #services, #routes, #paths, .actions-head, .paths, .routes, main');
+  function position(){if(target)target.scrollIntoView({behavior:'auto',block:'start'});}
+  requestAnimationFrame(position);
+  setTimeout(position,140);
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
