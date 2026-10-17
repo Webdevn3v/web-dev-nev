@@ -70,9 +70,18 @@
  if(mode!=='card' && mode!=='paths')return;
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  function targetForMode(){
-  return mode==='card'
-   ? document.querySelector('#digitalCard, #ownerCard, #cardTop, .northline-card, .attorney-card, .hero-wrap, .hero, main')
-   : document.querySelector('#doorPaths, #northlineServices, #services, #routes, #paths, .actions-head, .paths, .routes, main');
+  if(mode==='card'){
+   return document.getElementById('digitalCard') ||
+    document.getElementById('ownerCard') ||
+    document.getElementById('cardTop') ||
+    document.querySelector('.northline-card, .attorney-card, .hero-wrap, .hero, main');
+  }
+  return document.getElementById('doorPaths') ||
+   document.getElementById('northlineServices') ||
+   document.getElementById('services') ||
+   document.getElementById('routes') ||
+   document.getElementById('paths') ||
+   document.querySelector('.actions-head, .paths, .routes, main');
  }
  function placeTarget(){
   const target=targetForMode();
