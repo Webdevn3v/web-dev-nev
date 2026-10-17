@@ -506,79 +506,51 @@ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
 }
 </script>
 <script>
-/* TDS gallery entry: keep the native branded Door animation, THEN land on the correct content. */
+/* TDS gallery behavior: only Digital Business Card links bypass the entrance.
+   Digital Door (?view=paths) waits for the visitor to tap Enter, plays the
+   business's native door effect, and reveals the owner card with no forced scroll. */
 (function(){
- const mode=new URLSearchParams(location.search).get('view');
- if(mode!=='card' && mode!=='paths')return;
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- function targetForMode(){
-  if(mode==='card'){
-   return document.getElementById('digitalCard') ||
-    document.getElementById('ownerCard') ||
-    document.getElementById('cardTop') ||
-    document.querySelector('.northline-card, .attorney-card, .hero-wrap, .hero, main');
+  const mode=new URLSearchParams(location.search).get('view');
+  if(mode!=='card')return;
+  function showCard(){
+    const overlay=document.querySelector('#door, #gate, #doorEntry, #airlock, #entry');
+    if(overlay){
+      switch(overlay.id){
+        case 'door':
+          overlay.classList.add('done');
+          document.body.classList.add('revealed');
+          break;
+        case 'gate':
+          overlay.remove();
+          break;
+        case 'doorEntry':
+          overlay.classList.add('done');
+          document.body.classList.add('door-open');
+          break;
+        case 'airlock':
+          overlay.classList.add('done');
+          document.body.classList.add('revealed');
+          break;
+        case 'entry':
+          if(document.getElementById('markTrigger')){
+            overlay.classList.add('done');
+            document.body.classList.add('entered');
+          }else if(document.querySelector('.attorney-card')){
+            overlay.classList.add('open','done');
+          }else{
+            overlay.classList.add('open');
+          }
+          break;
+      }
+    }
+    const card=document.getElementById('digitalCard') ||
+      document.getElementById('ownerCard') ||
+      document.getElementById('cardTop') ||
+      document.querySelector('.northline-card, .attorney-card, .hero-wrap, .hero, main');
+    if(card)requestAnimationFrame(()=>card.scrollIntoView({behavior:'instant',block:'start'}));
   }
-  return document.getElementById('doorPaths') ||
-   document.getElementById('northlineServices') ||
-   document.getElementById('services') ||
-   document.getElementById('routes') ||
-   document.getElementById('paths') ||
-   document.querySelector('.actions-head, .paths, .routes, main');
- }
- function placeTarget(){
-  const target=targetForMode();
-  if(!target)return;
-  // "instant" overrides the site's smooth-scroll CSS so the view does not pass through the business card.
-  target.scrollIntoView({behavior:'instant',block:'start'});
- }
- function skipEntranceForCard(){
-  const overlay=document.querySelector('#door, #gate, #doorEntry, #airlock, #entry');
-  if(overlay){
-   switch(overlay.id){
-    case 'door': overlay.classList.add('done');document.body.classList.add('revealed');break;
-    case 'gate': overlay.remove();break;
-    case 'doorEntry': overlay.classList.add('done');document.body.classList.add('door-open');break;
-    case 'airlock': overlay.classList.add('done');document.body.classList.add('revealed');break;
-    case 'entry':
-     if(document.getElementById('markTrigger')){
-      overlay.classList.add('done');document.body.classList.add('entered');
-     }else if(document.querySelector('.attorney-card')){
-      overlay.classList.add('open','done');
-     }else{
-      overlay.classList.add('open');
-     }
-     break;
-   }
-  }
-  requestAnimationFrame(placeTarget);
- }
- function openDoorWithEffect(){
-  // Invoke the same control a customer taps, preserving each business's custom animation.
-  const trigger=document.querySelector('#enter, #markTrigger, #doorEntry, #gate, #airlock, #entry button, #entry');
-  if(!trigger){placeTarget();return;}
-  const overlay=trigger.closest('#door, #gate, #doorEntry, #airlock, #entry');
-  const id=overlay ? overlay.id : '';
-  const duration={door:1550,gate:1100,doorEntry:2100,airlock:1300,
-    entry:document.getElementById('markTrigger')?1500:(document.querySelector('.attorney-card')?2100:1050)}[id] || 1200;
-  // Two frames ensure the closed entrance is painted before its animation begins.
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-   if(reduced && id==='door'){overlay.classList.add('done');document.body.classList.add('revealed');}
-   else if(reduced && id==='airlock'){overlay.classList.add('done');document.body.classList.add('revealed');}
-   else if(reduced && id==='doorEntry'){overlay.classList.add('done');document.body.classList.add('door-open');}
-   else if(reduced && id==='entry' && document.getElementById('markTrigger')){
-    overlay.classList.add('done');document.body.classList.add('entered');
-   }else{
-    trigger.click();
-   }
-   setTimeout(placeTarget,reduced?80:duration);
-  }));
- }
- function start(){
-  if(mode==='card')skipEntranceForCard();
-  else openDoorWithEffect();
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
- else start();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',showCard,{once:true});
+  else showCard();
 })();
 </script></body>
 </html>
