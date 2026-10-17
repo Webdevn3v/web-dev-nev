@@ -827,6 +827,20 @@ img{display:block;max-width:100%}
 .demo-paths .static-northline-name{font:700 clamp(1.05rem,3vw,1.75rem)/1.1 var(--sans);letter-spacing:.075em}
 .demo-paths .static-northline-sub{font:700 .73rem/1 var(--mono);color:#a0c148;letter-spacing:.3em}
 
+
+/* Business cards open the actual owner hero; Door examples open the customer paths. */
+.modal-card-link{position:relative;display:block;color:inherit;text-decoration:none;cursor:pointer}
+.modal-card-link .tds-card-preview-large{pointer-events:none}
+.modal-card-link .modal-preview-cta{bottom:14px;left:14px;right:14px}
+.modal-card-link:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.tds-card-initials{width:100%;height:100%;display:grid;place-items:center;background:radial-gradient(circle at 50% 37%,#406e76,#132b35 75%);color:#d7f0e9;font:400 clamp(5rem,19vw,9rem)/1 Georgia,serif;letter-spacing:-.08em}
+.tds-card-designer .tds-card-info{background:linear-gradient(0deg,#211812e8,#4d332d82);color:#fff4e8}
+.tds-card-contractor .tds-card-info{background:linear-gradient(0deg,#081009f2,#08100999);color:#f0f3ed}
+.tds-card-contractor .tds-card-brand{color:#b6d42e}
+.tds-card-dentist .tds-card-info{background:linear-gradient(0deg,#0d2832f2,#0d2832c2);color:#effcf9}
+.tds-card-dentist .tds-card-brand{color:#afe4d6}
+.tds-card-attorney .tds-card-info{background:linear-gradient(0deg,#181411ef,#36261799)}
+
 </style>
 </head>
 <body>
@@ -1033,14 +1047,18 @@ tds:{title:'The TDS Collection',description:'Signature physical keys and digital
 {type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS keychain',caption:'Keychain',brand:'Everyday connection'},
 {type:'photo',src:'assets/door/key-wallet.webp',alt:'Digital wallet key',caption:'Wallet Key',brand:'Saved on your phone'},
 {type:'photo',src:'three-plaque-set.png',alt:'TDS tap plaques',caption:'Tap Plaques',brand:'Hiring, reviews and follows'}],links:[['Ask about the collection','project-inquiry.html']]},
-cards:{title:'Digital Business Cards',description:'Your contact details and the right next step in one place. No stack of business cards to carry or replace.',examples:[
-{type:'demo',kind:'card',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',photo:'avery-tds-bracelet.png',url:'avery-cole-door.html'},
-{type:'demo',kind:'card',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Attorney',photo:'frederick-attorney-hero.png',url:'door-frederick-legacy-law.html'},
-{type:'demo',kind:'card',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Contractor',photo:'northline-owner-portrait.png',url:'northline-door.html'}],links:[['Discuss a digital card','project-inquiry.html']]},
-door:{title:'Digital Door',description:'One focused mobile entry point that moves a customer from a tap to the action they came for.',examples:[
-{type:'demo',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html'},
-{type:'demo',brand:'Rivermore Real Estate',name:'Homes and appointments',caption:'Real estate Door',url:'avery-cole-door.html'},
-{type:'demo',brand:'Northline Roofing Co.',name:'Estimates and inspections',caption:'Contractor Door',url:'northline-door.html'}],
+cards:{title:'Digital Business Cards',description:'Every Digital Business Card is designed around the person and business. Tap an example to open the real card at the very top.',examples:[
+{type:'demo',kind:'card',theme:'realtor',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',photo:'avery-tds-bracelet.png',url:'avery-cole-door.html?view=card'},
+{type:'demo',kind:'card',theme:'contractor',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Owner · Roofing',photo:'northline-owner-portrait.png',url:'northline-door.html?view=card'},
+{type:'demo',kind:'card',theme:'designer',brand:'Atelier House',name:'Lillian Hart',caption:'Principal Designer',photo:'atelier-house-owner-headshot.png',url:'atelier-door.html?view=card'},
+{type:'demo',kind:'card',theme:'dentist',brand:'Lumina Dental Studio',name:'Dr. Elias Morgan',caption:'Dentist · Practice Owner',initials:'EM',url:'lumina-door.html?view=card'},
+{type:'demo',kind:'card',theme:'attorney',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Founding Attorney',photo:'frederick-attorney-hero.png',url:'door-frederick-legacy-law.html?view=card'}],links:[['Discuss a digital card','project-inquiry.html']]},
+door:{title:'Digital Door',description:'Skip the business card and enter the customer paths directly. Every Door is built around that business, not a template.',examples:[
+{type:'demo',brand:'Rivermore Real Estate',name:'Homes and showings',caption:'Realtor Door',url:'avery-cole-door.html?view=paths'},
+{type:'demo',brand:'Northline Roofing Co.',name:'Roof inspections and help',caption:'Contractor Door',url:'northline-door.html?view=paths'},
+{type:'demo',brand:'Atelier House',name:'Portfolio and design projects',caption:'Interior design Door',url:'atelier-door.html?view=paths'},
+{type:'demo',brand:'Lumina Dental Studio',name:'Visits and patient guidance',caption:'Dental office Door',url:'lumina-door.html?view=paths'},
+{type:'demo',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html?view=paths'}],
 details:['Direct mobile link','QR asset','Owner Key for Apple Wallet or Google Wallet','One programmed physical tap card'],
 links:[['See Digital Door pricing','#simple'],['Ask about a Door','project-inquiry.html']]},
 sets:{title:'Key Sets',description:'Physical keys paired with the right digital destination. These are illustrative combinations, not completed client orders.',examples:[
@@ -1104,12 +1122,16 @@ function sceneFor(example){
  return scene;
 }
 function renderBusinessCard(example){
- const card=element('div','tds-card-preview tds-card-preview-large');
+ const card=element('div','tds-card-preview tds-card-preview-large tds-card-'+(example.theme||'standard'));
  card.setAttribute('aria-label',example.name+' digital business card');
  const media=element('div','tds-card-media');
- const photo=element('img','');
- photo.src=example.photo;photo.alt='Portrait for '+example.name;photo.loading='lazy';photo.decoding='async';
- media.append(photo);
+ if(example.photo){
+  const photo=element('img','');
+  photo.src=example.photo;photo.alt='Portrait for '+example.name;photo.loading='lazy';photo.decoding='async';
+  media.append(photo);
+ }else{
+  media.append(element('div','tds-card-initials',example.initials||''));
+ }
  const info=element('div','tds-card-info');
  info.append(element('span','tds-card-brand',example.brand));
  info.append(element('strong','',example.name));
@@ -1126,7 +1148,10 @@ function renderExample(example){
   const frame=element('div','modal-photo'),img=element('img','');
   img.src=example.src;img.alt=example.alt;img.loading='lazy';img.decoding='async';frame.append(img);figure.append(frame);
  }else if(example.kind==='card'){
-  figure.append(renderBusinessCard(example));
+  const wrapper=element('a','modal-card-link');
+  wrapper.href=example.url;wrapper.setAttribute('aria-label','Open '+example.name+' digital business card');
+  wrapper.append(renderBusinessCard(example),element('span','modal-preview-cta','Open the digital business card ↗'));
+  figure.append(wrapper);
  }else if(example.kind==='website' && example.url){
   const wrapper=element('a','mobilized-site-example');
   wrapper.href=example.url;wrapper.setAttribute('aria-label','Open the real '+example.brand+' mobilized website');
