@@ -511,6 +511,29 @@ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
    business's native door effect, and reveals the owner card with no forced scroll. */
 (function(){
   const mode=new URLSearchParams(location.search).get('view');
+  // Door examples have a different destination from the owner's business card.
+  // Position the customer section WHILE the closed entrance covers the screen,
+  // but only after the visitor actually chooses to enter.
+  if(mode==='paths'){
+    const doorSection=document.getElementById('doorPaths');
+    const enterControl=document.querySelector('#enter, #markTrigger, #doorEntry, #gate, #airlock, #entry button, #entry');
+    if(doorSection && enterControl){
+      let positioned=false;
+      const enterCustomerDoor=()=>{
+        if(positioned)return;
+        positioned=true;
+        doorSection.scrollIntoView({behavior:'instant',block:'start'});
+      };
+      enterControl.addEventListener('click',enterCustomerDoor,{capture:true});
+      // div[role=button] entrances dispatch keydown rather than browser-generated click.
+      if(enterControl.tagName!=='BUTTON'){
+        enterControl.addEventListener('keydown',event=>{
+          if(event.key==='Enter'||event.key===' ')enterCustomerDoor();
+        },{capture:true});
+      }
+    }
+    return;
+  }
   if(mode!=='card')return;
   function showCard(){
     const overlay=document.querySelector('#door, #gate, #doorEntry, #airlock, #entry');
