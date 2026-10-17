@@ -214,58 +214,63 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
   </div>
 </div>
 <main class="shell door-ready">
-  <div class="top">
-    <div class="brand"><span class="mark">✦</span> Lumina Dental Studio</div>
-    <a class="toplink" href="#paths">Choose a path</a>
-  </div>
+  <header class="top">
+    <a class="brand" href="#digitalCard" aria-label="Lumina Dental Studio — meet Dr. Morgan"><span class="mark" aria-hidden="true">✦</span><span>Lumina Dental Studio</span></a>
+    <details class="lumina-menu">
+      <summary aria-label="Open navigation menu"><span class="menu-lines" aria-hidden="true"><i></i><i></i><i></i></span></summary>
+      <nav aria-label="Lumina navigation">
+        <a href="#digitalCard">Meet Dr. Morgan</a>
+        <a href="#doorPaths">Explore your options</a>
+        <a href="#arrival">Your appointment</a>
+        <a href="lumina-mobile-site.html">Practice website ↗</a>
+      </nav>
+    </details>
+  </header>
 
-  <section class="lumina-doctor-card" id="digitalCard" aria-label="Dr. Elias Morgan customized digital business card">
+  <section class="lumina-doctor-card" id="digitalCard" aria-label="Meet Dr. Elias Morgan">
     <div class="lumina-doctor-art">
-      <img class="lumina-doctor-photo" src="lumina-elias-morgan.jpg" alt="Dr. Elias Morgan at Lumina Dental Studio" loading="eager" decoding="async" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
-      <span class="lumina-doctor-art-label" aria-hidden="true">THE PRACTICE / 01</span>
+      <img class="lumina-doctor-photo" src="lumina-elias-morgan.jpg" alt="Dr. Elias Morgan at his dental practice" loading="eager" decoding="async" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
       <span class="lumina-doctor-emblem" aria-hidden="true">LM<span>.</span></span>
-      <span class="lumina-doctor-art-base" aria-hidden="true">CALM CARE · CLEAR NEXT STEPS</span>
     </div>
     <div class="lumina-doctor-info">
-      <span class="lumina-doctor-kicker">DIGITAL BUSINESS CARD · MEET YOUR DENTIST</span>
+      <span class="lumina-doctor-kicker">MEET YOUR DENTIST</span>
       <h1>Dr. Elias<br><em>Morgan.</em></h1>
-      <p class="lumina-doctor-role">Dentist &amp; Practice Owner<br>Lumina Dental Studio</p>
+      <p class="lumina-doctor-role">Dentist &amp; Practice Owner</p>
       <p class="lumina-doctor-lede">Questions first. Comfortable care. A clear way to book, prepare, or get help.</p>
-      <nav class="lumina-doctor-actions" aria-label="Contact Dr. Morgan's dental practice">
-        <a href="tel:+15555550177">Call</a>
-        <a href="sms:+15555550177">Text</a>
-        <a href="mailto:hello@luminadental.com">Email</a>
+      <nav class="lumina-doctor-actions" aria-label="Contact Dr. Morgan's practice">
+        <a href="tel:+15555550177"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 23 1 14 3 5l2-2Z"/></svg>Call</a>
+        <a href="sms:+15555550177"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 1-8 8 9 9 0 0 1-3-.5L4 20l1.5-4.7A8 8 0 1 1 20 11Z"/></svg>Text</a>
+        <a href="mailto:hello@luminadental.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>Email</a>
       </nav>
       <div class="lumina-doctor-utilities">
-        <a href="elias-morgan.vcf" download="elias-morgan.vcf">Save Contact ↗</a>
-        <a href="lumina-mobile-site.html">Mobilized Website ↗</a>
+        <a href="elias-morgan.vcf" download="elias-morgan.vcf">Save Contact <span aria-hidden="true">↗</span></a>
+        <a href="lumina-mobile-site.html">Practice Website <span aria-hidden="true">↗</span></a>
       </div>
-      <a class="lumina-doctor-next" href="#doorPaths">Continue to the Dental Door <span aria-hidden="true">↓</span></a>
+      <a class="lumina-doctor-next" href="#doorPaths">Explore your options <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
-  <section class="hero" id="doorPaths">
-    <div class="eyebrow">Digital Door · Your visit, simplified.</div>
-    <h1>What can we help with <em>today?</em></h1>
+  <section class="hero" id="doorPaths" aria-labelledby="doorHeading">
+    <div class="eyebrow">YOUR VISIT, SIMPLIFIED.</div>
+    <h1 id="doorHeading">What can we help with <em>today?</em></h1>
     <p>Skip the searching. Choose what brought you here and we’ll take you to the useful part.</p>
-    <div class="avail"><div class="live"><span class="dot"></span><span>Ready to schedule?</span></div><strong>Choose your next step below</strong></div>
   </section>
 
-  <section class="paths" id="paths">
-    <div class="paths-head"><h2>Start where you are.</h2><span class="small">5 paths</span></div>
-    <button class="path" data-path="new"><span class="num">01</span><strong>I’m New Here</strong><span class="arrow">→</span></button>
-    <button class="path" data-path="need"><span class="num">02</span><strong>I Know What I Need</strong><span class="arrow">→</span></button>
-    <button class="path" data-path="nervous"><span class="num">03</span><strong>I’m Nervous About the Dentist</strong><span class="arrow">→</span></button>
-    <button class="path" data-path="problem"><span class="num">04</span><strong>I Have a Dental Problem</strong><span class="arrow">→</span></button>
-    <button class="path" data-path="patient"><span class="num">05</span><strong>I’m Already a Patient</strong><span class="arrow">→</span></button>
+  <section class="paths" id="paths" aria-labelledby="pathHeading">
+    <div class="paths-head"><h2 id="pathHeading">Choose your path</h2><span class="small">5 paths</span></div>
+    <button class="path" data-path="new"><span class="path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M5.5 20v-2a6.5 6.5 0 0 1 13 0v2"/></svg></span><span class="path-copy"><strong>I’m New Here</strong><small>Meet the practice, learn what to expect, and get started.</small></span><span class="arrow" aria-hidden="true">→</span></button>
+    <button class="path" data-path="need"><span class="path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 3c-2.5-1.5-6-1-6.5 3-1 4.5 2.5 7 3.1 12 .2 1.5.7 2.5 1.9 2.5 1.6 0 2-4.5 3.5-6.5 1.5 2 1.9 6.5 3.5 6.5 1.2 0 1.7-1 1.9-2.5.6-5 4.1-7.5 3.1-12-.5-4-4-4.5-6.5-3Z"/></svg></span><span class="path-copy"><strong>I Know What I Need</strong><small>Explore treatments and find the right information.</small></span><span class="arrow" aria-hidden="true">→</span></button>
+    <button class="path" data-path="nervous"><span class="path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21c-6-2-8-7-8-12 5 0 8 3 8 8 0-6 3-10 8-12 1 9-2 14-8 16Z"/><path d="M12 14v7"/></svg></span><span class="path-copy"><strong>I’m Nervous About the Dentist</strong><small>Find comfort options and support before your visit.</small></span><span class="arrow" aria-hidden="true">→</span></button>
+    <button class="path" data-path="problem"><span class="path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.5 3C6 2 3 3 3 7c0 4 2 6 3 11 .5 2 2 2 2.5 0L12 11l3.5 7c.6 2 2 2 2.5 0l1-4"/><circle cx="18" cy="18" r="4.5"/><path d="M18 16v4m-2-2h4"/></svg></span><span class="path-copy"><strong>I Have a Dental Problem</strong><small>Find guidance and your next step.</small></span><span class="arrow" aria-hidden="true">→</span></button>
+    <button class="path" data-path="patient"><span class="path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16"/></svg></span><span class="path-copy"><strong>I’m Already a Patient</strong><small>Appointments, forms, and helpful resources.</small></span><span class="arrow" aria-hidden="true">→</span></button>
   </section>
 
-  <section class="arrival">
+  <section class="arrival" id="arrival">
     <div><span class="small">Appointment day</span><h3>I’m here. Get me there.</h3><p>Parking, Suite 140, check-in, forms, and a quick “running late?” button.</p></div>
     <button data-path="arrival" aria-label="Open arrival guide">→</button>
   </section>
 
-  <div class="foot"><a href="key-lumina.html">Dr. Elias Morgan</a> · <a href="lumina-mobile-site.html">In-depth site</a> · <a href="door.html#demos">Back to The Digital Side Path</a></div>
+  <footer class="foot"><span>Lumina Dental Studio</span><a href="lumina-mobile-site.html">Practice website ↗</a></footer>
 </main>
 
 <section class="panel" id="panel" aria-hidden="true">
@@ -308,14 +313,14 @@ const email='mailto:hello@luminadental.com';
 const data={
  new:{
    eye:'New patient path', title:'First visit. No guesswork.',
-   intro:'We made the first step easy — from choosing a time to knowing exactly what happens when you arrive.',
+   intro:'From your first question to your first appointment, find a clear way forward.',
    steps:[
-     ['1 · Choose a time','Book online in under two minutes. Lumina offers early morning, evening, and Saturday appointments.'],
-     ['2 · Complete intake','Fill out health history digitally from home so the team is ready when you arrive.'],
-     ['3 · Your exam','Plan for about 60–75 minutes for digital X-rays, a comprehensive exam, and a conversation about your goals.'],
-     ['4 · Your plan','Leave with clear options, timeline, and pricing — no pressure.']
+     ['1 · Choose a time','Review the appointment options and select a time that works for you.'],
+     ['2 · Prepare','Complete any intake forms supplied before your appointment.'],
+     ['3 · Your first visit','The team can explain the appointment length and what to expect before you arrive.'],
+     ['4 · Your next steps','Ask about treatment choices, timing, and costs so you can make an informed decision.']
    ],
-   actions:[['Book my free first visit',fullSite+'#book'],['Insurance + financing',fullSite+'#faq']]
+   actions:[['Request a first visit',fullSite+'#book'],['Insurance + financing',fullSite+'#faq']]
  },
  need:{
    eye:'Treatment path', title:'You already know the direction.',
@@ -335,9 +340,9 @@ const data={
    intro:'Lumina was built around calm, unrushed care. Start with what would make the visit feel easier.',
    steps:[
      ['Tell us before you arrive','Use the appointment note to share anxiety, past experiences, or anything the team should know.'],
-     ['Comfort options','Nitrous oxide and oral conscious sedation are available for appropriate patients.'],
-     ['No-rush appointments','The practice does not double-book or rush patients. Questions come before treatment.'],
-     ['Start with a conversation','You can book a first visit without committing to treatment that day.']
+     ['Comfort options','Ask the team about ways to make your visit more comfortable.'],
+     ['Take your time','Share your concerns and ask questions before discussing treatment options.'],
+     ['Start with a conversation','Ask questions and tell the team what would help you feel comfortable.']
    ],
    actions:[['Book a low-pressure first visit',fullSite+'#book'],['Learn about sedation',fullSite+'#services']]
  },
@@ -345,10 +350,10 @@ const data={
    eye:'Problem path', title:'Something hurts. Start here.',
    intro:'We’ll separate urgent from “needs attention” and get you to the fastest useful action.',
    steps:[
-     ['Severe pain, swelling, trauma, or bleeding','Call the office directly. Lumina reserves daily emergency appointment slots for current patients and tries to see urgent cases same day.'],
+     ['Severe pain, swelling, trauma, or bleeding','Call the office for guidance. For severe or life-threatening symptoms, seek urgent medical care.'],
      ['Broken tooth or lost restoration','Call for the soonest available evaluation. Avoid chewing on the affected side until you are seen.'],
      ['Sensitivity or something feels off','Request an appointment and describe what you are noticing.'],
-     ['After hours','Lumina’s voicemail includes guidance and an emergency line for severe situations.']
+     ['After hours','For urgent concerns, follow the contact guidance provided by your dental team.']
    ],
    actions:[['Call Lumina now',phone],['Request an appointment',fullSite+'#book']]
  },
@@ -356,8 +361,8 @@ const data={
    eye:'Returning patient path', title:'Welcome back.',
    intro:'The things returning patients need most, without making you dig through the website.',
    menu:[
-     ['Appointment information',fullSite+fullSite+'#book'],
-     ['Digital forms',fullSite+fullSite+'#book'],
+     ['Appointment information',fullSite+'#book'],
+     ['Digital forms',fullSite+'#book'],
      ['Insurance + financing',fullSite+'#faq'],
      ['Directions + hours',fullSite+'#visit'],
      ['Treatment information',fullSite+'#services']
@@ -368,13 +373,12 @@ const data={
    eye:'Appointment day · arrival guide', title:'You’re close. Here’s the last 100 feet.',
    intro:'A compact arrival path for the stuff people usually search for while sitting in the car.',
    steps:[
-     ['1 · Destination','280 Wellness Boulevard · Suite 140 · Your City, ST 00000'],
-     ['2 · Parking','Demo placeholder: use the main patient parking area nearest the Wellness Boulevard entrance. Replace with real parking instructions before launch.'],
-     ['3 · Find the suite','Enter through the main lobby and follow signs to Suite 140. Replace this demo routing with verified building directions before launch.'],
-     ['4 · Check in','Have your digital intake completed if possible. Arrive a few minutes early for your first visit.'],
-     ['Running late?','Call the front desk so the team can help with timing.']
+     ['1 · Find us','Use the location details in your appointment confirmation.'],
+     ['2 · Parking','Check your confirmation for arrival details or contact the front desk.'],
+     ['3 · Check in','Bring any requested forms and follow the check-in instructions for your appointment.'],
+     ['Running late?','Call the team so they can help you with timing.']
    ],
-   actions:[['Open directions','https://maps.google.com/?q=280+Wellness+Boulevard+Suite+140'],['I’m running late',phone]]
+   actions:[['Location & hours',fullSite+'#visit'],['I’m running late',phone]]
  }
 };
 
