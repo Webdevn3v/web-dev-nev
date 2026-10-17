@@ -226,6 +226,30 @@ body.entered .door-ready{opacity:1;transform:scale(1);filter:blur(0)}
   .chip-grid{gap:18px}
   .studio-banner img{height:340px}
 }
+
+
+/* Lillian's custom owner card: an editorial designer introduction, distinct from realtor/contractor demos. */
+.card-scene.atelier-owner-hero{display:flex;flex-direction:column;justify-content:space-between;min-height:calc(100svh - 70px);margin:0;padding:0;background:#faf6ef;gap:0}
+.atelier-owner-art{min-height:clamp(300px,46svh,485px);display:grid;grid-template-columns:47% 53%;background:#ded0c0}
+.atelier-owner-photo{min-width:0;overflow:hidden;background:#c2b2a2}
+.atelier-owner-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.atelier-owner-identity{min-width:0;padding:clamp(20px,5vw,42px) clamp(14px,4vw,38px);display:flex;flex-direction:column;justify-content:center;color:#382920}
+.atelier-owner-kicker,.atelier-owner-label{font:700 .64rem/1.4 var(--mono);letter-spacing:.12em;color:#87523f}
+.atelier-owner-identity h1{font:400 clamp(2rem,7vw,4.2rem)/.98 var(--serif);letter-spacing:-.045em;margin:22px 0 13px;overflow-wrap:anywhere}
+.atelier-owner-identity h1 em{display:block;color:#a06c57;font-weight:400}
+.atelier-owner-identity p{font:.88rem/1.55 var(--sans);color:#65584c;margin:0}
+.atelier-owner-rule{width:45px;height:1px;background:#a97b66;margin:24px 0 15px}
+.atelier-owner-signature{font:italic 1rem var(--serif);color:#7c5543}
+.atelier-owner-bottom{padding:20px clamp(17px,5vw,36px) 26px;display:flex;flex-direction:column;gap:11px}
+.atelier-owner-bottom>p{font:.86rem/1.55 var(--sans);color:#665950;margin:0;max-width:500px}
+.atelier-owner-hero .card-fan{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:5px;flex:0 0 auto}
+.atelier-owner-hero .fan-item{opacity:1;transform:none;min-width:0;min-height:49px;padding:12px 9px;background:#e8ded2;color:#3a2c25;box-shadow:none;font-size:.75rem;align-items:center}
+.atelier-owner-hero .fan-item:nth-child(-n+3){background:#98674f;color:#fffaf2}
+.atelier-owner-hero .fan-item:nth-child(4){grid-column:span 2}
+.atelier-owner-next{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #c5ad9b;margin-top:6px;padding:12px 2px 0;color:#654437;font:700 .68rem/1.4 var(--mono);letter-spacing:.085em;text-transform:uppercase}
+.atelier-owner-hero,.hero-scene#doorPaths{scroll-margin-top:0}
+@media(max-width:370px){.atelier-owner-art{min-height:300px;grid-template-columns:43% 57%}.atelier-owner-identity h1{font-size:2rem}.atelier-owner-identity{padding:17px 12px}.atelier-owner-bottom{padding:15px 13px 20px}}
+
 </style>
 </head>
 <body>
@@ -254,21 +278,28 @@ body.entered .door-ready{opacity:1;transform:scale(1);filter:blur(0)}
     </div>
   </section>
 
-  <section class="card-scene" id="ownerCard">
-    <div class="biz-card">
-      <img class="card-photo" src="atelier-house-owner-headshot.png" alt="Lillian Hart, Principal Designer at Atelier House">
-      <div class="card-id">
-        <span class="card-eyebrow">Owner · Digital Business Card</span>
-        <h2>Lillian Hart</h2>
-        <p>Principal Designer · Creative Director</p>
+  <section class="card-scene atelier-owner-hero" id="ownerCard" aria-label="Lillian Hart custom digital business card">
+    <div class="atelier-owner-art">
+      <div class="atelier-owner-photo"><img src="atelier-house-owner-headshot.png" alt="Lillian Hart, owner and principal designer"></div>
+      <div class="atelier-owner-identity">
+        <span class="atelier-owner-kicker">ATELIER HOUSE · FOUNDER</span>
+        <h1>Lillian <em>Hart.</em></h1>
+        <p>Principal Designer<br>Creative Director</p>
+        <span class="atelier-owner-rule" aria-hidden="true"></span>
+        <span class="atelier-owner-signature">Interiors made personal.</span>
       </div>
     </div>
+    <div class="atelier-owner-bottom">
+      <span class="atelier-owner-label">THE DIGITAL BUSINESS CARD</span>
+      <p>Let's make a space feel like yours. Reach the studio or explore the work in one place.</p>
     <div class="card-fan">
       <a class="fan-item" style="--i:0" href="tel:+15555550142"><span>Call</span><span>↗</span></a>
       <a class="fan-item" style="--i:1" href="sms:+15555550142"><span>Text</span><span>↗</span></a>
       <a class="fan-item" style="--i:2" href="mailto:hello@atelierhouse.example"><span>Email</span><span>↗</span></a>
-      <a class="fan-item" style="--i:3" href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AN%3AHart%3BLillian%3B%3B%3B%0AFN%3ALillian%20Hart%0AORG%3AAtelier%20House%20Interior%20Design%0ATITLE%3APrincipal%20Designer%20%C2%B7%20Creative%20Director%0ATEL%3BTYPE%3DWORK%2CVOICE%3A%2B15555550142%0AEMAIL%3Ahello%40atelierhouse.example%0AADR%3BTYPE%3DWORK%3A%3B%3B140%20Maple%20Row%20Suite%203%3B%3B%3B%3B%0AURL%3Ahttps%3A%2F%2Fatelierhouse.example%0AEND%3AVCARD" download="lillian-hart-atelier-house.vcf"><span>Save Contact</span><span>↗</span></a>
+      <a class="fan-item" style="--i:3" href="lillian-hart.vcf" download="lillian-hart.vcf"><span>Save Contact</span><span>↗</span></a>
       <a class="fan-item" style="--i:4" href="https://www.google.com/maps/search/?api=1&query=140+Maple+Row%2C+Suite+3" target="_blank" rel="noopener"><span>Directions</span><span>↗</span></a>
+    </div>
+      <a class="atelier-owner-next" href="#doorPaths">Explore the Design Door <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
