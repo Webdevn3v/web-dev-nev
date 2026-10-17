@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Cole;Jordan;;;
+FN:Jordan Cole
+ORG:Northline Roofing Co.
+TITLE:Owner and Project Lead
+TEL;TYPE=WORK,VOICE:+15555550198
+EMAIL:crew@northlineroofing.example
+URL:https://thedigitalside.org/northline-door.html
+END:VCARD
