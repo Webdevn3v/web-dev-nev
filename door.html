@@ -1164,9 +1164,10 @@ function renderExample(example){
   wrapper.href=example.url;
   wrapper.setAttribute('aria-label','Enter '+example.brand+' Digital Door');
   const frame=element('iframe','modal-real-preview');
-  frame.src=example.url;frame.title=example.brand+' Digital Door';
+  // Keep the closed branded entrance visible in the preview; only play it after opening the full Door.
+  frame.src=example.url.split('?')[0];frame.title=example.brand+' Digital Door';
   frame.tabIndex=-1;frame.loading='lazy';frame.setAttribute('aria-hidden','true');
-  wrapper.append(frame);
+  wrapper.append(frame,element('span','modal-preview-cta','Open the Digital Door ↗'));
   figure.append(wrapper);
  }
  if(example.caption||example.brand||example.name){
