@@ -181,6 +181,17 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
 #doorPaths{scroll-margin-top:70px}
 @media(max-width:380px){.lumina-doctor-art{min-height:165px}.lumina-doctor-info{padding:20px}.lumina-doctor-info h1{font-size:2.7rem}.lumina-doctor-lede{font-size:.82rem}}
 
+
+/* Approved practice-owner portrait. Preserve the LM design as a fallback
+   until the photo file arrives in the repository. */
+.lumina-doctor-art{min-height:clamp(235px,37svh,370px)}
+.lumina-doctor-photo{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center 28%;z-index:0}
+.lumina-doctor-art.has-photo::before{display:none}
+.lumina-doctor-art.has-photo::after{width:auto;height:auto;inset:0;border:0;border-radius:0;transform:none;background:linear-gradient(0deg,#0718208a,transparent 36%,#07182047);z-index:1}
+.lumina-doctor-art.has-photo .lumina-doctor-emblem{display:none}
+.lumina-doctor-art.has-photo .lumina-doctor-art-label,
+.lumina-doctor-art.has-photo .lumina-doctor-art-base{color:#fff;text-shadow:0 1px 8px #071820;z-index:2}
+
 </style>
 </head>
 <body>
@@ -209,10 +220,11 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
   </div>
 
   <section class="lumina-doctor-card" id="digitalCard" aria-label="Dr. Elias Morgan customized digital business card">
-    <div class="lumina-doctor-art" aria-hidden="true">
-      <span class="lumina-doctor-art-label">THE PRACTICE / 01</span>
-      <span class="lumina-doctor-emblem">LM<span>.</span></span>
-      <span class="lumina-doctor-art-base">CALM CARE · CLEAR NEXT STEPS</span>
+    <div class="lumina-doctor-art">
+      <img class="lumina-doctor-photo" src="lumina-elias-morgan.jpg" alt="Dr. Elias Morgan at Lumina Dental Studio" loading="eager" decoding="async" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
+      <span class="lumina-doctor-art-label" aria-hidden="true">THE PRACTICE / 01</span>
+      <span class="lumina-doctor-emblem" aria-hidden="true">LM<span>.</span></span>
+      <span class="lumina-doctor-art-base" aria-hidden="true">CALM CARE · CLEAR NEXT STEPS</span>
     </div>
     <div class="lumina-doctor-info">
       <span class="lumina-doctor-kicker">DIGITAL BUSINESS CARD · MEET YOUR DENTIST</span>
