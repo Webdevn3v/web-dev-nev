@@ -1120,7 +1120,7 @@ cards:{title:'Digital Business Cards',description:'Every Digital Business Card i
 {type:'demo',kind:'card',theme:'realtor',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',photo:'avery-tds-bracelet.png',url:'avery-cole-door.html?view=card'},
 {type:'demo',kind:'card',theme:'contractor',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Owner · Roofing',photo:'northline-owner-portrait.png',url:'northline-door.html?view=card'},
 {type:'demo',kind:'card',theme:'designer',brand:'Atelier House',name:'Lillian Hart',caption:'Principal Designer',photo:'atelier-house-owner-headshot.png',url:'atelier-door.html?view=card'},
-{type:'demo',kind:'card',theme:'dentist',brand:'Lumina Dental Studio',name:'Dr. Elias Morgan',caption:'Dentist · Practice Owner',initials:'EM',url:'lumina-door.html?view=card'},
+{type:'demo',kind:'card',theme:'dentist',brand:'Lumina Dental Studio',name:'Dr. Elias Morgan',caption:'Dentist · Practice Owner',photo:'lumina-elias-morgan.jpg',initials:'EM',url:'lumina-door.html?view=card'},
 {type:'demo',kind:'card',theme:'attorney',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Founding Attorney',photo:'frederick-attorney-hero.png',url:'door-frederick-legacy-law.html?view=card'}],links:[['Discuss a digital card','project-inquiry.html']]},
 door:{title:'Digital Door',description:'A branded entrance to the customer experience, separate from the owner’s business card. Each Door is built around what customers need to do next.',examples:[
 {type:'demo',brand:'Northline Roofing Co.',name:'Roof inspections and help',caption:'Contractor Door',url:'northline-door.html?view=paths'},
@@ -1199,6 +1199,9 @@ function renderBusinessCard(example){
  if(example.photo){
   const photo=element('img','');
   photo.src=example.photo;photo.alt=example.name+' portrait';photo.loading='lazy';photo.decoding='async';
+  if(example.initials)photo.addEventListener('error',()=>{
+    media.replaceChildren(element('div','tds-card-initials',example.initials));
+  },{once:true});
   media.append(photo);
  }else{
   media.append(element('div','tds-card-initials',example.initials||''));
