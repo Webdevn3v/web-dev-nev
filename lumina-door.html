@@ -155,6 +155,32 @@ button,a{font:inherit;color:inherit} button{border:0;background:none} a{text-dec
 body.door-open .door-ready{opacity:1;transform:none;filter:none}
 @media(prefers-reduced-motion:reduce){.door-leaf,.door-mark,.door-entry,.door-ready,.door-mark path,.spark,.door-leaf::after{transition:none!important;animation:none!important}}
 
+
+
+/* Lumina owner's digital card: calm dental-studio identity, distinct from Avery's photographic card. */
+.lumina-doctor-card{min-height:calc(100svh - 68px);display:flex;flex-direction:column;background:#f5f9f6;color:#182d33;scroll-margin-top:68px}
+.lumina-doctor-art{position:relative;min-height:clamp(175px,26svh,250px);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 50% 30%,#38616b,#1a3541 70%,#162630);color:#f7f9f6}
+.lumina-doctor-art:before,.lumina-doctor-art:after{content:"";position:absolute;width:340px;height:340px;border:1px solid #a9ded544;border-radius:50%;transform:translate(45%,22%)}
+.lumina-doctor-art:after{width:220px;height:220px;transform:translate(-70%,-32%);border-color:#a9ded526}
+.lumina-doctor-art-label,.lumina-doctor-art-base{position:absolute;z-index:1;left:22px;font:700 .62rem/1.4 var(--mono);letter-spacing:.14em;color:#b5e6d7}
+.lumina-doctor-art-label{top:19px}.lumina-doctor-art-base{bottom:18px}
+.lumina-doctor-emblem{font:400 clamp(5rem,20vw,8rem)/1 var(--serif);letter-spacing:-.13em;z-index:1}
+.lumina-doctor-emblem span{color:#8bdac5;letter-spacing:0}
+.lumina-doctor-info{padding:clamp(23px,5vw,38px);display:flex;flex-direction:column;flex:1}
+.lumina-doctor-kicker{font:800 .63rem/1.4 var(--mono);letter-spacing:.18em;color:#228d7d}
+.lumina-doctor-info h1{font:400 clamp(2.8rem,10vw,4.7rem)/.93 var(--serif);letter-spacing:-.035em;margin:13px 0 11px;color:#213740}
+.lumina-doctor-info h1 em{font-weight:400;color:#298c7e}
+.lumina-doctor-role{font:700 .85rem/1.55 var(--sans);color:#405f62;margin:0}
+.lumina-doctor-lede{font:.89rem/1.6 var(--sans);color:#61767a;margin:13px 0 19px;max-width:440px}
+.lumina-doctor-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.lumina-doctor-actions a{display:grid;place-items:center;padding:12px 6px;min-height:48px;background:#1b3941;color:white;font:700 .79rem var(--sans);border-radius:7px}
+.lumina-doctor-utilities{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px}
+.lumina-doctor-utilities a{padding:12px 6px;border:1px solid #b3cfc9;text-align:center;color:#275c61;font:700 .72rem/1.4 var(--sans);border-radius:7px}
+.lumina-doctor-next{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding:20px 2px 3px;color:#268272;font:800 .7rem/1.3 var(--mono);text-transform:uppercase;letter-spacing:.075em}
+.lumina-doctor-card :is(a):focus-visible{outline:2px solid #299d89;outline-offset:3px}
+#doorPaths{scroll-margin-top:70px}
+@media(max-width:380px){.lumina-doctor-art{min-height:165px}.lumina-doctor-info{padding:20px}.lumina-doctor-info h1{font-size:2.7rem}.lumina-doctor-lede{font-size:.82rem}}
+
 </style>
 </head>
 <body>
@@ -182,11 +208,35 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
     <a class="toplink" href="#paths">Choose a path</a>
   </div>
 
+  <section class="lumina-doctor-card" id="digitalCard" aria-label="Dr. Elias Morgan customized digital business card">
+    <div class="lumina-doctor-art" aria-hidden="true">
+      <span class="lumina-doctor-art-label">THE PRACTICE / 01</span>
+      <span class="lumina-doctor-emblem">LM<span>.</span></span>
+      <span class="lumina-doctor-art-base">CALM CARE · CLEAR NEXT STEPS</span>
+    </div>
+    <div class="lumina-doctor-info">
+      <span class="lumina-doctor-kicker">MEET YOUR DENTIST</span>
+      <h1>Dr. Elias<br><em>Morgan.</em></h1>
+      <p class="lumina-doctor-role">Dentist &amp; Practice Owner<br>Lumina Dental Studio</p>
+      <p class="lumina-doctor-lede">Questions first. Comfortable care. A clear way to book, prepare, or get help.</p>
+      <nav class="lumina-doctor-actions" aria-label="Contact Dr. Morgan's dental practice">
+        <a href="tel:+15555550177">Call</a>
+        <a href="sms:+15555550177">Text</a>
+        <a href="mailto:hello@luminadental.com">Email</a>
+      </nav>
+      <div class="lumina-doctor-utilities">
+        <a href="elias-morgan.vcf" download="elias-morgan.vcf">Save Contact ↗</a>
+        <a href="lumina-mobile-site.html">Mobilized Website ↗</a>
+      </div>
+      <a class="lumina-doctor-next" href="#doorPaths">Continue to the Dental Door <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
   <section class="hero" id="doorPaths">
     <div class="eyebrow">Your visit, simplified.</div>
     <h1>What can we help with <em>today?</em></h1>
     <p>Skip the searching. Choose what brought you here and we’ll take you to the useful part.</p>
-    <div class="avail"><div class="live"><span class="dot"></span><span>Next available</span></div><strong>Tomorrow · AM + PM</strong></div>
+    <div class="avail"><div class="live"><span class="dot"></span><span>Ready to schedule?</span></div><strong>Choose your next step below</strong></div>
   </section>
 
   <section class="paths" id="paths">
@@ -203,7 +253,7 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
     <button data-path="arrival" aria-label="Open arrival guide">→</button>
   </section>
 
-  <div class="foot"><a href="key-lumina.html">Dr. Maya Chen</a> · <a href="lumina-mobile-site.html">In-depth site</a> · <a href="door.html#demos">Back to The Digital Side Path</a></div>
+  <div class="foot"><a href="key-lumina.html">Dr. Elias Morgan</a> · <a href="lumina-mobile-site.html">In-depth site</a> · <a href="door.html#demos">Back to The Digital Side Path</a></div>
 </main>
 
 <section class="panel" id="panel" aria-hidden="true">
