@@ -182,7 +182,7 @@ body.door-open .door-ready{opacity:1;transform:none;filter:none}
     <a class="toplink" href="#paths">Choose a path</a>
   </div>
 
-  <section class="hero">
+  <section class="hero" id="doorPaths">
     <div class="eyebrow">Your visit, simplified.</div>
     <h1>What can we help with <em>today?</em></h1>
     <p>Skip the searching. Choose what brought you here and we’ll take you to the useful part.</p>
@@ -364,19 +364,28 @@ document.addEventListener('keydown',e=>{
 });
 </script>
 <script>
-/* TDS demo entry: same branded Door effect, two clear customer destinations. */
+/* TDS gallery modes: owner card opens at the top; Digital Door begins below the owner card. */
 (function(){
  const mode=new URLSearchParams(location.search).get('view');
- if(mode!=='card'&&mode!=='paths')return;
+ if(mode!=='card' && mode!=='paths')return;
  function start(){
-  const entrance=document.querySelector('#enter, #markTrigger, #doorEntry, #airlock, #gate, #entry');
-  if(entrance){entrance.click()}
-  const target=mode==='paths'
-   ? document.querySelector('#routes, #paths, #northlineServices, #services, .paths, .routes, .service-choices, main')
-   : document.querySelector('#digitalCard, #cardTop, .attorney-card, .hero, .hero-wrap, main');
-  setTimeout(function(){
-   if(target)target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
-  },1750);
+  const entrance=document.querySelector('#door, #gate, #doorEntry, #airlock, #entry');
+  if(entrance){
+   if(entrance.id==='door'){entrance.classList.add('done');document.body.classList.add('revealed');}
+   else if(entrance.id==='gate'){entrance.remove();}
+   else if(entrance.id==='doorEntry'){entrance.classList.add('done');document.body.classList.add('door-open');}
+   else if(entrance.id==='entry' && document.getElementById('markTrigger')){
+    entrance.classList.add('done');document.body.classList.add('entered');
+   }else if(entrance.id==='entry' && document.querySelector('.attorney-card')){
+    entrance.classList.add('open','done');
+   }else{entrance.click();entrance.classList.add('done');}
+  }
+  const target=mode==='card'
+   ? document.querySelector('#digitalCard, #ownerCard, #cardTop, .northline-card, .attorney-card, .hero-wrap, .hero, main')
+   : document.querySelector('#doorPaths, #northlineServices, #services, #routes, #paths, .actions-head, .paths, .routes, main');
+  function position(){if(target)target.scrollIntoView({behavior:'auto',block:'start'});}
+  requestAnimationFrame(position);
+  setTimeout(position,140);
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
