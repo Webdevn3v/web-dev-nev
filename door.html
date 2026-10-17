@@ -859,6 +859,25 @@ img{display:block;max-width:100%}
 
 /* Final override: landscape frame only; use the standard category-tile width. */
 .browse-section .category-tile-tds .scene-tds{height:auto;aspect-ratio:3/2}
+
+/* Digital Door pop-up: one complete, unobstructed entrance per swipe on mobile. */
+.category-dialog.is-door-collection .modal-door-preview .modal-preview-cta{display:none}
+.category-dialog.is-door-collection .modal-door-preview{width:100%}
+.category-dialog.is-door-collection .modal-example-caption{min-height:0;margin-top:11px;padding-bottom:9px}
+.category-dialog.is-door-collection .modal-door-preview iframe{display:block;width:100%;height:100%;border:0;pointer-events:none}
+@media(max-width:699px){
+  .category-dialog.is-door-collection .collection-swipe{
+    gap:0;
+    padding-inline:0;
+    scroll-padding-inline:0;
+  }
+  .category-dialog.is-door-collection .collection-swipe>.modal-slide{
+    flex:0 0 100%;
+    width:100%;
+    min-width:100%;
+    scroll-snap-align:start;
+  }
+}
 </style>
 </head>
 <body>
@@ -923,7 +942,7 @@ img{display:block;max-width:100%}
       <div class="category-grid" aria-label="Browse The Digital Side solutions" tabindex="0">
         <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="Tds_key_set.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Collection</span></button>
         <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="tds-card-preview tds-card-preview-tile"><span class="tds-card-media"><img src="avery-tds-bracelet.png" alt="" loading="lazy"></span><span class="tds-card-info"><span class="tds-card-brand">Rivermore Real Estate</span><strong>Avery Cole</strong><span class="tds-card-role">Realtor · Howard County</span></span></span></span><span class="category-label">Digital Business Cards</span></button>
-        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View mobilized website examples"><span class="category-scene scene-websites single-site-preview" aria-hidden="true"><span class="single-site-phone"><iframe src="realtor-index.html" title="Avery Cole mobilized website scrolling preview" tabindex="-1" loading="lazy" data-auto-site-scroll></iframe></span></span><span class="category-label">Mobilized Websites</span></button>
+        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View mobilized website examples"><span class="category-scene scene-websites single-site-preview" aria-hidden="true"><span class="single-site-phone"><iframe src="northline-mobile-site.html" title="Northline Roofing mobilized website scrolling preview" tabindex="-1" loading="lazy" data-auto-site-scroll></iframe></span></span><span class="category-label">Mobilized Websites</span></button>
         <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button>
         <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Key Sets examples"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="assets/Tds_pvc_card.PNG" alt="" loading="lazy"><img class="keyset-chain" src="assets/Tds_keychain.PNG" alt="" loading="lazy"><img class="keyset-wearable" src="assets/Tds_bracelet.PNG" alt="" loading="lazy"></span><span class="category-label">Key Sets</span></button>
         <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="plaque-hiring-window.jpg" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button>
@@ -1071,9 +1090,9 @@ cards:{title:'Digital Business Cards',description:'Every Digital Business Card i
 {type:'demo',kind:'card',theme:'designer',brand:'Atelier House',name:'Lillian Hart',caption:'Principal Designer',photo:'atelier-house-owner-headshot.png',url:'atelier-door.html?view=card'},
 {type:'demo',kind:'card',theme:'dentist',brand:'Lumina Dental Studio',name:'Dr. Elias Morgan',caption:'Dentist · Practice Owner',initials:'EM',url:'lumina-door.html?view=card'},
 {type:'demo',kind:'card',theme:'attorney',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Founding Attorney',photo:'frederick-attorney-hero.png',url:'door-frederick-legacy-law.html?view=card'}],links:[['Discuss a digital card','project-inquiry.html']]},
-door:{title:'Digital Door',description:'Skip the business card and enter the customer paths directly. Every Door is built around that business, not a template.',examples:[
-{type:'demo',brand:'Rivermore Real Estate',name:'Homes and showings',caption:'Realtor Door',url:'avery-cole-door.html?view=paths'},
+door:{title:'Digital Door',description:'A branded entrance to the customer experience, separate from the owner’s business card. Each Door is built around what customers need to do next.',examples:[
 {type:'demo',brand:'Northline Roofing Co.',name:'Roof inspections and help',caption:'Contractor Door',url:'northline-door.html?view=paths'},
+{type:'demo',brand:'Rivermore Real Estate',name:'Homes and showings',caption:'Realtor Door',url:'avery-cole-door.html?view=paths'},
 {type:'demo',brand:'Atelier House',name:'Portfolio and design projects',caption:'Interior design Door',url:'atelier-door.html?view=paths'},
 {type:'demo',brand:'Lumina Dental Studio',name:'Visits and patient guidance',caption:'Dental office Door',url:'lumina-door.html?view=paths'},
 {type:'demo',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html?view=paths'}],
@@ -1084,9 +1103,9 @@ sets:{title:'Key Sets',description:'Physical keys paired with the right digital 
 {type:'photo',src:'assets/Tds_keychain.PNG',alt:'Keychain key set option',caption:'Keychain',brand:'Ready to go'},
 {type:'photo',src:'assets/Tds_bracelet.PNG',alt:'Wearable key set option',caption:'Wearable Key',brand:'Within reach'}],
 links:[['Plan a key set','project-inquiry.html']]},
-websites:{title:'Mobilized Websites',description:'Your existing business website, thoughtfully streamlined for phones. Swipe between two real examples to see how information, services and customer actions can be easier to find.',examples:[
-{type:'demo',brand:'Rivermore Real Estate',name:'Avery · Listings and properties',caption:'Mobilized realtor website',kind:'website',url:'realtor-index.html'},
-{type:'demo',brand:'Northline Roofing Co.',name:'Jordan · Inspections and estimates',caption:'Mobilized roofing website',kind:'website',url:'northline-mobile-site.html'}],
+websites:{title:'Mobilized Websites',description:'Your existing business website, thoughtfully streamlined for phones. Swipe between real examples to see how information, services and customer actions can be easier to find.',examples:[
+{type:'demo',brand:'Northline Roofing Co.',name:'Jordan · Inspections and estimates',caption:'Mobilized roofing website',kind:'website',url:'northline-mobile-site.html'},
+{type:'demo',brand:'Rivermore Real Estate',name:'Avery · Listings and properties',caption:'Mobilized realtor website',kind:'website',url:'realtor-index.html'}],
 links:[['Discuss a mobilized website','project-inquiry.html']]},
 custom:{title:'Custom Tap Products',description:'Custom branded tap pieces can lead people straight to a specific action. These are concepts, not finished client orders.',examples:[
 {type:'photo',src:'plaque-hiring-window.jpg',alt:'Hiring plaque in a window',caption:'Hiring',brand:'Tap to apply'},
@@ -1185,7 +1204,7 @@ function renderExample(example){
   // Keep the closed branded entrance visible in the preview; only play it after opening the full Door.
   frame.src=example.url.split('?')[0];frame.title=example.brand+' Digital Door';
   frame.tabIndex=-1;frame.loading='lazy';frame.setAttribute('aria-hidden','true');
-  wrapper.append(frame,element('span','modal-preview-cta','Open the Digital Door ↗'));
+  wrapper.append(frame);
   figure.append(wrapper);
  }
  if(example.caption||example.brand||example.name){
@@ -1200,6 +1219,7 @@ function renderExample(example){
 function reset(){
  swipe.replaceChildren();links.replaceChildren();
  swipe.scrollLeft=0;
+ modal.classList.remove('is-door-collection');
 }
 function close(){
  if(modal.open)modal.close();
@@ -1213,8 +1233,10 @@ document.querySelectorAll('[data-collection]').forEach(button=>button.addEventLi
  document.getElementById('collectionDescription').textContent=data.description;
  const modalDescription=document.getElementById('collectionDescriptionDetails');
  const isDoor=button.dataset.collection==='door';
- modalDescription.open=isDoor;
- modalDescription.classList.toggle('show-description-open',isDoor);
+ modal.classList.toggle('is-door-collection',isDoor);
+ // Keep the description available, but do not push the actual Door off screen.
+ modalDescription.open=false;
+ modalDescription.classList.remove('show-description-open');
  for(const example of data.examples)swipe.append(renderExample(example));
  if(data.details){
   const group=element('div','modal-includes');
@@ -1244,7 +1266,7 @@ swipe.addEventListener('keydown',e=>{
 })();
 </script>
 <script>
-/* Keep real website frames at phone width, and make Avery's thumbnail gently scroll. */
+/* Keep the embedded websites at phone width; slowly scroll the Northline demo phone. */
 (function(){
  const thumb=document.querySelector('iframe[data-auto-site-scroll]');
  const frames=[...document.querySelectorAll('.single-site-phone iframe,.mobilized-site-example-frame')];
