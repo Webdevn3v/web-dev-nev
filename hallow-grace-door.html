@@ -67,8 +67,8 @@
   if(!trigger){placeTarget();return;}
   const overlay=trigger.closest('#door, #gate, #doorEntry, #airlock, #entry');
   const id=overlay ? overlay.id : '';
-  const duration={door:950,gate:1050,doorEntry:1660,airlock:850,
-    entry:document.getElementById('markTrigger')?1400:(document.querySelector('.attorney-card')?1730:1000)}[id] || 1100;
+  const duration={door:1550,gate:1100,doorEntry:2100,airlock:1300,
+    entry:document.getElementById('markTrigger')?1500:(document.querySelector('.attorney-card')?2100:1050)}[id] || 1200;
   // Two frames ensure the closed entrance is painted before its animation begins.
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
    if(reduced && id==='door'){overlay.classList.add('done');document.body.classList.add('revealed');}
