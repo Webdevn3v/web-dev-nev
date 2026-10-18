@@ -944,7 +944,7 @@ img{display:block;max-width:100%}
       <div class="keys-showcase"><div class="keys-showcase-copy">
         <details class="one-tap-disclosure">
           <summary><span class="one-tap-headline"><span class="kicker">The Digital Door</span><h2>One tap. A smarter first impression.</h2></span><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
-          <p class="keys-message">A <strong class="digital-door-emphasis">Digital Door</strong> is a digital business card built around what people need from your business. One easy place to connect, find answers and take the next step without searching through an entire website. Pair it with a physical tap, or keep it simple with a digital QR Key you keep in Apple Wallet or Google Wallet. When customers need more detail, your mobilized business website is right there.</p>
+          <p class="keys-message">Your <strong>Digital Business Card</strong> makes it easy to call, text, email or save a contact. The <strong class="digital-door-emphasis">Digital Door</strong> is the separate customer experience that helps people book, request, browse or get answers without digging through a long website. A tap product or wallet QR can take customers to the destination that fits your business.</p>
         </details>
       </div></div>
     </div>
@@ -1106,13 +1106,10 @@ const modal=document.getElementById('collectionModal');
 const swipe=document.getElementById('collectionSwipe');
 const links=document.getElementById('collectionLinks');
 const categories={
-tds:{title:'The TDS Collection',description:'Signature physical keys and digital connections. Swipe through the card, bracelet, USB, keychain, wallet and plaque designs.',examples:[
-{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'TDS tap card',caption:'Tap Card',brand:'A lasting first impression'},
-{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS wearable key',caption:'Bracelet',brand:'A connection you can wear'},
-{type:'photo',src:'assets/Tds_usb.PNG',alt:'TDS USB key',caption:'USB Key',brand:'The project handoff'},
-{type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS keychain',caption:'Keychain',brand:'Everyday connection'},
-{type:'photo',src:'assets/door/key-wallet.webp',alt:'Digital wallet key',caption:'Wallet Key',brand:'Saved on your phone'},
-{type:'photo',src:'three-plaque-set.png',alt:'TDS tap plaques',caption:'Tap Plaques',brand:'Hiring, reviews and follows'}],links:[['Ask about the collection','project-inquiry.html']]},
+tds:{title:'The TDS Collection',description:'Our signature TDS-branded physical accessories: a keychain, wearable bracelet and tap card. Owner handoff tools and business-branded sets are shown separately.',examples:[
+{type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS signature tap keychain',caption:'Signature Keychain',brand:'A simple everyday tap'},
+{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS signature wearable',caption:'Signature Bracelet',brand:'A connection you can wear'},
+{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'TDS signature tap card',caption:'Signature Card',brand:'Minimal, ready to share'}],links:[['Ask about the collection','project-inquiry.html']]},
 cards:{title:'Digital Business Cards',description:'Every Digital Business Card is designed around the person and business. Tap an example to open the real card at the very top.',examples:[
 {type:'demo',kind:'card',theme:'realtor',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',photo:'avery-tds-bracelet.png',url:'avery-cole-door.html?view=card'},
 {type:'demo',kind:'card',theme:'contractor',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Owner · Roofing',photo:'northline-owner-portrait.png',url:'northline-door.html?view=card'},
@@ -1127,19 +1124,22 @@ door:{title:'Digital Door',description:'A branded entrance to the customer exper
 {type:'demo',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html?view=paths'}],
 details:['Direct mobile link','QR asset','Owner Key for Apple Wallet or Google Wallet','One programmed physical tap card'],
 links:[['See Digital Door pricing','#simple'],['Ask about a Door','project-inquiry.html']]},
-sets:{title:'Key Sets',description:'Physical keys paired with the right digital destination. These are illustrative combinations, not completed client orders.',examples:[
-{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'Tap card key set option',caption:'Card',brand:'An easy handoff'},
-{type:'photo',src:'assets/Tds_keychain.PNG',alt:'Keychain key set option',caption:'Keychain',brand:'Ready to go'},
-{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'Wearable key set option',caption:'Wearable Key',brand:'Within reach'}],
+sets:{title:'Owner & Team Key Sets',description:'A coordinated digital handoff for one business: a wallet QR, programmed card or keychain and the matching online experience. A USB handoff key may be included for administrators. Exact physical pieces depend on the package.',examples:[
+{type:'photo',src:'Tds_key_set.PNG',alt:'Coordinated owner key set with phone QR, tap card, keychain and USB',caption:'Coordinated Key Set',brand:'One business, connected pieces'},
+{type:'photo',src:'assets/door/key-wallet.webp',alt:'Wallet QR key',caption:'Owner Wallet Key',brand:'Your QR ready on your phone'},
+{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'Physical tap card option',caption:'Physical Tap Card',brand:'A simple handoff'},
+{type:'photo',src:'assets/Tds_keychain.PNG',alt:'Programmed tap keychain option',caption:'Tap Keychain',brand:'Portable access'},
+{type:'photo',src:'assets/Tds_usb.PNG',alt:'USB project handoff key',caption:'Developer USB',brand:'Project files and updates'}],
 links:[['Plan a key set','project-inquiry.html']]},
 websites:{title:'Mobilized Websites',description:'Your existing business website, thoughtfully streamlined for phones. Swipe between real examples to see how information, services and customer actions can be easier to find.',examples:[
 {type:'demo',brand:'Northline Roofing Co.',name:'Jordan · Inspections and estimates',caption:'Mobilized roofing website',kind:'website',url:'northline-mobile-site.html'},
 {type:'demo',brand:'Rivermore Real Estate',name:'Avery · Listings and properties',caption:'Mobilized realtor website',kind:'website',url:'realtor-index.html'}],
 links:[['Discuss a mobilized website','project-inquiry.html']]},
-custom:{title:'Custom Tap Products',description:'Custom branded tap pieces can lead people straight to a specific action. These are concepts, not finished client orders.',examples:[
-{type:'photo',src:'plaque-hiring-window.jpg',alt:'Hiring plaque in a window',caption:'Hiring',brand:'Tap to apply'},
-{type:'photo',src:'review-at-bakery-exit.png',alt:'Review plaque near bakery exit',caption:'Reviews',brand:'Tap to review'},
-{type:'photo',src:'plaque-follow-bookstore.png',alt:'Follow plaque at bookstore',caption:'Follow',brand:'Tap to follow'}],
+custom:{title:'Custom Tap Products',description:'Different businesses, different shapes, colors and identities. Choose a custom keychain, bracelet, card or tap plaque designed around a useful action.',examples:[
+{type:'photo',src:'Tds_custom_mockup.PNG',alt:'Assortment of customized tap keychains, bracelet and branded PVC card',caption:'Shapes & Branding',brand:'Designed for your business'},
+{type:'photo',src:'plaque-hiring-window.jpg',alt:'Hiring tap plaque in a window',caption:'Hiring Plaque',brand:'Tap to apply'},
+{type:'photo',src:'review-at-bakery-exit.png',alt:'Review tap plaque near bakery exit',caption:'Review Plaque',brand:'Tap to review'},
+{type:'photo',src:'plaque-follow-bookstore.png',alt:'Follow tap plaque at bookstore',caption:'Follow Plaque',brand:'Tap to follow'}],
 links:[['Discuss a custom product','project-inquiry.html']]}
 };
 function element(tag,className,textValue){
