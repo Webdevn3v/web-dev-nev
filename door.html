@@ -982,7 +982,7 @@ img{display:block;max-width:100%}
         <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="tds-card-preview tds-card-preview-tile"><span class="tds-card-media"><img src="avery-tds-bracelet.png" alt="" loading="lazy"></span><span class="tds-card-info"><span class="tds-card-brand">Rivermore Real Estate</span><strong>Avery Cole</strong><span class="tds-card-role">Realtor · Howard County</span></span></span></span><span class="category-label">Digital Business Cards</span></button>
         <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View mobilized website examples"><span class="category-scene scene-websites single-site-preview" aria-hidden="true"><span class="single-site-phone"><iframe src="northline-mobile-site.html" title="Northline Roofing mobilized website scrolling preview" tabindex="-1" loading="lazy" data-auto-site-scroll></iframe></span></span><span class="category-label">Mobilized Websites</span></button>
         <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button>
-        <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Key Sets examples"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="assets/Tds_pvc_card.PNG" alt="" loading="lazy"><img class="keyset-chain" src="assets/Tds_keychain.PNG" alt="" loading="lazy"><img class="keyset-wearable" src="assets/Tds_bracelet.PNG" alt="" loading="lazy"></span><span class="category-label">Key Sets</span></button>
+        <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Owner and Team Key Set options"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="assets/Tds_pvc_card.PNG" alt="" loading="lazy"><img class="keyset-chain" src="assets/Tds_keychain.PNG" alt="" loading="lazy"><img class="keyset-wearable" src="assets/Tds_bracelet.PNG" alt="" loading="lazy"></span><span class="category-label">Owner &amp; Team Key Sets</span></button>
         <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="Tds_custom_mockup.PNG" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button>
       </div>
     </section>
@@ -1123,11 +1123,11 @@ const categoryPricing={
   custom:['Custom quote','Based on size, finish, design and quantity']
 };
 const categories={
-tds:{title:'The TDS Collection',description:'Our signature TDS-branded physical accessories: a keychain, wearable bracelet and tap card. Owner handoff tools and business-branded sets are shown separately.',examples:[
-{type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS signature tap keychain',caption:'Signature Keychain',brand:'A simple everyday tap'},
-{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS signature wearable',caption:'Signature Bracelet',brand:'A connection you can wear'},
-{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'TDS signature tap card',caption:'Signature Card',brand:'Minimal, ready to share'}],links:[['Ask about the collection','project-inquiry.html']]},
-cards:{title:'Digital Business Cards',description:'Every Digital Business Card is designed around the person and business. Tap an example to open the real card at the very top.',examples:[
+tds:{title:'The TDS Collection',description:'Our signature TDS-branded accessories: a gold-hardware keychain, bracelet and sleek black tap card. These are individual signature products, not the complete business-owner handoff kit. A resin card is still experimental.',examples:[
+{type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS signature tap keychain',caption:'TDS Keychain',brand:'Gold hardware · Signature branding'},
+{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS signature wearable',caption:'TDS Bracelet',brand:'Gold hardware · Wearable tap'},
+{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'TDS signature tap card',caption:'TDS Tap Card',brand:'PVC card · Resin version in development'}],links:[['Ask about the collection','project-inquiry.html']]},
+cards:{title:'Digital Business Cards',description:'The personal introduction: call, text, email and Save Contact in a custom mobile card. Physical tap accessories are optional. Tap a portrait to open the complete card at the top.',examples:[
 {type:'demo',kind:'card',theme:'realtor',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',photo:'avery-tds-bracelet.png',url:'avery-cole-door.html?view=card'},
 {type:'demo',kind:'card',theme:'contractor',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Owner · Roofing',photo:'northline-owner-portrait.png',url:'northline-door.html?view=card'},
 {type:'demo',kind:'card',theme:'designer',brand:'Atelier House',name:'Lillian Hart',caption:'Principal Designer',photo:'atelier-house-owner-headshot.png',url:'atelier-door.html?view=card'},
@@ -1141,18 +1141,18 @@ door:{title:'Digital Door',description:'A branded entrance to the customer exper
 {type:'demo',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html?view=paths'}],
 details:['Direct mobile link','QR asset','Owner Key for Apple Wallet or Google Wallet','One programmed physical tap card'],
 links:[['See Digital Door pricing','#simple'],['Ask about a Door','project-inquiry.html']]},
-sets:{title:'Owner & Team Key Sets',description:'A coordinated digital handoff for one business: a wallet QR, programmed card or keychain and the matching online experience. A USB handoff key may be included for administrators. Exact physical pieces depend on the package.',examples:[
-{type:'photo',src:'Tds_key_set.PNG',alt:'Coordinated owner key set with phone QR, tap card, keychain and USB',caption:'Coordinated Key Set',brand:'One business, connected pieces'},
-{type:'photo',src:'assets/door/key-wallet.webp',alt:'Wallet QR key',caption:'Owner Wallet Key',brand:'Your QR ready on your phone'},
-{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'Physical tap card option',caption:'Physical Tap Card',brand:'A simple handoff'},
-{type:'photo',src:'assets/Tds_keychain.PNG',alt:'Programmed tap keychain option',caption:'Tap Keychain',brand:'Portable access'},
-{type:'photo',src:'assets/Tds_usb.PNG',alt:'USB project handoff key',caption:'Developer USB',brand:'Project files and updates'}],
+sets:{title:'Owner & Team Key Sets',description:'One business identity across a matching wallet QR and physical tap pieces. The $250+ Door includes an owner wallet key and one programmed physical tap card; additional custom keychains, cards, team pieces and an optional developer USB are quoted separately. Current photos illustrate formats, not an included bundle.',examples:[
+{type:'photo',src:'Tds_key_set.PNG',alt:'Sample photo illustrating phone QR, PVC card, keychain, bracelet and USB formats',caption:'Format Preview',brand:'Physical formats shown · Set contents vary'},
+{type:'photo',src:'assets/door/key-wallet.webp',alt:'Wallet QR key',caption:'Owner Wallet Key',brand:'Included with a Digital Door'},
+{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'Physical tap card format example',caption:'Programmed Tap Card',brand:'One included with a Digital Door'},
+{type:'photo',src:'assets/Tds_keychain.PNG',alt:'Customizable tap keychain format example',caption:'Custom Keychain',brand:'Optional physical upgrade'},
+{type:'photo',src:'assets/Tds_usb.PNG',alt:'USB handoff key format example',caption:'Developer USB',brand:'Optional team handoff tool'}],
 links:[['Plan a key set','project-inquiry.html']]},
-websites:{title:'Mobilized Websites',description:'Your existing business website, thoughtfully streamlined for phones. Swipe between real examples to see how information, services and customer actions can be easier to find.',examples:[
+websites:{title:'Mobilized Websites',description:'Your existing website, reorganized for an easier mobile visit. This is separately scoped work, not automatically included in the Digital Door. Swipe through examples.',examples:[
 {type:'demo',brand:'Northline Roofing Co.',name:'Jordan · Inspections and estimates',caption:'Mobilized roofing website',kind:'website',url:'northline-mobile-site.html'},
 {type:'demo',brand:'Rivermore Real Estate',name:'Avery · Listings and properties',caption:'Mobilized realtor website',kind:'website',url:'realtor-index.html'}],
 links:[['Discuss a mobilized website','project-inquiry.html']]},
-custom:{title:'Custom Tap Products',description:'Different businesses, different shapes, colors and identities. Choose a custom keychain, bracelet, card or tap plaque designed around a useful action.',examples:[
+custom:{title:'Custom Tap Products',description:'Made for your business identity: choose the available resin shape, color, printable logo and hardware, or a branded tap card or plaque. These are custom physical upgrades, separate from the basic Digital Door setup.',examples:[
 {type:'photo',src:'Tds_custom_mockup.PNG',alt:'Assortment of customized tap keychains, bracelet and branded PVC card',caption:'Shapes & Branding',brand:'Designed for your business'},
 {type:'photo',src:'plaque-hiring-window.jpg',alt:'Hiring tap plaque in a window',caption:'Hiring Plaque',brand:'Tap to apply'},
 {type:'photo',src:'review-at-bakery-exit.png',alt:'Review tap plaque near bakery exit',caption:'Review Plaque',brand:'Tap to review'},
