@@ -950,7 +950,7 @@ img{display:block;max-width:100%}
       <div class="keys-showcase"><div class="keys-showcase-copy">
         <details class="one-tap-disclosure">
           <summary><span class="one-tap-headline"><span class="kicker">The Digital Door</span><h2>One tap. A smarter first impression.</h2></span><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
-          <p class="keys-message">Your <strong>Digital Business Card</strong> makes it easy to call, text, email or save a contact. The <strong class="digital-door-emphasis">Digital Door</strong> is the separate customer experience that helps people book, request, browse or get answers without digging through a long website. A tap product or wallet QR can take customers to the destination that fits your business.</p>
+          <p class="keys-message">Your <strong>Digital Business Card</strong> makes it easy to call, text, email or save a contact. The <strong class="digital-door-emphasis">Digital Door</strong> adds guided customer paths, a shareable QR key and one programmed tap card. Wallet setup is available for supported Apple and Google Wallet passes. Want a keychain or wearable key instead? Those are upgrades, not requirements.</p>
         </details>
       </div></div>
     </div>
@@ -1000,8 +1000,8 @@ img{display:block;max-width:100%}
       <summary><div><small>Choose what fits</small><strong>Start where you are.</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
         <div class="offer-grid">
-          <details class="offer-tile"><summary><small>01 · Connect</small><h3>Just need a tap?</h3><b>From $25</b></summary><p>Choose a tap card, keychain or wearable key for an existing website, booking page, reviews or another compatible link. No new page required; destination setup is available.</p></details>
-          <details class="offer-tile"><summary><small>02 · Create</small><h3>Need somewhere to go?</h3><b>From $100</b></summary><p>We can build a simple link page, a Digital Business Card from $100, or a guided Digital Door from $250. Choose only the destination you need.</p></details>
+          <details class="offer-tile"><summary><small>01 · Connect</small><h3>Just need a tap?</h3><b>From $45</b></summary><p>Every keychain or wearable key is programmed to one compatible link you provide and includes a matching tap card. No new website needed. Card-only orders are available for teams.</p></details>
+          <details class="offer-tile"><summary><small>02 · Create</small><h3>Need somewhere to go?</h3><b>From $100</b></summary><p>A Digital Business Card is your contact page ($100+). A Digital Door ($250+) adds guided customer paths, QR access and one programmed tap card; jewelry-style tap pieces are upgrades.</p></details>
           <details class="offer-tile wide"><summary><small>03 · Expand</small><h3>Connecting a business or team?</h3><b>Custom scope</b></summary><p>Coordinated owner keys, crew cards or keychains, individual team connections and improvements to your existing website. Explore detailed services and team options on our full site.</p></details>
         </div>
         <div class="level-buttons">
@@ -1080,7 +1080,7 @@ img{display:block;max-width:100%}
 
   const levelDetail=document.getElementById('levelDetail');
   const levelCopy={
-    less:'<small>Digital Business Card</small><h3>Your introduction, ready to share.</h3><b>Starting at $100</b><p>A personalized contact page with Call, Text, Email, Save Contact and useful links. A physical tap product is optional.</p>',
+    less:'<small>Digital Business Card</small><h3>Your introduction, ready to share.</h3><b>Starting at $100</b><p>A personalized contact page with Call, Text, Email, Save Contact and useful links. Choose a Digital Door when you also want guided paths, owner QR access and an included programmed tap card.</p>',
     more:'<small>Complete Digital Side</small><h3>Connected, but never one-size-fits-all.</h3><b>Starting at $750 for a new full build</b><p>Combine the contact card, Digital Door and website work your business actually needs. Existing-site enhancements and team pieces are scoped separately.</p>'
   };
   document.querySelectorAll('[data-level]').forEach(button=>button.addEventListener('click',()=>{
@@ -1115,36 +1115,36 @@ const modal=document.getElementById('collectionModal');
 const swipe=document.getElementById('collectionSwipe');
 const links=document.getElementById('collectionLinks');
 const categoryPricing={
-  tds:['Signature keychain · $40','Ready to tap · $60 · Other pieces priced separately'],
-  cards:['Starting at $100','Digital card setup · Physical products optional'],
-  door:['Starting at $250','Customer paths, owner wallet QR and one programmed tap card'],
+  tds:['Programmed Tap Keychain · $45','Wearable Tap Key · $65 · Matching programmed card included'],
+  cards:['Starting at $100','Your contact page · Door packages add QR access and a tap card'],
+  door:['Starting at $250','Guided paths · QR key · One programmed tap card included'],
   websites:['Starting at $250','Existing-site mobile improvements · Final scope varies'],
   sets:['Starting at $100','Owner starter set · Additional pieces and team quantities vary'],
-  custom:['Physical pieces from $25','Direct-link setup available · Custom digital pages priced separately']
+  custom:['Ready to tap from $45','One supplied link + a companion tap card · Team card orders quoted separately']
 };
 const categories={
-tds:{title:'TDS Signature Collection',description:'Our signature physical pieces, available alone or ready to tap. Destination setup opens a compatible link you provide; a new Digital Business Card or Digital Door is a separate service.',examples:[
-{type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS signature tap keychain',caption:'Signature Keychain · $40',brand:'Ready to tap · $60 with destination setup'},
-{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS signature wearable',caption:'Wearable Tap Key',brand:'Standalone or ready to tap · Pricing being finalized'},
-{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'TDS signature tap card',caption:'Signature Tap Card',brand:'Single cards and team options available'}],links:[['Ask about the collection','project-inquiry.html']]},
+tds:{title:'TDS Signature Collection',description:'Every keychain and wearable is ready to tap to one compatible link you provide. A matching programmed tap card comes with it. Need us to build the destination? That is a separate service.',examples:[
+{type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS signature tap keychain',caption:'Signature Tap Keychain · $45',brand:'Programmed and tested · Matching card included'},
+{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS signature wearable',caption:'Wearable Tap Key · $65',brand:'Programmed and tested · Matching card included'},
+{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'TDS signature tap card',caption:'Companion Tap Card',brand:'Included with every keychain or wearable · Team packs available'}],links:[['Ask about the collection','project-inquiry.html']]},
 cards:{title:'Digital Business Cards',description:'Your mobile first impression: call, text, email, Save Contact and useful links. Tap any example to explore.',examples:[
 {type:'demo',kind:'card',theme:'realtor',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',photo:'avery-tds-bracelet.png',url:'avery-cole-door.html?view=card'},
 {type:'demo',kind:'card',theme:'contractor',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Owner · Roofing',photo:'northline-owner-portrait.png',url:'northline-door.html?view=card'},
 {type:'demo',kind:'card',theme:'designer',brand:'Atelier House',name:'Lillian Hart',caption:'Principal Designer',photo:'atelier-house-owner-headshot.png',url:'atelier-door.html?view=card'},
 {type:'demo',kind:'card',theme:'dentist',brand:'Lumina Dental Studio',name:'Dr. Elias Morgan',caption:'Dentist · Practice Owner',photo:'lumina-elias-morgan.jpg',initials:'EM',url:'lumina-door.html?view=card'},
 {type:'demo',kind:'card',theme:'attorney',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Founding Attorney',photo:'frederick-attorney-hero.png',url:'door-frederick-legacy-law.html?view=card'}],links:[['Discuss a digital card','project-inquiry.html']]},
-door:{title:'Digital Door',description:'A guided customer experience beyond the business card. Choose paths to book, request, explore or get answers.',examples:[
+door:{title:'Digital Door',description:'The complete tap-ready customer entrance: guided paths, a shareable QR key and one programmed tap card. Apple/Google Wallet pass setup is supported when available; custom keychains and wearable keys cost extra.',examples:[
 {type:'demo',brand:'Northline Roofing Co.',name:'Roof inspections and help',caption:'Contractor Door',url:'northline-door.html?view=paths'},
 {type:'demo',brand:'Rivermore Real Estate',name:'Homes and showings',caption:'Realtor Door',url:'avery-cole-door.html?view=paths'},
 {type:'demo',brand:'Atelier House',name:'Portfolio and design projects',caption:'Interior design Door',url:'atelier-door.html?view=paths'},
 {type:'demo',brand:'Lumina Dental Studio',name:'Visits and patient guidance',caption:'Dental office Door',url:'lumina-door.html?view=paths'},
 {type:'demo',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html?view=paths'}],
-details:['Direct mobile link','QR asset','Owner Key for Apple Wallet or Google Wallet','One programmed physical tap card'],
+details:['Guided customer paths and direct link','Shareable owner QR key','Apple/Google Wallet pass setup where supported','One programmed physical tap card included · Jewelry upgrades are extra'],
 links:[['See Digital Door pricing','#simple'],['Ask about a Door','project-inquiry.html']]},
-sets:{title:'Owner Key Sets',description:'Your branding, connected in one set. Starts with a coordinated card and keychain programmed to one compatible destination; owner wallet keys, additional team pieces and USB handoff tools vary by package.',examples:[
+sets:{title:'Owner Key Sets',description:'A branded owner key and matching programmed tap card with QR backup. Choose additional cards or keychains for your team; team quantities and optional USB handoff tools are quoted separately.',examples:[
 {type:'photo',src:'Tds_key_set.PNG',alt:'Sample photo illustrating phone QR, PVC card, keychain, bracelet and USB formats',caption:'Format Preview',brand:'Physical formats shown · Set contents vary'},
 {type:'photo',src:'assets/door/key-wallet.webp',alt:'Wallet QR key',caption:'Owner Wallet Key',brand:'Included with a Digital Door'},
-{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'Physical tap card format example',caption:'Programmed Tap Card',brand:'One included with a Digital Door'},
+{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'Physical tap card format example',caption:'Programmed Tap Card',brand:'Included with Door or wearable/keychain · Team packs also available'},
 {type:'photo',src:'assets/Tds_keychain.PNG',alt:'Customizable tap keychain format example',caption:'Custom Keychain',brand:'Optional physical upgrade'},
 {type:'photo',src:'assets/Tds_usb.PNG',alt:'USB handoff key format example',caption:'Developer USB',brand:'Optional team handoff tool'}],
 links:[['Plan a key set','project-inquiry.html']]},
@@ -1152,7 +1152,7 @@ websites:{title:'Mobilized Websites',description:'Your existing website, made ea
 {type:'demo',brand:'Northline Roofing Co.',name:'Jordan · Inspections and estimates',caption:'Mobilized roofing website',kind:'website',url:'northline-mobile-site.html'},
 {type:'demo',brand:'Rivermore Real Estate',name:'Avery · Listings and properties',caption:'Mobilized realtor website',kind:'website',url:'realtor-index.html'}],
 links:[['Discuss a mobilized website','project-inquiry.html']]},
-custom:{title:'Custom Tap Products',description:'Your design. Your destination. Tap to reviews, booking, menus, payments, social profiles, a Door, or almost any compatible link.',examples:[
+custom:{title:'Custom Tap Products',description:'Your design and a working link, already connected. Tap to reviews, bookings, menus, payments, social profiles or a Digital Door. Every individual keychain or wearable includes a companion tap card.',examples:[
 {type:'photo',src:'Tds_custom_mockup.PNG',alt:'Assortment of customized tap keychains, bracelet and branded PVC card',caption:'Shapes & Branding',brand:'Designed for your business'},
 {type:'photo',src:'plaque-hiring-window.jpg',alt:'Hiring tap plaque in a window',caption:'Hiring Plaque',brand:'Tap to apply'},
 {type:'photo',src:'review-at-bakery-exit.png',alt:'Review tap plaque near bakery exit',caption:'Review Plaque',brand:'Tap to review'},
