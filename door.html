@@ -997,16 +997,16 @@ img{display:block;max-width:100%}
 </div><a class="demo-more-link" href="index.html#work">Explore more Digital Door demos →</a>
 </div></details></section>
     <details class="acc" id="simple">
-      <summary><div><small>Services and pricing</small><strong>How can we help?</strong></div><span class="acc-plus">+</span></summary>
+      <summary><div><small>Choose what fits</small><strong>Start where you are.</strong></div><span class="acc-plus">+</span></summary>
       <div class="acc-body">
         <div class="offer-grid">
-          <details class="offer-tile"><summary><small>Start here</small><h3>Signal Check</h3><b>Free</b></summary><p>We walk a customer path together to identify what is getting in the way, where people get stuck, and what actually needs handling.</p></details>
-          <details class="offer-tile"><summary><small>Core system</small><h3>Digital Door</h3><b>$250+</b></summary><p>A separate customer experience with guided paths, an owner's wallet QR key, the shareable QR asset and one programmed physical tap card. Additional custom keys and team sets are optional.</p></details>
-          <details class="offer-tile wide"><summary><small>Connect</small><h3>Connect the Dots</h3><b>$500+</b></summary><p>Connect your Digital Door with improvements to your existing mobile website, digital business cards and current business tools. Scope depends on what actually needs work; team keys and custom tap formats are optional.</p></details>
+          <details class="offer-tile"><summary><small>01 · Connect</small><h3>Just need a tap?</h3><b>From $25</b></summary><p>Choose a tap card, keychain or wearable key for an existing website, booking page, reviews or another compatible link. No new page required; destination setup is available.</p></details>
+          <details class="offer-tile"><summary><small>02 · Create</small><h3>Need somewhere to go?</h3><b>From $100</b></summary><p>We can build a simple link page, a Digital Business Card from $100, or a guided Digital Door from $250. Choose only the destination you need.</p></details>
+          <details class="offer-tile wide"><summary><small>03 · Expand</small><h3>Connecting a business or team?</h3><b>Custom scope</b></summary><p>Coordinated owner keys, crew cards or keychains, individual team connections and improvements to your existing website. Explore detailed services and team options on our full site.</p></details>
         </div>
         <div class="level-buttons">
-          <button class="level-btn" type="button" data-level="less" aria-expanded="false" aria-controls="levelDetail"><small>Need less?</small><strong>Something simple</strong></button>
-          <button class="level-btn" type="button" data-level="more" aria-expanded="false" aria-controls="levelDetail"><small>Need more?</small><strong>Built from the ground up</strong></button>
+          <button class="level-btn" type="button" data-level="less" aria-expanded="false" aria-controls="levelDetail"><small>Just an intro?</small><strong>Digital Business Card</strong></button>
+          <button class="level-btn" type="button" data-level="more" aria-expanded="false" aria-controls="levelDetail"><small>Full build?</small><strong>Complete Digital Side</strong></button>
         </div>
         <div class="level-detail" id="levelDetail" aria-live="polite"></div>
       </div>
@@ -1080,8 +1080,8 @@ img{display:block;max-width:100%}
 
   const levelDetail=document.getElementById('levelDetail');
   const levelCopy={
-    less:'<small>Digital Business Card</small><h3>Just need a tap?</h3><b>Starting at $100</b><p>A clear digital business card with the contact details, links and actions you need. We can pair it with a physical tap product.</p>',
-    more:'<small>Customized Full Build</small><h3>The whole digital experience, built to fit.</h3><b>Starting at $750</b><p>A custom responsive website and complete customer journey built from the ground up.</p>'
+    less:'<small>Digital Business Card</small><h3>Your introduction, ready to share.</h3><b>Starting at $100</b><p>A personalized contact page with Call, Text, Email, Save Contact and useful links. A physical tap product is optional.</p>',
+    more:'<small>Complete Digital Side</small><h3>Connected, but never one-size-fits-all.</h3><b>Starting at $750 for a new full build</b><p>Combine the contact card, Digital Door and website work your business actually needs. Existing-site enhancements and team pieces are scoped separately.</p>'
   };
   document.querySelectorAll('[data-level]').forEach(button=>button.addEventListener('click',()=>{
     const wasActive=button.classList.contains('active');
