@@ -980,34 +980,6 @@ img{display:block;max-width:100%}
 @media(max-width:800px){.category-row--products{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.top-links--primary{gap:13px 18px}.inquiry-buttons{grid-template-columns:1fr}.category-row--digital{grid-template-columns:repeat(2,minmax(0,1fr))}.category-row>.category-tile{min-height:170px}.contact-dialog{padding:30px 20px}}
 @media(max-width:420px){.category-row--digital{grid-template-columns:1fr}}
-</style><style id="opening-flow">
-.sec-head--door{margin-bottom:0}
-.one-tap-disclosure--top{margin:0 0 19px;padding:18px 20px;border:1px solid var(--line-l);border-radius:3px;background:rgba(255,255,255,.22)}
-.one-tap-disclosure--top>summary{min-height:0;padding:0}
-.one-tap-disclosure--top .one-tap-headline .kicker{margin-bottom:8px}
-.one-tap-disclosure--top .one-tap-headline h2{font:400 clamp(1.75rem,4.8vw,2.55rem)/1.1 var(--serif);letter-spacing:-.02em}
-.one-tap-disclosure--top .keys-message{max-width:700px;color:var(--ink-muted);font-size:.9rem;line-height:1.6}
-.one-tap-disclosure--top .keys-message p+p{margin-top:7px}
-.one-tap-disclosure--top .one-tap-demo-link{color:var(--ink);font-weight:600}
-.sec-head--door>.lede{max-width:600px;margin-top:22px}
-.top-links--primary{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:20px}
-.top-start{min-width:0;flex:1}
-.start-toggle{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;padding:15px 18px;background:#100e0b;color:#f2ede0;text-align:left;cursor:pointer;transition:transform .2s ease,background .2s ease}
-.start-toggle:hover{transform:translateY(-2px);background:#1b1c1d}
-.start-toggle>span:first-child{font:400 clamp(1.2rem,3.5vw,1.7rem)/1.15 var(--serif)}
-.start-toggle__icon{flex:none;color:var(--gold);font:400 1.45rem/1 var(--sans)}
-.start-toggle:focus-visible,.top-contact-trigger:focus-visible{outline:2px solid var(--gold-deep);outline-offset:4px}
-.top-utilities{display:flex;align-items:center;gap:20px}
-.top-contact{position:relative}
-.top-contact-trigger{cursor:pointer;background:none}
-.top-contact__menu{position:absolute;z-index:20;top:calc(100% + 10px);right:0;min-width:148px;padding:5px;background:var(--paper);border:1px solid var(--line-l);box-shadow:0 12px 28px rgba(0,0,0,.14);display:grid;gap:1px}
-.top-contact__menu[hidden]{display:none}
-.top-contact__menu a{padding:10px 11px;font:700 .65rem/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
-.top-contact__menu a:hover,.top-contact__menu a:focus-visible{background:rgba(12,10,7,.07)}
-.top-inquiries{margin-top:14px;padding:16px;border:1px solid var(--line-l);background:rgba(255,255,255,.3);scroll-margin-top:24px}
-.top-inquiries[hidden]{display:none}
-.top-inquiries.is-open{display:block;animation:panelIn .28s var(--ease) both}
-@media(max-width:640px){.top-links--primary{align-items:stretch;flex-direction:column}.top-utilities{justify-content:flex-end}.one-tap-disclosure--top{padding:15px}}
 </style></head>
 <body>
 
@@ -1022,28 +994,26 @@ img{display:block;max-width:100%}
 
 <main id="doorStart">
 
-<section class="sec sec-cream"><div class="wrap">
-<div class="sec-head sec-head--door">
-<details class="one-tap-disclosure one-tap-disclosure--top" id="oneTap">
-  <summary><span class="one-tap-headline"><span class="kicker">The Digital Door</span><h2>One tap. A smarter first impression.</h2></span><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
-  <div class="keys-message"><p>The Digital Business Card is at the top of the Door. Scroll down through the customer paths; the Mobilized Website is at the bottom.</p><p>Signature tap products include a companion card. Apple Wallet or Google Wallet access is available as an optional upgrade.</p><a class="one-tap-demo-link" href="avery-cole-door.html?view=paths">Preview a Digital Door →</a></div>
-</details>
-<p class="lede">Choose a project path or explore how the Door guides customers from first tap to next step.</p>
+<section class="sec sec-cream"><div class="wrap"><div class="sec-head">
+<h2>Start with what you came to do.</h2>
+<p class="lede">Explore how a tap connects a customer to your business, then choose the next step.</p>
+<details class="one-tap-disclosure one-tap-disclosure--top" id="keys">
+          <summary><span class="one-tap-headline"><span class="kicker">The Digital Door</span><h2>One tap. A smarter first impression.</h2></span><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
+          <p class="keys-message">A <strong>Digital Business Card</strong> shares your contact details. The <strong class="digital-door-emphasis">Digital Door</strong> adds guided customer paths. Signature tap products include a companion card; Apple Wallet or Google Wallet access is an optional upgrade. <a class="one-tap-demo-link" href="avery-cole-door.html?view=paths">Open a Digital Door demo →</a></p>
+        </details>
+
 <div class="top-links top-links--primary">
-<div class="top-start"><button class="start-toggle" id="inquiryToggle" type="button" aria-expanded="false" aria-controls="start"><span>Start with what you came to do</span><span class="start-toggle__icon" aria-hidden="true">＋</span></button></div>
-<div class="top-utilities">
-<a class="top-link" href="index.html">Home Index <span aria-hidden="true">→</span></a>
-<div class="top-contact">
-<button class="top-link top-contact-trigger" id="openContact" type="button" aria-expanded="false" aria-controls="contactMenu">Save Contact <span aria-hidden="true">＋</span></button>
-<div class="top-contact__menu" id="contactMenu" hidden>
-<a href="tel:+12029341126">Call</a><a href="sms:+12029341126">Text</a><a href="mailto:handled@thedigitalside.org">Email</a><a href="the-digital-side.vcf" download>Download Contact</a>
+<button class="btn btn-primary" id="inquiryToggle" type="button" aria-expanded="false" aria-controls="start">Tell us what you need <span aria-hidden="true">＋</span></button>
+<a class="top-link" href="index.html">View the Home Index →</a>
+<button class="top-link top-contact-trigger" id="openContactDialog" type="button" aria-haspopup="dialog">Contact <span aria-hidden="true">↗</span></button>
 </div>
-</div></div></div></div>
+</div>
 <div class="top-inquiries" id="start" hidden aria-label="Project inquiry options">
 <div class="inquiry-buttons">
 <a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry →</strong><span>A few details are enough to start.</span></a>
 <a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake →</strong><span>Share the complete project picture.</span></a>
-</div></div></div></section>
+</div>
+</div></div></section>
 
 <section class="sec sec-dark" id="paths">
   <div class="wrap">
@@ -1422,293 +1392,34 @@ swipe.addEventListener('keydown',e=>{
  requestAnimationFrame(tick);
 })();
 </script>
-
-</body>
-</html<script>
+<dialog class="contact-dialog" id="contactDialog" aria-labelledby="contactDialogTitle">
+<button class="contact-dialog__close" id="closeContactDialog" type="button" aria-label="Close contact panel">×</button>
+<span class="contact-dialog__eyebrow">THE DIGITAL SIDE</span><h2 id="contactDialogTitle">Let’s connect.</h2>
+<p>Choose the easiest way to reach Nev.</p>
+<div class="contact-dialog__actions">
+<a href="tel:+12029341126"><small>Call</small><strong>Call the studio ↗</strong></a>
+<a href="sms:+12029341126"><small>Text</small><strong>Send a text ↗</strong></a>
+<a href="mailto:handled@thedigitalside.org"><small>Email</small><strong>Send an email ↗</strong></a>
+<a href="the-digital-side.vcf" download><small>Contact</small><strong>Save Contact ↓</strong></a>
+</div></dialog>
+<script>
 (()=>{
  const panel=document.getElementById('start'),trigger=document.getElementById('inquiryToggle');
  function setInquiryOpen(open){
   if(!panel||!trigger)return;
   panel.hidden=!open;panel.classList.toggle('is-open',open);
   trigger.setAttribute('aria-expanded',String(open));
-  trigger.querySelector('.start-toggle__icon').textContent=open?'×':'＋';
+  trigger.querySelector('span').textContent=open?'×':'＋';
   if(open)requestAnimationFrame(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}));
  }
  if(trigger)trigger.addEventListener('click',()=>setInquiryOpen(panel.hidden));
  if(location.hash==='#start')setInquiryOpen(true);
- const contactTrigger=document.getElementById('openContact'),contactMenu=document.getElementById('contactMenu');
- function setContactOpen(open){
-  if(!contactMenu||!contactTrigger)return;
-  contactMenu.hidden=!open;contactTrigger.setAttribute('aria-expanded',String(open));
-  contactTrigger.querySelector('span').textContent=open?'×':'＋';
- }
- if(contactTrigger)contactTrigger.addEventListener('click',()=>setContactOpen(contactMenu.hidden));
- document.addEventListener('click',event=>{if(contactMenu&&!contactMenu.hidden&&!event.target.closest('.top-contact'))setContactOpen(false)});
- document.addEventListener('keydown',event=>{if(event.key==='Escape')setContactOpen(false)});
+ const contact=document.getElementById('contactDialog');
+ const openContact=document.getElementById('openContactDialog'),closeContact=document.getElementById('closeContactDialog');
+ if(openContact&&contact)openContact.addEventListener('click',()=>contact.showModal());
+ if(closeContact&&contact)closeContact.addEventListener('click',()=>contact.close());
+ if(contact)contact.addEventListener('click',event=>{if(event.target===contact)contact.close()});
 })();
 </script>
-<dialog class="collection-modal category-dialog" id="collectionModal" aria-labelledby="collectionTitle">
-  <button class="collection-modal-close" type="button" id="collectionClose" aria-label="Close examples">×</button>
-  <span class="dialog-kicker">Explore the possibilities</span>
-  <h3 id="collectionTitle"></h3>
-  <div class="collection-price-row" id="collectionPriceRow" aria-label="Pricing guidance">
-    <strong id="collectionPrice"></strong><span id="collectionPriceNote"></span>
-  </div>
-  <details class="collection-description-details" id="collectionDescriptionDetails"><summary>About this option <span aria-hidden="true">+</span></summary><p id="collectionDescription"></p></details>
-  <div class="collection-swipe" id="collectionSwipe" tabindex="0" role="region" aria-label="Swipeable category examples"></div>
-  <div class="collection-links" id="collectionLinks"></div>
-</dialog>
-<script>
-(()=>{
-const modal=document.getElementById('collectionModal');
-const swipe=document.getElementById('collectionSwipe');
-const links=document.getElementById('collectionLinks');
-const categoryPricing={
-  tds:['',''],
-  cards:['Starting at $100','Standalone contact page · Digital Door adds paths, QR and tap card'],
-  door:['Starting at $250','Business Card · Guided paths · Owner QR · Companion tap card'],
-  websites:['Starting at $300','Existing-site mobile improvements · Scope varies'],
-  sets:['Team packs from $250','10 cards $250+ · 10 keychains with backup cards $500+'],
-  custom:['Ready to tap from $45','Companion card + owner QR · Custom finishes vary']
-};
-const categories={
-keys:{title:'Digital Keys',description:'A scannable Owner QR key is included with a Digital Door. Apple Wallet or Google Wallet access is available as an optional upgrade.',examples:[{type:'photo',src:'assets/door/key-wallet.webp',alt:'Digital QR key displayed on a phone',caption:'Owner QR Key',brand:'Wallet access available as an upgrade'}],links:[['Ask about a Digital Key','project-inquiry.html']]},
-tds:{title:'TDS Signature Collection',description:'Each Signature keychain, wearable or Duo includes one destination, a companion tap card and an Owner QR key. Apple Wallet or Google Wallet access is available as an optional upgrade.',examples:[
-{type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS signature tap keychain',caption:'Signature Tap Keychain · $45',brand:'One destination'},
-{type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS signature wearable tap key',caption:'Wearable Tap Key · $65',brand:'One destination'},
-{type:'pair',items:[{src:'assets/Tds_keychain.PNG',alt:'Signature tap keychain'},{src:'assets/Tds_bracelet.PNG',alt:'Wearable tap key'}],caption:'Signature Duo · $100',brand:'Keychain + wearable'}],links:[['Ask about the collection','project-inquiry.html']]},
-cards:{title:'Digital Business Cards',description:'Your mobile first impression: call, text, email, Save Contact and useful links. Tap any example to explore.',examples:[
-{type:'demo',kind:'card',theme:'realtor',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',photo:'avery-tds-bracelet.png',url:'avery-cole-door.html?view=card'},
-{type:'demo',kind:'card',theme:'contractor',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Owner · Roofing',photo:'northline-owner-portrait.png',url:'northline-door.html?view=card'},
-{type:'demo',kind:'card',theme:'designer',brand:'Atelier House',name:'Lillian Hart',caption:'Principal Designer',photo:'atelier-house-owner-headshot.png',url:'atelier-door.html?view=card'},
-{type:'demo',kind:'card',theme:'dentist',brand:'Lumina Dental Studio',name:'Dr. Elias Morgan',caption:'Dentist · Practice Owner',photo:'lumina-elias-morgan.jpg',initials:'EM',url:'lumina-door.html?view=card'},
-{type:'demo',kind:'card',theme:'attorney',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Founding Attorney',photo:'frederick-attorney-hero.png',url:'door-frederick-legacy-law.html?view=card'}],links:[['Discuss a digital card','project-inquiry.html']]},
-door:{title:'Digital Door',description:'A Digital Business Card for contact details, plus guided customer paths in one mobile Door. Apple Wallet or Google Wallet access is available as an optional upgrade.',examples:[
-{type:'demo',brand:'Northline Roofing Co.',name:'Roof inspections and help',caption:'Contractor Door',url:'northline-door.html?view=paths'},
-{type:'demo',brand:'Rivermore Real Estate',name:'Homes and showings',caption:'Realtor Door',url:'avery-cole-door.html?view=paths'},
-{type:'demo',brand:'Atelier House',name:'Portfolio and design projects',caption:'Interior design Door',url:'atelier-door.html?view=paths'},
-{type:'demo',brand:'Lumina Dental Studio',name:'Visits and patient guidance',caption:'Dental office Door',url:'lumina-door.html?view=paths'},
-{type:'demo',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html?view=paths'}],
-
-links:[['See Digital Door pricing','#simple'],['Ask about a Door','project-inquiry.html']]},
-sets:{title:'Owner Key Sets',description:'Team cards from $250 for 10, or 10 keychains with matching tap cards from $500. QR backups and a distinct owner key are included. Individual employee pages and extra destinations cost more.',examples:[
-{type:'photo',src:'Tds_key_set.PNG',alt:'Sample photo illustrating phone QR, PVC card, keychain, bracelet and USB formats',caption:'Owner + Team Formats',brand:'Owner key · Team cards or keys · QR backup'},
-{type:'photo',src:'assets/door/key-wallet.webp',alt:'Wallet QR key',caption:'Owner Wallet Key',brand:'Included with a Digital Door'},
-{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'Physical tap card format example',caption:'Companion Tap Card',brand:'Included with Door or wearable/keychain · Team packs also available'},
-{type:'photo',src:'assets/Tds_keychain.PNG',alt:'Customizable tap keychain format example',caption:'Custom Keychain',brand:'Optional physical upgrade'},
-{type:'photo',src:'assets/Tds_usb.PNG',alt:'USB handoff key format example',caption:'Developer USB',brand:'Optional team handoff tool'}],
-links:[['Plan a key set','project-inquiry.html']]},
-websites:{title:'Mobilized Websites',description:'Your existing website, made easier to use on phones. Separate from a Digital Door, or part of a complete custom package.',examples:[
-{type:'demo',brand:'Northline Roofing Co.',name:'Jordan · Inspections and estimates',caption:'Mobilized roofing website',kind:'website',url:'northline-mobile-site.html'},
-{type:'demo',brand:'Rivermore Real Estate',name:'Avery · Listings and properties',caption:'Mobilized realtor website',kind:'website',url:'realtor-index.html'}],
-links:[['Discuss a mobilized website','project-inquiry.html']]},
-custom:{title:'Custom Tap Products',description:'Your design, ready to tap. Link to reviews, bookings, menus, payments, social profiles or your Digital Door. Each keychain or wearable includes a companion tap card.',examples:[
-{type:'photo',src:'Tds_custom_mockup.PNG',alt:'Assortment of customized tap keychains, bracelet and branded PVC card',caption:'Shapes & Branding',brand:'Designed for your business'},
-{type:'photo',src:'plaque-hiring-window.jpg',alt:'Hiring tap plaque in a window',caption:'Hiring Plaque',brand:'Tap to apply'},
-{type:'photo',src:'review-at-bakery-exit.png',alt:'Review tap plaque near bakery exit',caption:'Review Plaque',brand:'Tap to review'},
-{type:'photo',src:'plaque-follow-bookstore.png',alt:'Follow tap plaque at bookstore',caption:'Follow Plaque',brand:'Tap to follow'}],
-links:[['Discuss a custom product','project-inquiry.html']]}
-};
-function element(tag,className,textValue){
- const node=document.createElement(tag);
- if(className)node.className=className;
- if(textValue!=null)node.textContent=textValue;
- return node;
-}
-function sceneFor(example){
- const scene=element('div','modal-visual modal-visual-'+example.type);
- if(example.type==='card'){
-  const device=element('div','modal-phone');
-  device.append(element('span','modal-phone-top',example.brand));
-  device.append(element('span','modal-phone-title',example.name));
-  device.append(element('span','modal-phone-sub','DIGITAL BUSINESS CARD'));
-  const actions=element('div','modal-phone-actions');
-  ['Call','Text','Email','Save Contact'].forEach(x=>actions.append(element('span','',x)));
-  device.append(actions);scene.append(device);
- }else if(example.type==='portal'){
-  const gate=element('div','modal-gate');
-  gate.append(element('div','modal-gate-light'));
-  gate.append(element('div','modal-gate-door'));
-  scene.append(gate);
-  const routes=element('div','modal-routes');
-  ['Contact','Services','Next step'].forEach(x=>routes.append(element('span','',x)));
-  scene.append(routes);
- }else if(example.type==='kit'){
-  scene.append(element('div','modal-kit-card'));
-  scene.append(element('div','modal-kit-ring'));
-  scene.append(element('div','modal-kit-charm'));
-  scene.append(element('div','modal-kit-phone'));
- }else if(example.type==='website'){
-  const panel=element('div','modal-website');
-  panel.append(element('div','modal-web-header',example.brand));
-  panel.append(element('div','modal-web-hero'));
-  panel.append(element('div','modal-web-title',example.name));
-  for(let i=0;i<3;i++)panel.append(element('div','modal-web-row'));
-  scene.append(panel);
- }else if(example.type==='custom'){
-  const plaque=element('div','modal-concept-plaque');
-  plaque.append(element('span','modal-concept-head',example.brand));
-  plaque.append(element('span','modal-concept-name',example.name));
-  plaque.append(element('span','modal-concept-tap','TAP'));
-  scene.append(plaque);
- }
- return scene;
-}
-function renderBusinessCard(example){
- // Gallery preview is JUST the branded hero visual.
- // Working contact actions live on the actual business card reached on tap.
- const card=element('div','tds-card-preview tds-card-preview-large tds-card-'+(example.theme||'standard'));
- card.setAttribute('aria-label',example.name+' digital business card preview');
- const media=element('div','tds-card-media');
- if(example.photo){
-  const photo=element('img','');
-  photo.src=example.photo;photo.alt=example.name+' portrait';photo.loading='lazy';photo.decoding='async';
-  if(example.initials)photo.addEventListener('error',()=>{
-    media.replaceChildren(element('div','tds-card-initials',example.initials));
-  },{once:true});
-  media.append(photo);
- }else{
-  media.append(element('div','tds-card-initials',example.initials||''));
- }
- card.append(media);
- return card;
-}
-function renderExample(example){
- const figure=element('figure','modal-slide');
- if(example.type==='photo'){
-  const frame=element('div','modal-photo'),img=element('img','');
-  img.src=example.src;img.alt=example.alt;img.loading='lazy';img.decoding='async';frame.append(img);figure.append(frame);
- }else if(example.type==='pair'){
-  const pair=element('div','modal-product-pair');
-  for(const item of example.items){
-   const frame=element('div','modal-photo'),img=element('img','');
-   img.src=item.src;img.alt=item.alt;img.loading='lazy';img.decoding='async';
-   frame.append(img);pair.append(frame);
-  }
-  figure.append(pair);
- }else if(example.kind==='card'){
-  const wrapper=element('a','modal-card-link');
-  wrapper.href=example.url;wrapper.setAttribute('aria-label','Open '+example.name+' digital business card');
-  wrapper.append(renderBusinessCard(example));
-  figure.append(wrapper);
- }else if(example.kind==='website' && example.url){
-  const wrapper=element('a','mobilized-site-example');
-  wrapper.href=example.url;wrapper.setAttribute('aria-label','Open the real '+example.brand+' mobilized website');
-  const phone=element('span','mobilized-site-example-phone');
-  const frame=element('iframe','mobilized-site-example-frame');
-  frame.src=example.url;frame.title=example.brand+' actual mobilized website';frame.tabIndex=-1;frame.loading='lazy';frame.setAttribute('aria-hidden','true');
-  phone.append(frame);wrapper.append(phone,element('span','mobilized-site-example-link','View actual mobilized site ↗'));figure.append(wrapper);
- }else if(example.url){
-  const wrapper=element('a','modal-door-preview');
-  wrapper.href=example.url;
-  wrapper.setAttribute('aria-label','Enter '+example.brand+' Digital Door');
-  const frame=element('iframe','modal-real-preview');
-  // Keep the closed branded entrance visible in the preview; only play it after opening the full Door.
-  frame.src=example.url.split('?')[0];frame.title=example.brand+' Digital Door';
-  frame.tabIndex=-1;frame.loading='lazy';frame.setAttribute('aria-hidden','true');
-  wrapper.append(frame);
-  figure.append(wrapper);
- }
- if(example.caption||example.brand||example.name){
-  const cap=element('figcaption','modal-example-caption');
-  if(example.caption)cap.append(element('span','modal-example-type',example.caption));
-  if(example.brand)cap.append(element('strong','',example.brand));
-  if(example.name)cap.append(element('span','modal-example-name',example.name));
-  figure.append(cap);
- }
- return figure;
-}
-function reset(){
- swipe.replaceChildren();links.replaceChildren();
- swipe.scrollLeft=0;
- modal.classList.remove('is-door-collection','is-tds-collection');
-}
-function close(){
- if(modal.open)modal.close();
- reset();
-}
-document.querySelectorAll('[data-collection]').forEach(button=>button.addEventListener('click',()=>{
- const data=categories[button.dataset.collection];
- if(!data)return;
- reset();
- document.getElementById('collectionTitle').textContent=data.title;
- document.getElementById('collectionDescription').textContent=data.description;
- const [price,priceNote]=categoryPricing[button.dataset.collection]||['Ask for pricing',''];
- document.getElementById('collectionPrice').textContent=price;
- document.getElementById('collectionPriceNote').textContent=priceNote;
- const modalDescription=document.getElementById('collectionDescriptionDetails');
- const isDoor=button.dataset.collection==='door';
- const isTds=button.dataset.collection==='tds';
- modal.classList.toggle('is-door-collection',isDoor);
- modal.classList.toggle('is-tds-collection',isTds);
- // Keep the TDS collection description visible without another disclosure layer.
- modalDescription.open=isTds;
- modalDescription.classList.toggle('show-description-open',isTds);
- for(const example of data.examples)swipe.append(renderExample(example));
- if(data.details){
-  const group=element('div','modal-includes');
-  group.append(element('strong','','Every Digital Door includes'));
-  const list=element('ul','');
-  for(const item of data.details)list.append(element('li','',item));
-  group.append(list);links.append(group);
- }
- for(const [label,href] of data.links||[]){
-  const a=element('a','',label);a.href=href;links.append(a);
- }
- modal.showModal();
- swipe.scrollLeft=0;
-}));
-document.getElementById('collectionClose').addEventListener('click',close);
-modal.addEventListener('click',e=>{if(e.target===modal)close()});
-modal.addEventListener('close',reset);
-links.addEventListener('click',e=>{
- const link=e.target.closest('a[href="#simple"]');
- if(link){const target=document.getElementById('simple');if(target)target.open=true;close();}
-});
-swipe.addEventListener('keydown',e=>{
- const width=swipe.querySelector('.modal-slide')?.getBoundingClientRect().width||300;
- if(e.key==='ArrowRight'){swipe.scrollBy({left:width+10,behavior:'smooth'});e.preventDefault()}
- if(e.key==='ArrowLeft'){swipe.scrollBy({left:-width-10,behavior:'smooth'});e.preventDefault()}
-});
-})();
-</script>
-<script>
-/* Keep the embedded websites at phone width; slowly scroll the Northline demo phone. */
-(function(){
- const thumb=document.querySelector('iframe[data-auto-site-scroll]');
- const frames=[...document.querySelectorAll('.single-site-phone iframe,.mobilized-site-example-frame')];
- function sizeFrame(frame){
-  const parent=frame.parentElement;
-  if(!parent)return;
-  const width=parent.clientWidth-8;
-  frame.style.setProperty('--website-preview-scale',String(Math.min(1,width/375)));
- }
- frames.forEach(f=>{sizeFrame(f);f.addEventListener('load',()=>sizeFrame(f))});
- window.addEventListener('resize',()=>frames.forEach(sizeFrame));
- if(!thumb||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- let direction=1,frameStep=0,last=0;
- function tick(ts){
-  requestAnimationFrame(tick);
-  if(!document.documentElement.contains(thumb))return;
-  if(ts-last<50)return;
-  last=ts;
-  const rect=thumb.getBoundingClientRect();
-  // Don't run the phone animation while its carousel section is off-screen.
-  if(!rect.width || rect.bottom<0 || rect.top>window.innerHeight)return;
-  try{
-   const win=thumb.contentWindow,doc=win.document,body=doc.scrollingElement||doc.documentElement;
-   const max=Math.max(0,body.scrollHeight-win.innerHeight);
-   if(max<80)return;
-   frameStep+=direction*2.2;
-   if(frameStep>=Math.min(max,1350)){direction=-1}
-   if(frameStep<=0){direction=1;frameStep=0}
-   win.scrollTo(0,Math.max(0,frameStep));
-  }catch(e){}
- }
- thumb.addEventListener('load',()=>{frameStep=0;direction=1});
- requestAnimationFrame(tick);
-})();
-</script>
-
 </body>
 </html>
