@@ -980,6 +980,14 @@ img{display:block;max-width:100%}
 @media(max-width:800px){.category-row--products{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.top-links--primary{gap:13px 18px}.inquiry-buttons{grid-template-columns:1fr}.category-row--digital{grid-template-columns:repeat(2,minmax(0,1fr))}.category-row>.category-tile{min-height:170px}.contact-dialog{padding:30px 20px}}
 @media(max-width:420px){.category-row--digital{grid-template-columns:1fr}}
+</style><style id="category-row-layout-fix">
+/* Keep the digital services and physical key products in separate rows. */
+.browse-section .category-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:18px!important;overflow:visible!important;overflow-x:visible!important;overflow-y:visible!important;padding:0!important;margin:16px 0 0!important;scroll-snap-type:none!important}
+.browse-section .category-row--digital{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+.browse-section .category-row--products{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+@media(max-width:800px){.browse-section .category-row--products{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:640px){.browse-section .category-row--digital{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:420px){.browse-section .category-row--digital{grid-template-columns:1fr!important}}
 </style></head>
 <body>
 
