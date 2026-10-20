@@ -1019,6 +1019,7 @@ img{display:block;max-width:100%}
 .category-browser-disclosure>summary:focus-visible,.category-row-disclosure>summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 #collectionPriceRow[hidden]{display:none!important}
 @media(max-width:640px){.project-dialog,.contact-dialog{padding:28px 20px}.project-dialog .inquiry-buttons{grid-template-columns:1fr}.sec-cream>.wrap>.top-links--primary{gap:12px 16px}}
+.project-dialog,.contact-dialog,.category-dialog{box-sizing:border-box;max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 </style>
 </head>
 <body>
@@ -1036,7 +1037,7 @@ img{display:block;max-width:100%}
 
 <section class="sec sec-cream"><div class="wrap">
 <div class="top-links top-links--primary" aria-label="Quick actions">
-<button class="btn btn-primary" id="inquiryToggle" type="button" aria-haspopup="dialog" aria-controls="start">Start Project <span aria-hidden="true">↗</span></button>
+<button class="btn btn-primary" id="inquiryToggle" type="button" aria-haspopup="dialog" aria-controls="start">Start Project</button>
 <button class="top-link top-contact-trigger" id="openContactDialog" type="button" aria-haspopup="dialog">Save Contact</button>
 <a class="top-link" href="index.html">Home Index →</a>
 </div>
@@ -1424,18 +1425,18 @@ swipe.addEventListener('keydown',e=>{
 <button class="contact-dialog__close" type="button" data-close-dialog aria-label="Close project options">×</button>
 <span class="contact-dialog__eyebrow">THE DIGITAL SIDE</span><h2 id="projectDialogTitle">Start a project.</h2>
 <div class="inquiry-buttons">
-<a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry →</strong><span>A few details to begin.</span></a>
-<a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake →</strong><span>Share the full picture.</span></a>
+<a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry</strong><span>A few details to begin.</span></a>
+<a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake</strong><span>Share the full picture.</span></a>
 </div>
 </dialog>
 <dialog class="contact-dialog" id="contactDialog" aria-labelledby="contactDialogTitle">
 <button class="contact-dialog__close" id="closeContactDialog" type="button" aria-label="Close contact options">×</button>
 <h2 id="contactDialogTitle">Save Contact</h2>
 <div class="contact-dialog__actions">
-<a href="tel:+12029341126"><small>Call</small><strong>Call ↗</strong></a>
-<a href="sms:+12029341126"><small>Text</small><strong>Text ↗</strong></a>
-<a href="mailto:handled@thedigitalside.org"><small>Email</small><strong>Email ↗</strong></a>
-<a href="the-digital-side.vcf" download><small>Contact card</small><strong>Download ↓</strong></a>
+<a href="tel:+12029341126"><small>Call</small><strong>Call</strong></a>
+<a href="sms:+12029341126"><small>Text</small><strong>Text</strong></a>
+<a href="mailto:handled@thedigitalside.org"><small>Email</small><strong>Email</strong></a>
+<a href="the-digital-side.vcf" download><small>Contact card</small><strong>Download</strong></a>
 </div></dialog>
 <script>
 (()=>{
