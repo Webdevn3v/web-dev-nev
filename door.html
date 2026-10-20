@@ -12,9 +12,9 @@
 <meta name="theme-color" content="#0c0b09">
 <style>
 :root{
-  --ink:#0c0b09;--ink-elev:#17140f;--cream:#f6efe1;--paper:#fbf7ee;
-  --gold:#c9a66a;--gold-deep:#755a2b;--ink-muted:#5c5646;--cream-muted:#cabfa5;
-  --line-l:rgba(12,10,7,.14);--line-d:rgba(255,255,255,.14);--signal:#a6ff00;
+  --ink:#090a0b;--ink-elev:#151719;--cream:#f1f0ed;--paper:#faf9f7;
+  --gold:#d7d8d7;--gold-deep:#85898d;--ink-muted:#62666a;--cream-muted:#b9bcbe;
+  --line-l:rgba(12,10,7,.14);--line-d:rgba(255,255,255,.14);--signal:#d6d8d7;
   --serif:'Fraunces',Georgia,serif;--sans:'Inter',sans-serif;--mono:'Space Mono',monospace;
   --ease:cubic-bezier(.22,.72,.22,1);
 }
@@ -45,7 +45,7 @@ img{display:block;max-width:100%}
   width:.18em;height:.18em;flex:none;display:inline-block;
   margin-left:.07em;border-radius:50%;
   background:var(--signal);
-  box-shadow:0 0 13px rgba(166,255,0,.4);
+  box-shadow:0 0 13px rgba(214,216,215,.38);
 }
 .scroll-cue{
   position:absolute;bottom:clamp(26px,6vh,54px);left:50%;
@@ -201,7 +201,7 @@ img{display:block;max-width:100%}
 .handoff-cta{margin-top:22px}
 .contact-stack{margin-top:30px;padding-top:26px;border-top:1px solid var(--line-l);display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .about-btn{font:700 .6875rem/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;border-bottom:1px solid rgba(12,10,7,.4);padding-bottom:5px;cursor:pointer}.about-btn span{color:var(--gold-deep);margin-left:5px}.about-btn:focus-visible{outline:2px solid var(--gold-deep);outline-offset:4px}
-.save-contact{font:700 .6875rem/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--gold-deep);border-bottom:1px solid rgba(117,90,43,.5);padding-bottom:5px}
+.save-contact{font:700 .6875rem/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--gold-deep);border-bottom:1px solid rgba(133,137,141,.5);padding-bottom:5px}
 .contact-row{display:flex;gap:24px}
 .contact-row a{font:700 .6875rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid rgba(12,10,7,.3);padding-bottom:4px}
 .key-link{font:700 .6875rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted);border-bottom:1px solid rgba(12,10,7,.22);padding-bottom:4px;cursor:pointer}
@@ -229,7 +229,7 @@ img{display:block;max-width:100%}
 
 /* Updated Digital Door showcase, category paths and responsive galleries */
 .keys-feature{padding:0 0 24px;margin-bottom:12px;border-bottom:1px solid var(--line-d)}
-.keys-showcase{position:relative;min-height:clamp(385px,50vw,550px);border:1px solid rgba(201,166,106,.18);border-radius:7px;overflow:hidden;background:#16120d;display:flex;align-items:flex-start}
+.keys-showcase{position:relative;min-height:clamp(385px,50vw,550px);border:1px solid rgba(180,185,190,.18);border-radius:7px;overflow:hidden;background:#16120d;display:flex;align-items:flex-start}
 .keys-showcase-image{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center bottom;opacity:.43;filter:brightness(.81) saturate(.72)}
 .keys-showcase:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,11,9,.98),rgba(12,11,9,.88) 42%,rgba(12,11,9,.17) 100%),linear-gradient(0deg,rgba(12,11,9,.18),transparent 60%);pointer-events:none}
 .keys-showcase-copy{position:relative;z-index:1;max-width:610px;padding:clamp(25px,5vw,55px)}
@@ -240,8 +240,8 @@ img{display:block;max-width:100%}
 .category-head h3{font:400 clamp(1.3rem,3.4vw,1.85rem) var(--serif)}
 .category-head p{color:var(--cream-muted);font-size:.84rem;line-height:1.65;margin-top:5px}
 .category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.category-tile{min-width:0;min-height:115px;text-align:left;border:1px solid rgba(201,166,106,.28);border-radius:3px;padding:18px 14px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.005));color:var(--cream);cursor:pointer;transition:border-color .22s,background .22s}
-.category-tile:hover,.category-tile:focus-visible{border-color:var(--gold);background:rgba(201,166,106,.08);outline:none}
+.category-tile{min-width:0;min-height:115px;text-align:left;border:1px solid rgba(180,185,190,.28);border-radius:3px;padding:18px 14px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.005));color:var(--cream);cursor:pointer;transition:border-color .22s,background .22s}
+.category-tile:hover,.category-tile:focus-visible{border-color:var(--gold);background:rgba(180,185,190,.08);outline:none}
 .category-tile strong{font:600 clamp(.88rem,2.6vw,1.04rem)/1.3 var(--sans)}
 .category-tile small{font:.71rem/1.5 var(--sans);color:var(--cream-muted)}
 .category-tile .cat-open{align-self:flex-end;color:var(--gold);font:1.15rem var(--serif)}
@@ -249,7 +249,7 @@ img{display:block;max-width:100%}
 @media(max-width:590px){.keys-showcase{min-height:455px;align-items:flex-start}.keys-showcase-image{opacity:.34;object-position:center bottom}.keys-showcase:after{background:linear-gradient(180deg,rgba(12,11,9,.96),rgba(12,11,9,.72) 55%,rgba(12,11,9,.12))}.keys-showcase-copy{padding:26px 21px}.keys-showcase h2{max-width:360px}.keys-showcase .keys-lede{max-width:330px}}
 .keys-details{margin-top:21px}
 .keys-details summary{min-height:55px}
-.collection-modal{position:fixed;inset:0;margin:auto;width:min(94vw,720px);max-height:92dvh;background:var(--ink);color:var(--cream);border:1px solid rgba(201,166,106,.38);border-radius:7px;padding:28px 18px 21px;overflow-y:auto}
+.collection-modal{position:fixed;inset:0;margin:auto;width:min(94vw,720px);max-height:92dvh;background:var(--ink);color:var(--cream);border:1px solid rgba(180,185,190,.38);border-radius:7px;padding:28px 18px 21px;overflow-y:auto}
 .collection-modal::backdrop{background:rgba(0,0,0,.88)}
 .collection-modal-close{position:absolute;right:12px;top:9px;z-index:2;border:1px solid var(--line-d);color:var(--cream);background:#242019;border-radius:50%;width:37px;height:37px;font-size:1.5rem;cursor:pointer}
 .collection-modal .dialog-kicker{font:700 .65rem var(--mono);letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
@@ -276,7 +276,7 @@ img{display:block;max-width:100%}
 .demo-path-card .demo-role{font:700 .63rem/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin:0 0 7px}
 .demo-path-card p{font-size:.76rem;line-height:1.55;color:var(--cream-muted);margin-top:6px}
 .demo-path-card .demo-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.demo-path-card .demo-actions a{font:700 .66rem/1.3 var(--mono);padding:7px 8px;border:1px solid rgba(201,166,106,.38);color:var(--cream)}
+.demo-path-card .demo-actions a{font:700 .66rem/1.3 var(--mono);padding:7px 8px;border:1px solid rgba(180,185,190,.38);color:var(--cream)}
 .demo-path-card .demo-actions a:focus-visible,.demo-path-card .demo-actions a:hover{border-color:var(--gold);color:var(--gold)}
 @media(min-width:800px){.demo-path-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.demo-path-card{grid-template-columns:1fr}.demo-path-card img{height:165px;width:100%;object-position:center 25%}}
 .contact-stack{margin-top:30px;padding-top:26px;border-top:1px solid var(--line-l);align-items:stretch;text-align:center;gap:15px}
@@ -290,7 +290,7 @@ img{display:block;max-width:100%}
 
 
 /* A restrained image behind each category, with the copy fully readable */
-.category-tile{position:relative;isolation:isolate;overflow:hidden;min-height:156px;justify-content:space-between;gap:10px;background:#17120e;border-color:rgba(201,166,106,.32);padding:17px 14px}
+.category-tile{position:relative;isolation:isolate;overflow:hidden;min-height:156px;justify-content:space-between;gap:10px;background:#151719;border-color:rgba(180,185,190,.32);padding:17px 14px}
 .category-tile .category-visual{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center center;opacity:.30;z-index:0;filter:saturate(.72) contrast(.98);transition:opacity .2s ease}
 .category-tile::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(9,8,6,.81),rgba(9,8,6,.54)),linear-gradient(0deg,rgba(9,8,6,.65),transparent 85%);pointer-events:none}
 .category-tile strong,.category-tile small,.category-tile .cat-open{position:relative;z-index:2;text-shadow:0 2px 12px #070605}
@@ -303,7 +303,7 @@ img{display:block;max-width:100%}
 /* The live card is the example, not a separate unframed portrait photograph */
 .card-example{margin-top:18px}
 .card-example[hidden]{display:none!important}
-.card-example-panel{position:relative;min-height:345px;max-width:420px;overflow:hidden;border:1px solid rgba(201,166,106,.43);border-radius:6px;background:#21160f}
+.card-example-panel{position:relative;min-height:345px;max-width:420px;overflow:hidden;border:1px solid rgba(180,185,190,.43);border-radius:6px;background:#21160f}
 .card-example-panel .card-example-photo{position:absolute;inset:0;width:100%;height:100%;background:url('avery-tds-bracelet.png') center 25%/cover no-repeat}
 .card-example-panel::after{content:"";pointer-events:none;position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,7,5,.61),rgba(10,7,5,.12) 40%,rgba(10,7,5,.66) 68%,rgba(10,7,5,.97))}
 .card-example-panel .card-example-content{position:relative;z-index:1;min-height:345px;padding:27px 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center}
@@ -329,7 +329,7 @@ img{display:block;max-width:100%}
 .door-intro strong{font:650 .92rem var(--sans)}.door-intro p{font-size:.85rem;line-height:1.65;color:var(--ink-muted);margin-top:6px}
 .keys-showcase{min-height:0;background:none;border:0;border-radius:0;display:block}.keys-showcase::after{display:none}
 .keys-showcase-copy{padding:0;max-width:760px}.keys-showcase h2{margin:0 0 12px}
-.intro-drop summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:var(--gold);font:700 .69rem/1.6 var(--mono);border-bottom:1px solid rgba(201,166,106,.4);padding:9px 0}
+.intro-drop summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:var(--gold);font:700 .69rem/1.6 var(--mono);border-bottom:1px solid rgba(180,185,190,.4);padding:9px 0}
 .intro-drop summary::-webkit-details-marker{display:none}.intro-drop summary:after{content:"+";font-size:.93rem}.intro-drop[open] summary:after{content:"−"}
 .intro-drop p{color:var(--cream-muted);font-size:.86rem;line-height:1.7;padding:12px 0 4px;max-width:710px}
 .category-head{margin-top:28px}.category-grid{margin-top:16px}.category-tile{justify-content:flex-end;min-height:145px}
@@ -382,7 +382,7 @@ img{display:block;max-width:100%}
 .keys-showcase-copy{padding:0;max-width:700px}
 .keys-showcase h2{margin:0 0 17px}
 .keys-message{font:400 clamp(.94rem,2.8vw,1.07rem)/1.75 var(--sans);color:var(--cream-muted);max-width:690px}
-.digital-door-emphasis{font-weight:650;color:var(--cream);border-bottom:1px solid rgba(201,166,106,.55);padding-bottom:2px}
+.digital-door-emphasis{font-weight:650;color:var(--cream);border-bottom:1px solid rgba(180,185,190,.55);padding-bottom:2px}
 .category-subline{color:var(--cream-muted);font:.82rem/1.6 var(--sans);margin-top:8px;max-width:620px}
 .category-tile{min-height:160px;text-align:left;cursor:pointer}
 .category-tile:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
@@ -396,7 +396,7 @@ img{display:block;max-width:100%}
 .demo-paths{padding-top:26px}
 .demo-carousel{display:flex;gap:13px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:2px;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:1px 1px 16px}
 .demo-carousel::-webkit-scrollbar{display:none}
-.demo-slide{flex:0 0 min(82vw,285px);scroll-snap-align:start;min-width:0;overflow:hidden;border:1px solid rgba(201,166,106,.28);border-radius:4px;background:#15120f}
+.demo-slide{flex:0 0 min(82vw,285px);scroll-snap-align:start;min-width:0;overflow:hidden;border:1px solid rgba(180,185,190,.28);border-radius:4px;background:#15120f}
 .demo-cover{position:relative;display:block;height:clamp(185px,45vw,232px);overflow:hidden}
 .demo-cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 19%;filter:brightness(.77) saturate(.80)}
 .demo-cover:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(10,8,7,.97) 0%,rgba(10,8,7,.06) 75%)}
@@ -442,7 +442,7 @@ img{display:block;max-width:100%}
 .category-grid>.category-tile::before{background:linear-gradient(0deg,rgba(10,8,7,.91),rgba(10,8,7,.13) 78%);z-index:1}
 .category-grid>.category-tile:not(.category-tds){background-color:#201b17;background-image:repeating-linear-gradient(115deg,rgba(198,168,119,.045) 0 1px,transparent 1px 13px),radial-gradient(ellipse at 78% 16%,rgba(178,145,102,.2),transparent 62%),linear-gradient(145deg,#2d2721,#100f0d)}
 .category-grid>.tile-digital{background-image:radial-gradient(ellipse at 85% 12%,rgba(183,151,100,.2),transparent 55%),repeating-linear-gradient(90deg,rgba(195,158,98,.04) 0 1px,transparent 1px 19px),linear-gradient(135deg,#29241e,#13100d)!important}
-.category-grid>.tile-door{background-image:linear-gradient(90deg,transparent 49.7%,rgba(201,166,106,.22) 50%,transparent 50.3%),radial-gradient(ellipse at 50% 38%,rgba(174,148,115,.2),transparent 55%),linear-gradient(145deg,#241e19,#0d0c0a)!important}
+.category-grid>.tile-door{background-image:linear-gradient(90deg,transparent 49.7%,rgba(180,185,190,.22) 50%,transparent 50.3%),radial-gradient(ellipse at 50% 38%,rgba(174,148,115,.2),transparent 55%),linear-gradient(145deg,#241e19,#0d0c0a)!important}
 .category-grid>.tile-sets{background-image:linear-gradient(135deg,rgba(186,150,99,.10),transparent 70%),repeating-linear-gradient(0deg,rgba(197,166,119,.045) 0 1px,transparent 1px 17px),linear-gradient(135deg,#28221b,#14110e)!important}
 .category-grid>.tile-websites{background-image:repeating-linear-gradient(0deg,rgba(193,167,128,.08) 0 1px,transparent 1px 36px),linear-gradient(135deg,#332b21,#15110d)!important}
 .category-grid>.tile-custom{background-image:radial-gradient(circle at 80% 26%,rgba(184,145,86,.24),transparent 57%),linear-gradient(145deg,#241e18,#100d0a)!important}
@@ -455,8 +455,8 @@ img{display:block;max-width:100%}
 .layer-feature{margin:30px 0 27px;padding:22px 0 24px;border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);display:grid;gap:20px;align-items:center}
 .layer-copy .kicker{margin-bottom:10px}.layer-copy h3{font:400 clamp(1.7rem,5.2vw,2.8rem)/1.14 var(--serif);color:var(--cream);max-width:590px}
 .layer-copy p{margin-top:12px;color:var(--cream-muted);font:.88rem/1.7 var(--sans);max-width:480px}
-.layer-frame{position:relative;overflow:hidden;display:grid;place-items:center;min-height:215px;border:1px solid rgba(201,166,106,.22);border-radius:4px;background:radial-gradient(ellipse at 50% 38%,#302720 0%,#14120f 76%);isolation:isolate}
-.layer-frame:before{content:"";position:absolute;inset:9px;border:1px solid rgba(201,166,106,.1);z-index:1;pointer-events:none}
+.layer-frame{position:relative;overflow:hidden;display:grid;place-items:center;min-height:215px;border:1px solid rgba(180,185,190,.22);border-radius:4px;background:radial-gradient(ellipse at 50% 38%,#302720 0%,#14120f 76%);isolation:isolate}
+.layer-frame:before{content:"";position:absolute;inset:9px;border:1px solid rgba(180,185,190,.1);z-index:1;pointer-events:none}
 .layer-frame img{display:block;width:100%;height:auto;max-height:490px;object-fit:contain;transform:translateY(12px) scale(.97);opacity:.8;filter:saturate(.9);transition:transform .85s ease,opacity .85s ease}
 .layer-feature.is-visible .layer-frame img{transform:translateY(0) scale(1);opacity:1}
 @media(min-width:760px){.layer-feature{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:28px;padding:32px 0}.layer-frame{min-height:330px}}
@@ -468,7 +468,7 @@ img{display:block;max-width:100%}
 .browse-section .category-grid::-webkit-scrollbar{display:none}
 .browse-section .category-grid>.category-tile{flex:0 0 clamp(195px,65vw,285px);height:auto;min-height:0;width:auto!important;padding:0;border:0!important;display:flex;flex-direction:column;gap:9px;justify-content:flex-start;align-items:stretch;text-align:left;background:transparent!important;border-radius:0;scroll-snap-align:start}
 .browse-section .category-tile:before{display:none!important}
-.browse-section .category-scene{position:relative;display:block;height:clamp(204px,65vw,305px);width:100%;background:#211b15;overflow:hidden;border-radius:4px;border:1px solid rgba(201,166,106,.26);isolation:isolate}
+.browse-section .category-scene{position:relative;display:block;height:clamp(204px,65vw,305px);width:100%;background:#211b15;overflow:hidden;border-radius:4px;border:1px solid rgba(180,185,190,.26);isolation:isolate}
 .browse-section .category-scene::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(150deg,rgba(255,241,210,.06),transparent 48%,rgba(0,0,0,.17))}
 .browse-section .category-scene img{width:100%;height:100%;object-fit:cover;display:block;opacity:.97}
 /* TDS Collection uses the SAME carousel width as every other tile.
@@ -525,7 +525,7 @@ img{display:block;max-width:100%}
 @media(prefers-reduced-motion:reduce){.layer-frame img{opacity:1;transform:none;transition:none}}
 
 /* Shared swipeable category window */
-.category-dialog{width:min(96vw,740px);max-height:94dvh;padding:28px 15px 22px;background:#100e0c;color:var(--cream);border:1px solid rgba(201,166,106,.32);border-radius:6px}
+.category-dialog{width:min(96vw,740px);max-height:94dvh;padding:28px 15px 22px;background:#100e0c;color:var(--cream);border:1px solid rgba(180,185,190,.32);border-radius:6px}
 .category-dialog h3{font:400 clamp(1.65rem,5vw,2.35rem)/1.15 var(--serif);margin:11px 42px 9px 0}
 .category-dialog p{font:.85rem/1.65 var(--sans);color:var(--cream-muted);max-width:650px}
 .category-dialog .dialog-kicker{color:var(--gold);font:700 .62rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase}
@@ -557,7 +557,7 @@ img{display:block;max-width:100%}
 .modal-kit-card:after{content:"";position:absolute;left:13%;top:18%;width:18%;height:17%;border:2px solid #caa36b;border-radius:12px}
 .modal-kit-ring{position:absolute;right:18%;top:20%;width:48px;height:48px;border:7px solid #d3a566;border-radius:50%}
 .modal-kit-charm{position:absolute;right:11%;top:33%;width:35%;height:49%;border:2px solid #aa8a5c;border-radius:45px 45px 25px 25px;background:linear-gradient(135deg,#070707,#2c2822);transform:rotate(19deg);box-shadow:0 12px 16px #090706}
-.modal-kit-phone{position:absolute;left:13%;bottom:-12%;width:39%;height:39%;border:4px solid #b59568;border-radius:16px;background:linear-gradient(180deg,#17120e,#403326)}
+.modal-kit-phone{position:absolute;left:13%;bottom:-12%;width:39%;height:39%;border:4px solid #b59568;border-radius:16px;background:linear-gradient(180deg,#151719,#403326)}
 .modal-visual-website{background:linear-gradient(140deg,#342920,#110e0b)}
 .modal-website{height:88%;width:53%;border:8px solid #181410;border-radius:22px 22px 5px 5px;box-shadow:0 0 0 2px #b89a6c,15px 18px 22px #080706;background:#ede2d2;overflow:hidden;display:flex;flex-direction:column;gap:13px}
 .modal-web-header{padding:20px 8px 12px;text-align:center;font:700 .53rem/1.3 var(--mono);color:#ead2ab;background:#241b15}
@@ -571,7 +571,7 @@ img{display:block;max-width:100%}
 .modal-concept-name{font:400 clamp(1.3rem,5vw,2rem)/1.12 var(--serif);color:#f5dfbc}
 .modal-concept-tap{border:1px solid rgba(201,164,104,.65);border-radius:50%;width:44px;height:44px;display:grid;place-items:center;color:#d2b182;font:.66rem var(--mono)}
 .category-dialog .collection-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}
-.category-dialog .collection-links>a{color:var(--cream);border:1px solid rgba(201,166,106,.48);padding:12px 14px;font:.69rem/1.3 var(--mono);text-decoration:none}
+.category-dialog .collection-links>a{color:var(--cream);border:1px solid rgba(180,185,190,.48);padding:12px 14px;font:.69rem/1.3 var(--mono);text-decoration:none}
 .modal-includes{flex:1 0 100%;border-top:1px solid var(--line-d);padding-top:13px;color:var(--cream-muted);font:.79rem/1.7 var(--sans)}
 .modal-includes strong{font:.89rem/1.5 var(--sans);color:var(--cream);font-weight:600}
 .modal-includes ul{margin:8px 0 5px;padding-left:19px}
@@ -594,7 +594,7 @@ img{display:block;max-width:100%}
 .category-dialog .modal-photo{height:clamp(290px,58dvh,510px);min-height:0;display:block;background:#17120f}
 .category-dialog .modal-photo img{height:100%;width:100%;object-fit:cover;object-position:center;display:block}
 .category-dialog .modal-example-caption{min-height:0}
-.modal-door-preview{position:relative;display:block;height:clamp(335px,59dvh,540px);overflow:hidden;border:1px solid rgba(201,166,106,.42);border-radius:4px;background:#0d0b09;cursor:pointer}
+.modal-door-preview{position:relative;display:block;height:clamp(335px,59dvh,540px);overflow:hidden;border:1px solid rgba(180,185,190,.42);border-radius:4px;background:#0d0b09;cursor:pointer}
 .modal-door-preview iframe,.real-demo-cover iframe{display:block;width:100%;height:100%;border:0;pointer-events:none}
 .modal-door-preview:after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(0deg,rgba(0,0,0,.72),transparent);pointer-events:none}
 .modal-preview-cta{position:absolute;z-index:2;bottom:13px;left:15px;right:15px;text-align:center;background:rgba(19,15,12,.78);border:1px solid rgba(210,178,125,.55);color:#fff2dd;padding:12px;font:700 .72rem/1.3 var(--mono)}
@@ -603,11 +603,11 @@ img{display:block;max-width:100%}
 .real-demo-cover iframe{opacity:.8}
 .demo-more-link{display:inline-flex;margin:5px 0 24px;padding:10px 0;border-bottom:1px solid var(--gold);font:700 .72rem/1.4 var(--mono);color:var(--cream)}
 /* Photo slides out in its own overlay, never as a text block under the original */
-.layer-detail-modal{inset:0;margin:auto;width:min(96vw,1000px);max-height:91dvh;padding:0;background:#12100e;color:var(--cream);border:1px solid rgba(201,166,106,.45);border-radius:6px;overflow:hidden}
+.layer-detail-modal{inset:0;margin:auto;width:min(96vw,1000px);max-height:91dvh;padding:0;background:#12100e;color:var(--cream);border:1px solid rgba(180,185,190,.45);border-radius:6px;overflow:hidden}
 .layer-detail-modal::backdrop{background:rgba(0,0,0,.88)}
 .layer-detail-close{position:absolute;right:12px;top:12px;z-index:3;width:43px;height:43px;border:1px solid var(--line-d);border-radius:50%;background:rgba(21,16,12,.9);color:var(--cream);font:28px var(--sans);cursor:pointer}
 .layer-detail-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);align-items:center;min-height:400px}
-.layer-detail-image{min-width:0;background:#17120e;overflow:hidden;display:grid;place-items:center}
+.layer-detail-image{min-width:0;background:#151719;overflow:hidden;display:grid;place-items:center}
 .layer-detail-image img{display:block;width:100%;max-height:82dvh;object-fit:contain}
 .layer-detail-copy{padding:clamp(22px,4vw,42px)}
 .layer-detail-copy h3{font:400 clamp(1.4rem,4vw,2.4rem)/1.12 var(--serif);margin:14px 0}
@@ -631,11 +631,11 @@ img{display:block;max-width:100%}
 .layer-disclosure[open] .layer-disclosure-toggle{transform:rotate(45deg)}
 .layer-expanded{display:grid;grid-template-columns:minmax(0,1fr);gap:17px;padding-top:23px;animation:tdsLayerSectionIn .35s ease both}
 .layer-expanded-title{font:400 clamp(1.45rem,4.2vw,2.3rem)/1.17 var(--serif);color:var(--cream);letter-spacing:-.02em}
-.layer-visual-stage{min-width:0;overflow:hidden;border:1px solid rgba(201,166,106,.24);border-radius:4px;background:#17120e}
+.layer-visual-stage{min-width:0;overflow:hidden;border:1px solid rgba(180,185,190,.24);border-radius:4px;background:#151719}
 .layer-visual-stage img{display:block;width:100%;height:auto;max-height:525px;object-fit:contain;object-position:center;transform-origin:center top;animation:tdsLayerImageCascade .95s cubic-bezier(.19,1,.22,1) both}
 .layer-annotations{display:grid;align-content:center;gap:0}
-.layer-annotation{display:grid;grid-template-columns:29px minmax(0,1fr);gap:13px;padding:16px 0;border-bottom:1px solid rgba(201,166,106,.19);opacity:0;animation:tdsLayerNoteIn .52s ease forwards}
-.layer-annotation:first-child{border-top:1px solid rgba(201,166,106,.19);animation-delay:.25s}
+.layer-annotation{display:grid;grid-template-columns:29px minmax(0,1fr);gap:13px;padding:16px 0;border-bottom:1px solid rgba(180,185,190,.19);opacity:0;animation:tdsLayerNoteIn .52s ease forwards}
+.layer-annotation:first-child{border-top:1px solid rgba(180,185,190,.19);animation-delay:.25s}
 .layer-annotation:nth-child(2){animation-delay:.43s}
 .layer-annotation:nth-child(3){animation-delay:.61s}
 .layer-annotation-number{font:700 .69rem/1.6 var(--mono);color:var(--gold);letter-spacing:.12em}
@@ -669,12 +669,12 @@ img{display:block;max-width:100%}
 .browse-section .scene-card-preview{background:#100c0b}
 .browse-section .scene-card-preview iframe{display:block;width:100%;height:100%;border:0;pointer-events:none}
 .browse-section .scene-keyset-composite{background:#140f0c}
-.browse-section .scene-keyset-composite img{position:absolute!important;width:55%!important;height:58%!important;object-fit:cover!important;box-shadow:0 5px 20px rgba(0,0,0,.48);border:1px solid rgba(201,166,106,.2);border-radius:3px}
+.browse-section .scene-keyset-composite img{position:absolute!important;width:55%!important;height:58%!important;object-fit:cover!important;box-shadow:0 5px 20px rgba(0,0,0,.48);border:1px solid rgba(180,185,190,.2);border-radius:3px}
 .browse-section .scene-keyset-composite .keyset-card{top:6%;left:7%;transform:rotate(-7deg)}
 .browse-section .scene-keyset-composite .keyset-chain{right:5%;top:18%;transform:rotate(7deg)}
 .browse-section .scene-keyset-composite .keyset-wearable{bottom:2%;left:23%;width:49%!important;height:37%!important;transform:rotate(-2deg)}
 .browse-section .scene-site-preview{background:radial-gradient(ellipse at center,#392d22,#120f0d 78%)}
-.browse-section .scene-site-preview .real-site-phone{position:absolute;top:7%;width:61%;height:89%;overflow:hidden;background:#171515;border:5px solid #211b17;border-radius:17px;box-shadow:0 0 0 1px rgba(201,166,106,.5),0 8px 24px #0008}
+.browse-section .scene-site-preview .real-site-phone{position:absolute;top:7%;width:61%;height:89%;overflow:hidden;background:#171515;border:5px solid #211b17;border-radius:17px;box-shadow:0 0 0 1px rgba(180,185,190,.5),0 8px 24px #0008}
 .browse-section .scene-site-preview .real-site-phone.rear{left:6%;transform:rotate(-10deg) scale(.92);opacity:.8}
 .browse-section .scene-site-preview .real-site-phone.front{right:7%;transform:rotate(6deg)}
 .browse-section .scene-site-preview iframe{border:0;width:100%;height:100%;display:block;pointer-events:none;background:#090a0b}
@@ -684,7 +684,7 @@ img{display:block;max-width:100%}
 .category-dialog .collection-description-details>summary span{font-size:1.1rem}
 .category-dialog .collection-description-details[open]>summary span{transform:rotate(45deg)}
 .category-dialog .collection-description-details p{margin:11px 0 3px;max-width:630px}
-.category-dialog .modal-business-card-preview{height:clamp(335px,59dvh,540px);overflow:hidden;border:1px solid rgba(201,166,106,.42);border-radius:4px;background:#100d0c;cursor:default}
+.category-dialog .modal-business-card-preview{height:clamp(335px,59dvh,540px);overflow:hidden;border:1px solid rgba(180,185,190,.42);border-radius:4px;background:#100d0c;cursor:default}
 .category-dialog .modal-business-card-preview iframe{width:100%;height:100%;border:0;display:block;pointer-events:none}
 @media(prefers-reduced-motion:reduce){.browse-section .category-copy-toggle{transition:none}}
 
@@ -694,7 +694,7 @@ img{display:block;max-width:100%}
 /* Approved fully labeled technology image: simple fade-in only. */
 .layer-expanded{display:block!important}
 .layer-expanded-title{margin:0 0 15px!important}
-.layer-visual-stage.layer-static-stage{display:block!important;position:relative;width:100%;height:auto!important;aspect-ratio:auto!important;max-width:1100px;margin:0 auto;background:#e8d8c9;overflow:hidden;border:1px solid rgba(201,166,106,.25)}
+.layer-visual-stage.layer-static-stage{display:block!important;position:relative;width:100%;height:auto!important;aspect-ratio:auto!important;max-width:1100px;margin:0 auto;background:#e8d8c9;overflow:hidden;border:1px solid rgba(180,185,190,.25)}
 .layer-static-photo{display:block;width:100%;height:auto;max-height:none!important;object-fit:contain;opacity:1}
 .layer-disclosure[open] .layer-static-photo{animation:tdsSimpleLayerFade .7s ease both}
 @keyframes tdsSimpleLayerFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
@@ -704,7 +704,7 @@ img{display:block;max-width:100%}
 .tds-card-preview{display:flex;flex-direction:column;background:#100c0a;color:#f5ede1;width:100%;height:100%;overflow:hidden}
 .tds-card-media{min-height:0;flex:1 1 auto;overflow:hidden;background:#231914}
 .tds-card-media img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 20%!important;display:block;opacity:1!important}
-.tds-card-info{flex:0 0 auto;padding:13px 15px;background:#15100e;display:flex;flex-direction:column;gap:5px;align-items:flex-start;border-top:1px solid rgba(201,166,106,.32);text-align:left}
+.tds-card-info{flex:0 0 auto;padding:13px 15px;background:#15100e;display:flex;flex-direction:column;gap:5px;align-items:flex-start;border-top:1px solid rgba(180,185,190,.32);text-align:left}
 .tds-card-brand{color:var(--gold);text-transform:uppercase;font:700 .6rem/1.4 var(--mono);letter-spacing:.1em}
 .tds-card-info strong{color:var(--cream);font:400 clamp(1.25rem,3vw,1.9rem)/1.07 var(--serif);letter-spacing:0}
 .tds-card-role{color:var(--cream-muted);font:.72rem/1.45 var(--sans);letter-spacing:.02em}
@@ -712,10 +712,10 @@ img{display:block;max-width:100%}
 .tds-card-preview-tile .tds-card-info strong{font-size:clamp(1rem,3.5vw,1.32rem)}
 .tds-card-preview-tile .tds-card-role{font-size:.62rem}
 .tds-card-preview-tile .tds-card-brand{font-size:.53rem}
-.tds-card-preview-large{height:clamp(360px,59dvh,565px);border:1px solid rgba(201,166,106,.42);border-radius:4px}
+.tds-card-preview-large{height:clamp(360px,59dvh,565px);border:1px solid rgba(180,185,190,.42);border-radius:4px}
 .tds-card-preview-large .tds-card-info{padding:15px 18px}
 .tds-card-cta{display:flex;width:100%;gap:8px;margin-top:7px}
-.tds-card-cta span{flex:1;text-align:center;padding:9px 5px;border:1px solid rgba(201,166,106,.4);border-radius:3px;color:var(--cream);font:700 .66rem/1.2 var(--sans);letter-spacing:.07em;text-transform:uppercase}
+.tds-card-cta span{flex:1;text-align:center;padding:9px 5px;border:1px solid rgba(180,185,190,.4);border-radius:3px;color:var(--cream);font:700 .66rem/1.2 var(--sans);letter-spacing:.07em;text-transform:uppercase}
 .tds-card-save{align-self:center;color:var(--cream-muted);font:.71rem/1.5 var(--sans);text-transform:uppercase;letter-spacing:.08em;padding-top:5px}
 .category-dialog .collection-description-details.show-description-open>summary{display:none}
 .category-dialog .collection-description-details.show-description-open p{margin:4px 0 13px}
@@ -811,7 +811,7 @@ img{display:block;max-width:100%}
 .demo-paths .demo-slide-bottom strong{display:block;font:400 1.1rem/1.2 var(--serif);color:var(--cream);margin-bottom:6px}
 .demo-paths .demo-slide-bottom p{color:var(--cream-muted);line-height:1.55;font-size:.77rem}
 .category-dialog .mobilized-site-example{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none}
-.category-dialog .mobilized-site-example-phone{position:relative;display:block;width:min(80%,290px);height:clamp(350px,53dvh,480px);overflow:hidden;border:7px solid #25211e;border-radius:25px;background:#090a0b;box-shadow:0 0 0 1px rgba(201,166,106,.4)}
+.category-dialog .mobilized-site-example-phone{position:relative;display:block;width:min(80%,290px);height:clamp(350px,53dvh,480px);overflow:hidden;border:7px solid #25211e;border-radius:25px;background:#090a0b;box-shadow:0 0 0 1px rgba(180,185,190,.4)}
 .category-dialog .mobilized-site-example-frame{position:absolute;top:0;left:0;width:375px;height:900px;transform:scale(var(--website-preview-scale,.65));transform-origin:top left;border:0;pointer-events:none}
 .category-dialog .mobilized-site-example-link{font:700 .71rem/1.4 var(--mono);color:var(--gold);border-bottom:1px solid var(--gold);padding:9px}
 
@@ -819,7 +819,7 @@ img{display:block;max-width:100%}
 /* Full-height Door entrances. No description cards beneath the original preview. */
 .demo-paths .demo-carousel{align-items:start}
 .demo-paths .demo-slide{overflow:visible;background:transparent;border:0}
-.demo-paths .real-demo-cover{display:block;width:100%;height:auto!important;aspect-ratio:9/16;min-height:0!important;overflow:hidden;border:1px solid rgba(201,166,106,.36);border-radius:5px;background:#0d0b09}
+.demo-paths .real-demo-cover{display:block;width:100%;height:auto!important;aspect-ratio:9/16;min-height:0!important;overflow:hidden;border:1px solid rgba(180,185,190,.36);border-radius:5px;background:#0d0b09}
 .demo-paths .real-demo-cover iframe{display:block;width:100%;height:100%;border:0;pointer-events:none}
 .demo-paths .demo-slide-bottom{display:none!important}
 .demo-paths .demo-cover:after{display:none!important}
@@ -894,7 +894,7 @@ img{display:block;max-width:100%}
   height:clamp(325px,55dvh,535px);
   overflow:hidden;
   border-radius:4px;
-  border:1px solid rgba(201,166,106,.42);
+  border:1px solid rgba(180,185,190,.42);
 }
 .category-dialog .modal-card-link .tds-card-media{
   display:block;
@@ -913,7 +913,7 @@ img{display:block;max-width:100%}
 .category-dialog .modal-card-link:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
 /* Price belongs to the product category, never over a demo or its working preview. */
-.category-dialog .collection-price-row{display:flex;align-items:baseline;justify-content:space-between;gap:7px 18px;flex-wrap:wrap;margin:4px 0 16px;padding:11px 0;border-top:1px solid rgba(201,166,106,.25);border-bottom:1px solid rgba(201,166,106,.25)}
+.category-dialog .collection-price-row{display:flex;align-items:baseline;justify-content:space-between;gap:7px 18px;flex-wrap:wrap;margin:4px 0 16px;padding:11px 0;border-top:1px solid rgba(180,185,190,.25);border-bottom:1px solid rgba(180,185,190,.25)}
 .category-dialog.is-tds-collection .collection-price-row{display:none}
 .category-dialog .modal-product-pair{height:clamp(290px,58dvh,510px);display:grid;grid-template-columns:1fr 1fr;gap:8px;overflow:hidden}
 .category-dialog .modal-product-pair .modal-photo{height:100%;min-width:0}
@@ -931,7 +931,7 @@ img{display:block;max-width:100%}
 .top-contact>summary::-webkit-details-marker{display:none}
 .top-contact__menu{position:absolute;z-index:20;top:calc(100% + 12px);left:0;min-width:190px;padding:8px;background:var(--paper);border:1px solid var(--line-l);box-shadow:0 14px 32px rgba(0,0,0,.16);display:grid;gap:2px}
 .top-contact__menu a{padding:10px 12px;font:700 .66rem/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
-.top-contact__menu a:hover{background:rgba(201,166,106,.13)}
+.top-contact__menu a:hover{background:rgba(180,185,190,.13)}
 .top-inquiries{margin-top:28px;scroll-margin-top:24px}
 .top-inquiries__heading{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:12px}
 .top-inquiries__heading span{font:700 .7rem/1.2 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--gold-deep)}
@@ -939,7 +939,48 @@ img{display:block;max-width:100%}
 .one-tap-demo-link{display:inline-block;margin-top:12px;color:var(--gold);font-size:.78rem;text-decoration:underline;text-underline-offset:4px}
 @media(max-width:640px){.top-links--primary{gap:13px 18px}.top-contact__menu{position:static;margin-top:8px}.top-inquiries{margin-top:22px}}
 </style>
-</head>
+<style id="sprint1-layout-polish">
+:root{--ink:#090a0b;--ink-elev:#151719;--cream:#f1f0ed;--paper:#faf9f7;--gold:#d7d8d7;--gold-deep:#85898d;--ink-muted:#62666a;--cream-muted:#b9bcbe;--signal:#d6d8d7}
+.top-links--primary{align-items:center;gap:14px 22px}
+.top-contact-trigger{background:none;cursor:pointer}
+.top-contact-trigger:focus-visible,.btn:focus-visible{outline:2px solid var(--gold-deep);outline-offset:4px}
+.one-tap-disclosure--top{margin:22px 0 24px;padding:17px 19px;border:1px solid var(--line-l);border-radius:8px;background:rgba(0,0,0,.025)}
+.one-tap-disclosure--top>summary{min-height:54px}
+.one-tap-disclosure--top .one-tap-headline h2{color:var(--ink);font-size:clamp(1.25rem,3vw,1.85rem)}
+.one-tap-disclosure--top .keys-message{color:var(--ink-muted);line-height:1.7}
+.one-tap-disclosure--top .keys-message strong{color:var(--ink)}
+.one-tap-disclosure--top .one-tap-toggle{color:var(--gold-deep)}
+.top-inquiries{margin-top:24px;scroll-margin-top:24px}
+.top-inquiries[hidden]{display:none}
+.top-inquiries.is-open{display:block;animation:inquiryReveal .3s ease-out both}
+@keyframes inquiryReveal{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.inquiry-buttons{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.inquiry-btn{min-height:132px}
+.category-grid{display:grid!important;grid-template-columns:1fr!important;gap:18px!important;overflow:visible!important;overflow-x:visible!important;overflow-y:visible!important;padding:0!important;margin:16px 0 0!important;scroll-snap-type:none!important}
+.category-row{display:grid!important;gap:12px}
+.category-row--digital{grid-template-columns:repeat(3,minmax(0,1fr))}
+.category-row--products{grid-template-columns:repeat(4,minmax(0,1fr))}
+.category-row>.category-tile{flex:none!important;flex-basis:auto!important;width:auto!important;min-width:0;min-height:200px;scroll-snap-align:none!important}
+.category-tile{border-color:rgba(180,185,190,.3)!important;background-color:#151719!important}
+.category-tile:hover,.category-tile:focus-visible{border-color:var(--gold)!important;background-color:#202326!important}
+.scene-keys img{object-fit:cover;object-position:center}
+.contact-dialog{width:min(92vw,480px);max-width:none;max-height:calc(100dvh - 32px);margin:auto;padding:34px;border:1px solid rgba(0,0,0,.16);border-radius:14px;background:var(--paper);color:var(--ink);box-shadow:0 30px 100px rgba(0,0,0,.32);position:relative}
+.contact-dialog[open]{display:block;animation:contactReveal .28s cubic-bezier(.2,.75,.2,1) both}
+.contact-dialog::backdrop{background:rgba(8,9,10,.65);backdrop-filter:blur(5px)}
+@keyframes contactReveal{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.contact-dialog__close{position:absolute;top:14px;right:16px;width:36px;height:36px;border:1px solid var(--line-l);border-radius:50%;font-size:1.35rem;cursor:pointer}
+.contact-dialog__eyebrow{display:block;font:700 .62rem/1.2 var(--mono);letter-spacing:.16em;color:var(--gold-deep)}
+.contact-dialog h2{margin:12px 0 5px;font:500 clamp(1.8rem,5vw,2.4rem)/1.1 var(--serif)}
+.contact-dialog>p{color:var(--ink-muted);font-size:.9rem;margin-bottom:22px}
+.contact-dialog__actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.contact-dialog__actions a{display:flex;flex-direction:column;gap:6px;padding:15px;border:1px solid var(--line-l);border-radius:8px;background:#fff;color:var(--ink);transition:transform .2s,border-color .2s}
+.contact-dialog__actions a:hover{transform:translateY(-2px);border-color:var(--gold-deep)}
+.contact-dialog__actions small{font:700 .58rem/1.2 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--gold-deep)}
+.contact-dialog__actions strong{font:600 .86rem/1.3 var(--sans)}
+@media(max-width:800px){.category-row--products{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.top-links--primary{gap:13px 18px}.inquiry-buttons{grid-template-columns:1fr}.category-row--digital{grid-template-columns:repeat(2,minmax(0,1fr))}.category-row>.category-tile{min-height:170px}.contact-dialog{padding:30px 20px}}
+@media(max-width:420px){.category-row--digital{grid-template-columns:1fr}}
+</style></head>
 <body>
 
 <section class="world-hero" id="worldHero" aria-label="The Digital Side">
@@ -953,61 +994,41 @@ img{display:block;max-width:100%}
 
 <main id="doorStart">
 
-<section class="sec sec-cream">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2>Start with what you came to do.</h2>
-      <p class="lede">A Digital Business Card shares contact details. A Digital Door guides customer paths. A Mobilized Website streamlines an existing site for mobile.</p>
-      <div class="top-links top-links--primary">
-        <a class="btn btn-primary" href="#start">Tell us what you need ↓</a>
-        <a class="top-link" href="index.html">View the Home Index →</a>
-        <details class="top-contact">
-          <summary class="top-link">Contact <span aria-hidden="true">＋</span></summary>
-          <div class="top-contact__menu">
-            <a href="tel:+12029341126">Call</a>
-            <a href="sms:+12029341126">Text</a>
-            <a href="mailto:handled@thedigitalside.org">Email</a>
-            <a href="the-digital-side.vcf" download>Save Contact</a>
-          </div>
-        </details>
-      </div>
-    </div>
-    <div class="top-inquiries" id="start" aria-label="Project inquiry options">
-      <div class="top-inquiries__heading"><span>Tell us what you need</span><small>Choose the short form or share the full picture.</small></div>
-      <div class="inquiry-buttons">
-        <a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry →</strong><span>A few details are enough to start.</span></a>
-        <a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake →</strong><span>Share the complete project picture.</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec sec-dark" id="paths">
-  <div class="wrap">
-    <div class="keys-feature" id="keys">
-      <div class="keys-showcase"><div class="keys-showcase-copy">
-        <details class="one-tap-disclosure">
+<section class="sec sec-cream"><div class="wrap"><div class="sec-head">
+<h2>Start with what you came to do.</h2>
+<p class="lede">Explore how a tap connects a customer to your business, then choose the next step.</p>
+<details class="one-tap-disclosure one-tap-disclosure--top" id="keys">
           <summary><span class="one-tap-headline"><span class="kicker">The Digital Door</span><h2>One tap. A smarter first impression.</h2></span><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
           <p class="keys-message">A <strong>Digital Business Card</strong> shares your contact details. The <strong class="digital-door-emphasis">Digital Door</strong> adds guided customer paths. Signature tap products include a companion card; Apple Wallet or Google Wallet access is an optional upgrade. <a class="one-tap-demo-link" href="avery-cole-door.html?view=paths">Open a Digital Door demo →</a></p>
         </details>
-      </div></div>
-    </div>
+
+<div class="top-links top-links--primary">
+<button class="btn btn-primary" id="inquiryToggle" type="button" aria-expanded="false" aria-controls="start">Tell us what you need <span aria-hidden="true">＋</span></button>
+<a class="top-link" href="index.html">View the Home Index →</a>
+<button class="top-link top-contact-trigger" id="openContactDialog" type="button" aria-haspopup="dialog">Contact <span aria-hidden="true">↗</span></button>
+</div>
+</div>
+<div class="top-inquiries" id="start" hidden aria-label="Project inquiry options">
+<div class="inquiry-buttons">
+<a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry →</strong><span>A few details are enough to start.</span></a>
+<a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake →</strong><span>Share the complete project picture.</span></a>
+</div>
+</div></div></section>
+
+<section class="sec sec-dark" id="paths">
+  <div class="wrap">
     <section class="browse-section" id="keyCategories">
       <div class="category-head">
         <span class="kicker">What we create</span>
         <details class="category-copy-disclosure">
           <summary><h3>Find what fits your business.</h3><span class="category-copy-toggle" aria-hidden="true">+</span></summary>
-          <p class="category-subline">The first three examples show the digital experience. The remaining categories cover Signature products, Owner Key Sets, and custom tap pieces.</p>
+          <p class="category-subline">The first row shows Avery’s Digital Business Card, the Digital Door, and a Mobilized Website. The row below covers Digital Keys, the TDS Signature Collection, Owner Key Sets, and custom tap products.</p>
         </details>
       </div>
-      <div class="category-grid" aria-label="Browse The Digital Side solutions" tabindex="0">
-        <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="tds-card-preview tds-card-preview-tile"><span class="tds-card-media"><img src="avery-tds-bracelet.png" alt="" loading="lazy"></span><span class="tds-card-info"><span class="tds-card-brand">Rivermore Real Estate</span><strong>Avery Cole</strong><span class="tds-card-role">Realtor · Howard County</span></span></span></span><span class="category-label">Digital Business Cards</span></button>
-        <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button>
-        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View mobilized website examples"><span class="category-scene scene-websites single-site-preview" aria-hidden="true"><span class="single-site-phone"><iframe src="northline-mobile-site.html" title="Northline Roofing mobilized website scrolling preview" tabindex="-1" loading="lazy" data-auto-site-scroll></iframe></span></span><span class="category-label">Mobilized Websites</span></button>
-        <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="Tds_key_set.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Signature Collection</span></button>
-        <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Owner and Team Key Set options"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="assets/Tds_pvc_card.PNG" alt="" loading="lazy"><img class="keyset-chain" src="assets/Tds_keychain.PNG" alt="" loading="lazy"><img class="keyset-wearable" src="assets/Tds_bracelet.PNG" alt="" loading="lazy"></span><span class="category-label">Owner Key Sets</span></button>
-        <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="Tds_custom_mockup.PNG" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button>
-      </div>
+      <div class="category-grid" aria-label="Browse The Digital Side solutions">
+  <div class="category-row category-row--digital"><button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="tds-card-preview tds-card-preview-tile"><span class="tds-card-media"><img src="avery-tds-bracelet.png" alt="" loading="lazy"></span><span class="tds-card-info"><span class="tds-card-brand">Rivermore Real Estate</span><strong>Avery Cole</strong><span class="tds-card-role">Realtor · Howard County</span></span></span></span><span class="category-label">Digital Business Cards</span></button><button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button><button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View mobilized website examples"><span class="category-scene scene-websites single-site-preview" aria-hidden="true"><span class="single-site-phone"><iframe src="northline-mobile-site.html" title="Northline Roofing mobilized website scrolling preview" tabindex="-1" loading="lazy" data-auto-site-scroll></iframe></span></span><span class="category-label">Mobilized Websites</span></button></div>
+  <div class="category-row category-row--products"><button type="button" class="category-tile category-tile-keys" data-collection="keys" aria-label="View Digital Key options"><span class="category-scene scene-keys" aria-hidden="true"><img src="assets/door/key-wallet.webp" alt="" loading="lazy"></span><span class="category-label">Digital Keys</span></button><button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="Tds_key_set.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Signature Collection</span></button><button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Owner and Team Key Set options"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="assets/Tds_pvc_card.PNG" alt="" loading="lazy"><img class="keyset-chain" src="assets/Tds_keychain.PNG" alt="" loading="lazy"><img class="keyset-wearable" src="assets/Tds_bracelet.PNG" alt="" loading="lazy"></span><span class="category-label">Owner Key Sets</span></button><button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="Tds_custom_mockup.PNG" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button></div>
+</div>
     </section>
     <section class="demo-paths" aria-labelledby="featuredDemosTitle">
 <details class="demo-paths-disclosure">
@@ -1134,7 +1155,8 @@ const categoryPricing={
   custom:['Ready to tap from $45','Companion card + owner QR · Custom finishes vary']
 };
 const categories={
-tds:{title:'TDS Signature Collection',description:'One destination per purchase. A tap card is $20 on its own and included with the keychain, wearable or Duo. Owner QR included with each set; extra destinations are separate.',examples:[
+keys:{title:'Digital Keys',description:'A scannable Owner QR key is included with a Digital Door. Apple Wallet or Google Wallet access is available as an optional upgrade.',examples:[{type:'photo',src:'assets/door/key-wallet.webp',alt:'Digital QR key displayed on a phone',caption:'Owner QR Key',brand:'Wallet access available as an upgrade'}],links:[['Ask about a Digital Key','project-inquiry.html']]},
+tds:{title:'TDS Signature Collection',description:'Each Signature keychain, wearable or Duo includes one destination, a companion tap card and an Owner QR key. Apple Wallet or Google Wallet access is available as an optional upgrade.',examples:[
 {type:'photo',src:'assets/Tds_keychain.PNG',alt:'TDS signature tap keychain',caption:'Signature Tap Keychain · $45',brand:'One destination'},
 {type:'photo',src:'assets/Tds_bracelet.PNG',alt:'TDS signature wearable tap key',caption:'Wearable Tap Key · $65',brand:'One destination'},
 {type:'pair',items:[{src:'assets/Tds_keychain.PNG',alt:'Signature tap keychain'},{src:'assets/Tds_bracelet.PNG',alt:'Wearable tap key'}],caption:'Signature Duo · $100',brand:'Keychain + wearable'}],links:[['Ask about the collection','project-inquiry.html']]},
@@ -1144,7 +1166,7 @@ cards:{title:'Digital Business Cards',description:'Your mobile first impression:
 {type:'demo',kind:'card',theme:'designer',brand:'Atelier House',name:'Lillian Hart',caption:'Principal Designer',photo:'atelier-house-owner-headshot.png',url:'atelier-door.html?view=card'},
 {type:'demo',kind:'card',theme:'dentist',brand:'Lumina Dental Studio',name:'Dr. Elias Morgan',caption:'Dentist · Practice Owner',photo:'lumina-elias-morgan.jpg',initials:'EM',url:'lumina-door.html?view=card'},
 {type:'demo',kind:'card',theme:'attorney',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Founding Attorney',photo:'frederick-attorney-hero.png',url:'door-frederick-legacy-law.html?view=card'}],links:[['Discuss a digital card','project-inquiry.html']]},
-door:{title:'Digital Door',description:'Business Card, guided customer paths, owner QR key and one companion tap card. Signature keys and supported Wallet passes are optional.',examples:[
+door:{title:'Digital Door',description:'A Digital Business Card for contact details, plus guided customer paths in one mobile Door. Apple Wallet or Google Wallet access is available as an optional upgrade.',examples:[
 {type:'demo',brand:'Northline Roofing Co.',name:'Roof inspections and help',caption:'Contractor Door',url:'northline-door.html?view=paths'},
 {type:'demo',brand:'Rivermore Real Estate',name:'Homes and showings',caption:'Realtor Door',url:'avery-cole-door.html?view=paths'},
 {type:'demo',brand:'Atelier House',name:'Portfolio and design projects',caption:'Interior design Door',url:'atelier-door.html?view=paths'},
@@ -1368,6 +1390,35 @@ swipe.addEventListener('keydown',e=>{
  }
  thumb.addEventListener('load',()=>{frameStep=0;direction=1});
  requestAnimationFrame(tick);
+})();
+</script>
+<dialog class="contact-dialog" id="contactDialog" aria-labelledby="contactDialogTitle">
+<button class="contact-dialog__close" id="closeContactDialog" type="button" aria-label="Close contact panel">×</button>
+<span class="contact-dialog__eyebrow">THE DIGITAL SIDE</span><h2 id="contactDialogTitle">Let’s connect.</h2>
+<p>Choose the easiest way to reach Nev.</p>
+<div class="contact-dialog__actions">
+<a href="tel:+12029341126"><small>Call</small><strong>Call the studio ↗</strong></a>
+<a href="sms:+12029341126"><small>Text</small><strong>Send a text ↗</strong></a>
+<a href="mailto:handled@thedigitalside.org"><small>Email</small><strong>Send an email ↗</strong></a>
+<a href="the-digital-side.vcf" download><small>Contact</small><strong>Save Contact ↓</strong></a>
+</div></dialog>
+<script>
+(()=>{
+ const panel=document.getElementById('start'),trigger=document.getElementById('inquiryToggle');
+ function setInquiryOpen(open){
+  if(!panel||!trigger)return;
+  panel.hidden=!open;panel.classList.toggle('is-open',open);
+  trigger.setAttribute('aria-expanded',String(open));
+  trigger.querySelector('span').textContent=open?'×':'＋';
+  if(open)requestAnimationFrame(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}));
+ }
+ if(trigger)trigger.addEventListener('click',()=>setInquiryOpen(panel.hidden));
+ if(location.hash==='#start')setInquiryOpen(true);
+ const contact=document.getElementById('contactDialog');
+ const openContact=document.getElementById('openContactDialog'),closeContact=document.getElementById('closeContactDialog');
+ if(openContact&&contact)openContact.addEventListener('click',()=>contact.showModal());
+ if(closeContact&&contact)closeContact.addEventListener('click',()=>contact.close());
+ if(contact)contact.addEventListener('click',event=>{if(event.target===contact)contact.close()});
 })();
 </script>
 </body>
