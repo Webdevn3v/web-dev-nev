@@ -922,6 +922,23 @@ img{display:block;max-width:100%}
 .category-dialog .collection-price-row span{font:.76rem/1.35 var(--sans);color:var(--cream-muted)}
 @media(max-width:699px){.category-dialog .collection-price-row{margin:2px 0 13px;padding:9px 0}.category-dialog .collection-price-row strong{font-size:.81rem}.category-dialog .collection-price-row span{font-size:.7rem}}
 </style>
+
+<style>
+/* Sprint 1: top contact menu and direct inquiry choices */
+.top-links--primary{align-items:center;gap:14px 22px}
+.top-contact{position:relative}
+.top-contact>summary{list-style:none;cursor:pointer}
+.top-contact>summary::-webkit-details-marker{display:none}
+.top-contact__menu{position:absolute;z-index:20;top:calc(100% + 12px);left:0;min-width:190px;padding:8px;background:var(--paper);border:1px solid var(--line-l);box-shadow:0 14px 32px rgba(0,0,0,.16);display:grid;gap:2px}
+.top-contact__menu a{padding:10px 12px;font:700 .66rem/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.top-contact__menu a:hover{background:rgba(201,166,106,.13)}
+.top-inquiries{margin-top:28px;scroll-margin-top:24px}
+.top-inquiries__heading{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.top-inquiries__heading span{font:700 .7rem/1.2 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--gold-deep)}
+.top-inquiries__heading small{font-size:.78rem;color:var(--ink-muted)}
+.one-tap-demo-link{display:inline-block;margin-top:12px;color:var(--gold);font-size:.78rem;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:640px){.top-links--primary{gap:13px 18px}.top-contact__menu{position:static;margin-top:8px}.top-inquiries{margin-top:22px}}
+</style>
 </head>
 <body>
 
@@ -940,10 +957,26 @@ img{display:block;max-width:100%}
   <div class="wrap">
     <div class="sec-head">
       <h2>Start with what you came to do.</h2>
-      <p class="lede">Explore the examples, compare options, or visit the full site.</p>
-      <div class="top-links">
-        <a class="top-link" href="index.html">View full site →</a>
-        <a class="top-link" href="#contactUtilities">Contact now ↓</a>
+      <p class="lede">A Digital Business Card shares contact details. A Digital Door guides customer paths. A Mobilized Website streamlines an existing site for mobile.</p>
+      <div class="top-links top-links--primary">
+        <a class="btn btn-primary" href="#start">Tell us what you need ↓</a>
+        <a class="top-link" href="index.html">View the Home Index →</a>
+        <details class="top-contact">
+          <summary class="top-link">Contact <span aria-hidden="true">＋</span></summary>
+          <div class="top-contact__menu">
+            <a href="tel:+12029341126">Call</a>
+            <a href="sms:+12029341126">Text</a>
+            <a href="mailto:handled@thedigitalside.org">Email</a>
+            <a href="the-digital-side.vcf" download>Save Contact</a>
+          </div>
+        </details>
+      </div>
+    </div>
+    <div class="top-inquiries" id="start" aria-label="Project inquiry options">
+      <div class="top-inquiries__heading"><span>Tell us what you need</span><small>Choose the short form or share the full picture.</small></div>
+      <div class="inquiry-buttons">
+        <a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry →</strong><span>A few details are enough to start.</span></a>
+        <a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake →</strong><span>Share the complete project picture.</span></a>
       </div>
     </div>
   </div>
@@ -955,45 +988,30 @@ img{display:block;max-width:100%}
       <div class="keys-showcase"><div class="keys-showcase-copy">
         <details class="one-tap-disclosure">
           <summary><span class="one-tap-headline"><span class="kicker">The Digital Door</span><h2>One tap. A smarter first impression.</h2></span><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
-          <p class="keys-message">A <strong>Digital Business Card</strong> shares your contact details. The <strong class="digital-door-emphasis">Digital Door</strong> adds guided customer paths, an owner QR key and one companion tap card. Signature keys and supported Wallet passes are optional.</p>
+          <p class="keys-message">A <strong>Digital Business Card</strong> shares your contact details. The <strong class="digital-door-emphasis">Digital Door</strong> adds guided customer paths. Signature tap products include a companion card; Apple Wallet or Google Wallet access is an optional upgrade. <a class="one-tap-demo-link" href="avery-cole-door.html?view=paths">Open a Digital Door demo →</a></p>
         </details>
       </div></div>
     </div>
-    <section class="layer-feature" aria-label="Technology inside the tap">
-      <details class="layer-disclosure" id="technologyLayers">
-        <summary class="layer-disclosure-summary">
-          <span class="layer-disclosure-heading">
-            <span class="kicker">The technology</span>
-            <span class="layer-disclosure-title">A simple tap on the outside.<br>Advanced technology on the inside.</span>
-          </span>
-          <span class="layer-disclosure-toggle" aria-hidden="true">+</span>
-        </summary>
-        <div class="layer-expanded">
-          <h3 class="layer-expanded-title">Intelligence beneath the surface.</h3>
-          <div class="layer-visual-stage layer-static-stage"><img class="layer-static-photo" src="assets/tds_layered_description.png" alt="Finished keychain with protective coating, design, concealed connectivity, and foundation layer descriptions." loading="lazy" decoding="async"></div>
-        </div>
-      </details>
-    </section>
     <section class="browse-section" id="keyCategories">
       <div class="category-head">
         <span class="kicker">What we create</span>
         <details class="category-copy-disclosure">
           <summary><h3>Find what fits your business.</h3><span class="category-copy-toggle" aria-hidden="true">+</span></summary>
-          <p class="category-subline">Explore business cards, Digital Doors, mobile websites, and tap products.</p>
+          <p class="category-subline">The first three examples show the digital experience. The remaining categories cover Signature products, Owner Key Sets, and custom tap pieces.</p>
         </details>
       </div>
       <div class="category-grid" aria-label="Browse The Digital Side solutions" tabindex="0">
-        <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="Tds_key_set.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Signature Collection</span></button>
         <button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="tds-card-preview tds-card-preview-tile"><span class="tds-card-media"><img src="avery-tds-bracelet.png" alt="" loading="lazy"></span><span class="tds-card-info"><span class="tds-card-brand">Rivermore Real Estate</span><strong>Avery Cole</strong><span class="tds-card-role">Realtor · Howard County</span></span></span></span><span class="category-label">Digital Business Cards</span></button>
-        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View mobilized website examples"><span class="category-scene scene-websites single-site-preview" aria-hidden="true"><span class="single-site-phone"><iframe src="northline-mobile-site.html" title="Northline Roofing mobilized website scrolling preview" tabindex="-1" loading="lazy" data-auto-site-scroll></iframe></span></span><span class="category-label">Mobilized Websites</span></button>
         <button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button>
+        <button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View mobilized website examples"><span class="category-scene scene-websites single-site-preview" aria-hidden="true"><span class="single-site-phone"><iframe src="northline-mobile-site.html" title="Northline Roofing mobilized website scrolling preview" tabindex="-1" loading="lazy" data-auto-site-scroll></iframe></span></span><span class="category-label">Mobilized Websites</span></button>
+        <button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="Tds_key_set.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Signature Collection</span></button>
         <button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Owner and Team Key Set options"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="assets/Tds_pvc_card.PNG" alt="" loading="lazy"><img class="keyset-chain" src="assets/Tds_keychain.PNG" alt="" loading="lazy"><img class="keyset-wearable" src="assets/Tds_bracelet.PNG" alt="" loading="lazy"></span><span class="category-label">Owner Key Sets</span></button>
         <button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="Tds_custom_mockup.PNG" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button>
       </div>
     </section>
     <section class="demo-paths" aria-labelledby="featuredDemosTitle">
 <details class="demo-paths-disclosure">
-<summary><span class="demo-title-group"><span class="kicker">See it in action</span><span class="demo-heading" id="featuredDemosTitle">From tap to destination.</span><span class="demo-intro">Preview how a client enters and moves through each Door.</span></span><span class="demo-plus" aria-hidden="true">+</span></summary>
+<summary><span class="demo-title-group"><span class="kicker">See it in action</span><span class="demo-heading" id="featuredDemosTitle">From tap to destination.</span><span class="demo-intro">Digital Business Card first, Digital Door paths in the middle, Mobilized Website at the end.</span></span><span class="demo-plus" aria-hidden="true">+</span></summary>
 <div class="demo-paths-expanded">
 <div class="demo-carousel" aria-label="Featured Digital Door demos">
 <article class="demo-slide"><a class="demo-cover real-demo-cover" href="avery-cole-door.html?view=paths" aria-label="Enter Avery Cole Digital Door"><span class="static-door-scene static-avery" aria-hidden="true"><span class="static-avery-mark">A<span>|</span>C</span><span class="static-enter">ENTER</span></span></a></article>
@@ -1010,16 +1028,6 @@ img{display:block;max-width:100%}
           <details class="offer-tile wide"><summary><small>03 · Expand</small><h3>Connecting a business or team?</h3><b>From $250</b></summary><p>10 team cards from $250; 10 keychains with backup cards from $500. Complete Digital Side from $600; mobile website updates from $300+.</p><a href="index.html#services">See full packages →</a></details>
         </div>
        </div>
-    </details>
-
-    <details class="acc" id="start">
-      <summary><div><small>Get started</small><strong>Tell us what you need.</strong></div><span class="acc-plus">+</span></summary>
-      <div class="acc-body">
-        <div class="inquiry-buttons">
-          <a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry</strong><span>A few details are enough to start.</span></a>
-          <a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake</strong><span>Share the complete project picture.</span></a>
-        </div>
-      </div>
     </details>
 
     <details class="acc">
@@ -1064,10 +1072,10 @@ img{display:block;max-width:100%}
     <img class="about-photo" src="about_mim.webp" width="1086" height="1448" alt="Nev Gonzalez" loading="lazy" decoding="async">
     <div class="about-id"><strong>Nev Gonzalez</strong><span>Founder &amp; Lead Developer</span></div>
     <span class="about-kicker">Developer · Business Systems · Maryland</span>
-    <h3 class="about-sub">Hey, I’m Nev.</h3>
+    <h3 class="about-sub">Nev Gonzalez</h3>
     <div class="about-body">
-      <p>For nearly a decade, I worked across both sides of a small business in downtown Frederick, helping customers at the front while also managing the changing information, repeated questions, daily operations, and behind the scenes details that keep everything moving.</p>
-      <p>While studying Business Management and Forensic Accounting, I gained a stronger understanding of how those moving pieces fit together and where they can start to break down. A Salesforce internship added the technology side of business and opened the path into web development, which gave me a practical way to bring everything I had learned together.</p>
+      <p>For nearly a decade, Nev worked across both sides of a small business in downtown Frederick, helping customers at the front while also managing the changing information, repeated questions, daily operations, and behind the scenes details that keep everything moving.</p>
+      <p>While studying Business Management and Forensic Accounting, Nev gained a stronger understanding of how those moving pieces fit together and where they can start to break down. A Salesforce internship added the technology side of business and opened the path into web development, which gave me a practical way to bring everything I had learned together.</p>
       <p>That is where The Digital Side comes from: understanding how the business works first, then building the customer facing experience and digital systems around the way the brand actually operates.</p>
     </div>
   </div>
