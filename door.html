@@ -989,7 +989,38 @@ img{display:block;max-width:100%}
 .browse-section .category-row .category-scene{height:clamp(204px,65vw,275px)}
 .browse-section .category-row .scene-tds{height:auto;aspect-ratio:3/2}
 .browse-section .category-row:focus-visible{outline:1px solid var(--gold-deep);outline-offset:4px}
-</style></head>
+</style><style id="compact-collapsible-presentation">
+.sec-cream>.wrap>.top-links--primary{margin:0 0 16px;gap:12px 20px}
+.top-links--primary .btn{min-height:42px}
+.top-contact-trigger{border:0;border-bottom:1px solid rgba(12,10,7,.32);padding:0 0 5px;color:var(--ink);font:700 .6875rem/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase}
+.project-dialog{width:min(92vw,620px);max-width:none;max-height:calc(100dvh - 32px);margin:auto;padding:34px;border:1px solid rgba(0,0,0,.16);border-radius:14px;background:var(--paper);color:var(--ink);box-shadow:0 30px 100px rgba(0,0,0,.32);position:relative}
+.project-dialog[open]{display:block;animation:contactReveal .28s cubic-bezier(.2,.75,.2,1) both}
+.project-dialog::backdrop{background:rgba(8,9,10,.65);backdrop-filter:blur(5px)}
+.project-dialog h2{margin:12px 42px 18px 0;font:500 clamp(1.8rem,5vw,2.4rem)/1.1 var(--serif)}
+.project-dialog .inquiry-buttons{margin:0}
+.project-dialog .inquiry-btn{min-height:112px}
+.contact-dialog h2{margin:0 42px 18px 0}
+.contact-dialog__actions a{padding:12px}
+.category-browser-disclosure>summary{min-height:58px}
+.category-browser-disclosure>summary .category-heading-copy{display:flex;flex-direction:column;gap:8px}
+.category-browser-disclosure>summary .category-heading-copy .kicker{font:700 .65rem/1.2 var(--mono);letter-spacing:.17em;text-transform:uppercase;color:var(--cream-muted)}
+.category-browser-disclosure>summary .category-heading-copy h3{margin:0;font:400 clamp(1.3rem,3.4vw,1.85rem)/1.15 var(--serif)}
+.category-browser-disclosure>.category-grid{margin-top:15px!important}
+.category-row-disclosure{border-top:1px solid rgba(180,185,190,.24)}
+.category-row-disclosure:last-child{border-bottom:1px solid rgba(180,185,190,.24)}
+.category-row-disclosure>summary{min-height:46px;display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;list-style:none;padding:8px 2px}
+.category-row-disclosure>summary::-webkit-details-marker{display:none}
+.category-row-disclosure>summary::marker{content:""}
+.category-row-disclosure>summary .kicker{font:700 .66rem/1.2 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--cream-muted)}
+.category-row-toggle{font:400 1.45rem/1 var(--sans);color:var(--cream-muted);transition:transform .2s ease}
+.category-row-disclosure[open] .category-row-toggle{transform:rotate(45deg)}
+.category-row-disclosure .category-row{margin-top:8px}
+.category-browser-disclosure[open] .category-copy-toggle{transform:rotate(45deg)}
+.category-browser-disclosure>summary:focus-visible,.category-row-disclosure>summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#collectionPriceRow[hidden]{display:none!important}
+@media(max-width:640px){.project-dialog,.contact-dialog{padding:28px 20px}.project-dialog .inquiry-buttons{grid-template-columns:1fr}.sec-cream>.wrap>.top-links--primary{gap:12px 16px}}
+</style>
+</head>
 <body>
 
 <section class="world-hero" id="worldHero" aria-label="The Digital Side">
@@ -1003,42 +1034,34 @@ img{display:block;max-width:100%}
 
 <main id="doorStart">
 
-<section class="sec sec-cream"><div class="wrap"><div class="sec-head">
-<h2>Start with what you came to do.</h2>
-<p class="lede">Explore how a tap connects a customer to your business, then choose the next step.</p>
+<section class="sec sec-cream"><div class="wrap">
+<div class="top-links top-links--primary" aria-label="Quick actions">
+<button class="btn btn-primary" id="inquiryToggle" type="button" aria-haspopup="dialog" aria-controls="start">Start Project <span aria-hidden="true">↗</span></button>
+<button class="top-link top-contact-trigger" id="openContactDialog" type="button" aria-haspopup="dialog">Save Contact</button>
+<a class="top-link" href="index.html">Home Index →</a>
+</div>
 <details class="one-tap-disclosure one-tap-disclosure--top" id="keys">
-          <summary><span class="one-tap-headline"><span class="kicker">The Digital Door</span><h2>One tap. A smarter first impression.</h2></span><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
-          <p class="keys-message">A <strong>Digital Business Card</strong> shares your contact details. The <strong class="digital-door-emphasis">Digital Door</strong> adds guided customer paths. Signature tap products include a companion card; Apple Wallet or Google Wallet access is an optional upgrade. <a class="one-tap-demo-link" href="avery-cole-door.html?view=paths">Open a Digital Door demo →</a></p>
-        </details>
-
-<div class="top-links top-links--primary">
-<button class="btn btn-primary" id="inquiryToggle" type="button" aria-expanded="false" aria-controls="start">Tell us what you need <span aria-hidden="true">＋</span></button>
-<a class="top-link" href="index.html">View the Home Index →</a>
-<button class="top-link top-contact-trigger" id="openContactDialog" type="button" aria-haspopup="dialog">Contact <span aria-hidden="true">↗</span></button>
-</div>
-</div>
-<div class="top-inquiries" id="start" hidden aria-label="Project inquiry options">
-<div class="inquiry-buttons">
-<a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry →</strong><span>A few details are enough to start.</span></a>
-<a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake →</strong><span>Share the complete project picture.</span></a>
-</div>
-</div></div></section>
+  <summary><span class="one-tap-headline"><span class="kicker">The Digital Door</span><h2>One tap. A smarter first impression.</h2></span><span aria-hidden="true" class="one-tap-toggle">+</span></summary>
+  <p class="keys-message">Digital Business Card first. Digital Door paths in the middle. Mobilized Website at the end. <a class="one-tap-demo-link" href="avery-cole-door.html?view=paths">View a Door demo →</a></p>
+</details>
+</div></section>>
 
 <section class="sec sec-dark" id="paths">
   <div class="wrap">
     <section class="browse-section" id="keyCategories">
-      <div class="category-head">
-        <span class="kicker">What we create</span>
-        <details class="category-copy-disclosure">
-          <summary><h3>Find what fits your business.</h3><span class="category-copy-toggle" aria-hidden="true">+</span></summary>
-          <p class="category-subline">Explore digital services above and physical tap products below. Tap an option to see examples.</p>
-        </details>
-      </div>
-      <div class="category-grid" aria-label="Browse The Digital Side solutions">
-  <div class="category-row category-row--digital" role="region" tabindex="0" aria-label="Digital services, swipe to browse"><button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="tds-card-preview tds-card-preview-tile"><span class="tds-card-media"><img src="avery-tds-bracelet.png" alt="" loading="lazy"></span><span class="tds-card-info"><span class="tds-card-brand">Rivermore Real Estate</span><strong>Avery Cole</strong><span class="tds-card-role">Realtor · Howard County</span></span></span></span><span class="category-label">Digital Business Cards</span></button><button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button><button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View mobilized website examples"><span class="category-scene scene-websites single-site-preview" aria-hidden="true"><span class="single-site-phone"><iframe src="northline-mobile-site.html" title="Northline Roofing mobilized website scrolling preview" tabindex="-1" loading="lazy" data-auto-site-scroll></iframe></span></span><span class="category-label">Mobilized Websites</span></button></div>
-  <div class="category-row category-row--products" role="region" tabindex="0" aria-label="Physical tap products, swipe to browse"><button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="Tds_key_set.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Signature Collection</span></button><button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Owner and Team Key Set options"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="tds-nfc-card-front-back-mockup.png" alt="" loading="lazy"><img class="keyset-chain" src="tds_signature_keychain.png" alt="" loading="lazy"><img class="keyset-wearable" src="tds_signature_bracelet.png" alt="" loading="lazy"></span><span class="category-label">Owner Key Sets</span></button><button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="Tds_custom_mockup.PNG" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button></div>
-</div>
-    </section>
+  <details class="category-copy-disclosure category-browser-disclosure">
+    <summary><span class="category-heading-copy"><span class="kicker">What we create</span><h3>Find what fits your business.</h3></span><span class="category-copy-toggle" aria-hidden="true">+</span></summary>
+    <div class="category-grid" aria-label="Browse The Digital Side solutions">
+      <details class="category-row-disclosure">
+        <summary><span class="kicker">Digital services</span><span class="category-row-toggle" aria-hidden="true">+</span></summary>
+        <div class="category-row category-row--digital" role="region" tabindex="0" aria-label="Digital services, swipe to browse"><button type="button" class="category-tile category-tile-cards" data-collection="cards" aria-label="View Digital Business Cards examples"><span class="category-scene scene-cards" aria-hidden="true"><span class="tds-card-preview tds-card-preview-tile"><span class="tds-card-media"><img src="avery-tds-bracelet.png" alt="" loading="lazy"></span><span class="tds-card-info"><span class="tds-card-brand">Rivermore Real Estate</span><strong>Avery Cole</strong><span class="tds-card-role">Realtor · Howard County</span></span></span></span><span class="category-label">Digital Business Cards</span></button><button type="button" class="category-tile category-tile-door" data-collection="door" aria-label="View Digital Door examples"><span class="category-scene scene-door" aria-hidden="true"><img src="assets/door/rivermore-door-scene.webp" alt="" loading="lazy"></span><span class="category-label">Digital Door</span></button><button type="button" class="category-tile category-tile-websites" data-collection="websites" aria-label="View mobilized website examples"><span class="category-scene scene-websites single-site-preview" aria-hidden="true"><span class="single-site-phone"><iframe src="northline-mobile-site.html" title="Northline Roofing mobilized website scrolling preview" tabindex="-1" loading="lazy" data-auto-site-scroll></iframe></span></span><span class="category-label">Mobilized Websites</span></button></div>
+      </details>
+      <details class="category-row-disclosure">
+        <summary><span class="kicker">Physical tap products</span><span class="category-row-toggle" aria-hidden="true">+</span></summary>
+        <div class="category-row category-row--products" role="region" tabindex="0" aria-label="Physical tap products, swipe to browse"><button type="button" class="category-tile category-tile-tds" data-collection="tds" aria-label="View TDS Collection examples"><span class="category-scene scene-tds" aria-hidden="true"><img src="Tds_key_set.PNG" alt="" loading="lazy" decoding="async"></span><span class="category-label">TDS Signature Collection</span></button><button type="button" class="category-tile category-tile-sets" data-collection="sets" aria-label="View Owner and Team Key Set options"><span class="category-scene scene-sets scene-keyset-composite" aria-hidden="true"><img class="keyset-card" src="tds-nfc-card-front-back-mockup.png" alt="" loading="lazy"><img class="keyset-chain" src="tds_signature_keychain.png" alt="" loading="lazy"><img class="keyset-wearable" src="tds_signature_bracelet.png" alt="" loading="lazy"></span><span class="category-label">Owner Key Sets</span></button><button type="button" class="category-tile category-tile-custom" data-collection="custom" aria-label="View Custom Tap Products examples"><span class="category-scene scene-custom" aria-hidden="true"><img src="Tds_custom_mockup.PNG" alt="" loading="lazy"></span><span class="category-label">Custom Tap Products</span></button></div>
+      </details>
+    </div>
+  </details>
     <section class="demo-paths" aria-labelledby="featuredDemosTitle">
 <details class="demo-paths-disclosure">
 <summary><span class="demo-title-group"><span class="kicker">See it in action</span><span class="demo-heading" id="featuredDemosTitle">From tap to destination.</span><span class="demo-intro">Digital Business Card first, Digital Door paths in the middle, Mobilized Website at the end.</span></span><span class="demo-plus" aria-hidden="true">+</span></summary>
@@ -1141,7 +1164,6 @@ img{display:block;max-width:100%}
 </script>
 <dialog class="collection-modal category-dialog" id="collectionModal" aria-labelledby="collectionTitle">
   <button class="collection-modal-close" type="button" id="collectionClose" aria-label="Close examples">×</button>
-  <span class="dialog-kicker">Explore the possibilities</span>
   <h3 id="collectionTitle"></h3>
   <div class="collection-price-row" id="collectionPriceRow" aria-label="Pricing guidance">
     <strong id="collectionPrice"></strong><span id="collectionPriceNote"></span>
@@ -1157,49 +1179,45 @@ const swipe=document.getElementById('collectionSwipe');
 const links=document.getElementById('collectionLinks');
 const categoryPricing={
   tds:['',''],
-  cards:['Starting at $100','Standalone contact page · Digital Door adds paths, QR and tap card'],
-  door:['Starting at $250','Business Card · Guided paths · Owner QR · Companion tap card'],
-  websites:['Starting at $300','Existing-site mobile improvements · Scope varies'],
-  sets:['Team packs from $250','10 cards $250+ · 10 keychains with backup cards $500+'],
-  custom:['Ready to tap from $45','Companion card + owner QR · Custom finishes vary']
+  cards:['Starting at $100','One destination · Owner QR key + tap card'],
+  door:['Starting at $250','Guided customer paths'],
+  websites:['Starting at $300','Improve your existing website for mobile'],
+  sets:['',''],
+  custom:['','']
 };
 const categories={
 keys:{title:'Digital Keys',description:'A scannable Owner QR key is included with a Digital Door. Apple Wallet or Google Wallet access is available as an optional upgrade.',examples:[{type:'photo',src:'assets/door/key-wallet.webp',alt:'Digital QR key displayed on a phone',caption:'Owner QR Key',brand:'Wallet access available as an upgrade'}],links:[['Ask about a Digital Key','project-inquiry.html']]},
-tds:{title:'TDS Signature Collection',description:'Each Signature keychain, wearable or Duo includes one destination, a companion tap card and an Owner QR key. Apple Wallet or Google Wallet access is available as an optional upgrade.',examples:[
+tds:{title:'TDS Signature Collection',description:'One destination, plus a companion tap card and Owner QR key. Apple Wallet or Google Wallet access is an optional upgrade.',examples:[
 {type:'photo',src:'tds_signature_keychain.png',alt:'TDS signature tap keychain',caption:'Signature Tap Keychain · $45',brand:'One destination'},
 {type:'photo',src:'tds_signature_bracelet.png',alt:'TDS signature wearable tap bracelet',caption:'Wearable Tap Key · $65',brand:'One destination'},
 {type:'photo',src:'tds_signature_duo.png',alt:'Signature keychain and wearable together',caption:'Signature Duo · $100',brand:'Keychain + wearable'}],links:[['Ask about the collection','project-inquiry.html']]},
-cards:{title:'Digital Business Cards',description:'Your mobile first impression: call, text, email, Save Contact and useful links. Tap any example to explore.',examples:[
+cards:{title:'Digital Business Cards',description:'A mobile contact page with Save Contact and one destination.',examples:[
 {type:'demo',kind:'card',theme:'realtor',brand:'Rivermore Real Estate',name:'Avery Cole',caption:'Realtor',photo:'avery-tds-bracelet.png',url:'avery-cole-door.html?view=card'},
 {type:'demo',kind:'card',theme:'contractor',brand:'Northline Roofing Co.',name:'Jordan Cole',caption:'Owner · Roofing',photo:'northline-owner-portrait.png',url:'northline-door.html?view=card'},
 {type:'demo',kind:'card',theme:'designer',brand:'Atelier House',name:'Lillian Hart',caption:'Principal Designer',photo:'atelier-house-owner-headshot.png',url:'atelier-door.html?view=card'},
 {type:'demo',kind:'card',theme:'dentist',brand:'Lumina Dental Studio',name:'Dr. Elias Morgan',caption:'Dentist · Practice Owner',photo:'lumina-elias-morgan.jpg',initials:'EM',url:'lumina-door.html?view=card'},
-{type:'demo',kind:'card',theme:'attorney',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Founding Attorney',photo:'frederick-attorney-hero.png',url:'door-frederick-legacy-law.html?view=card'}],links:[['Discuss a digital card','project-inquiry.html']]},
-door:{title:'Digital Door',description:'A Digital Business Card for contact details, plus guided customer paths in one mobile Door. Apple Wallet or Google Wallet access is available as an optional upgrade.',examples:[
+{type:'demo',kind:'card',theme:'attorney',brand:'Frederick Legacy Law',name:'Avery Bennett',caption:'Founding Attorney',photo:'frederick-attorney-hero.png',url:'door-frederick-legacy-law.html?view=card'}],links:[['Start a project','project-inquiry.html']]},
+door:{title:'Digital Door',description:'A Digital Business Card with guided customer paths.',examples:[
 {type:'demo',brand:'Northline Roofing Co.',name:'Roof inspections and help',caption:'Contractor Door',url:'northline-door.html?view=paths'},
 {type:'demo',brand:'Rivermore Real Estate',name:'Homes and showings',caption:'Realtor Door',url:'avery-cole-door.html?view=paths'},
 {type:'demo',brand:'Atelier House',name:'Portfolio and design projects',caption:'Interior design Door',url:'atelier-door.html?view=paths'},
 {type:'demo',brand:'Lumina Dental Studio',name:'Visits and patient guidance',caption:'Dental office Door',url:'lumina-door.html?view=paths'},
 {type:'demo',brand:'Frederick Legacy Law',name:'Services and guidance',caption:'Law practice Door',url:'door-frederick-legacy-law.html?view=paths'}],
 
-links:[['See Digital Door pricing','#simple'],['Ask about a Door','project-inquiry.html']]},
-sets:{title:'Owner Key Sets',description:'Team cards from $250 for 10, or 10 keychains with matching tap cards from $500. QR backups and a distinct owner key are included. Individual employee pages and extra destinations cost more.',examples:[
-{type:'photo',src:'Tds_key_set.PNG',alt:'Sample photo illustrating phone QR, PVC card, keychain, bracelet and USB formats',caption:'Owner + Team Formats',brand:'Owner key · Team cards or keys · QR backup'},
-{type:'photo',src:'assets/door/key-wallet.webp',alt:'Wallet QR key',caption:'Owner Wallet Key',brand:'Included with a Digital Door'},
-{type:'photo',src:'assets/Tds_pvc_card.PNG',alt:'Physical tap card format example',caption:'Companion Tap Card',brand:'Included with Door or wearable/keychain · Team packs also available'},
-{type:'photo',src:'assets/Tds_keychain.PNG',alt:'Customizable tap keychain format example',caption:'Custom Keychain',brand:'Optional physical upgrade'},
-{type:'photo',src:'assets/Tds_usb.PNG',alt:'USB handoff key format example',caption:'Developer USB',brand:'Optional team handoff tool'}],
+links:[['Digital Door pricing','#simple'],['Start a project','project-inquiry.html']]},
+sets:{title:'Owner Key Sets',description:'A digital QR key, black tap card, white keychain, and USB for Digital Door handoffs when needed.',examples:[
+{type:'photo',src:'Tds_key_set.PNG',alt:'Owner key set with QR key, tap card, white keychain and USB handoff',caption:'Owner Key Set',brand:'Physical + digital handoff'}],
 links:[['Plan a key set','project-inquiry.html']]},
 websites:{title:'Mobilized Websites',description:'Your existing website, made easier to use on phones. Separate from a Digital Door, or part of a complete custom package.',examples:[
 {type:'demo',brand:'Northline Roofing Co.',name:'Jordan · Inspections and estimates',caption:'Mobilized roofing website',kind:'website',url:'northline-mobile-site.html'},
 {type:'demo',brand:'Rivermore Real Estate',name:'Avery · Listings and properties',caption:'Mobilized realtor website',kind:'website',url:'realtor-index.html'}],
 links:[['Discuss a mobilized website','project-inquiry.html']]},
-custom:{title:'Custom Tap Products',description:'Your design, ready to tap. Link to reviews, bookings, menus, payments, social profiles or your Digital Door. Each keychain or wearable includes a companion tap card.',examples:[
+custom:{title:'Custom Tap Products',description:'Designed for your business, networking, and first impressions.',examples:[
 {type:'photo',src:'Tds_custom_mockup.PNG',alt:'Assortment of customized tap keychains, bracelet and branded PVC card',caption:'Shapes & Branding',brand:'Designed for your business'},
 {type:'photo',src:'plaque-hiring-window.jpg',alt:'Hiring tap plaque in a window',caption:'Hiring Plaque',brand:'Tap to apply'},
 {type:'photo',src:'review-at-bakery-exit.png',alt:'Review tap plaque near bakery exit',caption:'Review Plaque',brand:'Tap to review'},
 {type:'photo',src:'plaque-follow-bookstore.png',alt:'Follow tap plaque at bookstore',caption:'Follow Plaque',brand:'Tap to follow'}],
-links:[['Discuss a custom product','project-inquiry.html']]}
+links:[['Tell us what you need','project-inquiry.html']]}
 };
 function element(tag,className,textValue){
  const node=document.createElement(tag);
@@ -1329,13 +1347,14 @@ document.querySelectorAll('[data-collection]').forEach(button=>button.addEventLi
  document.getElementById('collectionPrice').textContent=price;
  document.getElementById('collectionPriceNote').textContent=priceNote;
  const modalDescription=document.getElementById('collectionDescriptionDetails');
+ const priceRow=document.getElementById('collectionPriceRow');
+ priceRow.hidden=!(price||priceNote);
  const isDoor=button.dataset.collection==='door';
  const isTds=button.dataset.collection==='tds';
  modal.classList.toggle('is-door-collection',isDoor);
  modal.classList.toggle('is-tds-collection',isTds);
- // Keep the TDS collection description visible without another disclosure layer.
- modalDescription.open=isTds;
- modalDescription.classList.toggle('show-description-open',isTds);
+ modalDescription.open=false;
+ modalDescription.classList.remove('show-description-open');
  for(const example of data.examples)swipe.append(renderExample(example));
  if(data.details){
   const group=element('div','modal-includes');
@@ -1401,33 +1420,36 @@ swipe.addEventListener('keydown',e=>{
  requestAnimationFrame(tick);
 })();
 </script>
+<dialog class="project-dialog" id="start" aria-labelledby="projectDialogTitle">
+<button class="contact-dialog__close" type="button" data-close-dialog aria-label="Close project options">×</button>
+<span class="contact-dialog__eyebrow">THE DIGITAL SIDE</span><h2 id="projectDialogTitle">Start a project.</h2>
+<div class="inquiry-buttons">
+<a class="inquiry-btn primary" href="project-inquiry.html"><small>Short version</small><strong>New Project Inquiry →</strong><span>A few details to begin.</span></a>
+<a class="inquiry-btn secondary" href="client-intake.html"><small>More detail</small><strong>Full Project Intake →</strong><span>Share the full picture.</span></a>
+</div>
+</dialog>
 <dialog class="contact-dialog" id="contactDialog" aria-labelledby="contactDialogTitle">
-<button class="contact-dialog__close" id="closeContactDialog" type="button" aria-label="Close contact panel">×</button>
-<span class="contact-dialog__eyebrow">THE DIGITAL SIDE</span><h2 id="contactDialogTitle">Let’s connect.</h2>
-<p>Choose the easiest way to reach Nev.</p>
+<button class="contact-dialog__close" id="closeContactDialog" type="button" aria-label="Close contact options">×</button>
+<h2 id="contactDialogTitle">Save Contact</h2>
 <div class="contact-dialog__actions">
-<a href="tel:+12029341126"><small>Call</small><strong>Call the studio ↗</strong></a>
-<a href="sms:+12029341126"><small>Text</small><strong>Send a text ↗</strong></a>
-<a href="mailto:handled@thedigitalside.org"><small>Email</small><strong>Send an email ↗</strong></a>
-<a href="the-digital-side.vcf" download><small>Contact</small><strong>Save Contact ↓</strong></a>
+<a href="tel:+12029341126"><small>Call</small><strong>Call ↗</strong></a>
+<a href="sms:+12029341126"><small>Text</small><strong>Text ↗</strong></a>
+<a href="mailto:handled@thedigitalside.org"><small>Email</small><strong>Email ↗</strong></a>
+<a href="the-digital-side.vcf" download><small>Contact card</small><strong>Download ↓</strong></a>
 </div></dialog>
 <script>
 (()=>{
- const panel=document.getElementById('start'),trigger=document.getElementById('inquiryToggle');
- function setInquiryOpen(open){
-  if(!panel||!trigger)return;
-  panel.hidden=!open;panel.classList.toggle('is-open',open);
-  trigger.setAttribute('aria-expanded',String(open));
-  trigger.querySelector('span').textContent=open?'×':'＋';
-  if(open)requestAnimationFrame(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}));
- }
- if(trigger)trigger.addEventListener('click',()=>setInquiryOpen(panel.hidden));
- if(location.hash==='#start')setInquiryOpen(true);
+ const project=document.getElementById('start');
+ const projectTrigger=document.getElementById('inquiryToggle');
+ if(projectTrigger&&project)projectTrigger.addEventListener('click',()=>project.showModal());
+ const projectClose=project&&project.querySelector('[data-close-dialog]');
+ if(projectClose&&project)projectClose.addEventListener('click',()=>project.close());
+ if(project&&location.hash==='#start')project.showModal();
  const contact=document.getElementById('contactDialog');
  const openContact=document.getElementById('openContactDialog'),closeContact=document.getElementById('closeContactDialog');
  if(openContact&&contact)openContact.addEventListener('click',()=>contact.showModal());
  if(closeContact&&contact)closeContact.addEventListener('click',()=>contact.close());
- if(contact)contact.addEventListener('click',event=>{if(event.target===contact)contact.close()});
+ [project,contact].filter(Boolean).forEach(dialog=>dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()}));
 })();
 </script>
 </body>
