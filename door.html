@@ -1024,6 +1024,7 @@ img{display:block;max-width:100%}
 </style>
 <style>
 .world-hero{min-height:0!important;padding:28px 22px!important}.world-logo{font-size:clamp(1.8rem,6vw,3rem)!important}.world-hero .scroll-cue{display:none}.tap-intro{margin:30px 0 24px}.tap-intro h1{font:400 clamp(2rem,6vw,3.3rem)/1.08 var(--serif);margin:12px 0}.tap-intro p,.tap-note{color:var(--ink-muted);line-height:1.6;font-size:.9rem;max-width:650px}.quick-products{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px}.quick-products article{min-width:0;background:var(--paper);border:1px solid var(--line-l);padding:14px}.quick-products img{width:100%;aspect-ratio:1;object-fit:contain;background:#111;border-radius:3px}.quick-products h2{font:600 clamp(.95rem,3vw,1.2rem)/1.3 var(--sans);margin:16px 0 6px}.product-price{margin:0 0 14px;font:700 1rem var(--mono)}.quick-products .btn{width:100%;font-size:.62rem;padding:12px 7px}.tap-note{margin:18px 0}.custom-request{display:inline-block;font-weight:600;font-size:.9rem;line-height:1.6;text-decoration:underline;text-underline-offset:4px}.top-links--primary{margin-top:0!important}.sec:first-child{padding-top:26px}.sec{scroll-margin-top:20px}
+.tap-products-disclosure{max-width:760px;margin:24px 0;border:1px solid var(--line-l);border-radius:8px;background:var(--paper)}.tap-products-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px;cursor:pointer;list-style:none}.tap-products-disclosure>summary::-webkit-details-marker{display:none}.tap-products-disclosure>summary strong{display:block;margin-top:8px;font:600 clamp(1.1rem,4vw,1.5rem)/1.3 var(--sans)}.tap-products-disclosure>summary:focus-visible{outline:2px solid currentColor;outline-offset:4px}.tap-products-toggle{font:400 1.7rem var(--sans)}.tap-products-disclosure[open] .tap-products-toggle{transform:rotate(45deg)}.tap-products-content{padding:0 18px 6px}.tap-products-content .tap-note{font-size:.82rem}
 @media(max-width:360px){.quick-products{gap:8px}.quick-products article{padding:9px}}
 </style>
 </head>
@@ -1047,10 +1048,10 @@ img{display:block;max-width:100%}
 <a class="top-link" href="index.html">Home Index →</a>
 </div>
 <div class="tap-intro"><span class="kicker">Your business. One tap away.</span><h1>A small tap.<br>A useful connection.</h1><p>Keychains, bracelets and digital experiences that make your business easier to share.</p></div>
-<div class="quick-products" id="shop" aria-label="Signature tap products">
+<details class="tap-products-disclosure" id="shop"><summary><span><span class="kicker">Shop tap products</span><strong>Keychains &amp; Bracelets</strong></span><span class="tap-products-toggle" aria-hidden="true">+</span></summary><div class="tap-products-content"><div class="quick-products" aria-label="Signature tap products">
 <article><img src="tds_signature_keychain.png" alt="Black Signature tap keychain" loading="lazy"><h2>Black tap keychain</h2><p class="product-price">$45</p><a class="btn btn-primary" href="https://buy.stripe.com/aFa5kw5vy5y5fiPdHaeIw00">Buy keychain · $45</a></article>
 <article><img src="tds_signature_bracelet.png" alt="Signature tap bracelet" loading="lazy"><h2>Tap bracelet</h2><p class="product-price">$65</p><a class="btn btn-primary" href="https://buy.stripe.com/9B614ge245y5c6DcD6eIw01">Buy bracelet · $65</a></article>
-</div><p class="tap-note">Each includes a companion tap card and owner QR key, connected to one existing link. Digital pages are quoted separately. Pay securely through Stripe. Enter the link you want your product to open at checkout; Nev will email you to arrange your order and handoff.</p>
+</div><p class="tap-note">Each includes a companion tap card and owner QR key, connected to one existing link. Digital pages are quoted separately. Pay securely through Stripe. Enter the link you want your product to open at checkout; Nev will email you to arrange your order and handoff.</p></div></details>
 <a class="custom-request" href="project-inquiry.html">Need a Digital Business Card, Door, website help or team set? Start here →</a>
 </div></section>
 
@@ -1457,6 +1458,9 @@ swipe.addEventListener('keydown',e=>{
  if(closeContact&&contact)closeContact.addEventListener('click',()=>contact.close());
  [project,contact].filter(Boolean).forEach(dialog=>dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()}));
 })();
+</script>
+<script>
+(function(){function revealShop(){if(location.hash==="#shop"){var shop=document.getElementById("shop");if(shop)shop.open=true;}}revealShop();window.addEventListener("hashchange",revealShop);})();
 </script>
 </body>
 </html>
