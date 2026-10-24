@@ -1030,13 +1030,9 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <span class="ghost">One tap</span><br>
         <span class="hl">away.</span>
       </h1>
-      <p class="hero__promise">First impressions, reimagined. Connections that keep moving.</p>
-      <p class="hero__sub">Start with a Digital Business Card, connect it to a Digital Door, or make your existing website easier to use on mobile. Tap keys and team sets can be added as your business grows.</p>
-      <div class="hero__actions">
-        <a href="#work" class="btn btn--lime">Experience the Demos <span class="btn__arr">→</span></a>
-        <a href="door.html" class="btn btn--outline">Explore the Digital Door</a>
-        <a href="door.html#start" class="btn btn--ghost">Tell us what you need <span class="btn__arr">→</span></a>
-      </div>
+      <p class="hero__promise">Make your business easier to share.</p>
+      <p class="hero__sub">Custom tap keychains and bracelets, Digital Business Cards and simpler mobile websites. Start with what you need today.</p>
+      <div class="hero__actions"><a href="door.html#shop" class="btn btn--lime">Keychains &amp; Bracelets →</a><a href="project-inquiry.html" class="btn btn--outline">Tell me what you need →</a></div>
         <div class="hero__scroll">
     <span>scroll</span>
     <div class="hero__scroll-line"></div>
@@ -1273,14 +1269,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 @media(max-width:760px){.inquiry-card{padding:20px 16px;min-height:132px}.inquiry-card h3{font-size:.95rem}.inquiry-card p{font-size:.72rem}}
 </style>
 <div class="container">
-<details class="contact-collapse">
-<summary><span class="contact-collapse__label"><small>New Project Inquiry</small><strong>Tell Me About Your Business</strong></span><span class="contact-collapse__plus">+</span></summary>
-<div class="contact-simple">
-<p class="contact-simple__intro">Choose the amount you are ready to share. Both forms open on their own page, so this section stays simple.</p>
-<div class="inquiry-grid">
-<a class="inquiry-card inquiry-card--short" href="project-inquiry.html"><div class="tag">Short version</div><h3>New Project Inquiry →</h3><p>A few details are enough to start.</p></a>
-<a class="inquiry-card" href="client-intake.html"><div class="tag">More in-depth</div><h3>Full Project Intake →</h3><p>Share the complete project picture.</p></a>
-</div></div></details>
+<div class="contact-simple"><div class="tag">Let's start</div><h2>What can I help you with?</h2><p class="contact-simple__intro">Choose a tap product, a digital service or tell me your idea. One short form is enough to get started.</p><a class="btn btn--lime" href="project-inquiry.html">Send a request →</a><a class="btn btn--outline" href="mailto:handled@thedigitalside.org">Email Nev</a></div>
 </div></section>
 
 <!-- ─── ABOUT ──────────────────────────────── -->
@@ -1519,7 +1508,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') setDoorModal(
 
 const refreshDetails=document.getElementById('refreshDetails');
 const refreshMedia=window.matchMedia('(min-width: 701px)');
-function syncRefreshDisclosure(){if(refreshDetails)refreshDetails.open=refreshMedia.matches}
+function syncRefreshDisclosure(){if(refreshDetails)refreshDetails.open=false}
 syncRefreshDisclosure();
 if(refreshMedia.addEventListener)refreshMedia.addEventListener('change',syncRefreshDisclosure);
 
