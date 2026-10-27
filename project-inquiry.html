@@ -71,6 +71,6 @@ document.getElementById('short').addEventListener('submit',async function(e){
   }catch(error){button.textContent='Try sending again →';button.classList.remove('sending');document.getElementById('sendError').hidden=false;document.getElementById('emailFallback').href='mailto:handled@thedigitalside.org?subject=Project%20inquiry&body='+encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nBusiness: '+business+'\nInterest: '+interest+'\n\n'+message);}
 });
 </script>
-</body>
+<script>document.addEventListener('DOMContentLoaded',()=>{const p=new URLSearchParams(location.search),i=p.get('interest'),s=p.get('style');const sel=document.getElementById('interest'),msg=document.getElementById('message');if(i&&sel&&Array.from(sel.options).some(o=>o.value===i))sel.value=i;if(s&&msg)msg.value='Style: '+s+'\nQuantity: 1\nDestination link: ';});</script></body>
 </html>
 
