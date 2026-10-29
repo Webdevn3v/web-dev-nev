@@ -348,4 +348,4 @@ document.getElementById('routeClose').onclick=()=>routeSheet.classList.remove('o
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',showCard,{once:true});
   else showCard();
 })();
-</script></body></html>
+</script><script>if(new URLSearchParams(location.search).get('view')==='connected'){document.querySelectorAll('a[href^="realtor-index.html"]').forEach(a=>{a.href=a.getAttribute('href').replace('realtor-index.html','avery-mobile-site.html');a.textContent=a.textContent.replace('View Full Website','Explore Mobilized Website').replace('Explore the Full Site','Explore Mobilized Website')});for(const path of Object.values(paths)){path.actions=path.actions.map(([label,url])=>[label,url.replace('realtor-index.html','avery-mobile-site.html')])}}</script></body></html>
