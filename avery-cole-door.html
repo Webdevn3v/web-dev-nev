@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="view-transition" content="same-origin"><title>Avery Cole | Digital Door</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
+<script>if(new URLSearchParams(location.search).get('view')==='card')document.documentElement.classList.add('card-only');</script><style>
 :root{--ink:#17110d;--espresso:#21150e;--cream:#f3eadf;--paper:#fbf7f0;--gold:#b9905d;--gold-soft:rgba(185,144,93,.16);--line:#d9c8b1;--muted:#786b5c;--display:'Bodoni Moda',Georgia,serif;--sans:'Karla',Arial,sans-serif;--ease-out:cubic-bezier(.23,1,.32,1);--ease-in-out:cubic-bezier(.77,0,.175,1);--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans)}a{text-decoration:none;color:inherit}svg{display:block}
 
@@ -130,6 +130,19 @@ body.revealed .glint{animation:glintOnce 1.6s ease-in-out .5s 1 both}
 .portrait .tds-card-label{display:block;font:.62rem/1.5 var(--sans);font-weight:700;text-transform:uppercase;letter-spacing:.19em;color:#efe3d0;margin-bottom:9px}
 .stat-scroll .door-section-label{font:.59rem/1.2 var(--sans);font-weight:800;text-transform:uppercase;letter-spacing:.22em;color:#dbba8d;margin:0 0 6px}
 
+
+/* Standalone business-card demo: no customer paths or page scrolling. */
+.card-only,.card-only body{height:100%;overflow:hidden}
+.card-only .path{height:100dvh;min-height:0;overflow:hidden}
+.card-only .path>*:not(#digitalCard),.card-only #routeSheet,.card-only #door{display:none!important}
+.card-only #digitalCard,.card-only .portrait{height:100dvh;min-height:0}
+.portrait .identity{z-index:2;color:#fff;text-shadow:0 2px 10px #000}
+.portrait .identity h1,.portrait .broker,.portrait .meta,.portrait .tds-card-label{color:#fff}
+.portrait:after{background-image:linear-gradient(180deg,transparent 30%,rgba(10,7,5,.45) 55%,rgba(10,7,5,.94) 100%)}
+.portrait .ha{color:#fff;background:rgba(0,0,0,.65);border-color:#bfbab3}
+.portrait .utility-actions a{color:#fff;font-weight:700}
+.card-only .portrait .identity{padding-bottom:max(18px,env(safe-area-inset-bottom))}
+@media(max-height:620px){.card-only .identity h1{font-size:2rem}.card-only .utility-actions{gap:3px;margin-top:6px}.card-only .portrait .identity{padding-bottom:12px}.card-only .ha{padding:8px}}
 </style></head><body>
 <section class="door" id="door"><div class="scene"></div><div class="identity door-monogram"><div class="monogram" aria-label="Avery Cole">A<span class="monogram-divider">|</span>C</div><button class="enter" id="enter">Enter</button></div></section>
 <main class="path">
