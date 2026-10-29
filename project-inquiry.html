@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Send a Request — The Digital Side</title>
+<title>Project Inquiry — The Digital Side</title>
 <meta name="robots" content="noindex">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -36,23 +36,23 @@ button:hover{transform:translateY(-2px)}
 <body>
 <main class="wrap">
 <a class="back" href="door.html">← Back to Digital Door</a>
-<div class="kicker">Send a Request</div>
-<h1>What would you like?</h1>
-<p class="intro">Pick a product or service and share a few details. Nev will email you to confirm the scope, price and next step.</p>
+<div class="kicker">Project Inquiry</div>
+<h1>Let’s talk about your business.</h1>
+<p class="intro">Share what you need. The Digital Side will follow up with the next step.</p>
 <form id="short" class="form-card">
-  <div class="field"><label for="name">Your name</label><input id="name" autocomplete="name" required></div>
+  <div class="field"><label for="name">Full name</label><input id="name" autocomplete="name" required></div>
   <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" required></div>
-  <div class="field"><label for="business">Business name or link</label><input id="business"></div>
-  <div class="field"><label for="interest">Interested in something specific?</label><select id="interest"><option>Not sure yet</option><option>Black tap keychain · $45</option><option>Tap bracelet · $65</option><option>Signature Duo · $100</option><option>Digital Business Card</option><option>Digital Door</option><option>Mobilized Website · improve my existing site on mobile</option><option>Custom website</option><option>Owner Key Set</option><option>Team cards or keychains</option><option>Custom Tap Product</option><option>Digital Refresh · update an existing project</option><option>Complete Digital Side</option><option>Free starting conversation</option></select></div>
-  <div class="field"><label for="message">Tell me a little more</label><textarea id="message" required placeholder="For a tap product: quantity and the link you want it to open. For a project: what would you like help with?"></textarea></div>
-  <button type="submit" id="sendBtn">Send request →</button>
+  <div class="field"><label for="business">Business name or website</label><input id="business"></div>
+  <div class="field"><label for="interest">What are you interested in?</label><div class="interest-picker"><select id="interest"><option value="Not sure yet" data-price="">Not sure yet</option><option value="Signature Tap Keychain" data-price="$45">Signature Tap Keychain</option><option value="Wearable Tap Key" data-price="$65">Wearable Tap Key</option><option value="Signature Duo" data-price="$100">Signature Duo</option><option value="Digital Business Card" data-price="$100">Digital Business Card</option><option value="Digital Door" data-price="From $250">Digital Door</option><option value="Mobilized Website" data-price="From $300">Mobilized Website</option><option value="Connect the Dots" data-price="From $500">Connect the Dots</option><option value="Set of Keys" data-price="Custom quote">Set of Keys</option><option value="Custom Tap Product" data-price="Custom quote">Custom Tap Product</option><option value="Team project" data-price="Custom quote">Team project</option></select><output id="interestPrice" for="interest" aria-live="polite"></output></div></div>
+  <div class="field"><label for="message">What would you like help with?</label><textarea id="message" required placeholder="Tell us about your business, your idea, or what you would like to improve."></textarea></div>
+  <button type="submit" id="sendBtn">Send inquiry</button>
 </form><p id="sendError" role="alert" hidden>That did not go through. Your details are still here. <a id="emailFallback" href="mailto:handled@thedigitalside.org">Send by email instead →</a></p>
 <div class="success" id="success"><div class="success-mark">✓</div><h2>Thanks—it’s sent.</h2><p>Your request is in. You’ll hear back soon.</p></div>
-<a class="full" href="client-intake.html">Have more ready? <span>Open the full project intake →</span></a>
+<a class="full" href="https://thedigitalside.org/client-intake.html">Ready to share more? <span>Share project details</span></a>
 </main>
 <script>
 const requested=new URLSearchParams(location.search).get('interest');
-const selected={keychain:'Black tap keychain · $45',bracelet:'Tap bracelet · $65'};
+const selected={keychain:'Signature Tap Keychain',bracelet:'Wearable Tap Key'};
 if(selected[requested])document.getElementById('interest').value=selected[requested];
 document.getElementById('short').addEventListener('submit',async function(e){
   e.preventDefault();
@@ -63,7 +63,7 @@ document.getElementById('short').addEventListener('submit',async function(e){
   const interest=document.getElementById('interest').value;
   const message=document.getElementById('message').value.trim();
   const button=document.getElementById('sendBtn');button.textContent='Sending…';button.classList.add('sending');
-  const payload={name,email,business,interest,message,_subject:'Digital Side inquiry from '+name,_replyto:email};
+  const payload={name,email,business,interest,price:document.getElementById('interestPrice').textContent,message,_subject:'Digital Side inquiry from '+name,_replyto:email};
   try{
     const response=await fetch('https://formspree.io/f/mjyvrdnj',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
     if(!response.ok)throw new Error('send failed');
@@ -71,6 +71,7 @@ document.getElementById('short').addEventListener('submit',async function(e){
   }catch(error){button.textContent='Try sending again →';button.classList.remove('sending');document.getElementById('sendError').hidden=false;document.getElementById('emailFallback').href='mailto:handled@thedigitalside.org?subject=Project%20inquiry&body='+encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nBusiness: '+business+'\nInterest: '+interest+'\n\n'+message);}
 });
 </script>
-</body>
+<script>document.addEventListener('DOMContentLoaded',()=>{const p=new URLSearchParams(location.search),i=p.get('interest'),s=p.get('style');const sel=document.getElementById('interest'),msg=document.getElementById('message');if(i&&sel&&Array.from(sel.options).some(o=>o.value===i))sel.value=i;if(s&&msg)msg.value='Style: '+s+'\nQuantity: 1\nDestination link: ';});</script><script>function showInterestPrice(){const select=document.getElementById('interest');document.getElementById('interestPrice').textContent=select.selectedOptions[0]?.dataset.price||''}document.getElementById('interest').addEventListener('change',showInterestPrice);document.addEventListener('DOMContentLoaded',()=>{const wanted=new URLSearchParams(location.search).get('interest');if(wanted){const select=document.getElementById('interest');const match=Array.from(select.options).find(o=>o.value===wanted||wanted.startsWith(o.value+' ·'));if(match)select.value=match.value}showInterestPrice()});showInterestPrice();</script><style>.interest-picker{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:3px;padding-right:12px}.interest-picker select{border:0;flex:1;min-width:0;background:transparent}.interest-picker output{font:600 .85rem/1.3 var(--sans,Arial,sans-serif);white-space:nowrap;color:#222;flex-shrink:0}.interest-picker:focus-within{outline:1px solid #666}@media(max-width:380px){.interest-picker{gap:4px;padding-right:8px}.interest-picker select{padding:12px 5px;font-size:.8rem}.interest-picker output{font-size:.76rem}}</style></body>
 </html>
+
 
