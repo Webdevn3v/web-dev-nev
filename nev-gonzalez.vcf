@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Gonzalez;Nev;;;
+FN:Nev Gonzalez
+ORG:The Digital Side
+TITLE:Founder & Developer
+TEL;TYPE=WORK,VOICE:+12029341126
+EMAIL;TYPE=WORK:handled@thedigitalside.org
+URL:https://thedigitalside.org/
+END:VCARD
