@@ -1120,9 +1120,9 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
     </details>
   </div>
-</section></div></details><details class="home-panel" id="work" open><summary>Explore the Demos</summary><div class="home-panel__body"><h2>Different Businesses.<br>Different Ways In.</h2>
-<p class="demo-hint">Swipe to explore </p>
-<div class="work__grid" id="demo-track" aria-label="Swipe to explore business card, Door and website examples" tabindex="0">
+</section></div></details><section class="home-panel" id="work"><div class="home-panel__body"><h2>Different Businesses.<br>Different Ways In.</h2>
+
+<div class="work__grid" id="demo-track" aria-label="Business card, Door and website examples" tabindex="0">
       <div class="proj-card d1" style="--card-color:#d3b68e;--icon-color:#d3b68e;--icon-bg:rgba(211,182,142,.08);--icon-border:rgba(211,182,142,.2);--icon-bg-hover:rgba(211,182,142,.15);--card-accent:linear-gradient(90deg,#d3b68e,transparent)">
         <div class="proj-card__bg" style="background-image:url('avery-door-scene.jpg')"></div>
         <div class="proj-card__num">01</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
@@ -1176,7 +1176,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <button type="button" id="demo-prev" aria-label="Previous demo" aria-controls="demo-track" disabled></button>
   <span id="demo-count" aria-live="polite">1 / 7</span>
   <button type="button" id="demo-next" aria-label="Next demo" aria-controls="demo-track"></button>
-</div></div></details><details class="home-panel" id="contact"><summary>Choose your next step</summary><div class="home-panel__body"><div class="home-paths">
+</div></div></section><details class="home-panel" id="contact"><summary>Choose your next step</summary><div class="home-panel__body"><div class="home-paths">
 <a href="project-inquiry.html">Short intake form</a>
 <a href="client-intake.html">In-depth intake form</a>
 <a href="mailto:handled@thedigitalside.org">Email directly</a>
@@ -1471,7 +1471,7 @@ function handleForm(e){
   prev.addEventListener('click', () => moveDemo(active - 1));
   next.addEventListener('click', () => moveDemo(active + 1));
   track.addEventListener('scroll', updateDemo, { passive: true });
-  document.querySelector('#work').addEventListener('toggle', updateDemo);
+  updateDemo();
   window.addEventListener('resize', updateDemo);
 })();
 </script>
