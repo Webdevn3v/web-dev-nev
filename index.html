@@ -1076,51 +1076,12 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <a href="#services">Services</a>
         <a href="#contact">Contact</a>
       </div>
-      <div class="nav__right">
-        <div class="nav__ham" id="ham" onclick="toggleNav()">
-          <span></span><span></span><span></span>
-        </div>
-      </div>
     </div>
   </div>
 </nav>
 
-<!-- MOBILE DRAWER -->
-<div class="mob" id="mob">
-  <a href="#work" onclick="toggleNav()">Work</a>
-  <a href="#services" onclick="toggleNav()">Services</a>
-  <a href="#contact" onclick="toggleNav()">Contact</a>
-</div>
-
 <div class="home-index container" id="home-sections">
-<button type="button" class="home-shop-trigger" id="shop" data-open-collection aria-haspopup="dialog" aria-controls="home-collection">Shop the collection</button>
-<details class="home-panel" id="services"><summary>Digital Services</summary><div class="home-panel__body"><div class="services__grid"><article class="svc"><div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>Signal Check</h3><p>A starting conversation to find the right next step for your business.</p><div class="service-action"><strong>Free</strong><a href="project-inquiry.html">Start a conversation</a></div></article><article class="svc"><div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M9 12h6"/></svg></div><h3>Digital Door</h3><p>Give customers a clear path to book, browse services, or get in touch.</p><div class="service-action"><strong>From $250</strong><a href="https://buy.stripe.com/00w8wI6zC5y53A7gTmeIw07">Buy Digital Door</a></div></article><article class="svc svc--wide"><div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h6v6H4zM14 11h6v6h-6z"/><path d="M10 10h4M7 13v4h7"/></svg></div><h3>Connect the Dots</h3><p>Connect your Business Card, Digital Door, and Mobilized Website. Includes the Full Set of Keys and a guided handoff.</p><div class="service-action"><strong>From $500</strong><a href="project-inquiry.html?interest=connect-the-dots">Start your project</a></div></article></div><div class="offer-options"><details class="offer-option"><summary><span>Need less?</span><strong>Digital Business Card</strong></summary><div class="offer-option__body"><b><summary>Digital Services</summary><div class="home-panel__body">00</b><p>Share your contact details and essential links in one place.</p><a href="https://buy.stripe.com/00wdR21fi5y5fiP6eIeIw06">Buy Business Card</a></div></details><details class="offer-option"><summary><span>Have a website?</span><strong>Mobilized Website</strong></summary><div class="offer-option__body"><b>From $300</b><p>Put the essentials of your existing website within easy reach on mobile.</p><a href="https://buy.stripe.com/eVqeV6e245y5b2z46AeIw08">Buy Mobilized Website</a></div></details></div><details class="owner-update-addon reveal"><summary><span class="owner-update-addon__eyebrow">Need something specific?</span><strong>Small Requests &amp; Team Enhancements</strong><span class="owner-update-addon__toggle">+</span></summary><div class="owner-update-addon__body"><b>Start small or equip your crew.</b><p>Custom tap products, team sets and focused updates. Tell us what you need for a tailored quote.</p><a href="project-inquiry.html">Request a quote</a></div></details><section class="refresh" id="refresh">
-<style>
-.refresh{background:var(--black);padding:34px 0 42px}
-@media(max-width:860px){.refresh{padding:56px 0}.refresh__card{padding:32px 24px}}
-.refresh__card{max-width:900px;margin:0 auto;background:linear-gradient(180deg,var(--card),#0f1317);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:0 28px;text-align:center}.refresh__card>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0}.refresh__card>summary::-webkit-details-marker{display:none}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding:0 0 24px}
-.refresh__card h2{font-size:clamp(1.45rem,2.5vw,1.9rem);margin-bottom:6px}.refresh__summary-copy{flex:1;text-align:center}.refresh__summary-copy .tag{margin-bottom:6px}.refresh__summary-copy p{font-size:.76rem;color:var(--muted);line-height:1.5}
-.refresh__card .lead{margin:0 auto 20px;max-width:560px;text-align:center}
-.refresh__uses{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:20px}
-.refresh__uses span{font-family:var(--display);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 12px;border:1px solid var(--border-md);border-radius:3px}
-.refresh__note{font-size:.82rem;color:var(--muted);margin-bottom:24px}
-.refresh__note strong{color:var(--lime)}
-@media(max-width:700px){.refresh__card{padding:0 22px;text-align:left}.refresh__card>summary{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:18px}.refresh__card>summary .tag{justify-content:flex-start;margin:0}.refresh__card>summary h2{font-size:1.2rem;margin:7px 0 0}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding:0 0 26px;text-align:center}.refresh__body .lead{font-size:.84rem}.refresh__uses{margin-bottom:18px}.refresh__uses span{font-size:.52rem}}
-</style>
-  <div class="container">
-    <details class="refresh__card reveal" id="refreshDetails">
-      <summary><div class="refresh__summary-copy"><div class="tag" style="justify-content:center">When things change</div><h2>Digital Refresh</h2><p>Updates when your business needs them.</p></div><span class="refresh__summary-plus">+</span></summary>
-      <div class="refresh__body">
-      <p class="lead">Seasonal updates, new offers, pricing changes, new photos — handled à la carte, whenever you need it.</p>
-      <div class="refresh__uses">
-        <span>Seasonal Updates</span><span>New Services</span><span>Pricing Changes</span><span>New Photos</span><span>Booking Changes</span><span>QR Updates</span><span>Promotions</span>
-      </div>
-      <p class="refresh__note">No mandatory monthly plan. <strong>Quick, Seasonal, or Full Refresh</strong> — come back only when your business does.</p>
-      <a href="project-inquiry.html?request=refresh" class="btn btn--lime">Request a Refresh</a>
-      </div>
-    </details>
-  </div>
-</section></div></details><section class="home-panel" id="work"><div class="home-panel__body"><h2>Different Businesses.<br>Different Ways In.</h2>
+<section class="home-panel" id="work"><div class="home-panel__body"><h2>Different Businesses.<br>Different Ways In.</h2>
 
 <div class="work__grid" id="demo-track" aria-label="Business card, Door and website examples" tabindex="0">
       <div class="proj-card d1" style="--card-color:#d3b68e;--icon-color:#d3b68e;--icon-bg:rgba(211,182,142,.08);--icon-border:rgba(211,182,142,.2);--icon-bg-hover:rgba(211,182,142,.15);--card-accent:linear-gradient(90deg,#d3b68e,transparent)">
@@ -1176,7 +1137,35 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <button type="button" id="demo-prev" aria-label="Previous demo" aria-controls="demo-track" disabled></button>
   <span id="demo-count" aria-live="polite">1 / 7</span>
   <button type="button" id="demo-next" aria-label="Next demo" aria-controls="demo-track"></button>
-</div></div></section><details class="home-panel" id="contact"><summary>Choose your next step</summary><div class="home-panel__body"><div class="home-paths">
+</div></div></section>
+<button type="button" class="home-shop-trigger" id="shop" data-open-collection aria-haspopup="dialog" aria-controls="home-collection">Shop the collection</button>
+<details class="home-panel" id="services"><summary>Digital Services</summary><div class="home-panel__body"><div class="services__grid"><article class="svc"><div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>Signal Check</h3><p>A starting conversation to find the right next step for your business.</p><div class="service-action"><strong>Free</strong><a href="project-inquiry.html">Start a conversation</a></div></article><article class="svc"><div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M9 12h6"/></svg></div><h3>Digital Door</h3><p>Give customers a clear path to book, browse services, or get in touch.</p><div class="service-action"><strong>From $250</strong><a href="https://buy.stripe.com/00w8wI6zC5y53A7gTmeIw07">Buy Digital Door</a></div></article><article class="svc svc--wide"><div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h6v6H4zM14 11h6v6h-6z"/><path d="M10 10h4M7 13v4h7"/></svg></div><h3>Connect the Dots</h3><p>Connect your Business Card, Digital Door, and Mobilized Website. Includes the Full Set of Keys and a guided handoff.</p><div class="service-action"><strong>From $500</strong><a href="project-inquiry.html?interest=connect-the-dots">Start your project</a></div></article></div><div class="offer-options"><details class="offer-option"><summary><span>Need less?</span><strong>Digital Business Card</strong></summary><div class="offer-option__body"><b><summary>Digital Services</summary><div class="home-panel__body">00</b><p>Share your contact details and essential links in one place.</p><a href="https://buy.stripe.com/00wdR21fi5y5fiP6eIeIw06">Buy Business Card</a></div></details><details class="offer-option"><summary><span>Have a website?</span><strong>Mobilized Website</strong></summary><div class="offer-option__body"><b>From $300</b><p>Put the essentials of your existing website within easy reach on mobile.</p><a href="https://buy.stripe.com/eVqeV6e245y5b2z46AeIw08">Buy Mobilized Website</a></div></details></div><details class="owner-update-addon reveal"><summary><span class="owner-update-addon__eyebrow">Need something specific?</span><strong>Small Requests &amp; Team Enhancements</strong><span class="owner-update-addon__toggle">+</span></summary><div class="owner-update-addon__body"><b>Start small or equip your crew.</b><p>Custom tap products, team sets and focused updates. Tell us what you need for a tailored quote.</p><a href="project-inquiry.html">Request a quote</a></div></details><section class="refresh" id="refresh">
+<style>
+.refresh{background:var(--black);padding:34px 0 42px}
+@media(max-width:860px){.refresh{padding:56px 0}.refresh__card{padding:32px 24px}}
+.refresh__card{max-width:900px;margin:0 auto;background:linear-gradient(180deg,var(--card),#0f1317);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:0 28px;text-align:center}.refresh__card>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0}.refresh__card>summary::-webkit-details-marker{display:none}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding:0 0 24px}
+.refresh__card h2{font-size:clamp(1.45rem,2.5vw,1.9rem);margin-bottom:6px}.refresh__summary-copy{flex:1;text-align:center}.refresh__summary-copy .tag{margin-bottom:6px}.refresh__summary-copy p{font-size:.76rem;color:var(--muted);line-height:1.5}
+.refresh__card .lead{margin:0 auto 20px;max-width:560px;text-align:center}
+.refresh__uses{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:20px}
+.refresh__uses span{font-family:var(--display);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:6px 12px;border:1px solid var(--border-md);border-radius:3px}
+.refresh__note{font-size:.82rem;color:var(--muted);margin-bottom:24px}
+.refresh__note strong{color:var(--lime)}
+@media(max-width:700px){.refresh__card{padding:0 22px;text-align:left}.refresh__card>summary{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:18px}.refresh__card>summary .tag{justify-content:flex-start;margin:0}.refresh__card>summary h2{font-size:1.2rem;margin:7px 0 0}.refresh__summary-plus{display:block;color:var(--lime);font-size:1.4rem;transition:transform .2s}.refresh__card[open] .refresh__summary-plus{transform:rotate(45deg)}.refresh__body{padding:0 0 26px;text-align:center}.refresh__body .lead{font-size:.84rem}.refresh__uses{margin-bottom:18px}.refresh__uses span{font-size:.52rem}}
+</style>
+  <div class="container">
+    <details class="refresh__card reveal" id="refreshDetails">
+      <summary><div class="refresh__summary-copy"><div class="tag" style="justify-content:center">When things change</div><h2>Digital Refresh</h2><p>Updates when your business needs them.</p></div><span class="refresh__summary-plus">+</span></summary>
+      <div class="refresh__body">
+      <p class="lead">Seasonal updates, new offers, pricing changes, new photos — handled à la carte, whenever you need it.</p>
+      <div class="refresh__uses">
+        <span>Seasonal Updates</span><span>New Services</span><span>Pricing Changes</span><span>New Photos</span><span>Booking Changes</span><span>QR Updates</span><span>Promotions</span>
+      </div>
+      <p class="refresh__note">No mandatory monthly plan. <strong>Quick, Seasonal, or Full Refresh</strong> — come back only when your business does.</p>
+      <a href="project-inquiry.html?request=refresh" class="btn btn--lime">Request a Refresh</a>
+      </div>
+    </details>
+  </div>
+</section></div></details><details class="home-panel" id="contact"><summary>Choose your next step</summary><div class="home-panel__body"><div class="home-paths">
 <a href="project-inquiry.html">Short intake form</a>
 <a href="client-intake.html">In-depth intake form</a>
 <a href="mailto:handled@thedigitalside.org">Email directly</a>
@@ -1214,18 +1203,6 @@ document.querySelectorAll('a,button,.proj-card,.svc,.price-card,.process__step')
 
 const nav = document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>60));
-
-function toggleNav(){
-  document.getElementById('ham').classList.toggle('op');
-  document.getElementById('mob').classList.toggle('op');
-}
-document.addEventListener('click',e=>{
-  const m=document.getElementById('mob');
-  const h=document.getElementById('ham');
-  if(m.classList.contains('op')&&!m.contains(e.target)&&!h.contains(e.target)){
-    m.classList.remove('op'); h.classList.remove('op');
-  }
-});
 
 /* ── SCROLL REVEAL ───────────────────── */
 const ro = new IntersectionObserver(entries=>{
