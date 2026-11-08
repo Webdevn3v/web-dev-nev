@@ -984,21 +984,11 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .work__grid .proj-card__footer{width:100%}
 .work__header .lead{max-width:440px}
 </style><style>
-/* Home shares the Door’s typography and uses a warm white entry. */
-#hero{min-height:82svh;background:#faf9f6;color:#171919;isolation:isolate}
-#hero .hero__grid,#hero .hero__glow2{display:none}
-#hero .hero__glow{inset:0;width:auto;height:auto;background:
-  linear-gradient(116deg,transparent 55%,rgba(88,74,52,.11) 57%,transparent 61%),
-  linear-gradient(116deg,transparent 70%,rgba(88,74,52,.08) 72%,transparent 79%);
-  filter:blur(12px)}
-#hero .hero__content{padding:125px 0 88px}
-#hero h1{color:#171919;font-size:clamp(2.8rem,8vw,6.5rem)}
-#hero .hero__accent{color:#504b42}
-#hero .hero__terminal,#hero .hero__promise,#hero .hero__sub,#hero .hero__scroll{color:#555047}
-#hero .hero__terminal::before{content:'>'}
-#hero .hero__cursor,#hero .hero__scroll-line{background:#555047}
-#hero .btn--lime,.home-index .btn--lime{background:#20211f;color:#fff;border:1px solid #77786f}
-#hero .btn--outline{color:#222;border:1px solid #6d685e}
+/* The Door’s full-screen wordmark intro, in Home’s light palette. */
+#hero{min-height:100svh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:44px 22px 82px;background:#faf9f6;color:#171919}
+#hero .home-wordmark{margin:0;color:inherit;font:400 clamp(2.7rem,8vw,5rem)/1.1 'Fraunces',Georgia,serif;letter-spacing:-.045em;text-align:center;animation:none}
+#hero .home-scroll-cue{position:absolute;bottom:clamp(26px,6vh,54px);left:50%;transform:translateX(-50%);display:grid;place-items:center;width:44px;height:44px;color:#555047;font-size:1.35rem}
+.home-index .btn--lime{background:#20211f;color:#fff;border:1px solid #77786f}
 .home-index{padding-block:20px 40px}
 .home-panel{scroll-margin-top:85px;border-bottom:1px solid #3d4142}
 .home-panel>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;list-style:none;cursor:pointer;color:#f5f4f0;font:700 clamp(1.2rem,3.8vw,1.65rem)/1.2 var(--heading)}
@@ -1044,12 +1034,18 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .home-index .work__grid{max-width:760px}
 @media(min-width:701px){.home-index .work__grid>.proj-card{flex-basis:calc(100% - 64px)!important;width:calc(100% - 64px)!important}}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&amp;display=swap">
 </head>
 <body>
 
 <!-- CURSOR -->
 <div class="c-dot" id="cDot"></div>
 <div class="c-ring" id="cRing"></div>
+
+<section class="hero" id="hero" aria-label="The Digital Side">
+  <h1 class="home-wordmark">the digital side</h1>
+  <a class="home-scroll-cue" href="#home-sections" aria-label="Scroll to explore">↓</a>
+</section>
 
 <!-- ─── NAV ──────────────────────────────── -->
 <nav class="nav" id="nav">
@@ -1080,35 +1076,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <a href="#contact" onclick="toggleNav()">Contact</a>
 </div>
 
-<!-- ─── HERO ──────────────────────────────── -->
-<section class="hero" id="hero">
-  <div class="hero__grid"></div>
-  <div class="hero__glow"></div>
-  <div class="hero__glow2"></div>
-
-  <div class="container">
-    <div class="hero__content">
-      <div class="hero__terminal">
-        the digital side / home<span class="hero__cursor"></span>
-      </div>
-      <h1>
-        Your business.<br>
-        <span class="hero__accent">One tap away.</span>
-      </h1>
-      <p class="hero__promise">Tech you actually want to wear.</p>
-      <p class="hero__sub">Tap bracelets, keychains and digital pages. One payment. No TDS subscription.</p>
-      <div class="hero__actions">
-        <button type="button" class="btn btn--lime" data-open-collection>Shop the collection →</button>
-        <a href="#work" class="btn btn--outline" data-open-panel="work">See the demos →</a>
-      </div>
-    </div>
-  </div>
-        <div class="hero__scroll">
-    <span>scroll</span>
-    <div class="hero__scroll-line"></div>
-  </div>
-</section>
-<div class="home-index container">
+<div class="home-index container" id="home-sections">
 <details class="home-panel" id="shop"><summary>Signature Collection</summary><div class="home-panel__body"><ul class="home-offers"><li class="home-offer"><h3>Signature Tap Keychain</h3><strong>$45</strong></li><li class="home-offer"><h3>Wearable Tap Key</h3><strong>$65</strong></li><li class="home-offer"><h3>Signature Duo</h3><strong>$85</strong></li></ul>
 <p>Nocturne Black or Stone White. Tap card and wallet QR included.</p>
 <button type="button" class="btn btn--lime" data-open-collection>Shop the collection →</button></div></details><details class="home-panel" id="services"><summary>Digital Services</summary><div class="home-panel__body"><ul class="home-offers"><li class="home-offer"><h3>Signal Check</h3><strong>Free</strong><p>A starting conversation to find the right next step for your business.</p><a href="project-inquiry.html">Start a conversation →</a></li><li class="home-offer"><h3>Digital Business Card</h3><strong>$100</strong><p>Share your contact details and essential links in one place.</p><a href="https://buy.stripe.com/00wdR21fi5y5fiP6eIeIw06">Buy Business Card →</a></li><li class="home-offer"><h3>Digital Door</h3><strong>From $250</strong><p>Give customers a clear path to book, browse services, or get in touch.</p><a href="https://buy.stripe.com/00w8wI6zC5y53A7gTmeIw07">Buy Digital Door →</a></li><li class="home-offer"><h3>Mobilized Website</h3><strong>From $300</strong><p>Put the essentials of your existing website within easy reach on mobile.</p><a href="https://buy.stripe.com/eVqeV6e245y5b2z46AeIw08">Buy Mobilized Website →</a></li><li class="home-offer"><h3>Connect the Dots</h3><strong>From $500</strong><p>Connect your Business Card, Digital Door, and Mobilized Website. Includes the Full Set of Keys and a guided handoff.</p><a href="project-inquiry.html?interest=connect-the-dots">Start your project →</a></li></ul><details class="owner-update-addon reveal"><summary><span class="owner-update-addon__eyebrow">Need something specific?</span><strong>Small Requests &amp; Team Enhancements</strong><span class="owner-update-addon__toggle">+</span></summary><div class="owner-update-addon__body"><b>Start small or equip your crew.</b><p>Custom tap products, team sets and focused updates. Tell us what you need for a tailored quote.</p><a href="project-inquiry.html">Request a quote →</a></div></details><section class="refresh" id="refresh">
