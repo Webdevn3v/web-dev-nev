@@ -997,10 +997,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .home-panel[open]>summary::after{transform:rotate(225deg)}
 .home-panel__body{padding:4px 0 24px;color:#c6c9ca}
 .home-panel__body h2{font-size:clamp(1.65rem,5vw,2.6rem)}
-.home-offers{list-style:none;margin:0 0 16px;padding:0}
-.home-offer{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:baseline;padding:14px 0;border-bottom:1px solid #35393a}
-.home-offer h3{font-size:1.05rem;color:#f5f4f0}
-.home-offer p,.home-offer a{grid-column:1/-1}
 .home-panel__body a:not(.proj-card__link){text-decoration:underline;text-underline-offset:4px}
 .home-panel__body>.btn{margin-top:14px}
 .home-panel .owner-update-addon{padding-inline:14px}
@@ -1035,6 +1031,26 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 @media(min-width:701px){.home-index .work__grid>.proj-card{flex-basis:calc(100% - 64px)!important;width:calc(100% - 64px)!important}}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&amp;display=swap">
+<style>
+.home-shop-trigger{display:block;width:100%;min-height:44px;padding:22px 0;text-align:left;border:0;border-bottom:1px solid #3d4142;background:none;color:#f5f4f0;font:700 clamp(1.2rem,3.8vw,1.65rem)/1.2 var(--heading);cursor:pointer}
+#hero .home-scroll-cue::after,.demo-controls button::after{content:'';display:inline-block;width:9px;height:9px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.demo-controls #demo-prev::after{transform:rotate(135deg)}
+.demo-controls #demo-next::after{transform:rotate(-45deg)}
+#services .services__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#services .svc{display:flex;flex-direction:column;align-items:flex-start;padding:clamp(14px,4vw,36px)}
+#services .svc--wide{grid-column:1/-1}
+#services .svc p{color:#c6c9ca}
+#services .service-action{display:flex;flex-wrap:wrap;gap:5px 14px;align-items:baseline;margin-top:auto;padding-top:16px;color:#f5f4f0;font-size:.85rem}
+#services .offer-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+#services .offer-option{border:1px solid var(--border-md);padding:0 clamp(10px,3vw,22px)}
+#services .offer-option summary{position:relative;display:grid;gap:5px;padding:14px 18px 14px 0;list-style:none;cursor:pointer;color:#f5f4f0}
+#services .offer-option summary::-webkit-details-marker{display:none}
+#services .offer-option summary span{color:#c6c9ca;font:400 .62rem var(--display);text-transform:uppercase}
+#services .offer-option summary::after{content:'+';position:absolute;right:0;top:14px}
+#services .offer-option[open] summary::after{content:'−'}
+#services .offer-option__body{padding-bottom:14px;font-size:.82rem;line-height:1.6}
+#services .offer-option__body b{display:block;margin-bottom:6px;color:#f5f4f0}
+</style>
 </head>
 <body>
 
@@ -1044,7 +1060,7 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 
 <section class="hero" id="hero" aria-label="The Digital Side">
   <h1 class="home-wordmark">the digital side</h1>
-  <a class="home-scroll-cue" href="#home-sections" aria-label="Scroll to explore">↓</a>
+  <a class="home-scroll-cue" href="#home-sections" aria-label="Scroll to explore"></a>
 </section>
 
 <!-- ─── NAV ──────────────────────────────── -->
@@ -1077,9 +1093,8 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 </div>
 
 <div class="home-index container" id="home-sections">
-<details class="home-panel" id="shop"><summary>Signature Collection</summary><div class="home-panel__body"><ul class="home-offers"><li class="home-offer"><h3>Signature Tap Keychain</h3><strong>$45</strong></li><li class="home-offer"><h3>Wearable Tap Key</h3><strong>$65</strong></li><li class="home-offer"><h3>Signature Duo</h3><strong>$85</strong></li></ul>
-<p>Nocturne Black or Stone White. Tap card and wallet QR included.</p>
-<button type="button" class="btn btn--lime" data-open-collection>Shop the collection →</button></div></details><details class="home-panel" id="services"><summary>Digital Services</summary><div class="home-panel__body"><ul class="home-offers"><li class="home-offer"><h3>Signal Check</h3><strong>Free</strong><p>A starting conversation to find the right next step for your business.</p><a href="project-inquiry.html">Start a conversation →</a></li><li class="home-offer"><h3>Digital Business Card</h3><strong>$100</strong><p>Share your contact details and essential links in one place.</p><a href="https://buy.stripe.com/00wdR21fi5y5fiP6eIeIw06">Buy Business Card →</a></li><li class="home-offer"><h3>Digital Door</h3><strong>From $250</strong><p>Give customers a clear path to book, browse services, or get in touch.</p><a href="https://buy.stripe.com/00w8wI6zC5y53A7gTmeIw07">Buy Digital Door →</a></li><li class="home-offer"><h3>Mobilized Website</h3><strong>From $300</strong><p>Put the essentials of your existing website within easy reach on mobile.</p><a href="https://buy.stripe.com/eVqeV6e245y5b2z46AeIw08">Buy Mobilized Website →</a></li><li class="home-offer"><h3>Connect the Dots</h3><strong>From $500</strong><p>Connect your Business Card, Digital Door, and Mobilized Website. Includes the Full Set of Keys and a guided handoff.</p><a href="project-inquiry.html?interest=connect-the-dots">Start your project →</a></li></ul><details class="owner-update-addon reveal"><summary><span class="owner-update-addon__eyebrow">Need something specific?</span><strong>Small Requests &amp; Team Enhancements</strong><span class="owner-update-addon__toggle">+</span></summary><div class="owner-update-addon__body"><b>Start small or equip your crew.</b><p>Custom tap products, team sets and focused updates. Tell us what you need for a tailored quote.</p><a href="project-inquiry.html">Request a quote →</a></div></details><section class="refresh" id="refresh">
+<button type="button" class="home-shop-trigger" id="shop" data-open-collection aria-haspopup="dialog" aria-controls="home-collection">Shop the collection</button>
+<details class="home-panel" id="services"><summary>Digital Services</summary><div class="home-panel__body"><div class="services__grid"><article class="svc"><div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>Signal Check</h3><p>A starting conversation to find the right next step for your business.</p><div class="service-action"><strong>Free</strong><a href="project-inquiry.html">Start a conversation</a></div></article><article class="svc"><div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M9 12h6"/></svg></div><h3>Digital Door</h3><p>Give customers a clear path to book, browse services, or get in touch.</p><div class="service-action"><strong>From $250</strong><a href="https://buy.stripe.com/00w8wI6zC5y53A7gTmeIw07">Buy Digital Door</a></div></article><article class="svc svc--wide"><div class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h6v6H4zM14 11h6v6h-6z"/><path d="M10 10h4M7 13v4h7"/></svg></div><h3>Connect the Dots</h3><p>Connect your Business Card, Digital Door, and Mobilized Website. Includes the Full Set of Keys and a guided handoff.</p><div class="service-action"><strong>From $500</strong><a href="project-inquiry.html?interest=connect-the-dots">Start your project</a></div></article></div><div class="offer-options"><details class="offer-option"><summary><span>Need less?</span><strong>Digital Business Card</strong></summary><div class="offer-option__body"><b><summary>Digital Services</summary><div class="home-panel__body">00</b><p>Share your contact details and essential links in one place.</p><a href="https://buy.stripe.com/00wdR21fi5y5fiP6eIeIw06">Buy Business Card</a></div></details><details class="offer-option"><summary><span>Have a website?</span><strong>Mobilized Website</strong></summary><div class="offer-option__body"><b>From $300</b><p>Put the essentials of your existing website within easy reach on mobile.</p><a href="https://buy.stripe.com/eVqeV6e245y5b2z46AeIw08">Buy Mobilized Website</a></div></details></div><details class="owner-update-addon reveal"><summary><span class="owner-update-addon__eyebrow">Need something specific?</span><strong>Small Requests &amp; Team Enhancements</strong><span class="owner-update-addon__toggle">+</span></summary><div class="owner-update-addon__body"><b>Start small or equip your crew.</b><p>Custom tap products, team sets and focused updates. Tell us what you need for a tailored quote.</p><a href="project-inquiry.html">Request a quote</a></div></details><section class="refresh" id="refresh">
 <style>
 .refresh{background:var(--black);padding:34px 0 42px}
 @media(max-width:860px){.refresh{padding:56px 0}.refresh__card{padding:32px 24px}}
@@ -1101,47 +1116,47 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <span>Seasonal Updates</span><span>New Services</span><span>Pricing Changes</span><span>New Photos</span><span>Booking Changes</span><span>QR Updates</span><span>Promotions</span>
       </div>
       <p class="refresh__note">No mandatory monthly plan. <strong>Quick, Seasonal, or Full Refresh</strong> — come back only when your business does.</p>
-      <a href="project-inquiry.html?request=refresh" class="btn btn--lime">Request a Refresh →</a>
+      <a href="project-inquiry.html?request=refresh" class="btn btn--lime">Request a Refresh</a>
       </div>
     </details>
   </div>
 </section></div></details><details class="home-panel" id="work"><summary>Explore the Demos</summary><div class="home-panel__body"><h2>Different Businesses.<br>Different Ways In.</h2>
-<p class="demo-hint">Swipe to explore <span aria-hidden="true">↔</span></p>
+<p class="demo-hint">Swipe to explore </p>
 <div class="work__grid" id="demo-track" aria-label="Swipe to explore business card, Door and website examples" tabindex="0">
       <div class="proj-card d1" style="--card-color:#d3b68e;--icon-color:#d3b68e;--icon-bg:rgba(211,182,142,.08);--icon-border:rgba(211,182,142,.2);--icon-bg-hover:rgba(211,182,142,.15);--card-accent:linear-gradient(90deg,#d3b68e,transparent)">
         <div class="proj-card__bg" style="background-image:url('avery-door-scene.jpg')"></div>
         <div class="proj-card__num">01</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
         <div class="proj-card__industry">Real Estate · Realtor</div><h3>Rivermore Real Estate</h3>
         
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="avery-cole-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="avery-cole-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="realtor-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="avery-cole-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="avery-cole-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="realtor-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
       </div>
       <div class="proj-card d3" style="--card-color:#7ecfcf;--icon-color:#7ecfcf;--icon-bg:rgba(126,207,207,.08);--icon-border:rgba(126,207,207,.2);--icon-bg-hover:rgba(126,207,207,.15);--card-accent:linear-gradient(90deg,#7ecfcf,transparent)">
         <div class="proj-card__bg" style="background-image:url('https://images.pexels.com/videos/6070803/pexels-photo-6070803.jpeg?auto=compress&amp;dpr=1&amp;h=900&amp;w=1400')"></div>
         <div class="proj-card__num">02</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2c-2.5 0-4.5 1.5-5.5 3.5C5.5 7 4 7.5 3 9c-1.5 2.5-.5 5.5 1 7 .8 1 1.5 2.5 2 4.5.3 1.2.8 2 1.5 2s1-.5 1.5-1.5c.5-1 1-2.5 3-2.5s2.5 1.5 3 2.5c.5 1 .8 1.5 1.5 1.5s1.2-.8 1.5-2c.5-2 1.2-3.5 2-4.5 1.5-1.5 2.5-4.5 1-7-1-1.5-2.5-2-3.5-3.5C16.5 3.5 14.5 2 12 2z"/></svg></div>
         <div class="proj-card__industry">Healthcare · Dental</div><h3>Lumina Dental Studio</h3>
         
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="lumina-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="lumina-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="lumina-mobile-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="lumina-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="lumina-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="lumina-mobile-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
       </div>
       <div class="proj-card d2" style="--card-color:#b89478;--icon-color:#b89478;--icon-bg:rgba(184,148,120,.08);--icon-border:rgba(184,148,120,.2);--icon-bg-hover:rgba(184,148,120,.15);--card-accent:linear-gradient(90deg,#b89478,transparent)">
         <div class="proj-card__bg" style="background-image:url('atelier-house-hero-exterior.png')"></div>
         <div class="proj-card__num">03</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V8l6-4 6 4v12"/><path d="M9 13h6"/></svg></div>
         <div class="proj-card__industry">Interiors · Design</div><h3>Atelier House</h3>
         
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="atelier-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="atelier-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="atelier-house-full-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="atelier-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="atelier-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="atelier-house-full-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
       </div>
       <div class="proj-card d3" style="--card-color:#c98a52;--icon-color:#c98a52;--icon-bg:rgba(201,138,82,.08);--icon-border:rgba(201,138,82,.2);--icon-bg-hover:rgba(201,138,82,.15);--card-accent:linear-gradient(90deg,#c98a52,transparent)">
         <div class="proj-card__bg" style="background-image:url('assets/door/northline-owner.webp')"></div>
         <div class="proj-card__num">04</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
         <div class="proj-card__industry">Home Services · Roofing</div><h3>Northline Roofing Co.</h3>
         
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="northline-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="northline-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="northline-mobile-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="northline-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="northline-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="northline-mobile-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
       </div>
       <div class="proj-card d1" style="--card-color:#b8a98a;--icon-color:#b8a98a;--icon-bg:rgba(184,169,138,.08);--icon-border:rgba(184,169,138,.2);--icon-bg-hover:rgba(184,169,138,.15);--card-accent:linear-gradient(90deg,#b8a98a,transparent)">
         <div class="proj-card__bg" style="background-image:url('assets/door/frederick-attorney.webp')"></div>
         <div class="proj-card__num">05</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v4c0 5.25 3.75 10.15 9 11.35C17.25 21.15 21 16.25 21 11V7L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <div class="proj-card__industry">Legal · Law Firm</div><h3>Frederick Legacy Law</h3>
         
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="door-frederick-legacy-law.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="door-frederick-legacy-law.html?view=paths" class="proj-card__link">Digital Door →</a><a href="frederick-legacy-law-mobile.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="door-frederick-legacy-law.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="door-frederick-legacy-law.html?view=paths" class="proj-card__link">Digital Door</a><a href="frederick-legacy-law-mobile.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
       </div>
 
       <div class="proj-card d2" style="--card-color:#55c8e8;--icon-color:#55c8e8;--icon-bg:rgba(85,200,232,.08);--icon-border:rgba(85,200,232,.2);--icon-bg-hover:rgba(85,200,232,.15);--card-accent:linear-gradient(90deg,#55c8e8,transparent)">
@@ -1149,22 +1164,22 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
         <div class="proj-card__num">06</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 8c4-3 8-3 12 0 2 1.5 4 1.5 6 0"/><path d="M3 12c4-3 8-3 12 0 2 1.5 4 1.5 6 0"/><path d="M3 16c4-3 8-3 12 0 2 1.5 4 1.5 6 0"/></svg></div>
         <div class="proj-card__industry">Home Services · HVAC</div><h3>Marsh Brothers Heating &amp; Air</h3>
         
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="hvac-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="hvac-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="hvac-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="hvac-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="hvac-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="hvac-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
       </div>
       <div class="proj-card d3" style="--card-color:#b6aa94;--icon-color:#b6aa94;--icon-bg:rgba(182,170,148,.08);--icon-border:rgba(182,170,148,.2);--icon-bg-hover:rgba(182,170,148,.15);--card-accent:linear-gradient(90deg,#b6aa94,transparent)">
         <div class="proj-card__bg proj-card__bg--hallow" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600&q=70')"></div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M7 8c2-2 3-3 5-5 2 2 3 3 5 5"/><path d="M7 16c2 2 3 3 5 5 2-2 3-3 5-5"/></svg></div>
         <div class="proj-card__body"><div class="proj-card__industry">Care · Funeral Home</div><h3>Hallow &amp; Grace</h3><p>A calm, respectful Door built around immediate needs, planning, service information, and a gentler way to find the next step.</p></div>
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="hallow-grace-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="hallow-grace-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="hallow-grace-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="hallow-grace-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="hallow-grace-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="hallow-grace-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
       </div>
     </div>
 <div class="demo-controls">
-  <button type="button" id="demo-prev" aria-label="Previous demo" aria-controls="demo-track" disabled>←</button>
+  <button type="button" id="demo-prev" aria-label="Previous demo" aria-controls="demo-track" disabled></button>
   <span id="demo-count" aria-live="polite">1 / 7</span>
-  <button type="button" id="demo-next" aria-label="Next demo" aria-controls="demo-track">→</button>
+  <button type="button" id="demo-next" aria-label="Next demo" aria-controls="demo-track"></button>
 </div></div></details><details class="home-panel" id="contact"><summary>Choose your next step</summary><div class="home-panel__body"><div class="home-paths">
 <button type="button" data-open-collection>Signature Collection <span aria-hidden="true">+</span></button>
 <a href="#services" data-open-panel="services">Digital Services <span aria-hidden="true">+</span></a>
-<a href="project-inquiry.html">Make It Yours <span aria-hidden="true">→</span></a>
+<a href="project-inquiry.html">Make It Yours </a>
 </div></div></details>
 </div>
 <dialog class="home-collection" id="home-collection" aria-labelledby="collection-title"><button type="button" class="close-popup" autofocus aria-label="Close Signature Collection">×</button><h2 id="collection-title">Signature Collection</h2><p class="collection-includes">Tap card + wallet QR included.</p><article class="product-row"><img src="tds-black-drop-keychain-v2.webp" data-black="tds-black-drop-keychain-v2.webp" data-white="tds-white-stone-keychain-matte.webp" alt="Black Signature Tap Keychain"><div><h3>Signature Tap Keychain</h3><strong class="price">$45</strong><div class="finish" aria-label="Signature Tap Keychain finish"><button type="button" class="black" data-finish="black" aria-label="Nocturne Black" aria-pressed="true"></button><button type="button" class="white" data-finish="white" aria-label="Stone White" aria-pressed="false"></button></div><span class="finish-name">Nocturne Black</span><br><a class="action buy-product" href="https://buy.stripe.com/dRm00c8HK9OlfiP7iMeIw04">Buy now</a></div></article><article class="product-row"><img src="tds-black-oval-bracelet-v2.webp" data-black="tds-black-oval-bracelet-v2.webp" data-white="tds-white-stone-bracelet-matte.webp" alt="Black Wearable Tap Key"><div><h3>Wearable Tap Key</h3><strong class="price">$65</strong><div class="finish" aria-label="Wearable Tap Key finish"><button type="button" class="black" data-finish="black" aria-label="Nocturne Black" aria-pressed="true"></button><button type="button" class="white" data-finish="white" aria-label="Stone White" aria-pressed="false"></button></div><span class="finish-name">Nocturne Black</span><br><a class="action buy-product" href="https://buy.stripe.com/28E4gs6zC2lT7Qn0UoeIw02">Buy now</a></div></article><article class="product-row"><img src="tds-black-duo-v2.webp" data-black="tds-black-duo-v2.webp" data-white="tds-white-stone-duo-matte.webp" alt="Black Signature Duo"><div><h3>Signature Duo</h3><strong class="price">$85</strong><div class="finish" aria-label="Signature Duo finish"><button type="button" class="black" data-finish="black" aria-label="Nocturne Black" aria-pressed="true"></button><button type="button" class="white" data-finish="white" aria-label="Stone White" aria-pressed="false"></button></div><span class="finish-name">Nocturne Black</span><br><a class="action buy-product" href="https://buy.stripe.com/fZu9AM4rubWt0nVfPieIw05">Buy now</a></div></article></dialog>
