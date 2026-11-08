@@ -983,7 +983,68 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 .work__grid .tds-demo-actions .proj-card__link{width:100%;text-align:center;justify-content:center;white-space:normal;padding:11px 8px;font-size:.65rem;line-height:1.35}
 .work__grid .proj-card__footer{width:100%}
 .work__header .lead{max-width:440px}
-</style></head>
+</style><style>
+/* Home shares the Door’s typography and uses a warm white entry. */
+#hero{min-height:82svh;background:#faf9f6;color:#171919;isolation:isolate}
+#hero .hero__grid,#hero .hero__glow2{display:none}
+#hero .hero__glow{inset:0;width:auto;height:auto;background:
+  linear-gradient(116deg,transparent 55%,rgba(88,74,52,.11) 57%,transparent 61%),
+  linear-gradient(116deg,transparent 70%,rgba(88,74,52,.08) 72%,transparent 79%);
+  filter:blur(12px)}
+#hero .hero__content{padding:125px 0 88px}
+#hero h1{color:#171919;font-size:clamp(2.8rem,8vw,6.5rem)}
+#hero .hero__accent{color:#504b42}
+#hero .hero__terminal,#hero .hero__promise,#hero .hero__sub,#hero .hero__scroll{color:#555047}
+#hero .hero__terminal::before{content:'>'}
+#hero .hero__cursor,#hero .hero__scroll-line{background:#555047}
+#hero .btn--lime,.home-index .btn--lime{background:#20211f;color:#fff;border:1px solid #77786f}
+#hero .btn--outline{color:#222;border:1px solid #6d685e}
+.home-index{padding-block:20px 40px}
+.home-panel{scroll-margin-top:85px;border-bottom:1px solid #3d4142}
+.home-panel>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;list-style:none;cursor:pointer;color:#f5f4f0;font:700 clamp(1.2rem,3.8vw,1.65rem)/1.2 var(--heading)}
+.home-panel>summary::-webkit-details-marker{display:none}
+.home-panel>summary::after{content:'';flex:none;width:.52em;height:.52em;border:solid #b9c0b5;border-width:0 2px 2px 0;transform:rotate(45deg);margin-right:5px}
+.home-panel[open]>summary::after{transform:rotate(225deg)}
+.home-panel__body{padding:4px 0 24px;color:#c6c9ca}
+.home-panel__body h2{font-size:clamp(1.65rem,5vw,2.6rem)}
+.home-offers{list-style:none;margin:0 0 16px;padding:0}
+.home-offer{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:baseline;padding:14px 0;border-bottom:1px solid #35393a}
+.home-offer h3{font-size:1.05rem;color:#f5f4f0}
+.home-offer p,.home-offer a{grid-column:1/-1}
+.home-panel__body a:not(.proj-card__link){text-decoration:underline;text-underline-offset:4px}
+.home-panel__body>.btn{margin-top:14px}
+.home-panel .owner-update-addon{padding-inline:14px}
+.home-panel .refresh{padding:16px 0 0;background:none}
+.home-panel .refresh>.container{width:100%;padding:0}
+.demo-hint{margin:14px 0 8px}
+.home-index .work__grid{padding:2px 0 10px!important;scroll-padding:0}
+@media(max-width:700px){.home-index .work__grid>.proj-card{flex-basis:calc(100% - 36px)!important;width:calc(100% - 36px)!important}}
+.demo-controls{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:10px}
+.demo-controls button,.home-paths>*{border:1px solid #555b59;background:#171b1d;color:#f5f4f0;min-height:44px}
+.demo-controls button{min-width:44px}
+.demo-controls button:disabled{opacity:.45}
+.home-paths{display:grid;gap:8px;max-width:650px}
+.home-paths>*{display:flex;justify-content:space-between;align-items:center;padding:14px 17px;text-align:left;font:600 1rem var(--heading);text-decoration:none!important}
+.home-collection{position:fixed;inset:0;margin:auto;width:min(calc(100% - 28px),650px);max-height:85dvh;overflow:auto;padding:clamp(18px,5vw,35px);border:1px solid #c5c8c6;border-radius:14px;background:#fff;color:#16181a}
+.home-collection::backdrop{background:rgba(10,15,18,.77)}
+.home-collection h2{font:600 clamp(1.35rem,5vw,2rem)/1.1 Georgia,serif;color:#16181a;padding-right:48px;margin-bottom:12px}
+.home-collection .close-popup{position:sticky;top:0;float:right;z-index:2;width:44px;height:44px;border:1px solid #9a9b98;background:#fff;color:#16181a;font-size:1.6rem}
+.home-collection .collection-includes,.home-collection .finish-name{color:#565b60}
+.home-collection .product-row{clear:both;display:grid;grid-template-columns:minmax(70px,31%) minmax(0,1fr);gap:14px;align-items:center;border-top:1px solid #d1d3d2;padding:18px 0}
+.home-collection img{display:block;width:100%;max-height:160px;object-fit:contain}
+.home-collection h3{color:#16181a;font:600 clamp(1rem,4vw,1.4rem)/1.2 Georgia,serif}
+.home-collection .price{display:block;margin:7px 0}
+.home-collection .finish{display:flex;gap:6px;margin:8px 0}
+.home-collection .finish button{width:44px;height:44px;border:0;background:none;display:grid;place-items:center;border-radius:50%}
+.home-collection .finish button::before{content:'';width:30px;height:30px;border-radius:50%;border:1px solid #777;background:#151618}
+.home-collection .finish button.white::before{background:#eae8e3}
+.home-collection .finish button[aria-pressed="true"]{outline:1px solid #303134;outline-offset:-2px}
+.home-collection .buy-product{display:inline-block;padding:11px 15px;margin-top:8px;background:#16181a;color:#fff}
+.home-index :focus-visible,#hero :focus-visible,.home-collection :focus-visible{outline:2px solid #728d85;outline-offset:3px}
+.home-index .work__grid{max-width:760px}
+@media(min-width:701px){.home-index .work__grid>.proj-card{flex-basis:calc(100% - 64px)!important;width:calc(100% - 64px)!important}}
+</style>
+</head>
 <body>
 
 <!-- CURSOR -->
@@ -1001,7 +1062,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       <div class="nav__links">
         <a href="#work">Work</a>
         <a href="#services">Services</a>
-        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
       <div class="nav__right">
@@ -1017,8 +1077,6 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
 <div class="mob" id="mob">
   <a href="#work" onclick="toggleNav()">Work</a>
   <a href="#services" onclick="toggleNav()">Services</a>
-  <a href="#process" onclick="toggleNav()">Process</a>
-  <a href="#about" onclick="toggleNav()">About</a>
   <a href="#contact" onclick="toggleNav()">Contact</a>
 </div>
 
@@ -1031,214 +1089,29 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
   <div class="container">
     <div class="hero__content">
       <div class="hero__terminal">
-        the-digital-side@studio:~$ digital door live<span class="hero__cursor"></span>
+        the digital side / home<span class="hero__cursor"></span>
       </div>
       <h1>
         Your business.<br>
-        <span class="ghost">One tap</span><br>
-        <span class="hl">away.</span>
+        <span class="hero__accent">One tap away.</span>
       </h1>
       <p class="hero__promise">Tech you actually want to wear.</p>
       <p class="hero__sub">Tap bracelets, keychains and digital pages. One payment. No TDS subscription.</p>
-      <div class="hero__actions"><a href="door.html#shop" class="btn btn--lime">Shop the collection →</a><a href="project-inquiry.html" class="btn btn--outline">Tell me what you need →</a></div>
+      <div class="hero__actions">
+        <button type="button" class="btn btn--lime" data-open-collection>Shop the collection →</button>
+        <a href="#work" class="btn btn--outline" data-open-panel="work">See the demos →</a>
+      </div>
+    </div>
+  </div>
         <div class="hero__scroll">
     <span>scroll</span>
     <div class="hero__scroll-line"></div>
   </div>
 </section>
-
-
-<style>
-.hero__capabilities{margin-top:22px;display:flex;align-items:center;gap:10px;min-height:22px;font-family:var(--display);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fog)}
-.hero__cap-label{color:rgba(255,255,255,.35)}
-.hero__cap-rotator{color:var(--lime);transition:opacity .25s ease,transform .25s ease;display:inline-block}
-.hero__cap-rotator.is-changing{opacity:0;transform:translateY(4px)}
-@media(max-width:520px){.hero__capabilities{margin-top:16px;font-size:.56rem;gap:7px;flex-wrap:wrap}}
-</style>
-
-<!-- ─── THINK LIKE YOUR CUSTOMER ─────────── -->
-<style>
-.customer-think{background:var(--black);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:34px 0 38px}
-.customer-think__prompt{max-width:1100px;margin:0 auto;padding:0 28px}
-.customer-think__eyebrow{font-family:var(--display);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
-.customer-think__prompt h2{font-size:clamp(1.45rem,3vw,2.15rem);margin-bottom:8px}
-.customer-think__answer{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-family:var(--display);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.customer-think__rotator{color:var(--white);font-size:.78rem;font-weight:700;transition:opacity .22s ease,transform .22s ease;display:inline-block}
-.customer-think__rotator.is-changing{opacity:0;transform:translateY(5px)}
-.customer-think__start{margin-top:8px;font-family:var(--heading);font-size:.82rem;font-style:italic;font-weight:600;color:var(--muted)}
-.customer-think details{max-width:1100px;margin:20px auto 0;border-top:1px solid var(--border-md)}
-.customer-think summary{list-style:none;cursor:pointer;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.customer-think summary::-webkit-details-marker{display:none}
-.customer-think__summary-copy small{display:block;font-family:var(--display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.customer-think__summary-copy strong{font-family:var(--heading);font-size:clamp(1.15rem,2.4vw,1.55rem);color:var(--white)}
-.customer-think__plus{font-size:1.35rem;color:var(--muted);transition:transform .2s}
-.customer-think details[open] .customer-think__plus{transform:rotate(45deg)}
-.door-questions{display:flex;max-width:1100px;margin:0 auto;padding:4px 28px 10px;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.door-questions::-webkit-scrollbar{display:none}
-.door-question{flex:0 0 calc((100% - 24px)/3);min-height:200px;padding:28px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px;scroll-snap-align:start;display:flex;align-items:flex-end}
-.door-question h2{font-size:clamp(1.15rem,2.3vw,1.75rem);line-height:1.16;max-width:22ch;margin:0}
-.door-question__icon{width:36px;height:36px;border:1px solid var(--border-md);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--light);font-family:var(--display);font-size:.95rem;margin-bottom:14px;box-shadow:none}
-@media(max-width:760px){.customer-think{padding:42px 0 46px}.customer-think__prompt{padding:0 20px}.customer-think summary{padding:18px 20px}.customer-think details{margin-top:28px}.door-questions{padding:4px 8vw 8px}.door-question{flex:0 0 84vw;min-height:190px;padding:24px 20px;scroll-snap-align:center}.door-question h2{font-size:1.3rem}}
-</style>
-<style>
-.tds-journey{padding:44px 0 46px;background:var(--black);border-bottom:1px solid var(--border)}
-.tds-journey h2{font:600 clamp(1.65rem,3.8vw,2.5rem)/1.14 var(--heading);margin:11px 0 13px;color:var(--white);letter-spacing:-.025em}
-.tds-journey-lead{color:var(--muted);font:.96rem/1.75 var(--heading);max-width:730px;margin-bottom:25px}
-.tds-journey-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.tds-journey-items details{min-width:0;border:1px solid var(--border-md);border-radius:11px;background:var(--card);padding:0 19px}
-.tds-journey-items summary{list-style:none;cursor:pointer;position:relative;display:flex;flex-direction:column;gap:11px;padding:20px 20px 21px 0}
-.tds-journey-items summary::-webkit-details-marker{display:none}
-.tds-journey-items summary span{font:600 .6rem/1.5 var(--display);letter-spacing:.12em;color:var(--lime)}
-.tds-journey-items summary strong{font:600 clamp(1rem,2vw,1.25rem)/1.2 var(--heading);color:var(--white);padding-right:12px}
-.tds-journey-items summary i{position:absolute;right:0;top:22px;color:var(--lime);font:400 1.3rem/1 var(--heading);font-style:normal}
-.tds-journey-items details[open] summary i{transform:rotate(45deg)}
-.tds-journey-items details p{font:.83rem/1.7 var(--heading);color:var(--muted);border-top:1px solid var(--border);padding:14px 0 15px}
-.tds-journey-items details a{display:inline-block;color:var(--lime);font-size:.75rem;margin:0 0 20px;text-decoration:underline;text-underline-offset:5px}
-.tds-journey-items summary:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
-@media(max-width:700px){.tds-journey{padding:30px 0 34px}.tds-journey-items{display:block}.tds-journey-items details+details{margin-top:9px}.tds-journey-items summary{padding:17px 20px 17px 0}.tds-journey-lead{font-size:.87rem}}
-</style>
-<!-- ─── CONNECTED CUSTOMER JOURNEY ─── -->
-<section class="tds-journey" id="journey" aria-label="Networking evolved">
-  <div class="container">
-    <div class="tag">The networking evolution</div>
-    <h2>Make the introduction. Open what's next.</h2>
-    <p class="tds-journey-lead">Start with a tap key, a digital destination, or a complete customer experience.</p>
-    <div class="tds-journey-items">
-      <details><summary><span>01 / CONNECT</span><strong>Start with a tap.</strong><i>+</i></summary><p>Keychain $45 · Bracelet $65 · Duo $85. Tap card + wallet QR included.</p><a href="door.html#shop">Shop the collection →</a></details>
-      <details><summary><span>02 / DIRECT</span><strong>Create the destination.</strong><i>+</i></summary><p>Digital Business Card $100 · Digital Door from $250. Your introduction, with a clear next step.</p><a href="#services">Compare card and Door options →</a></details>
-      <details><summary><span>03 / EXPAND</span><strong>Connect the full experience.</strong><i>+</i></summary><p>Mobilized Website from $300 · Connect the Dots from $500. Bring your digital experience together.</p><a href="#services">Compare options →</a></details>
-    </div>
-  </div>
-</section>
-<!-- ─── WORK ───────────────────────────────── -->
-<section class="work" id="work">
-<style>
-.proj-desc{margin:14px 0 4px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.proj-desc summary{list-style:none;cursor:pointer;padding:12px 0;font-family:var(--display);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:10px}
-.proj-desc summary::-webkit-details-marker{display:none}.proj-desc summary::after{content:'+';color:var(--card-color,var(--lime))}.proj-desc[open] summary::after{content:'−'}
-.proj-desc p{padding:0 0 14px!important;margin:0!important}
-</style>
-  <div class="container">
-    <div class="work__header">
-      <div class="reveal rl"><div class="tag">Explore the Experiences</div><h2>Different Businesses.<br>Different Ways In.</h2></div>
-      <div class="reveal rr"><p class="lead">These are connected examples: the Digital Business Card handles the introduction, the Digital Door guides customer paths, and the Mobilized Website streamlines an existing site for mobile.</p></div>
-    </div>
-    <div class="work__grid" aria-label="Swipe to explore business card, Door and website examples" tabindex="0">
-      <div class="proj-card reveal d1" style="--card-color:#d3b68e;--icon-color:#d3b68e;--icon-bg:rgba(211,182,142,.08);--icon-border:rgba(211,182,142,.2);--icon-bg-hover:rgba(211,182,142,.15);--card-accent:linear-gradient(90deg,#d3b68e,transparent)">
-        <div class="proj-card__bg" style="background-image:url('avery-door-scene.jpg')"></div>
-        <div class="proj-card__num">01</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
-        <div class="proj-card__industry">Real Estate · Realtor</div><h3>Rivermore Real Estate</h3>
-        
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="avery-cole-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="avery-cole-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="realtor-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
-      </div>
-      <div class="proj-card reveal d3" style="--card-color:#7ecfcf;--icon-color:#7ecfcf;--icon-bg:rgba(126,207,207,.08);--icon-border:rgba(126,207,207,.2);--icon-bg-hover:rgba(126,207,207,.15);--card-accent:linear-gradient(90deg,#7ecfcf,transparent)">
-        <div class="proj-card__bg" style="background-image:url('https://images.pexels.com/videos/6070803/pexels-photo-6070803.jpeg?auto=compress&amp;dpr=1&amp;h=900&amp;w=1400')"></div>
-        <div class="proj-card__num">02</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2c-2.5 0-4.5 1.5-5.5 3.5C5.5 7 4 7.5 3 9c-1.5 2.5-.5 5.5 1 7 .8 1 1.5 2.5 2 4.5.3 1.2.8 2 1.5 2s1-.5 1.5-1.5c.5-1 1-2.5 3-2.5s2.5 1.5 3 2.5c.5 1 .8 1.5 1.5 1.5s1.2-.8 1.5-2c.5-2 1.2-3.5 2-4.5 1.5-1.5 2.5-4.5 1-7-1-1.5-2.5-2-3.5-3.5C16.5 3.5 14.5 2 12 2z"/></svg></div>
-        <div class="proj-card__industry">Healthcare · Dental</div><h3>Lumina Dental Studio</h3>
-        
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="lumina-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="lumina-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="lumina-mobile-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
-      </div>
-      <div class="proj-card reveal d2" style="--card-color:#b89478;--icon-color:#b89478;--icon-bg:rgba(184,148,120,.08);--icon-border:rgba(184,148,120,.2);--icon-bg-hover:rgba(184,148,120,.15);--card-accent:linear-gradient(90deg,#b89478,transparent)">
-        <div class="proj-card__bg" style="background-image:url('atelier-house-hero-exterior.png')"></div>
-        <div class="proj-card__num">03</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V8l6-4 6 4v12"/><path d="M9 13h6"/></svg></div>
-        <div class="proj-card__industry">Interiors · Design</div><h3>Atelier House</h3>
-        
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="atelier-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="atelier-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="atelier-house-full-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
-      </div>
-      <div class="proj-card reveal d3" style="--card-color:#c98a52;--icon-color:#c98a52;--icon-bg:rgba(201,138,82,.08);--icon-border:rgba(201,138,82,.2);--icon-bg-hover:rgba(201,138,82,.15);--card-accent:linear-gradient(90deg,#c98a52,transparent)">
-        <div class="proj-card__bg" style="background-image:url('assets/door/northline-owner.webp')"></div>
-        <div class="proj-card__num">04</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
-        <div class="proj-card__industry">Home Services · Roofing</div><h3>Northline Roofing Co.</h3>
-        
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="northline-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="northline-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="northline-mobile-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
-      </div>
-      <div class="proj-card reveal d1" style="--card-color:#b8a98a;--icon-color:#b8a98a;--icon-bg:rgba(184,169,138,.08);--icon-border:rgba(184,169,138,.2);--icon-bg-hover:rgba(184,169,138,.15);--card-accent:linear-gradient(90deg,#b8a98a,transparent)">
-        <div class="proj-card__bg" style="background-image:url('assets/door/frederick-attorney.webp')"></div>
-        <div class="proj-card__num">05</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v4c0 5.25 3.75 10.15 9 11.35C17.25 21.15 21 16.25 21 11V7L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="proj-card__industry">Legal · Law Firm</div><h3>Frederick Legacy Law</h3>
-        
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="door-frederick-legacy-law.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="door-frederick-legacy-law.html?view=paths" class="proj-card__link">Digital Door →</a><a href="frederick-legacy-law-mobile.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
-      </div>
-
-      <div class="proj-card reveal d2" style="--card-color:#55c8e8;--icon-color:#55c8e8;--icon-bg:rgba(85,200,232,.08);--icon-border:rgba(85,200,232,.2);--icon-bg-hover:rgba(85,200,232,.15);--card-accent:linear-gradient(90deg,#55c8e8,transparent)">
-        <div class="proj-card__bg" style="background-image:url('hvac-condenser-service.png')"></div>
-        <div class="proj-card__num">06</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 8c4-3 8-3 12 0 2 1.5 4 1.5 6 0"/><path d="M3 12c4-3 8-3 12 0 2 1.5 4 1.5 6 0"/><path d="M3 16c4-3 8-3 12 0 2 1.5 4 1.5 6 0"/></svg></div>
-        <div class="proj-card__industry">Home Services · HVAC</div><h3>Marsh Brothers Heating &amp; Air</h3>
-        
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="hvac-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="hvac-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="hvac-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
-      </div>
-      <div class="proj-card reveal d3" style="--card-color:#b6aa94;--icon-color:#b6aa94;--icon-bg:rgba(182,170,148,.08);--icon-border:rgba(182,170,148,.2);--icon-bg-hover:rgba(182,170,148,.15);--card-accent:linear-gradient(90deg,#b6aa94,transparent)">
-        <div class="proj-card__bg proj-card__bg--hallow" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600&q=70')"></div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M7 8c2-2 3-3 5-5 2 2 3 3 5 5"/><path d="M7 16c2 2 3 3 5 5 2-2 3-3 5-5"/></svg></div>
-        <div class="proj-card__body"><div class="proj-card__industry">Care · Funeral Home</div><h3>Hallow &amp; Grace</h3><p>A calm, respectful Door built around immediate needs, planning, service information, and a gentler way to find the next step.</p></div>
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="hallow-grace-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="hallow-grace-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="hallow-grace-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ─── SERVICES ──────────────────────────── -->
-<section class="services" id="services">
-<style>
-.offer-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.offer-option{border:1px solid var(--border-md);background:rgba(169,177,162,.035);padding:0 22px}.offer-option summary{list-style:none;cursor:pointer;padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px}.offer-option summary::-webkit-details-marker{display:none}.offer-option summary strong{font-family:var(--heading);color:var(--white)}.offer-option summary span{font-family:var(--display);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}.offer-option summary::after{content:'+';color:var(--lime);font-size:1.2rem}.offer-option[open] summary::after{content:'−'}.offer-option__body{padding:0 0 22px;color:var(--muted);font-size:.84rem;line-height:1.7}.offer-option__body b{display:block;color:var(--white);margin-bottom:6px}.offer-option__body a{display:inline-block;margin-top:12px;color:var(--lime)}
-.services__grid .svc--wide{grid-column:1/-1}
-.services__grid .svc:not(.svc--wide){min-height:290px;display:flex;flex-direction:column;align-items:flex-start}
-.services__grid .svc:not(.svc--wide) .svc__tag{margin-top:auto;padding-top:22px}
-.services__grid .svc--wide{min-height:150px;display:grid;grid-template-columns:58px minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:24px;align-items:center}
-.services__grid .svc--wide .svc__icon{grid-row:1/3;margin:0}
-.services__grid .svc--wide h3{align-self:end;margin:0 0 5px}
-.services__grid .svc--wide p{align-self:start;max-width:680px}
-.services__grid .svc--wide .svc__tag{grid-column:3;grid-row:1/3;margin:0;white-space:nowrap}
-.services .path-library-collapsed{margin-top:38px}
-.owner-update-addon{margin-top:14px;padding:0 24px;border:1px solid var(--border-md);background:rgba(169,177,162,.035)}.owner-update-addon summary{list-style:none;cursor:pointer;padding:18px 0;display:flex;gap:12px;align-items:baseline}.owner-update-addon__eyebrow{min-width:0}.owner-update-addon strong{flex:1}.owner-update-addon summary::-webkit-details-marker{display:none}.owner-update-addon__eyebrow{font-family:var(--display);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--lime)}.owner-update-addon strong{font-family:var(--heading);font-size:1rem;color:var(--white)}.owner-update-addon p{font-size:.82rem;color:var(--muted);line-height:1.65;padding:0 0 20px}.owner-update-addon__toggle{margin-left:auto;color:var(--lime);font-size:1.25rem;transition:transform .2s}.owner-update-addon[open] .owner-update-addon__toggle{transform:rotate(45deg)}.owner-update-addon__body{padding:0 0 18px}.owner-update-addon__body b{display:block;font-size:.78rem;color:var(--white);margin-bottom:5px}.owner-update-addon__body p{padding:0}
-.services .refresh{margin-top:14px;padding:0;background:transparent}.services .refresh>.container{width:100%;padding:0}.services .refresh__card{max-width:none}.work .path-library-collapsed{margin-top:34px}
-.services{padding-bottom:36px}
-@media(max-width:700px){.services__grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.services__grid .svc:not(.svc--wide){min-height:310px;padding:28px 18px}.services__grid .svc--wide{grid-column:1/-1!important;min-height:170px;padding:25px 20px;grid-template-columns:42px minmax(0,1fr) auto;column-gap:14px}.services__grid .svc--wide .svc__icon{width:40px;height:40px}.services__grid .svc--wide .svc__tag{font-size:.5rem}.services__grid .svc h3{font-size:.88rem}.services__grid .svc p{font-size:.75rem;line-height:1.6}.offer-option{padding:0 14px}.offer-option summary{align-items:flex-start;flex-direction:column;gap:5px;position:relative;padding-right:22px}.offer-option summary::after{position:absolute;right:0;top:20px}.offer-option summary strong{font-size:.82rem}.offer-option summary span{font-size:.5rem}.offer-option__body{font-size:.76rem}}
-@media(max-width:390px){.services__grid .svc:not(.svc--wide){min-height:290px;padding:24px 14px}.services__grid .svc--wide{grid-template-columns:36px minmax(0,1fr);grid-template-rows:auto auto auto}.services__grid .svc--wide .svc__icon{grid-row:1/3;width:34px;height:34px}.services__grid .svc--wide .svc__tag{grid-column:2;grid-row:3;margin-top:12px}.services__grid .svc p{font-size:.7rem}}
-@media(max-width:700px){.owner-update-addon{padding:0 18px}.owner-update-addon summary{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}.owner-update-addon__eyebrow{grid-column:1}.owner-update-addon strong{grid-column:1;font-size:.92rem}.owner-update-addon p{padding-bottom:18px}}
-</style>
-  <div class="container">
-    <div class="reveal"><div class="tag">The Breakdown</div><h2>Start where the problem is.</h2><p class="lead" style="margin-top:14px">Choose one useful piece or connect the full customer experience.</p></div>
-    <div class="services__grid" style="grid-template-columns:repeat(2,1fr)">
-      <div class="svc reveal d1"><div class="svc__icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><h3>Signature Collection</h3><p>Keychain $45 · Bracelet $65 · Duo $85.<br>Nocturne Black or Stone White.<br>Tap card + wallet QR included.</p><a class="svc__tag" href="door.html#shop">Shop the collection →</a></div>
-      <div class="svc reveal d2"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M9 12h6"/></svg></div><h3>Digital Door</h3><p>Your Business Card and guided customer paths, connected. Owner QR key + companion tap card included.</p><a class="svc__tag" href="https://buy.stripe.com/00w8wI6zC5y53A7gTmeIw07">From $250 · Buy now →</a></div>
-      <div class="svc svc--wide reveal d3"><div class="svc__icon"><svg viewBox="0 0 24 24"><path d="M4 7h6v6H4zM14 11h6v6h-6z"/><path d="M10 10h4M7 13v4h7"/></svg></div><h3>Connect the Dots</h3><p>Business Card, Digital Door and Mobilized Website. Includes the Full Set of Keys and a guided handoff.</p><a class="svc__tag" href="project-inquiry.html?interest=connect-the-dots">From $500 · Start your project →</a></div>
-    </div>
-    <div class="offer-options reveal">
-      <details class="offer-option"><summary><span>Need less?</span><strong>Digital Business Card</strong></summary><div class="offer-option__body"><b>$100</b>Your contact details and essential links, ready to save and share.<br><a href="https://buy.stripe.com/00wdR21fi5y5fiP6eIeIw06" class="svc__tag">Buy Business Card →</a></div></details>
-      <details class="offer-option"><summary><span>Have a website?</span><strong>Mobilized Website</strong></summary><div class="offer-option__body"><b>From $300</b>Your existing website, simplified for mobile.<br><a href="https://buy.stripe.com/eVqeV6e245y5b2z46AeIw08" class="svc__tag">Buy Mobilized Website →</a></div></details>
-    </div>
-    <details class="owner-update-addon reveal"><summary><span class="owner-update-addon__eyebrow">Need something specific?</span><strong>Small Requests &amp; Team Enhancements</strong><span class="owner-update-addon__toggle">+</span></summary><div class="owner-update-addon__body"><b>Start small or equip your crew.</b><p>Custom tap products, team sets and focused updates. Tell us what you need for a tailored quote.</p></div></details>
-    <details class="path-library path-library-collapsed" id="otherDoorPaths"><summary class="path-library-toggle"><span>More businesses. Different customer paths.</span><span>+</span></summary><div class="path-library__inside">
-      <div class="path-library__head reveal">
-        <div class="tag" style="justify-content:center">Different Business. Different Path.</div>
-        <h3>A Door fits the business it is built for.</h3>
-        <p>Open an example to see how different customers can be routed without repeating one template across every industry.</p>
-      </div>
-      <div class="path-examples">
-        <details class="path-example reveal"><summary><span class="path-example__name">Realtor + Property Team</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Featured Listings</span><span>Buy</span><span>Sell</span><span>Schedule</span><span>Save Contact</span><span>Call + Text</span></div><p class="path-example__note">A clean entry point can separate active listings, new leads, and direct contact without losing the personal connection.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">HVAC + Home Comfort</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Emergency Service</span><span>Repair</span><span>Replacement</span><span>Maintenance</span><span>Financing</span><span>Request Service</span></div><p class="path-example__note">Urgent repair customers and planned replacement customers should not have to follow the same route.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Auto Body Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Collision + Dent + Paint</span><span>Vehicle Info</span><span>Send Damage Photos</span><span>Estimate</span><span>Call + Text</span><span>Directions</span></div><p class="path-example__note">Photos and basic vehicle details can reduce back-and-forth before the shop responds.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Tattoo Artist + Shop</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Portfolio</span><span>Styles + Artists</span><span>Custom Inquiry</span><span>Upload Inspo</span><span>Book</span><span>Policies</span></div><p class="path-example__note">For visual businesses, the work itself can appear much earlier because seeing the portfolio helps the customer decide.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Fitness + Community Group</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Next Meetup</span><span>Schedule</span><span>Location</span><span>Join</span><span>Updates</span><span>Socials</span></div><p class="path-example__note">Recurring groups can keep the next time, place, and update easy to find without answering the same questions every week.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Independent Stylist + Barber</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Services + Pricing</span><span>Portfolio</span><span>New Client Info</span><span>Book</span><span>Text</span><span>Location</span></div><p class="path-example__note">Especially useful for booth renters who need a polished personal entry point without building an entire salon website.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Maker + Custom Orders</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Collections</span><span>Inspo</span><span>Custom Request</span><span>Upload Reference</span><span>Upcoming Events</span><span>Where to Shop</span></div><p class="path-example__note">Custom requests can collect the useful details up front so the maker starts the conversation with something to work from.</p></details>
-        <details class="path-example reveal"><summary><span class="path-example__name">Restaurant + Catering</span><span class="path-example__hint">See path ↓</span></summary><div class="path-example__flow"><span>Menu</span><span>Order + Reserve</span><span>Hours + Directions</span><span>Catering</span><span>Private Events</span><span>Event Inquiry</span></div><p class="path-example__note">Someone planning dinner should not have to take the same route as someone planning a 75-person event.</p></details>
-      </div>
-    </div></details>
-  </div>
-</section>
-
-<!-- ─── CUSTOMER + PROCESS PAIR ───────────── -->
-<style>
-.experience-pair{background:var(--dark);padding:34px 0}.experience-pair__grid{max-width:1100px;margin:auto;padding:0 28px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
-.experience-card{background:linear-gradient(180deg,#12171c,#0e1216);border:1px solid var(--border-md);border-radius:var(--r-lg);overflow:hidden;min-height:118px;align-self:start}.experience-card>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:30px 28px}.experience-card>summary::-webkit-details-marker{display:none}.experience-card__label{font-family:var(--heading);font-size:clamp(1.25rem,2.5vw,1.85rem);font-weight:750;color:var(--white)}.experience-card__plus{color:var(--signal);font-size:1.4rem;text-shadow:0 0 12px var(--signal-glow);transition:transform .2s}.experience-card[open] .experience-card__plus{transform:rotate(45deg)}.experience-card__body{padding:0 28px 28px}.experience-card__headline{font-family:var(--display);font-weight:400;letter-spacing:.06em;text-transform:uppercase;font-size:clamp(.78rem,1.7vw,1.05rem);line-height:1.45;color:var(--light);margin:0 0 24px;text-align:center}.experience-list{display:grid;grid-template-columns:1fr 1fr;gap:14px}.experience-row{padding:16px 14px;border:1px solid var(--border);border-radius:10px;background:#0c1115;text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:112px}.experience-row strong{display:block;font-size:.88rem;color:var(--white);margin-bottom:5px}.experience-row p{font-size:.73rem;color:var(--muted);line-height:1.45}.process-mini{display:grid;grid-template-columns:1fr 1fr;gap:14px}.process-step-mini{position:relative;padding:16px 15px;border:1px solid var(--border);border-radius:10px;background:#0c1115;overflow:hidden;animation:stepGlow 2.8s ease-in-out infinite alternate}.process-step-mini:nth-child(2){animation-delay:.35s}.process-step-mini:nth-child(3){animation-delay:.7s}.process-step-mini:nth-child(4){animation-delay:1.05s}.process-step-mini::before{content:'';position:absolute;width:46px;height:46px;border-radius:50%;right:-12px;top:-12px;background:radial-gradient(circle,var(--signal-glow),transparent 68%)}.process-glyph{width:28px;height:28px;border-radius:50%;border:1px solid rgba(214,216,215,.28);display:grid;place-items:center;color:var(--signal);font-family:var(--display);font-size:.7rem;margin-bottom:10px;box-shadow:0 0 16px rgba(214,216,215,.08)}.process-step-mini b{display:block;color:var(--white);font-size:.88rem;margin-bottom:4px}.process-step-mini p{font-size:.73rem;color:var(--muted);line-height:1.45}@keyframes stepGlow{from{box-shadow:0 0 0 rgba(214,216,215,0)}to{box-shadow:0 0 24px rgba(214,216,215,.06)}}
-@media(max-width:760px){.experience-pair{padding:32px 0}.experience-pair__grid{grid-template-columns:1fr 1fr;padding:0 20px;gap:10px}.experience-card{min-height:104px}.experience-card>summary{padding:22px 16px}.experience-card__label{font-size:1rem}.experience-card__body{padding:0 16px 20px}.experience-card__headline{font-size:.76rem}.process-mini,.experience-list{grid-template-columns:1fr}.experience-row p,.process-step-mini p{font-size:.7rem}}
-</style>
-<div class="experience-pair tds-process-only"><details class="experience-card" id="process"><summary><span class="experience-card__label">How It Works</span><span class="experience-card__plus">+</span></summary><div class="experience-card__body"><h3 class="experience-card__headline">From first conversation to handoff.</h3><div class="process-mini"><div class="process-step-mini"><div class="process-glyph">01</div><b>Discovery</b><p>Share the challenge. TDS helps identify what matters.</p></div><div class="process-step-mini"><div class="process-glyph">02</div><b>Direction</b><p>Review the plan before the build begins.</p></div><div class="process-step-mini"><div class="process-glyph">03</div><b>Build</b><p>Review the experience and refine the details.</p></div><div class="process-step-mini"><div class="process-glyph">04</div><b>Handoff</b><p>Live, organized, and yours. You leave with the keys.</p></div></div></div></details></div>
-
-<!-- ─── DIGITAL REFRESH ────────────────────── -->
-<section class="refresh" id="refresh">
+<div class="home-index container">
+<details class="home-panel" id="shop"><summary>Signature Collection</summary><div class="home-panel__body"><ul class="home-offers"><li class="home-offer"><h3>Signature Tap Keychain</h3><strong>$45</strong></li><li class="home-offer"><h3>Wearable Tap Key</h3><strong>$65</strong></li><li class="home-offer"><h3>Signature Duo</h3><strong>$85</strong></li></ul>
+<p>Nocturne Black or Stone White. Tap card and wallet QR included.</p>
+<button type="button" class="btn btn--lime" data-open-collection>Shop the collection →</button></div></details><details class="home-panel" id="services"><summary>Digital Services</summary><div class="home-panel__body"><ul class="home-offers"><li class="home-offer"><h3>Signal Check</h3><strong>Free</strong><p>A starting conversation to find the right next step for your business.</p><a href="project-inquiry.html">Start a conversation →</a></li><li class="home-offer"><h3>Digital Business Card</h3><strong>$100</strong><p>Share your contact details and essential links in one place.</p><a href="https://buy.stripe.com/00wdR21fi5y5fiP6eIeIw06">Buy Business Card →</a></li><li class="home-offer"><h3>Digital Door</h3><strong>From $250</strong><p>Give customers a clear path to book, browse services, or get in touch.</p><a href="https://buy.stripe.com/00w8wI6zC5y53A7gTmeIw07">Buy Digital Door →</a></li><li class="home-offer"><h3>Mobilized Website</h3><strong>From $300</strong><p>Put the essentials of your existing website within easy reach on mobile.</p><a href="https://buy.stripe.com/eVqeV6e245y5b2z46AeIw08">Buy Mobilized Website →</a></li><li class="home-offer"><h3>Connect the Dots</h3><strong>From $500</strong><p>Connect your Business Card, Digital Door, and Mobilized Website. Includes the Full Set of Keys and a guided handoff.</p><a href="project-inquiry.html?interest=connect-the-dots">Start your project →</a></li></ul><details class="owner-update-addon reveal"><summary><span class="owner-update-addon__eyebrow">Need something specific?</span><strong>Small Requests &amp; Team Enhancements</strong><span class="owner-update-addon__toggle">+</span></summary><div class="owner-update-addon__body"><b>Start small or equip your crew.</b><p>Custom tap products, team sets and focused updates. Tell us what you need for a tailored quote.</p><a href="project-inquiry.html">Request a quote →</a></div></details><section class="refresh" id="refresh">
 <style>
 .refresh{background:var(--black);padding:34px 0 42px}
 @media(max-width:860px){.refresh{padding:56px 0}.refresh__card{padding:32px 24px}}
@@ -1264,51 +1137,69 @@ body.hov .c-ring{width:48px;height:48px;opacity:.35}
       </div>
     </details>
   </div>
-</section>
+</section></div></details><details class="home-panel" id="work"><summary>Explore the Demos</summary><div class="home-panel__body"><h2>Different Businesses.<br>Different Ways In.</h2>
+<p class="demo-hint">Swipe to explore <span aria-hidden="true">↔</span></p>
+<div class="work__grid" id="demo-track" aria-label="Swipe to explore business card, Door and website examples" tabindex="0">
+      <div class="proj-card d1" style="--card-color:#d3b68e;--icon-color:#d3b68e;--icon-bg:rgba(211,182,142,.08);--icon-border:rgba(211,182,142,.2);--icon-bg-hover:rgba(211,182,142,.15);--card-accent:linear-gradient(90deg,#d3b68e,transparent)">
+        <div class="proj-card__bg" style="background-image:url('avery-door-scene.jpg')"></div>
+        <div class="proj-card__num">01</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
+        <div class="proj-card__industry">Real Estate · Realtor</div><h3>Rivermore Real Estate</h3>
+        
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="avery-cole-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="avery-cole-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="realtor-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+      </div>
+      <div class="proj-card d3" style="--card-color:#7ecfcf;--icon-color:#7ecfcf;--icon-bg:rgba(126,207,207,.08);--icon-border:rgba(126,207,207,.2);--icon-bg-hover:rgba(126,207,207,.15);--card-accent:linear-gradient(90deg,#7ecfcf,transparent)">
+        <div class="proj-card__bg" style="background-image:url('https://images.pexels.com/videos/6070803/pexels-photo-6070803.jpeg?auto=compress&amp;dpr=1&amp;h=900&amp;w=1400')"></div>
+        <div class="proj-card__num">02</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2c-2.5 0-4.5 1.5-5.5 3.5C5.5 7 4 7.5 3 9c-1.5 2.5-.5 5.5 1 7 .8 1 1.5 2.5 2 4.5.3 1.2.8 2 1.5 2s1-.5 1.5-1.5c.5-1 1-2.5 3-2.5s2.5 1.5 3 2.5c.5 1 .8 1.5 1.5 1.5s1.2-.8 1.5-2c.5-2 1.2-3.5 2-4.5 1.5-1.5 2.5-4.5 1-7-1-1.5-2.5-2-3.5-3.5C16.5 3.5 14.5 2 12 2z"/></svg></div>
+        <div class="proj-card__industry">Healthcare · Dental</div><h3>Lumina Dental Studio</h3>
+        
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="lumina-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="lumina-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="lumina-mobile-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+      </div>
+      <div class="proj-card d2" style="--card-color:#b89478;--icon-color:#b89478;--icon-bg:rgba(184,148,120,.08);--icon-border:rgba(184,148,120,.2);--icon-bg-hover:rgba(184,148,120,.15);--card-accent:linear-gradient(90deg,#b89478,transparent)">
+        <div class="proj-card__bg" style="background-image:url('atelier-house-hero-exterior.png')"></div>
+        <div class="proj-card__num">03</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V8l6-4 6 4v12"/><path d="M9 13h6"/></svg></div>
+        <div class="proj-card__industry">Interiors · Design</div><h3>Atelier House</h3>
+        
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="atelier-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="atelier-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="atelier-house-full-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+      </div>
+      <div class="proj-card d3" style="--card-color:#c98a52;--icon-color:#c98a52;--icon-bg:rgba(201,138,82,.08);--icon-border:rgba(201,138,82,.2);--icon-bg-hover:rgba(201,138,82,.15);--card-accent:linear-gradient(90deg,#c98a52,transparent)">
+        <div class="proj-card__bg" style="background-image:url('assets/door/northline-owner.webp')"></div>
+        <div class="proj-card__num">04</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
+        <div class="proj-card__industry">Home Services · Roofing</div><h3>Northline Roofing Co.</h3>
+        
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="northline-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="northline-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="northline-mobile-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+      </div>
+      <div class="proj-card d1" style="--card-color:#b8a98a;--icon-color:#b8a98a;--icon-bg:rgba(184,169,138,.08);--icon-border:rgba(184,169,138,.2);--icon-bg-hover:rgba(184,169,138,.15);--card-accent:linear-gradient(90deg,#b8a98a,transparent)">
+        <div class="proj-card__bg" style="background-image:url('assets/door/frederick-attorney.webp')"></div>
+        <div class="proj-card__num">05</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v4c0 5.25 3.75 10.15 9 11.35C17.25 21.15 21 16.25 21 11V7L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="proj-card__industry">Legal · Law Firm</div><h3>Frederick Legacy Law</h3>
+        
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="door-frederick-legacy-law.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="door-frederick-legacy-law.html?view=paths" class="proj-card__link">Digital Door →</a><a href="frederick-legacy-law-mobile.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+      </div>
 
-
-<!-- ─── CONTACT ───────────────────────────── -->
-<section class="contact" id="contact" style="padding:32px 0 0;scroll-margin-top:86px">
-<style>
-.contact-collapse{border-top:1px solid var(--border-md);border-bottom:1px solid var(--border-md)}
-.contact-collapse>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 0}
-.contact-collapse>summary::-webkit-details-marker{display:none}.contact-collapse__label{display:flex;flex-direction:column;gap:6px}.contact-collapse__label small{font-family:var(--display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}.contact-collapse__label strong{font-family:var(--heading);font-size:clamp(1.35rem,3vw,1.9rem);color:var(--white)}.contact-collapse__plus{color:var(--lime);font-size:1.4rem}.contact-collapse[open] .contact-collapse__plus{transform:rotate(45deg)}
-.contact-simple{padding:8px 0 38px}.contact-simple__intro{max-width:690px;color:var(--muted);line-height:1.7;margin-bottom:24px}.inquiry-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.inquiry-card{min-height:150px;background:var(--card);border:1px solid var(--border-md);border-radius:var(--r-lg);padding:28px;display:flex;flex-direction:column;justify-content:center;transition:transform .2s,border-color .2s}.inquiry-card:hover{transform:translateY(-2px);border-color:rgba(214,216,215,.45)}.inquiry-card .tag{margin-bottom:8px}.inquiry-card h3{font-size:1.25rem;margin:0 0 8px}.inquiry-card p{font-size:.84rem;color:var(--muted);line-height:1.6;margin:0}.inquiry-card--short{box-shadow:inset 3px 0 0 var(--lime)}
-@media(max-width:760px){.inquiry-card{padding:20px 16px;min-height:132px}.inquiry-card h3{font-size:.95rem}.inquiry-card p{font-size:.72rem}}
-</style>
-<div class="container">
-<div class="contact-simple"><div class="tag">Let's start</div><h2>What can I help you with?</h2><p class="contact-simple__intro">Shop the collection, choose a digital service or make it yours.</p><a class="btn btn--lime" href="door.html#shop">Shop the collection →</a><a class="btn btn--outline" href="project-inquiry.html">Make it yours →</a></div>
-</div></section>
-
-<!-- ─── ABOUT ──────────────────────────────── -->
-<section class="about-teaser" id="aboutTeaser" aria-label="Meet the Developer">
-<style>
-.about-teaser{background:var(--dark);padding:0;margin-top:0}
-.about-teaser .container{border-top:1px solid var(--border)}
-.about-teaser__button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 0;border:0;border-bottom:1px solid var(--border-md);background:transparent!important;color:var(--light)!important;font-family:var(--display);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;text-align:left;cursor:pointer;box-shadow:none!important;border-radius:0!important}
-.about-teaser__button:hover{color:var(--lime)!important;border-bottom-color:rgba(214,216,215,.48)}
-.about-teaser__arrow{color:var(--signal);font-size:1rem;text-shadow:0 0 10px var(--signal-glow)}
-</style>
-  <div class="container">
-    <button class="about-teaser__button" id="aboutRevealBtn" type="button" aria-expanded="false" aria-controls="about">
-      <span>Meet the Developer</span><span class="about-teaser__arrow">→</span>
-    </button>
-  </div>
-</section>
-<section class="about about-simple" id="about">
-<style>
-.about-simple{background:var(--dark);padding:76px 0}.about-simple__grid{display:grid;grid-template-columns:minmax(280px,.9fr) 1.1fr;gap:58px;align-items:start}.about-simple__photo-title{font-family:var(--heading);font-weight:900;line-height:.86;letter-spacing:-.055em;color:var(--white);margin:0 0 18px}.about-simple__photo-title span{display:block;font-size:clamp(1.3rem,3vw,2.1rem);color:var(--muted);font-weight:700}.about-simple__photo-title strong{display:block;font-size:clamp(2.5rem,5.5vw,4.5rem)}.about-simple__photo img{width:100%;display:block;border-radius:4px}.about-simple__copy h2{font-family:var(--heading);font-size:clamp(2rem,4.5vw,3.4rem);line-height:1;letter-spacing:-.04em;color:var(--white);margin:8px 0 20px}.about-simple__copy>p{font-size:.96rem;color:var(--light);line-height:1.8;margin-bottom:20px}.about-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}.about-actions .btn{margin:0}
-@media(max-width:860px){#about.about-simple{display:none;padding:54px 0}#about.about-simple.about-open{display:block}.about-simple__grid{grid-template-columns:1fr;gap:28px}.about-simple__photo{max-width:520px;margin:auto}.about-simple__ending{display:block}.about-simple__ending small{display:block;margin-bottom:8px}}
-</style>
-<div class="container">
-<div class="about-simple__grid">
-<div class="about-simple__photo reveal rl"><div class="about-simple__photo-title"><span>Meet the</span><strong>Developer.</strong></div><img src="about_mim.webp" alt="Nev Gonzalez with Method in Motion"><div style="padding-top:14px;font-family:var(--heading);font-size:1.15rem;font-weight:800;color:var(--white)">Nev Gonzalez</div><div style="margin-top:4px;font-family:var(--display);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Founder &amp; Lead Developer</div></div>
-<div class="about-simple__copy reveal rr"><div class="tag">Developer · Business Systems · Maryland</div><h2>Nev Gonzalez</h2><p>For nearly a decade, Nev worked across both sides of a small business in downtown Frederick, helping customers at the front while also managing the changing information, repeated questions, daily operations, and behind-the-scenes details that keep everything moving.</p><p>While studying Business Management and Forensic Accounting, Nev gained a stronger understanding of how those moving pieces fit together and where they can start to break down. A Salesforce internship added the technology side of business and opened the path into web development, which gave her a practical way to bring everything she had learned together.</p><p>That is where The Digital Side comes from: understanding how the business works first, then building the customer-facing experience and digital systems around the way the brand actually operates.</p>
-<div class="about-actions"><a href="mailto:handled@thedigitalside.org?subject=Let%27s%20talk%20about%20my%20business&body=Hi%20Nev%2C%0A%0AI%27d%20like%20to%20talk%20about%20the%20digital%20side%20of%20my%20business.%0A%0ABusiness%20name%20or%20link%3A%20%0AWhat%20feels%20messy%20or%20needs%20handling%3A%20" class="btn btn--lime">Email Nev Directly <span class="btn__arr">→</span></a><a href="the-digital-side.vcf" class="btn btn--outline">Save Complete Contact <span class="btn__arr">↓</span></a></div>
-</div></div>
-</div></section>
-
-<!-- ─── FOOTER ────────────────────────────── -->
+      <div class="proj-card d2" style="--card-color:#55c8e8;--icon-color:#55c8e8;--icon-bg:rgba(85,200,232,.08);--icon-border:rgba(85,200,232,.2);--icon-bg-hover:rgba(85,200,232,.15);--card-accent:linear-gradient(90deg,#55c8e8,transparent)">
+        <div class="proj-card__bg" style="background-image:url('hvac-condenser-service.png')"></div>
+        <div class="proj-card__num">06</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 8c4-3 8-3 12 0 2 1.5 4 1.5 6 0"/><path d="M3 12c4-3 8-3 12 0 2 1.5 4 1.5 6 0"/><path d="M3 16c4-3 8-3 12 0 2 1.5 4 1.5 6 0"/></svg></div>
+        <div class="proj-card__industry">Home Services · HVAC</div><h3>Marsh Brothers Heating &amp; Air</h3>
+        
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="hvac-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="hvac-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="hvac-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+      </div>
+      <div class="proj-card d3" style="--card-color:#b6aa94;--icon-color:#b6aa94;--icon-bg:rgba(182,170,148,.08);--icon-border:rgba(182,170,148,.2);--icon-bg-hover:rgba(182,170,148,.15);--card-accent:linear-gradient(90deg,#b6aa94,transparent)">
+        <div class="proj-card__bg proj-card__bg--hallow" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600&q=70')"></div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M7 8c2-2 3-3 5-5 2 2 3 3 5 5"/><path d="M7 16c2 2 3 3 5 5 2-2 3-3 5-5"/></svg></div>
+        <div class="proj-card__body"><div class="proj-card__industry">Care · Funeral Home</div><h3>Hallow &amp; Grace</h3><p>A calm, respectful Door built around immediate needs, planning, service information, and a gentler way to find the next step.</p></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="hallow-grace-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="hallow-grace-door.html?view=paths" class="proj-card__link">Digital Door →</a><a href="hallow-grace-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website ↗</a></div></div>
+      </div>
+    </div>
+<div class="demo-controls">
+  <button type="button" id="demo-prev" aria-label="Previous demo" aria-controls="demo-track" disabled>←</button>
+  <span id="demo-count" aria-live="polite">1 / 7</span>
+  <button type="button" id="demo-next" aria-label="Next demo" aria-controls="demo-track">→</button>
+</div></div></details><details class="home-panel" id="contact"><summary>Choose your next step</summary><div class="home-panel__body"><div class="home-paths">
+<button type="button" data-open-collection>Signature Collection <span aria-hidden="true">+</span></button>
+<a href="#services" data-open-panel="services">Digital Services <span aria-hidden="true">+</span></a>
+<a href="project-inquiry.html">Make It Yours <span aria-hidden="true">→</span></a>
+</div></div></details>
+</div>
+<dialog class="home-collection" id="home-collection" aria-labelledby="collection-title"><button type="button" class="close-popup" autofocus aria-label="Close Signature Collection">×</button><h2 id="collection-title">Signature Collection</h2><p class="collection-includes">Tap card + wallet QR included.</p><article class="product-row"><img src="tds-black-drop-keychain-v2.webp" data-black="tds-black-drop-keychain-v2.webp" data-white="tds-white-stone-keychain-matte.webp" alt="Black Signature Tap Keychain"><div><h3>Signature Tap Keychain</h3><strong class="price">$45</strong><div class="finish" aria-label="Signature Tap Keychain finish"><button type="button" class="black" data-finish="black" aria-label="Nocturne Black" aria-pressed="true"></button><button type="button" class="white" data-finish="white" aria-label="Stone White" aria-pressed="false"></button></div><span class="finish-name">Nocturne Black</span><br><a class="action buy-product" href="https://buy.stripe.com/dRm00c8HK9OlfiP7iMeIw04">Buy now</a></div></article><article class="product-row"><img src="tds-black-oval-bracelet-v2.webp" data-black="tds-black-oval-bracelet-v2.webp" data-white="tds-white-stone-bracelet-matte.webp" alt="Black Wearable Tap Key"><div><h3>Wearable Tap Key</h3><strong class="price">$65</strong><div class="finish" aria-label="Wearable Tap Key finish"><button type="button" class="black" data-finish="black" aria-label="Nocturne Black" aria-pressed="true"></button><button type="button" class="white" data-finish="white" aria-label="Stone White" aria-pressed="false"></button></div><span class="finish-name">Nocturne Black</span><br><a class="action buy-product" href="https://buy.stripe.com/28E4gs6zC2lT7Qn0UoeIw02">Buy now</a></div></article><article class="product-row"><img src="tds-black-duo-v2.webp" data-black="tds-black-duo-v2.webp" data-white="tds-white-stone-duo-matte.webp" alt="Black Signature Duo"><div><h3>Signature Duo</h3><strong class="price">$85</strong><div class="finish" aria-label="Signature Duo finish"><button type="button" class="black" data-finish="black" aria-label="Nocturne Black" aria-pressed="true"></button><button type="button" class="white" data-finish="white" aria-label="Stone White" aria-pressed="false"></button></div><span class="finish-name">Nocturne Black</span><br><a class="action buy-product" href="https://buy.stripe.com/fZu9AM4rubWt0nVfPieIw05">Buy now</a></div></article></dialog>
 <footer class="footer" style="padding:42px 0 28px">
   <div class="container">
     <div style="display:flex;justify-content:space-between;gap:28px;align-items:flex-start;flex-wrap:wrap;padding-bottom:28px;border-bottom:1px solid var(--border)">
@@ -1340,13 +1231,6 @@ document.querySelectorAll('a,button,.proj-card,.svc,.price-card,.process__step')
 
 const nav = document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>60));
-
-const refreshSection=document.getElementById('refresh');
-const ownerUpdate=document.querySelector('.owner-update-addon');
-if(refreshSection&&ownerUpdate)ownerUpdate.insertAdjacentElement('afterend',refreshSection);
-const otherDoorPaths=document.getElementById('otherDoorPaths');
-const workContainer=document.querySelector('#work .container');
-if(otherDoorPaths&&workContainer)workContainer.appendChild(otherDoorPaths);
 
 function toggleNav(){
   document.getElementById('ham').classList.toggle('op');
@@ -1527,38 +1411,86 @@ function handleForm(e){
 }
 </script>
 
+
+
 <script>
-(function(){
-  const about = document.getElementById('about');
-  const teaser = document.getElementById('aboutTeaser');
-  const btn = document.getElementById('aboutRevealBtn');
-  if(!about || !btn) return;
-
-  function openAbout(scrollToSection=true){
-    about.classList.add('about-open');
-    btn.setAttribute('aria-expanded','true');
-    if(teaser) teaser.style.display='none';
-    if(scrollToSection){
-      requestAnimationFrame(()=>about.scrollIntoView({behavior:'smooth',block:'start'}));
-    }
-  }
-
-  btn.addEventListener('click',()=>openAbout(true));
-
-  document.querySelectorAll('a[href="#about"]').forEach(link=>{
-    link.addEventListener('click',e=>{
-      if(window.matchMedia('(max-width: 860px)').matches){
-        e.preventDefault();
-        openAbout(true);
-        const mob=document.getElementById('mob');
-        const ham=document.getElementById('ham');
-        if(mob) mob.classList.remove('op');
-        if(ham) ham.classList.remove('op');
-      }
+(() => {
+  const collection = document.querySelector('#home-collection');
+  let opener;
+  document.querySelectorAll('[data-open-collection]').forEach(button => {
+    button.addEventListener('click', () => {
+      opener = button;
+      collection.showModal();
+      document.body.style.overflow = 'hidden';
     });
   });
+  collection.querySelector('.close-popup').addEventListener('click', () => collection.close());
+  collection.addEventListener('click', event => {
+    if (event.target !== collection) return;
+    const bounds = collection.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right ||
+        event.clientY < bounds.top || event.clientY > bounds.bottom) collection.close();
+  });
+  collection.addEventListener('close', () => {
+    document.body.style.overflow = '';
+    opener?.focus();
+  });
+  collection.querySelectorAll('[data-finish]').forEach(button => {
+    button.addEventListener('click', () => {
+      const product = button.closest('.product-row');
+      const image = product.querySelector('img');
+      image.src = image.dataset[button.dataset.finish];
+      image.alt = button.getAttribute('aria-label') + ' ' + product.querySelector('h3').textContent;
+      product.querySelector('.finish-name').textContent = button.getAttribute('aria-label');
+      product.querySelectorAll('[data-finish]').forEach(choice => {
+        choice.setAttribute('aria-pressed', String(choice === button));
+      });
+    });
+  });
+
+  function openLinkedPanel() {
+    const panel = document.getElementById(location.hash.slice(1));
+    if (panel?.matches('.home-panel')) panel.open = true;
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const panel = document.getElementById(link.hash.slice(1));
+      if (panel?.matches('.home-panel')) panel.open = true;
+    });
+  });
+  window.addEventListener('hashchange', openLinkedPanel);
+  openLinkedPanel();
+
+  const track = document.querySelector('#demo-track');
+  const cards = Array.from(track.children);
+  const prev = document.querySelector('#demo-prev');
+  const next = document.querySelector('#demo-next');
+  const count = document.querySelector('#demo-count');
+  let active = 0;
+  function updateDemo() {
+    const left = track.getBoundingClientRect().left;
+    const end = track.scrollWidth - track.clientWidth;
+    if (end <= 0) return;
+    active = cards.reduce((closest, card, index) =>
+      Math.abs(card.getBoundingClientRect().left - left) <
+      Math.abs(cards[closest].getBoundingClientRect().left - left) ? index : closest, 0);
+    if (track.scrollLeft >= end - 2) active = cards.length - 1;
+    count.textContent = (active + 1) + ' / ' + cards.length;
+    prev.disabled = active === 0;
+    next.disabled = active === cards.length - 1;
+  }
+  function moveDemo(index) {
+    const card = cards[index];
+    if (!card) return;
+    const left = card.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
+    track.scrollTo({ left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+  }
+  prev.addEventListener('click', () => moveDemo(active - 1));
+  next.addEventListener('click', () => moveDemo(active + 1));
+  track.addEventListener('scroll', updateDemo, { passive: true });
+  document.querySelector('#work').addEventListener('toggle', updateDemo);
+  window.addEventListener('resize', updateDemo);
 })();
 </script>
-
 </body>
 </html>
