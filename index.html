@@ -1139,7 +1139,7 @@ body{background:#faf9f6;color:#25231f}
         <div class="proj-card__num">03</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6 20V8l6-4 6 4v12"/><path d="M9 13h6"/></svg></div>
         <div class="proj-card__industry">Interiors · Design</div><h3>Atelier House</h3>
         
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="atelier-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="atelier-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="atelier-house-full-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="atelier-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="atelier-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="atelier-house-full-site.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div><button type="button" class="proj-card__link proj-card__link--ghost" id="atelier-tap-trigger" aria-haspopup="dialog" aria-controls="atelier-tap">Owner Tap</button></div>
       </div>
       <div class="proj-card d3" style="--card-color:#c98a52;--icon-color:#c98a52;--icon-bg:rgba(201,138,82,.08);--icon-border:rgba(201,138,82,.2);--icon-bg-hover:rgba(201,138,82,.15);--card-accent:linear-gradient(90deg,#c98a52,transparent)">
         <div class="proj-card__bg" style="background-image:url('assets/door/northline-owner.webp')"></div>
@@ -1509,6 +1509,15 @@ averyTapDialog.addEventListener('close', () => averyTapTrigger.focus());
 {
   const trigger = document.getElementById('lumina-tap-trigger');
   const dialog = document.getElementById('lumina-tap');
+  trigger.addEventListener('click', () => dialog.showModal());
+  dialog.addEventListener('close', () => trigger.focus());
+}
+</script><dialog class="home-collection" id="atelier-tap" aria-labelledby="atelier-tap-title"><form method="dialog"><button class="close-popup" aria-label="Close" autofocus>×</button></form><h2 id="atelier-tap-title">Lillian Hart · Interior Designer</h2><img src="atelier-owner-tap.webp" alt="Lillian holds her Stone White teardrop keychain near a guest’s phone over lunch"><p><strong>Best use</strong> Share her work when design comes up in conversation.<br><strong>Where to tap</strong> Lunch meetups, client introductions, and showroom visits.<br><strong>Opens</strong> Atelier House’s portfolio.</p></dialog>
+<style>#atelier-tap{border-radius:0;background:#eee9e0;color:#302a24}#atelier-tap img{max-height:none;margin:12px 0}#atelier-tap-trigger{margin-top:8px}</style>
+<script>
+{
+  const trigger = document.getElementById('atelier-tap-trigger');
+  const dialog = document.getElementById('atelier-tap');
   trigger.addEventListener('click', () => dialog.showModal());
   dialog.addEventListener('close', () => trigger.focus());
 }
