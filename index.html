@@ -1086,7 +1086,7 @@ body{background:#faf9f6;color:#25231f}
 #next-step-dialog .home-paths small{color:#595044;font-weight:400;line-height:1.45}
 @media(max-width:640px){#next-step-dialog .home-paths{grid-template-columns:1fr}#next-step-dialog .home-paths>a{min-height:68px}}
 </style>
-<style>#next-step-dialog .home-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}#next-step-dialog .home-paths>a{min-height:44px;padding:12px;align-items:center;text-align:center;border-radius:0;border-color:#343638}#next-step-dialog .home-paths>a:first-child{background:#151719;color:#fff}#next-step-dialog .home-paths>a:last-child{grid-column:1/-1}</style><style>#next-step-dialog{border-radius:0;background:#eee9e0;color:#302a24;border-color:#c8bdae}#next-step-dialog .home-paths{grid-template-columns:1fr}#next-step-dialog .home-paths>a,#next-step-dialog .home-paths>a:first-child{border-radius:0;background:#e4dbce;color:#302a24;border-color:#c8bdae}#next-step-dialog .home-paths>a:hover{background:#d9cdbd}#next-step-dialog .close-popup{border-radius:0;background:transparent;color:#302a24}.circle-checkout-status{display:inline-block;margin-top:8px}</style></head>
+<style>#next-step-dialog .home-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}#next-step-dialog .home-paths>a{min-height:44px;padding:12px;align-items:center;text-align:center;border-radius:0;border-color:#343638}#next-step-dialog .home-paths>a:first-child{background:#151719;color:#fff}#next-step-dialog .home-paths>a:last-child{grid-column:1/-1}</style><style>#next-step-dialog{border-radius:0;background:#eee9e0;color:#302a24;border-color:#c8bdae}#next-step-dialog .home-paths{grid-template-columns:1fr}#next-step-dialog .home-paths>a,#next-step-dialog .home-paths>a:first-child{border-radius:0;background:#e4dbce;color:#302a24;border-color:#c8bdae}#next-step-dialog .home-paths>a:hover{background:#d9cdbd}#next-step-dialog .close-popup{border-radius:0;background:transparent;color:#302a24}.circle-checkout-status{display:inline-block;margin-top:8px}</style><style>#avery-tap{border-radius:0;background:#eee9e0;color:#302a24}#avery-tap img{max-height:none;margin:12px 0}#avery-tap-trigger{margin-top:8px}</style></head>
 <body>
 
 <!-- CURSOR -->
@@ -1125,7 +1125,7 @@ body{background:#faf9f6;color:#25231f}
         <div class="proj-card__num">01</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
         <div class="proj-card__industry">Real Estate · Realtor</div><h3>Rivermore Real Estate</h3>
         
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="avery-cole-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="avery-cole-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="realtor-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="avery-cole-door.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="avery-cole-door.html?view=paths" class="proj-card__link">Digital Door</a><a href="realtor-index.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div><button type="button" class="proj-card__link proj-card__link--ghost" id="avery-tap-trigger" aria-haspopup="dialog" aria-controls="avery-tap">Owner Tap</button></div>
       </div>
       <div class="proj-card d3" style="--card-color:#7ecfcf;--icon-color:#7ecfcf;--icon-bg:rgba(126,207,207,.08);--icon-border:rgba(126,207,207,.2);--icon-bg-hover:rgba(126,207,207,.15);--card-accent:linear-gradient(90deg,#7ecfcf,transparent)">
         <div class="proj-card__bg" style="background-image:url('https://images.pexels.com/videos/6070803/pexels-photo-6070803.jpeg?auto=compress&amp;dpr=1&amp;h=900&amp;w=1400')"></div>
@@ -1203,6 +1203,7 @@ body{background:#faf9f6;color:#25231f}
   </div>
 </section></div></details><button type="button" class="home-shop-trigger" id="contact" aria-haspopup="dialog" aria-controls="next-step-dialog">Choose your next step</button>
 </div>
+<dialog class="home-collection" id="avery-tap" aria-labelledby="avery-tap-title"><form method="dialog"><button class="close-popup" aria-label="Close" autofocus>×</button></form><h2 id="avery-tap-title">Avery’s Owner Tap</h2><img src="avery-owner-tap.webp" alt="Stone White bracelet on Avery’s wrist as she hands a visitor a listing sheet"><p>Avery wears her Stone White bracelet at open houses. Guests can tap it to save her contact and pull up her current listings.</p></dialog>
 <dialog class="home-collection" id="next-step-dialog" aria-labelledby="next-step-title"><form method="dialog"><button type="submit" class="close-popup" autofocus aria-label="Close">×</button></form><h2 id="next-step-title">Choose your next step</h2><div class="home-paths"><a href="mailto:handled@thedigitalside.org"><span>Email directly</span></a>
 <a href="project-inquiry.html"><span>Short intake form</span></a>
 <a href="client-intake.html"><span>In-depth intake form</span></a></div></dialog>
@@ -1498,5 +1499,10 @@ function handleForm(e){
   window.addEventListener('resize', updateDemo);
 })();
 </script>
-</body>
+<script>
+const averyTapTrigger = document.getElementById('avery-tap-trigger');
+const averyTapDialog = document.getElementById('avery-tap');
+averyTapTrigger.addEventListener('click', () => averyTapDialog.showModal());
+averyTapDialog.addEventListener('close', () => averyTapTrigger.focus());
+</script></body>
 </html>
