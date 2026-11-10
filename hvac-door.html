@@ -519,6 +519,7 @@ body.revealed .hero-photo{animation:heroIn 1s var(--ease-out) both}
 const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const airlock=document.getElementById('airlock');
 function enter(){
+  window.scrollTo({top:0,left:0,behavior:'instant'});
   if(reduceMotion){airlock.classList.add('done');document.body.classList.add('revealed');return}
   airlock.classList.add('releasing');
   setTimeout(()=>{airlock.classList.add('done');document.body.classList.add('revealed')},650);
@@ -597,26 +598,7 @@ sheetBackdrop.addEventListener('click',closeFam);
   // Door examples have a different destination from the owner's business card.
   // Position the customer section WHILE the closed entrance covers the screen,
   // but only after the visitor actually chooses to enter.
-  if(mode==='paths'){
-    const doorSection=document.getElementById('doorPaths');
-    const enterControl=document.querySelector('#enter, #markTrigger, #doorEntry, #gate, #airlock, #entry button, #entry');
-    if(doorSection && enterControl){
-      let positioned=false;
-      const enterCustomerDoor=()=>{
-        if(positioned)return;
-        positioned=true;
-        doorSection.scrollIntoView({behavior:'instant',block:'start'});
-      };
-      enterControl.addEventListener('click',enterCustomerDoor,{capture:true});
-      // div[role=button] entrances dispatch keydown rather than browser-generated click.
-      if(enterControl.tagName!=='BUTTON'){
-        enterControl.addEventListener('keydown',event=>{
-          if(event.key==='Enter'||event.key===' ')enterCustomerDoor();
-        },{capture:true});
-      }
-    }
-    return;
-  }
+  if(mode==='paths')return;
   if(mode!=='card')return;
   function showCard(){
     const overlay=document.querySelector('#door, #gate, #doorEntry, #airlock, #entry');

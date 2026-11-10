@@ -1,0 +1,16 @@
+/* Shared Home and Door service presentation. */
+.tds-services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px;overflow:hidden;border:1px solid #d9d2c7;border-radius:18px;background:#d9d2c7;margin-top:24px;color:#25231f;font-family:Arial,sans-serif}
+.tds-services .tds-service{display:flex;flex-direction:column;align-items:flex-start;padding:28px;background:#f1ede6;min-width:0}
+.tds-services .tds-service-icon{display:grid;place-items:center;width:48px;height:48px;border:1px solid #d0c6b7;border-radius:10px;background:#e7e0d5;margin-bottom:20px}
+.tds-services svg{width:23px;height:23px;stroke:#665c4f;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.tds-services .tds-service h3{margin:0 0 12px;font:600 1.1rem/1.35 Arial,sans-serif;color:#25231f}
+.tds-services .tds-service p{font:400 .9rem/1.7 Arial,sans-serif;color:#4e463b;margin:0 0 20px}
+.tds-services .tds-service-price{font-size:1rem;font-weight:700;margin-top:auto;margin-bottom:14px}
+.tds-services .tds-service-actions{display:flex;flex-wrap:wrap;gap:12px 18px}
+.tds-services .tds-service-actions a{color:#302a24;font:400 .88rem/1.5 Arial,sans-serif;text-decoration:underline;text-underline-offset:5px;padding:7px 0}
+.tds-services .tds-service:last-child{grid-column:1/-1}
+#services.popup{background:#eeedeb;color:#292b2b}
+#collection{background:#eeedeb;color:#292b2b}
+#collection .buy-product{background:#454946;color:#fff}
+#collection .price{color:#363937}
+@media(max-width:600px){.tds-services{grid-template-columns:1fr}.tds-services .tds-service{padding:24px}.tds-services .tds-service:last-child{grid-column:auto}}
