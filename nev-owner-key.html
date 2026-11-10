@@ -185,5 +185,5 @@ body{
 
   <div class="tagline"><strong>The Digital Side, handled.</strong></div>
 <nav class="key-actions" aria-label="Digital Key actions"><a href="door.html">Open my Digital Door →</a><button type="button" id="shareKey">Share my Door</button><a href="the-digital-side.vcf">Save Contact ↓</a></nav></main>
-<script>document.getElementById('shareKey').addEventListener('click',async()=>{const url=new URL('door.html',location.href).href;try{if(navigator.share){await navigator.share({title:'Nev Gonzalez · The Digital Side',url})}else{await navigator.clipboard.writeText(url);document.getElementById('shareKey').textContent='Door link copied ✓'}}catch(e){if(e.name!=='AbortError'){location.href='mailto:?subject=Meet%20Nev%20at%20The%20Digital%20Side&body='+encodeURIComponent(url)}}});</script></body>
+<script>document.getElementById('shareKey').addEventListener('click',async()=>{const url=new URL('door.html',location.href).href;try{if(navigator.share){await navigator.share({title:'Nev Gonzalez · The Digital Side',url})}else{await navigator.clipboard.writeText(url);document.getElementById('shareKey').textContent='Door link copied ✓'}}catch(e){if(e.name!=='AbortError'){location.href='mailto:?subject=Meet%20Nev%20at%20The%20Digital%20Side&body='+encodeURIComponent(url)}}});</script><script src="navigation-state.js"></script></body>
 </html>
