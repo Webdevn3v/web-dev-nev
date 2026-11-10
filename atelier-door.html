@@ -251,7 +251,7 @@ body.entered .door-ready{opacity:1;transform:scale(1);filter:blur(0)}
 @media(max-width:370px){.atelier-owner-art{min-height:300px;grid-template-columns:43% 57%}.atelier-owner-identity h1{font-size:2rem}.atelier-owner-identity{padding:17px 12px}.atelier-owner-bottom{padding:15px 13px 20px}}
 
 </style>
-</head>
+<link rel="stylesheet" href="atelier-design.css"></head>
 <body>
 
 <div class="entry" id="entry">
@@ -303,79 +303,15 @@ body.entered .door-ready{opacity:1;transform:scale(1);filter:blur(0)}
     </div>
   </section>
 
-  <section class="hero-scene" id="doorPaths">
-    <div class="hero-photo" role="img" aria-label="Atelier House storefront exterior with signage and entry"></div>
-    <div class="hero-plate">
-      <span class="kicker">Digital Door · Spaces with a point of view</span>
-      <h1>Rooms that feel <em>like yours.</em></h1>
-      <p class="hero-note">Start with the work, your style, or the project already taking shape in your head.</p>
-    </div>
-  </section>
-
-  <section class="routes" id="paths">
-    <div class="routes-head"><h2>Where do you want<br>to begin?</h2><span>04 paths</span></div>
-    <div class="routes-list">
-      <button class="route-row" data-path="portfolio" data-mat="oak">
-        <div class="route-swatch" aria-hidden="true"></div>
-        <span class="route-num">01</span>
-        <span class="route-text"><b>See the Portfolio</b><i>Browse transformations, rooms, and finished spaces.</i></span>
-        <span class="route-tag">Oak</span>
-        <span class="route-go">↗</span>
-      </button>
-      <button class="route-row" data-path="style" data-mat="sage">
-        <div class="route-swatch" aria-hidden="true"></div>
-        <span class="route-num">02</span>
-        <span class="route-text"><b>What's My Style?</b><i>Choose what pulls you in. We'll name the direction.</i></span>
-        <span class="route-tag">Sage</span>
-        <span class="route-go">↗</span>
-      </button>
-      <button class="route-row" data-path="project" data-mat="linen">
-        <div class="route-swatch" aria-hidden="true"></div>
-        <span class="route-num">03</span>
-        <span class="route-text"><b>I Have a Project in Mind</b><i>Turn the idea into the right kind of design project.</i></span>
-        <span class="route-tag">Linen</span>
-        <span class="route-go">↗</span>
-      </button>
-      <button class="route-row" data-path="client" data-mat="clay">
-        <div class="route-swatch" aria-hidden="true"></div>
-        <span class="route-num">04</span>
-        <span class="route-text"><b>I'm Already a Client</b><i>Updates, selections, documents, and your next step.</i></span>
-        <span class="route-tag">Clay</span>
-        <span class="route-go">↗</span>
-      </button>
-    </div>
-  </section>
-
-  <section class="studio" id="studio">
-    <div class="studio-head"><h2>Inside the Studio</h2><span>The Team</span></div>
-    <div class="studio-banner"><img src="atelier-house-team.png" alt="The Atelier House design team in the studio"></div>
-    <div class="chip-grid">
-      <button class="chip" data-i="0" aria-label="Lillian Hart, Principal Designer">
-        <span class="chip-face chip-front"><img src="atelier-house-owner-headshot.png" alt="Lillian Hart"></span>
-        <span class="chip-face chip-back"><b>Lillian Hart</b><i>Principal Designer</i><em>Leads with warm, layered interiors.</em></span>
-      </button>
-      <button class="chip" data-i="1" aria-label="Marcus Reyes, Senior Designer">
-        <span class="chip-face chip-front"><img src="atelier-house-male-designer-headshot.png" alt="Marcus Reyes"></span>
-        <span class="chip-face chip-back"><b>Marcus Reyes</b><i>Senior Designer</i><em>Works in natural wood and stone.</em></span>
-      </button>
-      <button class="chip" data-i="2" aria-label="Naomi Cho, Design Associate">
-        <span class="chip-face chip-front"><img src="atelier-house-female-designer-headshot.png" alt="Naomi Cho"></span>
-        <span class="chip-face chip-back"><b>Naomi Cho</b><i>Design Associate</i><em>Focused on quiet, considered detail.</em></span>
-      </button>
-    </div>
-  </section>
-
-  <section class="help-block">
-    <div class="help-visual"><img src="atelier-house-hero-exterior.png" alt="" aria-hidden="true"></div>
-    <div class="help-copy">
-      <h3>Small problem? Big difference with a little help.</h3>
-      <p>Layout, color, styling, or the room that simply isn't working.</p>
-      <button data-path="help">Find the right help →</button>
-    </div>
-  </section>
-
-  <div class="fullsite"><a href="key-atelier.html">Lillian Hart</a> · <a href="atelier-house-full-site.html">In-depth site</a> · <a href="door.html#demos">Back to The Digital Side Path</a></div>
-</main>
+<section class="at-design" id="doorPaths">
+<header class="at-header"><a href="#doorPaths" class="at-wordmark">ATELIER HOUSE<small>INTERIOR DESIGN STUDIO</small></a><details class="at-menu"><summary aria-label="Atelier menu"><span></span><span></span><span></span></summary><nav aria-label="Atelier House"><button data-path="portfolio">Explore the work</button><button data-path="style">Discover your style</button><button data-path="project">Start a project</button><button data-path="client">Client studio</button><a href="#ownerCard">Lillian’s contact card</a></nav></details></header>
+<div class="at-cover"><div class="at-photo at-room-one" role="img" aria-label="Sunlit living room with linen sofa, sculptural oak chair and travertine table"></div><span>A HOME, CONSIDERED</span></div>
+<div class="at-intro"><h1>A little more <em>you.</em></h1><p>Thoughtful interiors for the way you live.</p><button class="at-link" data-path="portfolio">Explore the work <span>→</span></button></div>
+<section class="at-projects" id="paths" aria-label="Selected interiors"><button data-path="portfolio"><span class="at-project-photo at-room-two" role="img" aria-label="Collected living room with limestone fireplace"></span><span class="at-caption">Quietly collected</span></button><button data-path="portfolio"><span class="at-project-photo at-room-three" role="img" aria-label="Warm modern kitchen with olive cabinets and aged brass lighting"></span><span class="at-caption">Warm modern</span></button></section>
+<section class="at-materials"><div class="at-material-copy"><h2>Find your<br>point of view.</h2><button class="at-link" data-path="style">Discover your style <span>→</span></button><button class="at-link" data-path="project">Start a project <span>→</span></button></div><div class="at-swatches" role="img" aria-label="A material palette of linen, olive and warm oak"><span class="at-oak"></span><span class="at-linen"></span><span class="at-olive"></span></div></section>
+<footer class="at-footer"><button data-path="client">Already a client? Enter the studio →</button><a href="atelier-house-full-site.html">Explore Atelier House</a><a href="door.html">The Digital Side</a></footer>
+</section>
+</main><div class="at-action"><button data-path="project">Tell us about your space <span>→</span></button></div>
 
 <section class="panel" id="panel" aria-hidden="true">
  <div class="panel-inner">
@@ -575,5 +511,5 @@ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',showCard,{once:true});
   else showCard();
 })();
-</script><script src="navigation-state.js"></script></body>
+</script><script>new IntersectionObserver(entries=>{entries.forEach(entry=>document.querySelector(".at-action").classList.toggle("is-visible",entry.isIntersecting))}).observe(document.querySelector(".at-design"));</script><script src="navigation-state.js"></script></body>
 </html>

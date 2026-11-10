@@ -5,7 +5,8 @@
   let timer;
   let lastDialogs = '';
   let restoreVersion = 0;
-  const panels = ['routeSheet', 'famSheet', 'panel'];
+  const panels = [...new Set(['routeSheet', 'famSheet', 'panel', ...[...document.querySelectorAll('.panel[id]')].map(element => element.id)])];
+  const panelIsOpen = element => element?.classList.contains('open') || element?.classList.contains('active');
   const panelTriggers = new Map();
   let lastTrigger = null;
   const overlays = ['door', 'gate', 'doorEntry', 'airlock', 'entry'];
@@ -17,9 +18,11 @@
       y: window.scrollY,
       bodyClass: document.body.className,
       bodyOverflow: document.body.style.overflow,
-      overlays: overlays.map(id => document.getElementById(id)).filter(Boolean)
-        .map(element => ({ id: element.id, className: element.className })),
-      panels: panels.map(id => document.getElementById(id)).filter(element => element?.classList.contains('open'))
+      overlays: overlays.map(id => {
+        const element = document.getElementById(id);
+        return { id, exists: Boolean(element), className: element?.className };
+      }),
+      panels: panels.map(id => document.getElementById(id)).filter(element => panelIsOpen(element))
         .map(element => ({ id: element.id, trigger: panelTriggers.get(element.id), top: element.scrollTop })),
       dialogs: [...document.querySelectorAll('dialog[open]')].map(dialog => ({
         id: dialog.id,
@@ -47,7 +50,7 @@
 
   function dialogKey() {
     return [...document.querySelectorAll('dialog[open]')].map(dialog => dialog.id)
-      .concat(panels.filter(id => document.getElementById(id)?.classList.contains('open'))).join('|');
+      .concat(panels.filter(id => panelIsOpen(document.getElementById(id)))).join('|');
   }
 
   function restore(saved) {
@@ -57,7 +60,8 @@
     document.body.className = saved.bodyClass;
     saved.overlays.forEach(item => {
       const element = document.getElementById(item.id);
-      if (element) element.className = item.className;
+      if (item.exists === false) element?.remove();
+      else if (element) element.className = item.className;
     });
     document.querySelectorAll('details').forEach((element, index) => {
       element.open = Boolean(saved.details[index]);
@@ -70,11 +74,11 @@
     panels.forEach(id => {
       const panel = document.getElementById(id);
       const savedPanel = saved.panels?.find(item => item.id === id);
-      if (savedPanel?.trigger && !panel?.classList.contains('open')) {
+      if (savedPanel?.trigger && !panelIsOpen(panel)) {
         document.querySelector(savedPanel.trigger)?.click();
-      } else if (!savedPanel && panel?.classList.contains('open')) {
-        panel.querySelector('button[aria-label^="Close"], #routeClose, #famClose, #closePanel, .close')?.click();
-        panel.classList.remove('open');
+      } else if (!savedPanel && panelIsOpen(panel)) {
+        panel.querySelector('button[aria-label^="Close"], #routeClose, #famClose, #closePanel, #back, .close')?.click();
+        panel.classList.remove('open', 'active');
         panel.setAttribute('aria-hidden', 'true');
       }
     });
@@ -128,7 +132,7 @@
       return;
     }
     panels.forEach(id => {
-      if (document.getElementById(id)?.classList.contains('open') && !lastDialogs.split('|').includes(id)) {
+      if (panelIsOpen(document.getElementById(id)) && !lastDialogs.split('|').includes(id)) {
         panelTriggers.set(id, lastTrigger);
       }
     });
