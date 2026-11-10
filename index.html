@@ -1153,7 +1153,7 @@ body{background:#faf9f6;color:#25231f}
         <div class="proj-card__num">05</div><div class="proj-card__icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v4c0 5.25 3.75 10.15 9 11.35C17.25 21.15 21 16.25 21 11V7L12 2z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <div class="proj-card__industry">Legal · Law Firm</div><h3>Frederick Legacy Law</h3>
         
-        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="door-frederick-legacy-law.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="door-frederick-legacy-law.html?view=paths" class="proj-card__link">Digital Door</a><a href="frederick-legacy-law-mobile.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div></div>
+        <div class="proj-card__footer"><div class="proj-card__actions tds-demo-actions"><a href="door-frederick-legacy-law.html?view=card" class="proj-card__link proj-card__link--ghost">Digital Business Card</a><a href="door-frederick-legacy-law.html?view=paths" class="proj-card__link">Digital Door</a><a href="frederick-legacy-law-mobile.html" class="proj-card__link proj-card__link--ghost">Mobilized Website</a></div><button type="button" class="proj-card__link proj-card__link--ghost" id="simone-tap-trigger" aria-haspopup="dialog" aria-controls="simone-tap">Owner Tap</button></div>
       </div>
 
       <div class="proj-card d2" style="--card-color:#55c8e8;--icon-color:#55c8e8;--icon-bg:rgba(85,200,232,.08);--icon-border:rgba(85,200,232,.2);--icon-bg-hover:rgba(85,200,232,.15);--card-accent:linear-gradient(90deg,#55c8e8,transparent)">
@@ -1518,6 +1518,15 @@ averyTapDialog.addEventListener('close', () => averyTapTrigger.focus());
 {
   const trigger = document.getElementById('atelier-tap-trigger');
   const dialog = document.getElementById('atelier-tap');
+  trigger.addEventListener('click', () => dialog.showModal());
+  dialog.addEventListener('close', () => trigger.focus());
+}
+</script><dialog class="home-collection" id="simone-tap" aria-label="Owner Tap"><form method="dialog"><button class="close-popup" aria-label="Close" autofocus>×</button></form><img src="simone-owner-tap.webp" alt="Close-up of Simone’s Nocturne Black bracelet during a handshake"></dialog>
+<style>#simone-tap{border-radius:0;background:#eee9e0;color:#302a24}#simone-tap img{max-height:none;margin:12px 0}#simone-tap-trigger{margin-top:8px}</style>
+<script>
+{
+  const trigger = document.getElementById('simone-tap-trigger');
+  const dialog = document.getElementById('simone-tap');
   trigger.addEventListener('click', () => dialog.showModal());
   dialog.addEventListener('close', () => trigger.focus());
 }
