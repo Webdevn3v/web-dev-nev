@@ -15,3 +15,5 @@
 .nl-choices{padding:3.5cqw 3.8cqw 0}.nl-choices h2{font-size:4.2cqw;margin-bottom:2.3cqw;letter-spacing:-.15cqw}.nl-strip{padding:0!important;margin:.9cqw 0;background:none!important}
 .nl-system{grid-template-columns:35% 65%;gap:0;padding:3cqw 2cqw 0 4cqw;align-items:start}.nl-system h2{font-size:5.6cqw;line-height:.94;letter-spacing:-.2cqw;margin-top:2cqw}.nl-system p{font-size:2.2cqw;line-height:1.25;margin:0}.nl-rule{width:6.5cqw;height:.6cqw;margin:2.8cqw 0 2cqw}.nl-system a{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.nl-layers{align-self:end}
 .nl-actions button{color:#111!important}.nl-actions{gap:2cqw;padding:1.4cqw 2.5cqw}.nl-actions button,.nl-actions a{font-size:clamp(12px,3cqw,26px);padding:1.6cqw}
+
+.nl-strip .preview-crop{float:none}
