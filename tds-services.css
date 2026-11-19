@@ -77,3 +77,26 @@
 #collection { background: #eeedeb; color: #292b2b; }
 #collection .buy-product { background: #454946; color: #fff; }
 #collection .price { color: #363937; }
+
+/* The Door's pricing list is a single swipeable row inside the dialog. */
+#services.popup .tds-services {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: min(86%, 300px);
+  gap: 8px;
+  padding: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 8px;
+}
+#services.popup .tds-service {
+  border-radius: 6px;
+  scroll-snap-align: start;
+}
+#services.popup .tds-service--wide {
+  grid-column: auto;
+}
+#services.popup .tds-services:focus-visible {
+  outline: 2px solid #665c4f;
+  outline-offset: 2px;
+}
