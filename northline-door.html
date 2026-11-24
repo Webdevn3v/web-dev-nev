@@ -46,7 +46,89 @@
 
 .northline-card-type{display:block;font:800 .61rem/1.5 Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin-bottom:9px}
 
-</style><link rel="stylesheet" href="northline-design.css?v=approved-2"></head><body><div class="gate" id="gate" role="button" tabindex="0" aria-label="Enter Northline Roofing"><div class="rain"></div><div class="gate-card"><div class="mark">N<b>L</b></div><h1>Northline</h1><p>Roofing Co.</p><div class="tap">Tap to enter ↓</div></div></div><div class="site">
+</style><link rel="stylesheet" href="northline-design.css?v=approved-2">
+<style>
+.nl-next {
+  width: min(100%, 600px);
+  max-height: 85dvh;
+  position: fixed;
+  inset: auto 0 0;
+  margin: 0 auto;
+  padding: 12px 20px calc(20px + env(safe-area-inset-bottom));
+  border: 0;
+  border-radius: 18px 18px 0 0;
+  background: #f5f4f0;
+  color: #171a18;
+  font-family: Arial, sans-serif;
+}
+.nl-next::backdrop { background: #090a0966; }
+.nl-next[open] { animation: nl-next-in .28s ease-out both; }
+@keyframes nl-next-in { from { transform: translateY(100%); } }
+.nl-next form { display: flex; justify-content: center; }
+.nl-next form button {
+  width: 72px;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.nl-next form button::before {
+  content: "";
+  display: block;
+  margin: auto;
+  width: 32px;
+  height: 4px;
+  border-radius: 4px;
+  background: #676d63;
+}
+.nl-next .nl-next-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.nl-next-grid > :is(button, a) {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 12px;
+  border: 1px solid #b8bcb2;
+  border-radius: 8px;
+  background: transparent;
+  color: #171a18;
+  font: 700 1rem/1.25 Arial, sans-serif;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.nl-next-grid > :first-child { background: #c9f128; border-color: #c9f128; }
+.nl-next-grid > :last-child { grid-column: 1 / -1; }
+.nl-next-grid > :hover { border-color: #171a18; }
+.nl-next button:focus-visible, .nl-next a:focus-visible { outline: 2px solid #171a18; outline-offset: 2px; }
+.nl-next-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0 16px; margin-top: 10px; }
+.nl-next-links a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; font-size: .85rem; text-decoration: underline; text-underline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .nl-next[open] { animation: none; } }
+</style>
+<style>
+.nl-design { max-width: none; padding-bottom: 88px; }
+.nl-design .nl-roof { max-height: 52svh; overflow: hidden; }
+.nl-header { height: auto; min-height: 60px; padding: 10px clamp(16px, 4vw, 32px); }
+.nl-wordmark>b { font-size: clamp(29px, 6vw, 44px); }
+.nl-wordmark>i { font-size: clamp(24px, 6vw, 40px); }
+.nl-wordmark>span { font-size: clamp(14px, 4vw, 23px); letter-spacing: .12em; }
+.nl-wordmark small { font-size: 9px; letter-spacing: .25em; }
+.nl-menu summary { width: 32px; }
+.nl-intro { padding: 24px clamp(20px, 5vw, 44px) 12px; }
+.nl-intro h1 { font-size: clamp(40px, 9vw, 76px); line-height: .95; margin: 0 0 12px; letter-spacing: -.045em; }
+.nl-subtitle { font-size: clamp(14px, 3vw, 18px); }
+.nl-primary { grid-template-columns: minmax(0, 320px); margin: 20px 0 0; }
+.nl-primary button { min-height: 48px; font-size: 1rem; padding: 10px 14px; }
+.nl-system { max-width: 880px; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); padding: 20px clamp(20px, 5vw, 44px); }
+.nl-system h2 { font-size: clamp(26px, 5vw, 45px); }
+.nl-system p { font-size: clamp(12px, 2.6vw, 16px); line-height: 1.45; }
+.nl-system a { position: static; width: auto; height: auto; clip-path: none; display: inline-block; margin-top: 9px; }
+.nl-actions { width: 100%; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); }
+.nl-actions button, .nl-actions a { min-height: 44px; font-size: .9rem; padding: 8px; }
+</style></head><body><div class="gate" id="gate" role="button" tabindex="0" aria-label="Enter Northline Roofing"><div class="rain"></div><div class="gate-card"><div class="mark">N<b>L</b></div><h1>Northline</h1><p>Roofing Co.</p><div class="tap">Tap to enter ↓</div></div></div><div class="site">
 <section class="northline-card" id="digitalCard" aria-label="Jordan Cole digital business card">
   <div class="northline-card-content">
     <span class="northline-card-type">Digital Business Card</span><span class="northline-card-brand">Northline Roofing Co.</span>
@@ -64,8 +146,11 @@
 <main id="doorPaths" class="nl-design">
 <header class="nl-header"><a class="nl-wordmark" href="#northlineServices"><b>NL</b><i>/</i><span>NORTHLINE<small>ROOFING CO.</small></span></a><details class="nl-menu"><summary aria-label="Northline menu"><span></span><span></span><span></span></summary><nav aria-label="Northline"><a href="#northlineServices">Roofing paths</a><a href="northline-mobile-site.html">Mobilized Website</a><button data-panel="customer">Current customers</button><a href="#digitalCard">Jordan’s contact card</a></nav></details></header>
 <figure class="nl-roof"><span class="preview-crop " style="--x:0;--y:90;--w:941;--h:424" role="img" aria-label="Northline crew inspecting roof flashing"><img src="northline-approved.webp" alt="" width="941" height="1672"></span></figure>
-<section class="nl-intro" id="northlineServices"><p class="nl-kicker">01 <i>/</i> YOUR ROOF, CLEARLY</p><h1>Know what’s<br>overhead.</h1><p class="nl-subtitle">Inspections, repairs &amp; replacements.</p><div class="nl-primary"><button data-panel="inspection">Book an inspection <span>→</span></button><button data-panel="storm">Storm damage <span>→</span></button></div></section>
-<section class="nl-choices"><h2>Choose your next step.</h2><button class="nl-strip nl-inspect" data-panel="inspection"><span class="preview-crop " style="--x:36;--y:949;--w:869;--h:88" role="img" aria-label=""><img src="northline-approved.webp" alt="" width="941" height="1672"></span><span class="sr-label"><i>/</i> Inspect <span>→</span></span></button><button class="nl-strip nl-repair" data-panel="storm"><span class="preview-crop " style="--x:36;--y:1046;--w:869;--h:88" role="img" aria-label=""><img src="northline-approved.webp" alt="" width="941" height="1672"></span><span class="sr-label"><i>/</i> Repair <span>→</span></span></button><button class="nl-strip nl-replace" data-panel="replace"><span class="preview-crop " style="--x:36;--y:1143;--w:869;--h:88" role="img" aria-label=""><img src="northline-approved.webp" alt="" width="941" height="1672"></span><span class="sr-label"><i>/</i> Replace <span>→</span></span></button></section>
+<section class="nl-intro" id="northlineServices">
+  <h1>Know what’s<br>overhead.</h1>
+  <p class="nl-subtitle">Inspections, repairs &amp; replacements.</p>
+  <div class="nl-primary"><button type="button" data-next-steps aria-haspopup="dialog" aria-controls="northlineNext">Choose your next step</button></div>
+</section>
 <section class="nl-system"><div><h2>Built to<br>protect.</h2><span class="nl-rule"></span><p>A proven roofing system that sheds water, resists the elements, and lasts for decades.</p><a href="northline-full-site.html#systems">Explore roof systems →</a></div><span class="preview-crop nl-layers" style="--x:362;--y:1262;--w:566;--h:309" role="img" aria-label="Roof system cutaway showing standing seam metal, underlayment, barrier, deck and rafter"><img src="northline-approved.webp" alt="" width="941" height="1672"></span></section>
 
 <nav class="nl-actions" aria-label="Roofing quick actions"><button data-panel="replace">Get an estimate <span>→</span></button><a href="tel:+15555550198">Call the crew</a></nav></main></div>
@@ -73,6 +158,18 @@
 <div class="panel" id="storm"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">Storm response</div><h3>Protect the structure first.</h3><p>If water is entering now, move valuables away from the area and call. Northline can assess damage, provide temporary protection, and document conditions.</p><div class="actions"><a class="btn" href="tel:+15555550198">Call roof line</a><a class="btn alt" href="northline-mobile-site.html#storm">Storm checklist</a></div></div></div>
 <div class="panel" id="replace"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">Replacement planning</div><h3>Build the right roof once.</h3><p>Start with an on-site assessment, system recommendations, and a scope that explains materials, ventilation, flashing, cleanup, and warranty.</p><div class="actions"><a class="btn" href="northline-full-site.html#estimate">Request estimate</a><a class="btn alt" href="northline-full-site.html#systems">Compare systems</a></div></div></div>
 <div class="panel" id="customer"><div class="sheet"><button class="close" aria-label="Close">×</button><div class="eyebrow">Project support</div><h3>Your project stays connected.</h3><p>Reach the crew, request a document, or ask a warranty question. Include the service address so we can route it quickly.</p><div class="actions"><a class="btn" href="mailto:crew@northlineroofing.example?subject=Current%20Northline%20project">Email the crew</a><a class="btn alt" href="northline-mobile-site.html#customer">Customer support</a></div></div></div>
+<dialog class="nl-next" id="northlineNext" aria-label="Choose your next step">
+  <form method="dialog"><button type="submit" aria-label="Close next steps"></button></form>
+  <div class="nl-next-grid">
+    <button type="button" data-panel="inspection">Book an inspection</button>
+    <button type="button" data-panel="storm">Storm damage</button>
+    <button type="button" data-panel="replace">Get an estimate</button>
+  </div>
+  <nav class="nl-next-links" aria-label="More Northline options">
+    <a href="northline-mobile-site.html">Mobilized Website</a>
+    <a href="tel:+15555550198">Call the crew</a>
+  </nav>
+</dialog>
 <script>const gate=document.querySelector('#gate');function enter(){gate.classList.add('open');setTimeout(()=>gate.remove(),900)}gate.addEventListener('click',enter);gate.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')enter()});document.querySelectorAll('[data-panel]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.panel).classList.add('active'));document.querySelectorAll('.panel').forEach(p=>{p.onclick=e=>{if(e.target===p||e.target.classList.contains('close'))p.classList.remove('active')}});addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'))});</script><script>
 /* TDS gallery behavior: only Digital Business Card links bypass the entrance.
    Digital Door (?view=paths) waits for the visitor to tap Enter, plays the
@@ -143,4 +240,21 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',showCard,{once:true});
   else showCard();
 })();
-</script><script>new IntersectionObserver(entries=>{entries.forEach(entry=>entry.target.classList.toggle("is-visible",entry.isIntersecting))}).observe(document.querySelector(".nl-design"));</script><script src="navigation-state.js"></script></body></html>
+</script><script>new IntersectionObserver(entries=>{entries.forEach(entry=>entry.target.classList.toggle("is-visible",entry.isIntersecting))}).observe(document.querySelector(".nl-design"));</script>
+<script>
+{
+  const nextSteps = document.getElementById('northlineNext');
+  document.querySelectorAll('[data-next-steps]').forEach(trigger => {
+    trigger.addEventListener('click', () => nextSteps.showModal());
+  });
+  nextSteps.addEventListener('click', event => {
+    if (event.target === nextSteps && event.clientY < nextSteps.getBoundingClientRect().top) {
+      nextSteps.close();
+    }
+  });
+  nextSteps.querySelectorAll('.nl-next-grid a, .nl-next-grid button').forEach(action => {
+    action.addEventListener('click', () => nextSteps.close());
+  });
+}
+</script>
+<script src="navigation-state.js"></script></body></html>

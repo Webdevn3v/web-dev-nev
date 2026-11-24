@@ -27,4 +27,98 @@
 @media(min-width:520px){.roof-photo{height:430px}.roof-intro{padding:32px}.hero h1{font-size:3.6rem}}
 @media(max-width:360px){.roof-photo{height:285px}.hero h1{font-size:2.45rem}.hero .actions{gap:15px}.hero .btn{font-size:10px}.roof-call{font-size:11px}}
 
-</style><link rel="stylesheet" href="mobilized-brand-match.css?v=1"></head><body class="nl-mobile"><div class="phone"><header class="head"><div class="logo">N<b>L</b> NORTHLINE</div><a href="northline-door.html?view=paths">Digital Door <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></header><main><section class="hero" aria-labelledby="roof-title"><figure class="roof-photo"><span class="brand-crop" role="img" aria-label="Northline crew inspecting roof flashing" style="--x:0;--y:90;--w:941;--h:424"><img src="northline-approved.webp" alt="" width="941" height="1672"></span></figure><div class="roof-intro"><span class="eyebrow">NORTHLINE / ROOFING CO.</span><h1 id="roof-title">Every roof<br>has a story.<br><em>Know yours.</em></h1><p>Get a closer look at what’s overhead. Inspections, repairs and replacements, with photo-backed findings before the work starts.</p><div class="actions"><a class="btn" href="#inspection">Find your next step <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a><a class="roof-call" href="tel:+15555550198">Talk to the crew</a></div></div></section><section class="block" id="inspection"><div class="eyebrow">THE ROOF DESK</div><h2>Let’s start with<br>what you’re seeing.</h2><div class="list"><a class="item" href="mailto:crew@northlineroofing.example?subject=Roof%20inspection"><i aria-hidden="true"><svg class="link-icon" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></i><strong>Roof inspection</strong><span>Leaks, age, purchase, or maintenance check.</span></a><a class="item" href="#storm"><i aria-hidden="true"><svg class="link-icon" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></i><strong>Storm damage</strong><span>Wind, hail, fallen debris, or active water entry.</span></a><a class="item" href="northline-full-site.html#systems"><i aria-hidden="true"><svg class="link-icon" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></i><strong>New roof</strong><span>Replacement scope, systems, and estimate.</span></a><a class="item" href="#customer"><i aria-hidden="true"><svg class="link-icon" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></i><strong>Current customer</strong><span>Project, document, or warranty support.</span></a></div></section><section class="block urgent" id="storm"><div class="eyebrow" style="color:#090a09">Active leak or storm damage?</div><h2>Protect the inside first.</h2><p>Move valuables away from the affected area. Don’t climb onto a wet or damaged roof. Call Northline for response and documentation.</p><a class="btn" href="tel:+15555550198">Call 24/7 roof line</a></section><section class="block" id="process"><div class="eyebrow">No guesswork</div><h2>A clear roof process.</h2><details class="process-expand"><summary>See the 3-step process <span aria-hidden="true">+</span></summary><div class="steps"><div class="step"><strong>Inspect</strong><p>Roof system, flashing, drainage, penetrations, and visible interior warning signs.</p></div><div class="step"><strong>Document</strong><p>Photo-backed findings and a scope you can understand.</p></div><div class="step"><strong>Protect</strong><p>Scheduled work, site cleanup, final review, and warranty information.</p></div></div></details></section><section class="block" id="customer"><div class="eyebrow">Customer support</div><h2>Keep the project moving.</h2><p>Include your service address and the best number to reach you.</p><div class="actions"><a class="btn" href="mailto:crew@northlineroofing.example?subject=Northline%20project%20support">Email crew</a><a class="btn alt" href="tel:+15555550198">Call</a></div></section><section class="block"><div class="smalllinks"><a href="northline-door.html?view=paths">Back to the Digital Door →</a></div></section></main><div class="demo">Fictional roofing company demonstration. Contact details are placeholders.</div><nav class="sticky"><a class="btn alt" href="northline-full-site.html#estimate">Get estimate</a><a class="btn" href="tel:+15555550198">Call now</a></nav></div><script src="navigation-state.js"></script></body></html>
+</style><link rel="stylesheet" href="mobilized-brand-match.css?v=1">
+<style>
+.nl-next {
+  width: min(100%, 600px);
+  max-height: 85dvh;
+  position: fixed;
+  inset: auto 0 0;
+  margin: 0 auto;
+  padding: 12px 20px calc(20px + env(safe-area-inset-bottom));
+  border: 0;
+  border-radius: 18px 18px 0 0;
+  background: #f5f4f0;
+  color: #171a18;
+  font-family: Arial, sans-serif;
+}
+.nl-next::backdrop { background: #090a0966; }
+.nl-next[open] { animation: nl-next-in .28s ease-out both; }
+@keyframes nl-next-in { from { transform: translateY(100%); } }
+.nl-next form { display: flex; justify-content: center; }
+.nl-next form button {
+  width: 72px;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.nl-next form button::before {
+  content: "";
+  display: block;
+  margin: auto;
+  width: 32px;
+  height: 4px;
+  border-radius: 4px;
+  background: #676d63;
+}
+.nl-next .nl-next-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.nl-next-grid > :is(button, a) {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 12px;
+  border: 1px solid #b8bcb2;
+  border-radius: 8px;
+  background: transparent;
+  color: #171a18;
+  font: 700 1rem/1.25 Arial, sans-serif;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.nl-next-grid > :first-child { background: #c9f128; border-color: #c9f128; }
+.nl-next-grid > :last-child { grid-column: 1 / -1; }
+.nl-next-grid > :hover { border-color: #171a18; }
+.nl-next button:focus-visible, .nl-next a:focus-visible { outline: 2px solid #171a18; outline-offset: 2px; }
+.nl-next-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0 16px; margin-top: 10px; }
+.nl-next-links a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; font-size: .85rem; text-decoration: underline; text-underline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .nl-next[open] { animation: none; } }
+</style>
+<style>
+.nl-mobile .hero .actions button { cursor: pointer; font-family: inherit; }
+.nl-mobile .hero .actions button:focus-visible { outline: 2px solid #171a18; outline-offset: 3px; }
+</style></head><body class="nl-mobile"><div class="phone"><header class="head"><div class="logo">N<b>L</b> NORTHLINE</div><a href="northline-door.html?view=paths">Digital Door <svg class="link-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></header><main><section class="hero" aria-labelledby="roof-title"><figure class="roof-photo"><span class="brand-crop" role="img" aria-label="Northline crew inspecting roof flashing" style="--x:0;--y:90;--w:941;--h:424"><img src="northline-approved.webp" alt="" width="941" height="1672"></span></figure><div class="roof-intro"><span class="eyebrow">NORTHLINE / ROOFING CO.</span><h1 id="roof-title">Every roof<br>has a story.<br><em>Know yours.</em></h1><p>Get a closer look at what’s overhead. Inspections, repairs and replacements, with photo-backed findings before the work starts.</p><div class="actions"><button type="button" class="btn" data-next-steps aria-haspopup="dialog" aria-controls="northlineNext">Find your next step</button><a class="roof-call" href="tel:+15555550198">Talk to the crew</a></div></div></section><section class="block" id="inspection"><div class="eyebrow">THE ROOF DESK</div><h2>Let’s start with<br>what you’re seeing.</h2><div class="list"><a class="item" href="mailto:crew@northlineroofing.example?subject=Roof%20inspection"><i aria-hidden="true"><svg class="link-icon" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></i><strong>Roof inspection</strong><span>Leaks, age, purchase, or maintenance check.</span></a><a class="item" href="#storm"><i aria-hidden="true"><svg class="link-icon" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></i><strong>Storm damage</strong><span>Wind, hail, fallen debris, or active water entry.</span></a><a class="item" href="northline-full-site.html#systems"><i aria-hidden="true"><svg class="link-icon" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></i><strong>New roof</strong><span>Replacement scope, systems, and estimate.</span></a><a class="item" href="#customer"><i aria-hidden="true"><svg class="link-icon" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></i><strong>Current customer</strong><span>Project, document, or warranty support.</span></a></div></section><section class="block urgent" id="storm"><div class="eyebrow" style="color:#090a09">Active leak or storm damage?</div><h2>Protect the inside first.</h2><p>Move valuables away from the affected area. Don’t climb onto a wet or damaged roof. Call Northline for response and documentation.</p><a class="btn" href="tel:+15555550198">Call 24/7 roof line</a></section><section class="block" id="process"><div class="eyebrow">No guesswork</div><h2>A clear roof process.</h2><details class="process-expand"><summary>See the 3-step process <span aria-hidden="true">+</span></summary><div class="steps"><div class="step"><strong>Inspect</strong><p>Roof system, flashing, drainage, penetrations, and visible interior warning signs.</p></div><div class="step"><strong>Document</strong><p>Photo-backed findings and a scope you can understand.</p></div><div class="step"><strong>Protect</strong><p>Scheduled work, site cleanup, final review, and warranty information.</p></div></div></details></section><section class="block" id="customer"><div class="eyebrow">Customer support</div><h2>Keep the project moving.</h2><p>Include your service address and the best number to reach you.</p><div class="actions"><a class="btn" href="mailto:crew@northlineroofing.example?subject=Northline%20project%20support">Email crew</a><a class="btn alt" href="tel:+15555550198">Call</a></div></section><section class="block"><div class="smalllinks"><a href="northline-door.html?view=paths">Back to the Digital Door →</a></div></section></main><div class="demo">Fictional roofing company demonstration. Contact details are placeholders.</div><nav class="sticky"><a class="btn alt" href="northline-full-site.html#estimate">Get estimate</a><a class="btn" href="tel:+15555550198">Call now</a></nav></div><dialog class="nl-next" id="northlineNext" aria-label="Choose your next step">
+  <form method="dialog"><button type="submit" aria-label="Close next steps"></button></form>
+  <div class="nl-next-grid">
+    <a href="#inspection">Roof inspection</a>
+    <a href="#storm">Storm damage</a>
+    <a href="northline-full-site.html#estimate">Get an estimate</a>
+  </div>
+  <nav class="nl-next-links" aria-label="More Northline options">
+    <a href="#customer">Current customer</a>
+    <a href="northline-door.html?view=paths">Digital Door</a>
+  </nav>
+</dialog>
+
+<script>
+{
+  const nextSteps = document.getElementById('northlineNext');
+  document.querySelectorAll('[data-next-steps]').forEach(trigger => {
+    trigger.addEventListener('click', () => nextSteps.showModal());
+  });
+  nextSteps.addEventListener('click', event => {
+    if (event.target === nextSteps && event.clientY < nextSteps.getBoundingClientRect().top) {
+      nextSteps.close();
+    }
+  });
+  nextSteps.querySelectorAll('.nl-next-grid a, .nl-next-grid button').forEach(action => {
+    action.addEventListener('click', () => nextSteps.close());
+  });
+}
+</script>
+<script src="navigation-state.js"></script></body></html>
